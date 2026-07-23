@@ -197,8 +197,10 @@ h1{{font-size:23px;margin:0 0 2px}}.lead{{color:var(--dim);margin:0 0 18px;font-
 .ci{{position:absolute;top:50%;height:2px;background:rgba(255,255,255,.55);transform:translateY(-50%)}}
 .val{{text-align:right;font-variant-numeric:tabular-nums;color:var(--dim)}}.val em{{font-style:normal;font-size:10px;opacity:.7;margin-left:1px}}
 .foot{{color:var(--dim);font-size:12px;margin-top:16px}}.foot a{{color:var(--accent)}}
+.back{{font-size:13px;margin:0 0 14px}}.back a{{color:var(--dim);text-decoration:none}}.back a:hover{{color:var(--accent)}}
 .sigkey{{font-size:11.5px;color:var(--dim);margin:0 0 18px}}
 </style></head><body>
+<p class="back"><a href="/bulldozer/">&larr; BullDozer</a></p>
 <h1>{title}</h1><p class="lead">{lead}</p><p class="sigkey">{sigkey}</p>
 {body}
-<p class="foot">{foot}</p></body></html>"""
+<p class="foot">{foot} &middot; <a href="/bulldozer/">BullDozer</a> &middot; <a href="/bulldozer/surveys">All surveys</a></p></body></html>"""
