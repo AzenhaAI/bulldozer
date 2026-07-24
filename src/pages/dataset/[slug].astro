@@ -58,11 +58,19 @@ const panelIndicator = [{
 const backHref = ds.kind === 'survey' ? `${base}/surveys` : `${base}/macro`;
 const active = ds.kind === 'survey' ? 'surveys' : 'macro';
 const dsPeriods = [...new Set(ds.data.map((o) => o.period))].sort();
+// SEO title targets the high-intent "<indicator> by country" query pattern that
+// actually ranks for us (worldpopulationreview model), suffixed with the latest
+// data year. The on-page H1 keeps the short, clean indicator name.
+const lastYear = dsPeriods.at(-1);
+// Only advertise the year when the data is recent — a fresh "— 2025" lifts CTR,
+// but a stale "— 2013" signals outdated data and hurts it, so drop it there.
+const endYear = Number(String(lastYear ?? '').match(/(\d{4})(?!.*\d{4})/)?.[1]);
+const seoTitle = `${ds.title} by Country${endYear >= 2022 ? ` — ${lastYear}` : ''}`;
 // schema.org/Dataset — indexed by Google Dataset Search.
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
-  name: ds.title,
+  name: seoTitle,
   description: ds.summary,
   url: `https://shpara.com${base}/dataset/${ds.slug}`,
   license: ds.license,
@@ -76,7 +84,7 @@ const jsonLd = {
   }],
 };
 ---
-<BaseLayout title={ds.title} description={ds.summary} active={active} ogPath={`/og/${ds.slug}.png`}>
+<BaseLayout title={seoTitle} description={ds.summary} active={active} ogPath={`/og/${ds.slug}.png`}>
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <section class="section">
     <div class="container">
