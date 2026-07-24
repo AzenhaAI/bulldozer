@@ -161,7 +161,7 @@ a:hover { text-decoration: underline; }
 /* Section heads */
 .section { padding: 28px 0; }
 @media (max-width: 560px) { .section { padding: 20px 0; } }
-.section h2 { font-size: 24px; margin: 0 0 4px; }
+.section h1, .section h2 { font-size: 24px; margin: 0 0 4px; }
 .section .sub { color: var(--text-dim); margin: 0 0 14px; }
 
 /* KPI */
