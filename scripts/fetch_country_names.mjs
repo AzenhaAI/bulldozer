@@ -18,6 +18,7 @@ const rows = await res.json();
 
 const names = {};
 const currency = {};
+const subregions = {};
 for (const c of rows) {
   const iso = (c.cca3 || '').toUpperCase();
   if (iso.length !== 3) continue;
@@ -27,13 +28,18 @@ for (const c of rows) {
   // the no-Cyrillic rule targets Russian-language content, not other countries'
   // native currency marks
   if (code) currency[iso] = { code, name: c.currencies[code].name, symbol: c.currencies[code].symbol || '' };
+  // UN M49 sub-region (e.g. "Eastern Europe", "South-Eastern Asia") for finer
+  // country interlinking than the coarse 4-continent taxonomy.
+  if (c.subregion) subregions[iso] = c.subregion;
 }
 
 // mledoze codes Kosovo as UNK; our datasets (World Bank, OWID) use XKX.
 names.XKX = { common: 'Kosovo', official: 'Republic of Kosovo' };
 currency.XKX = { code: 'EUR', name: 'Euro', symbol: '€' };
+subregions.XKX = 'Southern Europe';
 
 await writeFile(join(DATA, 'country-names.json'), JSON.stringify(names));
 await writeFile(join(DATA, 'country-currency.json'), JSON.stringify(currency));
-console.log('✓ country-names.json:', Object.keys(names).length, '| country-currency.json:', Object.keys(currency).length);
+await writeFile(join(DATA, 'subregions.json'), JSON.stringify(subregions));
+console.log('✓ country-names.json:', Object.keys(names).length, '| country-currency.json:', Object.keys(currency).length, '| subregions.json:', Object.keys(subregions).length);
 console.log('  BRA:', JSON.stringify(currency.BRA), '| JPN:', JSON.stringify(currency.JPN));

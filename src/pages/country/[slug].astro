@@ -5,6 +5,7 @@ import { flagFor } from '@lib/flags';
 import { TOPICS, TOPIC_ORDER } from '@lib/topics';
 import isoAlpha2 from '@data/iso-alpha2.json';
 import countryCurrency from '@data/country-currency.json';
+import subregions from '@data/subregions.json';
 
 export function getStaticPaths() {
   return buildCountryIndex().map((c) => ({ params: { slug: countrySlug(c.name) }, props: { iso: c.iso } }));
@@ -35,10 +36,21 @@ const headline = [
 ].filter(Boolean) as { label: string; value: string; rank: { rank: number; total: number } }[];
 
 const similar = similarCountries(c, all, 5);
-// Regional neighbours for deep interlinking (komoot lesson: linked pages = deeper sessions).
-const regionPeers = c.region
-  ? all.filter((x) => x.region === c.region && x.iso !== c.iso).sort((a, b) => a.name.localeCompare(b.name))
+// Neighbours for deep interlinking (komoot lesson: linked pages = deeper sessions).
+// Prefer the fine UN M49 sub-region (Central Europe, South-Eastern Asia…); fall
+// back to the coarse continent when a sub-region is missing or nearly empty.
+const subMap = subregions as Record<string, string>;
+const subregion = subMap[c.iso];
+const prettySub = (s: string) => s.replace('South-Eastern', 'Southeast').replace('South-eastern', 'Southeast');
+const subPeers = subregion
+  ? all.filter((x) => subMap[x.iso] === subregion && x.iso !== c.iso)
   : [];
+const useSub = subPeers.length >= 3;
+const peerLabel = useSub ? prettySub(subregion) : c.region;
+const regionPeers = (useSub
+  ? subPeers
+  : (c.region ? all.filter((x) => x.region === c.region && x.iso !== c.iso) : [])
+).sort((a, b) => a.name.localeCompare(b.name));
 const byTopic = TOPIC_ORDER.map((id) => ({
   id, label: TOPICS[id].label, icon: TOPICS[id].icon,
   items: c.items.filter((it) => it.topic === id).sort((a, b) => a.title.localeCompare(b.title)),
@@ -117,7 +129,7 @@ const jsonLd = {
   {regionPeers.length > 0 && (
     <section class="section" style="padding-top:0">
       <div class="container">
-        <h2 style="font-size:18px">More {c.region} countries</h2>
+        <h2 style="font-size:18px">More {peerLabel} countries</h2>
         <p class="sub">Compare {c.name} with its neighbours across the same {c.items.length} indicators.</p>
         <p style="display:flex; gap:8px; flex-wrap:wrap">
           {regionPeers.map((p) => (
