@@ -177,6 +177,9 @@ def generate(cfg):
 
 _TEMPLATE = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>{title}</title>
+<meta name="description" content="{lead}">
+<meta property="og:type" content="website"><meta property="og:site_name" content="BullDozer"><meta property="og:title" content="{title}"><meta property="og:description" content="{lead}"><meta property="og:image" content="https://shpara.com/bulldozer/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title}"><meta name="twitter:image" content="https://shpara.com/bulldozer/og.png">
 <style>
 :root{{--bg:#0e0f11;--card:#16181b;--card2:#1c1f23;--border:#2a2e33;--text:#e7e9ec;--dim:#9aa1a9;--accent:#ffb000}}
 *{{box-sizing:border-box}}body{{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif;padding:24px;max-width:1100px;margin:0 auto}}

@@ -87,7 +87,7 @@ const jsonLd = {
         <span aria-hidden="true">›</span>
         <span class="crumb-here">{ds.title}</span>
       </nav>
-      <h2><span class="ind-ic" aria-hidden="true">{TOPICS[ds.topic]?.icon}</span>{ds.title}</h2>
+      <h1><span class="ind-ic" aria-hidden="true">{TOPICS[ds.topic]?.icon}</span>{ds.title}</h1>
       <p class="sub">{ds.summary}</p>
       <Provenance meta={ds} />
       {(ds.vintage || ds.method) && (

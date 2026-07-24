@@ -58,7 +58,7 @@ const jsonLd = {
     <div class="container">
       <a class="back-link" href={`${base}/country`}>← All countries</a>
       <span class="kicker">{c.region || 'Country profile'}</span>
-      <h2>{flag} {c.name}</h2>
+      <h1>{flag} {c.name}</h1>
       {c.official && c.official !== c.name && <p class="cc-official">{c.official}</p>}
       <div class="cc-codes">
         <span class="cc-code" title="ISO 3166-1 alpha-3">{c.iso}</span>
