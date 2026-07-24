@@ -35,6 +35,10 @@ const headline = [
 ].filter(Boolean) as { label: string; value: string; rank: { rank: number; total: number } }[];
 
 const similar = similarCountries(c, all, 5);
+// Regional neighbours for deep interlinking (komoot lesson: linked pages = deeper sessions).
+const regionPeers = c.region
+  ? all.filter((x) => x.region === c.region && x.iso !== c.iso).sort((a, b) => a.name.localeCompare(b.name))
+  : [];
 const byTopic = TOPIC_ORDER.map((id) => ({
   id, label: TOPICS[id].label, icon: TOPICS[id].icon,
   items: c.items.filter((it) => it.topic === id).sort((a, b) => a.title.localeCompare(b.title)),
@@ -44,6 +48,16 @@ const desc = `${c.name} — ${c.items.length} indicators with world ranks: ${
   headline.map((h) => `${h.label.toLowerCase()} ${h.value} (#${h.rank.rank} of ${h.rank.total})`).join(', ')
 }. Data from IMF, World Bank, Gapminder, WHR, V-Dem and more.`;
 
+// SEO title surfaces the high-intent marker indicators ("hungary gdp", "hdi of
+// hungary") plus the indicator count, instead of a generic "country data profile".
+const has = (kw: string) => c.items.some((i) => i.title.toLowerCase().includes(kw));
+const MARKERS: [string, string][] = [
+  ['gdp per capita', 'GDP'], ['population', 'Population'], ['human development', 'HDI'],
+  ['life expectancy', 'Life Expectancy'], ['happiness', 'Happiness'], ['inflation', 'Inflation'],
+];
+const markerStr = MARKERS.filter(([kw]) => has(kw)).map(([, l]) => l).slice(0, 3).join(', ');
+const seoTitle = `${c.name}: ${markerStr ? markerStr + ' & ' : ''}${c.items.length} Indicators`;
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Place',
@@ -52,7 +66,7 @@ const jsonLd = {
   description: desc,
 };
 ---
-<BaseLayout title={`${c.name} — country data profile`} description={desc} active="geo">
+<BaseLayout title={seoTitle} description={desc} active="geo">
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <section class="section">
     <div class="container">
@@ -93,6 +107,22 @@ const jsonLd = {
           {similar.map((s) => (
             <a class="ghost-btn" style="margin:0; text-decoration:none" href={`${base}/country/${countrySlug(s.c.name)}`}>
               {flagFor(s.c.iso)} {s.c.name} · {Math.round(s.match * 100)}%
+            </a>
+          ))}
+        </p>
+      </div>
+    </section>
+  )}
+
+  {regionPeers.length > 0 && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <h2 style="font-size:18px">More {c.region} countries</h2>
+        <p class="sub">Compare {c.name} with its neighbours across the same {c.items.length} indicators.</p>
+        <p style="display:flex; gap:8px; flex-wrap:wrap">
+          {regionPeers.map((p) => (
+            <a class="ghost-btn" style="margin:0; text-decoration:none" href={`${base}/country/${countrySlug(p.name)}`}>
+              {flagFor(p.iso)} {p.name}
             </a>
           ))}
         </p>
