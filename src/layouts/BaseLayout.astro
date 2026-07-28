@@ -42,6 +42,38 @@ const burger = [
 const fullTitle = title ? `${title} · BullDozer` : 'BullDozer — Marketing Analytics & Research';
 const desc = description ?? 'Bulldoze the noise. Mine the signal. 136 public, parsed datasets — surveys, IMF & World Bank macro, markets and people. Every number sourced.';
 const canonical = new URL(Astro.url.pathname, 'https://shpara.com').href;
+// Site-level entity markup, homepage only (Google reads WebSite/SearchAction from
+// the site root). The SearchAction declares the on-site search so Google can offer
+// a sitelinks search box; ?q= is handled by the search overlay below.
+const isHome = Astro.url.pathname.replace(/\/$/, '') === base;
+const siteLd = isHome ? {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `https://shpara.com${base}/#website`,
+      url: `https://shpara.com${base}/`,
+      name: 'BullDozer',
+      description: 'Marketing analytics & research — public, parsed datasets with sources cited.',
+      publisher: { '@id': `https://shpara.com${base}/#org` },
+      inLanguage: 'en',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: `https://shpara.com${base}/explore/?q={search_term_string}` },
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      '@type': 'Organization',
+      '@id': `https://shpara.com${base}/#org`,
+      name: 'BullDozer',
+      url: `https://shpara.com${base}/`,
+      logo: `https://shpara.com${base}/icon-512.png`,
+      founder: { '@type': 'Person', name: 'Kirill Shpara', url: 'https://shpara.com/' },
+      sameAs: ['https://github.com/kirshp/bulldozer'],
+    },
+  ],
+} : null;
 const ogImage = `https://shpara.com${base}${ogPath ?? '/og.png'}`;
 ---
 <!doctype html>
@@ -67,6 +99,9 @@ const ogImage = `https://shpara.com${base}${ogPath ?? '/og.png'}`;
     <meta name="apple-mobile-web-app-title" content="BullDozer" />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
+    <!-- Large previews are what makes a page eligible for Google Discover and for
+         big image thumbnails in search; without this Google defaults to small. -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="BullDozer" />
@@ -100,6 +135,7 @@ const ogImage = `https://shpara.com${base}${ogPath ?? '/og.png'}`;
         </script>
       </>
     )}
+    {siteLd && <script type="application/ld+json" set:html={JSON.stringify(siteLd)} />}
   </head>
   <body>
     <header class="site-header">
