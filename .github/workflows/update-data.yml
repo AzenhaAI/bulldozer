@@ -27,7 +27,14 @@ jobs:
       # local/curated files aren't present in CI, the parsers soft-skip — so this
       # job is a no-op unless run on a runner that has the sources mounted.
       # Day-to-day, run `npm run data:build` locally and commit the output.
+      #
+      # continue-on-error so that one unreachable upstream doesn't discard the
+      # refreshes that DID succeed — they still get committed below, and the
+      # job is failed at the end instead. Datasets are never left half-written:
+      # scripts/lib/guard.mjs refuses any write that looks broken.
       - name: Rebuild datasets from sources
+        id: parse
+        continue-on-error: true
         run: npm run data:build
 
       - name: Commit updated datasets
@@ -41,3 +48,10 @@ jobs:
           else
             echo "No data changes."
           fi
+
+      # Surface the failure only after the good data is safely committed.
+      - name: Fail if any parser failed
+        if: steps.parse.outcome == 'failure'
+        run: |
+          echo "One or more parsers failed — see the summary in the Rebuild step."
+          exit 1

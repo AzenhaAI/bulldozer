@@ -8,7 +8,7 @@ Marketing analytics & research site: **164 public, parsed datasets** — surveys
 
 ![BullDozer](public/og.png)
 
-> **Where it lives** — source: this repo (`~/Projects/bulldozer`, [github.com/kirshp/bulldozer](https://github.com/kirshp/bulldozer)). Deployed: `npm run build` → `dist/` is rsynced into `~/shpara1/bulldozer/` and served at **shpara.com/bulldozer** via Cloudflare Pages. See [docs/OVERVIEW.md](docs/OVERVIEW.md) for the full map.
+> **Where it lives** — source: this repo (`~/Projects/bulldozer`, [github.com/kirshp/bulldozer](https://github.com/kirshp/bulldozer)). Deployed: `npm run build` → `dist/` is rsynced into `~/Projects/shpara1/bulldozer/` and served at **shpara.com/bulldozer** via Cloudflare Pages. See [docs/OVERVIEW.md](docs/OVERVIEW.md) for the full map.
 
 ## What's inside
 

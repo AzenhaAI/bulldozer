@@ -32,18 +32,31 @@ async function iso3Region() {
 }
 
 /** The WB API times out sporadically — retry a few times before giving up. */
-async function fetchJson(url, tries = 4) {
+// The Findex endpoint (source=28) is slow — a full per_page=20000 pull takes
+// ~40s — and it 502s under load. Flat 3s retries all landed inside the same bad
+// ten seconds and the parser gave up while the API was merely busy. This runs
+// weekly, so waiting minutes costs nothing: back off exponentially with jitter,
+// and don't retry a 4xx, which means the URL changed rather than the server hiccuped.
+async function fetchJson(url, tries = 6) {
   for (let i = 0; i < tries; i++) {
     try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(120_000) });
+      const res = await fetch(url, { signal: AbortSignal.timeout(90_000) });
       if (res.ok) return await res.json();
-      console.warn(`  retry ${i + 1}: HTTP ${res.status}`);
+      if (res.status >= 400 && res.status < 500 && res.status !== 429) {
+        throw new Error(`HTTP ${res.status} — endpoint changed?`);
+      }
+      console.warn(`  attempt ${i + 1}/${tries}: HTTP ${res.status}`);
     } catch (e) {
-      console.warn(`  retry ${i + 1}: ${e.message}`);
+      if (/endpoint changed/.test(e.message)) throw e;
+      console.warn(`  attempt ${i + 1}/${tries}: ${e.message}`);
     }
-    await new Promise((r) => setTimeout(r, 3000));
+    if (i < tries - 1) {
+      const wait = Math.min(2000 * 2 ** i, 60_000) * (0.75 + Math.random() * 0.5);
+      console.warn(`  waiting ${Math.round(wait / 1000)}s`);
+      await new Promise((r) => setTimeout(r, wait));
+    }
   }
-  throw new Error(`WB API unreachable: ${url}`);
+  throw new Error(`WB API unreachable after ${tries} attempts: ${url}`);
 }
 
 async function main() {

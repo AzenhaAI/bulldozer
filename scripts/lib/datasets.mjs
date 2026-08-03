@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { homedir } from 'node:os';
 import { parseCsvObjects } from './csv.mjs';
+import { fingerprint, compareFingerprints, acceptedSlugs, loadPolicy } from './guard.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 export const ROOT = join(__dirname, '..', '..');
@@ -89,14 +90,38 @@ export function pickPeriods(counts, maxYear) {
   return eligible.slice(-2).map(([y]) => String(y));
 }
 
-/** Write a normalised dataset {meta, data} as pretty JSON. */
+/** Write a normalised dataset {meta, data} as pretty JSON.
+ *  Guarded: a refresh that looks broken next to the file already on disk is
+ *  refused, so a bad upstream day can't destroy good data (see lib/guard.mjs).
+ *  Sets process.exitCode on refusal — the parser finishes its other datasets,
+ *  but the run ends red. */
 export async function writeDataset(kind, slug, meta, data) {
   const dir = join(ROOT, 'src', 'data', kind === 'macro' ? 'macro' : 'surveys');
   await mkdir(dir, { recursive: true });
-  const out = { meta: { ...meta, kind }, data };
   const dest = join(dir, `${slug}.json`);
-  await writeFile(dest, JSON.stringify(out, null, 2) + '\n');
-  console.log(`  ✓ ${slug}: ${data.length} obs → ${dest.replace(ROOT + '/', '')}`);
+  const rel = dest.replace(ROOT + '/', '');
+
+  let prev = null;
+  try {
+    prev = fingerprint(JSON.parse(await readFile(dest, 'utf8')).data ?? []);
+  } catch { /* first write of this dataset */ }
+
+  const policy = { ...(await loadPolicy(join(__dirname, 'guard_policy.json')))[slug] };
+  const { ok, violations } = compareFingerprints(prev, fingerprint(data), policy);
+  const accepted = acceptedSlugs();
+  const override = accepted.has('all') || accepted.has(slug);
+
+  if (!ok && !override) {
+    console.error(`  ✗ ${slug}: REFUSED — ${violations.map((v) => `${v.code} (${v.detail})`).join(', ')}`);
+    console.error(`    kept the existing ${rel}. If this change is real: BD_ACCEPT_DATA_CHANGE=${slug} npm run data:build`);
+    process.exitCode = 1;
+    return { written: false, violations };
+  }
+
+  await writeFile(dest, JSON.stringify({ meta: { ...meta, kind }, data }, null, 2) + '\n');
+  const note = !ok && override ? ` (accepted: ${violations.map((v) => v.code).join(', ')})` : '';
+  console.log(`  ✓ ${slug}: ${data.length} obs → ${rel}${note}`);
+  return { written: true, violations };
 }
 
 export function round(v, dp = 2) {

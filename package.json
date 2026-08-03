@@ -30,7 +30,7 @@
     "parse:hofstede": "node scripts/parse_hofstede.mjs",
     "parse:afrobarometer": "node scripts/parse_afrobarometer.mjs",
     "parse:ess": "node scripts/parse_ess.mjs",
-    "data:build": "node scripts/parse_macro.mjs && node scripts/parse_surveys.mjs && node scripts/parse_tidy.mjs && node scripts/parse_lits.mjs && node scripts/parse_risk.mjs && node scripts/parse_owid.mjs && node scripts/parse_maddison.mjs && node scripts/parse_eurostat.mjs && node scripts/parse_findex.mjs && node scripts/parse_bigmac.mjs && node scripts/parse_cpi.mjs && node scripts/parse_pisa.mjs && node scripts/parse_rsf.mjs && node scripts/parse_fiw.mjs && node scripts/parse_unhcr.mjs && node scripts/parse_eu_cities.mjs",
+    "data:build": "node scripts/run_parsers.mjs",
     "digest": "node scripts/telegram_digest.mjs"
   },
   "dependencies": {

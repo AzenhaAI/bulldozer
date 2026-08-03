@@ -9,12 +9,12 @@ deploys, and how to add data.
 | Thing | Location |
 |---|---|
 | **Source code** | `~/Projects/bulldozer` → GitHub [`kirshp/bulldozer`](https://github.com/kirshp/bulldozer) (public, MIT) |
-| **Deployed copy** | `~/shpara1/bulldozer/` (the `dist/` build, copied in — not the source) |
+| **Deployed copy** | `~/Projects/shpara1/bulldozer/` (the `dist/` build, copied in — not the source) |
 | **Live site** | **[shpara.com/bulldozer](https://shpara.com/bulldozer)** — Cloudflare Pages, base path `/bulldozer` |
 | **Local preview** | `npm run dev` → http://localhost:4321/bulldozer/ |
 | **Raw source data** | `~/Documents/tableau_data/` and `…/BK/Opros/Inter_survey/` (curated public exports the parsers read; not in the repo) |
 
-`~/shpara1` is the whole shpara.com static site; BullDozer is one folder inside
+`~/Projects/shpara1` is the whole shpara.com static site; BullDozer is one folder inside
 it. Only `bulldozer/` is our concern there — the rest is unrelated and private.
 
 ## Stack
@@ -28,15 +28,15 @@ it. Only `bulldozer/` is our concern there — the rest is unrelated and private
 
 ```bash
 npm run build                          # → dist/  (static)
-rsync -a --delete dist/ ~/shpara1/bulldozer/
+rsync -a --delete dist/ ~/Projects/shpara1/bulldozer/
 # commit BOTH repos:
 #   ~/Projects/bulldozer : git add -A            (source)
-#   ~/shpara1            : git add bulldozer      (built copy only)
+#   ~/Projects/shpara1            : git add bulldozer      (built copy only)
 git push                               # Cloudflare Pages auto-deploys in ~15–60s
 ```
 
 Two git repos, always kept in step: the **source** (`~/Projects/bulldozer`)
-and the **built copy** committed under `~/shpara1/bulldozer`. In `~/shpara1`
+and the **built copy** committed under `~/Projects/shpara1/bulldozer`. In `~/Projects/shpara1`
 stage only `bulldozer` — the surrounding site has other, unrelated changes.
 
 **Rule:** nothing Russian/Cyrillic in this public surface. Grep before every
