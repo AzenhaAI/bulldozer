@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#eef3f5; }
+  a { color:#0f7f92; } a:hover { color:#0a5b69; }
+</style>
+</helmet>
+<div style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:40px 20px; font-family:'IBM Plex Sans',sans-serif; color:#17242a;">
+  <div style="width:1020px; background:#fbfdfd; border:1px solid #d8e2e5; padding:44px 48px 36px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:24px;">
+      <div>
+        <div style="font-family:'Source Serif 4',serif; font-size:30px; font-weight:700; line-height:1.25; max-width:620px; text-wrap:pretty;">
+          <span style="color:#0f7f92;">{{ heroName }}</span> ranks <strong>{{ heroLeftRankLabel }}</strong> in {{ leftMetricLabel }}…
+        </div>
+        <div style="font-family:'Source Serif 4',serif; font-size:20px; font-weight:400; color:#4a5a61; margin-top:6px;">
+          …and <strong style="color:#17242a;">{{ heroRightRankLabel }}</strong> in {{ rightMetricLabel }} among the world's giants.
+        </div>
+      </div>
+      <div style="display:flex; border:1px solid #c6d4d8; flex-shrink:0; font-size:13px; font-weight:600;">
+        <button onClick="{{ setSortCap }}" style="{{ btnCapStyle }}">Market cap first</button>
+        <button onClick="{{ setSortRev }}" style="{{ btnRevStyle }}">Revenue first</button>
+      </div>
+    </div>
+    <div style="position:relative; margin-top:26px;">
+      <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#5b6c73; margin-bottom:12px;">
+        <span>{{ leftHeader }}</span>
+        <span>{{ rightHeader }}</span>
+      </div>
+      <svg viewBox="0 0 920 518" width="100%" style="display:block;">
+        <sc-for list="{{ lines }}" as="ln" hint-placeholder-count="6">
+          <path d="{{ ln.path }}" fill="{{ ln.fill }}" opacity="{{ ln.opacity }}" style="transition:opacity .15s, fill .15s; cursor:pointer;" onMouseEnter="{{ ln.enter }}" onMouseLeave="{{ leave }}"></path>
+        </sc-for>
+        <sc-for list="{{ ticks }}" as="t" hint-placeholder-count="6">
+          <rect x="{{ t.x }}" y="{{ t.y }}" width="6" height="{{ t.h }}" fill="{{ t.fill }}"></rect>
+        </sc-for>
+      </svg>
+      <sc-for list="{{ labels }}" as="lb" hint-placeholder-count="6">
+        <div style="{{ lb.style }}" onMouseEnter="{{ lb.enter }}" onMouseLeave="{{ leave }}">
+          <span style="{{ lb.nameStyle }}">{{ lb.name }}</span>
+          <span style="{{ lb.valStyle }}">{{ lb.value }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="margin-top:24px; padding-top:14px; border-top:1px solid #dde6e9; display:flex; justify-content:space-between; font-size:12px; color:#7b8b91;">
+      <span>{{ footnote }}</span>
+      <span>Market cap as of July 2026 · Revenue: latest fiscal year / TTM</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1120, &quot;height&quot;: 820}, &quot;accentColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#0f7f92&quot;, &quot;options&quot;: [&quot;#0f7f92&quot;, &quot;#b3502d&quot;, &quot;#5b4b8a&quot;, &quot;#2d6a4f&quot;], &quot;tsType&quot;: &quot;string&quot;}, &quot;showValues&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { sort: 'cap', hover: null };
+  data() {
+    return [
+      { name: 'NVIDIA', cap: 4740, rev: 253 },
+      { name: 'Alphabet', cap: 4340, rev: 403 },
+      { name: 'Apple', cap: 4300, rev: 416 },
+      { name: 'Microsoft', cap: 2830, rev: 290 },
+      { name: 'Amazon', cap: 2570, rev: 715 },
+      { name: 'Meta', cap: 1900, rev: 200 },
+      { name: 'Broadcom', cap: 1700, rev: 65 },
+      { name: 'Saudi Aramco', cap: 1600, rev: 480 },
+      { name: 'TSMC', cap: 1500, rev: 120 },
+      { name: 'Berkshire Hathaway', cap: 1100, rev: 380 },
+      { name: 'Walmart', cap: 830, rev: 713 },
+      { name: 'ExxonMobil', cap: 500, rev: 340 },
+      { name: 'Toyota', cap: 290, rev: 310 },
+      { name: 'UnitedHealth', cap: 280, rev: 450 },
+    ];
+  }
+  fmt(b) { return b >= 1000 ? '$' + (b / 1000).toFixed(1).replace(/\.0$/, '') + 'T' : '$' + Math.round(b) + 'B'; }
+  ord(n) { const s = ['th','st','nd','rd'], v = n % 100; return n + (s[(v-20)%10] || s[v] || s[0]); }
+  renderVals() {
+    const accent = this.props.accentColor ?? '#0f7f92';
+    const sort = this.state.sort;
+    const leftKey = sort === 'cap' ? 'cap' : 'rev';
+    const rightKey = sort === 'cap' ? 'rev' : 'cap';
+    const companies = this.data();
+    const byLeft = [...companies].sort((a, b) => b[leftKey] - a[leftKey]);
+    const byRight = [...companies].sort((a, b) => b[rightKey] - a[rightKey]);
+    const n = companies.length;
+    const topPad = 8, rowH = (518 - 2 * topPad - 16) / (n - 1);
+    const yOf = i => topPad + i * rowH + 8;
+    const xL = 8, xR = 912;
+    const hero = byLeft[0].name;
+    const hov = this.state.hover;
+    const leave = () => this.setState({ hover: null });
+    const rows = companies.map(c => {
+      const li = byLeft.findIndex(d => d.name === c.name);
+      const ri = byRight.findIndex(d => d.name === c.name);
+      return { c, li, ri, yl: yOf(li), yr: yOf(ri) };
+    });
+    const maxVal = Math.max(...companies.map(c => Math.max(c.cap, c.rev)));
+    const wOf = v => 2.5 + 26 * Math.sqrt(v / maxVal);
+    const lines = rows.map(r => {
+      const isHero = r.c.name === hero, isHov = hov === r.c.name;
+      const wl = wOf(r.c[leftKey]) / 2, wr = wOf(r.c[rightKey]) / 2;
+      const x1 = xL + 6, x2 = xR;
+      return {
+        path: `M ${x1} ${r.yl - wl} C 460 ${r.yl - wl}, 460 ${r.yr - wr}, ${x2} ${r.yr - wr} L ${x2} ${r.yr + wr} C 460 ${r.yr + wr}, 460 ${r.yl + wl}, ${x1} ${r.yl + wl} Z`,
+        fill: isHero || isHov ? accent : '#b9c9ce',
+        width: wl + wr,
+        opacity: hov && !isHov && !isHero ? 0.3 : isHero || isHov ? 0.95 : 0.65,
+        enter: () => this.setState({ hover: r.c.name }),
+      };
+    }).sort((a, b) => (b.width - a.width));
+    const ticks = rows.flatMap(r => {
+      const on = r.c.name === hero || r.c.name === hov;
+      const fill = on ? accent : '#8fa2a8';
+      const hl = Math.max(10, wOf(r.c[leftKey]) + 4), hr = Math.max(10, wOf(r.c[rightKey]) + 4);
+      return [{ x: xL, y: r.yl - hl / 2, h: hl, fill }, { x: xR, y: r.yr - hr / 2, h: hr, fill }];
+    });
+    const showVals = this.props.showValues ?? true;
+    const labels = rows.flatMap(r => {
+      const mk = (side, rank, y, key) => {
+        const on = r.c.name === hero || r.c.name === hov;
+        // label only top-3 on each side by default, all on hover of that line
+        const show = rank < 3 || on;
+        if (!show) return [];
+        const base = `position:absolute; top:${y + 26}px; transform:translateY(-50%); display:flex; gap:8px; align-items:baseline; cursor:default; background:#fbfdfd; padding:1px 6px; box-shadow:0 0 0 2px #fbfdfd; ` +
+          (side === 'L' ? `left:22px;` : `right:22px; flex-direction:row-reverse;`);
+        return [{
+          style: base,
+          name: r.c.name,
+          nameStyle: `font-weight:${on ? 700 : 500}; color:${on ? (r.c.name === hero ? accent : '#17242a') : '#5b6c73'}; font-size:14px;`,
+          value: showVals ? this.fmt(r.c[key]) : '',
+          valStyle: 'font-size:12px; color:#8fa2a8; font-variant-numeric:tabular-nums;',
+          enter: () => this.setState({ hover: r.c.name }),
+        }];
+      };
+      return [...mk('L', r.li, r.yl, leftKey), ...mk('R', r.ri, r.yr, rightKey)];
+    });
+    const metricLabel = k => k === 'cap' ? 'market cap' : 'revenue';
+    const heroRow = rows.find(r => r.c.name === hero);
+    const btn = on => `padding:8px 14px; border:none; cursor:pointer; font:inherit; background:${on ? '#17242a' : 'transparent'}; color:${on ? '#fff' : '#4a5a61'};`;
+    return {
+      lines, ticks, labels, leave,
+      heroName: hero,
+      heroLeftRankLabel: this.ord(1),
+      heroRightRankLabel: this.ord(heroRow.ri + 1),
+      leftMetricLabel: metricLabel(leftKey),
+      rightMetricLabel: metricLabel(rightKey),
+      leftHeader: (leftKey === 'cap' ? 'Rank by market cap' : 'Rank by revenue'),
+      rightHeader: (rightKey === 'cap' ? 'Rank by market cap' : 'Rank by revenue'),
+      setSortCap: () => this.setState({ sort: 'cap', hover: null }),
+      setSortRev: () => this.setState({ sort: 'rev', hover: null }),
+      btnCapStyle: btn(sort === 'cap'),
+      btnRevStyle: btn(sort === 'rev'),
+      footnote: '14 of the world\u2019s largest public companies, ranked among themselves. Hover a line for details.',
+    };
+  }
+}
+</script>
+</body>
+</html>
