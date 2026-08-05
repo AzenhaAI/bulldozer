@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
 const OUT = join(dirname(fileURLToPath(import.meta.url)), '..', 'src', 'data', 'companies.json');
-const UA = { 'User-Agent': 'BullDozer/1.0 (aurapark888@gmail.com)' };
+const UA = { 'User-Agent': 'BullDozer/1.0 (azenha.agent@gmail.com)' };
 const num = (s) => { const m = (s || '').match(/[\d][\d,.]*/); return m ? Number(m[0].replace(/,/g, '')) : null; };
 const firstLink = (s) => { const m = (s || '').match(/\[\[([^\]]+)\]\]/); return m ? (m[1].split('|')[1] || m[1].split('|')[0]).trim() : null; };
 

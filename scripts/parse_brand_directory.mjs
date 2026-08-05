@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
 const OUT = join(dirname(fileURLToPath(import.meta.url)), '..', 'src', 'data', 'brands.json');
-const UA = { 'User-Agent': 'BullDozer/1.0 (aurapark888@gmail.com)' };
+const UA = { 'User-Agent': 'BullDozer/1.0 (azenha.agent@gmail.com)' };
 const ALIAS = { 'United States': 'USA', 'South Korea': 'KOR', 'United Kingdom': 'GBR', 'Hong Kong': 'HKG', 'Germany': 'DEU' };
 
 async function wiki(params) {

@@ -17,7 +17,7 @@ const Q = `SELECT ?iso3 ?capitalLabel ?coord ?coa WHERE {
 }`;
 
 const res = await fetch('https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(Q), {
-  headers: { 'User-Agent': 'BullDozer/1.0 (data viz; aurapark888@gmail.com)', Accept: 'application/sparql-results+json' },
+  headers: { 'User-Agent': 'BullDozer/1.0 (data viz; azenha.agent@gmail.com)', Accept: 'application/sparql-results+json' },
 });
 if (!res.ok) { console.error('Wikidata error', res.status); process.exit(1); }
 const rows = (await res.json()).results.bindings;
