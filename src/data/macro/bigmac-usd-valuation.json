@@ -9,7 +9,7 @@
     "source": "The Economist — Big Mac Index",
     "license": "Open data (The Economist, GitHub)",
     "url": "https://github.com/TheEconomist/big-mac-data",
-    "parsedAt": "2026-08-03",
+    "parsedAt": "2026-08-10",
     "kind": "macro"
   },
   "data": [
@@ -2299,168 +2299,168 @@
       "entity": "United Arab Emirates",
       "group": "Asia",
       "period": "2025",
-      "value": -15.4,
+      "value": -13.9,
       "iso": "ARE"
     },
     {
       "entity": "Argentina",
       "group": "Americas",
       "period": "2025",
-      "value": 20.1,
+      "value": -14.6,
       "iso": "ARG"
     },
     {
       "entity": "Australia",
       "group": "Asia",
       "period": "2025",
-      "value": -15.9,
+      "value": -13.2,
       "iso": "AUS"
     },
     {
       "entity": "Azerbaijan",
       "group": "Europe",
       "period": "2025",
-      "value": -36.6,
+      "value": -36.8,
       "iso": "AZE"
     },
     {
       "entity": "Bahrain",
       "group": "Asia",
       "period": "2025",
-      "value": -22.1,
+      "value": -20.6,
       "iso": "BHR"
     },
     {
       "entity": "Brazil",
       "group": "Americas",
       "period": "2025",
-      "value": -30.5,
+      "value": -28.4,
       "iso": "BRA"
     },
     {
       "entity": "Canada",
       "group": "Americas",
       "period": "2025",
-      "value": -6.2,
+      "value": -9,
       "iso": "CAN"
     },
     {
       "entity": "Switzerland",
       "group": "Europe",
       "period": "2025",
-      "value": 38,
+      "value": 49.6,
       "iso": "CHE"
     },
     {
       "entity": "Chile",
       "group": "Americas",
       "period": "2025",
-      "value": -21.5,
+      "value": -22.6,
       "iso": "CHL"
     },
     {
       "entity": "China",
       "group": "Asia",
       "period": "2025",
-      "value": -39.2,
+      "value": -40.9,
       "iso": "CHN"
     },
     {
       "entity": "Colombia",
       "group": "Americas",
       "period": "2025",
-      "value": -10.6,
+      "value": -5.2,
       "iso": "COL"
     },
     {
       "entity": "Costa Rica",
       "group": "Americas",
       "period": "2025",
-      "value": 1.9,
+      "value": -1,
       "iso": "CRI"
     },
     {
       "entity": "Czech Republic",
       "group": "Europe",
       "period": "2025",
-      "value": -21.2,
+      "value": -14.6,
       "iso": "CZE"
     },
     {
       "entity": "Denmark",
       "group": "Europe",
       "period": "2025",
-      "value": -5.2,
+      "value": 16.6,
       "iso": "DNK"
     },
     {
       "entity": "Egypt",
       "group": "Africa",
       "period": "2025",
-      "value": -53.6,
+      "value": -57.9,
       "iso": "EGY"
     },
     {
       "entity": "Britain",
       "group": "Europe",
       "period": "2025",
-      "value": -1.1,
+      "value": 13.5,
       "iso": "GBR"
     },
     {
       "entity": "Guatemala",
       "group": "Americas",
       "period": "2025",
-      "value": -30.7,
+      "value": -32.7,
       "iso": "GTM"
     },
     {
       "entity": "Hong Kong",
       "group": "Asia",
       "period": "2025",
-      "value": -46.8,
+      "value": -47,
       "iso": "HKG"
     },
     {
       "entity": "Honduras",
       "group": "Americas",
       "period": "2025",
-      "value": -28.8,
+      "value": -29,
       "iso": "HND"
     },
     {
       "entity": "Hungary",
       "group": "Europe",
       "period": "2025",
-      "value": -37,
+      "value": -25.7,
       "iso": "HUN"
     },
     {
       "entity": "Indonesia",
       "group": "Asia",
       "period": "2025",
-      "value": -56.2,
+      "value": -57,
       "iso": "IDN"
     },
     {
       "entity": "India",
       "group": "Asia",
       "period": "2025",
-      "value": -54.8,
+      "value": -56.2,
       "iso": "IND"
     },
     {
       "entity": "Israel",
       "group": "Asia",
       "period": "2025",
-      "value": -18.6,
+      "value": -1.1,
       "iso": "ISR"
     },
     {
       "entity": "Jordan",
       "group": "Asia",
       "period": "2025",
-      "value": -39.1,
+      "value": -41.3,
       "iso": "JOR"
     },
     {
@@ -2474,168 +2474,168 @@
       "entity": "South Korea",
       "group": "Asia",
       "period": "2025",
-      "value": -33.6,
+      "value": -33.7,
       "iso": "KOR"
     },
     {
       "entity": "Kuwait",
       "group": "Asia",
       "period": "2025",
-      "value": -21.5,
+      "value": -23.8,
       "iso": "KWT"
     },
     {
       "entity": "Lebanon",
       "group": "Asia",
       "period": "2025",
-      "value": -7.4,
+      "value": -10.8,
       "iso": "LBN"
     },
     {
       "entity": "Moldova",
       "group": "Europe",
       "period": "2025",
-      "value": -39.2,
+      "value": -30.8,
       "iso": "MDA"
     },
     {
       "entity": "Mexico",
       "group": "Americas",
       "period": "2025",
-      "value": -20.5,
+      "value": -12.2,
       "iso": "MEX"
     },
     {
       "entity": "Malaysia",
       "group": "Asia",
       "period": "2025",
-      "value": -48.1,
+      "value": -46.9,
       "iso": "MYS"
     },
     {
       "entity": "Nicaragua",
       "group": "Americas",
       "period": "2025",
-      "value": -22.7,
+      "value": -23.2,
       "iso": "NIC"
     },
     {
       "entity": "Norway",
       "group": "Europe",
       "period": "2025",
-      "value": 15.3,
+      "value": 22.1,
       "iso": "NOR"
     },
     {
       "entity": "New Zealand",
       "group": "Asia",
       "period": "2025",
-      "value": -17.5,
+      "value": -14.8,
       "iso": "NZL"
     },
     {
       "entity": "Oman",
       "group": "Asia",
       "period": "2025",
-      "value": -31.4,
+      "value": -34,
       "iso": "OMN"
     },
     {
       "entity": "Pakistan",
       "group": "Asia",
       "period": "2025",
-      "value": -35,
+      "value": -36.9,
       "iso": "PAK"
     },
     {
       "entity": "Peru",
       "group": "Americas",
       "period": "2025",
-      "value": -21.8,
+      "value": -21.2,
       "iso": "PER"
     },
     {
       "entity": "Philippines",
       "group": "Asia",
       "period": "2025",
-      "value": -50,
+      "value": -50.4,
       "iso": "PHL"
     },
     {
       "entity": "Poland",
       "group": "Europe",
       "period": "2025",
-      "value": -10,
+      "value": -3.4,
       "iso": "POL"
     },
     {
       "entity": "Qatar",
       "group": "Asia",
       "period": "2025",
-      "value": -28.8,
+      "value": -22.3,
       "iso": "QAT"
     },
     {
       "entity": "Romania",
       "group": "Europe",
       "period": "2025",
-      "value": -40.8,
+      "value": -35.5,
       "iso": "ROU"
     },
     {
       "entity": "Saudi Arabia",
       "group": "Asia",
       "period": "2025",
-      "value": -12.5,
+      "value": -15.7,
       "iso": "SAU"
     },
     {
       "entity": "Singapore",
       "group": "Asia",
       "period": "2025",
-      "value": -10.7,
+      "value": -10,
       "iso": "SGP"
     },
     {
       "entity": "Sweden",
       "group": "Europe",
       "period": "2025",
-      "value": -2.1,
+      "value": 21.8,
       "iso": "SWE"
     },
     {
       "entity": "Thailand",
       "group": "Asia",
       "period": "2025",
-      "value": -30.8,
+      "value": -30.7,
       "iso": "THA"
     },
     {
       "entity": "Turkey",
       "group": "Europe",
       "period": "2025",
-      "value": -8.2,
+      "value": -6.9,
       "iso": "TUR"
     },
     {
       "entity": "Taiwan",
       "group": "Asia",
       "period": "2025",
-      "value": -58.8,
+      "value": -55.7,
       "iso": "TWN"
     },
     {
       "entity": "Ukraine",
       "group": "Europe",
       "period": "2025",
-      "value": -50.7,
+      "value": -47.5,
       "iso": "UKR"
     },
     {
       "entity": "Uruguay",
       "group": "Americas",
       "period": "2025",
-      "value": 19.3,
+      "value": 29.6,
       "iso": "URY"
     },
     {
@@ -2649,224 +2649,224 @@
       "entity": "Venezuela",
       "group": "Americas",
       "period": "2025",
-      "value": -23.1,
+      "value": -30,
       "iso": "VEN"
     },
     {
       "entity": "Vietnam",
       "group": "Asia",
       "period": "2025",
-      "value": -47.7,
+      "value": -51.6,
       "iso": "VNM"
     },
     {
       "entity": "South Africa",
       "group": "Africa",
       "period": "2025",
-      "value": -52,
+      "value": -49.8,
       "iso": "ZAF"
     },
     {
       "entity": "United Arab Emirates",
       "group": "Asia",
       "period": "2026",
-      "value": -15.5,
+      "value": -16.8,
       "iso": "ARE"
     },
     {
       "entity": "Argentina",
       "group": "Americas",
       "period": "2026",
-      "value": -9.6,
+      "value": -5,
       "iso": "ARG"
     },
     {
       "entity": "Australia",
       "group": "Asia",
       "period": "2026",
-      "value": -7,
+      "value": -4.3,
       "iso": "AUS"
     },
     {
       "entity": "Azerbaijan",
       "group": "Europe",
       "period": "2026",
-      "value": -36.2,
+      "value": -31.4,
       "iso": "AZE"
     },
     {
       "entity": "Bahrain",
       "group": "Asia",
       "period": "2026",
-      "value": -22,
+      "value": -23.2,
       "iso": "BHR"
     },
     {
       "entity": "Brazil",
       "group": "Americas",
       "period": "2026",
-      "value": -27.3,
+      "value": -24.4,
       "iso": "BRA"
     },
     {
       "entity": "Canada",
       "group": "Americas",
       "period": "2026",
-      "value": -9.4,
+      "value": -6.5,
       "iso": "CAN"
     },
     {
       "entity": "Switzerland",
       "group": "Europe",
       "period": "2026",
-      "value": 48.4,
+      "value": 45.4,
       "iso": "CHE"
     },
     {
       "entity": "Chile",
       "group": "Americas",
       "period": "2026",
-      "value": -11.4,
+      "value": -13.1,
       "iso": "CHL"
     },
     {
       "entity": "China",
       "group": "Asia",
       "period": "2026",
-      "value": -40.2,
+      "value": -37.1,
       "iso": "CHN"
     },
     {
       "entity": "Colombia",
       "group": "Americas",
       "period": "2026",
-      "value": 1.5,
+      "value": 28.7,
       "iso": "COL"
     },
     {
       "entity": "Costa Rica",
       "group": "Americas",
       "period": "2026",
-      "value": -1.3,
+      "value": 12.5,
       "iso": "CRI"
     },
     {
       "entity": "Czech Republic",
       "group": "Europe",
       "period": "2026",
-      "value": -10.2,
+      "value": -12.6,
       "iso": "CZE"
     },
     {
       "entity": "Denmark",
       "group": "Europe",
       "period": "2026",
-      "value": 16.7,
+      "value": 13.1,
       "iso": "DNK"
     },
     {
       "entity": "Egypt",
       "group": "Africa",
       "period": "2026",
-      "value": -56.8,
+      "value": -53.9,
       "iso": "EGY"
     },
     {
       "entity": "Britain",
       "group": "Europe",
       "period": "2026",
-      "value": 15.7,
+      "value": 19,
       "iso": "GBR"
     },
     {
       "entity": "Guatemala",
       "group": "Americas",
       "period": "2026",
-      "value": -29.7,
+      "value": -28.3,
       "iso": "GTM"
     },
     {
       "entity": "Hong Kong",
       "group": "Asia",
       "period": "2026",
-      "value": -47.6,
+      "value": -47.7,
       "iso": "HKG"
     },
     {
       "entity": "Honduras",
       "group": "Americas",
       "period": "2026",
-      "value": -17.3,
+      "value": -16.5,
       "iso": "HND"
     },
     {
       "entity": "Hungary",
       "group": "Europe",
       "period": "2026",
-      "value": -18.4,
+      "value": -14.8,
       "iso": "HUN"
     },
     {
       "entity": "Indonesia",
       "group": "Asia",
       "period": "2026",
-      "value": -58.9,
+      "value": -61.7,
       "iso": "IDN"
     },
     {
       "entity": "India",
       "group": "Asia",
       "period": "2026",
-      "value": -58.9,
+      "value": -60.5,
       "iso": "IND"
     },
     {
       "entity": "Israel",
       "group": "Asia",
       "period": "2026",
-      "value": 4,
+      "value": 23.3,
       "iso": "ISR"
     },
     {
       "entity": "Jordan",
       "group": "Asia",
       "period": "2026",
-      "value": -42.3,
+      "value": -43.3,
       "iso": "JOR"
     },
     {
       "entity": "Japan",
       "group": "Asia",
       "period": "2026",
-      "value": -50.5,
+      "value": -50.4,
       "iso": "JPN"
     },
     {
       "entity": "South Korea",
       "group": "Asia",
       "period": "2026",
-      "value": -38.9,
+      "value": -38.3,
       "iso": "KOR"
     },
     {
       "entity": "Kuwait",
       "group": "Asia",
       "period": "2026",
-      "value": -25.8,
+      "value": -27.3,
       "iso": "KWT"
     },
     {
       "entity": "Lebanon",
       "group": "Asia",
       "period": "2026",
-      "value": -12.4,
+      "value": -13.8,
       "iso": "LBN"
     },
     {
       "entity": "Moldova",
       "group": "Europe",
       "period": "2026",
-      "value": -33.2,
+      "value": -26.7,
       "iso": "MDA"
     },
     {
@@ -2880,133 +2880,133 @@
       "entity": "Malaysia",
       "group": "Asia",
       "period": "2026",
-      "value": -44.6,
+      "value": -42.6,
       "iso": "MYS"
     },
     {
       "entity": "Nicaragua",
       "group": "Americas",
       "period": "2026",
-      "value": -22.4,
+      "value": -17.9,
       "iso": "NIC"
     },
     {
       "entity": "Norway",
       "group": "Europe",
       "period": "2026",
-      "value": 22.8,
+      "value": 29.5,
       "iso": "NOR"
     },
     {
       "entity": "New Zealand",
       "group": "Asia",
       "period": "2026",
-      "value": -19.3,
+      "value": -17.4,
       "iso": "NZL"
     },
     {
       "entity": "Oman",
       "group": "Asia",
       "period": "2026",
-      "value": -35.1,
+      "value": -36.1,
       "iso": "OMN"
     },
     {
       "entity": "Pakistan",
       "group": "Asia",
       "period": "2026",
-      "value": -36.9,
+      "value": -37.5,
       "iso": "PAK"
     },
     {
       "entity": "Peru",
       "group": "Americas",
       "period": "2026",
-      "value": -17.8,
+      "value": -19.7,
       "iso": "PER"
     },
     {
       "entity": "Philippines",
       "group": "Asia",
       "period": "2026",
-      "value": -53.6,
+      "value": -56,
       "iso": "PHL"
     },
     {
       "entity": "Poland",
       "group": "Europe",
       "period": "2026",
-      "value": 2.2,
+      "value": 0,
       "iso": "POL"
     },
     {
       "entity": "Qatar",
       "group": "Asia",
       "period": "2026",
-      "value": -23.7,
+      "value": -20.5,
       "iso": "QAT"
     },
     {
       "entity": "Romania",
       "group": "Europe",
       "period": "2026",
-      "value": -35,
+      "value": -35.6,
       "iso": "ROU"
     },
     {
       "entity": "Saudi Arabia",
       "group": "Asia",
       "period": "2026",
-      "value": -17.2,
+      "value": -18.7,
       "iso": "SAU"
     },
     {
       "entity": "Singapore",
       "group": "Asia",
       "period": "2026",
-      "value": -5.5,
+      "value": -7.2,
       "iso": "SGP"
     },
     {
       "entity": "Sweden",
       "group": "Europe",
       "period": "2026",
-      "value": 18.6,
+      "value": 15.1,
       "iso": "SWE"
     },
     {
       "entity": "Thailand",
       "group": "Asia",
       "period": "2026",
-      "value": -29.7,
+      "value": -35.4,
       "iso": "THA"
     },
     {
       "entity": "Turkey",
       "group": "Europe",
       "period": "2026",
-      "value": -3.5,
+      "value": 11.1,
       "iso": "TUR"
     },
     {
       "entity": "Taiwan",
       "group": "Asia",
       "period": "2026",
-      "value": -59.6,
+      "value": -61,
       "iso": "TWN"
     },
     {
       "entity": "Ukraine",
       "group": "Europe",
       "period": "2026",
-      "value": -47.8,
+      "value": -46.4,
       "iso": "UKR"
     },
     {
       "entity": "Uruguay",
       "group": "Americas",
       "period": "2026",
-      "value": 43.1,
+      "value": 43.7,
       "iso": "URY"
     },
     {
@@ -3020,21 +3020,21 @@
       "entity": "Venezuela",
       "group": "Americas",
       "period": "2026",
-      "value": -33.9,
+      "value": -27.5,
       "iso": "VEN"
     },
     {
       "entity": "Vietnam",
       "group": "Asia",
       "period": "2026",
-      "value": -52.7,
+      "value": -53.5,
       "iso": "VNM"
     },
     {
       "entity": "South Africa",
       "group": "Africa",
       "period": "2026",
-      "value": -45.1,
+      "value": -44,
       "iso": "ZAF"
     }
   ]
