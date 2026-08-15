@@ -166,8 +166,10 @@ def generate(cfg):
                                 site.get('summary', blurb), cfg['site_source'], cfg['site_license'],
                                 cfg['site_url'], cfg['wave'], c['country'])
 
+    # Clean URL of this dashboard — Cloudflare serves <name>.html at /<name>.
+    page_url = f"https://shpara.com/bulldozer/dashboards/{pathlib.Path(cfg['out_html']).stem}"
     html = _TEMPLATE.format(title=cfg['title'], lead=cfg['lead'], sigkey=cfg['sigkey'],
-                            body=body, foot=cfg['foot'])
+                            body=body, foot=cfg['foot'], page_url=page_url)
     out = pathlib.Path(cfg['out_html'])
     out.write_text(html)
     if cfg.get('folder_copy'):
@@ -178,7 +180,8 @@ def generate(cfg):
 _TEMPLATE = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>{title}</title>
 <meta name="description" content="{lead}">
-<meta property="og:type" content="website"><meta property="og:site_name" content="BullDozer"><meta property="og:title" content="{title}"><meta property="og:description" content="{lead}"><meta property="og:image" content="https://shpara.com/bulldozer/og.png">
+<link rel="canonical" href="{page_url}">
+<meta property="og:type" content="website"><meta property="og:site_name" content="BullDozer"><meta property="og:title" content="{title}"><meta property="og:description" content="{lead}"><meta property="og:url" content="{page_url}"><meta property="og:image" content="https://shpara.com/bulldozer/og.png">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title}"><meta name="twitter:image" content="https://shpara.com/bulldozer/og.png">
 <style>
 :root{{--bg:#0e0f11;--card:#16181b;--card2:#1c1f23;--border:#2a2e33;--text:#e7e9ec;--dim:#9aa1a9;--accent:#ffb000}}
