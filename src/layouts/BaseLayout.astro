@@ -4,7 +4,7 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
-  active?: 'home' | 'news' | 'explore' | 'sources' | 'surveys' | 'macro' | 'markets' | 'geo' | 'edu' | 'quiz' | 'glossary';
+  active?: 'home' | 'news' | 'apps' | 'explore' | 'sources' | 'surveys' | 'macro' | 'markets' | 'geo' | 'edu' | 'quiz' | 'glossary';
   /** Path (under base) to a page-specific OG image, e.g. `/og/whr-happiness.png`. */
   ogPath?: string;
 }
@@ -34,14 +34,15 @@ const burger = [
   { id: 'quiz', label: '🎲 Country quiz', href: `${base}/quiz/` },
   { id: 'glossary', label: '📖 Glossary', href: `${base}/glossary/` },
   { id: 'about', label: 'ℹ️ About', href: `${base}/about/` },
-  { id: 'github', label: '🐙 GitHub', href: 'https://github.com/kirshp/bulldozer' },
-  { id: 'contact', label: '✉️ Contact', href: 'mailto:azenha.agent@gmail.com' },
+  { id: 'contact', label: '✉️ Contact', href: 'mailto:agent@azenha.ai' },
   { sep: true },
-  { id: 'app', label: '📱 Get the app', href: `${base}/downloads/bulldozer-stats.apk`, download: true },
+  // Points at the apps page rather than straight at the APK: iPhone users tapping
+  // "Get the app" were being handed an Android package they can't install.
+  { id: 'apps', label: '📱 Get the app', href: `${base}/apps` },
 ];
 const fullTitle = title ? `${title} · BullDozer` : 'BullDozer — Marketing Analytics & Research';
 const desc = description ?? 'Bulldoze the noise. Mine the signal. 136 public, parsed datasets — surveys, IMF & World Bank macro, markets and people. Every number sourced.';
-const canonical = new URL(Astro.url.pathname, 'https://shpara.com').href;
+const canonical = new URL(Astro.url.pathname, 'https://azenha.ai').href;
 // Site-level entity markup, homepage only (Google reads WebSite/SearchAction from
 // the site root). The SearchAction declares the on-site search so Google can offer
 // a sitelinks search box; ?q= is handled by the search overlay below.
@@ -51,30 +52,30 @@ const siteLd = isHome ? {
   '@graph': [
     {
       '@type': 'WebSite',
-      '@id': `https://shpara.com${base}/#website`,
-      url: `https://shpara.com${base}/`,
+      '@id': `https://azenha.ai${base}/#website`,
+      url: `https://azenha.ai${base}/`,
       name: 'BullDozer',
       description: 'Marketing analytics & research — public, parsed datasets with sources cited.',
-      publisher: { '@id': `https://shpara.com${base}/#org` },
+      publisher: { '@id': `https://azenha.ai${base}/#org` },
       inLanguage: 'en',
       potentialAction: {
         '@type': 'SearchAction',
-        target: { '@type': 'EntryPoint', urlTemplate: `https://shpara.com${base}/explore/?q={search_term_string}` },
+        target: { '@type': 'EntryPoint', urlTemplate: `https://azenha.ai${base}/explore/?q={search_term_string}` },
         'query-input': 'required name=search_term_string',
       },
     },
     {
       '@type': 'Organization',
-      '@id': `https://shpara.com${base}/#org`,
+      '@id': `https://azenha.ai${base}/#org`,
       name: 'BullDozer',
-      url: `https://shpara.com${base}/`,
-      logo: `https://shpara.com${base}/icon-512.png`,
-      founder: { '@type': 'Person', name: 'Kirill Shpara', url: 'https://shpara.com/' },
-      sameAs: ['https://github.com/kirshp/bulldozer'],
+      url: `https://azenha.ai${base}/`,
+      logo: `https://azenha.ai${base}/icon-512.png`,
+      founder: { '@type': 'Organization', name: 'Azenha AI', url: 'https://azenha.ai/' },
+      sameAs: ['https://azenha.ai/'],
     },
   ],
 } : null;
-const ogImage = `https://shpara.com${base}${ogPath ?? '/og.png'}`;
+const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
 ---
 <!doctype html>
 <html lang="en">
@@ -269,7 +270,7 @@ const ogImage = `https://shpara.com${base}${ogPath ?? '/og.png'}`;
           <a href={`${base}/dashboards/`}>Dashboards</a> ·
           <a href={`${base}/glossary/`}>Glossary</a> ·
           <a href={`${base}/quiz/`}>Quiz</a> ·
-          <a href="mailto:azenha.agent@gmail.com">Contact</a> ·
+          <a href="mailto:agent@azenha.ai">Contact</a> ·
           Public, parsed data only · sources cited per dataset
         </span>
         <span class="map-note">

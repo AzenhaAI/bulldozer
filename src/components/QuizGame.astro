@@ -199,7 +199,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   $('q-again').addEventListener('click', () => ($('q-start-btn') as HTMLButtonElement).click());
   $('q-share').addEventListener('click', async () => {
     const grid = perRound.map((p) => (p >= 4 ? '🟩' : p >= 1 ? '🟨' : '🟥')).join('');
-    const text = `BullDozer Country Quiz — ${score}/${ROUNDS * MAX_CLUES}\n${grid}\nhttps://shpara.com${base}/quiz`;
+    const text = `BullDozer Country Quiz — ${score}/${ROUNDS * MAX_CLUES}\n${grid}\nhttps://azenha.ai${base}/quiz`;
     try { await navigator.clipboard.writeText(text); $('q-share').textContent = '✅ Copied'; } catch { /* ignore */ }
     setTimeout(() => ($('q-share').textContent = '📋 Copy result'), 1500);
   });

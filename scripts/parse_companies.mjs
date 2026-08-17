@@ -11,7 +11,7 @@ import { parseCsvObjects } from './lib/csv.mjs';
 import { gapminderRows, REGION_4, writeDataset } from './lib/datasets.mjs';
 
 const GAP = join(homedir(), 'Library', 'Mobile Documents', 'com~apple~CloudDocs', 'BK', 'Opros', 'Inter_survey', 'Gapminder', 'ddf--entities--geo--country.csv');
-const UA = { 'User-Agent': 'BullDozer/1.0 (azenha.agent@gmail.com)' };
+const UA = { 'User-Agent': 'BullDozer/1.0 (agent@azenha.ai)' };
 const PERIOD = '2023';
 
 // Wikipedia name → ISO-3 for names that differ from Gapminder's.

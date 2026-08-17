@@ -67,7 +67,7 @@ function svgFor(meta, rows, period) {
   </g>
   <text x="90" y="225" font-family="JetBrains Mono,monospace" font-size="22" fill="#ffb000">${esc((meta.source.length > 32 ? meta.source.slice(0, 31) + '…' : meta.source))} · ${esc(period)}</text>
   ${titleSvg}
-  <text x="90" y="560" font-family="JetBrains Mono,monospace" font-size="22" fill="#9aa1a9">shpara.com/bulldozer · every number sourced</text>
+  <text x="90" y="560" font-family="JetBrains Mono,monospace" font-size="22" fill="#9aa1a9">azenha.ai/bulldozer · every number sourced</text>
   <g transform="translate(660,120)">${bars}</g>
 </svg>`;
 }

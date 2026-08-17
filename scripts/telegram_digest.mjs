@@ -81,7 +81,7 @@ function buildMessage(datasets) {
     if (m.down[0]) lines.push(`  ↓ ${m.down.map((x) => `${x.entity} ${fmtChange(x.val, mode)}`).join(', ')}`);
     lines.push('');
   }
-  lines.push('https://bulldozer.shpara.com/');
+  lines.push('https://bulldozer.azenha.ai/');
   return lines.join('\n');
 }
 

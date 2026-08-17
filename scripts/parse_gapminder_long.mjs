@@ -14,7 +14,7 @@ import { REGION_4, writeDataset } from './lib/datasets.mjs';
 
 const DIR = join(homedir(), 'Library', 'Mobile Documents', 'com~apple~CloudDocs', 'BK', 'Opros', 'Inter_survey', 'Gapminder');
 const SURV = join(homedir(), 'Projects', 'bulldozer', 'src', 'data', 'surveys');
-const UA = { 'User-Agent': 'BullDozer/1.0 (azenha.agent@gmail.com)' };
+const UA = { 'User-Agent': 'BullDozer/1.0 (agent@azenha.ai)' };
 const PARSED = new Date().toISOString().slice(0, 10);
 const COMMON = { source: 'Gapminder', license: 'CC BY 4.0', url: 'https://www.gapminder.org/data/', parsedAt: PARSED };
 const MAXY = 2020; // drop projections

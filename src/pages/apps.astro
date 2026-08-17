@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// Size of public/downloads/bulldozer-stats.apk, rounded as elsewhere on the
+// site. Update it when the APK is rebuilt.
+const apkMB = 19;
+---
+<BaseLayout
+  title="Apps for Android, iPhone and the web"
+  description="BullDozer on your phone: a free Android app, an iOS build on request, or install the site as a web app. Every dataset, offline after the first load."
+  active="apps"
+>
+  <section class="section">
+    <div class="container" style="max-width:820px">
+      <span class="kicker">Apps</span>
+      <h1>The numbers, in your pocket</h1>
+      <p class="sub">
+        Every dataset on this site, on a phone, cached after the first load so
+        charts and country profiles keep working with no connection. Free, no
+        account, no ads.
+      </p>
+
+      <div class="apps-grid">
+        <div class="app-card">
+          <h2>Android</h2>
+          <p>A direct download. The app is not on Google Play yet, so your phone
+          asks you to allow <b>installing from unknown sources</b> the first time.</p>
+          <a class="ghost-btn app-cta" href={`${base}/downloads/bulldozer-stats.apk`} download>
+            Download APK, {apkMB} MB
+          </a>
+        </div>
+
+        <div class="app-card">
+          <h2>iPhone and iPad</h2>
+          <p>Not on the App Store yet. While review runs its course builds go out
+          by hand, so write and you get one back with the install steps.</p>
+          <a class="ghost-btn app-cta" href="mailto:agent@azenha.ai?subject=BullDozer%20for%20iOS">
+            Request a build by email
+          </a>
+          <p class="app-note">Or keep the site one tap away: in Safari, tap
+          <b>Share</b> and then <b>Add to Home Screen</b>.</p>
+        </div>
+
+        <div class="app-card">
+          <h2>Web app</h2>
+          <p>The site installs as an app on any desktop or Android browser, with
+          its own window and icon, and the same offline cache.</p>
+          <button type="button" class="ghost-btn app-cta" id="apps-pwa">Install web app</button>
+          <p class="app-note" id="apps-pwa-note" hidden>This browser offers no
+          install prompt here. Use its menu: <b>Install</b> or <b>Add to Home Screen</b>.</p>
+        </div>
+      </div>
+
+      <h2 style="margin-top:34px">What you get</h2>
+
+      <div class="gloss-term"><h3>The whole catalogue, offline</h3>
+        <p>Every indicator, country profile and ranking travels with you. What
+        the app has already fetched stays put, so a plane or a dead signal is no
+        obstacle, and fresh figures arrive when you are back online.</p></div>
+
+      <div class="gloss-term"><h3>Sourced, not scraped</h3>
+        <p>Each number names where it came from and which period it covers, from
+        the IMF, the World Bank, Gapminder, V-Dem and the World Happiness Report
+        among others. The same open files this site is built from.</p></div>
+
+      <div class="gloss-term"><h3>Nothing about you</h3>
+        <p>No sign-up, no login, and no record of what you look at. See
+        <a href={`${base}/privacy`}>Privacy</a> for the details, or
+        <a href={`${base}/support`}>Support</a> if something misbehaves.</p></div>
+    </div>
+  </section>
+
+  <script is:inline>
+    // Browsers only allow the install prompt from a user gesture, and only once
+    // they have fired beforeinstallprompt; where they never do, we say so
+    // instead of leaving a button that quietly does nothing.
+    (() => {
+      let deferred = null;
+      const btn = document.getElementById('apps-pwa');
+      const note = document.getElementById('apps-pwa-note');
+      window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferred = e; });
+      btn.addEventListener('click', async () => {
+        if (!deferred) { note.hidden = false; return; }
+        deferred.prompt();
+        await deferred.userChoice;
+        deferred = null;
+      });
+    })();
+  </script>
+</BaseLayout>

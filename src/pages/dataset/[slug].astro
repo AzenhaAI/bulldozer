@@ -68,7 +68,7 @@ const endYear = Number(String(lastYear ?? '').match(/(\d{4})(?!.*\d{4})/)?.[1]);
 const seoTitle = `${ds.title} by Country${endYear >= 2022 ? ` — ${lastYear}` : ''}`;
 // schema.org/Dataset — indexed by Google Dataset Search. Google ranks partly on
 // metadata completeness, so every recommended field it understands is filled in.
-const dsUrl = `https://shpara.com${base}/dataset/${ds.slug}`;
+const dsUrl = `https://azenha.ai${base}/dataset/${ds.slug}`;
 const countryCount = new Set(ds.data.map((o) => o.entity)).size;
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -80,8 +80,8 @@ const jsonLd = {
   license: ds.license,
   isAccessibleForFree: true,
   creator: { '@type': 'Organization', name: ds.source, url: ds.url },
-  publisher: { '@type': 'Organization', name: 'BullDozer', url: `https://shpara.com${base}/` },
-  includedInDataCatalog: { '@type': 'DataCatalog', name: 'BullDozer', url: `https://shpara.com${base}/` },
+  publisher: { '@type': 'Organization', name: 'BullDozer', url: `https://azenha.ai${base}/` },
+  includedInDataCatalog: { '@type': 'DataCatalog', name: 'BullDozer', url: `https://azenha.ai${base}/` },
   keywords: [ds.title, `${ds.title} by country`, TOPICS[ds.topic]?.label ?? ds.topic, ds.kind === 'survey' ? 'survey data' : 'macro indicator', 'country comparison'],
   spatialCoverage: { '@type': 'Place', name: countryCount > 50 ? 'World' : `${countryCount} countries` },
   dateModified: ds.parsedAt,
@@ -90,8 +90,8 @@ const jsonLd = {
   temporalCoverage: dsPeriods.length > 1 ? `${dsPeriods[0]}/${dsPeriods.at(-1)}` : dsPeriods[0],
   variableMeasured: ds.valueLabel,
   distribution: [
-    { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: `https://shpara.com${base}/data/${ds.slug}.csv` },
-    { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: `https://shpara.com${base}/data/${ds.slug}.json` },
+    { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: `https://azenha.ai${base}/data/${ds.slug}.csv` },
+    { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: `https://azenha.ai${base}/data/${ds.slug}.json` },
   ],
 };
 // Breadcrumbs are rendered visually below; this lets Google show them in the SERP
@@ -100,8 +100,8 @@ const breadcrumbLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'BullDozer', item: `https://shpara.com${base}/` },
-    { '@type': 'ListItem', position: 2, name: ds.kind === 'survey' ? 'Polls' : 'Macro', item: `https://shpara.com${backHref}/` },
+    { '@type': 'ListItem', position: 1, name: 'BullDozer', item: `https://azenha.ai${base}/` },
+    { '@type': 'ListItem', position: 2, name: ds.kind === 'survey' ? 'Polls' : 'Macro', item: `https://azenha.ai${backHref}/` },
     { '@type': 'ListItem', position: 3, name: TOPICS[ds.topic]?.label ?? ds.topic },
     { '@type': 'ListItem', position: 4, name: ds.title, item: dsUrl },
   ],
