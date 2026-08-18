@@ -132,8 +132,8 @@ const breadcrumbLd = {
         <a class="ghost-btn" style="margin:0; display:inline-block; text-decoration:none" href={`${base}/data/${ds.slug}.csv`} download>↓ Download CSV</a>
         {dashFile && (
           <>
-            <a class="ghost-btn" style="margin:0; display:inline-block; text-decoration:none" href={`${base}/dashboards/${dashFile}.html`} target="_blank" rel="noopener">📊 Detailed results dashboard ↗</a>
-            <a class="ghost-btn" style="margin:0; display:inline-block; text-decoration:none" href={`${base}/dashboards/${dashFile}.html`} download={`${dashFile}-dashboard.html`}>⤓ Download dashboard</a>
+            <a class="ghost-btn" style="margin:0; display:inline-block; text-decoration:none" href={`${base}/dashboards/${dashFile}`} target="_blank" rel="noopener">📊 Detailed results dashboard ↗</a>
+            <a class="ghost-btn" style="margin:0; display:inline-block; text-decoration:none" href={`${base}/dashboards/${dashFile}`} download={`${dashFile}-dashboard.html`}>⤓ Download dashboard</a>
           </>
         )}
       </p>

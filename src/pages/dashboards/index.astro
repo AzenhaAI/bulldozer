@@ -21,8 +21,8 @@ const desc = `Detailed, downloadable results dashboards for ${boards.length} sur
             <h3 style="margin:0 0 4px">{b.name}</h3>
             <p class="meta" style="margin:0 0 12px">{b.description}</p>
             <p style="display:flex; gap:10px; flex-wrap:wrap; margin:0">
-              <a class="ghost-btn" style="margin:0; text-decoration:none" href={`${base}/dashboards/${b.dash}.html`} target="_blank" rel="noopener">📊 Open ↗</a>
-              <a class="ghost-btn" style="margin:0; text-decoration:none" href={`${base}/dashboards/${b.dash}.html`} download={`${b.dash}-dashboard.html`}>⤓ Download</a>
+              <a class="ghost-btn" style="margin:0; text-decoration:none" href={`${base}/dashboards/${b.dash}`} target="_blank" rel="noopener">📊 Open ↗</a>
+              <a class="ghost-btn" style="margin:0; text-decoration:none" href={`${base}/dashboards/${b.dash}`} download={`${b.dash}-dashboard.html`}>⤓ Download</a>
               <a class="ghost-btn" style="margin:0; text-decoration:none" href={b.url} target="_blank" rel="noopener">Source ↗</a>
             </p>
           </div>
