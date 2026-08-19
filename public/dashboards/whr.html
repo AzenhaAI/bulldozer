@@ -24,5 +24,5 @@ function F(){let q=document.getElementById('q').value.toLowerCase(),g=document.g
  tb.querySelectorAll('tr').forEach(tr=>{let c=tr.querySelector('.c1').textContent.toLowerCase();tr.style.display=((!q||c.includes(q))&&(!g||tr.dataset.reg===g))?'':'none';});}
 let sc=1,asc=true;function S(i){let rows=[...tb.querySelectorAll('tr')];asc=(sc===i)?!asc:true;sc=i;
  rows.sort((a,b)=>{if(i===1||i===2){let x=a.children[i].textContent,y=b.children[i].textContent;return asc?x.localeCompare(y):y.localeCompare(x);}
-  let x=a.children[i].dataset.v??a.children[i].textContent,y=b.children[i].dataset.v??b.children[i].textContent,nx=parseFloat(x),ny=parseFloat(y);return asc?nx-ny:ny-nx;});
+  let x=(a.children[i].dataset.v!=null?a.children[i].dataset.v:a.children[i].textContent),y=(b.children[i].dataset.v!=null?b.children[i].dataset.v:b.children[i].textContent),nx=parseFloat(x),ny=parseFloat(y);return asc?nx-ny:ny-nx;});
  rows.forEach(r=>tb.appendChild(r));}</script></body></html>

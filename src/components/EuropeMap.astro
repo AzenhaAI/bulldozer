@@ -217,7 +217,7 @@ for (const c of countries) {
     let activeA3 = null; // clicked country → highlight it and its cities
 
     // City ranking across all 80 cities on the current metric (1 = highest).
-    function metricVals() { return dots.map((el) => JSON.parse(el.dataset.vals)[key]?.v).filter((v) => v != null); }
+    function metricVals() { return dots.map((el) => (JSON.parse(el.dataset.vals)[key] || {}).v).filter((v) => v != null); }
     function euRankOf(v, arr) { return 1 + arr.filter((x) => x > v).length; }
 
     chipsEl.innerHTML = defs.map((m, i) =>
@@ -235,7 +235,7 @@ for (const c of countries) {
 
     function apply() {
       // size by within-cities spread: bigger dot = higher rating on this metric
-      const vs = dots.map((el) => JSON.parse(el.dataset.vals)[key]?.v).filter((v) => v != null);
+      const vs = dots.map((el) => (JSON.parse(el.dataset.vals)[key] || {}).v).filter((v) => v != null);
       const min = Math.min(...vs), max = Math.max(...vs);
       for (const el of dots) {
         const rec = JSON.parse(el.dataset.vals)[key];

@@ -84,8 +84,8 @@ for (const [iso, m] of Object.entries(countryMeta as Record<string, any>)) {
   new MutationObserver(() => { TH = THEMES[themeName()]; patterns = {}; dirty = true; })
     .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-  const pctOf = (iso, k) => { const c = C[iso]; if (!c) return null; if (k === 'score') return c.score ?? null; const v = c.v[k]; return v ? v[2] : null; };
-  const valOf = (iso, k) => { const c = C[iso]; if (!c) return null; if (k === 'score') return c.score ?? null; const v = c.v[k]; return v ? v[0] : null; };
+  const pctOf = (iso, k) => { const c = C[iso]; if (!c) return null; if (k === 'score') return c.score != null ? c.score : null; const v = c.v[k]; return v ? v[2] : null; };
+  const valOf = (iso, k) => { const c = C[iso]; if (!c) return null; if (k === 'score') return c.score != null ? c.score : null; const v = c.v[k]; return v ? v[0] : null; };
   const tierColor = (p) => (p == null ? TH.nodata : p >= 80 ? PAL[0] : p >= 60 ? PAL[1] : p >= 40 ? PAL[2] : p >= 20 ? PAL[3] : PAL[4]);
   const tierName = (p) => (p >= 80 ? 'Thriving' : p >= 60 ? 'Solid' : p >= 40 ? 'Mixed' : p >= 20 ? 'Strained' : 'Critical');
   const flag = (a2) => (a2 ? String.fromCodePoint(...[...a2.toUpperCase()].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65)) : '🏳️');

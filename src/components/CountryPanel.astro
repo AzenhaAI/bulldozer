@@ -355,7 +355,7 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
   // Export every indicator for the selected country as a CSV.
   function exportCsv() {
     if (!currentC) return;
-    const esc = (s) => `"${String(s ?? '').replace(/"/g, '""')}"`;
+    const esc = (s) => `"${String(s == null ? '' : s).replace(/"/g, '""')}"`;
     const head = ['indicator', 'kind', 'topic', 'value', 'unit', 'period', 'rank', 'total'];
     const lines = [head.join(',')];
     for (const it of [...currentC.items].sort((a, b) => (a.kind === b.kind ? a.title.localeCompare(b.title) : a.kind < b.kind ? 1 : -1)))

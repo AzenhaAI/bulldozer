@@ -187,7 +187,7 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
           if (next === 'light') document.documentElement.setAttribute('data-theme', 'light');
           else document.documentElement.removeAttribute('data-theme');
           try { localStorage.setItem('bd-theme', next); } catch (e) { /* ignore */ }
-          document.querySelector('meta[name="theme-color"]')?.setAttribute('content', next === 'light' ? '#f7f6f2' : '#0e0f11');
+          var __tc = document.querySelector('meta[name="theme-color"]'); if (__tc) __tc.setAttribute('content', next === 'light' ? '#f7f6f2' : '#0e0f11');
           icon();
         });
         icon();
@@ -239,7 +239,7 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
             e.preventDefault();
             sel = Math.max(0, Math.min(rows.length - 1, sel + (e.key === 'ArrowDown' ? 1 : -1)));
             [...list.children].forEach((el, i) => el.classList && el.classList.toggle('sel', i === sel));
-            list.children[sel]?.scrollIntoView({ block: 'nearest' });
+            if (list.children[sel]) list.children[sel].scrollIntoView({ block: 'nearest' });
           } else if (e.key === 'Enter' && rows[sel]) location.href = base + rows[sel][2];
         });
         document.getElementById('hdr-search').addEventListener('click', open);
