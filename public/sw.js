@@ -1,5 +1,5 @@
 /* BullDozer service worker — minimal offline shell (network-first, cache fallback). */
-const CACHE = 'bulldozer-v1';
+const CACHE = 'bulldozer-v2';
 
 self.addEventListener('install', (e) => self.skipWaiting());
 self.addEventListener('activate', (e) => {

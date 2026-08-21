@@ -1,15 +1,16 @@
 {
+  "id": "/bulldozer/",
   "name": "BullDozer — Marketing Analytics & Research",
   "short_name": "BullDozer",
-  "description": "Bulldoze the noise. Mine the signal. 136 public, parsed datasets — surveys, macro, markets and people, every number sourced.",
+  "description": "Bulldoze the noise. Mine the signal. 188 public, parsed datasets — surveys, macro, markets and people, every number sourced.",
   "start_url": "/bulldozer/",
   "scope": "/bulldozer/",
   "display": "standalone",
   "background_color": "#0e0f11",
   "theme_color": "#0e0f11",
   "icons": [
-    { "src": "/bulldozer/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/bulldozer/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/bulldozer/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/bulldozer/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
     { "src": "/bulldozer/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
