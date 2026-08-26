@@ -8,7 +8,7 @@ deploys, and how to add data.
 
 | Thing | Location |
 |---|---|
-| **Source code** | `~/Projects/bulldozer` → GitHub [`kirshp/bulldozer`](https://github.com/kirshp/bulldozer) (public, MIT) |
+| **Source code** | `~/Projects/bulldozer` → GitHub [`Azenhaai/bulldozer`](https://github.com/Azenhaai/bulldozer) (public, MIT) |
 | **Deployed copy** | `~/Projects/shpara1/bulldozer/` (the `dist/` build, copied in — not the source) |
 | **Live site** | **[shpara.com/bulldozer](https://shpara.com/bulldozer)** — Cloudflare Pages, base path `/bulldozer` |
 | **Local preview** | `npm run dev` → http://localhost:4321/bulldozer/ |
