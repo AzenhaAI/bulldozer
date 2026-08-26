@@ -12,7 +12,7 @@ import isoAlpha2 from '@data/iso-alpha2.json';
 export const GET: APIRoute = () => {
   const a2 = isoAlpha2 as Record<string, string>;
   const map: Record<string, string> = {};
-  const names: { iso: string; a2: string; name: string }[] = [];
+  const names: { iso: string; a2: string; name: string; region: string }[] = [];
 
   for (const c of buildCountryIndex()) {
     const iso3 = c.iso.toUpperCase();
@@ -20,7 +20,7 @@ export const GET: APIRoute = () => {
     const two = a2[iso3];
     if (two && !map[two.toLowerCase()]) map[two.toLowerCase()] = iso3;
     map[c.name.toLowerCase()] = iso3;
-    names.push({ iso: iso3, a2: two ?? '', name: c.name });
+    names.push({ iso: iso3, a2: two ?? '', name: c.name, region: c.region ?? 'Other' });
   }
   // names travel alongside the map so a client can offer "did you mean", and
   // carry the two-letter code a client needs to draw a flag, without pulling

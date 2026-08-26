@@ -39,9 +39,10 @@ const burger = [
   // Points at the apps page rather than straight at the APK: iPhone users tapping
   // "Get the app" were being handed an Android package they can't install.
   { id: 'apps', label: '📱 Get the app', href: `${base}/apps` },
+  { id: 'bot', label: '🤖 Telegram bot', href: 'https://t.me/bulldozer_ebot' },
 ];
 const fullTitle = title ? `${title} · BullDozer` : 'BullDozer — Marketing Analytics & Research';
-const desc = description ?? 'Bulldoze the noise. Mine the signal. 136 public, parsed datasets — surveys, IMF & World Bank macro, markets and people. Every number sourced.';
+const desc = description ?? 'Bulldoze the noise. Mine the signal. 188 public, parsed datasets — surveys, IMF & World Bank macro, markets and people. Every number sourced.';
 const canonical = new URL(Astro.url.pathname, 'https://azenha.ai').href;
 // Site-level entity markup, homepage only (Google reads WebSite/SearchAction from
 // the site root). The SearchAction declares the on-site search so Google can offer
