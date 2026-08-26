@@ -40,7 +40,7 @@ jobs:
       - name: Commit updated datasets
         run: |
           git config user.name "bulldozer-bot"
-          git config user.email "bot@bulldozer.shpara.com"
+          git config user.email "agent@azenha.ai"
           if [[ -n "$(git status --porcelain src/data)" ]]; then
             git add src/data
             git commit -m "data: refresh from public sources [skip ci]"

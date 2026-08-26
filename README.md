@@ -4,11 +4,11 @@
 
 Marketing analytics & research site: **164 public, parsed datasets** — surveys, IMF & World Bank macro, markets and people. Every number sourced.
 
-**Live: [shpara.com/bulldozer](https://shpara.com/bulldozer)**
+**Live: [azenha.ai/bulldozer](https://azenha.ai/bulldozer/)**
 
 ![BullDozer](public/og.png)
 
-> **Where it lives** — source: this repo (`~/Projects/bulldozer`, [github.com/Azenhaai/bulldozer](https://github.com/Azenhaai/bulldozer)). Deployed: `npm run build` → `dist/` is rsynced into `~/Projects/shpara1/bulldozer/` and served at **shpara.com/bulldozer** via Cloudflare Pages. See [docs/OVERVIEW.md](docs/OVERVIEW.md) for the full map.
+> **Where it lives** — source: this repo (`~/Projects/bulldozer`, [github.com/AzenhaAI/bulldozer](https://github.com/AzenhaAI/bulldozer)). Deployed: `npm run build` → `dist/` is rsynced into `~/Projects/azenha/bulldozer/` and served at **azenha.ai/bulldozer** via Cloudflare Pages. See [docs/OVERVIEW.md](docs/OVERVIEW.md) for the full map.
 
 ## What's inside
 
@@ -24,7 +24,7 @@ Header tabs: **New · Top · Macro · Polls · Geo · Biz · Edu**; a right-edge
 | Geo | `/geo` | Country profiles (name, official name, ISO codes, currency), similar-country matching, side-by-side comparison |
 | Edu | `/edu` | Field guide: dashboard types, BI tools, how the site parses its own data |
 
-Plus **232 static country profiles** ([/country](https://shpara.com/bulldozer/country)), per-dataset dashboards with KPIs / movers / maps / trends / breadcrumbs, downloadable CSVs, a glossary, and detailed source-level results dashboards.
+Plus **232 static country profiles** ([/country](https://azenha.ai/bulldozer/country)), per-dataset dashboards with KPIs / movers / maps / trends / breadcrumbs, downloadable CSVs, a glossary, and detailed source-level results dashboards.
 
 ## Highlights
 

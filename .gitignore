@@ -11,5 +11,5 @@ dist/
 # logs
 npm-debug.log*
 
-# Hosted app build (deployed via dist→shpara1, not tracked in source)
+# Hosted app build (deployed via dist→azenha, not tracked in source)
 public/downloads/*.apk
