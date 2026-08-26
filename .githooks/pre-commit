@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Refuse to commit the old identity.
+#
+# Everything published now lives under azenha.ai; the previous domain and the
+# personal account handle must not appear in anything that ships or in the
+# configuration that decides where something is served from. This has leaked
+# twice: once through file contents, once through a platform-issued hostname
+# (a workers.dev subdomain is named after the account), which is why config
+# files are scanned too and not just page text.
+#
+# The needles are assembled at runtime so this script does not trip over itself.
+set -uo pipefail
+
+# The domain is matched with its dot, not as a bare word: the home directory on
+# this machine contains the same letters, and a guard that fires on every local
+# path gets switched off within a day.
+OLD_DOMAIN="$(printf 'shp''ara')\\.[a-z]"
+OLD_HANDLE="$(printf 'kir''shp')"
+
+# Binaries carry old package ids and endpoints until the app is rebuilt; they
+# are replaced by rebuilding, never by editing, so they are out of scope here.
+SKIP='\.(png|jpg|jpeg|gif|webp|svg|ico|woff2?|ttf|otf|apk|aab|ipa|dmg|exe|zip|7z|rar|pdf|mp4|mov)$'
+
+staged=$(git diff --cached --name-only --diff-filter=ACM | grep -Ev "$SKIP" || true)
+[ -z "$staged" ] && exit 0
+
+hits=$(printf '%s\n' "$staged" | while read -r f; do
+  [ -f "$f" ] || continue
+  if grep -InE "$OLD_DOMAIN|$OLD_HANDLE" "$f" 2>/dev/null | head -3 | sed "s|^|$f:|"; then :; fi
+done)
+
+if [ -n "$hits" ]; then
+  echo "✗ commit blocked — the old domain or account handle appears in:" >&2
+  echo "$hits" >&2
+  echo >&2
+  echo "  Public surfaces carry azenha.ai and agent@azenha.ai only." >&2
+  echo "  If this is genuinely unavoidable, commit with --no-verify and say why." >&2
+  exit 1
+fi
+exit 0
