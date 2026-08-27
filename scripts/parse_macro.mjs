@@ -46,7 +46,13 @@ const INDICATORS = {
     summary: 'GDP per capita based on purchasing-power-parity, international dollars.' },
   PPPSH: { slug: 'imf-world-gdp-share', title: 'Share of World GDP (PPP)', unit: '%', valueLabel: 'Share of world GDP', changeMode: 'pp', dp: 2,
     summary: 'Country share of world GDP, PPP basis.' },
-  LP: { slug: 'imf-population', title: 'Population', unit: 'million', valueLabel: 'Population', changeMode: 'pct', dp: 1,
+  // Three decimals, not one. Stored in millions, one decimal rounds anything
+  // under fifty thousand people to zero — San Marino, Nauru, Tuvalu, Palau,
+  // Liechtenstein and the Marshall Islands all published "Population: 0
+  // million" on their own country pages, beside a Gapminder figure saying
+  // 0.01. Three decimals resolves to the thousand, which every state on earth
+  // clears.
+  LP: { slug: 'imf-population', title: 'Population', unit: 'million', valueLabel: 'Population', changeMode: 'pct', dp: 3,
     summary: 'Total population, millions of people.' },
   GGXCNL_NGDP: { slug: 'imf-fiscal-balance', title: 'Fiscal Balance', unit: '% of GDP', valueLabel: 'Govt net lending/borrowing', changeMode: 'pp', dp: 1,
     summary: 'General government net lending/borrowing as a share of GDP.' },

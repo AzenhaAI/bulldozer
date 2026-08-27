@@ -59,7 +59,13 @@ async function main() {
   // life expectancy — long (1800→2020) from open-numbers
   const lifeCsv = await fetchText('https://raw.githubusercontent.com/open-numbers/ddf--gapminder--life_expectancy/master/ddf--datapoints--life_expectancy_at_birth--by--geo--time.csv');
   const life = toObs(lifeCsv, geo);
-  try { await unlink(join(SURV, 'gapminder-life-expectancy.json')); } catch {}
+  // A checkout from before parse_surveys.mjs stopped emitting these still has
+  // the short IHME copies sitting in surveys/, and the profile builder reads
+  // every folder — so they are removed here rather than left to reappear as a
+  // second, differently-dated answer under the same slug.
+  for (const stale of ['gapminder-life-expectancy.json', 'gapminder-income.json']) {
+    try { await unlink(join(SURV, stale)); } catch {}
+  }
   await writeDataset('macro', 'gapminder-life-expectancy', {
     title: 'Life Expectancy', valueLabel: 'Life expectancy at birth (years)', unit: 'years', changeMode: 'pp', topic: 'health',
     summary: 'Life expectancy at birth, in years — the long Gapminder series, 1800–2020. Pairs with income on the bubble chart.', ...COMMON,

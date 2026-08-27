@@ -25,13 +25,16 @@ const GAPMINDER_SRC = {
   parsedAt: new Date().toISOString().slice(0, 10),
 };
 
+// gapminder-life-expectancy and gapminder-income are NOT here on purpose.
+// parse_gapminder_long.mjs publishes both from the long open-numbers series
+// (1800 onwards) into macro/. Parsing them here as well put two entries under
+// one slug on every country page — Singapore's life expectancy showed as both
+// #1 and #9 in the world, and Cyprus's as #5 (from a 2013 IHME vintage) beside
+// #26 (2020), with no year on either. Same title, same page, different answer.
 const GAPMINDER = [
   { file: 'ddf--datapoints--hdi_human_development_index--by--geo--time.csv',
     slug: 'gapminder-hdi', title: 'Human Development Index', unit: 'index 0–1', valueLabel: 'HDI', changeMode: 'pp', dp: 3,
     summary: 'Composite index of life expectancy, education and income (0–1).' },
-  { file: 'ddf--datapoints--life_expectancy_at_birth_data_from_ihme--by--geo--time.csv',
-    slug: 'gapminder-life-expectancy', title: 'Life Expectancy', unit: 'years', valueLabel: 'Life expectancy at birth', changeMode: 'pp', dp: 1,
-    summary: 'Average number of years a newborn is expected to live (IHME).' },
   { file: 'ddf--datapoints--literacy_rate_adult_total_percent_of_people_ages_15_and_above--by--geo--time.csv',
     slug: 'gapminder-literacy', title: 'Adult Literacy', unit: '%', valueLabel: 'Adult literacy rate', changeMode: 'pp', dp: 1,
     summary: 'Share of people aged 15+ who can read and write.' },
@@ -41,9 +44,6 @@ const GAPMINDER = [
   { file: 'ddf--datapoints--internet_users--by--geo--time.csv',
     slug: 'gapminder-internet', title: 'Internet Users', unit: '%', valueLabel: 'Internet users', changeMode: 'pp', dp: 1,
     summary: 'Share of the population using the internet.' },
-  { file: 'ddf--datapoints--income_per_person_with_projections--by--geo--time.csv',
-    slug: 'gapminder-income', title: 'Income per Person', unit: 'int$', valueLabel: 'GDP/capita PPP', changeMode: 'pct', dp: 0,
-    summary: 'GDP per capita, PPP, inflation-adjusted international dollars.' },
   { file: 'ddf--datapoints--energy_use_per_person--by--geo--time.csv',
     slug: 'gapminder-energy', title: 'Energy Use per Person', unit: 'kg oil eq', valueLabel: 'Energy use', changeMode: 'pct', dp: 0,
     summary: 'Energy use per person, kg of oil equivalent.' },
