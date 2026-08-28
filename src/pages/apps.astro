@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-// Size of public/downloads/bulldozer-stats.apk, rounded as elsewhere on the
-// site. Update it when the APK is rebuilt.
-const apkMB = 19;
+// Read off the APK itself, so the figure cannot drift away from the download.
+const apkMB = Math.round(statSync(fileURLToPath(new URL('../../public/downloads/bulldozer-stats.apk', import.meta.url))).size / 1048576);
 ---
 <BaseLayout
   title="Apps for Android, iPhone and the web"
@@ -40,6 +41,20 @@ const apkMB = 19;
           </a>
           <p class="app-note">Or keep the site one tap away: in Safari, tap
           <b>Share</b> and then <b>Add to Home Screen</b>.</p>
+        </div>
+
+        <div class="app-card">
+          <h2>Mac</h2>
+          <p>A native window for the site, universal for Apple silicon and Intel.
+          It opens the live pages, so it never carries stale numbers.</p>
+          <a class="ghost-btn app-cta" href="/dl/BullDozer-mac.dmg" download>Download for macOS</a>
+        </div>
+
+        <div class="app-card">
+          <h2>Telegram</h2>
+          <p>Send a country code and get its figures back. Works inside any chat:
+          type the bot's name and a country, and the card lands in the conversation.</p>
+          <a class="ghost-btn app-cta" href="https://t.me/bulldozer_ebot">Open the bot</a>
         </div>
 
         <div class="app-card">

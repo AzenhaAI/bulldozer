@@ -257,7 +257,7 @@ table.data td.num { text-align: right; font-family: var(--mono); }
 .pwa-pop p { margin: 0 0 8px; font-size: 13px; color: var(--text-dim); line-height: 1.5; }
 .pwa-pop p:last-child { margin-bottom: 0; }
 .pwa-pop b { color: var(--text); font-weight: 600; }
-.app-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 4px 0 10px; }
+.app-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); gap: 6px; margin: 4px 0 10px; }
 .app-link { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 10px 4px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); color: var(--text); font: inherit; font-size: 12px; font-weight: 600; text-decoration: none; cursor: pointer; text-align: center; }
 .app-link:hover { border-color: var(--accent); color: var(--accent); }
 .app-link .app-ico { width: 26px; height: 26px; flex: 0 0 auto; }
