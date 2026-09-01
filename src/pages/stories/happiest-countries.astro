@@ -1,4 +1,5 @@
 ---
+import ChartActions from '@components/ChartActions.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Scatter from '@components/Scatter.astro';
 import { getDataset } from '@data/datasets';
@@ -112,6 +113,7 @@ const medal = (i: number) => ['#FFD24A', '#C7CDD4', '#E08A4B'][i] || 'var(--acce
       <h2>Richer tends to mean happier — up to a point</h2>
       <p class="sub">Each dot is a country: GDP per capita (PPP, log scale) vs happiness. {points.length} countries.</p>
       <Scatter points={points} xLabel="GDP per capita, PPP (international $, log scale)" yLabel="Happiness (0–10)" xLog={true} labelTop={6} />
+      <ChartActions name="bulldozer-happiness-income" svg=".sc-wrap svg" hash="chart" />
       <div class="legend-regions">
         {regionList.map((r) => (
           <span class="lr"><span class="lr-dot" style={`background:${colorFor(r)}`}></span>{r}</span>

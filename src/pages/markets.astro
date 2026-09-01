@@ -1,4 +1,5 @@
 ---
+import ChartActions from '@components/ChartActions.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import DataPanel from '@components/DataPanel.astro';
 import { getDataset } from '@data/datasets';
@@ -67,6 +68,7 @@ const RANKINGS = [
       <h2>Markets by country</h2>
       <p class="sub">Stock-market capitalisation, listings, biggest-company & brand counts and financial-service usage — pick any indicator.</p>
       <DataPanel indicators={panelIndicators} defaultView="bubbles" />
+      <ChartActions name="bulldozer-markets-countries" svg=".worldmap svg" hash="by-country" />
     </div>
   </section>
 
@@ -99,6 +101,7 @@ const RANKINGS = [
           <div class="tip" id="co-slope-tip"></div>
         </div>
         <p class="co-slope-foot" id="co-slope-foot"></p>
+        <ChartActions name="bulldozer-cap-revenue" svg="#co-slope-svg" hash="companies" />
       </div>
 
       <p class="sub" id="co-bar-sub" style="display:none"></p>

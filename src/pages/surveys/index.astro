@@ -1,4 +1,5 @@
 ---
+import ChartActions from '@components/ChartActions.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SourceCatalog from '@components/SourceCatalog.astro';
 import DatasetList from '@components/DatasetList.astro';
@@ -30,6 +31,7 @@ const points = (emo?.data || [])
           <h3 style="margin:6px 0 2px">The cultural map of the world</h3>
           <p class="sub">Every country on two value dimensions — survival ↔ self-expression and traditional ↔ secular (World Values Survey, Wave 7), coloured by cultural zone. Hover a country for its scores.</p>
           <CulturalMap />
+          <ChartActions name="bulldozer-cultural-map" svg=".cmap-wrap svg" hash="cultural-map" />
           <p style="margin:8px 0 28px"><a class="ghost-btn" style="margin:0; display:inline-block; text-decoration:none" href={`${base}/stories/cultural-map`}>Open the full cultural map →</a></p>
         </div>
       )}

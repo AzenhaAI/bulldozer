@@ -1,4 +1,5 @@
 ---
+import ChartActions from '@components/ChartActions.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CountryPanel from '@components/CountryPanel.astro';
 import CompareCountries from '@components/CompareCountries.astro';
@@ -37,6 +38,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <h2>Country vs country</h2>
       <p class="sub">Put a few countries side by side across every indicator. Highest in each row is highlighted.</p>
       <CompareCountries />
+      <ChartActions name="bulldozer-compare" svg=".worldmap svg" hash="compare" />
     </div>
   </section>
 </BaseLayout>

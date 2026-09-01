@@ -151,6 +151,7 @@ const breadcrumbLd = {
       <h2>{ds.valueLabel}</h2>
       <p class="sub">Interactive — choose a period, search a country, switch between bars, table and map.</p>
       <DataPanel indicators={panelIndicator} pinnedSlug={ds.slug} />
+      <ChartActions name={`bulldozer-${ds.slug}`} svg=".worldmap svg" hash="data" />
     </div>
   </section>
 

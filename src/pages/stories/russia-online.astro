@@ -1,4 +1,5 @@
 ---
+import ChartActions from '@components/ChartActions.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LineChart from '@components/LineChart.astro';
 import rlms from '@data/rlms.json';
@@ -45,6 +46,7 @@ const youngOld = age.length ? `${age[0].group} ${age[0].pct}% vs 65+ ${age[age.l
       <h2>The rise of internet use</h2>
       <p class="sub">Weighted share who used the internet in the last 12 months, {start.year}–{end.year}.</p>
       <LineChart points={trend.map((p) => ({ x: p.year, y: p.pct }))} yLabel="% used internet" />
+      <ChartActions name="bulldozer-russia-online" svg=".chart-svg svg" hash="chart" />
     </div>
   </section>
 

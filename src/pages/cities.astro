@@ -1,4 +1,5 @@
 ---
+import ChartActions from '@components/ChartActions.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EuropeMap from '@components/EuropeMap.astro';
 import cities from '@data/cities.json';
@@ -28,6 +29,7 @@ const desc = `The best cities to live in across Europe — a livability ranking 
         Hover for detail; <b>click a country</b> to focus it and its cities.
       </p>
       <EuropeMap />
+      <ChartActions name="bulldozer-cities-map" svg=".eumap-wrap svg" hash="map" />
 
       <h3 style="margin:30px 0 2px">City rankings</h3>
       <div class="ci-controls" style="margin-bottom:6px">

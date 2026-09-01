@@ -1,4 +1,5 @@
 ---
+import ChartActions from '@components/ChartActions.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Scatter from '@components/Scatter.astro';
 import { getDataset } from '@data/datasets';
@@ -51,6 +52,7 @@ const mostSurvival = top(points, (p) => -p.x)[0];
       <h2>The cultural map</h2>
       <p class="sub">{points.length} countries · horizontal = self-expression, vertical = secular values.</p>
       <Scatter points={points} xLabel="Survival → Self-expression values" yLabel="Traditional → Secular values" labelTop={0} />
+      <ChartActions name="bulldozer-cultural-map" svg=".sc-wrap svg" hash="chart" />
       <div class="legend-regions">
         {regionList.map((r) => (<span class="lr"><span class="lr-dot" style={`background:${colorFor(r)}`}></span>{r}</span>))}
       </div>
