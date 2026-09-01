@@ -16,7 +16,7 @@ deploys, and how to add data.
 
 `~/Projects/azenha` is the whole azenha.ai static site; BullDozer is one folder inside
 it. Only `bulldozer/` is our concern there — the rest is unrelated and private.
-The old home under shpara.com now answers with a permanent redirect.
+The previous domain now answers with a permanent redirect.
 
 ## Stack
 
@@ -117,3 +117,23 @@ Analytics: GA4 `G-QM1PRCY7M1`, wired in `BaseLayout` behind `import.meta.env.PRO
    dataset, surfaced in the UI.
 3. **No client framework** — Astro static build; hand-written browser JS.
 4. **English-only, no Cyrillic** in this public surface.
+
+## Publishing
+
+BullDozer is built here and copied into the site repo; `azenha` is what
+Cloudflare Pages uploads. One command does both:
+
+```
+scripts/deploy_site.sh            # build, copy, publish
+scripts/deploy_site.sh --stage    # build and copy, publish later
+```
+
+The copy is two-phase: hashed assets are added first and never deleted in that
+pass, pages follow, and only then are orphaned assets pruned — a browser holding
+an already-loaded page can still fetch the bundle it was built against. It also
+refuses to copy a build with fewer than 100 pages, which is what a parser
+failure looks like from here.
+
+Publishing sends the **whole** site, every product, because Pages uploads a
+snapshot of the directory rather than a diff. `azenha/scripts/deploy_prod.sh`
+checks the tree is complete and up to date before it does.
