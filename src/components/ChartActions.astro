@@ -5,9 +5,10 @@
 interface Props { name: string; svg?: string; hash?: string }
 const { name, svg, hash } = Astro.props;
 ---
-<p class="chart-actions" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px">
+<p class="chart-actions" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px">
   <button type="button" class="ghost-btn ca-share" data-hash={hash} style="margin:0">🔗 Copy link</button>
   {svg && <button type="button" class="ghost-btn ca-png" data-svg={svg} data-name={name} style="margin:0">↓ PNG</button>}
+  <span class="chart-src" style="margin-left:auto; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px; letter-spacing:.04em; color:var(--muted,#8b8f98)">azenha.ai/bulldozer</span>
 </p>
 <script>
   const BRAND = 'azenha.ai/bulldozer · every number sourced';
