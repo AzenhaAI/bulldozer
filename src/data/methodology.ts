@@ -22,6 +22,9 @@ export function methodologyFor(slug: string): Methodology {
     return { vintage: 'Forbes Global 2000 — 2023 list', method: 'Count of a country’s companies in the Forbes Global 2000; aggregate parsed from Wikipedia, by HQ country.' };
   if (slug.startsWith('brandz-'))
     return { vintage: 'Kantar BrandZ — 2026 ranking', method: 'Country totals aggregated from the Kantar BrandZ Most Valuable Global Brands list (via Wikipedia), by brand HQ country. Brand values are Kantar estimates.' };
+  // GHE files carry their own vintage and a per-country data grade; the generic
+  // GHO note below would replace both with "latest year varies", which is wrong.
+  if (slug.startsWith('who-ghe-')) return {};
   if (slug.startsWith('who-'))
     return { method: 'WHO Global Health Observatory; latest available year per country (varies); both sexes, modelled estimates.' };
   if (slug.startsWith('wgm-'))

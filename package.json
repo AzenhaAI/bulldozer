@@ -9,6 +9,8 @@
     "preview": "astro preview",
     "fetch:imf": "node scripts/fetch_imf.mjs",
     "parse:macro": "node scripts/parse_macro.mjs",
+    "parse:who": "node scripts/parse_who.mjs",
+    "parse:who-ghe": "node scripts/parse_who_ghe.mjs",
     "parse:surveys": "node scripts/parse_surveys.mjs",
     "parse:tidy": "node scripts/parse_tidy.mjs",
     "parse:lits": "node scripts/parse_lits.mjs",
