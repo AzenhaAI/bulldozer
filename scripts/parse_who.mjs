@@ -86,6 +86,22 @@ async function main() {
     title: 'Hypertension Prevalence', valueLabel: 'Age-standardised hypertension (30–79)', unit: '%', changeMode: 'pp', topic: 'health',
     summary: 'Age-standardised prevalence of hypertension among adults aged 30–79, both sexes. WHO Global Health Observatory.', ...WHO,
   }, g);
+  // Mortality. All three are WHO estimates rather than registered deaths — for
+  // countries without civil registration they are modelled — and the summaries
+  // say so, because a modelled figure shown as a count is the kind of number
+  // that lies quietly.
+  await emit('who-ncd-mortality-30-70', 'NCDMORT3070', {
+    title: 'Premature NCD Mortality', valueLabel: 'Probability of dying at 30–70 from the four main NCDs', unit: '%', changeMode: 'pp', topic: 'health',
+    summary: 'Probability of dying between ages 30 and 70 from cardiovascular disease, cancer, diabetes or chronic respiratory disease, both sexes. SDG 3.4.1. WHO estimate, modelled where death registration is incomplete.', ...WHO,
+  }, g);
+  await emit('who-ncd-mortality-rate', 'WHS2_131', {
+    title: 'NCD Mortality Rate', valueLabel: 'Age-standardised NCD deaths per 100,000', unit: 'per 100k', changeMode: 'pct', topic: 'health',
+    summary: 'Age-standardised death rate from noncommunicable diseases per 100,000 population, both sexes. WHO estimate, modelled where death registration is incomplete.', ...WHO,
+  }, g);
+  await emit('who-adult-mortality', 'WHOSIS_000004', {
+    title: 'Adult Mortality', valueLabel: 'Probability of dying between 15 and 60, per 1,000', unit: 'per 1,000', changeMode: 'pct', topic: 'health',
+    summary: 'Probability that a 15-year-old dies before reaching 60, per 1,000 population, both sexes. WHO estimate, modelled where death registration is incomplete.', ...WHO,
+  }, g);
   console.log('✓ WHO GHO: datasets written');
 }
 main();
