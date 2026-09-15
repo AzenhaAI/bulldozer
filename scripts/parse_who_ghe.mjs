@@ -10,14 +10,18 @@
  *
  *   node scripts/parse_who_ghe.mjs
  *
- * Input: data/raw/who-ghe/ghe2021_deaths_bycountry_2021.xlsx, from
- * https://www.who.int/data/gho/data/themes/mortality-and-global-health-estimates/ghe-leading-causes-of-death
+ * Input: data/raw/who-ghe/ghe2021_deaths_bycountry_2021.csv — the 'All ages /
+ * Persons' block of WHO's workbook, extracted once by
+ * scripts/tools/ghe_xlsx_to_csv.py and committed next to the workbook. The
+ * pipeline is Node; the runner has no openpyxl, and a parser that shells out to
+ * Python is a parser that fails on the schedule and nowhere else.
  */
-import { execFileSync } from 'node:child_process';
+import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { parseCsvObjects } from './lib/csv.mjs';
 import { gapminderRows, REGION_4, writeDataset, round } from './lib/datasets.mjs';
 
-const RAW = join('data', 'raw', 'who-ghe', 'ghe2021_deaths_bycountry_2021.xlsx');
+const RAW = join('data', 'raw', 'who-ghe', 'ghe2021_deaths_bycountry_2021.csv');
 const YEAR = '2021';
 const PARSED = new Date().toISOString().slice(0, 10);
 
@@ -39,24 +43,19 @@ const CAUSES = {
   1700: { slug: 'pandemic-other', title: 'Other Pandemic-related Deaths', what: 'other COVID-19 pandemic-related outcomes, beyond COVID-19 itself' },
 };
 
-// openpyxl does the reading; the sheet is 384 columns wide and a CSV round
-// trip would only add a place for column drift to hide.
-function readSheet() {
-  const py = `
-import openpyxl, json, sys
-wb = openpyxl.load_workbook(sys.argv[1], read_only=True)
-ws = wb['All ages']
-rows = list(ws.iter_rows(values_only=True))
-iso = rows[7]; grade = rows[8]
-out = {'countries': [], 'rows': []}
-for j in range(7, len(iso)):
-    if iso[j]: out['countries'].append({'col': j, 'iso': iso[j], 'grade': grade[j]})
-for r in rows[10:]:
-    if r[0] != 'Persons': break
-    out['rows'].append({'code': r[1], 'vals': [r[c['col']] for c in out['countries']]})
-json.dump(out, sys.stdout)
-`;
-  return JSON.parse(execFileSync('python3', ['-c', py, RAW], { maxBuffer: 64 * 1024 * 1024 }).toString());
+/** The CSV is wide — one column per country. Returns the country list with
+ *  its grade, and a map of GHE code → array of values in country order. */
+async function readSheet() {
+  const rows = [...parseCsvObjects(await readFile(RAW, 'utf8'))];
+  const isos = Object.keys(rows[0]).filter((k) => k !== 'code' && k !== 'cause');
+  const gradeRow = rows.find((r) => r.code === 'grade');
+  const countries = isos.map((iso) => ({ iso, grade: Number(gradeRow?.[iso]) || null }));
+  const byCode = new Map();
+  for (const r of rows) {
+    if (r.code === 'grade') continue;
+    byCode.set(Number(r.code), isos.map((iso) => (r[iso] === '' ? null : Number(r[iso]))));
+  }
+  return { countries, byCode };
 }
 
 async function main() {
@@ -66,8 +65,8 @@ async function main() {
     if (a3) geo.set(a3, { name: r.name, region: REGION_4[r.world_4region] || 'Other' });
   }
 
-  const sheet = readSheet();
-  const byCode = new Map(sheet.rows.map((r) => [r.code, r.vals]));
+  const sheet = await readSheet();
+  const byCode = sheet.byCode;
   const all = byCode.get(0);
   if (!all) throw new Error('All Causes row (GHE code 0) not found');
 
