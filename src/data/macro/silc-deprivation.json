@@ -9,7 +9,7 @@
     "source": "Eurostat — EU-SILC",
     "license": "CC BY 4.0 (Eurostat reuse policy)",
     "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_mdsd11/default/table",
-    "parsedAt": "2026-09-15",
+    "parsedAt": "2026-09-21",
     "kind": "macro"
   },
   "data": [
@@ -1698,6 +1698,13 @@
       "group": "Europe",
       "period": "2023",
       "value": 12.3,
+      "iso": "MNE"
+    },
+    {
+      "entity": "Montenegro",
+      "group": "Europe",
+      "period": "2024",
+      "value": 11,
       "iso": "MNE"
     },
     {
