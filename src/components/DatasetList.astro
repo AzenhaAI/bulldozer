@@ -1,8 +1,10 @@
 ---
 import type { Dataset } from '@data/datasets';
 import { TOPICS, TOPIC_ORDER } from '@lib/topics';
+import { recentlyAdded } from '@data/datasets';
 const { items } = Astro.props as { items: Dataset[] };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const newSlugs = new Set((recentlyAdded(30)?.items ?? []).map((d) => d.slug));
 
 const groups = TOPIC_ORDER
   .map((id) => ({ topic: TOPICS[id], list: items.filter((d) => d.topic === id) }))
@@ -38,7 +40,7 @@ const chips = [...bySource.entries()]
           <a class="card link dl-card" href={`${base}/dataset/${d.slug}`}
              data-src={d.source}
              data-text={`${d.title} ${d.source} ${d.valueLabel}`.toLowerCase()}>
-            <h3 style="font-size:16px"><span class="ind-ic" aria-hidden="true">{g.topic.icon}</span>{d.title}</h3>
+            <h3 style="font-size:16px"><span class="ind-ic" aria-hidden="true">{g.topic.icon}</span>{d.title}{newSlugs.has(d.slug) && <span class="new-badge">New</span>}</h3>
             <p class="meta">{d.summary}</p>
             <span class="pill">{d.source}</span>
           </a>

@@ -22,6 +22,7 @@ export const GET: APIRoute = () => {
         topic: d.topic,
         source: d.source ?? '',
         parsedAt: d.parsedAt ?? '', // when we last refreshed it (freshness)
+        firstSeen: d.firstSeen ?? '', // when it first appeared — the app's "new" should use this
         latest, // latest period present in the data
       };
     });

@@ -4,6 +4,7 @@ import { statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import QuizGame from '../components/QuizGame.astro';
 import GlobeExplorer from '@components/GlobeExplorer.astro';
+import RecentlyAdded from '@components/RecentlyAdded.astro';
 import { datasets, datasetsByKind, getDataset } from '@data/datasets';
 import { upcoming } from '@data/releases';
 import { stories as storyList } from '@data/stories';
@@ -186,6 +187,8 @@ const browse = [
       </div>
     </div>
   </section>
+
+  <RecentlyAdded />
 
   <section class="section" style="padding-top:0" id="releases">
     <div class="container">

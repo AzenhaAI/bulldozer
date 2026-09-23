@@ -8,6 +8,7 @@ import type { Observation } from '@lib/analytics';
 import { isOpinionSurvey, topicFor, topicOverride } from '@lib/topics';
 import { methodologyFor } from '@data/methodology';
 import { canonIso } from '@lib/geo';
+import firstSeenMap from '@data/first-seen.json';
 
 export type DatasetKind = 'survey' | 'macro';
 export type ChangeMode = 'pct' | 'pp';
@@ -20,7 +21,9 @@ export interface DatasetMeta {
   source: string;
   license: string;
   url: string;
-  parsedAt: string; // ISO date
+  parsedAt: string; // ISO date of the last RE-parse, not of arrival — see firstSeen
+  /** Date the dataset first appeared (scripts/gen_first_seen.mjs, from git). */
+  firstSeen?: string;
   unit: string;
   valueLabel: string;
   /** How period-over-period change is expressed: percentage points for
@@ -63,6 +66,7 @@ function build(modules: Record<string, { default: RawDataset }>): Dataset[] {
       topic: topicOverride(slug) ?? raw.meta.topic ?? topicFor(slug),
       changeMode: raw.meta.changeMode ?? deriveChangeMode(raw.meta.unit),
       ...methodologyFor(slug),
+      firstSeen: (firstSeenMap as Record<string, string>)[slug],
       // fold alternate ISO codes (IMF's UVK/WBG) onto the canonical spelling
       data: raw.data.map((o) => {
         const iso = canonIso(o.iso);
@@ -82,4 +86,20 @@ export function getDataset(slug: string): Dataset | undefined {
 
 export function datasetsByKind(kind: DatasetKind): Dataset[] {
   return datasets.filter((d) => d.kind === kind);
+}
+
+/** The newest cohort of datasets, if it arrived within `windowDays` of `now`.
+ *
+ *  A cohort, not "everything in the window": datasets arrive in batches, and
+ *  one batch is what a returning visitor has not seen. Fails closed — a dataset
+ *  with no firstSeen is never new. `now` is the build date, so the strip goes
+ *  quiet on its own once the batch is a month old and nobody has to remove it.
+ */
+export function recentlyAdded(windowDays = 30, now = new Date()): { date: string; items: Dataset[] } | null {
+  const dates = datasets.map((d) => d.firstSeen).filter((d): d is string => !!d).sort();
+  const date = dates.at(-1);
+  if (!date) return null;
+  const age = (now.getTime() - new Date(date + 'T00:00:00Z').getTime()) / 86_400_000;
+  if (age > windowDays) return null;
+  return { date, items: datasets.filter((d) => d.firstSeen === date).sort((a, b) => a.title.localeCompare(b.title)) };
 }

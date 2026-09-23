@@ -23,6 +23,12 @@ DEST="$SITE/bulldozer"
 [ -d "$SITE/.git" ] || { echo "✗ $SITE is not the site repo" >&2; exit 1; }
 [ -d "$DEST" ] || { echo "✗ $DEST missing — wrong site checkout?" >&2; exit 1; }
 
+# Arrival dates come from git history, which only exists here — CI clones at
+# depth 1. Regenerated on every publish so a dataset added since last time is
+# recognised as new.
+echo "→ first-seen dates"
+node scripts/gen_first_seen.mjs
+
 echo "→ building"
 cd "$HERE"
 npm run build

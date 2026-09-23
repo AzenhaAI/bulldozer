@@ -1,0 +1,29 @@
+---
+// The newest batch of datasets, while it is still new. Renders nothing once the
+// batch is older than the window, so nobody has to remember to take it down.
+// A tester asked where fourteen new series had gone: they were reachable from
+// five places and announced from none.
+import { recentlyAdded } from '@data/datasets';
+import { TOPICS } from '@lib/topics';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const fresh = recentlyAdded(30);
+const when = fresh ? new Date(fresh.date + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', timeZone: 'UTC' }) : '';
+---
+{fresh && (
+  <section class="section" style="padding-top:0" id="new">
+    <div class="container">
+      <span class="kicker">New · {when}</span>
+      <h2>{fresh.items.length} datasets just added</h2>
+      <p class="sub">The latest batch in the catalogue, each with its source and year.</p>
+      <div class="grid cols-2" style="margin-top:12px">
+        {fresh.items.map((d) => (
+          <a class="card link dl-card" href={`${base}/dataset/${d.slug}`}>
+            <h3 style="font-size:16px"><span class="ind-ic" aria-hidden="true">{TOPICS[d.topic]?.icon}</span>{d.title}<span class="new-badge">New</span></h3>
+            <p class="meta">{d.summary}</p>
+            <span class="pill">{d.source}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
