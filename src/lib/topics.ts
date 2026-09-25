@@ -30,7 +30,7 @@ export function isOpinionSurvey(slug: string): boolean {
   return slug.startsWith('whr-') || slug.startsWith('lits-') || slug.startsWith('wrp-')
     || slug.startsWith('hofstede-') || slug.startsWith('wvs-') || slug.startsWith('afro-') || slug.startsWith('ess-')
     || slug.startsWith('sdr2-') || slug.startsWith('cb-') || slug.startsWith('wgm-') || slug.startsWith('rlms-')
-    || slug.startsWith('lb-') || slug.startsWith('dnr-') || slug.startsWith('ab-');
+    || slug.startsWith('lb-') || slug.startsWith('dnr-') || slug.startsWith('ab-') || slug.startsWith('cses-');
 }
 
 /** Explicit topic overrides — win over the topic stored in the dataset JSON.

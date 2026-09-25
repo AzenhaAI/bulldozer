@@ -102,6 +102,8 @@ export const sources: Source[] = [
     description: 'HSE / UNC household panel running since 1994 — the deepest open microdata on everyday life in Russia. We aggregated internet use, incomes, life satisfaction, higher education, smoking & alcohol, marriage and bank cards.' },
   { name: 'EBRD — Life in Transition Survey (LiTS)', url: 'https://www.ebrd.com/what-we-do/economic-research-and-data/data/lits.html', status: 'live', category: 'Public opinion barometers', match: 'EBRD — Life in Transition',
     description: 'Attitudes to transition, markets and democracy across Central/Eastern Europe and Central Asia. Trust, risk tolerance, religion and more.' },
+  { name: 'CSES — Comparative Study of Electoral Systems', url: 'https://cses.org/', status: 'live', category: 'Public opinion barometers', match: 'CSES — Comparative Study',
+    description: 'Post-election surveys in 50+ democracies since 1996, fielded to a common module. We aggregated the Integrated Module Dataset (395,797 respondents, 230 election studies): satisfaction with democracy, left–right self-placement and whether voting or power makes a difference — latest study per country, 2011–2021.' },
   { name: 'SDR — Survey Data Recycling', url: 'https://dataharmonization.org/', status: 'live', category: 'Public opinion barometers', match: 'SDR2', dash: 'sdr2',
     description: 'Large harmonised ex-post integration of international survey projects. We aggregated the SDR2 master file: political trust (government, parliament, parties, legal system), demonstrations, petitions and union membership.' },
 

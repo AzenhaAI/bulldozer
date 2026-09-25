@@ -1,0 +1,435 @@
+{
+  "meta": {
+    "source": "CSES — Comparative Study of Electoral Systems",
+    "license": "Free for research and publication with citation",
+    "url": "https://cses.org/data-download/cses-integrated-module-dataset-imd/",
+    "vintage": "Integrated Module Dataset, 2024-02-27 release; latest election study per country, 2011–2021",
+    "kind": "surveys",
+    "title": "Left–Right Self-placement",
+    "unit": "score 0–10",
+    "changeMode": "pp",
+    "valueLabel": "Mean self-placement, 0 = left, 10 = right",
+    "summary": "Where voters place themselves on a 0–10 scale from left to right, averaged. CSES, latest study per country 2011–2021.",
+    "method": "Weighted mean on 0–10 by the CSES demographic weight; \"haven't heard of left–right\", refused, don't know and missing excluded.",
+    "topic": "attitudes",
+    "parsedAt": "2026-09-25"
+  },
+  "data": [
+    {
+      "entity": "Albania",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 3.97,
+      "iso": "ALB",
+      "year": "2017"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2011–2021",
+      "value": 5.63,
+      "iso": "ARG",
+      "year": "2015"
+    },
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2011–2021",
+      "value": 5.35,
+      "iso": "AUS",
+      "year": "2019"
+    },
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.42,
+      "iso": "AUT",
+      "year": "2017"
+    },
+    {
+      "entity": "Belgium",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.56,
+      "iso": "BEL",
+      "year": "2019"
+    },
+    {
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.23,
+      "iso": "BGR",
+      "year": "2014"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2011–2021",
+      "value": 6.57,
+      "iso": "BRA",
+      "year": "2018"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2011–2021",
+      "value": 5.08,
+      "iso": "CAN",
+      "year": "2019"
+    },
+    {
+      "entity": "Switzerland",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.25,
+      "iso": "CHE",
+      "year": "2019"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2011–2021",
+      "value": 5.07,
+      "iso": "CHL",
+      "year": "2017"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2011–2021",
+      "value": 6.85,
+      "iso": "CRI",
+      "year": "2018"
+    },
+    {
+      "entity": "Czech Republic",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.71,
+      "iso": "CZE",
+      "year": "2021"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 4.4,
+      "iso": "DEU",
+      "year": "2021"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.06,
+      "iso": "DNK",
+      "year": "2019"
+    },
+    {
+      "entity": "Estonia",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.68,
+      "iso": "EST",
+      "year": "2011"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.33,
+      "iso": "FIN",
+      "year": "2019"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 4.87,
+      "iso": "FRA",
+      "year": "2017"
+    },
+    {
+      "entity": "UK",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.1,
+      "iso": "GBR",
+      "year": "2019"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.03,
+      "iso": "GRC",
+      "year": "2019"
+    },
+    {
+      "entity": "Hong Kong, China",
+      "group": "Asia",
+      "period": "2011–2021",
+      "value": 5.88,
+      "iso": "HKG",
+      "year": "2016"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.95,
+      "iso": "HUN",
+      "year": "2018"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2011–2021",
+      "value": 3.91,
+      "iso": "IND",
+      "year": "2019"
+    },
+    {
+      "entity": "Ireland",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.48,
+      "iso": "IRL",
+      "year": "2016"
+    },
+    {
+      "entity": "Iceland",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.28,
+      "iso": "ISL",
+      "year": "2017"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2011–2021",
+      "value": 5.82,
+      "iso": "ISR",
+      "year": "2020"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.29,
+      "iso": "ITA",
+      "year": "2018"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2011–2021",
+      "value": 5.32,
+      "iso": "JPN",
+      "year": "2017"
+    },
+    {
+      "entity": "Kenya",
+      "group": "Africa",
+      "period": "2011–2021",
+      "value": 6.42,
+      "iso": "KEN",
+      "year": "2013"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2011–2021",
+      "value": 5.16,
+      "iso": "KOR",
+      "year": "2016"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.66,
+      "iso": "LTU",
+      "year": "2020"
+    },
+    {
+      "entity": "Latvia",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.9,
+      "iso": "LVA",
+      "year": "2018"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2011–2021",
+      "value": 5.4,
+      "iso": "MEX",
+      "year": "2018"
+    },
+    {
+      "entity": "Montenegro",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.28,
+      "iso": "MNE",
+      "year": "2016"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.07,
+      "iso": "NLD",
+      "year": "2021"
+    },
+    {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.52,
+      "iso": "NOR",
+      "year": "2017"
+    },
+    {
+      "entity": "New Zealand",
+      "group": "Asia",
+      "period": "2011–2021",
+      "value": 5.19,
+      "iso": "NZL",
+      "year": "2020"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2011–2021",
+      "value": 6.21,
+      "iso": "PER",
+      "year": "2021"
+    },
+    {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2011–2021",
+      "value": 7.21,
+      "iso": "PHL",
+      "year": "2016"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.78,
+      "iso": "POL",
+      "year": "2019"
+    },
+    {
+      "entity": "Portugal",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 4.68,
+      "iso": "PRT",
+      "year": "2019"
+    },
+    {
+      "entity": "Romania",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.77,
+      "iso": "ROU",
+      "year": "2016"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2011–2021",
+      "value": 6.74,
+      "iso": "SLV",
+      "year": "2019"
+    },
+    {
+      "entity": "Serbia",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.55,
+      "iso": "SRB",
+      "year": "2012"
+    },
+    {
+      "entity": "Slovak Republic",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.28,
+      "iso": "SVK",
+      "year": "2020"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 4.72,
+      "iso": "SVN",
+      "year": "2011"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 5.28,
+      "iso": "SWE",
+      "year": "2018"
+    },
+    {
+      "entity": "Thailand",
+      "group": "Asia",
+      "period": "2011–2021",
+      "value": 5.49,
+      "iso": "THA",
+      "year": "2019"
+    },
+    {
+      "entity": "Tunisia",
+      "group": "Africa",
+      "period": "2011–2021",
+      "value": 6.43,
+      "iso": "TUN",
+      "year": "2019"
+    },
+    {
+      "entity": "Turkey",
+      "group": "Europe",
+      "period": "2011–2021",
+      "value": 6.1,
+      "iso": "TUR",
+      "year": "2018"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2011–2021",
+      "value": 5.35,
+      "iso": "URY",
+      "year": "2019"
+    },
+    {
+      "entity": "USA",
+      "group": "Americas",
+      "period": "2011–2021",
+      "value": 5.72,
+      "iso": "USA",
+      "year": "2020"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2011–2021",
+      "value": 6.46,
+      "iso": "ZAF",
+      "year": "2014"
+    }
+  ]
+}

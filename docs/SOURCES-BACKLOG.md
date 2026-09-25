@@ -10,6 +10,19 @@ Eurobarometer (3), Afrobarometer, Arab Barometer, Latinobarómetro, Caucasus
 Barometer, LiTS, Wellcome Global Monitor, World Risk Poll, Digital News Report,
 PISA, EHIS, EU-SILC aggregates, DHS (1 country), RLMS.
 
+## Done
+
+**CSES** — added 2026-09-25 (`cses-*`, four series, 51–53 countries). Not the
+afternoon this list once promised: the data is ungated (a plain download despite
+the registration page), but the Integrated Module Dataset unpacks to 655 MB of
+CSV, beyond the longest string Node can hold. `scripts/tools/cses_imd_aggregate.mjs`
+streams it once per release into a 17 KB per-study aggregate under
+`data/raw/cses/`, which is what `parse_cses.mjs` and the scheduled run read.
+Answer codes come from the codebook: satisfaction with democracy has no code 3
+and a "neither" option only in some waves, so it is published as a share
+satisfied, not a mean. Module 6 (2021–2026, released Dec 2025) is also ungated
+and is the obvious next refresh.
+
 ## Gaps by region
 
 | Survey | Covers | Access | Where |
@@ -17,7 +30,6 @@ PISA, EHIS, EU-SILC aggregates, DHS (1 country), RLMS.
 | **AmericasBarometer (LAPOP)** | 34 countries, Americas, 2004– | free, account | vanderbilt.edu/lapop → Data access (now under /cgd/data-access/) |
 | **Asian Barometer** | 14+ countries, East & SE Asia | free, **written application**, approval takes weeks | asianbarometer.org/data |
 | **Pew Global Attitudes** | ~40 countries, yearly | free, account | pewresearch.org/global/datasets |
-| **CSES** | 50+ countries, election studies | free, no account | cses.org → Data download |
 | **MICS (UNICEF)** | 100+ countries, households, children | free, account + purpose statement | mics.unicef.org/surveys |
 | **DHS** (more countries) | 90 countries | free, account + project registration | dhsprogram.com |
 | **SHARE** | Europe 50+, 28 countries | free, account, research use | share-eric.eu/data/data-access |
@@ -55,8 +67,7 @@ manual and fragile, so only for a specific story.
 
 ## Suggested order
 
-1. **CSES** — no account, one download, 50 countries. An afternoon.
-2. **LAPOP** — account, closes the Americas gap (Latinobarómetro is 17 countries).
-3. **Pew** — account, the widest "attitudes to X" coverage.
-4. **ISSP + Eurobarometer** deeper — one GESIS account serves both.
-5. **Asian Barometer** — start the application now; it is the slow one.
+1. **LAPOP** — account, closes the Americas gap (Latinobarómetro is 17 countries).
+2. **Pew** — account, the widest "attitudes to X" coverage.
+3. **ISSP + Eurobarometer** deeper — one GESIS account serves both.
+4. **Asian Barometer** — start the application now; it is the slow one.
