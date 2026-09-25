@@ -1,0 +1,272 @@
+---
+import ChartActions from '@components/ChartActions.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Scatter from '@components/Scatter.astro';
+import { getDataset } from '@data/datasets';
+import { colorFor } from '@lib/palette';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Every figure on this page is computed here from the published datasets, so a
+// reader who downloads the same JSON gets the same numbers. Covariates are
+// pinned to the year of the cause data (2021) rather than taken as "latest":
+// the IMF series run to 2026 projections, which would quietly pair 2021 deaths
+// with 2026 forecasts. Life expectancy ends in 2020 in our source; that is the
+// closest year and the text says so.
+type Row = { entity: string; iso?: string; group?: string; period: string; value: number; grade?: number };
+
+function rowsFor(slug: string, period?: string): Row[] {
+  const ds = getDataset(slug);
+  if (!ds) return [];
+  const p = period ?? [...new Set(ds.data.map((o) => o.period))].sort().at(-1);
+  return (ds.data as Row[]).filter((o) => o.period === p && o.iso);
+}
+const byIso = (rows: Row[]) => new Map(rows.map((r) => [r.iso!, r]));
+
+const CAUSES = [
+  { slug: 'who-ghe-cardiovascular', label: 'Cardiovascular disease', color: '#f87171' },
+  { slug: 'who-ghe-communicable', label: 'Infections, maternal & newborn', color: '#fbbf24' },
+  { slug: 'who-ghe-cancer', label: 'Cancer', color: '#a78bfa' },
+  { slug: 'who-ghe-respiratory', label: 'Chronic respiratory', color: '#60a5fa' },
+  { slug: 'who-ghe-neurological', label: 'Neurological, incl. dementia', color: '#34d399' },
+  { slug: 'who-ghe-diabetes', label: 'Diabetes', color: '#f472b6' },
+  { slug: 'who-ghe-injuries', label: 'Injuries', color: '#fb923c' },
+  { slug: 'who-ghe-pandemic-other', label: 'Other pandemic-related', color: '#94a3b8' },
+];
+const cause = Object.fromEntries(CAUSES.map((c) => [c.slug, byIso(rowsFor(c.slug, '2021'))]));
+const cancer = rowsFor('who-ghe-cancer', '2021');
+const isos = cancer.map((r) => r.iso!);
+const le = byIso(rowsFor('gapminder-life-expectancy', '2020'));
+const gdp = byIso(rowsFor('imf-gdp-per-capita-ppp', '2021'));
+const pop = byIso(rowsFor('imf-population', '2021'));
+
+// ---- statistics -------------------------------------------------------------
+const mean = (a: number[]) => a.reduce((s, x) => s + x, 0) / a.length;
+function median(a: number[]) {
+  const s = [...a].sort((x, y) => x - y), m = s.length >> 1;
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+function pearson(x: number[], y: number[]) {
+  const mx = mean(x), my = mean(y);
+  let sxy = 0, sxx = 0, syy = 0;
+  for (let i = 0; i < x.length; i++) { sxy += (x[i] - mx) * (y[i] - my); sxx += (x[i] - mx) ** 2; syy += (y[i] - my) ** 2; }
+  return sxy / Math.sqrt(sxx * syy);
+}
+// Correlation of x and y with z held constant.
+function partial(x: number[], y: number[], z: number[]) {
+  const rxy = pearson(x, y), rxz = pearson(x, z), ryz = pearson(y, z);
+  return (rxy - rxz * ryz) / Math.sqrt((1 - rxz ** 2) * (1 - ryz ** 2));
+}
+const f2 = (r: number) => (r >= 0 ? '+' : '−') + Math.abs(r).toFixed(2);
+const pct = (v: number) => v.toFixed(1) + '%';
+
+// ---- hero: the cancer extremes -------------------------------------------------
+const cancerSorted = [...cancer].sort((a, b) => b.value - a.value);
+const cHi = cancerSorted[0], cLo = cancerSorted.at(-1)!;
+
+// ---- 1. two worlds: leading cause per country ------------------------------------
+const leading = new Map<string, number>();
+for (const iso of isos) {
+  let best = CAUSES[0], bv = -1;
+  for (const c of CAUSES) { const v = cause[c.slug].get(iso)?.value ?? -1; if (v > bv) { bv = v; best = c; } }
+  leading.set(best.slug, (leading.get(best.slug) ?? 0) + 1);
+}
+const leadRows = CAUSES.map((c) => ({ ...c, n: leading.get(c.slug) ?? 0 })).filter((c) => c.n > 0).sort((a, b) => b.n - a.n);
+const leadMax = leadRows[0].n;
+const comm = [...cause['who-ghe-communicable'].values()].sort((a, b) => a.value - b.value);
+const commLo = comm[0], commHi = comm.at(-1)!;
+
+// ---- 2. the clock: cancer share vs life expectancy -----------------------------
+const clock = isos.filter((i) => le.has(i));
+const points = clock.map((i) => {
+  const r = cause['who-ghe-cancer'].get(i)!;
+  return { x: le.get(i)!.value, y: r.value, label: r.entity, group: r.group, highlight: i === cHi.iso || i === cLo.iso };
+});
+// The legend lists the regions actually on the chart. This data uses four
+// continents, not the six World Bank regions other stories use.
+const legend = [...new Set(points.map((p) => p.group).filter(Boolean))].sort() as string[];
+const rLe = pearson(points.map((p) => p.x), points.map((p) => p.y));
+const trio = isos.filter((i) => le.has(i) && gdp.has(i));
+const cT = trio.map((i) => cause['who-ghe-cancer'].get(i)!.value);
+const leT = trio.map((i) => le.get(i)!.value);
+const lgT = trio.map((i) => Math.log10(gdp.get(i)!.value));
+const rGdp = pearson(lgT, cT);
+const pLe = partial(cT, leT, lgT);     // longevity, income held constant
+const pGdp = partial(cT, lgT, leT);    // income, longevity held constant
+
+// ---- 3. the twist: medians by income decile ----------------------------------------
+const withGdp = isos.filter((i) => gdp.has(i)).sort((a, b) => gdp.get(a)!.value - gdp.get(b)!.value);
+const deciles = Array.from({ length: 10 }, (_, d) => {
+  const slice = withGdp.slice(Math.floor((d * withGdp.length) / 10), Math.floor(((d + 1) * withGdp.length) / 10));
+  const med = (slug: string) => median(slice.map((i) => cause[slug].get(i)!.value));
+  return { d: d + 1, cvd: med('who-ghe-cardiovascular'), cancer: med('who-ghe-cancer'), neuro: med('who-ghe-neurological') };
+});
+const decMax = Math.max(...deciles.flatMap((x) => [x.cvd, x.cancer]));
+const cvdPeak = deciles.reduce((a, b) => (b.cvd > a.cvd ? b : a));
+const cvdTop = [...cause['who-ghe-cardiovascular'].values()].sort((a, b) => b.value - a.value).slice(0, 3);
+const richCvd = [...cause['who-ghe-cardiovascular'].values()].filter((r) => ['CHE', 'NOR', 'JPN'].includes(r.iso!));
+
+// ---- 4. what we do not know: WHO data grades -----------------------------------------
+const grades = [1, 2, 3, 4].map((g) => {
+  const g_isos = cancer.filter((r) => r.grade === g).map((r) => r.iso!);
+  const lev = g_isos.filter((i) => le.has(i)).map((i) => le.get(i)!.value);
+  return { g, n: g_isos.length, pop: g_isos.reduce((s, i) => s + (pop.get(i)?.value ?? 0), 0), le: lev.length ? mean(lev) : 0 };
+});
+const popTotal = grades.reduce((s, g) => s + g.pop, 0);
+const g4 = grades[3], g1 = grades[0];
+const africa = cancer.filter((r) => r.group === 'Africa');
+const africaG4 = africa.filter((r) => r.grade === 4).length;
+const bigG4 = cancer.filter((r) => r.grade === 4 && pop.has(r.iso!)).sort((a, b) => pop.get(b.iso!)!.value - pop.get(a.iso!)!.value).slice(0, 2);
+
+// ---- coda: diabetes -------------------------------------------------------------------
+const dia = isos.filter((i) => gdp.has(i));
+const rDia = pearson(dia.map((i) => Math.log10(gdp.get(i)!.value)), dia.map((i) => cause['who-ghe-diabetes'].get(i)!.value));
+const diaSorted = [...cause['who-ghe-diabetes'].values()].sort((a, b) => b.value - a.value);
+const diaHi = diaSorted.slice(0, 3), diaLo = diaSorted.at(-1)!;
+
+const title = 'What the world dies of — and why cancer is a sign of a long life';
+const description = `Cancer causes ${pct(cHi.value)} of deaths in ${cHi.entity} and ${pct(cLo.value)} in ${cLo.entity}. It tracks how long people live, not how rich they are. WHO Global Health Estimates, 2021, ${isos.length} countries.`;
+---
+<BaseLayout title={title} active="news" description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    url: 'https://azenha.ai/bulldozer/stories/what-people-die-of',
+    image: 'https://azenha.ai/bulldozer/og.png',
+    datePublished: '2026-09-25',
+    author: { '@type': 'Organization', name: 'Azenha AI', url: 'https://azenha.ai/' },
+    publisher: { '@type': 'Organization', name: 'BullDozer', url: 'https://azenha.ai/bulldozer/' },
+  })} />
+
+  <section class="story-hero">
+    <div class="container">
+      <a class="back-link" href={`${base}/`}>← News</a>
+      <span class="kicker">Data story · WHO Global Health Estimates 2021</span>
+      <h1>Cancer is a sign<br/>of a <span class="hl">long life</span>.</h1>
+      <div class="hero-figure">
+        <div class="hero-num">{pct(cHi.value)}</div>
+        <div class="hero-cap">of all deaths in {cHi.entity} are from cancer<br/>against {pct(cLo.value)} in {cLo.entity}</div>
+      </div>
+      <p class="sub" style="max-width:660px">
+        That gap is not a verdict on Danish oncology. Cancer is mostly a disease of age, and in
+        {' '}{cLo.entity} too few people reach the age at which it strikes — they die earlier, of
+        other things. Across {isos.length} countries, what a population dies of says less about how
+        good its hospitals are than about how long its people get to live.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Two worlds</h2>
+      <p class="sub">The single largest cause of death in each country, 2021.</p>
+      <div class="bars">
+        {leadRows.map((c) => (
+          <div class="bar-row">
+            <span>{c.label}</span>
+            <span class="bar-track"><span class="bar-fill" style={`width:${(c.n / leadMax) * 100}%; background:${c.color}`}></span></span>
+            <span class="bar-val">{c.n} <em class="flat">countries</em></span>
+          </div>
+        ))}
+      </div>
+      <p class="sub" style="margin-top:16px; max-width:680px">
+        Two causes split the world almost evenly. Where heart disease leads, people have lived long
+        enough to wear out; where infections, childbirth and newborn conditions lead, many never got
+        that far. Infections account for {pct(commLo.value)} of deaths in {commLo.entity} and
+        {' '}{pct(commHi.value)} in {commHi.entity}.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0" id="chart">
+    <div class="container">
+      <h2>The clock, not the wallet</h2>
+      <p class="sub">Each dot is a country: life expectancy (2020) against the share of deaths from cancer (2021). {points.length} countries, correlation {f2(rLe)}.</p>
+      <Scatter points={points} xLabel="Life expectancy at birth, years (2020)" yLabel="Share of deaths from cancer, %" labelTop={6} />
+      <ChartActions name="bulldozer-cancer-longevity" svg=".sc-wrap svg" hash="chart" />
+      <div class="legend-regions">
+        {legend.map((r) => (
+          <span class="lr"><span class="lr-dot" style={`background:${colorFor(r)}`}></span>{r}</span>
+        ))}
+      </div>
+      <p class="sub" style="margin-top:16px; max-width:680px">
+        Richer countries have more cancer deaths too (correlation with income {f2(rGdp)}), but income and
+        longevity move together, so the question is which one is doing the work. Hold income constant
+        and cancer still tracks life expectancy strongly ({f2(pLe)}). Hold life expectancy constant and
+        the link to income almost disappears ({f2(pGdp)}). Money matters to the cancer share only
+        insofar as it buys years.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <h2>Heart disease is not the rich world’s disease</h2>
+      <p class="sub">Median share of deaths by income decile, poorest (1) to richest (10), GDP per capita PPP 2021.</p>
+      <div class="bars">
+        {deciles.map((x) => (
+          <div class="bar-row">
+            <span>Decile {x.d}</span>
+            <span class="bar-track">
+              <span class="bar-fill" style={`width:${(x.cvd / decMax) * 100}%; background:#f87171`}></span>
+            </span>
+            <span class="bar-val">{pct(x.cvd)} <em class="flat">· cancer {pct(x.cancer)}</em></span>
+          </div>
+        ))}
+      </div>
+      <p class="sub" style="margin-top:16px; max-width:680px">
+        Cancer climbs with income almost without a break, from {pct(deciles[0].cancer)} to {pct(deciles[9].cancer)}.
+        Cardiovascular disease does not: it peaks in decile {cvdPeak.d} at {pct(cvdPeak.cvd)} and falls
+        back among the richest. The world’s highest shares are in {cvdTop.map((r) => `${r.entity} (${pct(r.value)})`).join(', ')}
+        {' '}— upper-middle-income countries where people live long enough for the heart to fail, but where
+        prevention and treatment lag. In {richCvd.map((r) => `${r.entity} ${pct(r.value)}`).join(', ')}, it is well below that.
+        Dementia and other neurological causes follow the rich-world pattern most sharply: a median of
+        {' '}{pct(deciles[7].neuro)} of deaths in decile 8, {pct(deciles[9].neuro)} in decile 10.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <h2>Where we know least</h2>
+      <p class="sub">WHO grades each country’s death-registration data from 1 (complete) to 4 (none usable). Share of the population of the {grades.reduce((s, g) => s + g.n, 0)} countries, 2021.</p>
+      <div class="bars">
+        {grades.map((g) => (
+          <div class="bar-row">
+            <span>Grade {g.g}</span>
+            <span class="bar-track"><span class="bar-fill" style={`width:${(g.pop / popTotal) * 100}%; background:${g.g === 4 ? 'var(--down)' : 'linear-gradient(90deg,var(--accent-2),var(--accent))'}`}></span></span>
+            <span class="bar-val">{((g.pop / popTotal) * 100).toFixed(0)}% <em class="flat">· {g.n} countries</em></span>
+          </div>
+        ))}
+      </div>
+      <p class="sub" style="margin-top:16px; max-width:680px">
+        For {g4.n} countries, home to {((g4.pop / popTotal) * 100).toFixed(0)}% of these people — {bigG4.map((r) => r.entity).join(' and ')} among
+        them — the shares on this page are WHO’s modelled estimates, not counted deaths. {africaG4} of
+        {' '}{africa.length} African countries are in that group. And the countries where registration is
+        weakest are the ones where people die youngest: average life expectancy is {g1.le.toFixed(1)} years
+        in grade-1 countries and {g4.le.toFixed(1)} in grade-4 countries. Part of the pattern above is
+        therefore a property of the model that fills the gaps. It is the best estimate there is, and it
+        is labelled as such on every dataset page.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <h2>What the clock does not explain</h2>
+      <p class="sub" style="max-width:680px">
+        Diabetes has no income gradient at all (correlation {f2(rDia)}). Its map is mostly
+        islands: {diaHi.map((r) => `${r.entity} ${pct(r.value)}`).join(', ')}, against {pct(diaLo.value)} in {diaLo.entity}.
+        Something other than age or wealth draws that map. Diet and genetics are the usual
+        suspects, and nothing in these numbers settles which.
+      </p>
+      <p class="sub" style="margin-top:24px">
+        Source: <a href="https://www.who.int/data/gho/data/themes/mortality-and-global-health-estimates/ghe-leading-causes-of-death" target="_blank" rel="noopener">WHO Global Health Estimates 2021</a>;
+        life expectancy from Gapminder, income and population from IMF WEO. Medians of an even-sized group
+        average the two middle values. <a href={`${base}/dataset/who-ghe-cancer`}>Explore the data →</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

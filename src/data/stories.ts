@@ -14,6 +14,12 @@ export const stories: Story[] = [
     dek: 'Who tops the ranking, how happiness tracks income, and what actually drives it.',
   },
   {
+    slug: 'what-people-die-of',
+    tag: 'WHO Global Health Estimates',
+    title: 'What the world dies of',
+    dek: 'Cancer is a sign of a long life: causes of death track how long people live, not how rich they are.',
+  },
+  {
     slug: 'strongest-democracies',
     tag: 'V-Dem',
     title: 'The world’s strongest democracies',
