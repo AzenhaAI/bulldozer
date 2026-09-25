@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "title": "ICILS Computational Thinking, Grade 8",
+    "valueLabel": "Mean computational thinking score, grade 8",
+    "unit": "IEA score",
+    "changeMode": "pp",
+    "topic": "education",
+    "summary": "Average score of eighth-grade students in framing problems and designing solutions a computer can run; not every country took this option. ICILS 2023 (IEA).",
+    "source": "ICILS 2023 (IEA)",
+    "license": "IEA International Database — free for research and publication with citation",
+    "url": "https://www.iea.nl/studies/iea/icils/2023",
+    "vintage": "2023 cycle",
+    "method": "Weighted mean of the five plausible values, as IEA estimates it. Left out, as in IEA's own ranking: USA (sample participation requirements not met). Benchmarking participants are not countries and are not shown.",
+    "parsedAt": "2026-09-25",
+    "kind": "macro"
+  },
+  "data": [
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2023",
+      "value": 476.3,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Czech Republic",
+      "group": "Europe",
+      "period": "2023",
+      "value": 526.7,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2023",
+      "value": 479,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2023",
+      "value": 504,
+      "iso": "DNK"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2023",
+      "value": 501.5,
+      "iso": "FIN"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2023",
+      "value": 499.3,
+      "iso": "FRA"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2023",
+      "value": 428.7,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2023",
+      "value": 482,
+      "iso": "ITA"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2023",
+      "value": 536.8,
+      "iso": "KOR"
+    },
+    {
+      "entity": "Luxembourg",
+      "group": "Europe",
+      "period": "2023",
+      "value": 475.5,
+      "iso": "LUX"
+    },
+    {
+      "entity": "Latvia",
+      "group": "Europe",
+      "period": "2023",
+      "value": 495.2,
+      "iso": "LVA"
+    },
+    {
+      "entity": "Malta",
+      "group": "Europe",
+      "period": "2023",
+      "value": 437.9,
+      "iso": "MLT"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2023",
+      "value": 440.3,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2023",
+      "value": 484.7,
+      "iso": "NOR"
+    },
+    {
+      "entity": "Portugal",
+      "group": "Europe",
+      "period": "2023",
+      "value": 483.9,
+      "iso": "PRT"
+    },
+    {
+      "entity": "Serbia",
+      "group": "Europe",
+      "period": "2023",
+      "value": 421.8,
+      "iso": "SRB"
+    },
+    {
+      "entity": "Slovak Republic",
+      "group": "Europe",
+      "period": "2023",
+      "value": 498.1,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2023",
+      "value": 448.2,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2023",
+      "value": 486.4,
+      "iso": "SWE"
+    },
+    {
+      "entity": "Taiwan",
+      "group": "Asia",
+      "period": "2023",
+      "value": 548.4,
+      "iso": "TWN"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2023",
+      "value": 421.1,
+      "iso": "URY"
+    }
+  ]
+}

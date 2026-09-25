@@ -25,7 +25,7 @@ const PARSERS = [
   'parse_risk.mjs', 'parse_owid.mjs', 'parse_maddison.mjs', 'parse_eurostat.mjs',
   'parse_findex.mjs', 'parse_bigmac.mjs', 'parse_cpi.mjs', 'parse_pisa.mjs',
   'parse_rsf.mjs', 'parse_fiw.mjs', 'parse_unhcr.mjs', 'parse_eu_cities.mjs',
-  'parse_who.mjs', 'parse_who_ghe.mjs', 'parse_cses.mjs', 'parse_afrobarometer.mjs',
+  'parse_who.mjs', 'parse_who_ghe.mjs', 'parse_cses.mjs', 'parse_afrobarometer.mjs', 'parse_iea.mjs',
 ];
 
 const filter = process.argv.slice(2);

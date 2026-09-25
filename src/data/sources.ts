@@ -73,6 +73,14 @@ export const sources: Source[] = [
   // ── Education & skills ─────────────────────────────────────────────
   { name: 'PISA — Programme for International Student Assessment', url: 'https://www.oecd.org/en/about/programmes/pisa.html', status: 'live', category: 'Education & skills', match: 'PISA international student assessment',
     description: 'Triennial assessment of 15-year-olds in mathematics, science and reading across 80+ education systems, 2000–2022.' },
+  { name: 'TIMSS — Trends in International Mathematics and Science Study', url: 'https://timss2023.org/results/', status: 'live', category: 'Education & skills', match: 'TIMSS 2023',
+    description: 'IEA’s mathematics and science assessment at grades 4 and 8, every four years since 1995. Reaches countries PISA does not — Kazakhstan, Uzbekistan, Azerbaijan, Georgia. Country means computed from the 2023 International Database and checked against IEA’s published tables.' },
+  { name: 'PIRLS — Progress in International Reading Literacy Study', url: 'https://pirls2021.org/results', status: 'live', category: 'Education & skills', match: 'PIRLS 2021',
+    description: 'IEA’s reading assessment at grade 4, every five years since 2001. 2021 cycle; country means computed from the International Database and matched to IEA’s published table.' },
+  { name: 'ICCS — International Civic and Citizenship Education Study', url: 'https://www.iea.nl/studies/iea/iccs/2022', status: 'live', category: 'Education & skills', match: 'ICCS 2022',
+    description: 'What eighth-graders know and understand about democracy, institutions and citizenship. 2022 cycle; countries IEA reports outside its ranking for low sample participation are left out.' },
+  { name: 'ICILS — International Computer and Information Literacy Study', url: 'https://www.iea.nl/studies/iea/icils/2023', status: 'live', category: 'Education & skills', match: 'ICILS 2023',
+    description: 'Eighth-graders’ ability to use computers to find, judge and create information, and — where countries opted in — computational thinking. 2023 cycle.' },
 
   { name: 'World Risk Poll', url: 'https://wrp.lrfoundation.org.uk/', status: 'live', category: 'Risk & resilience', match: 'World Risk Poll', dash: 'wrp',
     description: 'Lloyd’s Register Foundation / Gallup global study of how people experience and cope with risk — the Resilience Index.' },
