@@ -4,15 +4,16 @@
  *
  *   node scripts/parse_cses.mjs
  *
- * Reads data/raw/cses/cses_imd_by_study.csv: one row per election study,
- * aggregated from the 655 MB Integrated Module Dataset by
- * scripts/tools/cses_imd_aggregate.mjs, which documents every answer code
- * used. The source is too large to commit or to hold in a Node string; the
+ * Reads two per-study aggregates made by scripts/tools/cses_imd_aggregate.mjs,
+ * which documents every answer code used: data/raw/cses/cses_imd_by_study.csv
+ * (the 655 MB Integrated Module Dataset, 1996–2021) and cses6_by_study.csv
+ * (Module 6, 2021–2026). Where a country has both, the newer study wins. The source is too large to commit or to hold in a Node string; the
  * aggregate is small and is all this parser, and the scheduled run, ever read.
  *
  * CSES runs after national elections, so fieldwork years differ by country.
- * Each country contributes its most recent study from 2011–2021 (Modules 4–5),
- * and the election year travels with the row. Older studies are left out
+ * Each country contributes its most recent study from 2011 on, and the
+ * election year travels with the row; the period label is the span of years
+ * actually used, so a series Module 6 did not ask (who is in power) says so. Older studies are left out
  * rather than ranked beside recent ones: a 1998 Ukraine next to a 2021 Germany
  * is two different questions.
  */
@@ -21,8 +22,7 @@ import { join } from 'node:path';
 import { parseCsvObjects } from './lib/csv.mjs';
 import { gapminderRows, REGION_4, writeDataset, round } from './lib/datasets.mjs';
 
-const RAW = join('data', 'raw', 'cses', 'cses_imd_by_study.csv');
-const PERIOD = '2011–2021';
+const RAW = ['cses_imd_by_study.csv', 'cses6_by_study.csv'].map((f) => join('data', 'raw', 'cses', f));
 const FROM = 2011;
 const MIN_N = 300;                     // substantive answers needed to report a study
 const PARSED = new Date().toISOString().slice(0, 10);
@@ -31,26 +31,26 @@ const META = {
   source: 'CSES — Comparative Study of Electoral Systems',
   license: 'Free for research and publication with citation',
   url: 'https://cses.org/data-download/cses-integrated-module-dataset-imd/',
-  vintage: 'Integrated Module Dataset, 2024-02-27 release; latest election study per country, 2011–2021',
+  vintage: 'Integrated Module Dataset (2024-02-27) and Module 6 (2025-12); latest election study per country from 2011',
   kind: 'survey',
 };
 
 const SERIES = [
   { slug: 'cses-satisfaction-democracy', col: 'sat', title: 'Satisfaction with Democracy', unit: '%', changeMode: 'pp',
     valueLabel: 'Very or fairly satisfied with how democracy works (%)',
-    summary: 'Share of voters very or fairly satisfied with the way democracy works in their country, asked after a national election. CSES, latest study per country 2011–2021.',
+    summary: 'Share of voters very or fairly satisfied with the way democracy works in their country, asked after a national election. CSES, latest election study per country since 2011.',
     method: 'Weighted by the CSES demographic weight. Share of answers 1–2 among substantive answers (1, 2, 4, 5 and, where offered, 6 "neither"); refused, don\'t know and missing excluded.' },
   { slug: 'cses-left-right', col: 'lr', title: 'Left–Right Self-placement', unit: 'score 0–10', changeMode: 'pp',
     valueLabel: 'Mean self-placement, 0 = left, 10 = right',
-    summary: 'Where voters place themselves on a 0–10 scale from left to right, averaged. CSES, latest study per country 2011–2021.',
+    summary: 'Where voters place themselves on a 0–10 scale from left to right, averaged. CSES, latest election study per country since 2011.',
     method: 'Weighted mean on 0–10 by the CSES demographic weight; "haven\'t heard of left–right", refused, don\'t know and missing excluded.' },
   { slug: 'cses-efficacy-power', col: 'power', title: 'Who Is in Power Makes a Difference', unit: '%', changeMode: 'pp',
     valueLabel: 'Say it makes a difference who is in power (4–5 on a 1–5 scale, %)',
-    summary: 'Share of voters who say it makes a real difference who is in power. CSES, latest study per country 2011–2021.',
+    summary: 'Share of voters who say it makes a real difference who is in power. CSES, latest election study per country since 2011.',
     method: 'Weighted by the CSES demographic weight. Share answering 4 or 5 on the 1–5 scale; refused, don\'t know and missing excluded.' },
   { slug: 'cses-efficacy-vote', col: 'vote', title: 'Voting Makes a Difference', unit: '%', changeMode: 'pp',
     valueLabel: 'Say who people vote for makes a difference (4–5 on a 1–5 scale, %)',
-    summary: 'Share of voters who say who people vote for can make a real difference. CSES, latest study per country 2011–2021.',
+    summary: 'Share of voters who say who people vote for can make a real difference. CSES, latest election study per country since 2011.',
     method: 'Weighted by the CSES demographic weight. Share answering 4 or 5 on the 1–5 scale; refused, don\'t know and missing excluded.' },
 ];
 
@@ -60,7 +60,8 @@ async function main() {
     const a3 = (r.iso3166_1_alpha3 || '').toUpperCase();
     if (a3) geo.set(a3, { name: r.name, region: REGION_4[r.world_4region] || 'Other' });
   }
-  const studies = [...parseCsvObjects(await readFile(RAW, 'utf8'))];
+  const studies = [];
+  for (const f of RAW) studies.push(...parseCsvObjects(await readFile(f, 'utf8')));
 
   for (const s of SERIES) {
     const best = new Map();
@@ -70,6 +71,8 @@ async function main() {
       const cur = best.get(r.iso3);
       if (!cur || y > Number(cur.year)) best.set(r.iso3, r);
     }
+    const years = [...best.values()].map((r) => Number(r.year));
+    const PERIOD = `${Math.min(...years)}–${Math.max(...years)}`;
     const data = [];
     for (const [iso, r] of best) {
       const g = geo.get(iso);
