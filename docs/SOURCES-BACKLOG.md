@@ -23,6 +23,23 @@ and a "neither" option only in some waves, so it is published as a share
 satisfied, not a mean. Module 6 (2021–2026, released Dec 2025) is also ungated
 and is the obvious next refresh.
 
+**CSES Module 6** — added 2026-09-25: 16 countries move to 2022–2024. Module 6
+renumbers its questionnaire (F3010 is turnout, not satisfaction), so the
+aggregator looks every column up by name per release.
+
+**Afrobarometer Round 9** — 3 → 18 series, 39 countries. The original three
+came from a CSV in a temporary folder whose script was lost; the rule was
+recovered by reproducing them exactly and now lives in
+`scripts/tools/afro_r9_aggregate.py`.
+
+**IEA: TIMSS 2023, PIRLS 2021, ICCS 2022, ICILS 2023** — eight series. Direct
+downloads from iea.nl's data repository, no account. Checked against IEA's
+published tables country by country. Countries IEA reports below the line are
+left out, with the reason in the method note.
+
+Source files for all three are re-downloadable from the URLs in each
+aggregator's docstring; only the small per-country CSVs are committed.
+
 ## Gaps by region
 
 | Survey | Covers | Access | Where |
@@ -51,7 +68,6 @@ and is the obvious next refresh.
 
 | | Where |
 |---|---|
-| **TIMSS / PIRLS** (IEA) | iea.nl → Data tools → Repository |
 | **PIAAC** adult skills, **TALIS** teachers (OECD) | oecd.org → PIAAC / TALIS data |
 
 ## Not open — what we do instead
@@ -64,6 +80,16 @@ coming.
 **Ipsos, Edelman, YouGov** publish reports, not data. Aggregates can be
 transcribed from a report with the report as the cited source; it is
 manual and fragile, so only for a specific story.
+
+## Registration status (2026-09-25)
+
+Accounts are opened by Kirill, in the Chrome profile that has the Claude
+extension: `azenha.agent@gmail.com` by default, `agent@azenha.ai` where an
+organisation is required. None exists yet.
+
+LAPOP needs no account — "Free User" on the data page — but its licence says
+research use only, no commercial use, no redistribution of the data. Waiting
+on a decision whether publishing country aggregates fits that.
 
 ## Suggested order
 
