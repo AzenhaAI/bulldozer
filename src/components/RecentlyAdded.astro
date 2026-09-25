@@ -12,9 +12,9 @@ const when = fresh ? new Date(fresh.date + 'T00:00:00Z').toLocaleDateString('en-
 {fresh && (
   <section class="section" style="padding-top:0" id="new">
     <div class="container">
-      <span class="kicker">New · {when}</span>
-      <h2>{fresh.items.length} datasets just added</h2>
-      <p class="sub">The latest batch in the catalogue, each with its source and year.</p>
+      <span class="kicker">New · latest {when}</span>
+      <h2>{fresh.items.length} datasets added this month</h2>
+      <p class="sub">Newest first, each with its source and year.</p>
       <div class="grid cols-2" style="margin-top:12px">
         {fresh.items.map((d) => (
           <a class="card link dl-card" href={`${base}/dataset/${d.slug}`}>

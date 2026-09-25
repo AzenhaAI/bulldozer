@@ -88,18 +88,18 @@ export function datasetsByKind(kind: DatasetKind): Dataset[] {
   return datasets.filter((d) => d.kind === kind);
 }
 
-/** The newest cohort of datasets, if it arrived within `windowDays` of `now`.
+/** Datasets that first appeared within `windowDays` of `now`, newest first.
  *
- *  A cohort, not "everything in the window": datasets arrive in batches, and
- *  one batch is what a returning visitor has not seen. Fails closed — a dataset
- *  with no firstSeen is never new. `now` is the build date, so the strip goes
- *  quiet on its own once the batch is a month old and nobody has to remove it.
+ *  Everything in the window, not only the latest batch: showing one batch meant
+ *  the next one hid it, however recent — fourteen mortality series dropped off
+ *  the home page two weeks after they landed, the day four more arrived. Fails
+ *  closed: a dataset with no firstSeen is never new. `now` is the build date,
+ *  so the section goes quiet on its own and nobody has to remove it.
  */
 export function recentlyAdded(windowDays = 30, now = new Date()): { date: string; items: Dataset[] } | null {
-  const dates = datasets.map((d) => d.firstSeen).filter((d): d is string => !!d).sort();
-  const date = dates.at(-1);
-  if (!date) return null;
-  const age = (now.getTime() - new Date(date + 'T00:00:00Z').getTime()) / 86_400_000;
-  if (age > windowDays) return null;
-  return { date, items: datasets.filter((d) => d.firstSeen === date).sort((a, b) => a.title.localeCompare(b.title)) };
+  const age = (d: string) => (now.getTime() - new Date(d + 'T00:00:00Z').getTime()) / 86_400_000;
+  const items = datasets
+    .filter((d) => d.firstSeen && age(d.firstSeen) <= windowDays)
+    .sort((a, b) => (b.firstSeen ?? '').localeCompare(a.firstSeen ?? '') || a.title.localeCompare(b.title));
+  return items.length ? { date: items[0].firstSeen!, items } : null;
 }
