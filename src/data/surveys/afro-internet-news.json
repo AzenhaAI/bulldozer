@@ -1,12 +1,12 @@
 {
   "meta": {
-    "title": "Support for Democracy (Afrobarometer)",
-    "valueLabel": "Democracy preferable",
+    "title": "Get News from the Internet (Afrobarometer)",
+    "valueLabel": "Get news from the internet at least a few times a week",
     "unit": "%",
     "changeMode": "pp",
-    "topic": "governance",
+    "topic": "connectivity",
     "method": "Weighted by withinwt_ea. Share of substantive answers; refused, don’t know and missing are left out of the base.",
-    "summary": "Share who say democracy is preferable to any other kind of government. Afrobarometer Round 9, 2023.",
+    "summary": "Share who get news from the internet at least a few times a week. Afrobarometer Round 9, 2023.",
     "source": "Afrobarometer (Round 9)",
     "license": "Afrobarometer terms — public aggregates",
     "url": "https://www.afrobarometer.org/",
@@ -18,273 +18,273 @@
       "entity": "Angola",
       "group": "Africa",
       "period": "2023",
-      "value": 52.5,
+      "value": 38.2,
       "iso": "AGO"
     },
     {
       "entity": "Benin",
       "group": "Africa",
       "period": "2023",
-      "value": 79.5,
+      "value": 25.8,
       "iso": "BEN"
     },
     {
       "entity": "Botswana",
       "group": "Africa",
       "period": "2023",
-      "value": 77.4,
+      "value": 37.6,
       "iso": "BWA"
     },
     {
       "entity": "Burkina Faso",
       "group": "Africa",
       "period": "2023",
-      "value": 54.7,
+      "value": 23.1,
       "iso": "BFA"
     },
     {
       "entity": "Cabo Verde",
       "group": "Africa",
       "period": "2023",
-      "value": 85.1,
+      "value": 68.5,
       "iso": "CPV"
     },
     {
       "entity": "Cameroon",
       "group": "Africa",
       "period": "2023",
-      "value": 57,
+      "value": 63.1,
       "iso": "CMR"
     },
     {
       "entity": "Congo-Brazzaville",
       "group": "Africa",
       "period": "2023",
-      "value": 69.2,
+      "value": 39.2,
       "iso": "COG"
     },
     {
       "entity": "Côte d'Ivoire",
       "group": "Africa",
       "period": "2023",
-      "value": 69.9,
+      "value": 54.8,
       "iso": "CIV"
     },
     {
       "entity": "Eswatini",
       "group": "Africa",
       "period": "2023",
-      "value": 59,
+      "value": 60.7,
       "iso": "SWZ"
     },
     {
       "entity": "Ethiopia",
       "group": "Africa",
       "period": "2023",
-      "value": 85.4,
+      "value": 18.7,
       "iso": "ETH"
     },
     {
       "entity": "Gabon",
       "group": "Africa",
       "period": "2023",
-      "value": 73.4,
+      "value": 76.1,
       "iso": "GAB"
     },
     {
       "entity": "Gambia",
       "group": "Africa",
       "period": "2023",
-      "value": 65.1,
+      "value": 45.8,
       "iso": "GMB"
     },
     {
       "entity": "Ghana",
       "group": "Africa",
       "period": "2023",
-      "value": 76.1,
+      "value": 40.8,
       "iso": "GHA"
     },
     {
       "entity": "Guinea",
       "group": "Africa",
       "period": "2023",
-      "value": 67.5,
+      "value": 29,
       "iso": "GIN"
     },
     {
       "entity": "Kenya",
       "group": "Africa",
       "period": "2023",
-      "value": 79.8,
+      "value": 46.1,
       "iso": "KEN"
     },
     {
       "entity": "Lesotho",
       "group": "Africa",
       "period": "2023",
-      "value": 52.3,
+      "value": 29.5,
       "iso": "LSO"
     },
     {
       "entity": "Liberia",
       "group": "Africa",
       "period": "2023",
-      "value": 73,
+      "value": 33.7,
       "iso": "LBR"
     },
     {
       "entity": "Madagascar",
       "group": "Africa",
       "period": "2023",
-      "value": 55.1,
+      "value": 7.3,
       "iso": "MDG"
     },
     {
       "entity": "Malawi",
       "group": "Africa",
       "period": "2023",
-      "value": 58.7,
+      "value": 11.1,
       "iso": "MWI"
     },
     {
       "entity": "Mali",
       "group": "Africa",
       "period": "2023",
-      "value": 39.9,
+      "value": 29.4,
       "iso": "MLI"
     },
     {
       "entity": "Mauritania",
       "group": "Africa",
       "period": "2023",
-      "value": 78.1,
+      "value": 39.6,
       "iso": "MRT"
     },
     {
       "entity": "Mauritius",
       "group": "Africa",
       "period": "2023",
-      "value": 75.3,
+      "value": 80.1,
       "iso": "MUS"
     },
     {
       "entity": "Morocco",
       "group": "Africa",
       "period": "2023",
-      "value": 68.6,
+      "value": 68.3,
       "iso": "MAR"
     },
     {
       "entity": "Mozambique",
       "group": "Africa",
       "period": "2023",
-      "value": 51.3,
+      "value": 25.6,
       "iso": "MOZ"
     },
     {
       "entity": "Namibia",
       "group": "Africa",
       "period": "2023",
-      "value": 56.5,
+      "value": 47.5,
       "iso": "NAM"
     },
     {
       "entity": "Niger",
       "group": "Africa",
       "period": "2023",
-      "value": 61.3,
+      "value": 16.7,
       "iso": "NER"
     },
     {
       "entity": "Nigeria",
       "group": "Africa",
       "period": "2023",
-      "value": 69.4,
+      "value": 33.3,
       "iso": "NGA"
     },
     {
       "entity": "Senegal",
       "group": "Africa",
       "period": "2023",
-      "value": 85.4,
+      "value": 46.1,
       "iso": "SEN"
     },
     {
       "entity": "Seychelles",
       "group": "Africa",
       "period": "2023",
-      "value": 72.4,
+      "value": 68.5,
       "iso": "SYC"
     },
     {
       "entity": "Sierra Leone",
       "group": "Africa",
       "period": "2023",
-      "value": 83.9,
+      "value": 26.2,
       "iso": "SLE"
     },
     {
       "entity": "South Africa",
       "group": "Africa",
       "period": "2023",
-      "value": 44.9,
+      "value": 64,
       "iso": "ZAF"
     },
     {
       "entity": "Sudan",
       "group": "Africa",
       "period": "2023",
-      "value": 54.8,
+      "value": 45.6,
       "iso": "SDN"
     },
     {
       "entity": "São Tomé and Príncipe",
       "group": "Africa",
       "period": "2023",
-      "value": 56.8,
+      "value": 56.3,
       "iso": "STP"
     },
     {
       "entity": "Tanzania",
       "group": "Africa",
       "period": "2023",
-      "value": 80.1,
+      "value": 18.7,
       "iso": "TZA"
     },
     {
       "entity": "Togo",
       "group": "Africa",
       "period": "2023",
-      "value": 67.5,
+      "value": 39.8,
       "iso": "TGO"
     },
     {
       "entity": "Tunisia",
       "group": "Africa",
       "period": "2023",
-      "value": 53.7,
+      "value": 50.4,
       "iso": "TUN"
     },
     {
       "entity": "Uganda",
       "group": "Africa",
       "period": "2023",
-      "value": 82.9,
+      "value": 16.2,
       "iso": "UGA"
     },
     {
       "entity": "Zambia",
       "group": "Africa",
       "period": "2023",
-      "value": 86.9,
+      "value": 31.9,
       "iso": "ZMB"
     },
     {
       "entity": "Zimbabwe",
       "group": "Africa",
       "period": "2023",
-      "value": 76.7,
+      "value": 26.2,
       "iso": "ZWE"
     }
   ]

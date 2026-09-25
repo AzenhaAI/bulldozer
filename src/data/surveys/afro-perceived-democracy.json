@@ -5,11 +5,12 @@
     "unit": "%",
     "changeMode": "pp",
     "topic": "governance",
+    "method": "Weighted by withinwt_ea. Share of substantive answers; refused, don’t know and missing are left out of the base.",
     "summary": "Share who see their country as a democracy (with minor problems or fully). Afrobarometer Round 9, 2023.",
     "source": "Afrobarometer (Round 9)",
     "license": "Afrobarometer terms — public aggregates",
     "url": "https://www.afrobarometer.org/",
-    "parsedAt": "2026-06-28",
+    "parsedAt": "2026-09-25",
     "kind": "survey"
   },
   "data": [
