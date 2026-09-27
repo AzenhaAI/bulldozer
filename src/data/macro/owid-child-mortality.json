@@ -1,10 +1,10 @@
 {
   "meta": {
     "title": "Child Mortality (under-5)",
-    "summary": "Deaths of children under five per 1,000 live births. Our World in Data, 2017–2024.",
-    "unit": "per 1,000",
+    "summary": "Share of children who die before their fifth birthday (UN IGME estimates). Our World in Data, 2017–2024.",
+    "unit": "%",
     "valueLabel": "Child Mortality (under-5)",
-    "changeMode": "pct",
+    "changeMode": "pp",
     "topic": "health",
     "source": "Our World in Data",
     "license": "CC BY 4.0",

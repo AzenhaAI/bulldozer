@@ -19,7 +19,9 @@ const INDICATORS = [
   { grapher: 'share-of-population-in-extreme-poverty', slug: 'owid-extreme-poverty', title: 'Extreme Poverty', unit: '%', topic: 'economy', mode: 'pp', dp: 1, summary: 'Share of the population living below the international poverty line.' },
   { grapher: 'share-electricity-renewables', slug: 'owid-renewables', title: 'Renewable Electricity', unit: '%', topic: 'environment', mode: 'pp', dp: 1, summary: 'Share of electricity generated from renewable sources.' },
   { grapher: 'military-expenditure-as-a-share-of-gdp', slug: 'owid-military', title: 'Military Spending', unit: '% of GDP', topic: 'governance', mode: 'pp', dp: 2, summary: 'Military expenditure as a share of GDP.' },
-  { grapher: 'child-mortality-igme', slug: 'owid-child-mortality', title: 'Child Mortality (under-5)', unit: 'per 1,000', topic: 'health', mode: 'pct', dp: 1, summary: 'Deaths of children under five per 1,000 live births.' },
+  // The grapher publishes a share of children, not a rate per 1,000: Nigeria
+  // 11.6 means 11.6% (116 per 1,000). Labelled "per 1,000" it read ten times lower.
+  { grapher: 'child-mortality-igme', slug: 'owid-child-mortality', title: 'Child Mortality (under-5)', unit: '%', topic: 'health', mode: 'pp', dp: 1, summary: 'Share of children who die before their fifth birthday (UN IGME estimates).' },
   { grapher: 'prevalence-of-undernourishment', slug: 'owid-undernourishment', title: 'Undernourishment', unit: '%', topic: 'health', mode: 'pp', dp: 1, summary: 'Share of the population whose food intake is insufficient.' },
   { grapher: 'income-share-top-10-before-tax-wid', slug: 'owid-income-top10', title: 'Income Share of Top 10%', unit: '% of income', topic: 'economy', mode: 'pp', dp: 1, summary: 'Share of pre-tax national income received by the richest 10% (World Inequality Database).' },
   { grapher: 'income-share-top-1-before-tax-wid', slug: 'owid-income-top1', title: 'Income Share of Top 1%', unit: '% of income', topic: 'economy', mode: 'pp', dp: 1, summary: 'Share of pre-tax national income received by the richest 1% (World Inequality Database).' },
