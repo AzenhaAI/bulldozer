@@ -3,18 +3,1274 @@
     "source": "AmericasBarometer (LAPOP Lab)",
     "license": "LAPOP Lab, Vanderbilt University — published as country aggregates; the survey data are not redistributed",
     "url": "https://www.vanderbilt.edu/cgd/americasbarometer/",
-    "vintage": "AmericasBarometer 2025/26, merged file v1.0",
+    "vintage": "AmericasBarometer Grand Merge 2004–2023 (free, v1.0) and 2025/26 merged file (v1.0)",
     "kind": "surveys",
     "title": "Trust in Congress (AmericasBarometer)",
     "unit": "%",
     "changeMode": "pp",
     "valueLabel": "Trust the national legislature (5–7 on a 1–7 scale, %)",
     "topic": "governance",
-    "summary": "Share who trust the national legislature. AmericasBarometer 2025/26, fieldwork 2025–2026.",
+    "summary": "Share who trust the national legislature. AmericasBarometer, 2004–2026.",
     "method": "Weighted by wt, the within-country weight. Share of substantive answers; don't know, refused and not asked are left out of the base. A country needs 300 answers to be shown. Counted as yes: 5–7 on the 1–7 trust scale (B13).",
     "parsedAt": "2026-09-28"
   },
   "data": [
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2004",
+      "value": 45.1,
+      "iso": "MEX",
+      "year": "2004"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2006",
+      "value": 56.6,
+      "iso": "MEX",
+      "year": "2006"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2008",
+      "value": 51.4,
+      "iso": "MEX",
+      "year": "2008"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2010",
+      "value": 48.9,
+      "iso": "MEX",
+      "year": "2010"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2012",
+      "value": 46.2,
+      "iso": "MEX",
+      "year": "2012"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2014",
+      "value": 34.6,
+      "iso": "MEX",
+      "year": "2014"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2016–2017",
+      "value": 34.4,
+      "iso": "MEX",
+      "year": "2016"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2018–2019",
+      "value": 44.4,
+      "iso": "MEX",
+      "year": "2019"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2021",
+      "value": 33.9,
+      "iso": "MEX",
+      "year": "2021"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2023",
+      "value": 49.2,
+      "iso": "MEX",
+      "year": "2023"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2004",
+      "value": 27.8,
+      "iso": "GTM",
+      "year": "2004"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2006",
+      "value": 29.5,
+      "iso": "GTM",
+      "year": "2006"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2008",
+      "value": 29.9,
+      "iso": "GTM",
+      "year": "2008"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2010",
+      "value": 25.6,
+      "iso": "GTM",
+      "year": "2010"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2012",
+      "value": 28.6,
+      "iso": "GTM",
+      "year": "2012"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2014",
+      "value": 22.3,
+      "iso": "GTM",
+      "year": "2014"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2016–2017",
+      "value": 30.9,
+      "iso": "GTM",
+      "year": "2017"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2018–2019",
+      "value": 28.7,
+      "iso": "GTM",
+      "year": "2019"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2023",
+      "value": 23.9,
+      "iso": "GTM",
+      "year": "2023"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2004",
+      "value": 48.3,
+      "iso": "SLV",
+      "year": "2004"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2006",
+      "value": 42.6,
+      "iso": "SLV",
+      "year": "2006"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2008",
+      "value": 31.6,
+      "iso": "SLV",
+      "year": "2008"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2010",
+      "value": 43.9,
+      "iso": "SLV",
+      "year": "2010"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2012",
+      "value": 43.4,
+      "iso": "SLV",
+      "year": "2012"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2014",
+      "value": 39.4,
+      "iso": "SLV",
+      "year": "2014"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2016–2017",
+      "value": 33.4,
+      "iso": "SLV",
+      "year": "2016"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2018–2019",
+      "value": 31.9,
+      "iso": "SLV",
+      "year": "2018"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2023",
+      "value": 57,
+      "iso": "SLV",
+      "year": "2023"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2004",
+      "value": 38.5,
+      "iso": "HND",
+      "year": "2004"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2006",
+      "value": 31,
+      "iso": "HND",
+      "year": "2006"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2008",
+      "value": 23,
+      "iso": "HND",
+      "year": "2008"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2010",
+      "value": 49,
+      "iso": "HND",
+      "year": "2010"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2012",
+      "value": 21.9,
+      "iso": "HND",
+      "year": "2012"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2014",
+      "value": 37.4,
+      "iso": "HND",
+      "year": "2014"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2016–2017",
+      "value": 35.8,
+      "iso": "HND",
+      "year": "2016"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2018–2019",
+      "value": 25.7,
+      "iso": "HND",
+      "year": "2018"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2023",
+      "value": 27.1,
+      "iso": "HND",
+      "year": "2023"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2004",
+      "value": 29.9,
+      "iso": "NIC",
+      "year": "2004"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2006",
+      "value": 28.4,
+      "iso": "NIC",
+      "year": "2006"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2008",
+      "value": 26.9,
+      "iso": "NIC",
+      "year": "2008"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2010",
+      "value": 28.9,
+      "iso": "NIC",
+      "year": "2010"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2012",
+      "value": 43.9,
+      "iso": "NIC",
+      "year": "2012"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2014",
+      "value": 41.3,
+      "iso": "NIC",
+      "year": "2014"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2016–2017",
+      "value": 52.5,
+      "iso": "NIC",
+      "year": "2016"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2018–2019",
+      "value": 37.5,
+      "iso": "NIC",
+      "year": "2019"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2023",
+      "value": 29.2,
+      "iso": "NIC",
+      "year": "2023"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2004",
+      "value": 49.9,
+      "iso": "CRI",
+      "year": "2004"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2006",
+      "value": 42.4,
+      "iso": "CRI",
+      "year": "2006"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2008",
+      "value": 38,
+      "iso": "CRI",
+      "year": "2008"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2010",
+      "value": 43.6,
+      "iso": "CRI",
+      "year": "2010"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2012",
+      "value": 26.4,
+      "iso": "CRI",
+      "year": "2012"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2014",
+      "value": 27.3,
+      "iso": "CRI",
+      "year": "2014"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2023",
+      "value": 43.8,
+      "iso": "CRI",
+      "year": "2023"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2004",
+      "value": 28.4,
+      "iso": "PAN",
+      "year": "2004"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2006",
+      "value": 36.5,
+      "iso": "PAN",
+      "year": "2006"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2008",
+      "value": 23.4,
+      "iso": "PAN",
+      "year": "2008"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2010",
+      "value": 35.4,
+      "iso": "PAN",
+      "year": "2010"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2012",
+      "value": 24.4,
+      "iso": "PAN",
+      "year": "2012"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2014",
+      "value": 27.9,
+      "iso": "PAN",
+      "year": "2014"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2023",
+      "value": 18.8,
+      "iso": "PAN",
+      "year": "2023"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2004",
+      "value": 37.2,
+      "iso": "COL",
+      "year": "2004"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2006",
+      "value": 38.5,
+      "iso": "COL",
+      "year": "2006"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2008",
+      "value": 42.1,
+      "iso": "COL",
+      "year": "2008"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2010",
+      "value": 40,
+      "iso": "COL",
+      "year": "2010"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2012",
+      "value": 36.3,
+      "iso": "COL",
+      "year": "2012"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2014",
+      "value": 25.1,
+      "iso": "COL",
+      "year": "2014"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2018–2019",
+      "value": 23.9,
+      "iso": "COL",
+      "year": "2018"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2023",
+      "value": 24,
+      "iso": "COL",
+      "year": "2023"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2004",
+      "value": 13,
+      "iso": "ECU",
+      "year": "2004"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2006",
+      "value": 7.1,
+      "iso": "ECU",
+      "year": "2006"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2008",
+      "value": 10.3,
+      "iso": "ECU",
+      "year": "2008"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2010",
+      "value": 29.6,
+      "iso": "ECU",
+      "year": "2010"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2012",
+      "value": 34.2,
+      "iso": "ECU",
+      "year": "2012"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2016–2017",
+      "value": 42.6,
+      "iso": "ECU",
+      "year": "2016"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2021",
+      "value": 32.5,
+      "iso": "ECU",
+      "year": "2021"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2023",
+      "value": 21.5,
+      "iso": "ECU",
+      "year": "2023"
+    },
+    {
+      "entity": "Bolivia",
+      "group": "Americas",
+      "period": "2004",
+      "value": 21.3,
+      "iso": "BOL",
+      "year": "2004"
+    },
+    {
+      "entity": "Bolivia",
+      "group": "Americas",
+      "period": "2006",
+      "value": 32,
+      "iso": "BOL",
+      "year": "2006"
+    },
+    {
+      "entity": "Bolivia",
+      "group": "Americas",
+      "period": "2008",
+      "value": 33.7,
+      "iso": "BOL",
+      "year": "2008"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2006",
+      "value": 17.5,
+      "iso": "PER",
+      "year": "2006"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2008",
+      "value": 18.4,
+      "iso": "PER",
+      "year": "2008"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2010",
+      "value": 15.8,
+      "iso": "PER",
+      "year": "2010"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2012",
+      "value": 14.4,
+      "iso": "PER",
+      "year": "2012"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2014",
+      "value": 13.5,
+      "iso": "PER",
+      "year": "2014"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2016–2017",
+      "value": 16.1,
+      "iso": "PER",
+      "year": "2017"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2018–2019",
+      "value": 8.8,
+      "iso": "PER",
+      "year": "2019"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2021",
+      "value": 11.6,
+      "iso": "PER",
+      "year": "2021"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2023",
+      "value": 7.5,
+      "iso": "PER",
+      "year": "2023"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2006",
+      "value": 18.5,
+      "iso": "PRY",
+      "year": "2006"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2008",
+      "value": 14.3,
+      "iso": "PRY",
+      "year": "2008"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2010",
+      "value": 21.6,
+      "iso": "PRY",
+      "year": "2010"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2012",
+      "value": 28.1,
+      "iso": "PRY",
+      "year": "2012"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2014",
+      "value": 25.5,
+      "iso": "PRY",
+      "year": "2014"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2016–2017",
+      "value": 25.9,
+      "iso": "PRY",
+      "year": "2016"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2018–2019",
+      "value": 29.3,
+      "iso": "PRY",
+      "year": "2019"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2023",
+      "value": 25.5,
+      "iso": "PRY",
+      "year": "2023"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2006",
+      "value": 43.9,
+      "iso": "CHL",
+      "year": "2006"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2008",
+      "value": 41.1,
+      "iso": "CHL",
+      "year": "2008"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2006",
+      "value": 58,
+      "iso": "URY",
+      "year": "2007"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2008",
+      "value": 47.4,
+      "iso": "URY",
+      "year": "2008"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2010",
+      "value": 66.1,
+      "iso": "URY",
+      "year": "2010"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2012",
+      "value": 47.3,
+      "iso": "URY",
+      "year": "2012"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2014",
+      "value": 44.5,
+      "iso": "URY",
+      "year": "2014"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2006",
+      "value": 29.5,
+      "iso": "BRA",
+      "year": "2007"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2008",
+      "value": 23.6,
+      "iso": "BRA",
+      "year": "2008"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2010",
+      "value": 33.7,
+      "iso": "BRA",
+      "year": "2010"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2012",
+      "value": 29,
+      "iso": "BRA",
+      "year": "2012"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2014",
+      "value": 20.9,
+      "iso": "BRA",
+      "year": "2014"
+    },
+    {
+      "entity": "Venezuela",
+      "group": "Americas",
+      "period": "2006",
+      "value": 43.5,
+      "iso": "VEN",
+      "year": "2007"
+    },
+    {
+      "entity": "Venezuela",
+      "group": "Americas",
+      "period": "2008",
+      "value": 33.6,
+      "iso": "VEN",
+      "year": "2008"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2008",
+      "value": 23,
+      "iso": "ARG",
+      "year": "2008"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2004",
+      "value": 18.4,
+      "iso": "DOM",
+      "year": "2004"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2006",
+      "value": 48.8,
+      "iso": "DOM",
+      "year": "2006"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2008",
+      "value": 49.2,
+      "iso": "DOM",
+      "year": "2008"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2010",
+      "value": 44.1,
+      "iso": "DOM",
+      "year": "2010"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2012",
+      "value": 36.4,
+      "iso": "DOM",
+      "year": "2012"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2014",
+      "value": 33.5,
+      "iso": "DOM",
+      "year": "2014"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2016–2017",
+      "value": 37.1,
+      "iso": "DOM",
+      "year": "2016"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2018–2019",
+      "value": 31.8,
+      "iso": "DOM",
+      "year": "2019"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2023",
+      "value": 38.4,
+      "iso": "DOM",
+      "year": "2023"
+    },
+    {
+      "entity": "Haiti",
+      "group": "Americas",
+      "period": "2006",
+      "value": 37.6,
+      "iso": "HTI",
+      "year": "2006"
+    },
+    {
+      "entity": "Haiti",
+      "group": "Americas",
+      "period": "2008",
+      "value": 22,
+      "iso": "HTI",
+      "year": "2008"
+    },
+    {
+      "entity": "Haiti",
+      "group": "Americas",
+      "period": "2010",
+      "value": 14.4,
+      "iso": "HTI",
+      "year": "2010"
+    },
+    {
+      "entity": "Haiti",
+      "group": "Americas",
+      "period": "2012",
+      "value": 19.7,
+      "iso": "HTI",
+      "year": "2012"
+    },
+    {
+      "entity": "Haiti",
+      "group": "Americas",
+      "period": "2014",
+      "value": 31,
+      "iso": "HTI",
+      "year": "2014"
+    },
+    {
+      "entity": "Haiti",
+      "group": "Americas",
+      "period": "2016–2017",
+      "value": 16,
+      "iso": "HTI",
+      "year": "2017"
+    },
+    {
+      "entity": "Jamaica",
+      "group": "Americas",
+      "period": "2006",
+      "value": 29.3,
+      "iso": "JAM",
+      "year": "2006"
+    },
+    {
+      "entity": "Jamaica",
+      "group": "Americas",
+      "period": "2008",
+      "value": 36.9,
+      "iso": "JAM",
+      "year": "2008"
+    },
+    {
+      "entity": "Jamaica",
+      "group": "Americas",
+      "period": "2010",
+      "value": 26.5,
+      "iso": "JAM",
+      "year": "2010"
+    },
+    {
+      "entity": "Jamaica",
+      "group": "Americas",
+      "period": "2012",
+      "value": 36.3,
+      "iso": "JAM",
+      "year": "2012"
+    },
+    {
+      "entity": "Jamaica",
+      "group": "Americas",
+      "period": "2014",
+      "value": 17.6,
+      "iso": "JAM",
+      "year": "2014"
+    },
+    {
+      "entity": "Jamaica",
+      "group": "Americas",
+      "period": "2016–2017",
+      "value": 27.7,
+      "iso": "JAM",
+      "year": "2017"
+    },
+    {
+      "entity": "Jamaica",
+      "group": "Americas",
+      "period": "2018–2019",
+      "value": 26,
+      "iso": "JAM",
+      "year": "2019"
+    },
+    {
+      "entity": "Jamaica",
+      "group": "Americas",
+      "period": "2023",
+      "value": 21.3,
+      "iso": "JAM",
+      "year": "2023"
+    },
+    {
+      "entity": "Guyana",
+      "group": "Americas",
+      "period": "2006",
+      "value": 51.2,
+      "iso": "GUY",
+      "year": "2006"
+    },
+    {
+      "entity": "Guyana",
+      "group": "Americas",
+      "period": "2008",
+      "value": 47.1,
+      "iso": "GUY",
+      "year": "2009"
+    },
+    {
+      "entity": "Guyana",
+      "group": "Americas",
+      "period": "2010",
+      "value": 40.6,
+      "iso": "GUY",
+      "year": "2010"
+    },
+    {
+      "entity": "Guyana",
+      "group": "Americas",
+      "period": "2012",
+      "value": 54.6,
+      "iso": "GUY",
+      "year": "2012"
+    },
+    {
+      "entity": "Guyana",
+      "group": "Americas",
+      "period": "2014",
+      "value": 35.6,
+      "iso": "GUY",
+      "year": "2014"
+    },
+    {
+      "entity": "Trinidad and Tobago",
+      "group": "Americas",
+      "period": "2014",
+      "value": 26,
+      "iso": "TTO",
+      "year": "2014"
+    },
+    {
+      "entity": "Trinidad and Tobago",
+      "group": "Americas",
+      "period": "2023",
+      "value": 20.4,
+      "iso": "TTO",
+      "year": "2023"
+    },
+    {
+      "entity": "Belize",
+      "group": "Americas",
+      "period": "2008",
+      "value": 56.7,
+      "iso": "BLZ",
+      "year": "2008"
+    },
+    {
+      "entity": "Belize",
+      "group": "Americas",
+      "period": "2010",
+      "value": 44.5,
+      "iso": "BLZ",
+      "year": "2010"
+    },
+    {
+      "entity": "Belize",
+      "group": "Americas",
+      "period": "2012",
+      "value": 60.8,
+      "iso": "BLZ",
+      "year": "2012"
+    },
+    {
+      "entity": "Belize",
+      "group": "Americas",
+      "period": "2014",
+      "value": 35.6,
+      "iso": "BLZ",
+      "year": "2014"
+    },
+    {
+      "entity": "Belize",
+      "group": "Americas",
+      "period": "2023",
+      "value": 48.1,
+      "iso": "BLZ",
+      "year": "2023"
+    },
+    {
+      "entity": "Suriname",
+      "group": "Americas",
+      "period": "2014",
+      "value": 46.9,
+      "iso": "SUR",
+      "year": "2014"
+    },
+    {
+      "entity": "Suriname",
+      "group": "Americas",
+      "period": "2023",
+      "value": 19.1,
+      "iso": "SUR",
+      "year": "2023"
+    },
+    {
+      "entity": "Bahamas",
+      "group": "Americas",
+      "period": "2014",
+      "value": 50.4,
+      "iso": "BHS",
+      "year": "2014"
+    },
+    {
+      "entity": "Bahamas",
+      "group": "Americas",
+      "period": "2023",
+      "value": 32.9,
+      "iso": "BHS",
+      "year": "2023"
+    },
+    {
+      "entity": "Grenada",
+      "group": "Americas",
+      "period": "2023",
+      "value": 47,
+      "iso": "GRD",
+      "year": "2023"
+    },
+    {
+      "entity": "USA",
+      "group": "Americas",
+      "period": "2006",
+      "value": 47,
+      "iso": "USA",
+      "year": "2006"
+    },
+    {
+      "entity": "USA",
+      "group": "Americas",
+      "period": "2008",
+      "value": 23,
+      "iso": "USA",
+      "year": "2008"
+    },
+    {
+      "entity": "USA",
+      "group": "Americas",
+      "period": "2010",
+      "value": 20,
+      "iso": "USA",
+      "year": "2010"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2006",
+      "value": 62,
+      "iso": "CAN",
+      "year": "2006"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2008",
+      "value": 55.6,
+      "iso": "CAN",
+      "year": "2008"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2010",
+      "value": 37,
+      "iso": "CAN",
+      "year": "2010"
+    },
     {
       "entity": "Mexico",
       "group": "Americas",

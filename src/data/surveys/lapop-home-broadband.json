@@ -5,37 +5,21 @@
     "url": "https://www.vanderbilt.edu/cgd/americasbarometer/",
     "vintage": "AmericasBarometer Grand Merge 2004–2023 (free, v1.0) and 2025/26 merged file (v1.0)",
     "kind": "surveys",
-    "title": "Most Politicians Are Corrupt (AmericasBarometer)",
+    "title": "Broadband Internet at Home (AmericasBarometer)",
     "unit": "%",
     "changeMode": "pp",
-    "valueLabel": "Think more than half or all politicians are involved in corruption (%)",
-    "topic": "governance",
-    "summary": "Share who think more than half, or all, of the country's politicians are involved in corruption. AmericasBarometer, 2004–2026.",
-    "method": "Weighted by wt, the within-country weight. Share of substantive answers; don't know, refused and not asked are left out of the base. A country needs 300 answers to be shown. Counted as yes: answers 4–5 on the 1–5 scale (EXC7NEW).",
+    "valueLabel": "Have a broadband internet service at home (%)",
+    "topic": "connectivity",
+    "summary": "Share with a broadband internet service at home; internet only by phone does not count. AmericasBarometer, 2004–2026.",
+    "method": "Weighted by wt, the within-country weight. Share of substantive answers; don't know, refused and not asked are left out of the base. A country needs 300 answers to be shown. Counted as yes: answer yes (R18N).",
     "parsedAt": "2026-09-28"
   },
   "data": [
     {
       "entity": "Mexico",
       "group": "Americas",
-      "period": "2016–2017",
-      "value": 77.9,
-      "iso": "MEX",
-      "year": "2016"
-    },
-    {
-      "entity": "Mexico",
-      "group": "Americas",
-      "period": "2018–2019",
-      "value": 65.4,
-      "iso": "MEX",
-      "year": "2019"
-    },
-    {
-      "entity": "Mexico",
-      "group": "Americas",
       "period": "2021",
-      "value": 61.9,
+      "value": 44.9,
       "iso": "MEX",
       "year": "2021"
     },
@@ -43,31 +27,15 @@
       "entity": "Mexico",
       "group": "Americas",
       "period": "2023",
-      "value": 61.9,
+      "value": 59.4,
       "iso": "MEX",
       "year": "2023"
     },
     {
       "entity": "Guatemala",
       "group": "Americas",
-      "period": "2016–2017",
-      "value": 65.7,
-      "iso": "GTM",
-      "year": "2017"
-    },
-    {
-      "entity": "Guatemala",
-      "group": "Americas",
-      "period": "2018–2019",
-      "value": 73.3,
-      "iso": "GTM",
-      "year": "2019"
-    },
-    {
-      "entity": "Guatemala",
-      "group": "Americas",
       "period": "2021",
-      "value": 68.1,
+      "value": 33.4,
       "iso": "GTM",
       "year": "2021"
     },
@@ -75,31 +43,15 @@
       "entity": "Guatemala",
       "group": "Americas",
       "period": "2023",
-      "value": 75.9,
+      "value": 40.7,
       "iso": "GTM",
       "year": "2023"
     },
     {
       "entity": "El Salvador",
       "group": "Americas",
-      "period": "2016–2017",
-      "value": 55.4,
-      "iso": "SLV",
-      "year": "2016"
-    },
-    {
-      "entity": "El Salvador",
-      "group": "Americas",
-      "period": "2018–2019",
-      "value": 64.2,
-      "iso": "SLV",
-      "year": "2018"
-    },
-    {
-      "entity": "El Salvador",
-      "group": "Americas",
       "period": "2021",
-      "value": 58.3,
+      "value": 30.2,
       "iso": "SLV",
       "year": "2021"
     },
@@ -107,71 +59,47 @@
       "entity": "El Salvador",
       "group": "Americas",
       "period": "2023",
-      "value": 32.4,
-      "iso": "SLV",
-      "year": "2023"
-    },
-    {
-      "entity": "Honduras",
-      "group": "Americas",
-      "period": "2016–2017",
-      "value": 58.9,
-      "iso": "HND",
-      "year": "2016"
-    },
-    {
-      "entity": "Honduras",
-      "group": "Americas",
-      "period": "2018–2019",
-      "value": 68.9,
-      "iso": "HND",
-      "year": "2018"
-    },
-    {
-      "entity": "Honduras",
-      "group": "Americas",
-      "period": "2021",
-      "value": 68.4,
-      "iso": "HND",
-      "year": "2021"
-    },
-    {
-      "entity": "Honduras",
-      "group": "Americas",
-      "period": "2023",
-      "value": 65.9,
-      "iso": "HND",
-      "year": "2023"
-    },
-    {
-      "entity": "Nicaragua",
-      "group": "Americas",
-      "period": "2016–2017",
       "value": 45.4,
-      "iso": "NIC",
-      "year": "2016"
+      "iso": "SLV",
+      "year": "2023"
     },
     {
-      "entity": "Nicaragua",
+      "entity": "Honduras",
       "group": "Americas",
-      "period": "2018–2019",
-      "value": 53.4,
-      "iso": "NIC",
-      "year": "2019"
+      "period": "2021",
+      "value": 28.2,
+      "iso": "HND",
+      "year": "2021"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2023",
+      "value": 43.6,
+      "iso": "HND",
+      "year": "2023"
     },
     {
       "entity": "Nicaragua",
       "group": "Americas",
       "period": "2021",
-      "value": 68,
+      "value": 39.1,
       "iso": "NIC",
       "year": "2021"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2023",
+      "value": 38.1,
+      "iso": "NIC",
+      "year": "2023"
     },
     {
       "entity": "Costa Rica",
       "group": "Americas",
       "period": "2023",
-      "value": 53.4,
+      "value": 62.8,
       "iso": "CRI",
       "year": "2023"
     },
@@ -179,23 +107,15 @@
       "entity": "Panama",
       "group": "Americas",
       "period": "2023",
-      "value": 73.9,
+      "value": 46.3,
       "iso": "PAN",
       "year": "2023"
     },
     {
       "entity": "Colombia",
       "group": "Americas",
-      "period": "2018–2019",
-      "value": 75.8,
-      "iso": "COL",
-      "year": "2018"
-    },
-    {
-      "entity": "Colombia",
-      "group": "Americas",
       "period": "2021",
-      "value": 78.2,
+      "value": 45.7,
       "iso": "COL",
       "year": "2021"
     },
@@ -203,23 +123,15 @@
       "entity": "Colombia",
       "group": "Americas",
       "period": "2023",
-      "value": 74,
+      "value": 48.3,
       "iso": "COL",
       "year": "2023"
     },
     {
       "entity": "Ecuador",
       "group": "Americas",
-      "period": "2016–2017",
-      "value": 56.1,
-      "iso": "ECU",
-      "year": "2016"
-    },
-    {
-      "entity": "Ecuador",
-      "group": "Americas",
       "period": "2021",
-      "value": 64.1,
+      "value": 59.7,
       "iso": "ECU",
       "year": "2021"
     },
@@ -227,31 +139,15 @@
       "entity": "Ecuador",
       "group": "Americas",
       "period": "2023",
-      "value": 76.3,
+      "value": 70.2,
       "iso": "ECU",
       "year": "2023"
     },
     {
       "entity": "Peru",
       "group": "Americas",
-      "period": "2016–2017",
-      "value": 77,
-      "iso": "PER",
-      "year": "2017"
-    },
-    {
-      "entity": "Peru",
-      "group": "Americas",
-      "period": "2018–2019",
-      "value": 84.7,
-      "iso": "PER",
-      "year": "2019"
-    },
-    {
-      "entity": "Peru",
-      "group": "Americas",
       "period": "2021",
-      "value": 88.4,
+      "value": 42.4,
       "iso": "PER",
       "year": "2021"
     },
@@ -259,31 +155,15 @@
       "entity": "Peru",
       "group": "Americas",
       "period": "2023",
-      "value": 86.8,
+      "value": 47.6,
       "iso": "PER",
       "year": "2023"
     },
     {
       "entity": "Paraguay",
       "group": "Americas",
-      "period": "2016–2017",
-      "value": 68.3,
-      "iso": "PRY",
-      "year": "2016"
-    },
-    {
-      "entity": "Paraguay",
-      "group": "Americas",
-      "period": "2018–2019",
-      "value": 64.5,
-      "iso": "PRY",
-      "year": "2019"
-    },
-    {
-      "entity": "Paraguay",
-      "group": "Americas",
       "period": "2021",
-      "value": 75.2,
+      "value": 33.3,
       "iso": "PRY",
       "year": "2021"
     },
@@ -291,31 +171,15 @@
       "entity": "Paraguay",
       "group": "Americas",
       "period": "2023",
-      "value": 75.6,
+      "value": 42,
       "iso": "PRY",
       "year": "2023"
     },
     {
       "entity": "Dominican Republic",
       "group": "Americas",
-      "period": "2016–2017",
-      "value": 64.5,
-      "iso": "DOM",
-      "year": "2016"
-    },
-    {
-      "entity": "Dominican Republic",
-      "group": "Americas",
-      "period": "2018–2019",
-      "value": 68.7,
-      "iso": "DOM",
-      "year": "2019"
-    },
-    {
-      "entity": "Dominican Republic",
-      "group": "Americas",
       "period": "2021",
-      "value": 59.4,
+      "value": 37.1,
       "iso": "DOM",
       "year": "2021"
     },
@@ -323,23 +187,15 @@
       "entity": "Dominican Republic",
       "group": "Americas",
       "period": "2023",
-      "value": 62.5,
+      "value": 44.5,
       "iso": "DOM",
       "year": "2023"
     },
     {
       "entity": "Haiti",
       "group": "Americas",
-      "period": "2016–2017",
-      "value": 54.4,
-      "iso": "HTI",
-      "year": "2017"
-    },
-    {
-      "entity": "Haiti",
-      "group": "Americas",
       "period": "2021",
-      "value": 54,
+      "value": 11.8,
       "iso": "HTI",
       "year": "2021"
     },
@@ -347,31 +203,15 @@
       "entity": "Haiti",
       "group": "Americas",
       "period": "2023",
-      "value": 52.7,
+      "value": 12.7,
       "iso": "HTI",
       "year": "2023"
     },
     {
       "entity": "Jamaica",
       "group": "Americas",
-      "period": "2016–2017",
-      "value": 53.9,
-      "iso": "JAM",
-      "year": "2017"
-    },
-    {
-      "entity": "Jamaica",
-      "group": "Americas",
-      "period": "2018–2019",
-      "value": 61.7,
-      "iso": "JAM",
-      "year": "2019"
-    },
-    {
-      "entity": "Jamaica",
-      "group": "Americas",
       "period": "2021",
-      "value": 55.2,
+      "value": 64.2,
       "iso": "JAM",
       "year": "2021"
     },
@@ -379,7 +219,7 @@
       "entity": "Jamaica",
       "group": "Americas",
       "period": "2023",
-      "value": 66,
+      "value": 69.3,
       "iso": "JAM",
       "year": "2023"
     },
@@ -387,7 +227,7 @@
       "entity": "Guyana",
       "group": "Americas",
       "period": "2021",
-      "value": 41.6,
+      "value": 63.7,
       "iso": "GUY",
       "year": "2021"
     },
@@ -395,7 +235,7 @@
       "entity": "Trinidad and Tobago",
       "group": "Americas",
       "period": "2023",
-      "value": 62.6,
+      "value": 85.5,
       "iso": "TTO",
       "year": "2023"
     },
@@ -403,7 +243,7 @@
       "entity": "Belize",
       "group": "Americas",
       "period": "2023",
-      "value": 63.9,
+      "value": 74.1,
       "iso": "BLZ",
       "year": "2023"
     },
@@ -411,7 +251,7 @@
       "entity": "Suriname",
       "group": "Americas",
       "period": "2023",
-      "value": 63.9,
+      "value": 53.9,
       "iso": "SUR",
       "year": "2023"
     },
@@ -419,7 +259,7 @@
       "entity": "Bahamas",
       "group": "Americas",
       "period": "2023",
-      "value": 43.3,
+      "value": 80.7,
       "iso": "BHS",
       "year": "2023"
     },
@@ -427,7 +267,7 @@
       "entity": "Grenada",
       "group": "Americas",
       "period": "2023",
-      "value": 33.7,
+      "value": 78.3,
       "iso": "GRD",
       "year": "2023"
     },
@@ -435,7 +275,7 @@
       "entity": "Mexico",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 57.6,
+      "value": 61.6,
       "iso": "MEX",
       "year": "2025"
     },
@@ -443,7 +283,7 @@
       "entity": "Guatemala",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 62.8,
+      "value": 42,
       "iso": "GTM",
       "year": "2026"
     },
@@ -451,7 +291,7 @@
       "entity": "El Salvador",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 22.5,
+      "value": 54.8,
       "iso": "SLV",
       "year": "2026"
     },
@@ -459,7 +299,7 @@
       "entity": "Honduras",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 52.9,
+      "value": 47.4,
       "iso": "HND",
       "year": "2026"
     },
@@ -467,7 +307,7 @@
       "entity": "Nicaragua",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 29.4,
+      "value": 33.6,
       "iso": "NIC",
       "year": "2026"
     },
@@ -475,7 +315,7 @@
       "entity": "Costa Rica",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 44.3,
+      "value": 76.6,
       "iso": "CRI",
       "year": "2025"
     },
@@ -483,7 +323,7 @@
       "entity": "Panama",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 52.8,
+      "value": 51.2,
       "iso": "PAN",
       "year": "2026"
     },
@@ -491,7 +331,7 @@
       "entity": "Colombia",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 68.2,
+      "value": 46.1,
       "iso": "COL",
       "year": "2025"
     },
@@ -499,7 +339,7 @@
       "entity": "Ecuador",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 67.5,
+      "value": 72.1,
       "iso": "ECU",
       "year": "2026"
     },
@@ -507,7 +347,7 @@
       "entity": "Bolivia",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 67.2,
+      "value": 59.7,
       "iso": "BOL",
       "year": "2026"
     },
@@ -515,7 +355,7 @@
       "entity": "Peru",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 81.3,
+      "value": 43.6,
       "iso": "PER",
       "year": "2025"
     },
@@ -523,7 +363,7 @@
       "entity": "Paraguay",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 64.3,
+      "value": 61.9,
       "iso": "PRY",
       "year": "2025"
     },
@@ -531,7 +371,7 @@
       "entity": "Chile",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 44,
+      "value": 71.9,
       "iso": "CHL",
       "year": "2026"
     },
@@ -539,7 +379,7 @@
       "entity": "Uruguay",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 28.3,
+      "value": 70.5,
       "iso": "URY",
       "year": "2025"
     },
@@ -547,7 +387,7 @@
       "entity": "Brazil",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 60.3,
+      "value": 79.7,
       "iso": "BRA",
       "year": "2026"
     },
@@ -555,7 +395,7 @@
       "entity": "Argentina",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 63.8,
+      "value": 85.4,
       "iso": "ARG",
       "year": "2026"
     },
@@ -563,7 +403,7 @@
       "entity": "Dominican Republic",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 54.2,
+      "value": 56.1,
       "iso": "DOM",
       "year": "2026"
     },
@@ -571,25 +411,9 @@
       "entity": "Haiti",
       "group": "Americas",
       "period": "2025–2026",
-      "value": 55,
+      "value": 10.6,
       "iso": "HTI",
       "year": "2026"
-    },
-    {
-      "entity": "USA",
-      "group": "Americas",
-      "period": "2025–2026",
-      "value": 45.9,
-      "iso": "USA",
-      "year": "2025"
-    },
-    {
-      "entity": "Canada",
-      "group": "Americas",
-      "period": "2025–2026",
-      "value": 24.4,
-      "iso": "CAN",
-      "year": "2025"
     }
   ]
 }

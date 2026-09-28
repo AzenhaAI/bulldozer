@@ -90,11 +90,11 @@ organisation is required. None exists yet.
 LAPOP needs no account — "Free User" on the data page. Its licence says
 research use only, no redistribution of the data; the terms were accepted on
 2026-09-27 and only country aggregates are published (live since 2026-09-28,
-2025/26 wave, `lapop-*`). The 2004–2023 Grand Merge would add trends.
+`lapop-*`): the free 2004–2023 Grand Merge plus the 2025/26 wave, 28 countries.
 
 ## Suggested order
 
-1. ~~**LAPOP**~~ — done 2026-09-28, 2025/26 wave (20 countries, 11 series).
+1. ~~**LAPOP**~~ — done 2026-09-28: 11 series, 2004–2026, 28 countries.
 2. **Pew** — account, the widest "attitudes to X" coverage.
 3. **ISSP + Eurobarometer** deeper — one GESIS account serves both.
 4. **Asian Barometer** — start the application now; it is the slow one.

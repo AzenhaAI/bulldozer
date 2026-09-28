@@ -1,6 +1,7 @@
 """AmericasBarometer (LAPOP Lab) merged file -> one row per country, weighted shares.
 
     python3 scripts/tools/lapop_aggregate.py 2026_merge_CGD_AmericasBarometer_v1.0p.dta > data/raw/lapop/lapop_2026_by_country.csv
+    python3 scripts/tools/lapop_aggregate.py Grand_Merge_2004-2023_LAPOP_AmericasBarometer_v1.0_FREE.dta > data/raw/lapop/lapop_2004_2023_by_country.csv
 
 Run once per wave, locally (needs pyreadstat). The .dta is obtained from LAPOP
 Lab's data directory as a Free User under its Datasets Usage Agreement:
@@ -14,6 +15,12 @@ in this country" are Stata extended missing values (.a/.b/.x), read as missing,
 so the base is substantive answers only. Weight: wt, the within-country weight.
 A country needs 300 substantive answers for an item to be reported: several
 items were not asked everywhere.
+
+The Grand Merge (2004–2023) holds every wave in one file, so rows are one per
+country and wave. The same question names carry the same codes across waves
+(checked against the value labels of both files). r18n is broadband at home;
+r18, any home internet including by phone, was asked only in some waves and is
+left out so the series means one thing throughout.
 """
 import sys
 import pyreadstat
@@ -35,18 +42,22 @@ SPEC = {
 MIN_N = 300
 # LAPOP country codes (pais) -> ISO 3166 alpha-3
 PAIS = {1: 'MEX', 2: 'GTM', 3: 'SLV', 4: 'HND', 5: 'NIC', 6: 'CRI', 7: 'PAN', 8: 'COL', 9: 'ECU',
-        10: 'BOL', 11: 'PER', 12: 'PRY', 13: 'CHL', 14: 'URY', 15: 'BRA', 17: 'ARG', 21: 'DOM',
-        22: 'HTI', 36: 'CUB', 40: 'USA', 41: 'CAN'}
+        10: 'BOL', 11: 'PER', 12: 'PRY', 13: 'CHL', 14: 'URY', 15: 'BRA', 16: 'VEN', 17: 'ARG',
+        21: 'DOM', 22: 'HTI', 23: 'JAM', 24: 'GUY', 25: 'TTO', 26: 'BLZ', 27: 'SUR', 28: 'BHS',
+        29: 'BRB', 30: 'GRD', 31: 'LCA', 32: 'DMA', 33: 'ATG', 34: 'VCT', 35: 'KNA', 36: 'CUB',
+        40: 'USA', 41: 'CAN'}
 
-cols = ['pais', 'year', 'wt'] + [q for q, _ in SPEC.values()]
+cols = ['pais', 'wave', 'year', 'wt'] + [q for q, _ in SPEC.values()]
 df, meta = pyreadstat.read_dta(sys.argv[1], usecols=cols)
+# Self-weighted samples leave wt empty; there every answer counts once.
+df['wt'] = df['wt'].fillna(1.0)
 names = meta.variable_value_labels['pais']
 
-keys = ['iso3', 'name', 'year', 'respondents'] + [x for k in SPEC for x in (k, k + '_n')]
+keys = ['iso3', 'name', 'wave', 'year', 'respondents'] + [x for k in SPEC for x in (k, k + '_n')]
 print(','.join(keys))
-for code, g in sorted(df.groupby('pais')):
+for (code, wave), g in sorted(df.groupby(['pais', 'wave'])):
     code = int(code)
-    row = {'iso3': PAIS[code], 'name': names.get(code, ''), 'year': int(g['year'].max()), 'respondents': len(g)}
+    row = {'iso3': PAIS[code], 'name': names.get(code, ''), 'wave': int(wave), 'year': int(g['year'].max()), 'respondents': len(g)}
     for key, (q, yes) in SPEC.items():
         valid = g[q].notna()
         n = int(valid.sum())
@@ -54,4 +65,4 @@ for code, g in sorted(df.groupby('pais')):
         row[key + '_n'] = n
         row[key] = '' if n < MIN_N else f"{100 * w[valid & g[q].isin(yes)].sum() / w[valid].sum():.6f}"
     print(','.join(f'"{row[k]}"' if k == 'name' else str(row[k]) for k in keys))
-print(f"{len(df)} respondents, {df['pais'].nunique()} countries", file=sys.stderr)
+print(f"{len(df)} respondents, {df['pais'].nunique()} countries, waves {sorted(int(w) for w in df['wave'].dropna().unique())}", file=sys.stderr)
