@@ -92,6 +92,13 @@ research use only, no redistribution of the data; the terms were accepted on
 2026-09-27 and only country aggregates are published (live since 2026-09-28,
 `lapop-*`): the free 2004–2023 Grand Merge plus the 2025/26 wave, 28 countries.
 
+Asian Barometer (checked 2026-09-28): an online application form at
+asianbarometer.org/datar?page=d10 asks for a full name, title, affiliation and
+a research description; use is limited to academic research, education,
+policy analysis "or other pre-approved purposes", and the data may not be
+passed on. Apply as Azenha AI, describe publishing country-level aggregates
+with the required acknowledgement, and expect that they may say no.
+
 ## Suggested order
 
 1. ~~**LAPOP**~~ — done 2026-09-28: 11 series, 2004–2026, 28 countries.
