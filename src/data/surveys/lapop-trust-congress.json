@@ -1,0 +1,171 @@
+{
+  "meta": {
+    "source": "AmericasBarometer (LAPOP Lab)",
+    "license": "LAPOP Lab, Vanderbilt University — published as country aggregates; the survey data are not redistributed",
+    "url": "https://www.vanderbilt.edu/cgd/americasbarometer/",
+    "vintage": "AmericasBarometer 2025/26, merged file v1.0",
+    "kind": "surveys",
+    "title": "Trust in Congress (AmericasBarometer)",
+    "unit": "%",
+    "changeMode": "pp",
+    "valueLabel": "Trust the national legislature (5–7 on a 1–7 scale, %)",
+    "topic": "governance",
+    "summary": "Share who trust the national legislature. AmericasBarometer 2025/26, fieldwork 2025–2026.",
+    "method": "Weighted by wt, the within-country weight. Share of substantive answers; don't know, refused and not asked are left out of the base. A country needs 300 answers to be shown. Counted as yes: 5–7 on the 1–7 trust scale (B13).",
+    "parsedAt": "2026-09-28"
+  },
+  "data": [
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 45.9,
+      "iso": "MEX",
+      "year": "2025"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 25.2,
+      "iso": "GTM",
+      "year": "2026"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 55.1,
+      "iso": "SLV",
+      "year": "2026"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 34,
+      "iso": "HND",
+      "year": "2026"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 55.5,
+      "iso": "NIC",
+      "year": "2026"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 28.3,
+      "iso": "CRI",
+      "year": "2025"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 21.7,
+      "iso": "PAN",
+      "year": "2026"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 26,
+      "iso": "COL",
+      "year": "2025"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 19.9,
+      "iso": "ECU",
+      "year": "2026"
+    },
+    {
+      "entity": "Bolivia",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 29.9,
+      "iso": "BOL",
+      "year": "2026"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 7.1,
+      "iso": "PER",
+      "year": "2025"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 21.2,
+      "iso": "PRY",
+      "year": "2025"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 25.9,
+      "iso": "CHL",
+      "year": "2026"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 46.9,
+      "iso": "URY",
+      "year": "2025"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 29.8,
+      "iso": "BRA",
+      "year": "2026"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 26.5,
+      "iso": "ARG",
+      "year": "2026"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 37.3,
+      "iso": "DOM",
+      "year": "2026"
+    },
+    {
+      "entity": "USA",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 39.9,
+      "iso": "USA",
+      "year": "2025"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 53.3,
+      "iso": "CAN",
+      "year": "2025"
+    }
+  ]
+}

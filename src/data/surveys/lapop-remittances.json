@@ -1,0 +1,163 @@
+{
+  "meta": {
+    "source": "AmericasBarometer (LAPOP Lab)",
+    "license": "LAPOP Lab, Vanderbilt University — published as country aggregates; the survey data are not redistributed",
+    "url": "https://www.vanderbilt.edu/cgd/americasbarometer/",
+    "vintage": "AmericasBarometer 2025/26, merged file v1.0",
+    "kind": "surveys",
+    "title": "Households Receiving Remittances (AmericasBarometer)",
+    "unit": "%",
+    "changeMode": "pp",
+    "valueLabel": "Household receives money from abroad (%)",
+    "topic": "economy",
+    "summary": "Share who say they or someone in their household receives remittances — money sent from abroad. AmericasBarometer 2025/26, fieldwork 2025–2026.",
+    "method": "Weighted by wt, the within-country weight. Share of substantive answers; don't know, refused and not asked are left out of the base. A country needs 300 answers to be shown. Counted as yes: answer yes (Q10A).",
+    "parsedAt": "2026-09-28"
+  },
+  "data": [
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 8.9,
+      "iso": "MEX",
+      "year": "2025"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 18.9,
+      "iso": "GTM",
+      "year": "2026"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 24.3,
+      "iso": "SLV",
+      "year": "2026"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 26.5,
+      "iso": "HND",
+      "year": "2026"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 21.6,
+      "iso": "NIC",
+      "year": "2026"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 4.5,
+      "iso": "CRI",
+      "year": "2025"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 3.7,
+      "iso": "PAN",
+      "year": "2026"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 4.2,
+      "iso": "COL",
+      "year": "2025"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 7.3,
+      "iso": "ECU",
+      "year": "2026"
+    },
+    {
+      "entity": "Bolivia",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 6.9,
+      "iso": "BOL",
+      "year": "2026"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 3,
+      "iso": "PER",
+      "year": "2025"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 7.4,
+      "iso": "PRY",
+      "year": "2025"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 2.7,
+      "iso": "CHL",
+      "year": "2026"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 2.3,
+      "iso": "URY",
+      "year": "2025"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 1.3,
+      "iso": "BRA",
+      "year": "2026"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 2.6,
+      "iso": "ARG",
+      "year": "2026"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 24.7,
+      "iso": "DOM",
+      "year": "2026"
+    },
+    {
+      "entity": "Haiti",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 37.2,
+      "iso": "HTI",
+      "year": "2026"
+    }
+  ]
+}

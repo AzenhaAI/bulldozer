@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "source": "AmericasBarometer (LAPOP Lab)",
+    "license": "LAPOP Lab, Vanderbilt University — published as country aggregates; the survey data are not redistributed",
+    "url": "https://www.vanderbilt.edu/cgd/americasbarometer/",
+    "vintage": "AmericasBarometer 2025/26, merged file v1.0",
+    "kind": "surveys",
+    "title": "Trust in Elections (AmericasBarometer)",
+    "unit": "%",
+    "changeMode": "pp",
+    "valueLabel": "Trust elections (5–7 on a 1–7 scale, %)",
+    "topic": "governance",
+    "summary": "Share who trust elections in their country. AmericasBarometer 2025/26, fieldwork 2025–2026.",
+    "method": "Weighted by wt, the within-country weight. Share of substantive answers; don't know, refused and not asked are left out of the base. A country needs 300 answers to be shown. Counted as yes: 5–7 on the 1–7 trust scale (B47A).",
+    "parsedAt": "2026-09-28"
+  },
+  "data": [
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 44.1,
+      "iso": "MEX",
+      "year": "2025"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 32.7,
+      "iso": "GTM",
+      "year": "2026"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 69.1,
+      "iso": "SLV",
+      "year": "2026"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 27.6,
+      "iso": "HND",
+      "year": "2026"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 56.9,
+      "iso": "NIC",
+      "year": "2026"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 51.6,
+      "iso": "CRI",
+      "year": "2025"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 38.9,
+      "iso": "PAN",
+      "year": "2026"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 31.2,
+      "iso": "COL",
+      "year": "2025"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 30.6,
+      "iso": "ECU",
+      "year": "2026"
+    },
+    {
+      "entity": "Bolivia",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 34.6,
+      "iso": "BOL",
+      "year": "2026"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 17.4,
+      "iso": "PER",
+      "year": "2025"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 26,
+      "iso": "PRY",
+      "year": "2025"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 59.4,
+      "iso": "CHL",
+      "year": "2026"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 77.5,
+      "iso": "URY",
+      "year": "2025"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 37.3,
+      "iso": "BRA",
+      "year": "2026"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 42.1,
+      "iso": "ARG",
+      "year": "2026"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 38,
+      "iso": "DOM",
+      "year": "2026"
+    },
+    {
+      "entity": "Haiti",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 39,
+      "iso": "HTI",
+      "year": "2026"
+    },
+    {
+      "entity": "USA",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 56.3,
+      "iso": "USA",
+      "year": "2025"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2025–2026",
+      "value": 65,
+      "iso": "CAN",
+      "year": "2025"
+    }
+  ]
+}
