@@ -12,7 +12,7 @@
     "summary": "Where voters place themselves on a 0–10 scale from left to right, averaged. CSES, latest election study per country since 2011.",
     "method": "Weighted mean on 0–10 by the CSES demographic weight; \"haven't heard of left–right\", refused, don't know and missing excluded.",
     "topic": "attitudes",
-    "parsedAt": "2026-09-25"
+    "parsedAt": "2026-09-28"
   },
   "data": [
     {
