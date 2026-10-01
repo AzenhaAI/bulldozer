@@ -4,6 +4,7 @@ import Provenance from '@components/Provenance.astro';
 import KpiRow from '@components/KpiRow.astro';
 import DataPanel from '@components/DataPanel.astro';
 import MoversTable from '@components/MoversTable.astro';
+import RankTable from '@components/RankTable.astro';
 import GroupChart from '@components/GroupChart.astro';
 import TrendChart from '@components/TrendChart.astro';
 import BivariateMap from '@components/BivariateMap.astro';
@@ -208,6 +209,17 @@ const breadcrumbLd = {
       </div>
     </section>
   )}
+
+  <section class="section" style="padding-top:0" id="full">
+    <div class="container">
+      <h2>{ds.title} — full ranking</h2>
+      <p class="sub">
+        Every entity in this dataset, in HTML. The interactive panel above shows
+        the same numbers; this is the one that survives without JavaScript.
+      </p>
+      <RankTable data={ds.data} unit={pctUnit} mode={ds.changeMode} valueLabel={ds.valueLabel} />
+    </div>
+  </section>
 
   {related.length > 0 && (
     <section class="section" style="padding-top:0">

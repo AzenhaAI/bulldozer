@@ -1,0 +1,77 @@
+---
+/**
+ * The full ranking, rendered on the server.
+ *
+ * Every other view of this data is drawn by the browser: DataPanel ships an
+ * empty <table id="table-target"> and fills it from JS, and the map and bars
+ * are SVG. That made the dataset pages invisible to search — 379 KB of markup
+ * in which no country was ever named outside a <script>. 186 pages, 42% of the
+ * site, with nothing to rank for.
+ *
+ * So this duplicates the table view in HTML. It is not a fallback: it is the
+ * page's text.
+ *
+ * Built from entityTotals rather than computeChanges, which drops any entity
+ * whose previous value is 0 to avoid dividing by it — fine for a top-five
+ * movers list, wrong for a ranking that claims to be complete.
+ */
+import type { Observation, ChangeMode } from '@lib/analytics';
+import { periods, entityTotals, changeValue, isSinglePeriod } from '@lib/analytics';
+import { formatChange, pctClass, formatNum } from '@lib/format';
+import { flagFor } from '@lib/flags';
+
+interface Props { data: Observation[]; unit?: string; mode?: ChangeMode; valueLabel?: string }
+const { data, unit = '', mode = 'pct', valueLabel = 'Value' } = Astro.props;
+
+const all = periods(data);
+const currPeriod = all[all.length - 1];
+const prevPeriod = all.length > 1 ? all[all.length - 2] : null;
+const single = isSinglePeriod(data);
+
+const curr = entityTotals(data, currPeriod);
+const prev = prevPeriod ? entityTotals(data, prevPeriod) : new Map<string, number>();
+const isoOf = new Map(data.filter((o) => o.iso).map((o) => [o.entity, o.iso!]));
+
+const rows = [...curr.entries()]
+  .map(([entity, value]) => {
+    const pv = prev.get(entity);
+    // A change needs both ends. Missing or zero previous value means no
+    // meaningful percent, so the cell stays empty rather than reading 0%.
+    const pct = pv === undefined || (mode === 'pct' && pv === 0)
+      ? null
+      : changeValue(value, pv, mode);
+    return { entity, value, pct };
+  })
+  .sort((a, b) => b.value - a.value);
+---
+{rows.length > 0 && (
+  <table class="data">
+    <caption class="sub" style="text-align:left; caption-side:top; padding:0 0 8px">
+      {`${rows.length} ${rows.length === 1 ? 'entity' : 'entities'}, ${currPeriod}`}
+      {!single && prevPeriod && <span>, change vs {prevPeriod}</span>}.
+      Highest first.
+    </caption>
+    <thead>
+      <tr>
+        <th class="num" style="width:3em">#</th>
+        <th>Entity</th>
+        <th class="num">{valueLabel}</th>
+        {!single && <th class="num">Change</th>}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((r, i) => (
+        <tr>
+          <td class="num">{i + 1}</td>
+          <td>{flagFor(isoOf.get(r.entity)) ? flagFor(isoOf.get(r.entity)) + ' ' : ''}{r.entity}</td>
+          <td class="num">{formatNum(r.value)}{unit}</td>
+          {!single && (
+            <td class={`num ${r.pct === null ? '' : pctClass(r.pct)}`}>
+              {r.pct === null ? '—' : formatChange(r.pct, mode)}
+            </td>
+          )}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+)}
