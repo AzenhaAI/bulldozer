@@ -9,7 +9,7 @@
     "source": "Our World in Data",
     "license": "CC BY 4.0",
     "url": "https://ourworldindata.org/grapher/share-of-population-in-extreme-poverty",
-    "parsedAt": "2026-09-28",
+    "parsedAt": "2026-10-05",
     "kind": "macro"
   },
   "data": [
@@ -5442,7 +5442,7 @@
       "entity": "India",
       "group": "Asia",
       "period": "2023",
-      "value": 0,
+      "value": 2.6,
       "iso": "IND"
     },
     {
@@ -11546,7 +11546,7 @@
       "entity": "Switzerland",
       "group": "Europe",
       "period": "2023",
-      "value": 0,
+      "value": 0.1,
       "iso": "CHE"
     },
     {
@@ -12386,7 +12386,7 @@
       "entity": "Uganda",
       "group": "Africa",
       "period": "2023",
-      "value": 0,
+      "value": 54.4,
       "iso": "UGA"
     },
     {
