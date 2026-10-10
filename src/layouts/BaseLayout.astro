@@ -170,6 +170,20 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     <script is:inline>
       // Inside an app's web view the app draws its own bar underneath.
       if (/[?&](app|embed)=/.test(location.search) || /; wv\)/.test(navigator.userAgent)) document.documentElement.classList.add('in-app');
+      // A home-screen web app on iOS is woken from memory, never reloaded, and
+      // has no reload button: a page opened in the morning was still showing
+      // that evening, without the changes made in between. Back after two
+      // hours or more, it reloads.
+      (function () {
+        var standalone = window.navigator.standalone === true ||
+          (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+        if (!standalone) return;
+        var hidden = 0;
+        document.addEventListener('visibilitychange', function () {
+          if (document.hidden) { hidden = Date.now(); return; }
+          if (hidden && Date.now() - hidden > 2 * 3600 * 1000) location.reload();
+        });
+      })();
     </script>
     <header class="site-header">
       <div class="container">
@@ -391,6 +405,9 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     // Ask AI, the same seven tabs — so offer it instead of Add to Home Screen,
     // and offer it again to whoever already put the web version on their
     // home screen. Its own dismissal: closing the old hint was not a no to this.
+    // The app needs iOS 15; below that the App Store would offer nothing.
+    var iosMajor = +((ua.match(/OS (\d+)_/) || [])[1] || 99);
+    if (iOS && iosMajor < 15) iOS = false;
     if (iOS) {
       var AKEY = 'appstore-dismissed';
       try { if (localStorage.getItem(AKEY) === '1') return; } catch (e) {}
