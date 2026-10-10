@@ -1,0 +1,124 @@
+---
+// Ask AI on the web: the same service the app's Ask AI tab uses
+// (bot.azenha.ai/ask). The page sends a country and a question, never facts —
+// the server looks the figures up itself and drops any answer carrying a
+// number it does not hold. Exists so the phone bar can carry the app's tabs.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { buildCountryIndex, countrySlug } from '@lib/countryIndex';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const countries = buildCountryIndex()
+  .map((c) => ({ iso: c.iso, name: c.name, slug: countrySlug(c.name) }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it compared to the world?', 'Do people trust each other?'];
+---
+<BaseLayout title="Ask AI" active="ask" description="Ask about any country and get a short answer written from BullDozer's published figures, with every number checked against the data.">
+  <section class="container ask">
+    <h1>Ask AI <span class="beta">Beta</span></h1>
+    <p class="ask-lead">
+      Pick a country — a name or a code like <b>kz</b> or <b>bra</b> — and ask a question. The answer uses only
+      our published figures, and any number not found in them is held back. Your question and the country code go to
+      our server and to Anthropic to phrase the answer. AI answers can be wrong — the figures are the source.
+    </p>
+    <form id="ask-form" class="ask-form" autocomplete="off">
+      <label>Country
+        <input id="ask-country" list="ask-countries" required maxlength="60" placeholder="Kazakhstan, kz, bra…" />
+      </label>
+      <datalist id="ask-countries">
+        {countries.map((c) => <option value={c.name} />)}
+      </datalist>
+      <label>Question
+        <input id="ask-q" required maxlength="300" placeholder="Is it safe?" />
+      </label>
+      <div class="ask-chips">
+        {examples.map((e) => <button type="button" class="ask-chip">{e}</button>)}
+      </div>
+      <button type="submit" id="ask-go" class="ask-go">Ask</button>
+    </form>
+    <div id="ask-out" class="ask-out" hidden>
+      <div class="ask-label">AI answer · figures checked against our data</div>
+      <p id="ask-answer"></p>
+      <p id="ask-disclaimer" class="ask-disclaimer"></p>
+      <a id="ask-profile" class="ask-profile" hidden>See every figure for this country →</a>
+    </div>
+    <p id="ask-note" class="ask-note" hidden></p>
+  </section>
+  <script type="application/json" id="ask-index" set:html={JSON.stringify({ base, countries })} />
+</BaseLayout>
+
+<script>
+  const { base, countries } = JSON.parse(document.getElementById('ask-index')!.textContent!);
+  const form = document.getElementById('ask-form') as HTMLFormElement;
+  const country = document.getElementById('ask-country') as HTMLInputElement;
+  const q = document.getElementById('ask-q') as HTMLInputElement;
+  const go = document.getElementById('ask-go') as HTMLButtonElement;
+  const out = document.getElementById('ask-out')!;
+  const answer = document.getElementById('ask-answer')!;
+  const disclaimer = document.getElementById('ask-disclaimer')!;
+  const profile = document.getElementById('ask-profile') as HTMLAnchorElement;
+  const note = document.getElementById('ask-note')!;
+
+  document.querySelectorAll<HTMLButtonElement>('.ask-chip').forEach((b) =>
+    b.addEventListener('click', () => { q.value = b.textContent || ''; country.value ? form.requestSubmit() : country.focus(); }));
+
+  // ?c=kz&q=… opens with an answer, so a link can carry a question.
+  const params = new URLSearchParams(location.search);
+  if (params.get('c')) country.value = params.get('c')!;
+  if (params.get('q')) q.value = params.get('q')!;
+
+  const say = (text: string) => { note.textContent = text; note.hidden = false; };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    out.hidden = true; note.hidden = true; profile.hidden = true;
+    go.disabled = true; go.textContent = 'Thinking…';
+    try {
+      const res = await fetch('https://bot.azenha.ai/ask', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ country: country.value.trim(), q: q.value.trim() }),
+      });
+      const j = await res.json().catch(() => ({}));
+      if (res.ok && j.answer) {
+        answer.textContent = j.answer;
+        disclaimer.textContent = j.disclaimer || 'AI answers can be wrong — the figures are the source.';
+        const c = countries.find((x: { iso: string }) => x.iso === j.country);
+        if (c) { profile.href = `${base}/country/${c.slug}/`; profile.hidden = false; }
+        out.hidden = false;
+      } else if (res.status === 429) {
+        say('Too many questions in a minute — try again shortly.');
+      } else if (j.error === 'unknown country') {
+        say('That country was not recognised. Try its name or a two- or three-letter code.');
+      } else {
+        say('No answer passed the check against our figures this time. The country profile has every figure we hold.');
+      }
+    } catch {
+      say('Could not reach the answer service. Try again in a moment.');
+    } finally {
+      go.disabled = false; go.textContent = 'Ask';
+    }
+  });
+  if (country.value && q.value) form.requestSubmit();
+</script>
+
+<style>
+  .ask { padding-top: 28px; padding-bottom: 40px; max-width: 720px; }
+  .ask h1 { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; font-size: clamp(28px, 5vw, 40px); }
+  .beta { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 3px 8px; font-weight: 800; }
+  .ask-lead { color: var(--text-dim); font-size: 15px; line-height: 1.5; margin: 0 0 18px; }
+  .ask-form { display: grid; gap: 12px; }
+  .ask-form label { display: grid; gap: 6px; font-size: 13px; font-weight: 600; color: var(--text-dim); }
+  .ask-form input { font: 500 16px var(--font); color: var(--text); background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .ask-form input:focus { outline: 2px solid var(--accent); outline-offset: 0; }
+  .ask-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ask-chip { font: 500 13px var(--font); color: var(--text); background: var(--bg-elev); border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+  .ask-chip:hover { border-color: var(--accent); }
+  .ask-go { justify-self: start; font: 700 15px var(--font); color: #1a1300; background: var(--accent); border: 0; border-radius: 10px; padding: 11px 22px; cursor: pointer; }
+  .ask-go:disabled { opacity: 0.6; cursor: progress; }
+  .ask-out { margin-top: 22px; background: var(--bg-card); border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent); border-radius: 12px; padding: 16px; }
+  .ask-out[hidden], .ask-note[hidden], .ask-profile[hidden] { display: none; }
+  .ask-label { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  #ask-answer { font-size: 16px; line-height: 1.55; margin: 0 0 10px; white-space: pre-wrap; }
+  .ask-disclaimer { font-size: 13px; color: var(--text-dim); font-style: italic; margin: 0 0 10px; }
+  .ask-profile { font-weight: 600; font-size: 14px; }
+  .ask-note { margin-top: 18px; color: var(--text-dim); font-style: italic; }
+</style>

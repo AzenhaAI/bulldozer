@@ -4,7 +4,7 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
-  active?: 'home' | 'news' | 'apps' | 'explore' | 'sources' | 'surveys' | 'macro' | 'markets' | 'geo' | 'edu' | 'quiz' | 'glossary';
+  active?: 'home' | 'news' | 'ask' | 'apps' | 'explore' | 'sources' | 'surveys' | 'macro' | 'markets' | 'geo' | 'edu' | 'quiz' | 'glossary';
   /** Path (under base) to a page-specific OG image, e.g. `/og/whr-happiness.png`. */
   ogPath?: string;
 }
@@ -24,6 +24,7 @@ const nav = [
 // only nav on mobile) plus tools, the app link and the theme toggle.
 const burger = [
   { id: 'news', label: '📰 New', href: `${base}/` },
+  { id: 'ask', label: '✨ Ask AI', href: `${base}/ask/` },
   { id: 'explore', label: '🔎 Top', href: `${base}/explore/` },
   { id: 'macro', label: '📈 Macro', href: `${base}/macro/` },
   { id: 'markets', label: '💼 Biz', href: `${base}/markets/` },
@@ -40,6 +41,19 @@ const burger = [
   // "Get the app" were being handed an Android package they can't install.
   { id: 'apps', label: '📱 Get the app', href: `${base}/apps` },
   { id: 'bot', label: '🤖 Telegram bot', href: 'https://t.me/bulldozer_ebot' },
+];
+// Bottom bar on phones: the app's seven tabs in the app's order, so someone
+// who uses both never has to look for anything (Madeira Ativa does the same).
+// Stats is the app's Statistics tab, which on the site is Macro; Top lights it
+// too, since both are cross-country rankings.
+const tabs = [
+  { ids: ['news', 'home'], label: 'Home', href: `${base}/`, d: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z' },
+  { ids: ['ask'], label: 'Ask AI', href: `${base}/ask/`, d: 'M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z' },
+  { ids: ['macro', 'explore'], label: 'Stats', href: `${base}/macro/`, d: 'M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z' },
+  { ids: ['markets'], label: 'Biz', href: `${base}/markets/`, d: 'M10 16v-1H3.01L3 19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-4h-7v1h-4zm10-9h-4.01V5l-2-2h-4l-2 2v2H4c-1.1 0-2 .9-2 2v3c0 1.11.89 2 2 2h6v-2h4v2h6c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-6 0h-4V5h4v2z' },
+  { ids: ['surveys'], label: 'Polls', href: `${base}/surveys/`, d: 'M18 13h-.68l-2 2h1.91L19 17H5l1.78-2h2.05l-2-2H6l-3 3v4c0 1.1.89 2 1.99 2H19c1.1 0 2-.89 2-2v-4l-3-3zm-1-5.05l-4.95 4.95-3.54-3.54 4.95-4.95L17 7.95zm-4.24-5.66L6.39 8.66c-.39.39-.39 1.02 0 1.41l4.95 4.95c.39.39 1.02.39 1.41 0l6.36-6.36c.39-.39.39-1.02 0-1.41L14.16 2.3c-.38-.4-1.01-.4-1.4-.01z' },
+  { ids: ['geo'], label: 'Geo', href: `${base}/geo/`, d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z' },
+  { ids: ['edu'], label: 'Edu', href: `${base}/edu/`, d: 'M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z' },
 ];
 const fullTitle = title ? `${title} · BullDozer` : 'BullDozer — Marketing Analytics & Research';
 const desc = description ?? 'Bulldoze the noise. Mine the signal. 188 public, parsed datasets — surveys, IMF & World Bank macro, markets and people. Every number sourced.';
@@ -143,6 +157,10 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     <meta name="apple-itunes-app" content="app-id=6797664814" />
   </head>
   <body>
+    <script is:inline>
+      // Inside an app's web view the app draws its own bar underneath.
+      if (/[?&](app|embed)=/.test(location.search) || /; wv\)/.test(navigator.userAgent)) document.documentElement.classList.add('in-app');
+    </script>
     <header class="site-header">
       <div class="container">
         <a class="brand" href={`${base}/`}>
@@ -284,6 +302,17 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
         </span>
       </div>
     </footer>
+    <nav class="tabbar" aria-label="Sections">
+      {tabs.map((t) => {
+        const on = t.ids.includes(active ?? '') || (isHome && t.ids.includes('home'));
+        return (
+          <a href={t.href} class={on ? 'on' : ''} aria-current={on ? 'page' : undefined}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d={t.d} /></svg>
+            <span>{t.label}</span>
+          </a>
+        );
+      })}
+    </nav>
 <!-- Install prompt — the reference copy, inserted before </body>.
      Source of truth: ~/Projects/_stores/ios-install-hint.html
 
