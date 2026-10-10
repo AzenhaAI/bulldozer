@@ -61,7 +61,7 @@ async function main() {
   const data = rows.filter((r) => periods.includes(r.period));
   if (data.length < 500) throw new Error(`only ${data.length} rows`);
   await writeDataset('macro', 'fiw-freedom-score', {
-    title: 'Freedom in the World Score', unit: 'score 0–100 (100 = most free)', valueLabel: 'FIW total score',
+    title: 'Freedom in the World Score', unit: 'score up to 100 (100 = most free)', valueLabel: 'FIW total score',
     changeMode: 'pp', topic: 'governance',
     summary: 'Aggregate political-rights and civil-liberties score for countries and territories, annual editions.',
     source: 'Freedom House — Freedom in the World', license: 'Free reuse with attribution (Freedom House)',

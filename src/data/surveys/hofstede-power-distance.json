@@ -2,7 +2,7 @@
   "meta": {
     "title": "Power Distance",
     "valueLabel": "Power Distance",
-    "unit": "index 0–100",
+    "unit": "index (mostly 0–100)",
     "changeMode": "pp",
     "topic": "attitudes",
     "summary": "How much less powerful members accept that power is distributed unequally. Hofstede’s cultural dimensions.",

@@ -90,7 +90,10 @@ export function similarCountries(target: CountryProfile, all: CountryProfile[], 
       const w = cp.get(slug);
       if (w !== undefined) { sum += (v - w) ** 2; k++; }
     }
-    if (k < 8) continue;
+    // A territory with a dozen indicators could "match" on those alone:
+    // Kazakhstan's closest were Zanzibar, Somaliland and New Caledonia. The
+    // comparison has to cover a real share of the target's own profile.
+    if (k < Math.max(8, Math.round(tp.size * 0.4))) continue;
     scored.push({ c, match: Math.max(0, 1 - Math.sqrt(sum / k)) });
   }
   return scored.sort((a, b) => b.match - a.match).slice(0, n);

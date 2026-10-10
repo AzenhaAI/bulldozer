@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { datasets } from '@data/datasets';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const DASH_TYPES = [
@@ -189,7 +190,7 @@ const RESOURCES = [
           <h3>2 · Normalise</h3>
           <p style="font-size:14px; margin:8px 0">
             Everything is reshaped into one long format: <code>country · period · value</code>, with ISO-3 codes and
-            a metadata block (source, licence, method, link). 136 datasets, one schema.
+            a metadata block (source, licence, method, link). {datasets.length} datasets, one schema.
           </p>
           <p class="meta">The long format is why every chart on the site works with every indicator.</p>
         </div>

@@ -23,6 +23,14 @@ const fmt = (v: number, unit: string) =>
   `${v.toLocaleString('en-US', { maximumFractionDigits: 1 })}${unit && unit.includes('%') ? '%' : ''}`;
 const find = (slug: string) => c.items.find((i) => i.slug === slug);
 
+// IMF series run past the last closed year into the IMF's own projections; a
+// projection shown with a bare year reads as a measured result. Same rule as
+// Ask AI: the current and the previous year are estimates.
+const thisYear = new Date().getUTCFullYear();
+const when = (it: { slug: string; period: string }) => {
+  const y = Number(String(it.period).match(/\d{4}/)?.[0] ?? 0);
+  return it.slug.startsWith('imf-') && y >= thisYear - 1 ? `${it.period} est.` : it.period;
+};
 // Headline stats — same recipe as the interactive Geo panel.
 const gdp = find('imf-gdp-per-capita-ppp') || find('imf-gdp-per-capita');
 const life = find('gapminder-life-expectancy');
@@ -33,7 +41,7 @@ const headline = [
   life && { label: 'Life expectancy', value: `${life.value.toFixed(1)} yrs`, rank: life },
   happy && { label: 'Happiness score', value: happy.value.toFixed(2), rank: happy },
   dem && { label: 'Liberal democracy', value: dem.value.toFixed(2), rank: dem },
-].filter(Boolean) as { label: string; value: string; rank: { rank: number; total: number } }[];
+].filter(Boolean) as { label: string; value: string; rank: { rank: number; total: number; slug: string; period: string } }[];
 
 const similar = similarCountries(c, all, 5);
 // Neighbours for deep interlinking (komoot lesson: linked pages = deeper sessions).
@@ -97,12 +105,12 @@ const jsonLd = {
       </p>
 
       {headline.length > 0 && (
-        <div class="grid cols-4" style="margin:14px 0 6px">
+        <div class="grid cols-4 country-head" style="margin:14px 0 6px">
           {headline.map((h) => (
             <div class="card">
               <p class="meta" style="margin:0">{h.label}</p>
               <h3 style="margin:4px 0 2px">{h.value}</h3>
-              <p class="meta" style="margin:0">#{h.rank.rank} of {h.rank.total}</p>
+              <p class="meta" style="margin:0">#{h.rank.rank} of {h.rank.total} · {when(h.rank)}</p>
             </div>
           ))}
         </div>
@@ -148,14 +156,14 @@ const jsonLd = {
       {byTopic.map((t) => (
         <div>
           <h3 style="font-size:13px;margin:18px 0 6px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px">{t.icon} {t.label}</h3>
-          <table class="data">
+          <table class="data ci-table">
             <tbody>
               {t.items.map((it) => (
                 <tr>
                   <td><a href={`${base}/dataset/${it.slug}`}>{it.title}</a></td>
                   <td class="num">{fmt(it.value, it.unit)}</td>
                   <td class="num" style="color:var(--text-dim)">#{it.rank}/{it.total}</td>
-                  <td class="num" style="color:var(--text-dim)">{it.period}</td>
+                  <td class="num" style="color:var(--text-dim)">{when(it)}</td>
                 </tr>
               ))}
             </tbody>

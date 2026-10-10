@@ -59,7 +59,7 @@ async function main() {
       .map((r) => ({ entity: r.Country, group: iso2region.get(r.iso) || 'Other', period: PERIOD, value: Math.round(Number(r[code])), iso: r.iso }));
     if (!data.length) continue;
     await writeDataset('survey', cfg.slug, {
-      title: cfg.title, valueLabel: cfg.title, unit: 'index 0–100', changeMode: 'pp', topic: 'attitudes',
+      title: cfg.title, valueLabel: cfg.title, unit: 'index (mostly 0–100)', changeMode: 'pp', topic: 'attitudes',
       summary: `${cfg.summary} Hofstede’s cultural dimensions.`,
       source: 'Hofstede cultural dimensions (G. Hofstede)', license: 'Public — Hofstede model',
       url: 'https://geerthofstede.com/research-and-vsm/dimension-data-matrix/', parsedAt: new Date().toISOString().slice(0, 10),

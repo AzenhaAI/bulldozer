@@ -59,12 +59,14 @@ const config = {
     cache.set(slug, ds.data); return ds.data;
   }
   const periodsOf = (data) => [...new Set(data.map((o) => o.period))].sort();
+  // Not .at(-1): it throws on iOS before 15.4 and stops the whole chart.
+  const lastOf = (a) => a[a.length - 1];
   const atYear = (data, p) => data.filter((o) => o.period === p && o.iso && o.value != null);
 
   el('siv-legend').innerHTML = Object.entries(REGION).map(([r, c]) => `<span class="lr"><span class="lr-dot" style="background:${c}"></span>${r}</span>`).join('');
 
   function beeswarm() {
-    const data = atYear(state.ds, periodsOf(state.ds).at(-1));
+    const data = atYear(state.ds, lastOf(periodsOf(state.ds)));
     const vals = data.map((o) => o.value), min = Math.min(...vals), max = Math.max(...vals);
     const sx = (v) => M.l + (v - min) / ((max - min) || 1) * PW;
     const cy = M.t + PH / 2;
@@ -80,11 +82,11 @@ const config = {
     for (let i = 0; i <= 4; i++) { const v = min + (max - min) * i / 4, x = sx(v); g += `<line x1="${x}" y1="${M.t}" x2="${x}" y2="${M.t + PH}" class="bub-grid"/><text x="${x}" y="${H - 14}" class="bub-axt" text-anchor="middle">${fmt(v)}</text>`; }
     g += pts.map((p) => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${R}" fill="${REGION[p.o.group] || REGION.Other}" fill-opacity="0.8" stroke="#0e0f11" stroke-width="0.6" data-i="${p.o.iso}"><title>${p.o.entity}: ${fmt(p.o.value)}</title></circle>`).join('');
     svg.innerHTML = g; svg._pts = pts.map((p) => ({ ...p.o, _x: p.x, _y: p.y }));
-    el('siv-note').textContent = `${data.length} countries · ${periodsOf(state.ds).at(-1)} · each dot is a country, position = ${titleOf(state.slug)}.`;
+    el('siv-note').textContent = `${data.length} countries · ${lastOf(periodsOf(state.ds))} · each dot is a country, position = ${titleOf(state.slug)}.`;
   }
 
   function slope() {
-    const ps = periodsOf(state.ds); const a = ps[0], b = ps.at(-1);
+    const ps = periodsOf(state.ds); const a = ps[0], b = ps[ps.length - 1];
     if (a === b) { svg.innerHTML = `<text x="${W / 2}" y="${H / 2}" class="bub-axlbl" text-anchor="middle">Single period only</text>`; el('siv-note').textContent = ''; return; }
     const A = new Map(atYear(state.ds, a).map((o) => [o.iso, o])), B = new Map(atYear(state.ds, b).map((o) => [o.iso, o]));
     const rows = [...A.keys()].filter((k) => B.has(k)).map((k) => ({ iso: k, name: A.get(k).entity, va: A.get(k).value, vb: B.get(k).value, group: A.get(k).group }));
@@ -125,7 +127,7 @@ const config = {
     el('siv-play').hidden = state.type !== 'race';
     if (state.type === 'beeswarm') beeswarm();
     else if (state.type === 'slope') slope();
-    else { state.raceYear = periodsOf(state.ds).at(-1); raceFrame(state.raceYear); }
+    else { state.raceYear = lastOf(periodsOf(state.ds)); raceFrame(state.raceYear); }
   }
 
   async function rebuild() { state.ds = await load(state.slug); render(); }

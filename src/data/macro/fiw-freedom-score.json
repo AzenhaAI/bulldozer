@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Freedom in the World Score",
-    "unit": "score 0–100 (100 = most free)",
+    "unit": "score up to 100 (100 = most free)",
     "valueLabel": "FIW total score",
     "changeMode": "pp",
     "topic": "governance",

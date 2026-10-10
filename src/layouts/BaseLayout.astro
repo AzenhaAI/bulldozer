@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import { datasets } from '@data/datasets';
+import { buildCountryIndex } from '@lib/countryIndex';
 
 interface Props {
   title?: string;
@@ -56,7 +58,11 @@ const tabs = [
   { ids: ['edu'], label: 'Edu', href: `${base}/edu/`, d: 'M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z' },
 ];
 const fullTitle = title ? `${title} · BullDozer` : 'BullDozer — Marketing Analytics & Research';
-const desc = description ?? 'Bulldoze the noise. Mine the signal. 188 public, parsed datasets — surveys, IMF & World Bank macro, markets and people. Every number sourced.';
+// Counts are read from the data, not typed: the typed ones said 188 and 130+
+// long after the catalogue passed 230.
+const nDatasets = datasets.length;
+const nCountries = buildCountryIndex().length;
+const desc = description ?? `Bulldoze the noise. Mine the signal. ${nDatasets} public, parsed datasets — surveys, IMF & World Bank macro, markets and people. Every number sourced.`;
 const canonical = new URL(Astro.url.pathname, 'https://azenha.ai').href;
 // Site-level entity markup, homepage only (Google reads WebSite/SearchAction from
 // the site root). The SearchAction declares the on-site search so Google can offer
@@ -195,7 +201,7 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     </header>
     <div class="srch-overlay" id="srch-overlay" hidden>
       <div class="srch-box" role="dialog" aria-label="Search">
-        <input type="search" id="srch-input" placeholder="Search 130+ datasets and 230 countries…" autocomplete="off" />
+        <input type="search" id="srch-input" placeholder={`Search ${nDatasets} datasets and ${nCountries} countries…`} autocomplete="off" />
         <div class="srch-results" id="srch-results"></div>
       </div>
     </div>

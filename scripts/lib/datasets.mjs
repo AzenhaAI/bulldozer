@@ -95,7 +95,13 @@ export function pickPeriods(counts, maxYear) {
  *  refused, so a bad upstream day can't destroy good data (see lib/guard.mjs).
  *  Sets process.exitCode on refusal — the parser finishes its other datasets,
  *  but the run ends red. */
+// Names some sources use with no ISO code beside them. Without one a row never
+// reaches the map or the country page: Eswatini sat out 18 series as
+// "Swaziland", Kosovo as itself.
+const ISO_BY_NAME = { Swaziland: 'SWZ', Eswatini: 'SWZ', Kosovo: 'XKX' };
+
 export async function writeDataset(kind, slug, meta, data) {
+  for (const r of data) if (!r.iso && ISO_BY_NAME[r.entity]) r.iso = ISO_BY_NAME[r.entity];
   const dir = join(ROOT, 'src', 'data', kind === 'macro' ? 'macro' : 'surveys');
   await mkdir(dir, { recursive: true });
   const dest = join(dir, `${slug}.json`);
