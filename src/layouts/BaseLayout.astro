@@ -119,6 +119,10 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="BullDozer" />
+    <!-- Chrome's "Add to home screen" shortcut (the icon with a Chrome badge)
+         took the page title, which the launcher cut to "BullDoz…"; this is the
+         name it should use. An installed app takes short_name from the manifest. -->
+    <meta name="application-name" content="BullDozer" />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
     <!-- Large previews are what makes a page eligible for Google Discover and for
