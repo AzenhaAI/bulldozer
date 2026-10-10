@@ -354,7 +354,7 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
   #a2hs strong{white-space:nowrap}
   #a2hs button{flex:none;border:0;border-radius:8px;color:inherit;cursor:pointer;
     font:inherit;background:rgba(255,255,255,.12)}
-  #a2hs-go{padding:7px 14px;font-weight:600;background:#2f7d5d;color:#fff}
+  #a2hs #a2hs-go{padding:7px 14px;font-weight:700;background:#ffb000;color:#1a1300;white-space:nowrap}
   #a2hs-go[hidden]{display:none}
   #a2hs-x{width:28px;height:28px;font-size:18px;line-height:1}
 </style>
@@ -366,11 +366,44 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     var go = document.getElementById('a2hs-go');
     var KEY = 'a2hs-dismissed';
 
-    var dismissed = false;
-    try { dismissed = localStorage.getItem(KEY) === '1'; } catch (e) {}
+    var ua = navigator.userAgent;
+    var iOS = /iPhone|iPod|iPad/.test(ua) ||
+              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     var installed = window.navigator.standalone === true ||
                     (window.matchMedia &&
                      window.matchMedia('(display-mode: standalone)').matches);
+    // Inside an app's web view the reader already has the app.
+    if (document.documentElement.classList.contains('in-app')) return;
+    // On Ask AI the banner would sit over the Ask button.
+    if (/\/ask\/?$/.test(location.pathname)) return;
+
+    // iPhone and iPad: the App Store app is the better install — offline,
+    // Ask AI, the same seven tabs — so offer it instead of Add to Home Screen,
+    // and offer it again to whoever already put the web version on their
+    // home screen. Its own dismissal: closing the old hint was not a no to this.
+    if (iOS) {
+      var AKEY = 'appstore-dismissed';
+      try { if (localStorage.getItem(AKEY) === '1') return; } catch (e) {}
+      txt.innerHTML = installed
+        ? 'You are using the web version. <strong>BullDozer Stats</strong> is in the App Store — faster, works offline.'
+        : '<strong>BullDozer Stats</strong> is in the App Store — faster, works offline, with Ask AI.';
+      go.textContent = 'Get the app';
+      go.hidden = false;
+      go.addEventListener('click', function () {
+        try { localStorage.setItem(AKEY, '1'); } catch (e) {}
+        location.href = 'https://apps.apple.com/app/id6797664814';
+      });
+      document.getElementById('a2hs-x').addEventListener('click', function () {
+        el.hidden = true;
+        try { localStorage.setItem(AKEY, '1'); } catch (e) {}
+      });
+      // Not immediately: a hint in the first second reads as an ad.
+      setTimeout(function () { el.hidden = false; }, 2500);
+      return;
+    }
+
+    var dismissed = false;
+    try { dismissed = localStorage.getItem(KEY) === '1'; } catch (e) {}
     if (dismissed || installed) return;
 
     document.getElementById('a2hs-x').addEventListener('click', function () {
@@ -401,16 +434,6 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
       try { localStorage.setItem(KEY, '1'); } catch (e) {}
     });
 
-    // iOS: no button exists, so point the way to it.
-    var ua = navigator.userAgent;
-    var iOS = /iPhone|iPod|iPad/.test(ua) ||
-              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    if (iOS) {
-      txt.innerHTML = 'Install this as an app: tap <strong>Share</strong>, ' +
-                      'then <strong>Add to Home Screen</strong>.';
-      // Not immediately: a hint in the first second reads as an ad.
-      setTimeout(function () { if (!deferred) el.hidden = false; }, 2500);
-    }
   })();
 </script>
   </body>
