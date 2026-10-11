@@ -25,7 +25,8 @@ const CSV = join('data', 'raw', 'pew', 'pew_ga2025_by_country.csv');
 const PARSED = new Date().toISOString().slice(0, 10);
 const META = {
   source: 'Pew Research Center (Global Attitudes Survey)',
-  license: 'Pew Research Center terms of use — country aggregates with attribution; Pew bears no responsibility for the analyses or interpretations presented here',
+  // Pew's dataset terms (section 13) require this disclaimer word for word.
+  license: 'Pew Research Center terms of use (survey dataset terms). Pew Research Center bears no responsibility for the analyses or interpretations of the data presented here. The opinions expressed herein, including any implications for policy, are those of the author and not of Pew Research Center.',
   url: 'https://www.pewresearch.org/global/',
   vintage: 'Spring 2025 Global Attitudes Survey, public international file (24 countries)',
 };
