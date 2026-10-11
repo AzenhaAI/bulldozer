@@ -12,8 +12,11 @@
  * - `review` is an internal note for the maintainer (possible conflict between
  *   the terms and how BullDozer uses the data). It is NOT rendered.
  * - Entries are matched in array order: the first entry whose `match` text
- *   appears in a dataset's meta.source wins, so specific entries (EPI, Fraser,
- *   GPI via QoG; TI, Maddison, PISA via OWID) come before the general ones.
+ *   appears in a dataset's meta.source wins, so specific entries (data.who.int
+ *   before WHO; EPI, Fraser, GPI via QoG; TI, Maddison, PISA via OWID) come
+ *   before the general ones.
+ * - A source BullDozer no longer publishes keeps its entry with `match: []`
+ *   and a `usedFor` that says so, until the owner removes it.
  */
 export interface Licence {
   /** Anchor id on /licences/. */
@@ -38,6 +41,7 @@ export interface Licence {
 }
 
 const CHECKED = '2026-10-11';
+const CHECKED_1012 = '2026-10-12';
 
 export const licences: Licence[] = [
   // ── International organisations ────────────────────────────────────
@@ -55,17 +59,19 @@ export const licences: Licence[] = [
   },
   {
     id: 'world-bank',
-    name: 'World Bank — Open Data, World Development Indicators, Global Findex',
+    name: 'World Bank — Open Data, World Development Indicators, Worldwide Governance Indicators, Global Findex',
     match: ['World Bank'],
     termsUrl: 'https://www.worldbank.org/ext/en/legal/terms-conditions/datasets',
-    licence: `CC BY 4.0, with the World Bank's additional terms for datasets.`,
+    licence: `CC BY 4.0, with the World Bank's additional terms for datasets. The data catalog records for World Development Indicators and Worldwide Governance Indicators each state "License: Creative Commons Attribution 4.0".`,
     citation: `The World Bank: Dataset name: Data source (if known).`,
-    note: `Do not imply that the World Bank sponsors or endorses this use. Global Findex figures are taken from the World Bank API, not from the Findex microdata.`,
+    note: `Do not imply that the World Bank sponsors or endorses this use. Global Findex figures are taken from the World Bank API, not from the Findex microdata. The governance estimates (control of corruption, government effectiveness, voice & accountability) and the health spending, education spending and infant mortality series were earlier taken from the QoG Standard Dataset; they now come straight from the World Bank API.`,
     urls: [
       'https://www.worldbank.org/ext/en/legal/terms-conditions/datasets',
       'https://datacatalog.worldbank.org/public-licenses',
+      'https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators',
+      'https://datacatalog.worldbank.org/search/dataset/0037712/World-Development-Indicators',
     ],
-    checked: CHECKED,
+    checked: CHECKED_1012,
   },
   {
     id: 'oecd',
@@ -89,20 +95,36 @@ export const licences: Licence[] = [
     checked: CHECKED,
   },
   {
+    id: 'who-data',
+    name: 'WHO — data.who.int (Global Health Observatory indicators)',
+    match: ['data.who.int'],
+    termsUrl: 'https://data.who.int/about/data/terms-and-conditions',
+    licence: `CC BY 4.0: "Unless specifically indicated otherwise, these Datasets are provided to you under a Creative Commons Attribution 4.0 International License (CC BY 4.0), with the additional terms below." Each indicator page's metadata also lists "Attribution 4.0 International (CC BY 4.0)".`,
+    citation: `World Health Organization {YEAR} data.who.int, {ITEM_NAME} [{ITEM_TYPE}]. {URL} (Accessed on {ACCESS DATE})`,
+    note: `Used for alcohol, tobacco, obesity, hypertension, road traffic deaths, the UHC service coverage index and premature NCD mortality. Values are read from the feed the data.who.int indicator pages display and match the GHO API figures published here before. WHO does not endorse BullDozer or its use of the data.`,
+    urls: [
+      'https://data.who.int/about/data/terms-and-conditions',
+      'https://data.who.int/indicators/i/EF38E6A/EE6F72A',
+      'https://data.who.int/indicators',
+    ],
+    checked: CHECKED_1012,
+    review: `Additional terms on the same page: "You shall not attempt to de-anonymise the Datasets or use the Datasets in a manner that falsifies or misrepresents their content."; "No WHO endorsement — You shall not ... state or imply that WHO endorses, or is affiliated with, you"; "No use of WHO name and emblem — Without the prior written approval of WHO, you will not use the name (or any abbreviation thereof) and/or emblem of the World Health Organization." (we use the name only in attribution, which the licence requires; the who- slug prefix and "WHO" in source lines are attribution, not branding); disputes go to conciliation/UNCITRAL arbitration.`,
+  },
+  {
     id: 'who',
-    name: 'WHO — Global Health Observatory and Global Health Estimates',
+    name: 'WHO — Global Health Estimates and GHO API series not on data.who.int',
     match: ['WHO Global Health'],
     termsUrl: 'https://www.who.int/about/policies/publishing/data-policy/terms-and-conditions',
-    licence: `WHO terms of use for WHO datasets (GHO API, who.int). WHO publications are CC BY-NC-SA 3.0 IGO; datasets on data.who.int are CC BY 4.0.`,
+    licence: `WHO "Terms and conditions of use for WHO data compilations, aggregations, evaluations and analyses" (datasets published on www.who.int): a royalty-free right to use, reproduce and distribute the Datasets "for public health purposes".`,
     citation: `WHO, title of dataset, year, date of access, acknowledgement of the country or countries having provided the underlying data.`,
-    note: `Global Health Estimates: "Global Health Estimates 2021: Deaths by Cause, Age, Sex, by Country and by Region, 2000-2021. Geneva, World Health Organization; 2024." BullDozer shows WHO figures as published, without alteration beyond formatting.`,
+    note: `Global Health Estimates: "Global Health Estimates 2021: Deaths by Cause, Age, Sex, by Country and by Region, 2000-2021. Geneva, World Health Organization; 2024." Also covers three GHO series data.who.int does not carry: the age-standardised suicide rate, the age-standardised NCD death rate and adult mortality (15–60). BullDozer shows WHO figures as published; cause-of-death shares are computed from WHO's death counts.`,
     urls: [
       'https://www.who.int/about/policies/publishing/data-policy/terms-and-conditions',
-      'https://data.who.int/about/data/terms-and-conditions',
-      'https://www.who.int/about/policies/publishing/copyright',
+      'https://www.who.int/data/gho/data/themes/mortality-and-global-health-estimates/ghe-leading-causes-of-death',
+      'https://www.who.int/about/policies/terms-of-use',
     ],
-    checked: CHECKED,
-    review: `Older who.int dataset terms (which the GHO API falls under) grant use "for public health purposes" and say: "Any other alteration or modification of the Datasets (including abbreviations, additions, or deletions) may be made only with the prior written authorization of WHO." and "Datasets shall not be used for or in conjunction with the promotion of a commercial enterprise and/or its product(s) or service(s)". Our meta.license says CC BY-NC-SA 3.0 IGO, which is the licence of WHO publications, not datasets; the CC BY-NC-SA adaptation disclaimer is for adapted publications. Lowest-risk fix: source the indicators from data.who.int (CC BY 4.0).`,
+    checked: CHECKED_1012,
+    review: `Still under the who.int dataset terms: "Any other alteration or modification of the Datasets (including abbreviations, additions, or deletions) may be made only with the prior written authorization of WHO." and "Datasets shall not be used for or in conjunction with the promotion of a commercial enterprise and/or its product(s) or service(s)". Applies to who-ghe-* (11 series, shares computed from the GHE 2021 workbook) and who-suicide, who-ncd-mortality-rate, who-adult-mortality (GHO API; checked 2026-10-12 that data.who.int has only the crude suicide rate and neither of the other two). Their meta.license still says CC BY-NC-SA 3.0 IGO, which is the licence of WHO publications, not of these datasets. The GHE 2021 workbook (ghe2021_deaths_bycountry_2021.xlsx) is no longer linked from the GHE page, which now offers GHE 2023 (2000–2023, published 2026; "not comparable to previously-released WHO estimates") as cdn.who.int xlsx files with no dataset licence of their own — so the who.int dataset terms above apply. Options: ask WHO for written authorization, or drop these series.`,
   },
   {
     id: 'unhcr',
@@ -175,9 +197,9 @@ export const licences: Licence[] = [
     licence: `CC BY 4.0 for the CPI and datasets (other website content is CC BY-ND 4.0).`,
     citation: `CONTENT TITLE (YEAR) by Transparency International is licensed under CC BY 4.0`,
     disclaimer: `Source: Transparency International`,
-    note: `Data reach BullDozer via Our World in Data ("Transparency International (2024) – with minor processing by Our World in Data"). Every change to the data must be indicated.`,
-    urls: ['https://www.transparency.org/en/copyright-enquiries', 'https://www.transparency.org/en/cpi/2024'],
-    checked: CHECKED,
+    note: `Two CPI series: one via Our World in Data ("Transparency International (2024) – with minor processing by Our World in Data"), and one read from TI's own results workbook (CPI2025_Results.xlsx, sheet "CPI Timeseries 2012 - 2025"), which replaced the earlier QoG copy. Every change to the data must be indicated.`,
+    urls: ['https://www.transparency.org/en/copyright-enquiries', 'https://www.transparency.org/en/cpi/2025', 'https://images.transparencycdn.org/images/CPI2025_Results.xlsx'],
+    checked: CHECKED_1012,
   },
   {
     id: 'maddison',
@@ -210,7 +232,7 @@ export const licences: Licence[] = [
     note: `Environmental Performance Index is a registered trademark of Yale University.`,
     urls: ['https://epi.yale.edu/'],
     checked: CHECKED,
-    review: `NonCommercial + ShareAlike (CC BY-NC-SA 4.0); publisher is a company. Also taken via QoG, whose terms forbid redistribution and for-profit use.`,
+    review: `Not moved off QoG (2026-10-12) — owner to decide. epi.yale.edu footer: "This work is under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License." NonCommercial + ShareAlike; publisher is a company. The series is still the QoG copy of EPI 2024, and QoG's terms forbid redistribution and for-profit use.`,
   },
   {
     id: 'fraser',
@@ -221,7 +243,7 @@ export const licences: Licence[] = [
     citation: `James Gwartney, Robert Lawson, and Ryan Murphy (2025). Economic Freedom Dataset, published in Economic Freedom of the World: 2025 Annual Report. Fraser Institute. <www.fraserinstitute.org/economic-freedom/dataset>.`,
     urls: ['https://www.libinst.ch/wp-content/uploads/2025/09/EFOTW-2025.pdf', 'https://efotw.org/node/10406'],
     checked: CHECKED,
-    review: `"These data files are provided for free public download. Users wishing to share the data should direct other users to download it from this site." (efotw.org/node/10406). Also taken via QoG (no redistribution / for-profit use).`,
+    review: `Not moved off QoG (2026-10-12) — owner to decide. "These data files are provided for free public download. Users wishing to share the data should direct other users to download it from this site." (efotw.org/node/10406, re-read 2026-10-12) and the report's "Copyright © 2025 by the Fraser Institute. All rights reserved." Still the QoG copy (no redistribution / for-profit use).`,
   },
   {
     id: 'gpi',
@@ -232,7 +254,7 @@ export const licences: Licence[] = [
     citation: `No citation format on the IEP pages read; credit Institute for Economics & Peace, Global Peace Index.`,
     urls: ['https://www.economicsandpeace.org/consulting/data-licensing/', 'https://www.visionofhumanity.org/public-release-data/'],
     checked: CHECKED,
-    review: `"Any use of IEP data by an organisation other than a non-profit or research institution is considered commercial use. This includes all private and public companies. Commercial organisations using IEP data must purchase a Commercial Licence before downloading any datasets."`,
+    review: `Not moved off QoG (2026-10-12) — owner to decide. "Any use of IEP data by an organisation other than a non-profit or research institution is considered commercial use. This includes all private and public companies. Commercial organisations using IEP data must purchase a Commercial Licence before downloading any datasets." (re-read 2026-10-12). Still the QoG copy (no redistribution / for-profit use).`,
   },
   {
     id: 'qog',
@@ -241,21 +263,22 @@ export const licences: Licence[] = [
     termsUrl: 'https://www.gu.se/en/quality-government/qog-data/data-downloads/standard-dataset',
     licence: `QoG terms: free of charge, for "analysis, graphs, teaching, and other academic-related and non-commercial purposes". Each variable keeps its original source's licence.`,
     citation: `Teorell, Jan, Aksel Sundström, Sören Holmberg, Bo Rothstein, Natalia Alvarado Pachon, Victor Saidi Phiri, Chuwei Chen & Zhen Liu. 2026. The Quality of Government Standard Dataset, version Jan26. University of Gothenburg: The Quality of Government Institute, https://www.gu.se/en/quality-government. https://doi:10.18157/qogstdjan26`,
-    note: `QoG asks users to cite both the original source of each variable and the QoG dataset.`,
+    note: `QoG asks users to cite both the original source of each variable and the QoG dataset. Only Freedom House status (and, under their own entries, EPI, Fraser and the Global Peace Index) still come from QoG; the World Bank governance and development series and the CPI are now taken from their producers.`,
     urls: ['https://www.gu.se/en/quality-government/qog-data/data-downloads/standard-dataset'],
-    checked: CHECKED,
-    review: `"We do not allow other uses of these data including but not limited to redistribution, commercialization and other for-profit usage."`,
+    checked: CHECKED_1012,
+    review: `"We do not allow other uses of these data including but not limited to redistribution, commercialization and other for-profit usage." Still QoG-sourced after 2026-10-12: qog-fh-status (Freedom House: "All use of Freedom House content for commercial purposes must be formally approved by Freedom House prior to publication or any other use."), epi-environmental-performance, fraser-economic-freedom, gpi-global-peace — not moved because their producers' terms also restrict our use; owner to decide. Moved to producers: qog-wbgi-cce/gee/vae, qog-wdi-chexppgdp/expedu/mortinf (World Bank), qog-ti-cpi (Transparency International). Retired: qog-rsf-pfi (RSF) and the QoG results dashboard (moved to data/retired/).`,
   },
   {
     id: 'v-dem',
     name: 'V-Dem — Varieties of Democracy',
     match: ['V-Dem'],
     termsUrl: 'https://www.v-dem.net/data/the-v-dem-dataset/',
-    licence: `CC BY-SA 4.0 — free to use, adapt and share, including commercially, with attribution; derivative products under the same licence.`,
+    licence: `CC BY-SA 4.0: "anyone is free to use, adapt, and share the data, including for commercial purposes, provided that appropriate attribution is given and that any derivative products are distributed under the same license terms."`,
     citation: `Coppedge, Michael, John Gerring, Carl Henrik Knutsen, Staffan I. Lindberg, Jan Teorell, David Altman, Fabio Angiolillo, Michael Bernhard, Agnes Cornell, M. Steven Fish, Linnea Fox, Lisa Gastaldi, Haakon Gjerløw, Adam Glynn, Ana Good God, Allen Hicken, Katrin Kinzelbach, Joshua Krusell, Kyle L. Marquardt, Kelly McMann, Valeriya Mechkova, Juraj Medzihorsky, Anja Neundorf, Pamela Paxton, Daniel Pemstein, Josefine Pernes, Johannes von Römer, Brigitte Seim, Rachel Sigman, Svend-Erik Skaaning, Jeffrey Staton, Aksel Sundström, Marcus Tannenberg, Eitan Tzelgov, Yi-ting Wang, Tore Wig, Steven Wilson and Daniel Ziblatt. 2026. ”V-Dem [Country-Year/Country-Date] Dataset v16” Varieties of Democracy (V-Dem) Project. https://doi.org/10.23696/vdemds26.`,
     note: `BullDozer's V-Dem-derived figures are shared under the same licence, CC BY-SA 4.0.`,
+    usedFor: `democracy indices, and media freedom (freedom of expression and alternative sources of information; government censorship effort — media) in place of the RSF World Press Freedom Index`,
     urls: ['https://www.v-dem.net/data/the-v-dem-dataset/'],
-    checked: CHECKED,
+    checked: CHECKED_1012,
   },
   {
     id: 'freedom-house',
@@ -271,13 +294,15 @@ export const licences: Licence[] = [
   {
     id: 'rsf',
     name: 'RSF — World Press Freedom Index',
-    match: ['RSF World Press Freedom'],
+    // No longer published (2026-10-12); the retired files are in data/retired/.
+    match: [],
+    usedFor: 'nothing since 12 October 2026 — retired and replaced by V-Dem media freedom indicators',
     termsUrl: 'https://rsf.org/en/gcu',
     licence: `No open licence. RSF General Conditions of Use: all rights reserved.`,
     citation: `No citation format published by RSF; credit "Reporters Without Borders (RSF), World Press Freedom Index".`,
     urls: ['https://rsf.org/en/gcu', 'https://rsf.org/en/index'],
     checked: CHECKED,
-    review: `"Any total or partial reproduction or representation of the RWB site or elements thereof is strictly forbidden without RWB’s explicit prior consent. Any withdrawal or any re-use by means of permanent or temporary transfer of all or part of the content of any data on this site, by any means or in any form, is strictly forbidden."`,
+    review: `Retired 2026-10-12 (rsf-press-freedom and qog-rsf-pfi moved to data/retired/; parse_rsf.mjs writes nothing). Reason: "Any total or partial reproduction or representation of the RWB site or elements thereof is strictly forbidden without RWB’s explicit prior consent. Any withdrawal or any re-use by means of permanent or temporary transfer of all or part of the content of any data on this site, by any means or in any form, is strictly forbidden."`,
   },
   {
     id: 'big-mac',

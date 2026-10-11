@@ -7,7 +7,7 @@
     "topic": "health",
     "summary": "Age-standardised suicide mortality rate per 100,000 population, both sexes. WHO Global Health Observatory.",
     "source": "WHO Global Health Observatory",
-    "license": "CC BY-NC-SA 3.0 IGO",
+    "license": "WHO terms of use for datasets (who.int): for public health purposes; see azenha.ai/bulldozer/licences",
     "url": "https://www.who.int/data/gho",
     "parsedAt": "2026-10-05",
     "kind": "macro"

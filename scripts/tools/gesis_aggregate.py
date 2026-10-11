@@ -62,6 +62,9 @@ ISSP = {
 EB = {
     'ZA9130': ('2025-autumn', {
         'life_satisfied': ('d70', [1, 2]),
+        # Our 2024 life-satisfaction series has "don't know" (code 5) outside
+        # the base; this variant continues it.
+        'life_satisfied_sub': ('d70', [1, 2], [5]),
         'country_right_direction': ('d73_1', [1]),
         'trust_eu': ('qa6_9', [1]),
         'trust_national_govt': ('qa6_7', [1]),
@@ -69,6 +72,7 @@ EB = {
     }),
     'ZA9144': ('2026-spring', {
         'life_satisfied': ('d70', [1, 2]),
+        'life_satisfied_sub': ('d70', [1, 2], [5]),
         'country_right_direction': ('d73_1', [1]),
         'trust_eu': ('qa6_12', [1]),
         'trust_national_govt': ('qa6_10', [1]),
@@ -90,9 +94,12 @@ def shares(df, weight, items, keep_negative_base):
     rows = []
     for cc, g in sorted(df.groupby('cc')):
         row = {'iso2': cc, 'respondents': len(g)}
-        for col, (var, yes) in items.items():
+        for col, spec in items.items():
+            var, yes = spec[0], spec[1]
+            dropped = spec[2] if len(spec) > 2 else []
             s = g[var]
             base = s.notna() if keep_negative_base else (s.notna() & (s >= 0))
+            base = base & ~s.isin(dropped)
             n = int(base.sum())
             row[col + '_n'] = n
             w = g[weight]
@@ -111,7 +118,7 @@ def write(path, rows, extra):
 
 
 for study, (year, weight, items) in ISSP.items():
-    cols = ['c_alphan', weight] + [v for v, _ in items.values()]
+    cols = ['c_alphan', weight] + sorted({spec[0] for spec in items.values()})
     df, _ = pyreadstat.read_sav(find(study), usecols=cols, apply_value_formats=False)
     df['cc'] = df['c_alphan'].astype(str).str[:2]
     rows = shares(df, weight, items, keep_negative_base=False)
@@ -120,7 +127,7 @@ for study, (year, weight, items) in ISSP.items():
     print(f'{study} ISSP {year}: {len(rows)} countries -> {out.name}')
 
 for study, (wave, items) in EB.items():
-    cols = ['isocntry', 'w1'] + [v for v, _ in items.values()]
+    cols = ['isocntry', 'w1'] + sorted({spec[0] for spec in items.values()})
     df, _ = pyreadstat.read_sav(find(study), usecols=cols, apply_value_formats=False)
     df = df[~df['isocntry'].astype(str).str.startswith('CY-TCC')].copy()
     df['cc'] = df['isocntry'].astype(str).str[:2]

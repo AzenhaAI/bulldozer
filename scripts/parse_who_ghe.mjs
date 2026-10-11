@@ -71,7 +71,7 @@ async function main() {
   if (!all) throw new Error('All Causes row (GHE code 0) not found');
 
   const WHO = {
-    source: 'WHO Global Health Estimates 2021', license: 'CC BY-NC-SA 3.0 IGO',
+    source: 'WHO Global Health Estimates 2021', license: 'WHO terms of use for datasets (who.int): for public health purposes; see azenha.ai/bulldozer/licences',
     url: 'https://www.who.int/data/gho/data/themes/mortality-and-global-health-estimates/ghe-leading-causes-of-death',
     vintage: '2021 estimates, published June 2024',
     method: 'WHO estimate. Share of all deaths, both sexes, all ages. WHO grades each country\'s death-registration data from 1 (complete) to 4 (none, fully modelled); the grade is stored per country as "grade".',

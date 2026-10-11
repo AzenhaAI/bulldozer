@@ -36,21 +36,17 @@ const SOURCES = [
     },
   },
   {
-    // Governance indicators only. HDI comes from Gapminder; electoral/liberal
-    // democracy from V-Dem — those QoG copies are dropped to avoid duplicates.
+    // QoG's terms forbid redistribution, so its series now come from their
+    // original producers (scripts/parse_qog_originals.mjs: World Bank WGI/WDI,
+    // Transparency International). The QoG copy of RSF's index is retired with
+    // RSF (data/retired/). Only Freedom House status is still read here: its
+    // producer's terms need approval for commercial use too, so moving it would
+    // not help — left for the owner to decide (see src/data/licences.ts).
     tag: 'QoG', kind: 'survey', file: join(SURV, 'QoG_Quality_of_Government', 'qog_ts_tidy.csv'),
     source: 'Quality of Government Institute (University of Gothenburg)', license: 'Open — academic use',
     url: 'https://www.gu.se/en/quality-government/qog-data',
     indicators: {
-      ti_cpi: pp('Corruption Perceptions Index', '0–100', 1),
       fh_status: pp('Freedom House Status', '1=free…3=not', 2),
-      wbgi_cce: pp('Control of Corruption', 'estimate', 2),
-      wbgi_gee: pp('Government Effectiveness', 'estimate', 2),
-      wbgi_vae: pp('Voice & Accountability', 'estimate', 2),
-      rsf_pfi: pp('Press Freedom (RSF)', 'score', 1),
-      wdi_chexppgdp: pp('Health Spending', '% of GDP', 1),
-      wdi_expedu: pp('Education Spending', '% of GDP', 1),
-      wdi_mortinf: pct('Infant Mortality', 'per 1k births', 1),
     },
   },
   {

@@ -37,7 +37,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const DASH: Record<string, string> = {
   'wvs-': 'wvs', 'afro-': 'afrobarometer', 'wgm-': 'wellcome', 'wrp-': 'wrp',
   'sdr2-': 'sdr2', 'v-dem-': 'vdem', 'whr-': 'whr', 'gapminder-': 'gapminder',
-  'qog-': 'qog', 'dhs-': 'dhs', 'lb-': 'latinobarometro',
+  'dhs-': 'dhs', 'lb-': 'latinobarometro',
   'eb-': 'eurobarometer', 'issp-': 'issp', 'evs-': 'evs', 'ab-': 'arabbarometer', 'rlms-': 'rlms',
 };
 const dashFile = Object.entries(DASH).find(([p]) => ds.slug.startsWith(p))?.[1];

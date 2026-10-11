@@ -1,6 +1,16 @@
 /**
  * RSF (Reporters Without Borders) — World Press Freedom Index.
  *   node scripts/parse_rsf.mjs
+ *
+ * RETIRED 2026-10-12: no longer run (not in run_parsers.mjs) and writes
+ * nothing. RSF's General Conditions of Use forbid reuse: "Any withdrawal or any
+ * re-use by means of permanent or temporary transfer of all or part of the
+ * content of any data on this site, by any means or in any form, is strictly
+ * forbidden." (https://rsf.org/en/gcu). The last published file is kept in
+ * data/retired/rsf-press-freedom.json; media freedom now comes from V-Dem
+ * (v-dem-v2x-freexp-altinf via parse_tidy.mjs, v-dem-v2mecenefm via
+ * parse_vdem_media.mjs). The code below is kept for reference.
+ *
  * Official per-year CSVs from rsf.org. Semicolon-separated with decimal
  * commas, no quoting; the score column is named `Score` or `Score <year>`
  * depending on the edition. RSF's methodology changed in 2022, so we start
@@ -25,6 +35,9 @@ async function iso3Region() {
 }
 
 async function main() {
+  console.log('– RSF World Press Freedom Index: retired, nothing written (see the header).');
+  return;
+  // eslint-disable-next-line no-unreachable
   console.log('RSF World Press Freedom Index →');
   const region = await iso3Region();
   const data = [];
