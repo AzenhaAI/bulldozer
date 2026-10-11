@@ -38,7 +38,9 @@ const EXCLUDE = new Set(['CUB']);
 const PARSED = new Date().toISOString().slice(0, 10);
 const META = {
   source: 'AmericasBarometer (LAPOP Lab)',
-  license: 'LAPOP Lab, Vanderbilt University — published as country aggregates; the survey data are not redistributed',
+  // LAPOP Lab Datasets Usage Agreement (https://ddl3.americasbarometer.org/): "All publications and
+  // outputs using LAPOP Lab data must include the following acknowledgment" — kept word for word.
+  license: 'LAPOP Lab, Vanderbilt University — published as country aggregates; the survey data are not redistributed. These data were supplied by LAPOP Lab at Vanderbilt University, which takes no responsibility for any interpretation of the data.',
   url: 'https://www.vanderbilt.edu/cgd/americasbarometer/',
   vintage: 'AmericasBarometer Grand Merge 2004–2023 (free, v1.0) and 2025/26 merged file (v1.0)',
 };

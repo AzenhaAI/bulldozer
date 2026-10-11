@@ -7,7 +7,7 @@
     "topic": "economy",
     "summary": "Number of companies headquartered in each country that appear in the Forbes Global 2000 list of the world’s largest public companies (2023).",
     "source": "Forbes Global 2000 (via Wikipedia)",
-    "license": "CC BY-SA (Wikipedia aggregate)",
+    "license": "CC BY-SA 4.0 (Wikipedia aggregate; https://creativecommons.org/licenses/by-sa/4.0/)",
     "url": "https://www.forbes.com/lists/global2000/",
     "parsedAt": "2026-06-29",
     "kind": "macro"

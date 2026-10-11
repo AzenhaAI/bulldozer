@@ -50,7 +50,9 @@ async function main() {
     summary: 'Perceived public-sector corruption as scored by experts and business surveys; higher means cleaner.',
     // 'via OWID', not the full name — the OWID catalogue card collects
     // datasets by substring match, and this belongs to the TI card
-    source: 'Transparency International CPI (via OWID)', license: 'CC BY 4.0',
+    source: 'Transparency International CPI (via OWID)',
+    // TI asks that datasets be attributed as "Source: Transparency International": https://www.transparency.org/en/copyright-enquiries
+    license: 'CC BY 4.0. Source: Transparency International',
     url: 'https://www.transparency.org/en/cpi', parsedAt: new Date().toISOString().slice(0, 10),
   }, data);
 }

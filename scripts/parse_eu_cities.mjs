@@ -134,7 +134,9 @@ async function main() {
   const out = {
     title: 'Best cities to live in Europe',
     source: 'Eurostat — Perception survey on quality of life in European cities',
-    license: 'CC BY 4.0 (Eurostat reuse policy)',
+    // Eurostat copyright notice: modified data must say so, with "a disclaimer regarding the
+    // non-responsibility of Eurostat" (https://ec.europa.eu/eurostat/web/main/help/copyright-notice).
+    license: 'CC BY 4.0 (Eurostat reuse policy). Ranking computed by BullDozer from Eurostat data; Eurostat has no responsibility for it.',
     url: 'https://ec.europa.eu/eurostat/web/cities/data/database',
     year: YEAR, parsedAt: new Date().toISOString().slice(0, 10), metrics,
   };

@@ -20,7 +20,8 @@ const WHR_CSV = process.env.WHR_CSV || join(homedir(), 'Documents', 'tableau_dat
 
 const GAPMINDER_SRC = {
   source: 'Gapminder (open data, ddf)',
-  license: 'CC BY 4.0',
+  // Gapminder requires this citation for changed material: https://www.gapminder.org/free-material/
+  license: 'CC BY 4.0. Based on free material from GAPMINDER.ORG, CC-BY LICENSE',
   url: 'https://www.gapminder.org/data/',
   parsedAt: new Date().toISOString().slice(0, 10),
 };

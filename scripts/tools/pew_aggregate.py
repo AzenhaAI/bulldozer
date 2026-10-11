@@ -1,6 +1,11 @@
 """Pew Research Center Global Attitudes (Spring 2025) -> one row per country.
 
     /usr/bin/python3 scripts/tools/pew_aggregate.py "<...> Dataset.sav" > data/raw/pew/pew_ga2025_by_country.csv
+    /usr/bin/python3 scripts/tools/pew_aggregate.py "<2024 .sav>" > data/raw/pew/pew_ga2024_by_country.csv   (and 2023, 2022)
+
+Earlier waves ask a subset under the same variable names and codes (checked
+per wave against that wave's topline). Items a wave did not ask come out
+empty. Australia's leader items are *_dk in 2025 and *_aus in 2023.
 
 Run once per wave, locally (needs pyreadstat). The .sav is downloaded from
 pewresearch.org with an account under Pew's terms of use; it is never
@@ -28,8 +33,9 @@ SPEC = {
     'fav_nato': ('fav_nato', [1, 2], None),
     'fav_russia': ('fav_russia', [1, 2], None),
     'conf_trump': ('confid_trump', [1, 2], 'confid_trump_dk'),
-    'conf_xi': ('confid_xi', [1, 2], 'confid_xi_dk'),
-    'conf_putin': ('confid_putin', [1, 2], 'confid_putin_dk'),
+    'conf_biden': ('confid_biden', [1, 2], 'confid_biden_aus'),
+    'conf_xi': ('confid_xi', [1, 2], ('confid_xi_dk', 'confid_xi_aus')),
+    'conf_putin': ('confid_putin', [1, 2], ('confid_putin_dk', 'confid_putin_aus')),
     'god_needed_moral': ('believe_god', [2], None),
     'homosexuality_unacceptable': ('moral_homosexuality', [2], None),
     'climate_major_threat': ('intthreat_climatechange', [1], None),
@@ -42,12 +48,16 @@ MIN_N = 300
 ISO = {'Canada': 'CAN', 'France': 'FRA', 'Germany': 'DEU', 'Greece': 'GRC', 'Hungary': 'HUN', 'Italy': 'ITA',
        'Netherlands': 'NLD', 'Poland': 'POL', 'Spain': 'ESP', 'Sweden': 'SWE', 'UK': 'GBR', 'Australia': 'AUS',
        'India': 'IND', 'Indonesia': 'IDN', 'Japan': 'JPN', 'South Korea': 'KOR', 'Israel': 'ISR', 'Turkey': 'TUR',
-       'Kenya': 'KEN', 'Nigeria': 'NGA', 'South Africa': 'ZAF', 'Argentina': 'ARG', 'Brazil': 'BRA', 'Mexico': 'MEX'}
+       'Kenya': 'KEN', 'Nigeria': 'NGA', 'South Africa': 'ZAF', 'Argentina': 'ARG', 'Brazil': 'BRA', 'Mexico': 'MEX',
+       'Bangladesh': 'BGD', 'Belgium': 'BEL', 'Chile': 'CHL', 'Colombia': 'COL', 'Ghana': 'GHA', 'Malaysia': 'MYS',
+       'Peru': 'PER', 'Philippines': 'PHL', 'Singapore': 'SGP', 'Sri Lanka': 'LKA', 'Thailand': 'THA', 'Tunisia': 'TUN'}
 
+_, head = pyreadstat.read_sav(sys.argv[1], metadataonly=True)
+have = set(head.column_names)
+fallbacks = lambda fb: () if not fb else (fb,) if isinstance(fb, str) else fb
 cols = {'country', 'weight'}
 for q, _, fb in SPEC.values():
-    cols.add(q)
-    if fb: cols.add(fb)
+    cols.update(c for c in (q, *fallbacks(fb)) if c in have)
 df, meta = pyreadstat.read_sav(sys.argv[1], usecols=sorted(cols))
 names = meta.variable_value_labels['country']
 
@@ -57,9 +67,10 @@ for code, g in sorted(df.groupby('country')):
     name = names[code]
     row = {'iso3': ISO[name], 'name': name, 'respondents': len(g)}
     for key, (q, yes, fb) in SPEC.items():
-        s = g[q]
-        if fb and s.notna().sum() == 0:
-            s = g[fb]
+        s = g[q] if q in g else g['weight'] * float('nan')
+        for alt in fallbacks(fb):
+            if s.notna().sum() == 0 and alt in g:
+                s = g[alt]
         asked = s.notna()
         n = int(asked.sum())
         row[key + '_n'] = n

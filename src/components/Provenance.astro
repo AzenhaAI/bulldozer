@@ -1,7 +1,10 @@
 ---
 import type { DatasetMeta } from '@data/datasets';
+import { licenceForSource } from '@data/licences';
 interface Props { meta: DatasetMeta }
 const { meta } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const lic = licenceForSource(meta.source);
 ---
 <div class="prov">
   <span class="pill">Source: <b>{meta.source}</b></span>
@@ -9,4 +12,5 @@ const { meta } = Astro.props;
   <span class="pill">Unit: <b>{meta.unit}</b></span>
   <span class="pill">Parsed: <b>{meta.parsedAt}</b></span>
   <span class="pill"><a href={meta.url} target="_blank" rel="noopener">Open source ↗</a></span>
+  <span class="pill"><a href={`${base}/licences/${lic ? `#${lic.id}` : ''}`}>Licence &amp; attribution</a></span>
 </div>

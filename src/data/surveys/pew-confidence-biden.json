@@ -1,0 +1,544 @@
+{
+  "meta": {
+    "source": "Pew Research Center (Global Attitudes Survey)",
+    "license": "Pew Research Center terms of use (survey dataset terms). Pew Research Center bears no responsibility for the analyses or interpretations of the data presented here. The opinions expressed herein, including any implications for policy, are those of the author and not of Pew Research Center.",
+    "url": "https://www.pewresearch.org/global/",
+    "vintage": "Spring Global Attitudes Surveys 2022–2025, public international files",
+    "kind": "surveys",
+    "title": "Confidence in Joe Biden (Pew)",
+    "unit": "%",
+    "changeMode": "pp",
+    "valueLabel": "A lot of or some confidence in Biden on world affairs (%)",
+    "topic": "attitudes",
+    "summary": "Share with a lot of or some confidence in US President Joe Biden to do the right thing regarding world affairs, asked while he was in office (2022–2024). Pew Research Center, Spring 2022, 2023, 2024.",
+    "method": "Weighted by Pew's weight. As in Pew's published tables, \"don't know\" and refused are part of the base; only people not asked are left out. Matches Pew's topline to the point. Counted: a lot or some (Australia: its own variant).",
+    "parsedAt": "2026-10-11"
+  },
+  "data": [
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2022",
+      "value": 51.9,
+      "iso": "AUS"
+    },
+    {
+      "entity": "Belgium",
+      "group": "Europe",
+      "period": "2022",
+      "value": 60.5,
+      "iso": "BEL"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2022",
+      "value": 61.1,
+      "iso": "CAN"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2022",
+      "value": 53.5,
+      "iso": "FRA"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2022",
+      "value": 64.3,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2022",
+      "value": 41,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2022",
+      "value": 31.5,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2022",
+      "value": 59.8,
+      "iso": "ISR"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2022",
+      "value": 44.6,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2022",
+      "value": 62.2,
+      "iso": "JPN"
+    },
+    {
+      "entity": "Malaysia",
+      "group": "Asia",
+      "period": "2022",
+      "value": 53.5,
+      "iso": "MYS"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2022",
+      "value": 66.8,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2022",
+      "value": 82.1,
+      "iso": "POL"
+    },
+    {
+      "entity": "Singapore",
+      "group": "Asia",
+      "period": "2022",
+      "value": 48.8,
+      "iso": "SGP"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2022",
+      "value": 69.3,
+      "iso": "KOR"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2022",
+      "value": 47.8,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2022",
+      "value": 73.7,
+      "iso": "SWE"
+    },
+    {
+      "entity": "UK",
+      "group": "Europe",
+      "period": "2022",
+      "value": 55.4,
+      "iso": "GBR"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2023",
+      "value": 58.3,
+      "iso": "CAN"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2023",
+      "value": 47.1,
+      "iso": "FRA"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2023",
+      "value": 67,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2023",
+      "value": 42.8,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2023",
+      "value": 19.6,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2023",
+      "value": 42.4,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2023",
+      "value": 68,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2023",
+      "value": 83,
+      "iso": "POL"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2023",
+      "value": 47.6,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2023",
+      "value": 75.5,
+      "iso": "SWE"
+    },
+    {
+      "entity": "UK",
+      "group": "Europe",
+      "period": "2023",
+      "value": 53.6,
+      "iso": "GBR"
+    },
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2023",
+      "value": 54.1,
+      "iso": "AUS"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2023",
+      "value": 63.9,
+      "iso": "IND"
+    },
+    {
+      "entity": "Indonesia",
+      "group": "Asia",
+      "period": "2023",
+      "value": 40.3,
+      "iso": "IDN"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2023",
+      "value": 65,
+      "iso": "JPN"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2023",
+      "value": 59.7,
+      "iso": "KOR"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2023",
+      "value": 67.9,
+      "iso": "ISR"
+    },
+    {
+      "entity": "Kenya",
+      "group": "Africa",
+      "period": "2023",
+      "value": 76.3,
+      "iso": "KEN"
+    },
+    {
+      "entity": "Nigeria",
+      "group": "Africa",
+      "period": "2023",
+      "value": 71.4,
+      "iso": "NGA"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2023",
+      "value": 52.6,
+      "iso": "ZAF"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2023",
+      "value": 29,
+      "iso": "ARG"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2023",
+      "value": 43.3,
+      "iso": "BRA"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2023",
+      "value": 43.4,
+      "iso": "MEX"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2024",
+      "value": 51.9,
+      "iso": "CAN"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2024",
+      "value": 42.5,
+      "iso": "FRA"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2024",
+      "value": 63.5,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2024",
+      "value": 33.7,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2024",
+      "value": 23.7,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2024",
+      "value": 33.3,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2024",
+      "value": 61.7,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2024",
+      "value": 69.5,
+      "iso": "POL"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2024",
+      "value": 35.4,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2024",
+      "value": 63.2,
+      "iso": "SWE"
+    },
+    {
+      "entity": "UK",
+      "group": "Europe",
+      "period": "2024",
+      "value": 39.9,
+      "iso": "GBR"
+    },
+    {
+      "entity": "Bangladesh",
+      "group": "Asia",
+      "period": "2024",
+      "value": 46.8,
+      "iso": "BGD"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2024",
+      "value": 44.2,
+      "iso": "IND"
+    },
+    {
+      "entity": "Indonesia",
+      "group": "Asia",
+      "period": "2024",
+      "value": 52.1,
+      "iso": "IDN"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2024",
+      "value": 53.5,
+      "iso": "JPN"
+    },
+    {
+      "entity": "Malaysia",
+      "group": "Asia",
+      "period": "2024",
+      "value": 33.5,
+      "iso": "MYS"
+    },
+    {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2024",
+      "value": 77,
+      "iso": "PHL"
+    },
+    {
+      "entity": "Singapore",
+      "group": "Asia",
+      "period": "2024",
+      "value": 37.8,
+      "iso": "SGP"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2024",
+      "value": 53.1,
+      "iso": "KOR"
+    },
+    {
+      "entity": "Sri Lanka",
+      "group": "Asia",
+      "period": "2024",
+      "value": 46.5,
+      "iso": "LKA"
+    },
+    {
+      "entity": "Thailand",
+      "group": "Asia",
+      "period": "2024",
+      "value": 65.8,
+      "iso": "THA"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2024",
+      "value": 56.7,
+      "iso": "ISR"
+    },
+    {
+      "entity": "Tunisia",
+      "group": "Africa",
+      "period": "2024",
+      "value": 7,
+      "iso": "TUN"
+    },
+    {
+      "entity": "Turkey",
+      "group": "Europe",
+      "period": "2024",
+      "value": 7.7,
+      "iso": "TUR"
+    },
+    {
+      "entity": "Ghana",
+      "group": "Africa",
+      "period": "2024",
+      "value": 61.3,
+      "iso": "GHA"
+    },
+    {
+      "entity": "Kenya",
+      "group": "Africa",
+      "period": "2024",
+      "value": 74.8,
+      "iso": "KEN"
+    },
+    {
+      "entity": "Nigeria",
+      "group": "Africa",
+      "period": "2024",
+      "value": 65.7,
+      "iso": "NGA"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2024",
+      "value": 35.8,
+      "iso": "ZAF"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2024",
+      "value": 35.6,
+      "iso": "ARG"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2024",
+      "value": 36.6,
+      "iso": "BRA"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2024",
+      "value": 34.4,
+      "iso": "CHL"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2024",
+      "value": 48.8,
+      "iso": "COL"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2024",
+      "value": 35.5,
+      "iso": "MEX"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2024",
+      "value": 38.6,
+      "iso": "PER"
+    }
+  ]
+}

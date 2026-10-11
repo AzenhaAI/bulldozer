@@ -13,7 +13,10 @@ import { writeDataset } from './lib/datasets.mjs';
 const CSV = process.env.RLMS_CSV ||
   '/private/tmp/claude-501/-Users-kirillshpara/025d8691-cfe3-48e0-a982-db40cbef8a62/scratchpad/rlms_trends.csv';
 const COMMON = {
-  source: 'RLMS-HSE (HSE University / UNC)', license: 'RLMS-HSE terms — public aggregates',
+  source: 'RLMS-HSE (HSE University / UNC)',
+  // Required acknowledgement, word for word from https://www.hse.ru/en/rlms/reference
+  // ("Please use the following text in all publications resulting from use of the RLMS HSE data").
+  license: 'RLMS-HSE terms — public aggregates. Source: "Russia Longitudinal Monitoring survey, RLMS HSE", conducted by National Research University "Higher School of Economics" and OOO “Demoscope” together with the Institute of Sociology of the Federal Center of Theoretical and Applied Sociology of the Russian Academy of Sciences. (RLMS HSE web site: https://www.hse.ru/rlms)',
   url: 'https://www.hse.ru/en/rlms/', parsedAt: new Date().toISOString().slice(0, 10),
 };
 const RU = (period, value) => ({ entity: 'Russia', group: 'Europe', period: String(period), value, iso: 'RUS' });

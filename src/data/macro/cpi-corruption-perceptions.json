@@ -7,7 +7,7 @@
     "topic": "governance",
     "summary": "Perceived public-sector corruption as scored by experts and business surveys; higher means cleaner.",
     "source": "Transparency International CPI (via OWID)",
-    "license": "CC BY 4.0",
+    "license": "CC BY 4.0. Source: Transparency International",
     "url": "https://www.transparency.org/en/cpi",
     "parsedAt": "2026-10-05",
     "kind": "macro"

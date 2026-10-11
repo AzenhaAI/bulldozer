@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { datasets } from '@data/datasets';
+import { licences, licenceForSource } from '@data/licences';
+
+// Count published datasets per licence entry, using the same matcher the
+// dataset pages use for their "Licence & attribution" link.
+const counts = new Map<string, number>();
+for (const ds of datasets) {
+  const l = licenceForSource(ds.source);
+  if (l) counts.set(l.id, (counts.get(l.id) ?? 0) + 1);
+}
+const sorted = [...licences].sort((a, b) => a.name.localeCompare(b.name));
+---
+<BaseLayout title="Data licences & attributions" description="Licence, required citation and required disclaimer for every data source BullDozer publishes.">
+  <section class="section">
+    <div class="container" style="max-width:820px">
+      <span class="kicker">Legal</span>
+      <h1>Data licences &amp; attributions</h1>
+      <p class="sub">
+        BullDozer publishes country-level figures derived from the sources below. Each source keeps its own
+        licence and terms; the figures shown here are our own aggregations and are not endorsed by the data
+        owners. For each source we list the licence, the citation it asks for and, where its terms require
+        one, its disclaimer word for word. Questions or corrections:
+        <a href="mailto:agent@azenha.ai">agent@azenha.ai</a>.
+      </p>
+
+      <nav class="lic-toc" aria-label="Sources">
+        {sorted.map((l) => <a href={`#${l.id}`}>{l.name}</a>)}
+      </nav>
+
+      {sorted.map((l) => (
+        <article class="gloss-term lic" id={l.id}>
+          <h3>{l.name}</h3>
+          <dl>
+            <dt>Licence</dt>
+            <dd>{l.licence}</dd>
+            {counts.get(l.id) ? (<><dt>Used for</dt><dd>{counts.get(l.id)} dataset{counts.get(l.id) === 1 ? '' : 's'}{l.usedFor ? ` · ${l.usedFor}` : ''}</dd></>) : l.usedFor ? (<><dt>Used for</dt><dd>{l.usedFor}</dd></>) : null}
+            <dt>Terms</dt>
+            <dd><a href={l.termsUrl} target="_blank" rel="noopener">{l.termsUrl.replace(/^https?:\/\//, '')} ↗</a></dd>
+            {l.disclaimer === l.citation ? (
+              <><dt>Required credit</dt><dd><blockquote class="lic-disc">{l.citation}</blockquote></dd></>
+            ) : (
+              <>
+                <dt>Cite as</dt>
+                <dd>{l.citation}</dd>
+                {l.disclaimer && (<><dt>Required text</dt><dd><blockquote class="lic-disc">{l.disclaimer}</blockquote></dd></>)}
+              </>
+            )}
+            {l.note && (<><dt>Note</dt><dd>{l.note}</dd></>)}
+          </dl>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lic-toc { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; margin: 8px 0 28px; }
+  .lic { scroll-margin-top: 80px; }
+  .lic dl { display: grid; grid-template-columns: 96px 1fr; gap: 4px 12px; margin: 6px 0 0; font-size: 14px; }
+  .lic dt { color: var(--text-dim); font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 1px; padding-top: 3px; }
+  .lic dd { margin: 0; color: var(--text); overflow-wrap: anywhere; }
+  .lic-disc { margin: 0; padding: 6px 10px; border-left: 2px solid var(--border); background: var(--bg-elev); font-style: italic; color: var(--text-dim); }
+  @media (max-width: 560px) {
+    .lic dl { grid-template-columns: 1fr; }
+    .lic dt { padding-top: 6px; }
+  }
+</style>

@@ -12,6 +12,9 @@ import { gapminderRows, REGION_4, writeDataset } from './lib/datasets.mjs';
 
 const GAP = join(homedir(), 'Library', 'Mobile Documents', 'com~apple~CloudDocs', 'BK', 'Opros', 'Inter_survey', 'Gapminder', 'ddf--entities--geo--country.csv');
 const UA = { 'User-Agent': 'BullDozer/1.0 (agent@azenha.ai)' };
+// Wikipedia re-use requires a CC BY-SA licensing notice with a link to the licence text:
+// https://en.wikipedia.org/wiki/Wikipedia:Reusing_Wikipedia_content
+const WIKI_LICENSE = 'CC BY-SA 4.0 (Wikipedia aggregate; https://creativecommons.org/licenses/by-sa/4.0/)';
 const PERIOD = '2023';
 
 // Wikipedia name → ISO-3 for names that differ from Gapminder's.
@@ -69,7 +72,7 @@ async function main() {
   await writeDataset('macro', 'forbes-global-2000', {
     title: 'Forbes Global 2000 Companies', valueLabel: 'Companies in the Forbes Global 2000', unit: 'count', changeMode: 'pct', topic: 'economy',
     summary: 'Number of companies headquartered in each country that appear in the Forbes Global 2000 list of the world’s largest public companies (2023).',
-    source: 'Forbes Global 2000 (via Wikipedia)', license: 'CC BY-SA (Wikipedia aggregate)', url: 'https://www.forbes.com/lists/global2000/', parsedAt: new Date().toISOString().slice(0, 10),
+    source: 'Forbes Global 2000 (via Wikipedia)', license: WIKI_LICENSE, url: 'https://www.forbes.com/lists/global2000/', parsedAt: new Date().toISOString().slice(0, 10),
   }, data);
   console.log(`✓ Forbes Global 2000: ${data.length} countries`);
 
@@ -101,13 +104,13 @@ async function brands(n2i, reg) {
   await writeDataset('macro', 'brandz-value', {
     title: 'Top Brand Value', valueLabel: 'Combined value of top global brands (US$ bn)', unit: 'bn', changeMode: 'pct', topic: 'economy',
     summary: 'Combined brand value of a country’s brands in Kantar BrandZ’s Most Valuable Global Brands ranking (2026), in US$ billions.',
-    source: 'Kantar BrandZ (via Wikipedia)', license: 'CC BY-SA (Wikipedia aggregate)', url: 'https://www.kantar.com/campaigns/brandz', parsedAt: new Date().toISOString().slice(0, 10),
+    source: 'Kantar BrandZ (via Wikipedia)', license: WIKI_LICENSE, url: 'https://www.kantar.com/campaigns/brandz', parsedAt: new Date().toISOString().slice(0, 10),
   }, mk((o) => Math.round(o.value / 1000)));
 
   await writeDataset('macro', 'brandz-count', {
     title: 'Top Global Brands', valueLabel: 'Brands in the BrandZ global ranking', unit: 'count', changeMode: 'pct', topic: 'economy',
     summary: 'Number of a country’s brands in Kantar BrandZ’s Most Valuable Global Brands ranking (2026).',
-    source: 'Kantar BrandZ (via Wikipedia)', license: 'CC BY-SA (Wikipedia aggregate)', url: 'https://www.kantar.com/campaigns/brandz', parsedAt: new Date().toISOString().slice(0, 10),
+    source: 'Kantar BrandZ (via Wikipedia)', license: WIKI_LICENSE, url: 'https://www.kantar.com/campaigns/brandz', parsedAt: new Date().toISOString().slice(0, 10),
   }, mk((o) => o.count));
   console.log(`✓ BrandZ: ${byIso.size} countries`);
 }

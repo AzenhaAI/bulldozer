@@ -1,18 +1,19 @@
 /**
- * Pew Research Center Global Attitudes, Spring 2025 → country-level views,
- * weighted %, 24 countries.
+ * Pew Research Center Global Attitudes, Spring 2022–2025 → country-level
+ * views, weighted %, one value per country and year (18–35 countries a wave).
  *
  *   node scripts/parse_pew.mjs
  *
- * Reads data/raw/pew/pew_ga2025_by_country.csv, written by
+ * Reads data/raw/pew/pew_ga{2022,2023,2024,2025}_by_country.csv, written by
  * scripts/tools/pew_aggregate.py, which documents every answer code. The
  * survey file is downloaded from pewresearch.org with an account; only these
  * country aggregates are kept, credited to Pew.
  *
  * Pew's convention, not ours elsewhere: "don't know" and refused stay in the
  * base, as in Pew's own tables. With that, every one of the 18 series matched
- * Pew's published topline to the point in every country (checked 2026-10-11,
- * 16 questions × up to 24 countries, zero differences). The guards below hold
+ * Pew's published topline to the point in every country (checked 2026-10-11:
+ * 2025, 16 questions; 2022–2024, 11–12 questions each; zero differences —
+ * older toplines print very and somewhat apart, so their sum is compared). The guards below hold
  * a few of those published figures. The United States is not in the public
  * international file (Pew releases it separately) and so is absent here.
  */
@@ -21,18 +22,20 @@ import { join } from 'node:path';
 import { parseCsvObjects } from './lib/csv.mjs';
 import { gapminderRows, REGION_4, writeDataset, round } from './lib/datasets.mjs';
 
-const CSV = join('data', 'raw', 'pew', 'pew_ga2025_by_country.csv');
+const WAVES = ['2022', '2023', '2024', '2025'];
+const LATEST = '2025';
 const PARSED = new Date().toISOString().slice(0, 10);
 const META = {
   source: 'Pew Research Center (Global Attitudes Survey)',
   // Pew's dataset terms (section 13) require this disclaimer word for word.
   license: 'Pew Research Center terms of use (survey dataset terms). Pew Research Center bears no responsibility for the analyses or interpretations of the data presented here. The opinions expressed herein, including any implications for policy, are those of the author and not of Pew Research Center.',
   url: 'https://www.pewresearch.org/global/',
-  vintage: 'Spring 2025 Global Attitudes Survey, public international file (24 countries)',
+  vintage: 'Spring Global Attitudes Surveys 2022–2025, public international files',
 };
 const BASE = 'Weighted by Pew\'s weight. As in Pew\'s published tables, "don\'t know" and refused are part of the base; only people not asked are left out. Matches Pew\'s topline to the point.';
 
-const S = (col, slug, topic, title, valueLabel, summary, codes, check) => ({ col, slug, topic, title, valueLabel, summary, codes, check });
+// latest: the wave the guards apply to (Biden was last asked in 2024).
+const S = (col, slug, topic, title, valueLabel, summary, codes, check, latest = LATEST) => ({ col, slug, topic, title, valueLabel, summary, codes, check, latest });
 const SERIES = [
   S('economy_good', 'pew-economy-good', 'economy', 'Economy Seen as Good (Pew)', 'Call the national economy very or somewhat good (%)',
     'Share who describe the current economic situation in their country as very or somewhat good.', 'very or somewhat good (Q1)', { IND: [75, 77], KOR: [9, 11] }),
@@ -52,6 +55,8 @@ const SERIES = [
     'Share with a very or somewhat favourable opinion of Russia.', 'very or somewhat favourable (Q3f)'),
   S('conf_trump', 'pew-confidence-trump', 'attitudes', 'Confidence in Donald Trump (Pew)', 'A lot of or some confidence in Trump on world affairs (%)',
     'Share with a lot of or some confidence in US President Donald Trump to do the right thing regarding world affairs.', 'a lot or some (Q7a; Australia Q7aAUS)', { AUS: [21, 23], MEX: [7, 9] }),
+  S('conf_biden', 'pew-confidence-biden', 'attitudes', 'Confidence in Joe Biden (Pew)', 'A lot of or some confidence in Biden on world affairs (%)',
+    'Share with a lot of or some confidence in US President Joe Biden to do the right thing regarding world affairs, asked while he was in office (2022–2024).', 'a lot or some (Australia: its own variant)', null, '2024'),
   S('conf_xi', 'pew-confidence-xi', 'attitudes', 'Confidence in Xi Jinping (Pew)', 'A lot of or some confidence in Xi on world affairs (%)',
     'Share with a lot of or some confidence in Chinese President Xi Jinping to do the right thing regarding world affairs.', 'a lot or some (Q7b; Australia Q7bAUS)'),
   S('conf_putin', 'pew-confidence-putin', 'attitudes', 'Confidence in Vladimir Putin (Pew)', 'A lot of or some confidence in Putin on world affairs (%)',
@@ -78,27 +83,31 @@ async function main() {
     const a3 = (r.iso3166_1_alpha3 || '').toUpperCase();
     if (a3) geo.set(a3, { name: r.name, region: REGION_4[r.world_4region] || 'Other' });
   }
-  const rows = [...parseCsvObjects(await readFile(CSV, 'utf8'))];
+  const rows = [];
+  for (const y of WAVES)
+    for (const r of parseCsvObjects(await readFile(join('data', 'raw', 'pew', `pew_ga${y}_by_country.csv`), 'utf8')))
+      rows.push({ ...r, year: y });
   for (const s of SERIES) {
     const data = [];
     for (const r of rows) {
       if (r[s.col] === '') continue;
       const g = geo.get(r.iso3);
       if (!g) throw new Error(`${s.slug}: no geography for ${r.iso3}`);
-      data.push({ entity: g.name, group: g.region, period: '2025', value: round(Number(r[s.col]), 1), iso: r.iso3 });
+      data.push({ entity: g.name, group: g.region, period: r.year, value: round(Number(r[s.col]), 1), iso: r.iso3 });
     }
-    if (data.length < 10) throw new Error(`${s.slug}: only ${data.length} countries`);
+    const latest = data.filter((d) => d.period === s.latest);
+    if (latest.length < 10) throw new Error(`${s.slug}: only ${latest.length} countries in ${s.latest}`);
     if (data.some((d) => !(d.value >= 0 && d.value <= 100))) throw new Error(`${s.slug}: share outside 0–100`);
     for (const [iso, [lo, hi]] of Object.entries(s.check || {})) {
-      const d = data.find((x) => x.iso === iso);
+      const d = latest.find((x) => x.iso === iso);
       if (!d || d.value < lo || d.value > hi) throw new Error(`${s.slug}: ${iso} = ${d?.value}, Pew published ${lo}–${hi}`);
     }
     await writeDataset('surveys', s.slug, {
       ...META, kind: 'surveys', title: s.title, unit: '%', changeMode: 'pp', valueLabel: s.valueLabel, topic: s.topic,
-      summary: `${s.summary} Pew Research Center, Spring 2025.`,
+      summary: `${s.summary} Pew Research Center, Spring ${[...new Set(data.map((d) => d.period))].sort().join(', ')}.`,
       method: `${BASE} Counted: ${s.codes}.`, parsedAt: PARSED,
     }, data);
   }
-  console.log(`✓ Pew Global Attitudes: ${SERIES.length} datasets, ${rows.length} countries`);
+  console.log(`✓ Pew Global Attitudes: ${SERIES.length} datasets, ${new Set(rows.map((r) => r.iso3)).size} countries, ${rows.length} country-waves`);
 }
 main().catch((e) => { console.error('✗ parse_pew failed:', e.message); process.exit(1); });

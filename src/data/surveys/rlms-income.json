@@ -7,7 +7,7 @@
     "topic": "economy",
     "summary": "Weighted median of personal income over the last 30 days, in rubles — annual trend. RLMS-HSE longitudinal survey.",
     "source": "RLMS-HSE (HSE University / UNC)",
-    "license": "RLMS-HSE terms — public aggregates",
+    "license": "RLMS-HSE terms — public aggregates. Source: \"Russia Longitudinal Monitoring survey, RLMS HSE\", conducted by National Research University \"Higher School of Economics\" and OOO “Demoscope” together with the Institute of Sociology of the Federal Center of Theoretical and Applied Sociology of the Russian Academy of Sciences. (RLMS HSE web site: https://www.hse.ru/rlms)",
     "url": "https://www.hse.ru/en/rlms/",
     "parsedAt": "2026-06-29",
     "kind": "survey"
