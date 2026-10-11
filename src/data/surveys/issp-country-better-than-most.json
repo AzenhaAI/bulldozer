@@ -1,0 +1,222 @@
+{
+  "meta": {
+    "source": "ISSP (International Social Survey Programme)",
+    "license": "GESIS terms of use (04.02.2026). Aggregates computed by the data user; the survey data are not redistributed.",
+    "url": "https://www.gesis.org/en/issp/home",
+    "vintage": "ISSP Research Group, modules 2019 (ZA7600 v3.0.0), 2020 (ZA7650 v2.0.0), 2021 (ZA8000 v2.0.0), 2022 (ZA10000 v2.0.0), 2023 (ZA10010 v1.0.0); GESIS, Cologne",
+    "kind": "surveys",
+    "title": "Country Better Than Most Others (ISSP)",
+    "unit": "%",
+    "changeMode": "pp",
+    "valueLabel": "Agree their country is better than most other countries (%)",
+    "topic": "attitudes",
+    "summary": "Share who agree that, generally speaking, their country is a better country than most other countries. ISSP 2023, National Identity.",
+    "method": "Weighted (WEIGHT 2019–2020, WEIGHT_COM 2021–2023). No answer, can't choose and not applicable are left out of the base; a country needs 300 answers.",
+    "parsedAt": "2026-10-11"
+  },
+  "data": [
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2023",
+      "value": 67.5,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2023",
+      "value": 79.2,
+      "iso": "AUS"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2023",
+      "value": 70.9,
+      "iso": "CAN"
+    },
+    {
+      "entity": "Switzerland",
+      "group": "Europe",
+      "period": "2023",
+      "value": 57.9,
+      "iso": "CHE"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2023",
+      "value": 46.3,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2023",
+      "value": 73.6,
+      "iso": "DNK"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2023",
+      "value": 72.5,
+      "iso": "FIN"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2023",
+      "value": 35.8,
+      "iso": "FRA"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2023",
+      "value": 27.1,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2023",
+      "value": 48.9,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2023",
+      "value": 35.8,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2023",
+      "value": 52,
+      "iso": "ISR"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2023",
+      "value": 73.6,
+      "iso": "IND"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2023",
+      "value": 48,
+      "iso": "ITA"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2023",
+      "value": 67.9,
+      "iso": "KOR"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2023",
+      "value": 45.9,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2023",
+      "value": 47.9,
+      "iso": "MEX"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2023",
+      "value": 56.9,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2023",
+      "value": 71.4,
+      "iso": "NOR"
+    },
+    {
+      "entity": "New Zealand",
+      "group": "Asia",
+      "period": "2023",
+      "value": 62.9,
+      "iso": "NZL"
+    },
+    {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2023",
+      "value": 58.5,
+      "iso": "PHL"
+    },
+    {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "2023",
+      "value": 78.6,
+      "iso": "RUS"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2023",
+      "value": 51.9,
+      "iso": "SWE"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2023",
+      "value": 44.6,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Slovak Republic",
+      "group": "Europe",
+      "period": "2023",
+      "value": 48,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Thailand",
+      "group": "Asia",
+      "period": "2023",
+      "value": 48.5,
+      "iso": "THA"
+    },
+    {
+      "entity": "Taiwan",
+      "group": "Asia",
+      "period": "2023",
+      "value": 87.4,
+      "iso": "TWN"
+    },
+    {
+      "entity": "USA",
+      "group": "Americas",
+      "period": "2023",
+      "value": 59.4,
+      "iso": "USA"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2023",
+      "value": 64.7,
+      "iso": "ZAF"
+    }
+  ]
+}

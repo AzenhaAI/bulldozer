@@ -1,0 +1,229 @@
+{
+  "meta": {
+    "source": "ISSP (International Social Survey Programme)",
+    "license": "GESIS terms of use (04.02.2026). Aggregates computed by the data user; the survey data are not redistributed.",
+    "url": "https://www.gesis.org/en/issp/home",
+    "vintage": "ISSP Research Group, modules 2019 (ZA7600 v3.0.0), 2020 (ZA7650 v2.0.0), 2021 (ZA8000 v2.0.0), 2022 (ZA10000 v2.0.0), 2023 (ZA10010 v1.0.0); GESIS, Cologne",
+    "kind": "surveys",
+    "title": "Satisfaction with the Health System (ISSP)",
+    "unit": "%",
+    "changeMode": "pp",
+    "valueLabel": "Completely, very or fairly satisfied with the health care system (%)",
+    "topic": "health",
+    "summary": "Share completely, very or fairly satisfied with the health care system in their country. ISSP 2021, Health and Health Care.",
+    "method": "Weighted (WEIGHT 2019–2020, WEIGHT_COM 2021–2023). No answer, can't choose and not applicable are left out of the base; a country needs 300 answers.",
+    "parsedAt": "2026-10-11"
+  },
+  "data": [
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2021",
+      "value": 72,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2021",
+      "value": 79.9,
+      "iso": "AUS"
+    },
+    {
+      "entity": "Switzerland",
+      "group": "Europe",
+      "period": "2021",
+      "value": 85.1,
+      "iso": "CHE"
+    },
+    {
+      "entity": "China",
+      "group": "Asia",
+      "period": "2021",
+      "value": 78.1,
+      "iso": "CHN"
+    },
+    {
+      "entity": "Czech Republic",
+      "group": "Europe",
+      "period": "2021",
+      "value": 77.8,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2021",
+      "value": 76,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2021",
+      "value": 85.3,
+      "iso": "DNK"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2021",
+      "value": 89.1,
+      "iso": "FIN"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2021",
+      "value": 75.5,
+      "iso": "FRA"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 38.9,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2021",
+      "value": 55.7,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2021",
+      "value": 62.9,
+      "iso": "ISR"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2021",
+      "value": 71.5,
+      "iso": "IND"
+    },
+    {
+      "entity": "Iceland",
+      "group": "Europe",
+      "period": "2021",
+      "value": 62.7,
+      "iso": "ISL"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2021",
+      "value": 58,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2021",
+      "value": 60.8,
+      "iso": "JPN"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2021",
+      "value": 39.8,
+      "iso": "MEX"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2021",
+      "value": 86.6,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2021",
+      "value": 91.7,
+      "iso": "NOR"
+    },
+    {
+      "entity": "New Zealand",
+      "group": "Asia",
+      "period": "2021",
+      "value": 64.9,
+      "iso": "NZL"
+    },
+    {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2021",
+      "value": 74.6,
+      "iso": "PHL"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2021",
+      "value": 31.5,
+      "iso": "POL"
+    },
+    {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 39.2,
+      "iso": "RUS"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 61.5,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Slovak Republic",
+      "group": "Europe",
+      "period": "2021",
+      "value": 34.7,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Suriname",
+      "group": "Americas",
+      "period": "2021",
+      "value": 38.9,
+      "iso": "SUR"
+    },
+    {
+      "entity": "Thailand",
+      "group": "Asia",
+      "period": "2021",
+      "value": 72.8,
+      "iso": "THA"
+    },
+    {
+      "entity": "Taiwan",
+      "group": "Asia",
+      "period": "2021",
+      "value": 92.4,
+      "iso": "TWN"
+    },
+    {
+      "entity": "USA",
+      "group": "Americas",
+      "period": "2021",
+      "value": 60.9,
+      "iso": "USA"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2021",
+      "value": 55.3,
+      "iso": "ZAF"
+    }
+  ]
+}

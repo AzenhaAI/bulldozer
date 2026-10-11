@@ -1,0 +1,222 @@
+{
+  "meta": {
+    "source": "ISSP (International Social Survey Programme)",
+    "license": "GESIS terms of use (04.02.2026). Aggregates computed by the data user; the survey data are not redistributed.",
+    "url": "https://www.gesis.org/en/issp/home",
+    "vintage": "ISSP Research Group, modules 2019 (ZA7600 v3.0.0), 2020 (ZA7650 v2.0.0), 2021 (ZA8000 v2.0.0), 2022 (ZA10000 v2.0.0), 2023 (ZA10010 v1.0.0); GESIS, Cologne",
+    "kind": "surveys",
+    "title": "Strong Conflict Between Rich and Poor (ISSP)",
+    "unit": "%",
+    "changeMode": "pp",
+    "valueLabel": "See strong or very strong conflicts between rich and poor (%)",
+    "topic": "attitudes",
+    "summary": "Share who see strong or very strong conflicts between poor and rich people in their country. ISSP 2019, Social Inequality.",
+    "method": "Weighted (WEIGHT 2019–2020, WEIGHT_COM 2021–2023). No answer, can't choose and not applicable are left out of the base; a country needs 300 answers.",
+    "parsedAt": "2026-10-11"
+  },
+  "data": [
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2019",
+      "value": 29.2,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2019",
+      "value": 29.7,
+      "iso": "AUS"
+    },
+    {
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "2019",
+      "value": 53.3,
+      "iso": "BGR"
+    },
+    {
+      "entity": "Switzerland",
+      "group": "Europe",
+      "period": "2019",
+      "value": 13.8,
+      "iso": "CHE"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2019",
+      "value": 66.5,
+      "iso": "CHL"
+    },
+    {
+      "entity": "Czech Republic",
+      "group": "Europe",
+      "period": "2019",
+      "value": 22.5,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2019",
+      "value": 39.2,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2019",
+      "value": 12,
+      "iso": "DNK"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2019",
+      "value": 35.2,
+      "iso": "FIN"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2019",
+      "value": 48.7,
+      "iso": "FRA"
+    },
+    {
+      "entity": "UK",
+      "group": "Europe",
+      "period": "2019",
+      "value": 44.7,
+      "iso": "GBR"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 24,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2019",
+      "value": 21.3,
+      "iso": "ISR"
+    },
+    {
+      "entity": "Iceland",
+      "group": "Europe",
+      "period": "2019",
+      "value": 14.1,
+      "iso": "ISL"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2019",
+      "value": 71.1,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2019",
+      "value": 33.8,
+      "iso": "JPN"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2019",
+      "value": 34.9,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2019",
+      "value": 14.5,
+      "iso": "NOR"
+    },
+    {
+      "entity": "New Zealand",
+      "group": "Asia",
+      "period": "2019",
+      "value": 37.2,
+      "iso": "NZL"
+    },
+    {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2019",
+      "value": 54.1,
+      "iso": "PHL"
+    },
+    {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 67,
+      "iso": "RUS"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2019",
+      "value": 27.7,
+      "iso": "SWE"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 32.4,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Suriname",
+      "group": "Americas",
+      "period": "2019",
+      "value": 45.6,
+      "iso": "SUR"
+    },
+    {
+      "entity": "Thailand",
+      "group": "Asia",
+      "period": "2019",
+      "value": 22.2,
+      "iso": "THA"
+    },
+    {
+      "entity": "Taiwan",
+      "group": "Asia",
+      "period": "2019",
+      "value": 36,
+      "iso": "TWN"
+    },
+    {
+      "entity": "USA",
+      "group": "Americas",
+      "period": "2019",
+      "value": 65.3,
+      "iso": "USA"
+    },
+    {
+      "entity": "Venezuela",
+      "group": "Americas",
+      "period": "2019",
+      "value": 43.9,
+      "iso": "VEN"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2019",
+      "value": 66.2,
+      "iso": "ZAF"
+    }
+  ]
+}

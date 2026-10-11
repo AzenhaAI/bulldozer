@@ -1,0 +1,243 @@
+{
+  "meta": {
+    "source": "ISSP (International Social Survey Programme)",
+    "license": "GESIS terms of use (04.02.2026). Aggregates computed by the data user; the survey data are not redistributed.",
+    "url": "https://www.gesis.org/en/issp/home",
+    "vintage": "ISSP Research Group, modules 2019 (ZA7600 v3.0.0), 2020 (ZA7650 v2.0.0), 2021 (ZA8000 v2.0.0), 2022 (ZA10000 v2.0.0), 2023 (ZA10010 v1.0.0); GESIS, Cologne",
+    "kind": "surveys",
+    "title": "Living Together Unmarried Is All Right (ISSP)",
+    "unit": "%",
+    "changeMode": "pp",
+    "valueLabel": "Agree it is all right for a couple to live together without intending to marry (%)",
+    "topic": "attitudes",
+    "summary": "Share who agree it is all right for a couple to live together without intending to get married. ISSP 2022, Family and Changing Gender Roles.",
+    "method": "Weighted (WEIGHT 2019–2020, WEIGHT_COM 2021–2023). No answer, can't choose and not applicable are left out of the base; a country needs 300 answers.",
+    "parsedAt": "2026-10-11"
+  },
+  "data": [
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2022",
+      "value": 86.3,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2022",
+      "value": 79,
+      "iso": "AUS"
+    },
+    {
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "2022",
+      "value": 51.1,
+      "iso": "BGR"
+    },
+    {
+      "entity": "Switzerland",
+      "group": "Europe",
+      "period": "2022",
+      "value": 86.6,
+      "iso": "CHE"
+    },
+    {
+      "entity": "Czech Republic",
+      "group": "Europe",
+      "period": "2022",
+      "value": 56.5,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2022",
+      "value": 87.6,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2022",
+      "value": 87.5,
+      "iso": "DNK"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2022",
+      "value": 82.5,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2022",
+      "value": 90,
+      "iso": "FIN"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2022",
+      "value": 83.2,
+      "iso": "FRA"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2022",
+      "value": 77.9,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2022",
+      "value": 56,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2022",
+      "value": 57.8,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2022",
+      "value": 58.2,
+      "iso": "ISR"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2022",
+      "value": 22.5,
+      "iso": "IND"
+    },
+    {
+      "entity": "Iceland",
+      "group": "Europe",
+      "period": "2022",
+      "value": 83.6,
+      "iso": "ISL"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2022",
+      "value": 70.6,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2022",
+      "value": 58.3,
+      "iso": "JPN"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2022",
+      "value": 37.2,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2022",
+      "value": 83.7,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2022",
+      "value": 87.5,
+      "iso": "NOR"
+    },
+    {
+      "entity": "New Zealand",
+      "group": "Asia",
+      "period": "2022",
+      "value": 73.7,
+      "iso": "NZL"
+    },
+    {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2022",
+      "value": 41.6,
+      "iso": "PHL"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2022",
+      "value": 77.7,
+      "iso": "POL"
+    },
+    {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "2022",
+      "value": 50.5,
+      "iso": "RUS"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2022",
+      "value": 85.7,
+      "iso": "SWE"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2022",
+      "value": 76.4,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Slovak Republic",
+      "group": "Europe",
+      "period": "2022",
+      "value": 24.3,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Thailand",
+      "group": "Asia",
+      "period": "2022",
+      "value": 37.5,
+      "iso": "THA"
+    },
+    {
+      "entity": "Taiwan",
+      "group": "Asia",
+      "period": "2022",
+      "value": 68.8,
+      "iso": "TWN"
+    },
+    {
+      "entity": "USA",
+      "group": "Americas",
+      "period": "2022",
+      "value": 65.4,
+      "iso": "USA"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2022",
+      "value": 40.1,
+      "iso": "ZAF"
+    }
+  ]
+}

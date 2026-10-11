@@ -93,11 +93,11 @@ export const sources: Source[] = [
 
   // ── Public opinion (regional barometers) ───────────────────────────
   { name: 'Eurobarometer', url: 'https://europa.eu/eurobarometer/', status: 'live', category: 'Public opinion barometers', match: 'Eurobarometer', dash: 'eurobarometer',
-    description: 'European Commission’s standard survey of public opinion across EU member states since 1974. Extended dashboard: 34 countries, weighted, with breakdowns by sex and age — democracy, wellbeing, digital behaviour and science/media.' },
+    description: 'European Commission’s standard survey of public opinion across EU member states since 1974. Extended dashboard: 34 countries, weighted, with breakdowns by sex and age — democracy, wellbeing, digital behaviour and science/media. Plus the latest Standard waves (autumn 2025, spring 2026): trust in the EU, the government, police, media and scientists, and whether the country is going in the right direction.' },
   { name: 'European Social Survey (ESS)', url: 'https://www.europeansocialsurvey.org/', status: 'live', category: 'Public opinion barometers', match: 'European Social Survey',
     description: 'Rigorous biennial survey of attitudes across Europe. We aggregated trust in people and satisfaction with democracy.' },
   { name: 'ISSP — International Social Survey Programme', url: 'https://issp.org/', status: 'live', category: 'Public opinion barometers', match: 'ISSP', dash: 'issp',
-    description: 'Annual cross-national survey on rotating social-science themes. Extended dashboard from the 2020 Environment module: 28 countries worldwide, weighted, by sex and age — trust, media, the environment and green trade-offs.' },
+    description: 'Annual cross-national survey on rotating social-science themes. Extended dashboard from the 2020 Environment module: 28 countries worldwide, weighted, by sex and age — trust, media, the environment and green trade-offs. Plus one module a year 2019–2023 (inequality, environment, health, family, national identity), about 30 countries each — aggregated by hand, as GESIS\'s terms do not allow AI processing of the data.' },
   { name: 'Afrobarometer', url: 'https://www.afrobarometer.org/', status: 'live', category: 'Public opinion barometers', match: 'Afrobarometer', dash: 'afrobarometer',
     description: 'Pan-African survey of attitudes on democracy, governance and quality of life. We aggregated Round 9 (39 countries): support for democracy, trust, perceived democracy.' },
   { name: 'Arab Barometer', url: 'https://www.arabbarometer.org/', status: 'live', category: 'Public opinion barometers', match: 'Arab Barometer', dash: 'arabbarometer',

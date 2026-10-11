@@ -1,0 +1,215 @@
+{
+  "meta": {
+    "source": "ISSP (International Social Survey Programme)",
+    "license": "GESIS terms of use (04.02.2026). Aggregates computed by the data user; the survey data are not redistributed.",
+    "url": "https://www.gesis.org/en/issp/home",
+    "vintage": "ISSP Research Group, modules 2019 (ZA7600 v3.0.0), 2020 (ZA7650 v2.0.0), 2021 (ZA8000 v2.0.0), 2022 (ZA10000 v2.0.0), 2023 (ZA10010 v1.0.0); GESIS, Cologne",
+    "kind": "surveys",
+    "title": "Concerned About the Environment (ISSP)",
+    "unit": "%",
+    "changeMode": "pp",
+    "valueLabel": "Concerned about environmental issues (4–5 on a 1–5 scale, %)",
+    "topic": "environment",
+    "summary": "Share concerned about environmental issues (4 or 5 on a scale from 1, not at all, to 5, very). ISSP 2020, Environment.",
+    "method": "Weighted (WEIGHT 2019–2020, WEIGHT_COM 2021–2023). No answer, can't choose and not applicable are left out of the base; a country needs 300 answers.",
+    "parsedAt": "2026-10-11"
+  },
+  "data": [
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2020",
+      "value": 65.2,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2020",
+      "value": 70.5,
+      "iso": "AUS"
+    },
+    {
+      "entity": "Switzerland",
+      "group": "Europe",
+      "period": "2020",
+      "value": 71.9,
+      "iso": "CHE"
+    },
+    {
+      "entity": "China",
+      "group": "Asia",
+      "period": "2020",
+      "value": 62.6,
+      "iso": "CHN"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2020",
+      "value": 71.4,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2020",
+      "value": 60.5,
+      "iso": "DNK"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2020",
+      "value": 80.8,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2020",
+      "value": 62,
+      "iso": "FIN"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2020",
+      "value": 71.4,
+      "iso": "FRA"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2020",
+      "value": 57.2,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2020",
+      "value": 56.4,
+      "iso": "HUN"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2020",
+      "value": 68.9,
+      "iso": "IND"
+    },
+    {
+      "entity": "Iceland",
+      "group": "Europe",
+      "period": "2020",
+      "value": 64.4,
+      "iso": "ISL"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2020",
+      "value": 71,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2020",
+      "value": 77,
+      "iso": "JPN"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2020",
+      "value": 65,
+      "iso": "KOR"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2020",
+      "value": 63.3,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2020",
+      "value": 59.9,
+      "iso": "NOR"
+    },
+    {
+      "entity": "New Zealand",
+      "group": "Asia",
+      "period": "2020",
+      "value": 75.8,
+      "iso": "NZL"
+    },
+    {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2020",
+      "value": 74.9,
+      "iso": "PHL"
+    },
+    {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "2020",
+      "value": 69.9,
+      "iso": "RUS"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2020",
+      "value": 59.1,
+      "iso": "SWE"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2020",
+      "value": 80,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Slovak Republic",
+      "group": "Europe",
+      "period": "2020",
+      "value": 43.4,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Thailand",
+      "group": "Asia",
+      "period": "2020",
+      "value": 47.2,
+      "iso": "THA"
+    },
+    {
+      "entity": "Taiwan",
+      "group": "Asia",
+      "period": "2020",
+      "value": 64.8,
+      "iso": "TWN"
+    },
+    {
+      "entity": "USA",
+      "group": "Americas",
+      "period": "2020",
+      "value": 63.4,
+      "iso": "USA"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2020",
+      "value": 45.1,
+      "iso": "ZAF"
+    }
+  ]
+}

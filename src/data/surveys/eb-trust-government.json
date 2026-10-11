@@ -1,0 +1,523 @@
+{
+  "meta": {
+    "source": "Eurobarometer (European Commission)",
+    "license": "GESIS terms of use (04.02.2026). Aggregates computed by the data user; the survey data are not redistributed.",
+    "url": "https://europa.eu/eurobarometer/",
+    "vintage": "Standard Eurobarometer 104.1 (ZA9130 v1.0.0, autumn 2025) and 105.2 (ZA9144 v1.0.0, spring 2026); GESIS, Cologne",
+    "kind": "surveys",
+    "title": "Trust in the National Government (Eurobarometer)",
+    "unit": "%",
+    "changeMode": "pp",
+    "valueLabel": "Tend to trust the national government (%)",
+    "topic": "governance",
+    "summary": "Share who tend to trust their national government. Standard Eurobarometer, autumn 2025 and spring 2026.",
+    "method": "Weighted by w1. As in the Commission's own reports, \"don't know\" is part of the base; the Turkish Cypriot community sample is left out. A country needs 300 answers.",
+    "parsedAt": "2026-10-11"
+  },
+  "data": [
+    {
+      "entity": "Albania",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 41.1,
+      "iso": "ALB"
+    },
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 47.9,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 28.5,
+      "iso": "BIH"
+    },
+    {
+      "entity": "Belgium",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 34.4,
+      "iso": "BEL"
+    },
+    {
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 25.2,
+      "iso": "BGR"
+    },
+    {
+      "entity": "Cyprus",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 34.4,
+      "iso": "CYP"
+    },
+    {
+      "entity": "Czech Republic",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 29.1,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 36.4,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 53.4,
+      "iso": "DNK"
+    },
+    {
+      "entity": "Estonia",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 35.7,
+      "iso": "EST"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 29.4,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 44.6,
+      "iso": "FIN"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 8.6,
+      "iso": "FRA"
+    },
+    {
+      "entity": "UK",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 24.9,
+      "iso": "GBR"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 54.3,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 18.9,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 34.8,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 41.3,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Ireland",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 43.4,
+      "iso": "IRL"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 37.6,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 33.6,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Luxembourg",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 71.4,
+      "iso": "LUX"
+    },
+    {
+      "entity": "Latvia",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 31.1,
+      "iso": "LVA"
+    },
+    {
+      "entity": "Moldova",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 41.3,
+      "iso": "MDA"
+    },
+    {
+      "entity": "Montenegro",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 27.8,
+      "iso": "MNE"
+    },
+    {
+      "entity": "North Macedonia",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 44.4,
+      "iso": "MKD"
+    },
+    {
+      "entity": "Malta",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 40.4,
+      "iso": "MLT"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 24.3,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 45.4,
+      "iso": "POL"
+    },
+    {
+      "entity": "Portugal",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 49.2,
+      "iso": "PRT"
+    },
+    {
+      "entity": "Romania",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 32.7,
+      "iso": "ROU"
+    },
+    {
+      "entity": "Serbia",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 45.3,
+      "iso": "SRB"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 41.2,
+      "iso": "SWE"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 27,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Slovak Republic",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 26.2,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Turkey",
+      "group": "Europe",
+      "period": "2025 autumn",
+      "value": 58.8,
+      "iso": "TUR"
+    },
+    {
+      "entity": "Albania",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 39.5,
+      "iso": "ALB"
+    },
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 50.6,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 29.6,
+      "iso": "BIH"
+    },
+    {
+      "entity": "Belgium",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 37.6,
+      "iso": "BEL"
+    },
+    {
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 22.1,
+      "iso": "BGR"
+    },
+    {
+      "entity": "Cyprus",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 30.7,
+      "iso": "CYP"
+    },
+    {
+      "entity": "Czech Republic",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 44.7,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 37,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 59.4,
+      "iso": "DNK"
+    },
+    {
+      "entity": "Estonia",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 36.2,
+      "iso": "EST"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 33.9,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 42.4,
+      "iso": "FIN"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 20.7,
+      "iso": "FRA"
+    },
+    {
+      "entity": "UK",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 25.8,
+      "iso": "GBR"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 52,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 20.5,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 36.3,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 44.8,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Ireland",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 48,
+      "iso": "IRL"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 36.8,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 32.8,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Luxembourg",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 74.6,
+      "iso": "LUX"
+    },
+    {
+      "entity": "Latvia",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 25.6,
+      "iso": "LVA"
+    },
+    {
+      "entity": "Moldova",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 31.3,
+      "iso": "MDA"
+    },
+    {
+      "entity": "Montenegro",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 54.2,
+      "iso": "MNE"
+    },
+    {
+      "entity": "North Macedonia",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 47,
+      "iso": "MKD"
+    },
+    {
+      "entity": "Malta",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 52.3,
+      "iso": "MLT"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 49.4,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 43.4,
+      "iso": "POL"
+    },
+    {
+      "entity": "Portugal",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 54,
+      "iso": "PRT"
+    },
+    {
+      "entity": "Romania",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 30.7,
+      "iso": "ROU"
+    },
+    {
+      "entity": "Serbia",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 39.4,
+      "iso": "SRB"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 46.2,
+      "iso": "SWE"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 27.5,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Slovak Republic",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 30.1,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Turkey",
+      "group": "Europe",
+      "period": "2026 spring",
+      "value": 46.2,
+      "iso": "TUR"
+    }
+  ]
+}
