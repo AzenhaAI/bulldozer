@@ -15,7 +15,7 @@ export interface QuizCountry {
 const CLUE_DEFS: { slug: string; label: string; fmt: (v: number) => string }[] = [
   { slug: 'gapminder-population', label: 'Population', fmt: (v) => `${formatNum(v)} million people` },
   { slug: 'imf-gdp-per-capita', label: 'GDP per capita', fmt: (v) => `$${formatNum(v)}` },
-  { slug: 'gapminder-life-expectancy', label: 'Life expectancy', fmt: (v) => `${formatNum(v)} years` },
+  { slug: 'wb-life-expectancy', label: 'Life expectancy', fmt: (v) => `${formatNum(v)} years` },
   { slug: 'gapminder-median-age', label: 'Median age', fmt: (v) => `${formatNum(v)} years` },
   { slug: 'gapminder-urban', label: 'Urban population', fmt: (v) => `${formatNum(v)}%` },
   { slug: 'gapminder-internet', label: 'Internet users', fmt: (v) => `${formatNum(v)}%` },

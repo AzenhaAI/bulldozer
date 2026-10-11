@@ -14,6 +14,7 @@ import { datasets, getDataset } from '@data/datasets';
 // Curated bivariate pairings — a "good" second dimension per indicator.
 const PAIRINGS: Record<string, { y: string; title: string }> = {
   'whr-happiness': { y: 'imf-gdp-per-capita-ppp', title: 'Happiness × wealth — colour shows both at once' },
+  'wb-life-expectancy': { y: 'imf-gdp-per-capita-ppp', title: 'Longevity × wealth' },
   'gapminder-life-expectancy': { y: 'imf-gdp-per-capita-ppp', title: 'Longevity × wealth' },
   'gapminder-internet': { y: 'imf-gdp-per-capita-ppp', title: 'Internet access × wealth' },
   'v-dem-v2x-libdem': { y: 'qog-ti-cpi', title: 'Liberal democracy × clean government' },

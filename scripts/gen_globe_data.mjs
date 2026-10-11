@@ -21,7 +21,7 @@ const a2map = load('iso-alpha2');
 const METRICS = [
   ['whr-happiness', 'surveys/whr-happiness', 'Happiness', '/10', 'high', 'd2', true],
   ['gdp-pc', 'macro/imf-gdp-per-capita-ppp', 'GDP per capita', 'PPP $', 'high', 'usd', true],
-  ['life', 'macro/gapminder-life-expectancy', 'Life expectancy', 'years', 'high', 'd1', true],
+  ['life', 'macro/wb-life-expectancy', 'Life expectancy', 'years', 'high', 'd1', true],
   ['cpi', 'surveys/qog-ti-cpi', 'Corruption (CPI)', '/100 clean', 'high', 'd0', true],
   ['libdem', 'surveys/v-dem-v2x-libdem', 'Liberal democracy', '/1', 'high', 'd2', true],
   ['internet', 'surveys/gapminder-internet', 'Internet users', '%', 'high', 'd0', true],

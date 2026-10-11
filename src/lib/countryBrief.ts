@@ -27,6 +27,7 @@ const SKIP_PREFIX = [
 ];
 const SKIP = new Set([
   'wrp-discrimination', // a reading around 1% nearly everywhere: rank is noise
+  'gapminder-life-expectancy', // superseded by the fresher wb-life-expectancy; one life-expectancy line, not two
 ]);
 
 export interface BriefLine {

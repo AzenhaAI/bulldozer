@@ -5,6 +5,7 @@
  * only real ISO-3 countries (validated against iso-alpha2.json) and take the
  * latest non-null year per country.
  *   node scripts/parse_worldbank.mjs
+ *   node scripts/parse_worldbank.mjs --only=life-expectancy
  */
 import { readFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
@@ -63,6 +64,31 @@ async function emit(slug, code, meta, ctx, maxYear) {
   await writeDataset('macro', slug, { ...meta, parsedAt: PARSED }, data);
 }
 
+/** Full annual series (not just the latest year) for an indicator that
+ *  competes with a long series from another source — life expectancy vs
+ *  Gapminder's 1800–2020 run. Keeping every year lets pages pin a matching
+ *  year (e.g. 2021 next to 2021 cause-of-death data) while headlines take the
+ *  latest. Real ISO-3 countries only, same filter as wbLatest. */
+async function emitSeries(slug, code, meta, ctx, from = 1990, to = 2025) {
+  const res = await fetch(`https://api.worldbank.org/v2/country/all/indicator/${code}?format=json&per_page=20000&date=${from}:${to}`);
+  const j = await res.json();
+  if (!Array.isArray(j) || !j[1]?.length) { console.warn(`– ${slug}: empty; skipped.`); return; }
+  const data = [];
+  for (const r of j[1]) {
+    const iso = (r.countryiso3code || '').toUpperCase();
+    if (r.value == null || !ctx.real.has(iso)) continue;
+    const info = ctx.geo.get(iso);
+    data.push({ entity: info?.name || r.country?.value || iso, group: info?.region || 'Other', period: String(r.date), value: round(r.value, 2), iso });
+  }
+  data.sort((a, b) => a.entity.localeCompare(b.entity) || a.period.localeCompare(b.period));
+  await writeDataset('macro', slug, { ...meta, parsedAt: PARSED }, data);
+}
+
+const LIFE = ['wb-life-expectancy', 'SP.DYN.LE00.IN', {
+  title: 'Life Expectancy', valueLabel: 'Life expectancy at birth (years)', unit: 'years', changeMode: 'pp', topic: 'health',
+  summary: 'Life expectancy at birth, total, in years — World Bank WDI series SP.DYN.LE00.IN, from the UN World Population Prospects. Fresher than the long Gapminder series (which ends in 2020); annual values since 1990.', ...WB,
+}];
+
 /** Share of world market capitalisation, per year — computed from the
  *  absolute US$ series (CM.MKT.LCAP.CD) against the WLD aggregate, so each
  *  year's shares are honest within that year. Country names fall back to the
@@ -101,6 +127,7 @@ async function emitMarketCapShare(ctx) {
 async function main() {
   const ctx = await geoAndCountries();
   if (process.argv.includes('--only=market-cap-share')) { await emitMarketCapShare(ctx); return; }
+  if (process.argv.includes('--only=life-expectancy')) { await emitSeries(...LIFE, ctx); return; }
   // Nominal exchange rate — local currency per US$ (period average).
   await emit('wb-exchange-rate', 'PA.NUS.FCRF', {
     title: 'Exchange Rate (per US$)', valueLabel: 'Local currency units per US$ (period average)', unit: 'LCU per US$', changeMode: 'pct', topic: 'economy',
@@ -150,6 +177,8 @@ async function main() {
     summary: 'Number of domestic companies listed on the country’s stock exchange(s) at year end. World Bank.', ...WB,
   }, ctx);
   await emitMarketCapShare(ctx);
+  // Health — full annual series, see emitSeries.
+  await emitSeries(...LIFE, ctx);
   console.log('✓ World Bank: datasets written');
 }
 main();

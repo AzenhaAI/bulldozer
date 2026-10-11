@@ -33,7 +33,8 @@ const when = (it: { slug: string; period: string }) => {
 };
 // Headline stats — same recipe as the interactive Geo panel.
 const gdp = find('imf-gdp-per-capita-ppp') || find('imf-gdp-per-capita');
-const life = find('gapminder-life-expectancy');
+// Freshest source wins: World Bank WDI (to 2024) over Gapminder (ends 2020).
+const life = find('wb-life-expectancy') || find('gapminder-life-expectancy');
 const happy = find('whr-happiness');
 const dem = find('v-dem-v2x-libdem');
 const headline = [

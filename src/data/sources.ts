@@ -36,6 +36,8 @@ export const sources: Source[] = [
     description: 'Open research and data on development, health, energy, education and more — schooling, poverty, electricity, renewables, military spending and beyond.' },
   { name: 'World Bank — Global Findex', url: 'https://www.worldbank.org/en/publication/globalfindex', status: 'live', category: 'Macro & economics', match: 'Global Findex',
     description: 'The reference survey of financial inclusion — account ownership and digital payments in ~140 economies, waves 2011–2024. Via the open World Bank API.' },
+  { name: 'World Bank Open Data (API)', url: 'https://data.worldbank.org/', status: 'live', category: 'Macro & economics', match: 'World Bank Open Data',
+    description: 'Series pulled straight from the open World Bank API: life expectancy (UN World Population Prospects), exchange rates, stock markets, banking access and mobile subscriptions.' },
   { name: 'The Economist — Big Mac Index', url: 'https://github.com/TheEconomist/big-mac-data', status: 'live', category: 'Macro & economics', match: 'Big Mac',
     description: 'The famous burger-nomics gauge of currency valuation and price levels, published since 1986. Semiannual data from The Economist’s open GitHub repo.' },
 

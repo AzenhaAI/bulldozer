@@ -147,7 +147,7 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
   function describe(c) {
     const bits = [];
     const gdp = find(c, 'imf-gdp-per-capita-ppp') || find(c, 'imf-gdp-per-capita');
-    const life = find(c, 'gapminder-life-expectancy');
+    const life = find(c, 'wb-life-expectancy') || find(c, 'gapminder-life-expectancy'); // freshest first
     const happy = find(c, 'whr-happiness');
     const dem = find(c, 'v-dem-v2x-libdem');
     if (gdp) bits.push(`GDP per capita ${Math.round(gdp.value).toLocaleString()} ${gdp.unit} (#${gdp.rank})`);
@@ -192,7 +192,7 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
     // Remaining topics: top-3 by prominence in the research literature.
     connectivity: [['gapminder-internet'], ['wb-mobile-subscriptions'], ['owid-electricity']],
     health: [
-      ['gapminder-life-expectancy'], ['owid-child-mortality', 'qog-wdi-mortinf'], ['qog-wdi-chexppgdp'],
+      ['wb-life-expectancy', 'gapminder-life-expectancy'], ['owid-child-mortality', 'qog-wdi-mortinf'], ['qog-wdi-chexppgdp'],
       ['who-obesity'], ['who-uhc'],
     ],
     education: [['owid-schooling'], ['gapminder-literacy'], ['pisa-mathematics', 'qog-wdi-expedu']],

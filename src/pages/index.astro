@@ -22,7 +22,7 @@ const calendar = upcoming(month).slice(0, 6);
 const stories = storyList.map((s) => ({ ...s, href: `${base}/stories/${s.slug}` }));
 const [feature, ...rest] = stories;
 
-const picks = ['imf-gdp-growth', 'v-dem-v2x-libdem', 'gapminder-life-expectancy', 'imf-inflation', 'qog-ti-cpi', 'gapminder-internet']
+const picks = ['imf-gdp-growth', 'v-dem-v2x-libdem', 'wb-life-expectancy', 'imf-inflation', 'qog-ti-cpi', 'gapminder-internet']
   .map((s) => getDataset(s)).filter(Boolean) as NonNullable<ReturnType<typeof getDataset>>[];
 
 const browse = [
