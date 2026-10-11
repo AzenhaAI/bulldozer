@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "source": "Pew Research Center (Global Attitudes Survey)",
+    "license": "Pew Research Center terms of use — country aggregates with attribution; Pew bears no responsibility for the analyses or interpretations presented here",
+    "url": "https://www.pewresearch.org/global/",
+    "vintage": "Spring 2025 Global Attitudes Survey, public international file (24 countries)",
+    "kind": "surveys",
+    "title": "Favourable View of the United States (Pew)",
+    "unit": "%",
+    "changeMode": "pp",
+    "valueLabel": "Very or somewhat favourable opinion of the US (%)",
+    "topic": "attitudes",
+    "summary": "Share with a very or somewhat favourable opinion of the United States. Pew Research Center, Spring 2025.",
+    "method": "Weighted by Pew's weight. As in Pew's published tables, \"don't know\" and refused are part of the base; only people not asked are left out. Matches Pew's topline to the point. Counted: very or somewhat favourable (Q3a).",
+    "parsedAt": "2026-10-11"
+  },
+  "data": [
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2025",
+      "value": 34,
+      "iso": "CAN"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2025",
+      "value": 36.3,
+      "iso": "FRA"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2025",
+      "value": 32.9,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2025",
+      "value": 45.2,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2025",
+      "value": 60,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2025",
+      "value": 47.3,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2025",
+      "value": 29.1,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2025",
+      "value": 54.7,
+      "iso": "POL"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2025",
+      "value": 31.2,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2025",
+      "value": 19.2,
+      "iso": "SWE"
+    },
+    {
+      "entity": "UK",
+      "group": "Europe",
+      "period": "2025",
+      "value": 49.6,
+      "iso": "GBR"
+    },
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2025",
+      "value": 28.8,
+      "iso": "AUS"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2025",
+      "value": 54.1,
+      "iso": "IND"
+    },
+    {
+      "entity": "Indonesia",
+      "group": "Asia",
+      "period": "2025",
+      "value": 48.4,
+      "iso": "IDN"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2025",
+      "value": 55.4,
+      "iso": "JPN"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2025",
+      "value": 60.7,
+      "iso": "KOR"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2025",
+      "value": 83.3,
+      "iso": "ISR"
+    },
+    {
+      "entity": "Turkey",
+      "group": "Europe",
+      "period": "2025",
+      "value": 24.8,
+      "iso": "TUR"
+    },
+    {
+      "entity": "Kenya",
+      "group": "Africa",
+      "period": "2025",
+      "value": 62.2,
+      "iso": "KEN"
+    },
+    {
+      "entity": "Nigeria",
+      "group": "Africa",
+      "period": "2025",
+      "value": 78,
+      "iso": "NGA"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2025",
+      "value": 49.8,
+      "iso": "ZAF"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2025",
+      "value": 52.1,
+      "iso": "ARG"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2025",
+      "value": 56.3,
+      "iso": "BRA"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2025",
+      "value": 28.8,
+      "iso": "MEX"
+    }
+  ]
+}

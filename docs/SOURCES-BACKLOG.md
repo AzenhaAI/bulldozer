@@ -102,6 +102,6 @@ with the required acknowledgement, and expect that they may say no.
 ## Suggested order
 
 1. ~~**LAPOP**~~ — done 2026-09-28: 11 series, 2004–2026, 28 countries.
-2. **Pew** — account, the widest "attitudes to X" coverage.
+2. ~~**Pew**~~ — done 2026-10-11: Spring 2025, 18 series, 24 countries; every figure matches Pew's topline. Earlier waves would add trends.
 3. **ISSP + Eurobarometer** deeper — one GESIS account serves both.
 4. **Asian Barometer** — start the application now; it is the slow one.
