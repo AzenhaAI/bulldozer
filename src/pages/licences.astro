@@ -10,6 +10,7 @@ for (const ds of datasets) {
   const l = licenceForSource(ds.source);
   if (l) counts.set(l.id, (counts.get(l.id) ?? 0) + 1);
 }
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const sorted = [...licences].sort((a, b) => a.name.localeCompare(b.name));
 ---
 <BaseLayout title="Data licences & attributions" description="Licence, required citation and required disclaimer for every data source BullDozer publishes.">
@@ -22,8 +23,10 @@ const sorted = [...licences].sort((a, b) => a.name.localeCompare(b.name));
         licence and terms; the figures shown here are our own aggregations and are not endorsed by the data
         owners. For each source we list the licence, the citation it asks for and, where its terms require
         one, its disclaimer word for word. Questions or corrections:
-        <a href="mailto:agent@azenha.ai">agent@azenha.ai</a>.
+        <a href="mailto:agent@azenha.ai">agent@azenha.ai</a>. For programmes we do not use, see the
+        <a href={`${base}/edu/sources/`}>guide to the world’s surveys and data programmes</a>.
       </p>
+      <p class="method-note takedown-note"><b>Data owners:</b> if you produce any of the data shown here and want it removed, or credited differently, write to <a href="mailto:agent@azenha.ai">agent@azenha.ai</a>. We take it down on your first request — no questions asked.</p>
 
       <nav class="lic-toc" aria-label="Sources">
         {sorted.map((l) => <a href={`#${l.id}`}>{l.name}</a>)}
@@ -56,6 +59,7 @@ const sorted = [...licences].sort((a, b) => a.name.localeCompare(b.name));
 </BaseLayout>
 
 <style>
+  .takedown-note { margin: 0 0 4px; font-size: 14px; }
   .lic-toc { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; margin: 8px 0 28px; }
   .lic { scroll-margin-top: 80px; }
   .lic dl { display: grid; grid-template-columns: 96px 1fr; gap: 4px 12px; margin: 6px 0 0; font-size: 14px; }

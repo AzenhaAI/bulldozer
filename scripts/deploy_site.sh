@@ -17,7 +17,9 @@
 set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SITE="$HOME/Projects/azenha"
+# AZENHA_SITE points the copy at another checkout of the site repo (e.g. a
+# worktree of main) when the shared one is on someone else's branch.
+SITE="${AZENHA_SITE:-$HOME/Projects/azenha}"
 DEST="$SITE/bulldozer"
 
 [ -d "$SITE/.git" ] || { echo "✗ $SITE is not the site repo" >&2; exit 1; }

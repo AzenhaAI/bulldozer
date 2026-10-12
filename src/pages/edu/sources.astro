@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EduTabs from '@components/EduTabs.astro';
+import { datasets } from '@data/datasets';
+import { sources } from '@data/sources';
+import { licences } from '@data/licences';
+import { surveyGuide, guideSections, ACCESS_TYPES, type GuideEntry } from '@data/surveyGuide';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const licenceIds = new Set(licences.map((l) => l.id));
+
+// Live dataset count for a used programme: the same substring match the
+// source catalogue (src/components/SourceCatalog.astro) uses on meta.source.
+function liveCount(e: GuideEntry): number {
+  if (!e.inBullDozer.used) return 0;
+  const m = e.inBullDozer.match;
+  return datasets.filter((d) => m.some((s) => d.source.includes(s))).length;
+}
+// Which section of the site lists the programme's datasets: the source
+// catalogue puts 'Macro & economics' on /macro/, everything else on /surveys/.
+function sectionLink(e: GuideEntry): { href: string; label: string } {
+  if (!e.inBullDozer.used) return { href: '', label: '' };
+  const m = e.inBullDozer.match;
+  const src = sources.find((s) => s.match && m.some((x) => x.includes(s.match!) || s.match!.includes(x)));
+  let macro: boolean;
+  if (src) macro = src.category === 'Macro & economics';
+  else {
+    const own = datasets.filter((d) => m.some((s) => d.source.includes(s)));
+    macro = own.filter((d) => d.kind === 'macro').length >= own.length / 2;
+  }
+  return macro ? { href: `${base}/macro/`, label: 'Macro' } : { href: `${base}/surveys/#studies`, label: 'Polls' };
+}
+const host = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/.*$/, '');
+
+const rows = surveyGuide.map((e) => ({ e, n: liveCount(e), link: sectionLink(e) }));
+const nUsed = rows.filter((r) => r.e.inBullDozer.used).length;
+const sections = guideSections
+  .map((s) => ({
+    ...s,
+    rows: rows
+      .filter((r) => r.e.section === s.id)
+      // used first, then the rest; alphabetical within each group
+      .sort((a, b) => Number(b.e.inBullDozer.used) - Number(a.e.inBullDozer.used) || a.e.name.localeCompare(b.e.name)),
+  }))
+  .filter((s) => s.rows.length > 0);
+---
+<BaseLayout
+  title="Sources — a field guide to surveys and data programmes"
+  description={`${surveyGuide.length} survey and data programmes worldwide — who runs them, what they cover, how to get the data, and whether BullDozer uses them.`}
+  active="edu"
+>
+  <section class="section">
+    <div class="container">
+      <EduTabs current="sources" />
+      <span class="kicker">Edu · Sources</span>
+      <h1>A field guide to the world’s surveys and data programmes</h1>
+      <p class="sub">
+        The names worth knowing — {surveyGuide.length} research programmes, from the big cross-national attitude surveys
+        to household panels, school assessments and the indices built on top of them. Including the {surveyGuide.length - nUsed}
+        we do not use: for each one we say why. Facts are taken from each programme’s own website, linked on every card.
+      </p>
+      <p class="sub">How you get the data is the first thing to check:</p>
+      <dl class="sg-access">
+        {ACCESS_TYPES.map((a) => (<div><dt><span class={`sg-acc sg-acc-${a.key}`}>{a.label}</span></dt><dd>{a.what}</dd></div>))}
+      </dl>
+      <p class="method-note sg-takedown"><b>Data owners:</b> if you produce any of the data shown here and want it removed, or credited differently, write to <a href="mailto:agent@azenha.ai">agent@azenha.ai</a>. We take it down on your first request — no questions asked.</p>
+
+      <nav class="sg-index" aria-label="Sections">
+        {sections.map((s) => <a href={`#${s.id}`}>{s.title} <span class="fchip-n">{s.rows.length}</span></a>)}
+      </nav>
+
+      <div class="dlist-filters sg-filters" role="group" aria-label="Filter">
+        <button type="button" class="fchip active" data-f="all">All <span class="fchip-n">{surveyGuide.length}</span></button>
+        <button type="button" class="fchip" data-f="used">Used in BullDozer <span class="fchip-n">{nUsed}</span></button>
+        <button type="button" class="fchip" data-f="not">Not used <span class="fchip-n">{surveyGuide.length - nUsed}</span></button>
+      </div>
+
+      {sections.map((s) => (
+        <div class="sg-section" id={s.id}>
+          <h2>{s.title}</h2>
+          <p class="sub">{s.intro}</p>
+          <div class="grid cols-2">
+            {s.rows.map(({ e, n, link }) => (
+              <article class="card source-card sg-card" id={e.id} data-used={e.inBullDozer.used ? 'used' : 'not'}>
+                <div class="source-head">
+                  <h3><a href={e.url} target="_blank" rel="noopener">{e.name}{e.acronym ? ` (${e.acronym})` : ''} ↗</a></h3>
+                  {e.inBullDozer.used
+                    ? <span class="badge live">Used · {n} {n === 1 ? 'dataset' : 'datasets'}</span>
+                    : <span class="badge catalog">Not used</span>}
+                </div>
+                <p class="meta sg-prod">{e.producer} · {e.type}</p>
+                <dl class="sg-dl">
+                  <dt>Coverage</dt><dd>{e.coverage}</dd>
+                  {e.frequency && (<><dt>How often</dt><dd>{e.frequency}</dd></>)}
+                  <dt>Topics</dt><dd>{e.topics}</dd>
+                  <dt>Access</dt><dd>{e.access
+                    ? <span class={`sg-acc sg-acc-${ACCESS_TYPES.find((a) => a.label === e.access)!.key}`}>{e.access}</span>
+                    : <span class="sg-unk">not confirmed on the programme’s own site</span>}</dd>
+                  <dt>Licence</dt><dd>{e.licence}</dd>
+                  <dt>BullDozer</dt>
+                  <dd>
+                    {e.inBullDozer.used ? (
+                      <>
+                        {n > 0 ? <a href={link.href}>{n} {n === 1 ? 'dataset' : 'datasets'} on {link.label}</a> : 'no live datasets'}
+                        {e.inBullDozer.note && <> · {e.inBullDozer.note}</>}
+                        {e.inBullDozer.licenceId && licenceIds.has(e.inBullDozer.licenceId) && (
+                          <> · <a href={`${base}/licences/#${e.inBullDozer.licenceId}`}>licence &amp; credit</a></>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        Not used — {e.inBullDozer.reason}
+                        {e.inBullDozer.licenceId && licenceIds.has(e.inBullDozer.licenceId) && (
+                          <> · <a href={`${base}/licences/#${e.inBullDozer.licenceId}`}>licence notes</a></>
+                        )}
+                      </>
+                    )}
+                  </dd>
+                </dl>
+                <p class="meta sg-src">
+                  Checked on: {e.sourceUrl.map((u, i) => (<>{i > 0 && ', '}<a href={u} target="_blank" rel="noopener">{e.sourceUrl.slice(0, i).some((v) => host(v) === host(u)) ? `p.${i + 1}` : host(u)}</a></>))}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const bar = document.querySelector('.sg-filters');
+  if (bar) {
+    bar.addEventListener('click', function (ev) {
+      const btn = (ev.target as HTMLElement).closest('.fchip') as HTMLElement | null;
+      if (!btn) return;
+      const f = btn.getAttribute('data-f') || 'all';
+      bar.querySelectorAll('.fchip').forEach(function (b) { b.classList.toggle('active', b === btn); });
+      document.querySelectorAll('.sg-section').forEach(function (sec) {
+        let shown = 0;
+        sec.querySelectorAll<HTMLElement>('.sg-card').forEach(function (c) {
+          const ok = f === 'all' || c.getAttribute('data-used') === f;
+          c.hidden = !ok;
+          if (ok) shown++;
+        });
+        (sec as HTMLElement).hidden = shown === 0;
+      });
+    });
+  }
+</script>
+
+<style>
+  .sg-access { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px 18px; margin: 0 0 18px; }
+  .sg-access div { min-width: 0; }
+  .sg-access dt { margin: 0 0 3px; }
+  .sg-access dd { margin: 0; font-size: 13.5px; color: var(--text-dim); }
+  .sg-takedown { margin: 0 0 18px; font-size: 14px; }
+  .sg-index { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 14px; margin: 0 0 16px; }
+  .sg-filters { margin-bottom: 8px; }
+  .sg-section { margin-top: 30px; scroll-margin-top: 80px; }
+  .sg-section[hidden], .sg-card[hidden] { display: none; }
+  .sg-card { scroll-margin-top: 80px; display: flex; flex-direction: column; }
+  .sg-card h3 { overflow-wrap: anywhere; }
+  .sg-prod { margin: 0 0 8px; }
+  .sg-dl { display: grid; grid-template-columns: 80px 1fr; gap: 3px 10px; margin: 0; font-size: 13.5px; }
+  .sg-dl dt { color: var(--text-dim); font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.8px; padding-top: 3px; }
+  .sg-dl dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+  .sg-src { margin: 10px 0 0; font-size: 12px; overflow-wrap: anywhere; }
+  .sg-acc { display: inline-block; font-family: var(--mono); font-size: 11.5px; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-elev); white-space: nowrap; }
+  .sg-acc-open { color: var(--up); border-color: rgba(52,211,153,0.35); }
+  .sg-acc-account { color: var(--accent); border-color: rgba(255,176,0,0.4); }
+  .sg-acc-apply { color: var(--accent-2); border-color: rgba(255,122,0,0.4); }
+  .sg-acc-paid { color: var(--down); border-color: var(--border); }
+  .sg-acc-reports { color: var(--text-dim); }
+  .sg-unk { color: var(--text-dim); font-style: italic; }
+  @media (max-width: 420px) {
+    .sg-dl { grid-template-columns: 1fr; }
+    .sg-dl dt { padding-top: 6px; }
+    .source-head { flex-wrap: wrap; }
+  }
+</style>

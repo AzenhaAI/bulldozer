@@ -1,0 +1,23 @@
+---
+/** Sub-navigation between the two Edu pages: Guides (/edu/) and Sources (/edu/sources/). */
+interface Props {
+  current: 'guides' | 'sources';
+}
+const { current } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const tabs = [
+  { id: 'guides', label: '🧭 Guides', href: `${base}/edu/` },
+  { id: 'sources', label: '🗂 Sources', href: `${base}/edu/sources/` },
+];
+---
+<nav class="edu-tabs" aria-label="Edu sections">
+  {tabs.map((t) => (
+    <a class:list={['fchip', { active: t.id === current }]} href={t.href} aria-current={t.id === current ? 'page' : undefined}>{t.label}</a>
+  ))}
+</nav>
+
+<style>
+  .edu-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+  .edu-tabs .fchip { font-size: 13px; padding: 6px 14px; text-decoration: none; }
+  .edu-tabs .fchip.active:hover { color: #1a1300; }
+</style>

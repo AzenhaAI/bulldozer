@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EduTabs from '@components/EduTabs.astro';
 import { datasets } from '@data/datasets';
+import { surveyGuide } from '@data/surveyGuide';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const DASH_TYPES = [
@@ -111,6 +113,7 @@ const RESOURCES = [
 >
   <section class="section" id="types">
     <div class="container">
+      <EduTabs current="guides" />
       <nav class="explore-nav">
         <a class="ghost-btn" href="#types">🗂 Dashboard types</a>
         <a class="ghost-btn" href="#tools">🛠 BI tools</a>
@@ -124,6 +127,14 @@ const RESOURCES = [
         What kinds of dashboards exist, which tool to reach for, how this site parses its own data — and the
         best free places to learn. Opinionated on purpose; every link is a primary source.
       </p>
+
+      <a class="card link edu-sources-card" href={`${base}/edu/sources/`}>
+        <h3>🗂 A field guide to the world’s surveys and data programmes</h3>
+        <p class="meta">
+          {surveyGuide.length} research programmes — attitude surveys, household and health surveys, panels, school
+          assessments and indices — with who runs each one, what it covers, how to get the data, and whether BullDozer uses it.
+        </p>
+      </a>
 
       <h2 style="margin-top:34px">Six kinds of dashboard</h2>
       <p class="sub">Most dashboard failures are type errors — a real-time layout answering a strategic question. Decide the type first, then the tool.</p>
@@ -234,3 +245,8 @@ const RESOURCES = [
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .edu-sources-card { display: block; margin-top: 18px; text-decoration: none; }
+  .edu-sources-card h3 { color: var(--text); }
+</style>
