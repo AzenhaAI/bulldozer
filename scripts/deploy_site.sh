@@ -22,7 +22,7 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SITE="${AZENHA_SITE:-$HOME/Projects/azenha}"
 DEST="$SITE/bulldozer"
 
-[ -d "$SITE/.git" ] || { echo "✗ $SITE is not the site repo" >&2; exit 1; }
+[ -e "$SITE/.git" ] || { echo "✗ $SITE is not the site repo" >&2; exit 1; }
 [ -d "$DEST" ] || { echo "✗ $DEST missing — wrong site checkout?" >&2; exit 1; }
 
 # Arrival dates come from git history, which only exists here — CI clones at
