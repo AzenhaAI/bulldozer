@@ -41,6 +41,14 @@ const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it comp
       <a id="ask-profile" class="ask-profile" hidden>See every figure for this country →</a>
     </div>
     <p id="ask-note" class="ask-note" hidden></p>
+    <a class="ask-lab" href="https://azenha.ai/modellab/">
+      <span class="ask-lab-icon" aria-hidden="true">💻</span>
+      <span>
+        <b>Run AI on your own laptop</b>
+        <span>We tested 22 open models on an ordinary 16 GB MacBook against the cloud — which ones fit and answer well. A guide for students on a modest computer.</span>
+      </span>
+      <span class="ask-lab-go" aria-hidden="true">→</span>
+    </a>
   </section>
   <script type="application/json" id="ask-index" set:html={JSON.stringify({ base, countries })} />
 </BaseLayout>
@@ -121,4 +129,10 @@ const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it comp
   .ask-disclaimer { font-size: 13px; color: var(--text-dim); font-style: italic; margin: 0 0 10px; }
   .ask-profile { font-weight: 600; font-size: 14px; }
   .ask-note { margin-top: 18px; color: var(--text-dim); font-style: italic; }
+  .ask-lab { display: flex; align-items: center; gap: 12px; margin-top: 34px; padding: 14px 16px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border); color: var(--text); text-decoration: none; }
+  .ask-lab:hover { border-color: var(--accent); text-decoration: none; }
+  .ask-lab-icon { font-size: 26px; flex: 0 0 auto; }
+  .ask-lab b { display: block; font-size: 15px; margin-bottom: 3px; }
+  .ask-lab span span { display: block; font-size: 13px; line-height: 1.45; color: var(--text-dim); }
+  .ask-lab-go { margin-left: auto; color: var(--accent); font-size: 20px; flex: 0 0 auto; }
 </style>
