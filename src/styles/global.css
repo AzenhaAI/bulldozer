@@ -94,6 +94,15 @@ a:hover { text-decoration: underline; }
 .bm-sep { height: 1px; background: var(--border); margin: 5px 6px; }
 /* Edu is a plain tab like the rest — there's room on every size */
 .nav-extra { display: inline-block; }
+.nav a { white-space: nowrap; }
+/* Between the phone bar (≤760) and a full desktop the eight tabs and the
+   tools did not fit one row: at 800 px "Ask AI" wrapped and the burger fell
+   off the edge. Tighter tabs keep the row whole. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .site-header .container { gap: 12px; }
+  .nav { gap: 2px; }
+  .nav a { font-size: 14px; padding: 3px 8px; }
+}
 @media (max-width: 560px) {
   #hdr-search, #hdr-theme { display: none; }
 }
