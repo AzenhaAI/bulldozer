@@ -170,7 +170,17 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
   <body>
     <script is:inline>
       // Inside an app's web view the app draws its own bar underneath.
-      if (/[?&](app|embed)=/.test(location.search) || /; wv\)/.test(navigator.userAgent)) document.documentElement.classList.add('in-app');
+      // The iOS app opens pages in Safari's view controller, which cannot be told
+      // apart from Safari by its user agent, so it marks the first URL with
+      // ?app=1; the mark is kept for the visit so links followed inside keep it.
+      (function () {
+        var mark = /[?&](app|embed)=/.test(location.search) || /; wv\)/.test(navigator.userAgent);
+        try {
+          if (mark) sessionStorage.setItem('bd-in-app', '1');
+          else mark = sessionStorage.getItem('bd-in-app') === '1';
+        } catch (e) {}
+        if (mark) document.documentElement.classList.add('in-app');
+      })();
       // A home-screen web app on iOS is woken from memory, never reloaded, and
       // has no reload button: a page opened in the morning was still showing
       // that evening, without the changes made in between. Back after two
