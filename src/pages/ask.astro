@@ -49,6 +49,11 @@ const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it comp
       </span>
       <span class="ask-lab-go" aria-hidden="true">→</span>
     </a>
+    <section id="aiw" class="aiw" hidden>
+      <h2>🤖 AI this week <span id="aiw-date" class="aiw-date"></span></h2>
+      <div id="aiw-body"></div>
+      <a class="aiw-all" href={`${base}/ask/ai-weekly/`}>Every issue →</a>
+    </section>
   </section>
   <script type="application/json" id="ask-index" set:html={JSON.stringify({ base, countries })} />
 </BaseLayout>
@@ -106,6 +111,41 @@ const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it comp
     }
   });
   if (country.value && q.value) form.requestSubmit();
+
+  // The weekly AI review: built once in AzenhaAI/azenha by the morning-brief
+  // pipeline and served from the same domain, so the Telegram post, the owner's
+  // mail and this block never disagree. No issue, no block.
+  (async () => {
+    try {
+      const res = await fetch('/ai-weekly/latest.json');
+      if (!res.ok) return;
+      const issue = await res.json();
+      if (!(Date.now() - Date.parse(issue.id) < 8 * 86400e3)) return;
+      const body = document.getElementById('aiw-body')!;
+      for (const [key, title] of [['news', 'News'], ['theory', 'Theory & papers']]) {
+        const items = (issue.sections && issue.sections[key]) || [];
+        if (!items.length) continue;
+        const h = document.createElement('h3');
+        h.textContent = title;
+        const ul = document.createElement('ul');
+        for (const it of items.slice(0, 5)) {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = it.url; a.rel = 'noopener'; a.target = '_blank';
+          a.textContent = it.en || it.title;
+          const src = document.createElement('span');
+          src.className = 'aiw-src';
+          src.textContent = ` — ${it.outlet}`;
+          li.append(a, src);
+          ul.append(li);
+        }
+        body.append(h, ul);
+      }
+      if (!body.childNodes.length) return;
+      document.getElementById('aiw-date')!.textContent = issue.id;
+      document.getElementById('aiw')!.hidden = false;
+    } catch { /* the block simply stays hidden */ }
+  })();
 </script>
 
 <style>
@@ -135,4 +175,13 @@ const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it comp
   .ask-lab b { display: block; font-size: 15px; margin-bottom: 3px; }
   .ask-lab span span { display: block; font-size: 13px; line-height: 1.45; color: var(--text-dim); }
   .ask-lab-go { margin-left: auto; color: var(--accent); font-size: 20px; flex: 0 0 auto; }
+  .aiw { margin-top: 34px; }
+  .aiw[hidden] { display: none; }
+  .aiw h2 { font-size: 22px; margin: 0 0 6px; }
+  .aiw-date { font-size: 13px; font-weight: 500; color: var(--text-dim); margin-left: 6px; }
+  .aiw h3 { font-size: 13px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin: 16px 0 6px; }
+  .aiw ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+  .aiw li { font-size: 15px; line-height: 1.45; }
+  .aiw-src { color: var(--text-dim); font-size: 13px; }
+  .aiw-all { display: inline-block; margin-top: 14px; font-weight: 600; font-size: 14px; }
 </style>

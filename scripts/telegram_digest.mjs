@@ -85,24 +85,66 @@ function buildMessage(datasets) {
   return lines.join('\n');
 }
 
+// The weekly AI review is built once, by the morning-brief pipeline in
+// AzenhaAI/azenha, and read here, by the Ask AI page and by the owner's mail,
+// so the three never disagree. An issue older than eight days is a pipeline
+// that stopped, and is skipped rather than reposted.
+const AI_WEEKLY = 'https://azenha.ai/ai-weekly/latest.json';
+const AI_SECTIONS = [['news', 'AI this week'], ['theory', 'Theory & papers']];
+
+// Legacy Markdown: these four open an entity unless escaped.
+const md = (s) => String(s).replace(/([_*`[])/g, '\\$1');
+// Inside a link's text nothing can be escaped, so those characters go.
+const linkText = (s) => String(s).replace(/[_*`[\]]/g, ' ').replace(/ +/g, ' ').trim();
+
+async function buildAiMessage() {
+  let issue;
+  try {
+    const res = await fetch(AI_WEEKLY);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    issue = await res.json();
+  } catch (err) {
+    console.warn('AI weekly unavailable:', err.message);
+    return null;
+  }
+  const age = Date.now() - Date.parse(issue.id);
+  if (!(age < 8 * 86400e3)) return null;
+  const lines = [`*🤖 BullDozer — AI weekly, ${md(issue.id)}*`, ''];
+  for (const [key, title] of AI_SECTIONS) {
+    const items = (issue.sections?.[key] || []).slice(0, 3);
+    if (!items.length) continue;
+    lines.push(`*${title}*`);
+    for (const it of items) lines.push(`• [${linkText(it.en || it.title)}](${it.url}) — ${md(it.outlet)}`);
+    lines.push('');
+  }
+  if (lines.length === 2) return null;
+  lines.push('https://azenha.ai/bulldozer/ask/');
+  return lines.join('\n');
+}
+
 async function main() {
   const datasets = await loadDatasets();
-  const message = buildMessage(datasets);
+  // A message of its own, sent whether or not the analytics digest goes through.
+  const messages = [buildMessage(datasets), await buildAiMessage()].filter(Boolean);
 
   if (!BOT_TOKEN || !CHAT_ID) {
-    console.log('No TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID set — dry run. Message:\n');
-    console.log(message);
+    console.log('No TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID set — dry run. Messages:\n');
+    console.log(messages.join('\n\n────────\n\n'));
     return;
   }
 
-  const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: CHAT_ID, text: message, parse_mode: 'Markdown', disable_web_page_preview: true }),
-  });
-  const body = await res.json();
-  if (!body.ok) throw new Error(`Telegram API: ${body.description}`);
-  console.log('✓ Digest sent to Telegram chat', CHAT_ID);
+  const failed = [];
+  for (const text of messages) {
+    const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'Markdown', disable_web_page_preview: true }),
+    });
+    const body = await res.json();
+    if (!body.ok) failed.push(body.description);
+  }
+  if (failed.length) throw new Error(`Telegram API: ${failed.join('; ')}`);
+  console.log(`✓ ${messages.length} message(s) sent to Telegram chat`, CHAT_ID);
 }
 
 main().catch((err) => {
