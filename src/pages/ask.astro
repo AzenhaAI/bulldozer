@@ -49,6 +49,16 @@ const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it comp
       </span>
       <span class="ask-lab-go" aria-hidden="true">→</span>
     </a>
+    <!-- AI news, long reads, papers of the week and Andrej Karpathy, from
+         bot.azenha.ai/ai-news (testers asked for it, R11). Titles and links
+         only; the block stays hidden until the list has loaded. -->
+    <section id="ai-read" class="ai-read" hidden>
+      <div class="ai-read-label">Read about AI</div>
+      <div id="ai-read-tabs" class="ask-chips" role="tablist"></div>
+      <ol id="ai-read-list" class="ai-read-list"></ol>
+      <button type="button" id="ai-read-more" class="ai-read-more" hidden></button>
+      <p class="ai-read-note">Headlines and links from the publishers’ own feeds; open one to read it at the source.</p>
+    </section>
   </section>
   <script type="application/json" id="ask-index" set:html={JSON.stringify({ base, countries })} />
 </BaseLayout>
@@ -106,6 +116,58 @@ const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it comp
     }
   });
   if (country.value && q.value) form.requestSubmit();
+
+  (async () => {
+    const box = document.getElementById('ai-read')!;
+    const tabs = document.getElementById('ai-read-tabs')!;
+    const list = document.getElementById('ai-read-list')!;
+    const more = document.getElementById('ai-read-more') as HTMLButtonElement;
+    type Item = { title: string; link: string; source: string; date: string };
+    type Section = { id: string; title: string; items: Item[] };
+    let sections: Section[] = [];
+    try {
+      const r = await fetch('https://bot.azenha.ai/ai-news');
+      if (!r.ok) return;
+      sections = ((await r.json()).sections || []).filter((s: Section) => s.items?.length);
+    } catch { return; }
+    if (!sections.length) return;
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const ago = (iso: string) => {
+      const t = new Date(iso);
+      if (isNaN(+t)) return '';
+      const h = (Date.now() - +t) / 3600e3;
+      if (h < 1) return 'just now';
+      if (h < 24) return `${Math.floor(h)} h ago`;
+      if (h < 24 * 7) return `${Math.floor(h / 24)} d ago`;
+      return t.getFullYear() === new Date().getFullYear() ? `${t.getDate()} ${months[t.getMonth()]}` : `${months[t.getMonth()]} ${t.getFullYear()}`;
+    };
+    let tab = 0, all = false;
+    const draw = () => {
+      tabs.replaceChildren(...sections.map((s, i) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'ask-chip' + (i === tab ? ' on' : ''); b.textContent = s.title;
+        b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', String(i === tab));
+        b.onclick = () => { tab = i; all = false; draw(); };
+        return b;
+      }));
+      const s = sections[tab];
+      list.replaceChildren(...(all ? s.items : s.items.slice(0, 5)).map((it) => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = it.link; a.target = '_blank'; a.rel = 'noopener';
+        a.textContent = it.title;
+        const meta = document.createElement('span');
+        meta.textContent = [it.source, ago(it.date)].filter(Boolean).join(' · ');
+        li.append(a, meta);
+        return li;
+      }));
+      more.hidden = s.items.length <= 5;
+      more.textContent = all ? 'Show fewer' : `Show all ${s.items.length}`;
+    };
+    more.onclick = () => { all = !all; draw(); };
+    draw();
+    box.hidden = false;
+  })();
 </script>
 
 <style>
@@ -135,4 +197,15 @@ const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it comp
   .ask-lab b { display: block; font-size: 15px; margin-bottom: 3px; }
   .ask-lab span span { display: block; font-size: 13px; line-height: 1.45; color: var(--text-dim); }
   .ask-lab-go { margin-left: auto; color: var(--accent); font-size: 20px; flex: 0 0 auto; }
+  .ai-read { margin-top: 30px; }
+  .ai-read[hidden], .ai-read-more[hidden] { display: none; }
+  .ai-read-label { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .ask-chip.on { background: var(--accent); color: #1a1300; border-color: var(--accent); }
+  .ai-read-list { list-style: none; padding: 0; margin: 8px 0 0; }
+  .ai-read-list li { padding: 11px 0; border-bottom: 1px solid var(--border); }
+  .ai-read-list a { display: block; color: var(--text); font-weight: 600; font-size: 15px; line-height: 1.35; text-decoration: none; }
+  .ai-read-list a:hover { color: var(--accent); }
+  .ai-read-list span { display: block; margin-top: 3px; font-size: 12px; color: var(--text-dim); }
+  .ai-read-more { margin-top: 10px; font: 600 14px var(--font); color: var(--accent); background: none; border: 0; padding: 4px 0; cursor: pointer; }
+  .ai-read-note { margin-top: 10px; font-size: 11px; color: var(--text-dim); }
 </style>
