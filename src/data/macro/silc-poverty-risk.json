@@ -9,7 +9,7 @@
     "source": "Eurostat — EU-SILC",
     "license": "CC BY 4.0 (Eurostat reuse policy)",
     "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_li02/default/table",
-    "parsedAt": "2026-10-19",
+    "parsedAt": "2026-10-26",
     "kind": "macro"
   },
   "data": [
@@ -1803,6 +1803,13 @@
       "group": "Europe",
       "period": "2024",
       "value": 19.2,
+      "iso": "ALB"
+    },
+    {
+      "entity": "Albania",
+      "group": "Europe",
+      "period": "2025",
+      "value": 19,
       "iso": "ALB"
     },
     {
