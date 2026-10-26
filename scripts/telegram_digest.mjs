@@ -85,12 +85,12 @@ function buildMessage(datasets) {
   return lines.join('\n');
 }
 
-// The weekly AI review is built once, by the morning-brief pipeline in
-// AzenhaAI/azenha, and read here, by the Ask AI page and by the owner's mail,
+// The weekly AI review is built once, by the brief bot in AzenhaAI/azenha,
+// and read here, by the Ask AI page and by the owner's mail,
 // so the three never disagree. An issue older than eight days is a pipeline
 // that stopped, and is skipped rather than reposted.
 const AI_WEEKLY = 'https://azenha.ai/ai-weekly/latest.json';
-const AI_SECTIONS = [['news', 'AI this week'], ['theory', 'Theory & papers']];
+const AI_SECTIONS = [['news', 'AI this week'], ['practice', '🛠 Hands-on'], ['theory', 'Theory & papers']];
 
 // Legacy Markdown: these four open an entity unless escaped.
 const md = (s) => String(s).replace(/([_*`[])/g, '\\$1');
@@ -107,9 +107,11 @@ async function buildAiMessage() {
     console.warn('AI weekly unavailable:', err.message);
     return null;
   }
-  const age = Date.now() - Date.parse(issue.id);
+  // `date` is the Sunday the issue covers; `id` was the first draft of the format.
+  const date = issue.date || issue.id;
+  const age = Date.now() - Date.parse(date);
   if (!(age < 8 * 86400e3)) return null;
-  const lines = [`*🤖 BullDozer — AI weekly, ${md(issue.id)}*`, ''];
+  const lines = [`*🤖 BullDozer — AI weekly, ${md(issue.week || date)}*`, ''];
   for (const [key, title] of AI_SECTIONS) {
     const items = (issue.sections?.[key] || []).slice(0, 3);
     if (!items.length) continue;

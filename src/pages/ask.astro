@@ -112,17 +112,18 @@ const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it comp
   });
   if (country.value && q.value) form.requestSubmit();
 
-  // The weekly AI review: built once in AzenhaAI/azenha by the morning-brief
-  // pipeline and served from the same domain, so the Telegram post, the owner's
+  // The weekly AI review: built once in AzenhaAI/azenha by the brief bot and
+  // served from the same domain, so the Telegram post, the owner's
   // mail and this block never disagree. No issue, no block.
   (async () => {
     try {
       const res = await fetch('/ai-weekly/latest.json');
       if (!res.ok) return;
       const issue = await res.json();
-      if (!(Date.now() - Date.parse(issue.id) < 8 * 86400e3)) return;
+      const date = issue.date || issue.id;
+      if (!(Date.now() - Date.parse(date) < 8 * 86400e3)) return;
       const body = document.getElementById('aiw-body')!;
-      for (const [key, title] of [['news', 'News'], ['theory', 'Theory & papers']]) {
+      for (const [key, title] of [['news', 'News'], ['practice', '🛠 Hands-on'], ['theory', 'Theory & papers']]) {
         const items = (issue.sections && issue.sections[key]) || [];
         if (!items.length) continue;
         const h = document.createElement('h3');
@@ -142,7 +143,7 @@ const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it comp
         body.append(h, ul);
       }
       if (!body.childNodes.length) return;
-      document.getElementById('aiw-date')!.textContent = issue.id;
+      document.getElementById('aiw-date')!.textContent = issue.week || date;
       document.getElementById('aiw')!.hidden = false;
     } catch { /* the block simply stays hidden */ }
   })();

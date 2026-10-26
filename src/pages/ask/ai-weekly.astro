@@ -1,15 +1,16 @@
 ---
 // Every issue of the weekly AI review, newest first. The issues are built in
-// AzenhaAI/azenha by the morning-brief pipeline and served from azenha.ai/ai-weekly/
-// (index.json lists them; one JSON per issue), so this page only reads them.
+// AzenhaAI/azenha by the brief bot and served from azenha.ai/ai-weekly/, so this
+// page only reads them: index.json and one JSON per issue when the archive is
+// published, otherwise just latest.json.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-<BaseLayout title="AI this week" active="ask" description="A weekly review of AI: the week's news and the theory and papers worth reading slowly.">
+<BaseLayout title="AI this week" active="ask" description="A weekly review of AI: the week's news, what to try hands-on, and the theory and papers worth reading slowly.">
   <section class="container aiw-page">
     <a class="aiw-back" href={`${base}/ask/`}>← Ask AI</a>
     <h1>🤖 AI this week</h1>
-    <p class="aiw-lead">Every Sunday: the week's AI news, and the theory and papers worth reading slowly — interpretability, world models, alignment.</p>
+    <p class="aiw-lead">Every Sunday: the week's AI news, what to try hands-on, and the theory and papers worth reading slowly — interpretability, world models, alignment.</p>
     <div id="aiw-issues"></div>
     <p id="aiw-none" class="aiw-none" hidden>No issues yet — the first arrives on Sunday.</p>
   </section>
@@ -17,7 +18,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 <script>
   const list = document.getElementById('aiw-issues')!;
-  const SECTIONS = [['news', 'News'], ['theory', 'Theory & papers']];
+  const SECTIONS = [['news', 'News'], ['practice', '🛠 Hands-on'], ['theory', 'Theory & papers']];
 
   function render(issue: any, into: HTMLElement) {
     for (const [key, title] of SECTIONS) {
@@ -46,8 +47,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     try {
       const res = await fetch('/ai-weekly/index.json');
       if (res.ok) ids = (await res.json()).issues || [];
-    } catch { /* falls through to "no issues yet" */ }
-    if (!ids.length) { document.getElementById('aiw-none')!.hidden = false; return; }
+    } catch { /* no archive yet */ }
+    // No archive published yet: show the latest issue on its own.
+    if (!ids.length) {
+      try {
+        const res = await fetch('/ai-weekly/latest.json');
+        if (!res.ok) throw new Error(String(res.status));
+        const issue = await res.json();
+        const h = document.createElement('h2');
+        h.className = 'aiw-week';
+        h.textContent = issue.week || issue.date || '';
+        list.append(h);
+        render(issue, list);
+        if (list.querySelector('li')) return;
+        list.textContent = '';
+      } catch { /* falls through to "no issues yet" */ }
+      document.getElementById('aiw-none')!.hidden = false;
+      return;
+    }
     ids.forEach((id, i) => {
       const d = document.createElement('details');
       const s = document.createElement('summary');
@@ -87,4 +104,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .aiw-src { color: var(--text-dim); font-size: 13px; }
   .aiw-none { color: var(--text-dim); font-style: italic; }
   .aiw-none[hidden] { display: none; }
+  .aiw-week { font-size: 18px; margin: 6px 0 0; }
 </style>
