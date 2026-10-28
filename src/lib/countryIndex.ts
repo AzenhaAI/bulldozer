@@ -39,6 +39,8 @@ export function buildCountryIndex(): CountryProfile[] {
   const nameVotes: Record<string, Map<string, number>> = {};
 
   for (const ds of datasets) {
+    // One number per question: a superseded series is history, not a profile line.
+    if (ds.supersededBy) continue;
     const periods = [...new Set(ds.data.map((o) => o.period))].sort();
     const period = periods[periods.length - 1];
     const rows = ds.data.filter((o) => o.period === period && o.iso);

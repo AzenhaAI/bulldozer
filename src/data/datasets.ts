@@ -4,6 +4,7 @@
  * UI. JSON files in ./surveys and ./macro are auto-registered, so the parsers
  * (scripts/parse_*.mjs) can add datasets without touching code.
  */
+import { SUPERSEDED } from '@lib/superseded';
 import type { Observation } from '@lib/analytics';
 import { isOpinionSurvey, topicFor, topicOverride } from '@lib/topics';
 import { methodologyFor } from '@data/methodology';
@@ -17,6 +18,8 @@ export interface DatasetMeta {
   slug: string;
   title: string;
   kind: DatasetKind;
+  /** A fresher series of ours that measures the same thing (lib/superseded.ts). */
+  supersededBy?: string;
   summary: string;
   source: string;
   license: string;
@@ -67,6 +70,8 @@ function build(modules: Record<string, { default: RawDataset }>): Dataset[] {
       changeMode: raw.meta.changeMode ?? deriveChangeMode(raw.meta.unit),
       ...methodologyFor(slug),
       firstSeen: (firstSeenMap as Record<string, string>)[slug],
+      // A fresher series of ours measures the same thing (lib/superseded.ts).
+      ...(SUPERSEDED[slug] ? { title: `${raw.meta.title} (historical)`, supersededBy: SUPERSEDED[slug] } : {}),
       // fold alternate ISO codes (IMF's UVK/WBG) onto the canonical spelling
       data: raw.data.map((o) => {
         const iso = canonIso(o.iso);
