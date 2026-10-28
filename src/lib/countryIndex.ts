@@ -3,6 +3,7 @@
  * Shared by the /data/country-index.json endpoint (interactive Geo panel)
  * and the static /country/[slug] SEO pages.
  */
+import { SUPERSEDED } from '@lib/superseded';
 import { datasets } from '@data/datasets';
 import { bestCountryName } from '@lib/geo';
 import countryNames from '@data/country-names.json';
@@ -38,9 +39,17 @@ export function buildCountryIndex(): CountryProfile[] {
   // sources spell the same country differently; vote on a clean display name
   const nameVotes: Record<string, Map<string, number>> = {};
 
+  // Countries each fresher series covers, so a superseded series is dropped only
+  // where its replacement actually has the country: Anguilla's population exists
+  // only in Gapminder's 2013 figure, and that stays, dated, rather than nothing.
+  const covered = new Map<string, Set<string>>();
   for (const ds of datasets) {
-    // One number per question: a superseded series is history, not a profile line.
-    if (ds.supersededBy) continue;
+    if (!Object.values(SUPERSEDED).includes(ds.slug)) continue;
+    covered.set(ds.slug, new Set(ds.data.filter((o) => o.iso).map((o) => o.iso!)));
+  }
+
+  for (const ds of datasets) {
+    const replacedIn = ds.supersededBy ? covered.get(ds.supersededBy) : undefined;
     const periods = [...new Set(ds.data.map((o) => o.period))].sort();
     const period = periods[periods.length - 1];
     const rows = ds.data.filter((o) => o.period === period && o.iso);
@@ -48,6 +57,9 @@ export function buildCountryIndex(): CountryProfile[] {
     const total = ranked.length;
     ranked.forEach((o, i) => {
       const iso = o.iso!;
+      // One number per question: where a fresher series has this country, the
+      // superseded one is history, not a profile line.
+      if (replacedIn?.has(iso)) return;
       if (!byIso[iso]) byIso[iso] = { iso, name: o.entity, region: o.group ?? '', items: [] };
       const votes = (nameVotes[iso] ??= new Map());
       votes.set(o.entity, (votes.get(o.entity) ?? 0) + 1);
