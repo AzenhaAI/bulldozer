@@ -57,7 +57,7 @@ const panelIndicator = [{
   slug: ds.slug, title: ds.title, kind: ds.kind, unit: ds.unit, valueLabel: ds.valueLabel,
   changeMode: ds.changeMode, periods: [...new Set(ds.data.map((o) => o.period))].sort(),
 }];
-const backHref = ds.kind === 'survey' ? `${base}/surveys` : `${base}/macro`;
+const backHref = ds.kind === 'survey' ? `${base}/surveys/` : `${base}/macro/`;
 const active = ds.kind === 'survey' ? 'surveys' : 'macro';
 const dsPeriods = [...new Set(ds.data.map((o) => o.period))].sort();
 // SEO title targets the high-intent "<indicator> by country" query pattern that
@@ -70,7 +70,7 @@ const endYear = Number(String(lastYear ?? '').match(/(\d{4})(?!.*\d{4})/)?.[1]);
 const seoTitle = `${ds.title} by Country${endYear >= 2022 ? ` — ${lastYear}` : ''}`;
 // schema.org/Dataset — indexed by Google Dataset Search. Google ranks partly on
 // metadata completeness, so every recommended field it understands is filled in.
-const dsUrl = `https://azenha.ai${base}/dataset/${ds.slug}`;
+const dsUrl = `https://azenha.ai${base}/dataset/${ds.slug}/`;
 const countryCount = new Set(ds.data.map((o) => o.entity)).size;
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -229,7 +229,7 @@ const breadcrumbLd = {
         <p class="sub">More in {ds.topic}.</p>
         <div class="grid cols-3">
           {related.map((d) => (
-            <a class="card link" href={`${base}/dataset/${d.slug}`}>
+            <a class="card link" href={`${base}/dataset/${d.slug}/`}>
               <h3 style="font-size:15px"><span class="ind-ic" aria-hidden="true">{TOPICS[d.topic]?.icon}</span>{d.title}</h3>
               <p class="meta">{d.source}</p>
             </a>
@@ -237,8 +237,8 @@ const breadcrumbLd = {
         </div>
         {(prevDs || nextDs) && (
           <div class="pager">
-            {prevDs ? <a class="ghost-btn" href={`${base}/dataset/${prevDs.slug}`}>← {prevDs.title}</a> : <span />}
-            {nextDs ? <a class="ghost-btn" href={`${base}/dataset/${nextDs.slug}`}>{nextDs.title} →</a> : <span />}
+            {prevDs ? <a class="ghost-btn" href={`${base}/dataset/${prevDs.slug}/`}>← {prevDs.title}</a> : <span />}
+            {nextDs ? <a class="ghost-btn" href={`${base}/dataset/${nextDs.slug}/`}>{nextDs.title} →</a> : <span />}
           </div>
         )}
       </div>

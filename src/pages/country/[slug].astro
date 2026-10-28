@@ -83,7 +83,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Place',
   name: c.name,
-  url: `https://azenha.ai${base}/country/${countrySlug(c.name)}`,
+  url: `https://azenha.ai${base}/country/${countrySlug(c.name)}/`,
   description: desc,
 };
 ---
@@ -91,7 +91,7 @@ const jsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <section class="section">
     <div class="container">
-      <a class="back-link" href={`${base}/country`}>← All countries</a>
+      <a class="back-link" href={`${base}/country/`}>← All countries</a>
       <span class="kicker">{c.region || 'Country profile'}</span>
       <h1>{flag} {c.name}</h1>
       {c.official && c.official !== c.name && <p class="cc-official">{c.official}</p>}
@@ -102,7 +102,7 @@ const jsonLd = {
       </div>
       <p class="sub">
         Every statistic we track for {c.name} — {c.items.length} indicators, each with its latest value and world rank.
-        <a href={`${base}/geo?c=${c.iso}`}>Open the interactive profile →</a>
+        <a href={`${base}/geo/?c=${c.iso}`}>Open the interactive profile →</a>
       </p>
 
       {headline.length > 0 && (
@@ -126,7 +126,7 @@ const jsonLd = {
         <p class="sub">By profile across every shared indicator (global percentiles).</p>
         <p style="display:flex; gap:10px; flex-wrap:wrap">
           {similar.map((s) => (
-            <a class="ghost-btn" style="margin:0; text-decoration:none" href={`${base}/country/${countrySlug(s.c.name)}`}>
+            <a class="ghost-btn" style="margin:0; text-decoration:none" href={`${base}/country/${countrySlug(s.c.name)}/`}>
               {flagFor(s.c.iso)} {s.c.name} · {Math.round(s.match * 100)}%
             </a>
           ))}
@@ -142,7 +142,7 @@ const jsonLd = {
         <p class="sub">Compare {c.name} with its neighbours across the same {c.items.length} indicators.</p>
         <p style="display:flex; gap:8px; flex-wrap:wrap">
           {regionPeers.map((p) => (
-            <a class="ghost-btn" style="margin:0; text-decoration:none" href={`${base}/country/${countrySlug(p.name)}`}>
+            <a class="ghost-btn" style="margin:0; text-decoration:none" href={`${base}/country/${countrySlug(p.name)}/`}>
               {flagFor(p.iso)} {p.name}
             </a>
           ))}
@@ -161,7 +161,7 @@ const jsonLd = {
             <tbody>
               {t.items.map((it) => (
                 <tr>
-                  <td><a href={`${base}/dataset/${it.slug}`}>{it.title}</a></td>
+                  <td><a href={`${base}/dataset/${it.slug}/`}>{it.title}</a></td>
                   <td class="num">{fmt(it.value, it.unit)}</td>
                   <td class="num" style="color:var(--text-dim)">#{it.rank}/{it.total}</td>
                   <td class="num" style="color:var(--text-dim)">{when(it)}</td>

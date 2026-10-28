@@ -157,7 +157,7 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
     return `${c.region || 'World'}. ${bits.join(' · ')}.`;
   }
 
-  const row = (it, cls = '') => `<tr${cls ? ` class="${cls}"` : ''}><td><span class="ind-ic">${TICON[it.topic] || ''}</span><a href="${base}/dataset/${it.slug}">${it.title}</a></td>` +
+  const row = (it, cls = '') => `<tr${cls ? ` class="${cls}"` : ''}><td><span class="ind-ic">${TICON[it.topic] || ''}</span><a href="${base}/dataset/${it.slug}/">${it.title}</a></td>` +
     `<td class="num">${fmt(it.value, it.unit)}</td>` +
     `<td class="num" style="color:var(--text-dim)">#${it.rank}/${it.total}</td></tr>`;
   const COLLAPSE_AT = 3;
@@ -221,7 +221,7 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
       headlineSlugs.add(it.slug);
       // show the real currency code on the exchange-rate card instead of "LCU"
       const unit = it.slug === 'wb-exchange-rate' && cur ? `${cur.code} per US$` : it.unit;
-      cards.push(`<a class="kpi-card" href="${base}/dataset/${it.slug}"><div class="kpi-label">${h.label}</div>` +
+      cards.push(`<a class="kpi-card" href="${base}/dataset/${it.slug}/"><div class="kpi-label">${h.label}</div>` +
         `<div class="kpi-val">${kval(it.value)}</div><div class="kpi-unit">${unit}</div>` +
         `<div class="kpi-rank">#${it.rank} of ${it.total}</div></a>`);
     }

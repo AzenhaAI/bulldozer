@@ -64,7 +64,7 @@ const BI_TOOLS = [
   { name: 'Observable', url: 'https://observablehq.com/', kind: 'Freemium', best: 'JavaScript notebooks for bespoke D3 visuals; home of Observable Plot.', note: 'For people who like code', demo: { url: 'https://observablehq.com/@huw/whr', label: 'a World Happiness Report notebook' } },
   { name: 'Datawrapper', url: 'https://www.datawrapper.de/', kind: 'Freemium', best: 'Newsroom-grade single charts and maps with zero code; excellent defaults.', note: 'Charts, not full dashboards', demo: { url: 'https://www.datawrapper.de/blog/', label: 'Weekly Charts — live charts by their team' } },
   { name: 'Flourish', url: 'https://flourish.studio/', kind: 'Freemium', best: 'Animated templates — bar chart races, scrollytelling — publishable in minutes.', note: 'Template-bound', demo: { url: 'https://flourish.studio/examples/', label: 'the template gallery, all interactive' } },
-  { name: 'D3 / hand-written SVG', url: 'https://d3js.org/', kind: 'Open source', best: 'Total control, zero dependencies, any design. Everything on BullDozer is built this way.', note: 'Slowest to build, most durable', demo: { url: `${base}/stories/happiest-countries`, label: 'our happiness story — this site is the demo' } },
+  { name: 'D3 / hand-written SVG', url: 'https://d3js.org/', kind: 'Open source', best: 'Total control, zero dependencies, any design. Everything on BullDozer is built this way.', note: 'Slowest to build, most durable', demo: { url: `${base}/stories/happiest-countries/`, label: 'our happiness story — this site is the demo' } },
 ];
 
 const RESOURCES = [
@@ -227,8 +227,8 @@ const RESOURCES = [
         Practical parsing notes: prefer an official API or bulk-download over scraping HTML; keep the raw file and parse a copy;
         re-run on a schedule (GitHub Actions cron) rather than by hand; and record the source URL and access date next to the data —
         that is what makes “every number sourced” possible. Browse the results on
-        <a href={`${base}/surveys`}>Polls</a> and <a href={`${base}/macro`}>Macro</a>, or check definitions in the
-        <a href={`${base}/glossary`}>Glossary</a>.
+        <a href={`${base}/surveys/`}>Polls</a> and <a href={`${base}/macro/`}>Macro</a>, or check definitions in the
+        <a href={`${base}/glossary/`}>Glossary</a>.
       </p>
     </div>
   </section>

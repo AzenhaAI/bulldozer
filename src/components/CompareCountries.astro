@@ -56,7 +56,7 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
         const vals = cols.map((c) => { const it = c.items.find((x) => x.slug === r.slug); return it ? it.value : null; });
         const max = Math.max(...vals.filter((v) => v != null));
         const unit = r.unit && r.unit.includes('%') ? '%' : '';
-        html += `<tr><td><a href="${base}/dataset/${r.slug}">${r.title}</a></td>` +
+        html += `<tr><td><a href="${base}/dataset/${r.slug}/">${r.title}</a></td>` +
           vals.map((v) => v == null ? '<td class="num" style="color:var(--text-dim)">—</td>'
             : `<td class="num"${v === max ? ' style="color:var(--accent);font-weight:600"' : ''}>${fmtNum(v)}${unit}</td>`).join('') + '</tr>';
       }

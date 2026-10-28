@@ -21,14 +21,14 @@ const desc = `Data profiles for ${all.length} countries — every indicator we t
       <p class="page-tagline">Take the data by the horns.</p>
       <p class="sub">
         {all.length} country profiles — every indicator with its latest value and world rank.
-        Prefer it interactive? <a href={`${base}/geo`}>Open the Geo explorer →</a>
+        Prefer it interactive? <a href={`${base}/geo/`}>Open the Geo explorer →</a>
       </p>
       {regions.map((r) => (
         <div>
           <h3 style="font-size:13px;margin:18px 0 8px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px">{r.region} · {r.countries.length}</h3>
           <p style="display:flex; gap:8px; flex-wrap:wrap; margin:0">
             {r.countries.map((c) => (
-              <a class="ghost-btn" style="margin:0; text-decoration:none" href={`${base}/country/${countrySlug(c.name)}`}>{flagFor(c.iso)} {c.name}</a>
+              <a class="ghost-btn" style="margin:0; text-decoration:none" href={`${base}/country/${countrySlug(c.name)}/`}>{flagFor(c.iso)} {c.name}</a>
             ))}
           </p>
         </div>

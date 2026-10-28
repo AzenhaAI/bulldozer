@@ -23,7 +23,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           <button type="button" data-m="relief">3-D relief</button>
         </div>
       </div>
-      <p class="sub">Countries shaded by happiness, city dots sized by their own ratings — or flip to the relief, where <b>height = GDP per capita (PPP)</b> and <b>colour = happiness</b>. <a href={`${base}/dataset/gapminder-internet`}>The internet-adoption chart</a> that used to live here is one click away.</p>
+      <p class="sub">Countries shaded by happiness, city dots sized by their own ratings — or flip to the relief, where <b>height = GDP per capita (PPP)</b> and <b>colour = happiness</b>. <a href={`${base}/dataset/gapminder-internet/`}>The internet-adoption chart</a> that used to live here is one click away.</p>
       <div id="eu-flat"><EuropeMap /></div>
       <ChartActions name="bulldozer-europe-map" svg=".eumap-wrap svg" hash="europe" />
       <div id="eu-relief" hidden><EuropeRelief /></div>

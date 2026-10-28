@@ -19,17 +19,17 @@ const happyLatest = happy ? [...new Set(happy.data.map((o) => o.period))].sort()
 const month = new Date().getMonth() + 1;
 const calendar = upcoming(month).slice(0, 6);
 
-const stories = storyList.map((s) => ({ ...s, href: `${base}/stories/${s.slug}` }));
+const stories = storyList.map((s) => ({ ...s, href: `${base}/stories/${s.slug}/` }));
 const [feature, ...rest] = stories;
 
 const picks = ['imf-gdp-growth', 'v-dem-v2x-libdem', 'wb-life-expectancy', 'imf-inflation', 'qog-ti-cpi', 'gapminder-internet']
   .map((s) => getDataset(s)).filter(Boolean) as NonNullable<ReturnType<typeof getDataset>>[];
 
 const browse = [
-  { title: 'Charts', href: `${base}/explore`, desc: 'Pick any indicator, period and country — bars, table or world map.' },
-  { title: 'Macro', href: `${base}/macro`, desc: `${datasetsByKind('macro').length} objective indicators — economy, demographics, health, governance, environment, risk.` },
-  { title: 'Polls', href: `${base}/surveys`, desc: `${datasetsByKind('survey').length} opinion & perception studies — happiness, attitudes, risk perception.` },
-  { title: 'Glossary', href: `${base}/glossary`, desc: 'Plain-language explanations of every metric and method.' },
+  { title: 'Charts', href: `${base}/explore/`, desc: 'Pick any indicator, period and country — bars, table or world map.' },
+  { title: 'Macro', href: `${base}/macro/`, desc: `${datasetsByKind('macro').length} objective indicators — economy, demographics, health, governance, environment, risk.` },
+  { title: 'Polls', href: `${base}/surveys/`, desc: `${datasetsByKind('survey').length} opinion & perception studies — happiness, attitudes, risk perception.` },
+  { title: 'Glossary', href: `${base}/glossary/`, desc: 'Plain-language explanations of every metric and method.' },
 ];
 ---
 <BaseLayout active="news">
@@ -144,8 +144,8 @@ const browse = [
         <div class="quiz-row">
           <span class="quiz-blurb"><span class="q-emo">🎯</span> <b>Country Quiz</b> — one mystery country, five real statistics. Most people lose to a chimp. Will you?</span>
           <span class="quiz-btns">
-            <a class="quiz-play" id="quiz-play" href={`${base}/quiz`}>New game 🎲</a>
-            <a class="ghost-btn" href={`${base}/explore`} style="margin:0">Try other charts →</a>
+            <a class="quiz-play" id="quiz-play" href={`${base}/quiz/`}>New game 🎲</a>
+            <a class="ghost-btn" href={`${base}/explore/`} style="margin:0">Try other charts →</a>
           </span>
         </div>
         <QuizGame autostart />
@@ -178,7 +178,7 @@ const browse = [
       <p class="sub">Jump straight into the numbers.</p>
       <div class="grid cols-3">
         {picks.map((d) => (
-          <a class="card link" href={`${base}/dataset/${d.slug}`}>
+          <a class="card link" href={`${base}/dataset/${d.slug}/`}>
             <h3 style="font-size:16px">{d.title}</h3>
             <p class="meta">{d.summary}</p>
             <span class="pill">{d.source}</span>

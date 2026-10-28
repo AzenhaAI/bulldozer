@@ -37,7 +37,7 @@ const cats = [...new Set(list.map((s) => s.category))];
               {own.length > 0 && (
                 <p class="src-inds">
                   {own.map((d) => (
-                    <a class="src-ind" href={`${base}/dataset/${d.slug}`}>{d.title}</a>
+                    <a class="src-ind" href={`${base}/dataset/${d.slug}/`}>{d.title}</a>
                   ))}
                 </p>
               )}
