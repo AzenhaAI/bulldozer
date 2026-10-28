@@ -108,9 +108,34 @@ export async function writeDataset(kind, slug, meta, data) {
   const rel = dest.replace(ROOT + '/', '');
 
   let prev = null;
+  let prevData = [];
   try {
-    prev = fingerprint(JSON.parse(await readFile(dest, 'utf8')).data ?? []);
+    prevData = JSON.parse(await readFile(dest, 'utf8')).data ?? [];
+    prev = fingerprint(prevData);
   } catch { /* first write of this dataset */ }
+
+  // A source that stops short for one country must not take a newer year away
+  // from us: EU-SILC once came back with Iceland ending at 2020 where we held
+  // 2022 (26 Oct 2026). The whole-dataset check cannot see that — the newest
+  // period overall did not move — so per country, rows newer than what the
+  // source now returns are carried forward and the carry-over is logged.
+  const key = (r) => r.iso || r.entity;
+  const newest = (rows) => {
+    const m = new Map();
+    for (const r of rows) {
+      const k = key(r), p = String(r.period);
+      if (k && (!m.has(k) || p > m.get(k))) m.set(k, p);
+    }
+    return m;
+  };
+  const nowNewest = newest(data);
+  const kept = [];
+  for (const [k, p] of newest(prevData)) {
+    const n = nowNewest.get(k);
+    if (n === undefined || p <= n) continue; // a country gone entirely is the entity-shrink guard's case
+    for (const r of prevData) if (key(r) === k && String(r.period) > n) { data.push(r); kept.push(`${k} ${r.period}`); }
+  }
+  if (kept.length) console.log(`  ↺ ${slug}: source ends earlier than our copy for ${[...new Set(kept.map((x) => x.split(' ')[0]))].join(', ')} — kept ${kept.join(', ')}`);
 
   const policy = { ...(await loadPolicy(join(__dirname, 'guard_policy.json')))[slug] };
   const { ok, violations } = compareFingerprints(prev, fingerprint(data), policy);

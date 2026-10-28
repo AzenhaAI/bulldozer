@@ -9,7 +9,7 @@
     "source": "Eurostat — EU-SILC",
     "license": "CC BY 4.0 (Eurostat reuse policy)",
     "url": "https://ec.europa.eu/eurostat/databrowser/view/ilc_li02/default/table",
-    "parsedAt": "2026-10-26",
+    "parsedAt": "2026-10-28",
     "kind": "macro"
   },
   "data": [
@@ -1923,6 +1923,20 @@
       "period": "2025",
       "value": 23.4,
       "iso": "TUR"
+    },
+    {
+      "entity": "Iceland",
+      "group": "Europe",
+      "period": "2021",
+      "value": 7.4,
+      "iso": "ISL"
+    },
+    {
+      "entity": "Iceland",
+      "group": "Europe",
+      "period": "2022",
+      "value": 7.4,
+      "iso": "ISL"
     }
   ]
 }
