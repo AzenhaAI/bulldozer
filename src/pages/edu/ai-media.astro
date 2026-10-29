@@ -1,0 +1,224 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EduTabs from '@components/EduTabs.astro';
+
+// Images and video made with AI — a student's map, asked for by testers next
+// to the AI news (R13, 28 Oct 2026). Every fact links to the page it was read
+// from, checked on 29 Oct 2026; what could not be checked (free tiers that no
+// official page states, clip lengths, a model "fitting" a 16 GB Mac) is left
+// out rather than guessed. The field moves monthly: re-check before quoting.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const CHECKED = '29 October 2026';
+
+type Item = { name: string; what: string; links: [string, string][] };
+
+const cloudVideo: Item[] = [
+  {
+    name: 'Google Gemini — Omni Flash',
+    what: 'Video from a prompt inside the Gemini app; Google says the Omni model replaces Veo (Veo 3.1 is the previous one). 10-second clips. Needs a Google AI subscription and an age of 18+.',
+    links: [['gemini.google — video generation', 'https://gemini.google/overview/video-generation/']],
+  },
+  {
+    name: 'Runway — Gen-4.5',
+    what: 'Free plan: a one-time 125 credits. Gen-4.5 costs 60 credits per 5 seconds, so the free credits make about 10 seconds of video. Also offers partner models (Kling, Seedance).',
+    links: [['runway.com/pricing', 'https://runway.com/pricing']],
+  },
+  {
+    name: 'Kling 4.0 (Kuaishou)',
+    what: 'One of the most used video models; its own site and inside Runway and Firefly.',
+    links: [['kling.ai', 'https://kling.ai/']],
+  },
+  {
+    name: 'Luma — Ray3',
+    what: 'Priced per 5- or 10-second clip; the pricing page shows paid plans only.',
+    links: [['lumalabs.ai/pricing', 'https://lumalabs.ai/pricing']],
+  },
+  {
+    name: 'Pika',
+    what: 'Its own Pika 2.5 plus other makers’ models. The free plan has no monthly credits and no commercial licence.',
+    links: [['pika.art/pricing', 'https://pika.art/pricing']],
+  },
+  {
+    name: 'MiniMax Hailuo — H3',
+    what: 'Chinese video model, available on its own site and through aggregators.',
+    links: [['hailuoai.video', 'https://hailuoai.video/']],
+  },
+];
+
+const cloudImage: Item[] = [
+  {
+    name: 'Google Gemini — Nano Banana',
+    what: 'Nano Banana 2 is free in the Gemini app; 2.1, the newest, needs a paid plan. Images carry an invisible SynthID watermark and a visible one.',
+    links: [['gemini.google — image generation', 'https://gemini.google/overview/image-generation/']],
+  },
+  {
+    name: 'Adobe Firefly',
+    what: 'Free daily generations without a plan (the number is not stated). Adds Content Credentials to every file. Adobe calls output from its own Firefly models safe for commercial use; output from partner models (GPT Image, Nano Banana, FLUX, Kling…) is your responsibility.',
+    links: [['adobe.com — Firefly plans', 'https://www.adobe.com/products/firefly/plans.html']],
+  },
+  {
+    name: 'ChatGPT Images',
+    what: 'OpenAI’s image model inside ChatGPT; version 2.0 launched in April 2026.',
+    links: [['eWeek, 21 Apr 2026', 'https://www.eweek.com/news/openai-chatgpt-images-2-0/']],
+  },
+  {
+    name: 'FLUX — Black Forest Labs',
+    what: 'FLUX 3 Image and Video through the maker’s API and many apps; some FLUX models are also open (below).',
+    links: [['bfl.ai/models', 'https://bfl.ai/models']],
+  },
+];
+
+const openModels: { name: string; kind: string; licence: string; note: string; link: string }[] = [
+  { name: 'FLUX.1 [schnell]', kind: 'Image, 12B', licence: 'Apache-2.0 — commercial use allowed', note: 'Fast few-step model; the classic starting point.', link: 'https://huggingface.co/black-forest-labs/FLUX.1-schnell' },
+  { name: 'FLUX.2 [klein] 4B', kind: 'Image, 4B', licence: 'Apache-2.0 — commercial use allowed', note: 'The card says it fits in about 13 GB of GPU memory. (The 9B version is non-commercial.)', link: 'https://huggingface.co/black-forest-labs/FLUX.2-klein-4B' },
+  { name: 'Stable Diffusion 3.5 Medium / Large', kind: 'Image, 2B / 8B', licence: 'Stability Community License — free, commercial use under $1M revenue a year', note: '', link: 'https://huggingface.co/stabilityai/stable-diffusion-3.5-medium' },
+  { name: 'Wan 2.2 TI2V-5B', kind: 'Video, 5B, 720p', licence: 'Apache-2.0 — commercial use allowed', note: 'The model card asks for a 24 GB GPU; ComfyUI’s guide says it fits 8 GB with offloading.', link: 'https://docs.comfy.org/tutorials/video/wan/wan2_2' },
+  { name: 'LTX-2', kind: 'Video, 19B', licence: 'LTX-2 Community License — free commercial use under $10M revenue a year', note: '', link: 'https://huggingface.co/Lightricks/LTX-2' },
+  { name: 'HunyuanVideo 1.5', kind: 'Video, 8.3B', licence: 'Tencent licence — does not cover the EU, the UK or South Korea', note: 'If you study or work in the EU, this one is not licensed to you.', link: 'https://huggingface.co/tencent/HunyuanVideo-1.5/blob/main/LICENSE' },
+];
+
+const apps: Item[] = [
+  { name: 'Draw Things', what: 'Free and offline on iPhone, iPad and Mac. Runs FLUX, Wan 2.2, LTX-2 and Qwen Image among others — the easiest way to try open models without code.', links: [['drawthings.ai', 'https://drawthings.ai/'], ['App Store', 'https://apps.apple.com/us/app/draw-things-offline-ai-art/id6444050820']] },
+  { name: 'mflux', what: 'Command-line FLUX on Apple’s MLX, with 8-bit quantisation for smaller memory.', links: [['github.com/filipstrand/mflux', 'https://github.com/filipstrand/mflux']] },
+  { name: 'ComfyUI Desktop', what: 'The node editor most open-model workflows are shared in. macOS 13+, Apple silicon.', links: [['docs.comfy.org — macOS', 'https://docs.comfy.org/installation/desktop/macos']] },
+  { name: 'DiffusionBee', what: 'One-click Stable Diffusion for the Mac; about 30 seconds an image on an 8 GB M1 Air, by its own figure.', links: [['diffusionbee.com', 'https://diffusionbee.com/']] },
+];
+
+const learn: [string, string, string][] = [
+  ['Hugging Face — Diffusion Models Course', 'Free, four units; Python and PyTorch.', 'https://huggingface.co/learn/diffusion-course/unit0/1'],
+  ['DeepLearning.AI — How Diffusion Models Work', 'A 46-minute short course.', 'https://www.deeplearning.ai/short-courses/how-diffusion-models-work/'],
+  ['fast.ai — Part 2', 'Stable Diffusion from the foundations, 30+ hours of lessons.', 'https://course.fast.ai/Lessons/part2.html'],
+  ['ComfyUI docs', 'Tutorials for image and video workflows, Wan included.', 'https://docs.comfy.org/'],
+  ['Diffusers on Apple silicon', 'How to run Hugging Face pipelines on a Mac, and what to switch on with less than 64 GB of memory.', 'https://huggingface.co/docs/diffusers/optimization/mps'],
+];
+---
+<BaseLayout
+  title="Images and video with AI — a student's map"
+  description="Which AI image and video tools exist in late 2026, what is free, what runs on your own laptop, which licences let you use the result, and the labelling rules that apply in the EU."
+  active="edu"
+>
+  <section class="section">
+    <div class="container">
+      <EduTabs current="ai-media" />
+      <span class="kicker">Edu · AI images &amp; video</span>
+      <h1>Images and video with AI — a student’s map</h1>
+      <p class="sub">
+        What exists, what is free, what runs on your own laptop, whose licence lets you use the result, and what the
+        law asks you to label. Every line links to the page it was read from, checked on {CHECKED}. Where no official
+        page says something — a free tier, a clip length — we leave it out. The field changes monthly.
+      </p>
+      <p class="sub">
+        For the news itself: <a href={`${base}/ask/#ai-read`}>Ask AI → Read about AI → Images &amp; video</a>.
+      </p>
+
+      <div class="card ai-note">
+        <h3>Sora is gone</h3>
+        <p class="meta">
+          OpenAI closed the Sora app and API in March 2026. Guides from 2025 that start with Sora are out of date.
+          <a href="https://www.engadget.com/ai/openai-is-shutting-down-its-sora-video-generation-app-211023358.html" rel="noopener">Engadget, 24 Mar 2026</a>
+        </p>
+      </div>
+
+      <h2>Video in the cloud</h2>
+      <div class="grid cols-2">
+        {cloudVideo.map((i) => (
+          <div class="card"><h3>{i.name}</h3><p class="ai-what">{i.what}</p>
+            <p class="meta">{i.links.map(([t, u], k) => (<>{k > 0 && ' · '}<a href={u} rel="noopener">{t}</a></>))}</p></div>
+        ))}
+      </div>
+
+      <h2>Images in the cloud</h2>
+      <div class="grid cols-2">
+        {cloudImage.map((i) => (
+          <div class="card"><h3>{i.name}</h3><p class="ai-what">{i.what}</p>
+            <p class="meta">{i.links.map(([t, u], k) => (<>{k > 0 && ' · '}<a href={u} rel="noopener">{t}</a></>))}</p></div>
+        ))}
+      </div>
+
+      <h2>On your own computer</h2>
+      <p class="sub">
+        Open models are free to download, and nothing you make leaves the machine. Read the licence before you publish:
+        “open” ranges from anything-goes to non-commercial to not-in-your-country.
+      </p>
+      <div class="ai-table-wrap">
+        <table class="ai-table">
+          <thead><tr><th>Model</th><th>What</th><th>Licence</th><th>Note</th></tr></thead>
+          <tbody>
+            {openModels.map((m) => (
+              <tr><td><a href={m.link} rel="noopener">{m.name}</a></td><td>{m.kind}</td><td>{m.licence}</td><td>{m.note}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="meta ai-caveat">
+        Memory figures on model cards are for NVIDIA graphics cards; no maker promises a model runs on a 16 GB Mac. Our own
+        rule of thumb from <a href="https://azenha.ai/modellab/">testing language models on one</a>: start with the 4B-class image
+        models, expect video to take minutes per clip.
+      </p>
+      <h3 class="ai-h3">Apps that run them</h3>
+      <div class="grid cols-2">
+        {apps.map((i) => (
+          <div class="card"><h3>{i.name}</h3><p class="ai-what">{i.what}</p>
+            <p class="meta">{i.links.map(([t, u], k) => (<>{k > 0 && ' · '}<a href={u} rel="noopener">{t}</a></>))}</p></div>
+        ))}
+      </div>
+
+      <h2>The rules</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Label it — EU AI Act, Article 50</h3>
+          <p class="ai-what">
+            Since 2 August 2026, makers of generators must mark synthetic images, audio and video in a machine-readable way,
+            and whoever publishes a deepfake must say so. For plainly artistic, satirical or fictional work the label may be
+            light, but not absent. Systems already on the market have until 2 December 2026 for the marking.
+          </p>
+          <p class="meta"><a href="https://artificialintelligenceact.eu/article/50/" rel="noopener">Article 50</a> · <a href="https://www.bakerbotts.com/thought-leadership/publications/2026/september/eu-ai-act-article-50-transparency-obligations-go-live" rel="noopener">Baker Botts, Sep 2026</a></p>
+        </div>
+        <div class="card">
+          <h3>Check it — Content Credentials and SynthID</h3>
+          <p class="ai-what">
+            Content Credentials (the C2PA standard) travel with a file and show how it was made and edited. Google’s SynthID
+            is an invisible watermark; its detector also reads marks from OpenAI, NVIDIA and Kakao.
+          </p>
+          <p class="meta"><a href="https://contentcredentials.org/" rel="noopener">contentcredentials.org</a> · <a href="https://deepmind.google/models/synthid/" rel="noopener">SynthID</a></p>
+        </div>
+        <div class="card">
+          <h3>Own it? — copyright</h3>
+          <p class="ai-what">
+            The US Copyright Office (January 2025): a prompt alone does not make you the author. What you add yourself —
+            your own material, a creative selection and arrangement, real edits — can be protected; using AI as a tool does
+            not rule that out.
+          </p>
+          <p class="meta"><a href="https://www.copyright.gov/newsnet/2025/1060.html" rel="noopener">copyright.gov — Part 2 report</a></p>
+        </div>
+        <div class="card">
+          <h3>Charts are not pictures</h3>
+          <p class="ai-what">
+            Image models draw what looks right, not what the numbers say. A chart for publication comes from the data —
+            the BullDozer app’s Edu tab has a map maker and a people-chart maker that print the source on every image.
+          </p>
+          <p class="meta"><a href={`${base}/apps/`}>Get the app</a></p>
+        </div>
+      </div>
+
+      <h2>Learn it properly — free</h2>
+      <div class="grid cols-2">
+        {learn.map(([t, w, u]) => (
+          <a class="card link" href={u} rel="noopener"><h3>{t}</h3><p class="meta">{w}</p></a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ai-note { margin: 18px 0 8px; border-left: 3px solid var(--accent, #f2a900); }
+  .ai-what { font-size: 14px; margin: 8px 0; line-height: 1.5; }
+  .ai-h3 { margin: 26px 0 10px; }
+  .ai-caveat { margin-top: 10px; }
+  .ai-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .ai-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px; }
+  .ai-table th, .ai-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border, rgba(127,127,127,.25)); vertical-align: top; }
+  .ai-table th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; opacity: .75; }
+  h2 { margin-top: 34px; }
+</style>
