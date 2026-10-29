@@ -98,7 +98,9 @@ const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it comp
       const j = await res.json().catch(() => ({}));
       if (res.ok && j.answer) {
         answer.textContent = j.answer;
-        disclaimer.textContent = j.disclaimer || 'AI answers can be wrong — the figures are the source.';
+        // The server's line speaks of "the figures below", which the app shows
+        // under the answer; here the figures are one link away (QA, 29 Oct 2026).
+        disclaimer.textContent = 'AI answers can be wrong — the figures are the source: every one is on the country page.';
         const c = countries.find((x: { iso: string }) => x.iso === j.country);
         if (c) { profile.href = `${base}/country/${c.slug}/`; profile.hidden = false; }
         out.hidden = false;

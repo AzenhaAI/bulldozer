@@ -162,7 +162,7 @@ const jsonLd = {
               {t.items.map((it) => (
                 <tr>
                   <td><a href={`${base}/dataset/${it.slug}/`}>{it.title}</a></td>
-                  <td class="num">{fmt(it.value, it.unit)}</td>
+                  <td class="num">{fmt(it.value, it.unit)}{it.unit && !it.unit.includes('%') && <span class="ci-unit"> {it.unit}</span>}</td>
                   <td class="num" style="color:var(--text-dim)">#{it.rank}/{it.total}</td>
                   <td class="num" style="color:var(--text-dim)">{when(it)}</td>
                 </tr>

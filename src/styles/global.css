@@ -688,3 +688,8 @@ html[data-theme='light'] #co-slope { --rib: #c3ccd2; --tickc: #9aa4ad; }
   html:not(.in-app) .brand .mark { width: 26px; height: 26px; font-size: 16px; }
   html:not(.in-app) #a2hs { bottom: calc(12px + 64px + env(safe-area-inset-bottom)) !important; }
 }
+
+/* Unit after a value in country indicator tables (page and Geo panel). */
+.ci-unit { color: var(--text-dim); font-size: 12px; }
+/* The install banner sat over the bottom of the open ☰ menu on phones (QA, 29 Oct 2026). */
+html:has(#hdr-burger[aria-expanded="true"]) #a2hs { display: none !important; }

@@ -158,7 +158,7 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
   }
 
   const row = (it, cls = '') => `<tr${cls ? ` class="${cls}"` : ''}><td><span class="ind-ic">${TICON[it.topic] || ''}</span><a href="${base}/dataset/${it.slug}/">${it.title}</a></td>` +
-    `<td class="num">${fmt(it.value, it.unit)}</td>` +
+    `<td class="num">${fmt(it.value, it.unit)}${it.unit && !it.unit.includes('%') ? `<span class="ci-unit"> ${it.unit}</span>` : ''}</td>` +
     `<td class="num" style="color:var(--text-dim)">#${it.rank}/${it.total}</td></tr>`;
   const COLLAPSE_AT = 3;
 
