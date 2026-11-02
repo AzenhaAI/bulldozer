@@ -164,7 +164,7 @@ const jsonLd = {
                   <td><a href={`${base}/dataset/${it.slug}/`}>{it.title}</a></td>
                   <td class="num">{fmt(it.value, it.unit)}{it.unit && !it.unit.includes('%') && <span class="ci-unit"> {it.unit}</span>}</td>
                   <td class="num" style="color:var(--text-dim)">#{it.rank}/{it.total}</td>
-                  <td class="num" style="color:var(--text-dim)">{when(it)}</td>
+                  <td class="num" style="color:var(--text-dim)" title={it.years > 1 ? `${it.years} readings` : 'Single reading, no trend yet'}>{it.years > 1 && it.first !== it.period ? `${it.first} → ${when(it)}` : it.years === 1 ? `${when(it)} only` : when(it)}</td>
                 </tr>
               ))}
             </tbody>
@@ -172,7 +172,8 @@ const jsonLd = {
         </div>
       ))}
       <p class="sub" style="margin-top:14px">
-        Latest available period per indicator. The rank counts down from the highest
+        Latest available period per indicator; "2015 → 2024" means a series of readings over
+        those years, "2024 only" a single reading with no trend yet. The rank counts down from the highest
         value, whatever that means for the series: on child mortality or extreme
         poverty the country at #1 is the worst in the world, not the best.
         Sources are credited on each indicator page.

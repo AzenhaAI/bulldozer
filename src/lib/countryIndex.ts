@@ -20,6 +20,10 @@ export interface CountryItem {
   period: string;
   rank: number;
   total: number;
+  /** This country's earliest period in the series and how many periods it has:
+   *  1 means a single figure, so no trend to show (testers' R15, 2 Nov 2026). */
+  first: string;
+  years: number;
 }
 
 export interface CountryProfile {
@@ -55,6 +59,8 @@ export function buildCountryIndex(): CountryProfile[] {
     const rows = ds.data.filter((o) => o.period === period && o.iso);
     const ranked = [...rows].sort((a, b) => b.value - a.value);
     const total = ranked.length;
+    const own = new Map<string, Set<string>>();
+    for (const o of ds.data) if (o.iso) (own.get(o.iso) ?? own.set(o.iso, new Set()).get(o.iso)!).add(o.period);
     ranked.forEach((o, i) => {
       const iso = o.iso!;
       // One number per question: where a fresher series has this country, the
@@ -66,6 +72,7 @@ export function buildCountryIndex(): CountryProfile[] {
       byIso[iso].items.push({
         slug: ds.slug, title: ds.title, kind: ds.kind, topic: ds.topic, unit: ds.unit,
         value: o.value, period, rank: i + 1, total,
+        first: [...own.get(iso)!].sort()[0], years: own.get(iso)!.size,
       });
     });
   }
