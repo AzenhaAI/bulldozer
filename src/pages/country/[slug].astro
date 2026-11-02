@@ -163,7 +163,7 @@ const jsonLd = {
                 <tr>
                   <td><a href={`${base}/dataset/${it.slug}/`}>{it.title}</a></td>
                   <td class="num">{fmt(it.value, it.unit)}{it.unit && !it.unit.includes('%') && <span class="ci-unit"> {it.unit}</span>}</td>
-                  <td class="num" style="color:var(--text-dim)">#{it.rank}/{it.total}</td>
+                  <td class="num" style="color:var(--text-dim)" title={it.better === 'low' ? 'Ranked from the highest value; lower is better here' : it.better === 'high' ? 'Ranked from the highest value; higher is better here' : 'Ranked from the highest value; not a judgement of good or bad'}>#{it.rank}/{it.total}</td>
                   <td class="num" style="color:var(--text-dim)" title={it.years > 1 ? `${it.years} readings` : 'Single reading, no trend yet'}>{it.years > 1 && it.first !== it.period ? `${it.first} → ${when(it)}` : it.years === 1 ? `${when(it)} only` : when(it)}</td>
                 </tr>
               ))}

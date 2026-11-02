@@ -8,6 +8,7 @@ import { SUPERSEDED } from '@lib/superseded';
 import type { Observation } from '@lib/analytics';
 import { isOpinionSurvey, topicFor, topicOverride } from '@lib/topics';
 import { methodologyFor } from '@data/methodology';
+import { betterFor } from '@lib/polarity';
 import { canonIso } from '@lib/geo';
 import firstSeenMap from '@data/first-seen.json';
 
@@ -38,6 +39,8 @@ export interface DatasetMeta {
   vintage?: string;
   /** One-line methodology note (weighting, item, projection caveat). */
   method?: string;
+  /** 'high' or 'low' when one direction is plainly better; absent when neutral. */
+  better?: 'high' | 'low';
 }
 
 export interface Dataset extends DatasetMeta {
@@ -69,6 +72,8 @@ function build(modules: Record<string, { default: RawDataset }>): Dataset[] {
       topic: topicOverride(slug) ?? raw.meta.topic ?? topicFor(slug),
       changeMode: raw.meta.changeMode ?? deriveChangeMode(raw.meta.unit),
       ...methodologyFor(slug),
+      // Which way is better, where that is plain (lib/polarity.ts); absent = neutral.
+      ...(betterFor(slug) ? { better: betterFor(slug) } : {}),
       firstSeen: (firstSeenMap as Record<string, string>)[slug],
       // A fresher series of ours measures the same thing (lib/superseded.ts).
       ...(SUPERSEDED[slug] ? { title: `${raw.meta.title} (historical)`, supersededBy: SUPERSEDED[slug] } : {}),

@@ -24,6 +24,8 @@ export interface CountryItem {
    *  1 means a single figure, so no trend to show (testers' R15, 2 Nov 2026). */
   first: string;
   years: number;
+  /** Which way is better, when plain (lib/polarity.ts) — the rank alone does not say. */
+  better?: 'high' | 'low';
 }
 
 export interface CountryProfile {
@@ -73,6 +75,7 @@ export function buildCountryIndex(): CountryProfile[] {
         slug: ds.slug, title: ds.title, kind: ds.kind, topic: ds.topic, unit: ds.unit,
         value: o.value, period, rank: i + 1, total,
         first: [...own.get(iso)!].sort()[0], years: own.get(iso)!.size,
+        ...(ds.better ? { better: ds.better } : {}),
       });
     });
   }
