@@ -12,5 +12,10 @@
     { "src": "/bulldozer/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "/bulldozer/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
     { "src": "/bulldozer/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
-  ]
+  ],
+  "related_applications": [
+    { "platform": "play", "id": "ai.azenha.bulldozer", "url": "https://play.google.com/store/apps/details?id=ai.azenha.bulldozer" },
+    { "platform": "itunes", "url": "https://apps.apple.com/app/id6797664814" }
+  ],
+  "prefer_related_applications": false
 }

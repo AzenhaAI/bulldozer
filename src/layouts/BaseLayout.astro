@@ -441,6 +441,30 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
       return;
     }
 
+    // Android phones and tablets: the Google Play app is the better install,
+    // for the same reasons as on iPhone, and Play keeps it updated. Offered
+    // even to whoever installed the web version, with its own dismissal.
+    // Chrome opens a play.google.com link straight in the Play Store app.
+    if (/Android/.test(ua)) {
+      var PKEY = 'play-dismissed';
+      try { if (localStorage.getItem(PKEY) === '1') return; } catch (e) {}
+      txt.innerHTML = installed
+        ? 'You are using the web version. <strong>BullDozer Stats</strong> is on Google Play — faster, works offline.'
+        : '<strong>BullDozer Stats</strong> is on Google Play — faster, works offline, with Ask AI.';
+      go.textContent = 'Get the app';
+      go.hidden = false;
+      go.addEventListener('click', function () {
+        try { localStorage.setItem(PKEY, '1'); } catch (e) {}
+        location.href = 'https://play.google.com/store/apps/details?id=ai.azenha.bulldozer';
+      });
+      document.getElementById('a2hs-x').addEventListener('click', function () {
+        el.hidden = true;
+        try { localStorage.setItem(PKEY, '1'); } catch (e) {}
+      });
+      setTimeout(function () { el.hidden = false; }, 2500);
+      return;
+    }
+
     var dismissed = false;
     try { dismissed = localStorage.getItem(KEY) === '1'; } catch (e) {}
     if (dismissed || installed) return;
@@ -450,7 +474,7 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
       try { localStorage.setItem(KEY, '1'); } catch (e) {}
     });
 
-    // Android / Chromium: a real install.
+    // Desktop Chromium: a real install of the web app.
     var deferred = null;
     window.addEventListener('beforeinstallprompt', function (e) {
       e.preventDefault();

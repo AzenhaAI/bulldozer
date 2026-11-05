@@ -8,7 +8,7 @@ const apkMB = Math.round(statSync(fileURLToPath(new URL('../../public/downloads/
 ---
 <BaseLayout
   title="Apps for Android, iPhone and the web"
-  description="BullDozer on your phone: a free Android app, an iOS build on request, or install the site as a web app. Every dataset, offline after the first load."
+  description="BullDozer on your phone: free on Google Play and the App Store, or install the site as a web app. Every dataset, offline after the first load."
   active="apps"
 >
   <section class="section">
@@ -24,11 +24,15 @@ const apkMB = Math.round(statSync(fileURLToPath(new URL('../../public/downloads/
       <div class="apps-grid">
         <div class="app-card">
           <h2>Android</h2>
-          <p>A direct download. The app is not on Google Play yet, so your phone
-          asks you to allow <b>installing from unknown sources</b> the first time.</p>
-          <a class="ghost-btn app-cta" href={`${base}/downloads/bulldozer-stats.apk`} download>
-            Download APK, {apkMB} MB
+          <p>On Google Play — free, no ads, no sign-up. Play keeps it up to
+          date for you.</p>
+          <a class="ghost-btn app-cta" href="https://play.google.com/store/apps/details?id=ai.azenha.bulldozer">
+            Get it on Google Play
           </a>
+          <p class="app-note">No Google Play on your phone? <a href={`${base}/downloads/bulldozer-stats.apk`} download>Download
+          the APK, {apkMB} MB</a> and allow <b>installing from unknown sources</b> when
+          asked. A copy installed this way does not update from Google Play: to
+          switch, uninstall it first, then install from Play.</p>
         </div>
 
         <div class="app-card">
