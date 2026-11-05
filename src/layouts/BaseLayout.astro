@@ -412,6 +412,8 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     if (document.documentElement.classList.contains('in-app')) return;
     // On Ask AI the banner would sit over the Ask button.
     if (/\/ask\/?$/.test(location.pathname)) return;
+    // On the apps page the store badges are the page itself.
+    if (/\/apps\/?$/.test(location.pathname)) return;
 
     // iPhone and iPad: the App Store app is the better install — offline,
     // Ask AI, the same seven tabs — so offer it instead of Add to Home Screen,
