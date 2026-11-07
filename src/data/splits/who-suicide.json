@@ -1,0 +1,939 @@
+{
+  "meta": {
+    "slug": "who-suicide",
+    "dims": [
+      "sex"
+    ],
+    "source": "WHO Global Health Observatory",
+    "url": "https://www.who.int/data/gho",
+    "parsedAt": "2026-11-07",
+    "note": "Female and male values for the same year as each country's headline figure."
+  },
+  "bySex": {
+    "AFG": {
+      "period": "2023",
+      "female": 3.8,
+      "male": 6.5
+    },
+    "AGO": {
+      "period": "2023",
+      "female": 6.7,
+      "male": 31.5
+    },
+    "ALB": {
+      "period": "2023",
+      "female": 3.6,
+      "male": 7.3
+    },
+    "ARE": {
+      "period": "2023",
+      "female": 1.4,
+      "male": 3.8
+    },
+    "ARG": {
+      "period": "2023",
+      "female": 4.7,
+      "male": 18.3
+    },
+    "ARM": {
+      "period": "2023",
+      "female": 0.7,
+      "male": 8.1
+    },
+    "ATG": {
+      "period": "2023",
+      "female": 0.9,
+      "male": 1.6
+    },
+    "AUS": {
+      "period": "2023",
+      "female": 6.2,
+      "male": 19.1
+    },
+    "AUT": {
+      "period": "2023",
+      "female": 5.5,
+      "male": 20.9
+    },
+    "AZE": {
+      "period": "2023",
+      "female": 1.5,
+      "male": 5
+    },
+    "BDI": {
+      "period": "2023",
+      "female": 8,
+      "male": 29.6
+    },
+    "BEL": {
+      "period": "2023",
+      "female": 9.4,
+      "male": 21.3
+    },
+    "BEN": {
+      "period": "2023",
+      "female": 7.2,
+      "male": 27.2
+    },
+    "BFA": {
+      "period": "2023",
+      "female": 6.6,
+      "male": 38.3
+    },
+    "BGD": {
+      "period": "2023",
+      "female": 2.1,
+      "male": 7.2
+    },
+    "BGR": {
+      "period": "2023",
+      "female": 3.3,
+      "male": 12.8
+    },
+    "BHR": {
+      "period": "2023",
+      "female": 2.8,
+      "male": 2.5
+    },
+    "BHS": {
+      "period": "2023",
+      "female": 0.6,
+      "male": 4.5
+    },
+    "BIH": {
+      "period": "2023",
+      "female": 3.8,
+      "male": 18
+    },
+    "BLR": {
+      "period": "2023",
+      "female": 5.8,
+      "male": 34.5
+    },
+    "BLZ": {
+      "period": "2023",
+      "female": 2.3,
+      "male": 17
+    },
+    "BOL": {
+      "period": "2023",
+      "female": 3,
+      "male": 8.8
+    },
+    "BRA": {
+      "period": "2023",
+      "female": 4.1,
+      "male": 14
+    },
+    "BRB": {
+      "period": "2023",
+      "female": 1.1,
+      "male": 8.8
+    },
+    "BRN": {
+      "period": "2023",
+      "female": 1.5,
+      "male": 4.6
+    },
+    "BTN": {
+      "period": "2023",
+      "female": 4.9,
+      "male": 10.3
+    },
+    "BWA": {
+      "period": "2023",
+      "female": 6.1,
+      "male": 26.9
+    },
+    "CAF": {
+      "period": "2023",
+      "female": 6.2,
+      "male": 48.7
+    },
+    "CAN": {
+      "period": "2023",
+      "female": 4.3,
+      "male": 12.7
+    },
+    "CHE": {
+      "period": "2023",
+      "female": 7.5,
+      "male": 16
+    },
+    "CHL": {
+      "period": "2023",
+      "female": 3.6,
+      "male": 14.8
+    },
+    "CHN": {
+      "period": "2023",
+      "female": 6,
+      "male": 10.1
+    },
+    "CIV": {
+      "period": "2023",
+      "female": 4.6,
+      "male": 28.7
+    },
+    "CMR": {
+      "period": "2023",
+      "female": 6,
+      "male": 31
+    },
+    "COD": {
+      "period": "2023",
+      "female": 5.4,
+      "male": 32.9
+    },
+    "COG": {
+      "period": "2023",
+      "female": 5.8,
+      "male": 30.4
+    },
+    "COL": {
+      "period": "2023",
+      "female": 3,
+      "male": 11.1
+    },
+    "COM": {
+      "period": "2023",
+      "female": 11.6,
+      "male": 31
+    },
+    "CPV": {
+      "period": "2023",
+      "female": 4.4,
+      "male": 37.3
+    },
+    "CRI": {
+      "period": "2023",
+      "female": 2.6,
+      "male": 11.5
+    },
+    "CUB": {
+      "period": "2023",
+      "female": 4.9,
+      "male": 25.6
+    },
+    "CYP": {
+      "period": "2023",
+      "female": 1.6,
+      "male": 6.2
+    },
+    "CZE": {
+      "period": "2023",
+      "female": 4.6,
+      "male": 20.6
+    },
+    "DEU": {
+      "period": "2023",
+      "female": 5.3,
+      "male": 15.2
+    },
+    "DJI": {
+      "period": "2023",
+      "female": 10.4,
+      "male": 30.4
+    },
+    "DNK": {
+      "period": "2023",
+      "female": 5,
+      "male": 12.4
+    },
+    "DOM": {
+      "period": "2023",
+      "female": 2.4,
+      "male": 17.1
+    },
+    "DZA": {
+      "period": "2023",
+      "female": 2,
+      "male": 4.4
+    },
+    "ECU": {
+      "period": "2023",
+      "female": 3.3,
+      "male": 8
+    },
+    "EGY": {
+      "period": "2023",
+      "female": 0.4,
+      "male": 1.3
+    },
+    "ERI": {
+      "period": "2023",
+      "female": 10.4,
+      "male": 45
+    },
+    "ESP": {
+      "period": "2023",
+      "female": 3.7,
+      "male": 10.9
+    },
+    "EST": {
+      "period": "2023",
+      "female": 7.4,
+      "male": 22.6
+    },
+    "ETH": {
+      "period": "2023",
+      "female": 6.4,
+      "male": 24.2
+    },
+    "FIN": {
+      "period": "2023",
+      "female": 7.3,
+      "male": 19
+    },
+    "FJI": {
+      "period": "2023",
+      "female": 5.1,
+      "male": 12.5
+    },
+    "FRA": {
+      "period": "2023",
+      "female": 7.6,
+      "male": 21.1
+    },
+    "FSM": {
+      "period": "2023",
+      "female": 4.3,
+      "male": 25.7
+    },
+    "GAB": {
+      "period": "2023",
+      "female": 4.7,
+      "male": 50.1
+    },
+    "GBR": {
+      "period": "2023",
+      "female": 4.9,
+      "male": 14.4
+    },
+    "GEO": {
+      "period": "2023",
+      "female": 1.8,
+      "male": 10.4
+    },
+    "GHA": {
+      "period": "2023",
+      "female": 5.8,
+      "male": 31.3
+    },
+    "GIN": {
+      "period": "2023",
+      "female": 6.8,
+      "male": 21.2
+    },
+    "GMB": {
+      "period": "2023",
+      "female": 5.7,
+      "male": 22.6
+    },
+    "GNB": {
+      "period": "2023",
+      "female": 8.1,
+      "male": 31.9
+    },
+    "GNQ": {
+      "period": "2023",
+      "female": 6.2,
+      "male": 27.7
+    },
+    "GRC": {
+      "period": "2023",
+      "female": 1.3,
+      "male": 6.9
+    },
+    "GRD": {
+      "period": "2023",
+      "female": 3.5,
+      "male": 7.5
+    },
+    "GTM": {
+      "period": "2023",
+      "female": 2.6,
+      "male": 8.9
+    },
+    "GUY": {
+      "period": "2023",
+      "female": 16,
+      "male": 101.7
+    },
+    "HND": {
+      "period": "2023",
+      "female": 1.8,
+      "male": 10.2
+    },
+    "HRV": {
+      "period": "2023",
+      "female": 5.3,
+      "male": 20.1
+    },
+    "HTI": {
+      "period": "2023",
+      "female": 2.2,
+      "male": 8.5
+    },
+    "HUN": {
+      "period": "2023",
+      "female": 6.2,
+      "male": 27.3
+    },
+    "IDN": {
+      "period": "2023",
+      "female": 1.4,
+      "male": 3.1
+    },
+    "IND": {
+      "period": "2023",
+      "female": 11.6,
+      "male": 19.1
+    },
+    "IRL": {
+      "period": "2023",
+      "female": 3.6,
+      "male": 11
+    },
+    "IRN": {
+      "period": "2023",
+      "female": 3.2,
+      "male": 9
+    },
+    "IRQ": {
+      "period": "2023",
+      "female": 2.4,
+      "male": 8.3
+    },
+    "ISL": {
+      "period": "2023",
+      "female": 7.5,
+      "male": 12.9
+    },
+    "ISR": {
+      "period": "2023",
+      "female": 3.2,
+      "male": 10.7
+    },
+    "ITA": {
+      "period": "2023",
+      "female": 2.7,
+      "male": 8.9
+    },
+    "JAM": {
+      "period": "2023",
+      "female": 0.5,
+      "male": 3.8
+    },
+    "JOR": {
+      "period": "2023",
+      "female": 0.5,
+      "male": 1.6
+    },
+    "JPN": {
+      "period": "2023",
+      "female": 8.9,
+      "male": 20
+    },
+    "KAZ": {
+      "period": "2023",
+      "female": 6.3,
+      "male": 33.7
+    },
+    "KEN": {
+      "period": "2023",
+      "female": 6.3,
+      "male": 36.1
+    },
+    "KGZ": {
+      "period": "2023",
+      "female": 4,
+      "male": 13.6
+    },
+    "KHM": {
+      "period": "2023",
+      "female": 3.1,
+      "male": 7.7
+    },
+    "KIR": {
+      "period": "2023",
+      "female": 4.7,
+      "male": 33.3
+    },
+    "KOR": {
+      "period": "2023",
+      "female": 13.6,
+      "male": 34.8
+    },
+    "KWT": {
+      "period": "2023",
+      "female": 1.6,
+      "male": 3.5
+    },
+    "LAO": {
+      "period": "2023",
+      "female": 1.8,
+      "male": 7.3
+    },
+    "LBN": {
+      "period": "2023",
+      "female": 0.8,
+      "male": 1.7
+    },
+    "LBR": {
+      "period": "2023",
+      "female": 9.4,
+      "male": 16.5
+    },
+    "LBY": {
+      "period": "2023",
+      "female": 2.1,
+      "male": 6.7
+    },
+    "LCA": {
+      "period": "2023",
+      "female": 1.1,
+      "male": 15.2
+    },
+    "LKA": {
+      "period": "2023",
+      "female": 4.9,
+      "male": 25.5
+    },
+    "LSO": {
+      "period": "2023",
+      "female": 11,
+      "male": 66.5
+    },
+    "LTU": {
+      "period": "2023",
+      "female": 7.2,
+      "male": 34.9
+    },
+    "LUX": {
+      "period": "2023",
+      "female": 5.2,
+      "male": 13.5
+    },
+    "LVA": {
+      "period": "2023",
+      "female": 3.9,
+      "male": 26.7
+    },
+    "MAR": {
+      "period": "2023",
+      "female": 1.7,
+      "male": 5.2
+    },
+    "MDA": {
+      "period": "2023",
+      "female": 4.9,
+      "male": 25.3
+    },
+    "MDG": {
+      "period": "2023",
+      "female": 7.8,
+      "male": 27.4
+    },
+    "MDV": {
+      "period": "2023",
+      "female": 0.9,
+      "male": 5.1
+    },
+    "MEX": {
+      "period": "2023",
+      "female": 3,
+      "male": 14.9
+    },
+    "MKD": {
+      "period": "2023",
+      "female": 2.4,
+      "male": 8.8
+    },
+    "MLI": {
+      "period": "2023",
+      "female": 6.2,
+      "male": 15.2
+    },
+    "MLT": {
+      "period": "2023",
+      "female": 2.1,
+      "male": 9.9
+    },
+    "MMR": {
+      "period": "2023",
+      "female": 1.3,
+      "male": 7.1
+    },
+    "MNE": {
+      "period": "2023",
+      "female": 7,
+      "male": 29.1
+    },
+    "MNG": {
+      "period": "2023",
+      "female": 3.8,
+      "male": 29.4
+    },
+    "MOZ": {
+      "period": "2023",
+      "female": 6.3,
+      "male": 31.9
+    },
+    "MRT": {
+      "period": "2023",
+      "female": 4.7,
+      "male": 15.6
+    },
+    "MUS": {
+      "period": "2023",
+      "female": 3.3,
+      "male": 17.6
+    },
+    "MWI": {
+      "period": "2023",
+      "female": 7.9,
+      "male": 40.1
+    },
+    "MYS": {
+      "period": "2023",
+      "female": 2,
+      "male": 8
+    },
+    "NAM": {
+      "period": "2023",
+      "female": 5.9,
+      "male": 29.2
+    },
+    "NER": {
+      "period": "2023",
+      "female": 6.9,
+      "male": 19.2
+    },
+    "NGA": {
+      "period": "2023",
+      "female": 3.3,
+      "male": 10
+    },
+    "NIC": {
+      "period": "2023",
+      "female": 2.7,
+      "male": 12.1
+    },
+    "NLD": {
+      "period": "2023",
+      "female": 6.3,
+      "male": 13
+    },
+    "NOR": {
+      "period": "2023",
+      "female": 6.9,
+      "male": 16.5
+    },
+    "NPL": {
+      "period": "2023",
+      "female": 11.2,
+      "male": 26.7
+    },
+    "NZL": {
+      "period": "2023",
+      "female": 7,
+      "male": 19.1
+    },
+    "OMN": {
+      "period": "2023",
+      "female": 0.3,
+      "male": 1.7
+    },
+    "PAK": {
+      "period": "2023",
+      "female": 3.3,
+      "male": 15.2
+    },
+    "PAN": {
+      "period": "2023",
+      "female": 1.4,
+      "male": 8.3
+    },
+    "PER": {
+      "period": "2023",
+      "female": 1.6,
+      "male": 4.2
+    },
+    "PHL": {
+      "period": "2023",
+      "female": 1.1,
+      "male": 5.4
+    },
+    "PNG": {
+      "period": "2023",
+      "female": 2.1,
+      "male": 3.7
+    },
+    "POL": {
+      "period": "2023",
+      "female": 3.7,
+      "male": 23.8
+    },
+    "PRI": {
+      "period": "2023",
+      "female": 2.5,
+      "male": 11.1
+    },
+    "PRK": {
+      "period": "2023",
+      "female": 7.2,
+      "male": 14.4
+    },
+    "PRT": {
+      "period": "2023",
+      "female": 3.9,
+      "male": 14.2
+    },
+    "PRY": {
+      "period": "2023",
+      "female": 5.3,
+      "male": 16.2
+    },
+    "PSE": {
+      "period": "2023",
+      "female": 0.9,
+      "male": 2.3
+    },
+    "QAT": {
+      "period": "2023",
+      "female": 1.2,
+      "male": 4.1
+    },
+    "ROU": {
+      "period": "2023",
+      "female": 2.5,
+      "male": 14.6
+    },
+    "RUS": {
+      "period": "2023",
+      "female": 6.8,
+      "male": 36.2
+    },
+    "RWA": {
+      "period": "2023",
+      "female": 8.4,
+      "male": 23
+    },
+    "SAU": {
+      "period": "2023",
+      "female": 1,
+      "male": 2.9
+    },
+    "SDN": {
+      "period": "2023",
+      "female": 2,
+      "male": 5.5
+    },
+    "SEN": {
+      "period": "2023",
+      "female": 4.8,
+      "male": 27.2
+    },
+    "SGP": {
+      "period": "2023",
+      "female": 4.7,
+      "male": 10
+    },
+    "SLB": {
+      "period": "2023",
+      "female": 6.1,
+      "male": 22
+    },
+    "SLE": {
+      "period": "2023",
+      "female": 7.5,
+      "male": 23.9
+    },
+    "SLV": {
+      "period": "2023",
+      "female": 3.8,
+      "male": 17.3
+    },
+    "SOM": {
+      "period": "2023",
+      "female": 13.3,
+      "male": 44.6
+    },
+    "SRB": {
+      "period": "2023",
+      "female": 5.7,
+      "male": 15.4
+    },
+    "SSD": {
+      "period": "2023",
+      "female": 8.1,
+      "male": 26.8
+    },
+    "STP": {
+      "period": "2023",
+      "female": 1.1,
+      "male": 3.6
+    },
+    "SUR": {
+      "period": "2023",
+      "female": 12.3,
+      "male": 62.2
+    },
+    "SVK": {
+      "period": "2023",
+      "female": 2.8,
+      "male": 15.3
+    },
+    "SVN": {
+      "period": "2023",
+      "female": 5.4,
+      "male": 26
+    },
+    "SWE": {
+      "period": "2023",
+      "female": 7.7,
+      "male": 17.9
+    },
+    "SWZ": {
+      "period": "2023",
+      "female": 8.2,
+      "male": 40.9
+    },
+    "SYC": {
+      "period": "2023",
+      "female": 1.1,
+      "male": 15.1
+    },
+    "SYR": {
+      "period": "2023",
+      "female": 0.5,
+      "male": 2.3
+    },
+    "TCD": {
+      "period": "2023",
+      "female": 7.7,
+      "male": 31.1
+    },
+    "TGO": {
+      "period": "2023",
+      "female": 6,
+      "male": 27.1
+    },
+    "THA": {
+      "period": "2023",
+      "female": 3.4,
+      "male": 16.3
+    },
+    "TJK": {
+      "period": "2023",
+      "female": 3.2,
+      "male": 8.2
+    },
+    "TKM": {
+      "period": "2023",
+      "female": 5.6,
+      "male": 18.1
+    },
+    "TLS": {
+      "period": "2023",
+      "female": 2.4,
+      "male": 7.6
+    },
+    "TON": {
+      "period": "2023",
+      "female": 2.8,
+      "male": 5.6
+    },
+    "TTO": {
+      "period": "2023",
+      "female": 4,
+      "male": 22.9
+    },
+    "TUN": {
+      "period": "2023",
+      "female": 1.7,
+      "male": 4.3
+    },
+    "TUR": {
+      "period": "2023",
+      "female": 2.2,
+      "male": 5.4
+    },
+    "TZA": {
+      "period": "2023",
+      "female": 7,
+      "male": 26.2
+    },
+    "UGA": {
+      "period": "2023",
+      "female": 5.5,
+      "male": 34.2
+    },
+    "UKR": {
+      "period": "2023",
+      "female": 5.8,
+      "male": 35.2
+    },
+    "URY": {
+      "period": "2023",
+      "female": 10.7,
+      "male": 35.6
+    },
+    "USA": {
+      "period": "2023",
+      "female": 5.8,
+      "male": 21.1
+    },
+    "UZB": {
+      "period": "2023",
+      "female": 6.1,
+      "male": 9.9
+    },
+    "VCT": {
+      "period": "2023",
+      "female": 0,
+      "male": 0.3
+    },
+    "VEN": {
+      "period": "2023",
+      "female": 2.3,
+      "male": 14.2
+    },
+    "VNM": {
+      "period": "2023",
+      "female": 6,
+      "male": 14.7
+    },
+    "VUT": {
+      "period": "2023",
+      "female": 7.5,
+      "male": 25.5
+    },
+    "WSM": {
+      "period": "2023",
+      "female": 6.6,
+      "male": 18.1
+    },
+    "YEM": {
+      "period": "2023",
+      "female": 3.7,
+      "male": 7.5
+    },
+    "ZAF": {
+      "period": "2023",
+      "female": 6,
+      "male": 28.1
+    },
+    "ZMB": {
+      "period": "2023",
+      "female": 7.7,
+      "male": 38.2
+    },
+    "ZWE": {
+      "period": "2023",
+      "female": 6.4,
+      "male": 28.1
+    }
+  }
+}

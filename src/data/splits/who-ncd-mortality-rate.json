@@ -1,0 +1,939 @@
+{
+  "meta": {
+    "slug": "who-ncd-mortality-rate",
+    "dims": [
+      "sex"
+    ],
+    "source": "WHO Global Health Observatory",
+    "url": "https://www.who.int/data/gho",
+    "parsedAt": "2026-11-07",
+    "note": "Female and male values for the same year as each country's headline figure."
+  },
+  "bySex": {
+    "AFG": {
+      "period": "2023",
+      "female": 1710.2,
+      "male": 1502.8
+    },
+    "AGO": {
+      "period": "2023",
+      "female": 1123.4,
+      "male": 1329.5
+    },
+    "ALB": {
+      "period": "2023",
+      "female": 653.2,
+      "male": 930.6
+    },
+    "ARE": {
+      "period": "2023",
+      "female": 492.1,
+      "male": 504.7
+    },
+    "ARG": {
+      "period": "2023",
+      "female": 609.5,
+      "male": 887.1
+    },
+    "ARM": {
+      "period": "2023",
+      "female": 724.2,
+      "male": 1233.1
+    },
+    "ATG": {
+      "period": "2023",
+      "female": 685.9,
+      "male": 1035.1
+    },
+    "AUS": {
+      "period": "2023",
+      "female": 464.2,
+      "male": 622.7
+    },
+    "AUT": {
+      "period": "2023",
+      "female": 524,
+      "male": 748.1
+    },
+    "AZE": {
+      "period": "2023",
+      "female": 844.1,
+      "male": 1229
+    },
+    "BDI": {
+      "period": "2023",
+      "female": 1070.9,
+      "male": 1293.4
+    },
+    "BEL": {
+      "period": "2023",
+      "female": 477.8,
+      "male": 652.9
+    },
+    "BEN": {
+      "period": "2023",
+      "female": 1018.4,
+      "male": 1317.1
+    },
+    "BFA": {
+      "period": "2023",
+      "female": 981.5,
+      "male": 1204.6
+    },
+    "BGD": {
+      "period": "2023",
+      "female": 1156.9,
+      "male": 1184.7
+    },
+    "BGR": {
+      "period": "2023",
+      "female": 837.2,
+      "male": 1355.4
+    },
+    "BHR": {
+      "period": "2023",
+      "female": 766.5,
+      "male": 536.2
+    },
+    "BHS": {
+      "period": "2023",
+      "female": 773.6,
+      "male": 931.5
+    },
+    "BIH": {
+      "period": "2023",
+      "female": 755.2,
+      "male": 987.1
+    },
+    "BLR": {
+      "period": "2023",
+      "female": 858.2,
+      "male": 1482.2
+    },
+    "BLZ": {
+      "period": "2023",
+      "female": 1085.5,
+      "male": 1311.5
+    },
+    "BOL": {
+      "period": "2023",
+      "female": 894.9,
+      "male": 1232.1
+    },
+    "BRA": {
+      "period": "2023",
+      "female": 693,
+      "male": 930
+    },
+    "BRB": {
+      "period": "2023",
+      "female": 645.2,
+      "male": 884.9
+    },
+    "BRN": {
+      "period": "2023",
+      "female": 865.6,
+      "male": 1076.6
+    },
+    "BTN": {
+      "period": "2023",
+      "female": 818.2,
+      "male": 1043.8
+    },
+    "BWA": {
+      "period": "2023",
+      "female": 822,
+      "male": 1177.1
+    },
+    "CAF": {
+      "period": "2023",
+      "female": 1812.6,
+      "male": 2470
+    },
+    "CAN": {
+      "period": "2023",
+      "female": 507.1,
+      "male": 696.2
+    },
+    "CHE": {
+      "period": "2023",
+      "female": 447.6,
+      "male": 595.1
+    },
+    "CHL": {
+      "period": "2023",
+      "female": 513.1,
+      "male": 651.4
+    },
+    "CHN": {
+      "period": "2023",
+      "female": 694.9,
+      "male": 1115.3
+    },
+    "CIV": {
+      "period": "2023",
+      "female": 1112.9,
+      "male": 1321.4
+    },
+    "CMR": {
+      "period": "2023",
+      "female": 1125.3,
+      "male": 1258.2
+    },
+    "COD": {
+      "period": "2023",
+      "female": 1109.3,
+      "male": 1448.8
+    },
+    "COG": {
+      "period": "2023",
+      "female": 1251.4,
+      "male": 1421.6
+    },
+    "COL": {
+      "period": "2023",
+      "female": 683.4,
+      "male": 983
+    },
+    "COM": {
+      "period": "2023",
+      "female": 976.5,
+      "male": 1080.2
+    },
+    "CPV": {
+      "period": "2023",
+      "female": 598,
+      "male": 966.9
+    },
+    "CRI": {
+      "period": "2023",
+      "female": 520.3,
+      "male": 751
+    },
+    "CUB": {
+      "period": "2023",
+      "female": 681.5,
+      "male": 989.4
+    },
+    "CYP": {
+      "period": "2023",
+      "female": 545,
+      "male": 741.2
+    },
+    "CZE": {
+      "period": "2023",
+      "female": 618.7,
+      "male": 944.2
+    },
+    "DEU": {
+      "period": "2023",
+      "female": 560.7,
+      "male": 793.6
+    },
+    "DJI": {
+      "period": "2023",
+      "female": 942.7,
+      "male": 843.9
+    },
+    "DNK": {
+      "period": "2023",
+      "female": 526,
+      "male": 703.2
+    },
+    "DOM": {
+      "period": "2023",
+      "female": 568.5,
+      "male": 1030.3
+    },
+    "DZA": {
+      "period": "2023",
+      "female": 767.6,
+      "male": 927.1
+    },
+    "ECU": {
+      "period": "2023",
+      "female": 588.5,
+      "male": 863.1
+    },
+    "EGY": {
+      "period": "2023",
+      "female": 1396.6,
+      "male": 1932.8
+    },
+    "ERI": {
+      "period": "2023",
+      "female": 1092.3,
+      "male": 1329.1
+    },
+    "ESP": {
+      "period": "2023",
+      "female": 433.8,
+      "male": 681.2
+    },
+    "EST": {
+      "period": "2023",
+      "female": 562.3,
+      "male": 1029.2
+    },
+    "ETH": {
+      "period": "2023",
+      "female": 974.9,
+      "male": 1065.9
+    },
+    "FIN": {
+      "period": "2023",
+      "female": 578.1,
+      "male": 826.6
+    },
+    "FJI": {
+      "period": "2023",
+      "female": 1380.4,
+      "male": 2121.5
+    },
+    "FRA": {
+      "period": "2023",
+      "female": 428,
+      "male": 654.2
+    },
+    "FSM": {
+      "period": "2023",
+      "female": 1346.1,
+      "male": 1738.2
+    },
+    "GAB": {
+      "period": "2023",
+      "female": 1075.2,
+      "male": 1560.9
+    },
+    "GBR": {
+      "period": "2023",
+      "female": 579.5,
+      "male": 769.3
+    },
+    "GEO": {
+      "period": "2023",
+      "female": 729.3,
+      "male": 1482.5
+    },
+    "GHA": {
+      "period": "2023",
+      "female": 1029.9,
+      "male": 1348.6
+    },
+    "GIN": {
+      "period": "2023",
+      "female": 1216.3,
+      "male": 1286
+    },
+    "GMB": {
+      "period": "2023",
+      "female": 1039.1,
+      "male": 1164.4
+    },
+    "GNB": {
+      "period": "2023",
+      "female": 1373.3,
+      "male": 1623.1
+    },
+    "GNQ": {
+      "period": "2023",
+      "female": 1351.1,
+      "male": 1311.9
+    },
+    "GRC": {
+      "period": "2023",
+      "female": 448.3,
+      "male": 773.7
+    },
+    "GRD": {
+      "period": "2023",
+      "female": 775.6,
+      "male": 1210.6
+    },
+    "GTM": {
+      "period": "2023",
+      "female": 1091.9,
+      "male": 1344.7
+    },
+    "GUY": {
+      "period": "2023",
+      "female": 2252.9,
+      "male": 3128.4
+    },
+    "HND": {
+      "period": "2023",
+      "female": 1185.2,
+      "male": 1154.9
+    },
+    "HRV": {
+      "period": "2023",
+      "female": 670.8,
+      "male": 1090.6
+    },
+    "HTI": {
+      "period": "2023",
+      "female": 1646.8,
+      "male": 1571.8
+    },
+    "HUN": {
+      "period": "2023",
+      "female": 827.2,
+      "male": 1274.9
+    },
+    "IDN": {
+      "period": "2023",
+      "female": 795.1,
+      "male": 1221.2
+    },
+    "IND": {
+      "period": "2023",
+      "female": 989.2,
+      "male": 1345.4
+    },
+    "IRL": {
+      "period": "2023",
+      "female": 536.2,
+      "male": 724.2
+    },
+    "IRN": {
+      "period": "2023",
+      "female": 767.3,
+      "male": 1119.5
+    },
+    "IRQ": {
+      "period": "2023",
+      "female": 993.2,
+      "male": 1304.2
+    },
+    "ISL": {
+      "period": "2023",
+      "female": 564.4,
+      "male": 707.2
+    },
+    "ISR": {
+      "period": "2023",
+      "female": 429.4,
+      "male": 575
+    },
+    "ITA": {
+      "period": "2023",
+      "female": 479.1,
+      "male": 665.5
+    },
+    "JAM": {
+      "period": "2023",
+      "female": 1177.4,
+      "male": 1521.7
+    },
+    "JOR": {
+      "period": "2023",
+      "female": 605.2,
+      "male": 736.5
+    },
+    "JPN": {
+      "period": "2023",
+      "female": 368.5,
+      "male": 611.4
+    },
+    "KAZ": {
+      "period": "2023",
+      "female": 785.8,
+      "male": 1323.4
+    },
+    "KEN": {
+      "period": "2023",
+      "female": 885.5,
+      "male": 1167.2
+    },
+    "KGZ": {
+      "period": "2023",
+      "female": 967.1,
+      "male": 1295.7
+    },
+    "KHM": {
+      "period": "2023",
+      "female": 1004.5,
+      "male": 1400.3
+    },
+    "KIR": {
+      "period": "2023",
+      "female": 1566.2,
+      "male": 3559.9
+    },
+    "KOR": {
+      "period": "2023",
+      "female": 333.4,
+      "male": 578.1
+    },
+    "KWT": {
+      "period": "2023",
+      "female": 536.1,
+      "male": 613.3
+    },
+    "LAO": {
+      "period": "2023",
+      "female": 1062.7,
+      "male": 1435.6
+    },
+    "LBN": {
+      "period": "2023",
+      "female": 610.2,
+      "male": 881.3
+    },
+    "LBR": {
+      "period": "2023",
+      "female": 1238.5,
+      "male": 1300.4
+    },
+    "LBY": {
+      "period": "2023",
+      "female": 1014.2,
+      "male": 1150.7
+    },
+    "LCA": {
+      "period": "2023",
+      "female": 906.9,
+      "male": 1829.7
+    },
+    "LKA": {
+      "period": "2023",
+      "female": 789.5,
+      "male": 1292.8
+    },
+    "LSO": {
+      "period": "2023",
+      "female": 1643.7,
+      "male": 2217.9
+    },
+    "LTU": {
+      "period": "2023",
+      "female": 660.9,
+      "male": 1161.3
+    },
+    "LUX": {
+      "period": "2023",
+      "female": 457.3,
+      "male": 603.6
+    },
+    "LVA": {
+      "period": "2023",
+      "female": 737.3,
+      "male": 1328.2
+    },
+    "MAR": {
+      "period": "2023",
+      "female": 1022.8,
+      "male": 1062.5
+    },
+    "MDA": {
+      "period": "2023",
+      "female": 1147.3,
+      "male": 1715.1
+    },
+    "MDG": {
+      "period": "2023",
+      "female": 1102.8,
+      "male": 1141.7
+    },
+    "MDV": {
+      "period": "2023",
+      "female": 602,
+      "male": 894.8
+    },
+    "MEX": {
+      "period": "2023",
+      "female": 801.1,
+      "male": 975
+    },
+    "MKD": {
+      "period": "2023",
+      "female": 947.2,
+      "male": 1187.9
+    },
+    "MLI": {
+      "period": "2023",
+      "female": 1219.3,
+      "male": 1259.4
+    },
+    "MLT": {
+      "period": "2023",
+      "female": 487.8,
+      "male": 676.6
+    },
+    "MMR": {
+      "period": "2023",
+      "female": 1051.3,
+      "male": 1484.8
+    },
+    "MNE": {
+      "period": "2023",
+      "female": 901.2,
+      "male": 1574.5
+    },
+    "MNG": {
+      "period": "2023",
+      "female": 769.6,
+      "male": 1289.1
+    },
+    "MOZ": {
+      "period": "2023",
+      "female": 1189.7,
+      "male": 1542.3
+    },
+    "MRT": {
+      "period": "2023",
+      "female": 1109.6,
+      "male": 1088.4
+    },
+    "MUS": {
+      "period": "2023",
+      "female": 850,
+      "male": 1208.3
+    },
+    "MWI": {
+      "period": "2023",
+      "female": 1130.9,
+      "male": 1338.8
+    },
+    "MYS": {
+      "period": "2023",
+      "female": 904.4,
+      "male": 1034.6
+    },
+    "NAM": {
+      "period": "2023",
+      "female": 1093.1,
+      "male": 1512.1
+    },
+    "NER": {
+      "period": "2023",
+      "female": 1085.1,
+      "male": 1232.2
+    },
+    "NGA": {
+      "period": "2023",
+      "female": 1106.3,
+      "male": 1208.6
+    },
+    "NIC": {
+      "period": "2023",
+      "female": 706.3,
+      "male": 1009.5
+    },
+    "NLD": {
+      "period": "2023",
+      "female": 556.2,
+      "male": 714.1
+    },
+    "NOR": {
+      "period": "2023",
+      "female": 503.9,
+      "male": 633.1
+    },
+    "NPL": {
+      "period": "2023",
+      "female": 987.7,
+      "male": 1157.5
+    },
+    "NZL": {
+      "period": "2023",
+      "female": 636.2,
+      "male": 796.9
+    },
+    "OMN": {
+      "period": "2023",
+      "female": 615.4,
+      "male": 769
+    },
+    "PAK": {
+      "period": "2023",
+      "female": 1321.5,
+      "male": 1228.9
+    },
+    "PAN": {
+      "period": "2023",
+      "female": 541,
+      "male": 817.1
+    },
+    "PER": {
+      "period": "2023",
+      "female": 564,
+      "male": 655.6
+    },
+    "PHL": {
+      "period": "2023",
+      "female": 1044.3,
+      "male": 1774.2
+    },
+    "PNG": {
+      "period": "2023",
+      "female": 1065.2,
+      "male": 1187.5
+    },
+    "POL": {
+      "period": "2023",
+      "female": 641.3,
+      "male": 1029.6
+    },
+    "PRI": {
+      "period": "2023",
+      "female": 516,
+      "male": 732.2
+    },
+    "PRK": {
+      "period": "2023",
+      "female": 951.5,
+      "male": 1311.4
+    },
+    "PRT": {
+      "period": "2023",
+      "female": 483.1,
+      "male": 743.6
+    },
+    "PRY": {
+      "period": "2023",
+      "female": 903.5,
+      "male": 1393.8
+    },
+    "PSE": {
+      "period": "2023",
+      "female": 781.7,
+      "male": 1037.7
+    },
+    "QAT": {
+      "period": "2023",
+      "female": 928.7,
+      "male": 836.7
+    },
+    "ROU": {
+      "period": "2023",
+      "female": 759.3,
+      "male": 1207.7
+    },
+    "RUS": {
+      "period": "2023",
+      "female": 791.3,
+      "male": 1389.7
+    },
+    "RWA": {
+      "period": "2023",
+      "female": 1053.9,
+      "male": 1289.6
+    },
+    "SAU": {
+      "period": "2023",
+      "female": 745.5,
+      "male": 778.7
+    },
+    "SDN": {
+      "period": "2023",
+      "female": 1289.5,
+      "male": 1376.7
+    },
+    "SEN": {
+      "period": "2023",
+      "female": 1161.8,
+      "male": 1317
+    },
+    "SGP": {
+      "period": "2023",
+      "female": 353.2,
+      "male": 510.4
+    },
+    "SLB": {
+      "period": "2023",
+      "female": 1484.4,
+      "male": 1866.6
+    },
+    "SLE": {
+      "period": "2023",
+      "female": 1122.9,
+      "male": 1134.7
+    },
+    "SLV": {
+      "period": "2023",
+      "female": 845.3,
+      "male": 1443.2
+    },
+    "SOM": {
+      "period": "2023",
+      "female": 1369.5,
+      "male": 1717.2
+    },
+    "SRB": {
+      "period": "2023",
+      "female": 956.7,
+      "male": 1220.5
+    },
+    "SSD": {
+      "period": "2023",
+      "female": 874,
+      "male": 1124
+    },
+    "STP": {
+      "period": "2023",
+      "female": 1002.3,
+      "male": 991.2
+    },
+    "SUR": {
+      "period": "2023",
+      "female": 976.7,
+      "male": 1377.8
+    },
+    "SVK": {
+      "period": "2023",
+      "female": 668.3,
+      "male": 1009.1
+    },
+    "SVN": {
+      "period": "2023",
+      "female": 521.5,
+      "male": 799.9
+    },
+    "SWE": {
+      "period": "2023",
+      "female": 505.1,
+      "male": 644.1
+    },
+    "SWZ": {
+      "period": "2023",
+      "female": 1359.5,
+      "male": 1619.4
+    },
+    "SYC": {
+      "period": "2023",
+      "female": 683.9,
+      "male": 1004
+    },
+    "SYR": {
+      "period": "2023",
+      "female": 949.8,
+      "male": 1347.4
+    },
+    "TCD": {
+      "period": "2023",
+      "female": 1160.2,
+      "male": 1302.8
+    },
+    "TGO": {
+      "period": "2023",
+      "female": 1087.6,
+      "male": 1408.3
+    },
+    "THA": {
+      "period": "2023",
+      "female": 504,
+      "male": 729.8
+    },
+    "TJK": {
+      "period": "2023",
+      "female": 1020.5,
+      "male": 1323.7
+    },
+    "TKM": {
+      "period": "2023",
+      "female": 1168.1,
+      "male": 1839.8
+    },
+    "TLS": {
+      "period": "2023",
+      "female": 1124.7,
+      "male": 1287.9
+    },
+    "TON": {
+      "period": "2023",
+      "female": 1189.8,
+      "male": 1434.8
+    },
+    "TTO": {
+      "period": "2023",
+      "female": 1091,
+      "male": 1920.1
+    },
+    "TUN": {
+      "period": "2023",
+      "female": 768,
+      "male": 1096.3
+    },
+    "TUR": {
+      "period": "2023",
+      "female": 651,
+      "male": 846.8
+    },
+    "TZA": {
+      "period": "2023",
+      "female": 1030,
+      "male": 1219.6
+    },
+    "UGA": {
+      "period": "2023",
+      "female": 1107.8,
+      "male": 1431.5
+    },
+    "UKR": {
+      "period": "2023",
+      "female": 875.5,
+      "male": 1461
+    },
+    "URY": {
+      "period": "2023",
+      "female": 625.2,
+      "male": 1028.9
+    },
+    "USA": {
+      "period": "2023",
+      "female": 631.9,
+      "male": 823.7
+    },
+    "UZB": {
+      "period": "2023",
+      "female": 1406.3,
+      "male": 1811.3
+    },
+    "VCT": {
+      "period": "2023",
+      "female": 971,
+      "male": 1262.2
+    },
+    "VEN": {
+      "period": "2023",
+      "female": 948.5,
+      "male": 1453.2
+    },
+    "VNM": {
+      "period": "2023",
+      "female": 828.3,
+      "male": 1381.8
+    },
+    "VUT": {
+      "period": "2023",
+      "female": 1364.6,
+      "male": 1874.4
+    },
+    "WSM": {
+      "period": "2023",
+      "female": 911.7,
+      "male": 1220.1
+    },
+    "YEM": {
+      "period": "2023",
+      "female": 1333.4,
+      "male": 1559
+    },
+    "ZAF": {
+      "period": "2023",
+      "female": 925.5,
+      "male": 1266.6
+    },
+    "ZMB": {
+      "period": "2023",
+      "female": 1108.1,
+      "male": 1356.5
+    },
+    "ZWE": {
+      "period": "2023",
+      "female": 1452.1,
+      "male": 1604
+    }
+  }
+}

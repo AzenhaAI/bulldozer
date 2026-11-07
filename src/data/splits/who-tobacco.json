@@ -1,0 +1,849 @@
+{
+  "meta": {
+    "slug": "who-tobacco",
+    "dims": [
+      "sex"
+    ],
+    "source": "WHO Global Health Observatory (data.who.int)",
+    "url": "https://data.who.int/indicators/i/847662C/75DDA77",
+    "parsedAt": "2026-11-07",
+    "note": "Female and male values for the same year as each country's headline figure."
+  },
+  "bySex": {
+    "AFG": {
+      "period": "2022",
+      "female": 6.8,
+      "male": 39
+    },
+    "ALB": {
+      "period": "2022",
+      "female": 6.4,
+      "male": 38.3
+    },
+    "AND": {
+      "period": "2022",
+      "female": 35.7,
+      "male": 35
+    },
+    "ARE": {
+      "period": "2022",
+      "female": 2.7,
+      "male": 16.2
+    },
+    "ARG": {
+      "period": "2022",
+      "female": 20.4,
+      "male": 28.1
+    },
+    "ARM": {
+      "period": "2022",
+      "female": 1.8,
+      "male": 51.4
+    },
+    "AUS": {
+      "period": "2022",
+      "female": 10.6,
+      "male": 14.2
+    },
+    "AUT": {
+      "period": "2022",
+      "female": 24.9,
+      "male": 25.7
+    },
+    "AZE": {
+      "period": "2022",
+      "female": 0.1,
+      "male": 38.6
+    },
+    "BDI": {
+      "period": "2022",
+      "female": 5.3,
+      "male": 16.5
+    },
+    "BEL": {
+      "period": "2022",
+      "female": 20.9,
+      "male": 27.1
+    },
+    "BEN": {
+      "period": "2022",
+      "female": 1.8,
+      "male": 13.8
+    },
+    "BFA": {
+      "period": "2022",
+      "female": 5.1,
+      "male": 19.8
+    },
+    "BGD": {
+      "period": "2022",
+      "female": 15.7,
+      "male": 51
+    },
+    "BGR": {
+      "period": "2022",
+      "female": 36.4,
+      "male": 41.7
+    },
+    "BHR": {
+      "period": "2022",
+      "female": 5.9,
+      "male": 25.5
+    },
+    "BHS": {
+      "period": "2022",
+      "female": 3.5,
+      "male": 30.4
+    },
+    "BIH": {
+      "period": "2022",
+      "female": 31.2,
+      "male": 44
+    },
+    "BLR": {
+      "period": "2022",
+      "female": 14.1,
+      "male": 46.4
+    },
+    "BLZ": {
+      "period": "2022",
+      "female": 2,
+      "male": 15.6
+    },
+    "BOL": {
+      "period": "2022",
+      "female": 4.8,
+      "male": 21.3
+    },
+    "BRA": {
+      "period": "2022",
+      "female": 8.9,
+      "male": 16.1
+    },
+    "BRN": {
+      "period": "2022",
+      "female": 2.3,
+      "male": 27.2
+    },
+    "BTN": {
+      "period": "2022",
+      "female": 11.9,
+      "male": 28.6
+    },
+    "BWA": {
+      "period": "2022",
+      "female": 7.4,
+      "male": 30.1
+    },
+    "CAN": {
+      "period": "2022",
+      "female": 9.5,
+      "male": 14.6
+    },
+    "CHE": {
+      "period": "2022",
+      "female": 22.4,
+      "male": 24.9
+    },
+    "CHL": {
+      "period": "2022",
+      "female": 25.4,
+      "male": 30.4
+    },
+    "CHN": {
+      "period": "2022",
+      "female": 1.6,
+      "male": 44.7
+    },
+    "CIV": {
+      "period": "2022",
+      "female": 1.4,
+      "male": 14.6
+    },
+    "CMR": {
+      "period": "2022",
+      "female": 1.5,
+      "male": 10.8
+    },
+    "COD": {
+      "period": "2022",
+      "female": 3.2,
+      "male": 22.1
+    },
+    "COG": {
+      "period": "2022",
+      "female": 2.4,
+      "male": 28.6
+    },
+    "COK": {
+      "period": "2022",
+      "female": 24.7,
+      "male": 33.3
+    },
+    "COL": {
+      "period": "2022",
+      "female": 4.3,
+      "male": 12.3
+    },
+    "COM": {
+      "period": "2022",
+      "female": 2.7,
+      "male": 17.6
+    },
+    "CPV": {
+      "period": "2022",
+      "female": 5.3,
+      "male": 16.6
+    },
+    "CRI": {
+      "period": "2022",
+      "female": 4.4,
+      "male": 12.5
+    },
+    "CUB": {
+      "period": "2022",
+      "female": 9.6,
+      "male": 25
+    },
+    "CYP": {
+      "period": "2022",
+      "female": 19,
+      "male": 46.6
+    },
+    "CZE": {
+      "period": "2022",
+      "female": 24.8,
+      "male": 32.9
+    },
+    "DEU": {
+      "period": "2022",
+      "female": 20.4,
+      "male": 25.3
+    },
+    "DNK": {
+      "period": "2022",
+      "female": 16.2,
+      "male": 17.9
+    },
+    "DZA": {
+      "period": "2022",
+      "female": 0.6,
+      "male": 43.6
+    },
+    "ECU": {
+      "period": "2022",
+      "female": 2.7,
+      "male": 18.1
+    },
+    "EGY": {
+      "period": "2022",
+      "female": 0.4,
+      "male": 48.4
+    },
+    "ESP": {
+      "period": "2022",
+      "female": 26.4,
+      "male": 29.9
+    },
+    "EST": {
+      "period": "2022",
+      "female": 22,
+      "male": 33
+    },
+    "ETH": {
+      "period": "2022",
+      "female": 1.5,
+      "male": 9
+    },
+    "FIN": {
+      "period": "2022",
+      "female": 18.2,
+      "male": 26.5
+    },
+    "FJI": {
+      "period": "2022",
+      "female": 12.7,
+      "male": 40
+    },
+    "FRA": {
+      "period": "2022",
+      "female": 31.1,
+      "male": 36.2
+    },
+    "GAB": {
+      "period": "2022",
+      "female": 3.4,
+      "male": 23.2
+    },
+    "GBR": {
+      "period": "2022",
+      "female": 12.2,
+      "male": 15.9
+    },
+    "GEO": {
+      "period": "2022",
+      "female": 8.1,
+      "male": 57.6
+    },
+    "GHA": {
+      "period": "2022",
+      "female": 0.7,
+      "male": 6.4
+    },
+    "GMB": {
+      "period": "2022",
+      "female": 0.8,
+      "male": 22.5
+    },
+    "GNB": {
+      "period": "2022",
+      "female": 0.6,
+      "male": 16.6
+    },
+    "GRC": {
+      "period": "2022",
+      "female": 27.3,
+      "male": 35.7
+    },
+    "GTM": {
+      "period": "2022",
+      "female": 1.8,
+      "male": 21
+    },
+    "GUY": {
+      "period": "2022",
+      "female": 2.3,
+      "male": 22.7
+    },
+    "HND": {
+      "period": "2022",
+      "female": 1.7,
+      "male": 23.2
+    },
+    "HRV": {
+      "period": "2022",
+      "female": 33,
+      "male": 36
+    },
+    "HTI": {
+      "period": "2022",
+      "female": 2.6,
+      "male": 13.8
+    },
+    "HUN": {
+      "period": "2022",
+      "female": 29,
+      "male": 33.6
+    },
+    "IDN": {
+      "period": "2022",
+      "female": 3,
+      "male": 59.4
+    },
+    "IND": {
+      "period": "2022",
+      "female": 10.9,
+      "male": 37.9
+    },
+    "IRL": {
+      "period": "2022",
+      "female": 16.4,
+      "male": 22
+    },
+    "IRN": {
+      "period": "2022",
+      "female": 1.6,
+      "male": 23.5
+    },
+    "IRQ": {
+      "period": "2022",
+      "female": 2.4,
+      "male": 38
+    },
+    "ISL": {
+      "period": "2022",
+      "female": 9.9,
+      "male": 10.4
+    },
+    "ISR": {
+      "period": "2022",
+      "female": 14.4,
+      "male": 29.2
+    },
+    "ITA": {
+      "period": "2022",
+      "female": 19.3,
+      "male": 26.2
+    },
+    "JAM": {
+      "period": "2022",
+      "female": 4.7,
+      "male": 19.1
+    },
+    "JOR": {
+      "period": "2022",
+      "female": 12.9,
+      "male": 54.7
+    },
+    "JPN": {
+      "period": "2022",
+      "female": 9.2,
+      "male": 27.8
+    },
+    "KAZ": {
+      "period": "2022",
+      "female": 7,
+      "male": 37.2
+    },
+    "KEN": {
+      "period": "2022",
+      "female": 2.6,
+      "male": 17.8
+    },
+    "KGZ": {
+      "period": "2022",
+      "female": 3.1,
+      "male": 42.8
+    },
+    "KHM": {
+      "period": "2022",
+      "female": 6.1,
+      "male": 33.3
+    },
+    "KIR": {
+      "period": "2022",
+      "female": 26.8,
+      "male": 52.5
+    },
+    "KOR": {
+      "period": "2022",
+      "female": 5.8,
+      "male": 33.4
+    },
+    "KWT": {
+      "period": "2022",
+      "female": 2.5,
+      "male": 36.2
+    },
+    "LAO": {
+      "period": "2022",
+      "female": 9.3,
+      "male": 44.4
+    },
+    "LBN": {
+      "period": "2022",
+      "female": 38.9,
+      "male": 52.4
+    },
+    "LBR": {
+      "period": "2022",
+      "female": 1.9,
+      "male": 9.7
+    },
+    "LBY": {
+      "period": "2022",
+      "female": 0.2,
+      "male": 49.5
+    },
+    "LCA": {
+      "period": "2022",
+      "female": 3.1,
+      "male": 25.3
+    },
+    "LKA": {
+      "period": "2022",
+      "female": 2.7,
+      "male": 39.8
+    },
+    "LSO": {
+      "period": "2022",
+      "female": 6.9,
+      "male": 48.5
+    },
+    "LTU": {
+      "period": "2022",
+      "female": 21.6,
+      "male": 43
+    },
+    "LUX": {
+      "period": "2022",
+      "female": 23.4,
+      "male": 26
+    },
+    "LVA": {
+      "period": "2022",
+      "female": 22.2,
+      "male": 48.3
+    },
+    "MAR": {
+      "period": "2022",
+      "female": 1.3,
+      "male": 24.7
+    },
+    "MDA": {
+      "period": "2022",
+      "female": 6.8,
+      "male": 49.9
+    },
+    "MDG": {
+      "period": "2022",
+      "female": 10.7,
+      "male": 43
+    },
+    "MDV": {
+      "period": "2022",
+      "female": 10.1,
+      "male": 43
+    },
+    "MEX": {
+      "period": "2022",
+      "female": 7.9,
+      "male": 24.4
+    },
+    "MHL": {
+      "period": "2022",
+      "female": 8.5,
+      "male": 50.8
+    },
+    "MKD": {
+      "period": "2022",
+      "female": 35.2,
+      "male": 44.1
+    },
+    "MLI": {
+      "period": "2022",
+      "female": 0.9,
+      "male": 14.9
+    },
+    "MLT": {
+      "period": "2022",
+      "female": 23.1,
+      "male": 27
+    },
+    "MMR": {
+      "period": "2022",
+      "female": 18.4,
+      "male": 70.7
+    },
+    "MNE": {
+      "period": "2022",
+      "female": 34.3,
+      "male": 39.9
+    },
+    "MNG": {
+      "period": "2022",
+      "female": 7.4,
+      "male": 52.3
+    },
+    "MOZ": {
+      "period": "2022",
+      "female": 3.3,
+      "male": 19.6
+    },
+    "MRT": {
+      "period": "2022",
+      "female": 2.7,
+      "male": 18.2
+    },
+    "MUS": {
+      "period": "2022",
+      "female": 2.6,
+      "male": 33.9
+    },
+    "MWI": {
+      "period": "2022",
+      "female": 3,
+      "male": 16.2
+    },
+    "MYS": {
+      "period": "2022",
+      "female": 0.7,
+      "male": 34
+    },
+    "NER": {
+      "period": "2022",
+      "female": 1.2,
+      "male": 13.9
+    },
+    "NGA": {
+      "period": "2022",
+      "female": 0.5,
+      "male": 6.1
+    },
+    "NLD": {
+      "period": "2022",
+      "female": 18.9,
+      "male": 24
+    },
+    "NOR": {
+      "period": "2022",
+      "female": 13.1,
+      "male": 15.7
+    },
+    "NPL": {
+      "period": "2022",
+      "female": 12.2,
+      "male": 48.6
+    },
+    "NRU": {
+      "period": "2022",
+      "female": 42.7,
+      "male": 30.6
+    },
+    "NZL": {
+      "period": "2022",
+      "female": 9.3,
+      "male": 11.2
+    },
+    "OMN": {
+      "period": "2022",
+      "female": 0.4,
+      "male": 16.4
+    },
+    "PAK": {
+      "period": "2022",
+      "female": 6.9,
+      "male": 31.2
+    },
+    "PAN": {
+      "period": "2022",
+      "female": 2,
+      "male": 8.6
+    },
+    "PER": {
+      "period": "2022",
+      "female": 3.2,
+      "male": 23.6
+    },
+    "PHL": {
+      "period": "2022",
+      "female": 4.9,
+      "male": 36.9
+    },
+    "PLW": {
+      "period": "2022",
+      "female": 11.3,
+      "male": 35.6
+    },
+    "PNG": {
+      "period": "2022",
+      "female": 25.9,
+      "male": 55.1
+    },
+    "POL": {
+      "period": "2022",
+      "female": 19.3,
+      "male": 26.4
+    },
+    "PRK": {
+      "period": "2022",
+      "female": 0,
+      "male": 32.9
+    },
+    "PRT": {
+      "period": "2022",
+      "female": 21.6,
+      "male": 34.5
+    },
+    "PRY": {
+      "period": "2022",
+      "female": 3.1,
+      "male": 11.5
+    },
+    "PSE": {
+      "period": "2022",
+      "female": 10.1,
+      "male": 59.4
+    },
+    "QAT": {
+      "period": "2022",
+      "female": 3.4,
+      "male": 21.6
+    },
+    "ROU": {
+      "period": "2022",
+      "female": 21.4,
+      "male": 39.3
+    },
+    "RUS": {
+      "period": "2022",
+      "female": 18.7,
+      "male": 36.8
+    },
+    "RWA": {
+      "period": "2022",
+      "female": 6.4,
+      "male": 16.8
+    },
+    "SAU": {
+      "period": "2022",
+      "female": 3.6,
+      "male": 25.8
+    },
+    "SEN": {
+      "period": "2022",
+      "female": 0.8,
+      "male": 11.1
+    },
+    "SGP": {
+      "period": "2022",
+      "female": 5.6,
+      "male": 22.5
+    },
+    "SLB": {
+      "period": "2022",
+      "female": 20.9,
+      "male": 56.2
+    },
+    "SLE": {
+      "period": "2022",
+      "female": 5.7,
+      "male": 19.6
+    },
+    "SLV": {
+      "period": "2022",
+      "female": 2.3,
+      "male": 14.9
+    },
+    "SRB": {
+      "period": "2022",
+      "female": 39.6,
+      "male": 39.6
+    },
+    "STP": {
+      "period": "2022",
+      "female": 2.1,
+      "male": 14.1
+    },
+    "SVK": {
+      "period": "2022",
+      "female": 25.3,
+      "male": 33.8
+    },
+    "SVN": {
+      "period": "2022",
+      "female": 20.6,
+      "male": 21.8
+    },
+    "SWE": {
+      "period": "2022",
+      "female": 16,
+      "male": 27.5
+    },
+    "SWZ": {
+      "period": "2022",
+      "female": 2.6,
+      "male": 20.3
+    },
+    "SYC": {
+      "period": "2022",
+      "female": 4.6,
+      "male": 31.1
+    },
+    "TCD": {
+      "period": "2022",
+      "female": 1.9,
+      "male": 13.5
+    },
+    "TGO": {
+      "period": "2022",
+      "female": 1,
+      "male": 11.6
+    },
+    "THA": {
+      "period": "2022",
+      "female": 1.4,
+      "male": 35.4
+    },
+    "TKM": {
+      "period": "2022",
+      "female": 0.5,
+      "male": 11.1
+    },
+    "TLS": {
+      "period": "2022",
+      "female": 21.1,
+      "male": 76.2
+    },
+    "TON": {
+      "period": "2022",
+      "female": 16,
+      "male": 48
+    },
+    "TUN": {
+      "period": "2022",
+      "female": 2.3,
+      "male": 48
+    },
+    "TUR": {
+      "period": "2022",
+      "female": 19.6,
+      "male": 42.7
+    },
+    "TUV": {
+      "period": "2022",
+      "female": 19.7,
+      "male": 48.9
+    },
+    "TZA": {
+      "period": "2022",
+      "female": 2.6,
+      "male": 14.6
+    },
+    "UGA": {
+      "period": "2022",
+      "female": 3.3,
+      "male": 13.2
+    },
+    "UKR": {
+      "period": "2022",
+      "female": 10.7,
+      "male": 39
+    },
+    "URY": {
+      "period": "2022",
+      "female": 17.3,
+      "male": 23.2
+    },
+    "USA": {
+      "period": "2022",
+      "female": 12.5,
+      "male": 21.4
+    },
+    "UZB": {
+      "period": "2022",
+      "female": 1.1,
+      "male": 32.9
+    },
+    "VNM": {
+      "period": "2022",
+      "female": 1.3,
+      "male": 42.1
+    },
+    "VUT": {
+      "period": "2022",
+      "female": 8.5,
+      "male": 41.5
+    },
+    "WSM": {
+      "period": "2022",
+      "female": 14.4,
+      "male": 33.8
+    },
+    "ZAF": {
+      "period": "2022",
+      "female": 8.7,
+      "male": 38.4
+    },
+    "ZMB": {
+      "period": "2022",
+      "female": 3.5,
+      "male": 25.6
+    },
+    "ZWE": {
+      "period": "2022",
+      "female": 1.2,
+      "male": 22.1
+    }
+  }
+}

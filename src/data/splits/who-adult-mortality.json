@@ -1,0 +1,939 @@
+{
+  "meta": {
+    "slug": "who-adult-mortality",
+    "dims": [
+      "sex"
+    ],
+    "source": "WHO Global Health Observatory",
+    "url": "https://www.who.int/data/gho",
+    "parsedAt": "2026-11-07",
+    "note": "Female and male values for the same year as each country's headline figure."
+  },
+  "bySex": {
+    "AFG": {
+      "period": "2023",
+      "female": 241,
+      "male": 238
+    },
+    "AGO": {
+      "period": "2023",
+      "female": 198,
+      "male": 279
+    },
+    "ALB": {
+      "period": "2023",
+      "female": 45,
+      "male": 100
+    },
+    "ARE": {
+      "period": "2023",
+      "female": 23,
+      "male": 50
+    },
+    "ARG": {
+      "period": "2023",
+      "female": 80,
+      "male": 128
+    },
+    "ARM": {
+      "period": "2023",
+      "female": 52,
+      "male": 143
+    },
+    "ATG": {
+      "period": "2023",
+      "female": 60,
+      "male": 99
+    },
+    "AUS": {
+      "period": "2023",
+      "female": 42,
+      "male": 73
+    },
+    "AUT": {
+      "period": "2023",
+      "female": 40,
+      "male": 75
+    },
+    "AZE": {
+      "period": "2023",
+      "female": 63,
+      "male": 152
+    },
+    "BDI": {
+      "period": "2023",
+      "female": 179,
+      "male": 257
+    },
+    "BEL": {
+      "period": "2023",
+      "female": 40,
+      "male": 68
+    },
+    "BEN": {
+      "period": "2023",
+      "female": 138,
+      "male": 223
+    },
+    "BFA": {
+      "period": "2023",
+      "female": 167,
+      "male": 269
+    },
+    "BGD": {
+      "period": "2023",
+      "female": 100,
+      "male": 162
+    },
+    "BGR": {
+      "period": "2023",
+      "female": 79,
+      "male": 179
+    },
+    "BHR": {
+      "period": "2023",
+      "female": 111,
+      "male": 21
+    },
+    "BHS": {
+      "period": "2023",
+      "female": 121,
+      "male": 222
+    },
+    "BIH": {
+      "period": "2023",
+      "female": 51,
+      "male": 104
+    },
+    "BLR": {
+      "period": "2023",
+      "female": 78,
+      "male": 232
+    },
+    "BLZ": {
+      "period": "2023",
+      "female": 136,
+      "male": 208
+    },
+    "BOL": {
+      "period": "2023",
+      "female": 119,
+      "male": 158
+    },
+    "BRA": {
+      "period": "2023",
+      "female": 85,
+      "male": 170
+    },
+    "BRB": {
+      "period": "2023",
+      "female": 68,
+      "male": 106
+    },
+    "BRN": {
+      "period": "2023",
+      "female": 82,
+      "male": 120
+    },
+    "BTN": {
+      "period": "2023",
+      "female": 92,
+      "male": 114
+    },
+    "BWA": {
+      "period": "2023",
+      "female": 222,
+      "male": 294
+    },
+    "CAF": {
+      "period": "2023",
+      "female": 373,
+      "male": 573
+    },
+    "CAN": {
+      "period": "2023",
+      "female": 56,
+      "male": 97
+    },
+    "CHE": {
+      "period": "2023",
+      "female": 31,
+      "male": 53
+    },
+    "CHL": {
+      "period": "2023",
+      "female": 53,
+      "male": 98
+    },
+    "CHN": {
+      "period": "2023",
+      "female": 55,
+      "male": 120
+    },
+    "CIV": {
+      "period": "2023",
+      "female": 157,
+      "male": 239
+    },
+    "CMR": {
+      "period": "2023",
+      "female": 177,
+      "male": 253
+    },
+    "COD": {
+      "period": "2023",
+      "female": 181,
+      "male": 274
+    },
+    "COG": {
+      "period": "2023",
+      "female": 251,
+      "male": 278
+    },
+    "COL": {
+      "period": "2023",
+      "female": 61,
+      "male": 119
+    },
+    "COM": {
+      "period": "2023",
+      "female": 138,
+      "male": 180
+    },
+    "CPV": {
+      "period": "2023",
+      "female": 59,
+      "male": 176
+    },
+    "CRI": {
+      "period": "2023",
+      "female": 62,
+      "male": 129
+    },
+    "CUB": {
+      "period": "2023",
+      "female": 71,
+      "male": 129
+    },
+    "CYP": {
+      "period": "2023",
+      "female": 34,
+      "male": 69
+    },
+    "CZE": {
+      "period": "2023",
+      "female": 48,
+      "male": 104
+    },
+    "DEU": {
+      "period": "2023",
+      "female": 45,
+      "male": 83
+    },
+    "DJI": {
+      "period": "2023",
+      "female": 176,
+      "male": 231
+    },
+    "DNK": {
+      "period": "2023",
+      "female": 36,
+      "male": 60
+    },
+    "DOM": {
+      "period": "2023",
+      "female": 82,
+      "male": 177
+    },
+    "DZA": {
+      "period": "2023",
+      "female": 65,
+      "male": 87
+    },
+    "ECU": {
+      "period": "2023",
+      "female": 70,
+      "male": 158
+    },
+    "EGY": {
+      "period": "2023",
+      "female": 85,
+      "male": 142
+    },
+    "ERI": {
+      "period": "2023",
+      "female": 209,
+      "male": 323
+    },
+    "ESP": {
+      "period": "2023",
+      "female": 35,
+      "male": 67
+    },
+    "EST": {
+      "period": "2023",
+      "female": 57,
+      "male": 142
+    },
+    "ETH": {
+      "period": "2023",
+      "female": 137,
+      "male": 188
+    },
+    "FIN": {
+      "period": "2023",
+      "female": 43,
+      "male": 87
+    },
+    "FJI": {
+      "period": "2023",
+      "female": 161,
+      "male": 229
+    },
+    "FRA": {
+      "period": "2023",
+      "female": 44,
+      "male": 87
+    },
+    "FSM": {
+      "period": "2023",
+      "female": 201,
+      "male": 322
+    },
+    "GAB": {
+      "period": "2023",
+      "female": 165,
+      "male": 261
+    },
+    "GBR": {
+      "period": "2023",
+      "female": 56,
+      "male": 92
+    },
+    "GEO": {
+      "period": "2023",
+      "female": 62,
+      "male": 213
+    },
+    "GHA": {
+      "period": "2023",
+      "female": 159,
+      "male": 240
+    },
+    "GIN": {
+      "period": "2023",
+      "female": 188,
+      "male": 239
+    },
+    "GMB": {
+      "period": "2023",
+      "female": 184,
+      "male": 262
+    },
+    "GNB": {
+      "period": "2023",
+      "female": 245,
+      "male": 362
+    },
+    "GNQ": {
+      "period": "2023",
+      "female": 214,
+      "male": 248
+    },
+    "GRC": {
+      "period": "2023",
+      "female": 35,
+      "male": 83
+    },
+    "GRD": {
+      "period": "2023",
+      "female": 133,
+      "male": 174
+    },
+    "GTM": {
+      "period": "2023",
+      "female": 130,
+      "male": 221
+    },
+    "GUY": {
+      "period": "2023",
+      "female": 281,
+      "male": 477
+    },
+    "HND": {
+      "period": "2023",
+      "female": 139,
+      "male": 172
+    },
+    "HRV": {
+      "period": "2023",
+      "female": 50,
+      "male": 117
+    },
+    "HTI": {
+      "period": "2023",
+      "female": 220,
+      "male": 262
+    },
+    "HUN": {
+      "period": "2023",
+      "female": 70,
+      "male": 138
+    },
+    "IDN": {
+      "period": "2023",
+      "female": 113,
+      "male": 185
+    },
+    "IND": {
+      "period": "2023",
+      "female": 140,
+      "male": 203
+    },
+    "IRL": {
+      "period": "2023",
+      "female": 38,
+      "male": 59
+    },
+    "IRN": {
+      "period": "2023",
+      "female": 53,
+      "male": 112
+    },
+    "IRQ": {
+      "period": "2023",
+      "female": 93,
+      "male": 155
+    },
+    "ISL": {
+      "period": "2023",
+      "female": 44,
+      "male": 73
+    },
+    "ISR": {
+      "period": "2023",
+      "female": 39,
+      "male": 87
+    },
+    "ITA": {
+      "period": "2023",
+      "female": 36,
+      "male": 64
+    },
+    "JAM": {
+      "period": "2023",
+      "female": 117,
+      "male": 169
+    },
+    "JOR": {
+      "period": "2023",
+      "female": 45,
+      "male": 71
+    },
+    "JPN": {
+      "period": "2023",
+      "female": 36,
+      "male": 64
+    },
+    "KAZ": {
+      "period": "2023",
+      "female": 86,
+      "male": 203
+    },
+    "KEN": {
+      "period": "2023",
+      "female": 162,
+      "male": 268
+    },
+    "KGZ": {
+      "period": "2023",
+      "female": 71,
+      "male": 154
+    },
+    "KHM": {
+      "period": "2023",
+      "female": 131,
+      "male": 217
+    },
+    "KIR": {
+      "period": "2023",
+      "female": 221,
+      "male": 347
+    },
+    "KOR": {
+      "period": "2023",
+      "female": 35,
+      "male": 70
+    },
+    "KWT": {
+      "period": "2023",
+      "female": 32,
+      "male": 51
+    },
+    "LAO": {
+      "period": "2023",
+      "female": 133,
+      "male": 203
+    },
+    "LBN": {
+      "period": "2023",
+      "female": 51,
+      "male": 99
+    },
+    "LBR": {
+      "period": "2023",
+      "female": 189,
+      "male": 223
+    },
+    "LBY": {
+      "period": "2023",
+      "female": 161,
+      "male": 177
+    },
+    "LCA": {
+      "period": "2023",
+      "female": 105,
+      "male": 240
+    },
+    "LKA": {
+      "period": "2023",
+      "female": 63,
+      "male": 155
+    },
+    "LSO": {
+      "period": "2023",
+      "female": 383,
+      "male": 557
+    },
+    "LTU": {
+      "period": "2023",
+      "female": 70,
+      "male": 181
+    },
+    "LUX": {
+      "period": "2023",
+      "female": 30,
+      "male": 53
+    },
+    "LVA": {
+      "period": "2023",
+      "female": 74,
+      "male": 218
+    },
+    "MAR": {
+      "period": "2023",
+      "female": 106,
+      "male": 119
+    },
+    "MDA": {
+      "period": "2023",
+      "female": 98,
+      "male": 261
+    },
+    "MDG": {
+      "period": "2023",
+      "female": 199,
+      "male": 242
+    },
+    "MDV": {
+      "period": "2023",
+      "female": 52,
+      "male": 88
+    },
+    "MEX": {
+      "period": "2023",
+      "female": 89,
+      "male": 190
+    },
+    "MKD": {
+      "period": "2023",
+      "female": 64,
+      "male": 120
+    },
+    "MLI": {
+      "period": "2023",
+      "female": 181,
+      "male": 216
+    },
+    "MLT": {
+      "period": "2023",
+      "female": 37,
+      "male": 63
+    },
+    "MMR": {
+      "period": "2023",
+      "female": 119,
+      "male": 228
+    },
+    "MNE": {
+      "period": "2023",
+      "female": 75,
+      "male": 163
+    },
+    "MNG": {
+      "period": "2023",
+      "female": 95,
+      "male": 248
+    },
+    "MOZ": {
+      "period": "2023",
+      "female": 256,
+      "male": 383
+    },
+    "MRT": {
+      "period": "2023",
+      "female": 133,
+      "male": 144
+    },
+    "MUS": {
+      "period": "2023",
+      "female": 107,
+      "male": 208
+    },
+    "MWI": {
+      "period": "2023",
+      "female": 209,
+      "male": 315
+    },
+    "MYS": {
+      "period": "2023",
+      "female": 90,
+      "male": 173
+    },
+    "NAM": {
+      "period": "2023",
+      "female": 186,
+      "male": 319
+    },
+    "NER": {
+      "period": "2023",
+      "female": 169,
+      "male": 219
+    },
+    "NGA": {
+      "period": "2023",
+      "female": 141,
+      "male": 186
+    },
+    "NIC": {
+      "period": "2023",
+      "female": 74,
+      "male": 130
+    },
+    "NLD": {
+      "period": "2023",
+      "female": 44,
+      "male": 64
+    },
+    "NOR": {
+      "period": "2023",
+      "female": 39,
+      "male": 60
+    },
+    "NPL": {
+      "period": "2023",
+      "female": 112,
+      "male": 164
+    },
+    "NZL": {
+      "period": "2023",
+      "female": 50,
+      "male": 79
+    },
+    "OMN": {
+      "period": "2023",
+      "female": 43,
+      "male": 67
+    },
+    "PAK": {
+      "period": "2023",
+      "female": 148,
+      "male": 180
+    },
+    "PAN": {
+      "period": "2023",
+      "female": 62,
+      "male": 110
+    },
+    "PER": {
+      "period": "2023",
+      "female": 74,
+      "male": 113
+    },
+    "PHL": {
+      "period": "2023",
+      "female": 108,
+      "male": 210
+    },
+    "PNG": {
+      "period": "2023",
+      "female": 180,
+      "male": 221
+    },
+    "POL": {
+      "period": "2023",
+      "female": 58,
+      "male": 148
+    },
+    "PRI": {
+      "period": "2023",
+      "female": 64,
+      "male": 155
+    },
+    "PRK": {
+      "period": "2023",
+      "female": 113,
+      "male": 208
+    },
+    "PRT": {
+      "period": "2023",
+      "female": 42,
+      "male": 94
+    },
+    "PRY": {
+      "period": "2023",
+      "female": 95,
+      "male": 179
+    },
+    "PSE": {
+      "period": "2023",
+      "female": 152,
+      "male": 309
+    },
+    "QAT": {
+      "period": "2023",
+      "female": 25,
+      "male": 35
+    },
+    "ROU": {
+      "period": "2023",
+      "female": 69,
+      "male": 172
+    },
+    "RUS": {
+      "period": "2023",
+      "female": 105,
+      "male": 316
+    },
+    "RWA": {
+      "period": "2023",
+      "female": 146,
+      "male": 209
+    },
+    "SAU": {
+      "period": "2023",
+      "female": 59,
+      "male": 84
+    },
+    "SDN": {
+      "period": "2023",
+      "female": 133,
+      "male": 187
+    },
+    "SEN": {
+      "period": "2023",
+      "female": 149,
+      "male": 203
+    },
+    "SGP": {
+      "period": "2023",
+      "female": 31,
+      "male": 58
+    },
+    "SLB": {
+      "period": "2023",
+      "female": 228,
+      "male": 340
+    },
+    "SLE": {
+      "period": "2023",
+      "female": 190,
+      "male": 230
+    },
+    "SLV": {
+      "period": "2023",
+      "female": 94,
+      "male": 271
+    },
+    "SOM": {
+      "period": "2023",
+      "female": 293,
+      "male": 434
+    },
+    "SRB": {
+      "period": "2023",
+      "female": 75,
+      "male": 142
+    },
+    "SSD": {
+      "period": "2023",
+      "female": 195,
+      "male": 282
+    },
+    "STP": {
+      "period": "2023",
+      "female": 126,
+      "male": 170
+    },
+    "SUR": {
+      "period": "2023",
+      "female": 139,
+      "male": 217
+    },
+    "SVK": {
+      "period": "2023",
+      "female": 58,
+      "male": 131
+    },
+    "SVN": {
+      "period": "2023",
+      "female": 37,
+      "male": 83
+    },
+    "SWE": {
+      "period": "2023",
+      "female": 37,
+      "male": 57
+    },
+    "SWZ": {
+      "period": "2023",
+      "female": 337,
+      "male": 462
+    },
+    "SYC": {
+      "period": "2023",
+      "female": 71,
+      "male": 169
+    },
+    "SYR": {
+      "period": "2023",
+      "female": 90,
+      "male": 156
+    },
+    "TCD": {
+      "period": "2023",
+      "female": 200,
+      "male": 267
+    },
+    "TGO": {
+      "period": "2023",
+      "female": 169,
+      "male": 269
+    },
+    "THA": {
+      "period": "2023",
+      "female": 78,
+      "male": 186
+    },
+    "TJK": {
+      "period": "2023",
+      "female": 68,
+      "male": 97
+    },
+    "TKM": {
+      "period": "2023",
+      "female": 117,
+      "male": 239
+    },
+    "TLS": {
+      "period": "2023",
+      "female": 129,
+      "male": 174
+    },
+    "TON": {
+      "period": "2023",
+      "female": 112,
+      "male": 187
+    },
+    "TTO": {
+      "period": "2023",
+      "female": 133,
+      "male": 250
+    },
+    "TUN": {
+      "period": "2023",
+      "female": 50,
+      "male": 96
+    },
+    "TUR": {
+      "period": "2023",
+      "female": 90,
+      "male": 126
+    },
+    "TZA": {
+      "period": "2023",
+      "female": 159,
+      "male": 213
+    },
+    "UGA": {
+      "period": "2023",
+      "female": 155,
+      "male": 256
+    },
+    "UKR": {
+      "period": "2023",
+      "female": 98,
+      "male": 307
+    },
+    "URY": {
+      "period": "2023",
+      "female": 80,
+      "male": 146
+    },
+    "USA": {
+      "period": "2023",
+      "female": 82,
+      "male": 141
+    },
+    "UZB": {
+      "period": "2023",
+      "female": 91,
+      "male": 145
+    },
+    "VCT": {
+      "period": "2023",
+      "female": 144,
+      "male": 251
+    },
+    "VEN": {
+      "period": "2023",
+      "female": 98,
+      "male": 218
+    },
+    "VNM": {
+      "period": "2023",
+      "female": 68,
+      "male": 182
+    },
+    "VUT": {
+      "period": "2023",
+      "female": 176,
+      "male": 320
+    },
+    "WSM": {
+      "period": "2023",
+      "female": 116,
+      "male": 184
+    },
+    "YEM": {
+      "period": "2023",
+      "female": 137,
+      "male": 209
+    },
+    "ZAF": {
+      "period": "2023",
+      "female": 206,
+      "male": 354
+    },
+    "ZMB": {
+      "period": "2023",
+      "female": 205,
+      "male": 289
+    },
+    "ZWE": {
+      "period": "2023",
+      "female": 279,
+      "male": 396
+    }
+  }
+}

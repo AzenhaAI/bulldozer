@@ -1,0 +1,984 @@
+{
+  "meta": {
+    "slug": "who-hypertension",
+    "dims": [
+      "sex"
+    ],
+    "source": "WHO Global Health Observatory (data.who.int)",
+    "url": "https://data.who.int/indicators/i/7DA4E68/608DE39",
+    "parsedAt": "2026-11-07",
+    "note": "Female and male values for the same year as each country's headline figure."
+  },
+  "bySex": {
+    "AFG": {
+      "period": "2019",
+      "female": 45.3,
+      "male": 35.3
+    },
+    "AGO": {
+      "period": "2019",
+      "female": 40.8,
+      "male": 36.5
+    },
+    "ALB": {
+      "period": "2019",
+      "female": 40.8,
+      "male": 42.6
+    },
+    "AND": {
+      "period": "2019",
+      "female": 26.2,
+      "male": 35.7
+    },
+    "ARE": {
+      "period": "2019",
+      "female": 34.5,
+      "male": 43.9
+    },
+    "ARG": {
+      "period": "2019",
+      "female": 41.2,
+      "male": 54
+    },
+    "ARM": {
+      "period": "2019",
+      "female": 46.2,
+      "male": 48.5
+    },
+    "ATG": {
+      "period": "2019",
+      "female": 43.2,
+      "male": 41.9
+    },
+    "AUS": {
+      "period": "2019",
+      "female": 26.3,
+      "male": 32.3
+    },
+    "AUT": {
+      "period": "2019",
+      "female": 30.2,
+      "male": 37.5
+    },
+    "AZE": {
+      "period": "2019",
+      "female": 42.1,
+      "male": 39.6
+    },
+    "BDI": {
+      "period": "2019",
+      "female": 35.6,
+      "male": 32.5
+    },
+    "BEL": {
+      "period": "2019",
+      "female": 26.1,
+      "male": 33.8
+    },
+    "BEN": {
+      "period": "2019",
+      "female": 33,
+      "male": 28.9
+    },
+    "BFA": {
+      "period": "2019",
+      "female": 31.7,
+      "male": 29.1
+    },
+    "BGD": {
+      "period": "2019",
+      "female": 34.2,
+      "male": 23.5
+    },
+    "BGR": {
+      "period": "2019",
+      "female": 40.7,
+      "male": 49.4
+    },
+    "BHR": {
+      "period": "2019",
+      "female": 35.3,
+      "male": 40.1
+    },
+    "BHS": {
+      "period": "2019",
+      "female": 43.6,
+      "male": 45.5
+    },
+    "BIH": {
+      "period": "2019",
+      "female": 41.3,
+      "male": 46.9
+    },
+    "BLR": {
+      "period": "2019",
+      "female": 46.6,
+      "male": 51.6
+    },
+    "BLZ": {
+      "period": "2019",
+      "female": 38,
+      "male": 38
+    },
+    "BOL": {
+      "period": "2019",
+      "female": 27.2,
+      "male": 29.4
+    },
+    "BRA": {
+      "period": "2019",
+      "female": 42.1,
+      "male": 47.9
+    },
+    "BRB": {
+      "period": "2019",
+      "female": 43.3,
+      "male": 40
+    },
+    "BRN": {
+      "period": "2019",
+      "female": 45.6,
+      "male": 47
+    },
+    "BTN": {
+      "period": "2019",
+      "female": 43,
+      "male": 43.6
+    },
+    "BWA": {
+      "period": "2019",
+      "female": 47,
+      "male": 40.3
+    },
+    "CAF": {
+      "period": "2019",
+      "female": 42.8,
+      "male": 39.5
+    },
+    "CAN": {
+      "period": "2019",
+      "female": 19.9,
+      "male": 24.3
+    },
+    "CHE": {
+      "period": "2019",
+      "female": 17.5,
+      "male": 26.4
+    },
+    "CHL": {
+      "period": "2019",
+      "female": 33.1,
+      "male": 39
+    },
+    "CHN": {
+      "period": "2019",
+      "female": 24.1,
+      "male": 30.2
+    },
+    "CIV": {
+      "period": "2019",
+      "female": 37.6,
+      "male": 36.9
+    },
+    "CMR": {
+      "period": "2019",
+      "female": 38.6,
+      "male": 34.8
+    },
+    "COD": {
+      "period": "2019",
+      "female": 35.7,
+      "male": 32.7
+    },
+    "COG": {
+      "period": "2019",
+      "female": 41.5,
+      "male": 38
+    },
+    "COK": {
+      "period": "2019",
+      "female": 41.1,
+      "male": 44.6
+    },
+    "COL": {
+      "period": "2019",
+      "female": 30.8,
+      "male": 31.1
+    },
+    "COM": {
+      "period": "2019",
+      "female": 36.2,
+      "male": 30
+    },
+    "CPV": {
+      "period": "2019",
+      "female": 41.7,
+      "male": 45.7
+    },
+    "CRI": {
+      "period": "2019",
+      "female": 39.4,
+      "male": 36
+    },
+    "CUB": {
+      "period": "2019",
+      "female": 39.5,
+      "male": 40.3
+    },
+    "CYP": {
+      "period": "2019",
+      "female": 26,
+      "male": 35.7
+    },
+    "CZE": {
+      "period": "2019",
+      "female": 34,
+      "male": 49.1
+    },
+    "DEU": {
+      "period": "2019",
+      "female": 25,
+      "male": 34.4
+    },
+    "DJI": {
+      "period": "2019",
+      "female": 35.8,
+      "male": 32.7
+    },
+    "DMA": {
+      "period": "2019",
+      "female": 49.9,
+      "male": 45.5
+    },
+    "DNK": {
+      "period": "2019",
+      "female": 28.6,
+      "male": 43.3
+    },
+    "DOM": {
+      "period": "2019",
+      "female": 49.2,
+      "male": 49
+    },
+    "DZA": {
+      "period": "2019",
+      "female": 37.4,
+      "male": 35
+    },
+    "ECU": {
+      "period": "2019",
+      "female": 25.1,
+      "male": 29.2
+    },
+    "EGY": {
+      "period": "2019",
+      "female": 40.7,
+      "male": 35.6
+    },
+    "ERI": {
+      "period": "2019",
+      "female": 24.7,
+      "male": 22.5
+    },
+    "ESP": {
+      "period": "2019",
+      "female": 20.8,
+      "male": 33.5
+    },
+    "EST": {
+      "period": "2019",
+      "female": 34.2,
+      "male": 45.9
+    },
+    "ETH": {
+      "period": "2019",
+      "female": 30.1,
+      "male": 24.5
+    },
+    "FIN": {
+      "period": "2019",
+      "female": 30.6,
+      "male": 41
+    },
+    "FJI": {
+      "period": "2019",
+      "female": 40.5,
+      "male": 36.5
+    },
+    "FRA": {
+      "period": "2019",
+      "female": 24.4,
+      "male": 34.1
+    },
+    "FSM": {
+      "period": "2019",
+      "female": 33.9,
+      "male": 31.7
+    },
+    "GAB": {
+      "period": "2019",
+      "female": 38.7,
+      "male": 36
+    },
+    "GBR": {
+      "period": "2019",
+      "female": 23,
+      "male": 29.9
+    },
+    "GEO": {
+      "period": "2019",
+      "female": 42.3,
+      "male": 46.5
+    },
+    "GHA": {
+      "period": "2019",
+      "female": 36.1,
+      "male": 31.4
+    },
+    "GIN": {
+      "period": "2019",
+      "female": 42.5,
+      "male": 38.3
+    },
+    "GMB": {
+      "period": "2019",
+      "female": 40.2,
+      "male": 34.7
+    },
+    "GNB": {
+      "period": "2019",
+      "female": 39.7,
+      "male": 36
+    },
+    "GNQ": {
+      "period": "2019",
+      "female": 39.9,
+      "male": 36.6
+    },
+    "GRC": {
+      "period": "2019",
+      "female": 26.2,
+      "male": 36.5
+    },
+    "GRD": {
+      "period": "2019",
+      "female": 45.6,
+      "male": 47.6
+    },
+    "GTM": {
+      "period": "2019",
+      "female": 32.6,
+      "male": 31.5
+    },
+    "GUY": {
+      "period": "2019",
+      "female": 41.8,
+      "male": 38.2
+    },
+    "HND": {
+      "period": "2019",
+      "female": 34.4,
+      "male": 33.2
+    },
+    "HRV": {
+      "period": "2019",
+      "female": 45.3,
+      "male": 51.4
+    },
+    "HTI": {
+      "period": "2019",
+      "female": 47.8,
+      "male": 37.6
+    },
+    "HUN": {
+      "period": "2019",
+      "female": 40.9,
+      "male": 55.9
+    },
+    "IDN": {
+      "period": "2019",
+      "female": 44.5,
+      "male": 35.9
+    },
+    "IND": {
+      "period": "2019",
+      "female": 30.5,
+      "male": 31.6
+    },
+    "IRL": {
+      "period": "2019",
+      "female": 26.6,
+      "male": 38.2
+    },
+    "IRN": {
+      "period": "2019",
+      "female": 25.8,
+      "male": 26.6
+    },
+    "IRQ": {
+      "period": "2019",
+      "female": 47.7,
+      "male": 48.4
+    },
+    "ISL": {
+      "period": "2019",
+      "female": 24.2,
+      "male": 30.9
+    },
+    "ISR": {
+      "period": "2019",
+      "female": 25.3,
+      "male": 33
+    },
+    "ITA": {
+      "period": "2019",
+      "female": 28.6,
+      "male": 39.1
+    },
+    "JAM": {
+      "period": "2019",
+      "female": 47.8,
+      "male": 44.5
+    },
+    "JOR": {
+      "period": "2019",
+      "female": 35.7,
+      "male": 39.6
+    },
+    "JPN": {
+      "period": "2019",
+      "female": 22.5,
+      "male": 40.3
+    },
+    "KAZ": {
+      "period": "2019",
+      "female": 42.5,
+      "male": 40.9
+    },
+    "KEN": {
+      "period": "2019",
+      "female": 34.7,
+      "male": 31.4
+    },
+    "KGZ": {
+      "period": "2019",
+      "female": 43.2,
+      "male": 38.1
+    },
+    "KHM": {
+      "period": "2019",
+      "female": 25.4,
+      "male": 25.8
+    },
+    "KIR": {
+      "period": "2019",
+      "female": 43.8,
+      "male": 40.4
+    },
+    "KNA": {
+      "period": "2019",
+      "female": 45.1,
+      "male": 45.1
+    },
+    "KOR": {
+      "period": "2019",
+      "female": 21.2,
+      "male": 32
+    },
+    "KWT": {
+      "period": "2019",
+      "female": 35.2,
+      "male": 43.5
+    },
+    "LAO": {
+      "period": "2019",
+      "female": 31.4,
+      "male": 25.6
+    },
+    "LBN": {
+      "period": "2019",
+      "female": 34.2,
+      "male": 42.1
+    },
+    "LBR": {
+      "period": "2019",
+      "female": 41.3,
+      "male": 37.4
+    },
+    "LBY": {
+      "period": "2019",
+      "female": 39.4,
+      "male": 45.9
+    },
+    "LCA": {
+      "period": "2019",
+      "female": 40.8,
+      "male": 38.8
+    },
+    "LKA": {
+      "period": "2019",
+      "female": 36.5,
+      "male": 34.4
+    },
+    "LSO": {
+      "period": "2019",
+      "female": 46.8,
+      "male": 32.1
+    },
+    "LTU": {
+      "period": "2019",
+      "female": 42,
+      "male": 54
+    },
+    "LUX": {
+      "period": "2019",
+      "female": 24.2,
+      "male": 36.6
+    },
+    "LVA": {
+      "period": "2019",
+      "female": 38.9,
+      "male": 48.9
+    },
+    "MAR": {
+      "period": "2019",
+      "female": 35.6,
+      "male": 35
+    },
+    "MDA": {
+      "period": "2019",
+      "female": 46.9,
+      "male": 49.3
+    },
+    "MDG": {
+      "period": "2019",
+      "female": 38.9,
+      "male": 34.7
+    },
+    "MDV": {
+      "period": "2019",
+      "female": 35.4,
+      "male": 32.6
+    },
+    "MEX": {
+      "period": "2019",
+      "female": 31.4,
+      "male": 32.8
+    },
+    "MHL": {
+      "period": "2019",
+      "female": 32.9,
+      "male": 30.8
+    },
+    "MKD": {
+      "period": "2019",
+      "female": 40.7,
+      "male": 49.4
+    },
+    "MLI": {
+      "period": "2019",
+      "female": 38.3,
+      "male": 30.5
+    },
+    "MLT": {
+      "period": "2019",
+      "female": 24.8,
+      "male": 34.1
+    },
+    "MMR": {
+      "period": "2019",
+      "female": 40,
+      "male": 35.2
+    },
+    "MNE": {
+      "period": "2019",
+      "female": 40.8,
+      "male": 49.5
+    },
+    "MNG": {
+      "period": "2019",
+      "female": 40.7,
+      "male": 45
+    },
+    "MOZ": {
+      "period": "2019",
+      "female": 41.9,
+      "male": 34.3
+    },
+    "MRT": {
+      "period": "2019",
+      "female": 39.7,
+      "male": 35.9
+    },
+    "MUS": {
+      "period": "2019",
+      "female": 32,
+      "male": 34.2
+    },
+    "MWI": {
+      "period": "2019",
+      "female": 31.6,
+      "male": 26.8
+    },
+    "MYS": {
+      "period": "2019",
+      "female": 41,
+      "male": 40.5
+    },
+    "NAM": {
+      "period": "2019",
+      "female": 44.8,
+      "male": 42.6
+    },
+    "NER": {
+      "period": "2019",
+      "female": 42.6,
+      "male": 40.4
+    },
+    "NGA": {
+      "period": "2019",
+      "female": 39,
+      "male": 33
+    },
+    "NIC": {
+      "period": "2019",
+      "female": 36.9,
+      "male": 34.5
+    },
+    "NIU": {
+      "period": "2019",
+      "female": 39.7,
+      "male": 39.1
+    },
+    "NLD": {
+      "period": "2019",
+      "female": 24.8,
+      "male": 36.2
+    },
+    "NOR": {
+      "period": "2019",
+      "female": 25.5,
+      "male": 35.3
+    },
+    "NPL": {
+      "period": "2019",
+      "female": 33.9,
+      "male": 39.6
+    },
+    "NRU": {
+      "period": "2019",
+      "female": 39.7,
+      "male": 43.7
+    },
+    "NZL": {
+      "period": "2019",
+      "female": 27.6,
+      "male": 34.4
+    },
+    "OMN": {
+      "period": "2019",
+      "female": 38.8,
+      "male": 48.3
+    },
+    "PAK": {
+      "period": "2019",
+      "female": 44.8,
+      "male": 41.6
+    },
+    "PAN": {
+      "period": "2019",
+      "female": 35.3,
+      "male": 36.8
+    },
+    "PER": {
+      "period": "2019",
+      "female": 18.4,
+      "male": 22.8
+    },
+    "PHL": {
+      "period": "2019",
+      "female": 32.8,
+      "male": 34.7
+    },
+    "PLW": {
+      "period": "2019",
+      "female": 42.5,
+      "male": 45.1
+    },
+    "PNG": {
+      "period": "2019",
+      "female": 30.1,
+      "male": 25.4
+    },
+    "POL": {
+      "period": "2019",
+      "female": 42.7,
+      "male": 55.5
+    },
+    "PRI": {
+      "period": "2019",
+      "female": 43.2,
+      "male": 41.8
+    },
+    "PRK": {
+      "period": "2019",
+      "female": 25.2,
+      "male": 28.1
+    },
+    "PRT": {
+      "period": "2019",
+      "female": 28,
+      "male": 37
+    },
+    "PRY": {
+      "period": "2019",
+      "female": 50.9,
+      "male": 61.6
+    },
+    "PSE": {
+      "period": "2019",
+      "female": 37.4,
+      "male": 40.7
+    },
+    "QAT": {
+      "period": "2019",
+      "female": 37.7,
+      "male": 41.6
+    },
+    "ROU": {
+      "period": "2019",
+      "female": 43.9,
+      "male": 52.6
+    },
+    "RUS": {
+      "period": "2019",
+      "female": 41.2,
+      "male": 47.3
+    },
+    "RWA": {
+      "period": "2019",
+      "female": 30.9,
+      "male": 28.5
+    },
+    "SAU": {
+      "period": "2019",
+      "female": 30.2,
+      "male": 36.3
+    },
+    "SDN": {
+      "period": "2019",
+      "female": 43.5,
+      "male": 38
+    },
+    "SEN": {
+      "period": "2019",
+      "female": 42.9,
+      "male": 37.3
+    },
+    "SGP": {
+      "period": "2019",
+      "female": 27.1,
+      "male": 35.4
+    },
+    "SLB": {
+      "period": "2019",
+      "female": 34.5,
+      "male": 24.9
+    },
+    "SLE": {
+      "period": "2019",
+      "female": 43.4,
+      "male": 38
+    },
+    "SLV": {
+      "period": "2019",
+      "female": 33.6,
+      "male": 31.4
+    },
+    "SOM": {
+      "period": "2019",
+      "female": 38.6,
+      "male": 33.4
+    },
+    "SRB": {
+      "period": "2019",
+      "female": 42.1,
+      "male": 49.9
+    },
+    "SSD": {
+      "period": "2019",
+      "female": 36,
+      "male": 32.3
+    },
+    "STP": {
+      "period": "2019",
+      "female": 48,
+      "male": 41.9
+    },
+    "SUR": {
+      "period": "2019",
+      "female": 43.3,
+      "male": 42.4
+    },
+    "SVK": {
+      "period": "2019",
+      "female": 38,
+      "male": 47.4
+    },
+    "SVN": {
+      "period": "2019",
+      "female": 40.7,
+      "male": 49.6
+    },
+    "SWE": {
+      "period": "2019",
+      "female": 24.6,
+      "male": 35.6
+    },
+    "SWZ": {
+      "period": "2019",
+      "female": 47.3,
+      "male": 37.4
+    },
+    "SYC": {
+      "period": "2019",
+      "female": 42.3,
+      "male": 45.8
+    },
+    "SYR": {
+      "period": "2019",
+      "female": 39.8,
+      "male": 42.4
+    },
+    "TCD": {
+      "period": "2019",
+      "female": 40.7,
+      "male": 35.1
+    },
+    "TGO": {
+      "period": "2019",
+      "female": 37.5,
+      "male": 34.3
+    },
+    "THA": {
+      "period": "2019",
+      "female": 29.2,
+      "male": 29.1
+    },
+    "TJK": {
+      "period": "2019",
+      "female": 42.8,
+      "male": 50.9
+    },
+    "TKM": {
+      "period": "2019",
+      "female": 40.2,
+      "male": 37.6
+    },
+    "TLS": {
+      "period": "2019",
+      "female": 36.7,
+      "male": 33.8
+    },
+    "TON": {
+      "period": "2019",
+      "female": 46.8,
+      "male": 39.6
+    },
+    "TTO": {
+      "period": "2019",
+      "female": 41.6,
+      "male": 43.2
+    },
+    "TUN": {
+      "period": "2019",
+      "female": 34.8,
+      "male": 34.5
+    },
+    "TUR": {
+      "period": "2019",
+      "female": 34.4,
+      "male": 30.8
+    },
+    "TUV": {
+      "period": "2019",
+      "female": 50.8,
+      "male": 49.2
+    },
+    "TZA": {
+      "period": "2019",
+      "female": 35.4,
+      "male": 30.9
+    },
+    "UGA": {
+      "period": "2019",
+      "female": 33.9,
+      "male": 30.9
+    },
+    "UKR": {
+      "period": "2019",
+      "female": 41.6,
+      "male": 44.5
+    },
+    "URY": {
+      "period": "2019",
+      "female": 38.9,
+      "male": 46
+    },
+    "USA": {
+      "period": "2019",
+      "female": 29,
+      "male": 34.1
+    },
+    "UZB": {
+      "period": "2019",
+      "female": 44.6,
+      "male": 46.7
+    },
+    "VCT": {
+      "period": "2019",
+      "female": 41.5,
+      "male": 37.2
+    },
+    "VEN": {
+      "period": "2019",
+      "female": 39.1,
+      "male": 39.7
+    },
+    "VNM": {
+      "period": "2019",
+      "female": 26.4,
+      "male": 32.9
+    },
+    "VUT": {
+      "period": "2019",
+      "female": 41.8,
+      "male": 37.4
+    },
+    "WSM": {
+      "period": "2019",
+      "female": 37.9,
+      "male": 38.6
+    },
+    "YEM": {
+      "period": "2019",
+      "female": 29.6,
+      "male": 29.1
+    },
+    "ZAF": {
+      "period": "2019",
+      "female": 44.3,
+      "male": 43.8
+    },
+    "ZMB": {
+      "period": "2019",
+      "female": 33.8,
+      "male": 30.3
+    },
+    "ZWE": {
+      "period": "2019",
+      "female": 46.4,
+      "male": 36.9
+    }
+  }
+}

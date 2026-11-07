@@ -10,6 +10,13 @@ import countryNames from '@data/country-names.json';
 
 const NAMES: Record<string, { common: string; official: string }> = countryNames;
 
+// Women and men beside the headline, where the upstream publishes the series by
+// sex (scripts/parse_sex_splits.mjs). Shown only when the split is for the same
+// year as the headline, so the three numbers never disagree about when.
+type SexSplit = { meta: { slug: string }; bySex: Record<string, { period: string; female: number; male: number }> };
+const SPLITS = Object.values(import.meta.glob('../data/splits/*.json', { eager: true, import: 'default' })) as SexSplit[];
+const SEX = new Map(SPLITS.map((s) => [s.meta.slug, s.bySex]));
+
 export interface CountryItem {
   slug: string;
   title: string;
@@ -26,6 +33,8 @@ export interface CountryItem {
   years: number;
   /** Which way is better, when plain (lib/polarity.ts) — the rank alone does not say. */
   better?: 'high' | 'low';
+  /** Women and men for the same period, when the source publishes them. */
+  sex?: { female: number; male: number };
 }
 
 export interface CountryProfile {
@@ -76,6 +85,7 @@ export function buildCountryIndex(): CountryProfile[] {
         value: o.value, period, rank: i + 1, total,
         first: [...own.get(iso)!].sort()[0], years: own.get(iso)!.size,
         ...(ds.better ? { better: ds.better } : {}),
+        ...((sx) => (sx && sx.period === period ? { sex: { female: sx.female, male: sx.male } } : {}))(SEX.get(ds.slug)?.[iso]),
       });
     });
   }

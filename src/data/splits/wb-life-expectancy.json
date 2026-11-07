@@ -1,0 +1,1094 @@
+{
+  "meta": {
+    "slug": "wb-life-expectancy",
+    "dims": [
+      "sex"
+    ],
+    "source": "World Bank Open Data (SP.DYN.LE00.FE.IN, SP.DYN.LE00.MA.IN)",
+    "url": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN",
+    "parsedAt": "2026-11-07",
+    "note": "Female and male values for the same year as each country's headline figure."
+  },
+  "bySex": {
+    "ABW": {
+      "period": "2024",
+      "female": 78.92,
+      "male": 73.85
+    },
+    "AFG": {
+      "period": "2024",
+      "female": 67.81,
+      "male": 64.7
+    },
+    "AGO": {
+      "period": "2024",
+      "female": 67.34,
+      "male": 62.28
+    },
+    "ALB": {
+      "period": "2024",
+      "female": 81.59,
+      "male": 77.92
+    },
+    "AND": {
+      "period": "2024",
+      "female": 86.24,
+      "male": 82.26
+    },
+    "ARE": {
+      "period": "2024",
+      "female": 84.32,
+      "male": 82.17
+    },
+    "ARG": {
+      "period": "2024",
+      "female": 80.02,
+      "male": 74.98
+    },
+    "ARM": {
+      "period": "2024",
+      "female": 81.7,
+      "male": 75.1
+    },
+    "ASM": {
+      "period": "2024",
+      "female": 75.99,
+      "male": 70.32
+    },
+    "ATG": {
+      "period": "2024",
+      "female": 80.45,
+      "male": 74.74
+    },
+    "AUS": {
+      "period": "2024",
+      "female": 85.1,
+      "male": 81.1
+    },
+    "AUT": {
+      "period": "2024",
+      "female": 84.3,
+      "male": 79.8
+    },
+    "AZE": {
+      "period": "2024",
+      "female": 77.29,
+      "male": 71.71
+    },
+    "BDI": {
+      "period": "2024",
+      "female": 65.88,
+      "male": 61.75
+    },
+    "BEL": {
+      "period": "2024",
+      "female": 84.4,
+      "male": 80.3
+    },
+    "BEN": {
+      "period": "2024",
+      "female": 62.42,
+      "male": 59.52
+    },
+    "BFA": {
+      "period": "2024",
+      "female": 63.43,
+      "male": 59.11
+    },
+    "BGD": {
+      "period": "2024",
+      "female": 76.67,
+      "male": 73.3
+    },
+    "BGR": {
+      "period": "2024",
+      "female": 79.5,
+      "male": 72.2
+    },
+    "BHR": {
+      "period": "2024",
+      "female": 82.13,
+      "male": 80.86
+    },
+    "BHS": {
+      "period": "2024",
+      "female": 78.33,
+      "male": 71.06
+    },
+    "BIH": {
+      "period": "2024",
+      "female": 81.07,
+      "male": 74.65
+    },
+    "BLR": {
+      "period": "2024",
+      "female": 79.22,
+      "male": 69.74
+    },
+    "BLZ": {
+      "period": "2024",
+      "female": 76.66,
+      "male": 71.08
+    },
+    "BMU": {
+      "period": "2024",
+      "female": 85.87,
+      "male": 79.06
+    },
+    "BOL": {
+      "period": "2024",
+      "female": 71.32,
+      "male": 66.27
+    },
+    "BRA": {
+      "period": "2024",
+      "female": 79.15,
+      "male": 72.95
+    },
+    "BRB": {
+      "period": "2024",
+      "female": 78.76,
+      "male": 73.75
+    },
+    "BRN": {
+      "period": "2024",
+      "female": 77.73,
+      "male": 73.49
+    },
+    "BTN": {
+      "period": "2024",
+      "female": 75.27,
+      "male": 71.57
+    },
+    "BWA": {
+      "period": "2024",
+      "female": 71.85,
+      "male": 66.78
+    },
+    "CAF": {
+      "period": "2024",
+      "female": 59.56,
+      "male": 55.51
+    },
+    "CAN": {
+      "period": "2024",
+      "female": 84.29,
+      "male": 80.03
+    },
+    "CHE": {
+      "period": "2024",
+      "female": 86.2,
+      "male": 82.7
+    },
+    "CHL": {
+      "period": "2024",
+      "female": 83.23,
+      "male": 79.45
+    },
+    "CHN": {
+      "period": "2024",
+      "female": 80.97,
+      "male": 75.25
+    },
+    "CIV": {
+      "period": "2024",
+      "female": 64.31,
+      "male": 60.17
+    },
+    "CMR": {
+      "period": "2024",
+      "female": 66.22,
+      "male": 61.78
+    },
+    "COD": {
+      "period": "2024",
+      "female": 64.23,
+      "male": 59.96
+    },
+    "COG": {
+      "period": "2024",
+      "female": 67.72,
+      "male": 64.33
+    },
+    "COL": {
+      "period": "2024",
+      "female": 80.61,
+      "male": 75.16
+    },
+    "COM": {
+      "period": "2024",
+      "female": 69.2,
+      "male": 65.02
+    },
+    "CPV": {
+      "period": "2024",
+      "female": 79.37,
+      "male": 73.05
+    },
+    "CRI": {
+      "period": "2024",
+      "female": 83.58,
+      "male": 78.37
+    },
+    "CUB": {
+      "period": "2024",
+      "female": 80.68,
+      "male": 75.86
+    },
+    "CUW": {
+      "period": "2024",
+      "female": 80.96,
+      "male": 72.66
+    },
+    "CYM": {
+      "period": "2024",
+      "female": 83,
+      "male": 78.2
+    },
+    "CYP": {
+      "period": "2024",
+      "female": 83.8,
+      "male": 79.84
+    },
+    "CZE": {
+      "period": "2024",
+      "female": 83,
+      "male": 77.1
+    },
+    "DEU": {
+      "period": "2024",
+      "female": 83.2,
+      "male": 78.5
+    },
+    "DJI": {
+      "period": "2024",
+      "female": 68.74,
+      "male": 63.73
+    },
+    "DMA": {
+      "period": "2024",
+      "female": 74.72,
+      "male": 68.35
+    },
+    "DNK": {
+      "period": "2024",
+      "female": 84.2,
+      "male": 80.4
+    },
+    "DOM": {
+      "period": "2024",
+      "female": 77.11,
+      "male": 70.66
+    },
+    "DZA": {
+      "period": "2024",
+      "female": 77.91,
+      "male": 75.1
+    },
+    "ECU": {
+      "period": "2024",
+      "female": 80.31,
+      "male": 74.88
+    },
+    "EGY": {
+      "period": "2024",
+      "female": 74.01,
+      "male": 69.65
+    },
+    "ERI": {
+      "period": "2024",
+      "female": 70.94,
+      "male": 66.76
+    },
+    "ESP": {
+      "period": "2024",
+      "female": 86.5,
+      "male": 81.4
+    },
+    "EST": {
+      "period": "2024",
+      "female": 83.7,
+      "male": 75.1
+    },
+    "ETH": {
+      "period": "2024",
+      "female": 71.02,
+      "male": 64.36
+    },
+    "FIN": {
+      "period": "2024",
+      "female": 85,
+      "male": 79.8
+    },
+    "FJI": {
+      "period": "2024",
+      "female": 69.54,
+      "male": 65.47
+    },
+    "FRA": {
+      "period": "2024",
+      "female": 85.9,
+      "male": 80.2
+    },
+    "FRO": {
+      "period": "2024",
+      "female": 84.91,
+      "male": 81.34
+    },
+    "FSM": {
+      "period": "2024",
+      "female": 71.28,
+      "male": 63.63
+    },
+    "GAB": {
+      "period": "2024",
+      "female": 71.24,
+      "male": 66.06
+    },
+    "GBR": {
+      "period": "2024",
+      "female": 83.33,
+      "male": 79.54
+    },
+    "GEO": {
+      "period": "2024",
+      "female": 79.23,
+      "male": 69.75
+    },
+    "GHA": {
+      "period": "2024",
+      "female": 68.16,
+      "male": 63.31
+    },
+    "GIB": {
+      "period": "2024",
+      "female": 86.19,
+      "male": 81.03
+    },
+    "GIN": {
+      "period": "2024",
+      "female": 62.09,
+      "male": 59.66
+    },
+    "GMB": {
+      "period": "2024",
+      "female": 67.75,
+      "male": 64.35
+    },
+    "GNB": {
+      "period": "2024",
+      "female": 66.55,
+      "male": 61.82
+    },
+    "GNQ": {
+      "period": "2024",
+      "female": 65.89,
+      "male": 62.22
+    },
+    "GRC": {
+      "period": "2024",
+      "female": 84.4,
+      "male": 79.4
+    },
+    "GRD": {
+      "period": "2024",
+      "female": 78.5,
+      "male": 72.52
+    },
+    "GRL": {
+      "period": "2024",
+      "female": 72.23,
+      "male": 68.41
+    },
+    "GTM": {
+      "period": "2024",
+      "female": 75.04,
+      "male": 70.44
+    },
+    "GUM": {
+      "period": "2024",
+      "female": 81.59,
+      "male": 73.66
+    },
+    "GUY": {
+      "period": "2024",
+      "female": 74.09,
+      "male": 66.62
+    },
+    "HKG": {
+      "period": "2024",
+      "female": 88.22,
+      "male": 82.7
+    },
+    "HND": {
+      "period": "2024",
+      "female": 75.67,
+      "male": 70.49
+    },
+    "HRV": {
+      "period": "2024",
+      "female": 81.9,
+      "male": 76.1
+    },
+    "HTI": {
+      "period": "2024",
+      "female": 68.49,
+      "male": 61.9
+    },
+    "HUN": {
+      "period": "2024",
+      "female": 79.9,
+      "male": 73.7
+    },
+    "IDN": {
+      "period": "2024",
+      "female": 73.43,
+      "male": 69.16
+    },
+    "IMN": {
+      "period": "2024",
+      "female": 83.2,
+      "male": 79.04
+    },
+    "IND": {
+      "period": "2024",
+      "female": 73.86,
+      "male": 70.73
+    },
+    "IRL": {
+      "period": "2024",
+      "female": 84.7,
+      "male": 81.4
+    },
+    "IRN": {
+      "period": "2024",
+      "female": 79.81,
+      "male": 76
+    },
+    "IRQ": {
+      "period": "2024",
+      "female": 74.18,
+      "male": 70.5
+    },
+    "ISL": {
+      "period": "2024",
+      "female": 84.5,
+      "male": 81.2
+    },
+    "ISR": {
+      "period": "2024",
+      "female": 85.4,
+      "male": 81.1
+    },
+    "ITA": {
+      "period": "2024",
+      "female": 86,
+      "male": 82
+    },
+    "JAM": {
+      "period": "2024",
+      "female": 74.15,
+      "male": 69.08
+    },
+    "JOR": {
+      "period": "2024",
+      "female": 80.33,
+      "male": 75.89
+    },
+    "JPN": {
+      "period": "2024",
+      "female": 87.13,
+      "male": 81.09
+    },
+    "KAZ": {
+      "period": "2024",
+      "female": 78.52,
+      "male": 70.27
+    },
+    "KEN": {
+      "period": "2024",
+      "female": 66.12,
+      "male": 61.64
+    },
+    "KGZ": {
+      "period": "2024",
+      "female": 76.6,
+      "male": 68.4
+    },
+    "KHM": {
+      "period": "2024",
+      "female": 73.36,
+      "male": 68.15
+    },
+    "KIR": {
+      "period": "2024",
+      "female": 68.32,
+      "male": 64.69
+    },
+    "KNA": {
+      "period": "2024",
+      "female": 76.16,
+      "male": 68.69
+    },
+    "KOR": {
+      "period": "2024",
+      "female": 86.6,
+      "male": 80.8
+    },
+    "KWT": {
+      "period": "2024",
+      "female": 85.4,
+      "male": 83.8
+    },
+    "LAO": {
+      "period": "2024",
+      "female": 71.53,
+      "male": 67.02
+    },
+    "LBN": {
+      "period": "2024",
+      "female": 79.86,
+      "male": 75.88
+    },
+    "LBR": {
+      "period": "2024",
+      "female": 63.63,
+      "male": 61.02
+    },
+    "LBY": {
+      "period": "2024",
+      "female": 72.68,
+      "male": 69.63
+    },
+    "LCA": {
+      "period": "2024",
+      "female": 76.45,
+      "male": 69.45
+    },
+    "LIE": {
+      "period": "2024",
+      "female": 86.3,
+      "male": 82.2
+    },
+    "LKA": {
+      "period": "2024",
+      "female": 80.75,
+      "male": 74.45
+    },
+    "LSO": {
+      "period": "2024",
+      "female": 60.44,
+      "male": 55.03
+    },
+    "LTU": {
+      "period": "2024",
+      "female": 81.6,
+      "male": 73
+    },
+    "LUX": {
+      "period": "2024",
+      "female": 85.5,
+      "male": 81
+    },
+    "LVA": {
+      "period": "2024",
+      "female": 81.5,
+      "male": 71.6
+    },
+    "MAC": {
+      "period": "2024",
+      "female": 86.2,
+      "male": 80.6
+    },
+    "MAF": {
+      "period": "2024",
+      "female": 83.96,
+      "male": 76.99
+    },
+    "MAR": {
+      "period": "2024",
+      "female": 77.78,
+      "male": 73.35
+    },
+    "MCO": {
+      "period": "2024",
+      "female": 88.63,
+      "male": 84.56
+    },
+    "MDA": {
+      "period": "2024",
+      "female": 75.67,
+      "male": 66.7
+    },
+    "MDG": {
+      "period": "2024",
+      "female": 65.6,
+      "male": 62.12
+    },
+    "MDV": {
+      "period": "2024",
+      "female": 83,
+      "male": 79.95
+    },
+    "MEX": {
+      "period": "2024",
+      "female": 78,
+      "male": 72.44
+    },
+    "MHL": {
+      "period": "2024",
+      "female": 69.48,
+      "male": 65.03
+    },
+    "MKD": {
+      "period": "2024",
+      "female": 78.86,
+      "male": 74.48
+    },
+    "MLI": {
+      "period": "2024",
+      "female": 62.15,
+      "male": 59.25
+    },
+    "MLT": {
+      "period": "2024",
+      "female": 84.8,
+      "male": 81.2
+    },
+    "MMR": {
+      "period": "2024",
+      "female": 70.38,
+      "male": 63.99
+    },
+    "MNE": {
+      "period": "2024",
+      "female": 80.4,
+      "male": 75.5
+    },
+    "MNG": {
+      "period": "2024",
+      "female": 77.1,
+      "male": 67.92
+    },
+    "MNP": {
+      "period": "2024",
+      "female": 80.87,
+      "male": 77.28
+    },
+    "MOZ": {
+      "period": "2024",
+      "female": 66.74,
+      "male": 60.49
+    },
+    "MRT": {
+      "period": "2024",
+      "female": 70.73,
+      "male": 66.7
+    },
+    "MUS": {
+      "period": "2024",
+      "female": 77.4,
+      "male": 70.35
+    },
+    "MWI": {
+      "period": "2024",
+      "female": 70.77,
+      "male": 64.27
+    },
+    "MYS": {
+      "period": "2024",
+      "female": 79.52,
+      "male": 74.45
+    },
+    "NAM": {
+      "period": "2024",
+      "female": 71.48,
+      "male": 63.45
+    },
+    "NCL": {
+      "period": "2024",
+      "female": 81.41,
+      "male": 76.46
+    },
+    "NER": {
+      "period": "2024",
+      "female": 62.41,
+      "male": 60.49
+    },
+    "NGA": {
+      "period": "2024",
+      "female": 54.94,
+      "male": 54.33
+    },
+    "NIC": {
+      "period": "2024",
+      "female": 77.58,
+      "male": 72.46
+    },
+    "NLD": {
+      "period": "2024",
+      "female": 83.4,
+      "male": 80.6
+    },
+    "NOR": {
+      "period": "2024",
+      "female": 84.8,
+      "male": 81.6
+    },
+    "NPL": {
+      "period": "2024",
+      "female": 72.14,
+      "male": 69.09
+    },
+    "NRU": {
+      "period": "2024",
+      "female": 64.19,
+      "male": 60.41
+    },
+    "NZL": {
+      "period": "2024",
+      "female": 83.7,
+      "male": 80.4
+    },
+    "OMN": {
+      "period": "2024",
+      "female": 82.05,
+      "male": 78.72
+    },
+    "PAK": {
+      "period": "2024",
+      "female": 70.32,
+      "male": 65.46
+    },
+    "PAN": {
+      "period": "2024",
+      "female": 82.71,
+      "male": 76.88
+    },
+    "PER": {
+      "period": "2024",
+      "female": 80.3,
+      "male": 75.63
+    },
+    "PHL": {
+      "period": "2024",
+      "female": 72.96,
+      "male": 66.99
+    },
+    "PLW": {
+      "period": "2024",
+      "female": 71.94,
+      "male": 67.25
+    },
+    "PNG": {
+      "period": "2024",
+      "female": 69.21,
+      "male": 63.84
+    },
+    "POL": {
+      "period": "2024",
+      "female": 82.2,
+      "male": 74.8
+    },
+    "PRI": {
+      "period": "2024",
+      "female": 85.38,
+      "male": 78.28
+    },
+    "PRK": {
+      "period": "2024",
+      "female": 75.88,
+      "male": 71.55
+    },
+    "PRT": {
+      "period": "2024",
+      "female": 85.2,
+      "male": 79.7
+    },
+    "PRY": {
+      "period": "2024",
+      "female": 77.09,
+      "male": 71.01
+    },
+    "PSE": {
+      "period": "2024",
+      "female": 74.25,
+      "male": 65.22
+    },
+    "PYF": {
+      "period": "2024",
+      "female": 86.62,
+      "male": 81.9
+    },
+    "QAT": {
+      "period": "2024",
+      "female": 83.48,
+      "male": 81.78
+    },
+    "ROU": {
+      "period": "2024",
+      "female": 80.3,
+      "male": 72.8
+    },
+    "RUS": {
+      "period": "2024",
+      "female": 78.88,
+      "male": 68.26
+    },
+    "RWA": {
+      "period": "2024",
+      "female": 70.14,
+      "male": 65.71
+    },
+    "SAU": {
+      "period": "2024",
+      "female": 81.33,
+      "male": 77.33
+    },
+    "SDN": {
+      "period": "2024",
+      "female": 69.83,
+      "male": 63.45
+    },
+    "SEN": {
+      "period": "2024",
+      "female": 71.01,
+      "male": 67.01
+    },
+    "SGP": {
+      "period": "2024",
+      "female": 85.6,
+      "male": 81.2
+    },
+    "SLB": {
+      "period": "2024",
+      "female": 72.18,
+      "male": 69.36
+    },
+    "SLE": {
+      "period": "2024",
+      "female": 63.7,
+      "male": 60.23
+    },
+    "SLV": {
+      "period": "2024",
+      "female": 76.49,
+      "male": 67.76
+    },
+    "SMR": {
+      "period": "2024",
+      "female": 87.22,
+      "male": 84.32
+    },
+    "SOM": {
+      "period": "2024",
+      "female": 61.55,
+      "male": 56.49
+    },
+    "SRB": {
+      "period": "2024",
+      "female": 78.35,
+      "male": 73.7
+    },
+    "SSD": {
+      "period": "2024",
+      "female": 60.75,
+      "male": 54.76
+    },
+    "STP": {
+      "period": "2024",
+      "female": 73.91,
+      "male": 66.41
+    },
+    "SUR": {
+      "period": "2024",
+      "female": 76.98,
+      "male": 70.6
+    },
+    "SVK": {
+      "period": "2024",
+      "female": 81.7,
+      "male": 75.2
+    },
+    "SVN": {
+      "period": "2024",
+      "female": 85,
+      "male": 79.7
+    },
+    "SWE": {
+      "period": "2024",
+      "female": 85.6,
+      "male": 82.6
+    },
+    "SWZ": {
+      "period": "2024",
+      "female": 67.11,
+      "male": 61.32
+    },
+    "SXM": {
+      "period": "2024",
+      "female": 79.66,
+      "male": 73.85
+    },
+    "SYC": {
+      "period": "2024",
+      "female": 80.7,
+      "male": 72.1
+    },
+    "SYR": {
+      "period": "2024",
+      "female": 74.92,
+      "male": 70.21
+    },
+    "TCA": {
+      "period": "2024",
+      "female": 80.45,
+      "male": 76.01
+    },
+    "TCD": {
+      "period": "2024",
+      "female": 57.19,
+      "male": 53.36
+    },
+    "TGO": {
+      "period": "2024",
+      "female": 63.15,
+      "male": 62.7
+    },
+    "THA": {
+      "period": "2024",
+      "female": 80.98,
+      "male": 72.34
+    },
+    "TJK": {
+      "period": "2024",
+      "female": 74.14,
+      "male": 69.68
+    },
+    "TKM": {
+      "period": "2024",
+      "female": 73.01,
+      "male": 67
+    },
+    "TLS": {
+      "period": "2024",
+      "female": 69.67,
+      "male": 66.27
+    },
+    "TON": {
+      "period": "2024",
+      "female": 76.54,
+      "male": 69.5
+    },
+    "TTO": {
+      "period": "2024",
+      "female": 76.83,
+      "male": 70.51
+    },
+    "TUN": {
+      "period": "2024",
+      "female": 79.33,
+      "male": 74.13
+    },
+    "TUR": {
+      "period": "2024",
+      "female": 80.34,
+      "male": 74.62
+    },
+    "TUV": {
+      "period": "2024",
+      "female": 70.86,
+      "male": 63.91
+    },
+    "TZA": {
+      "period": "2024",
+      "female": 70,
+      "male": 64.4
+    },
+    "UGA": {
+      "period": "2024",
+      "female": 71.36,
+      "male": 65.49
+    },
+    "UKR": {
+      "period": "2024",
+      "female": 79.39,
+      "male": 69.79
+    },
+    "URY": {
+      "period": "2024",
+      "female": 82.04,
+      "male": 74.38
+    },
+    "USA": {
+      "period": "2024",
+      "female": 81.4,
+      "male": 76.5
+    },
+    "UZB": {
+      "period": "2024",
+      "female": 75.55,
+      "male": 69.56
+    },
+    "VCT": {
+      "period": "2024",
+      "female": 74.48,
+      "male": 68.78
+    },
+    "VEN": {
+      "period": "2024",
+      "female": 76.66,
+      "male": 68.89
+    },
+    "VGB": {
+      "period": "2024",
+      "female": 80.19,
+      "male": 74.7
+    },
+    "VIR": {
+      "period": "2024",
+      "female": 84.1,
+      "male": 77.6
+    },
+    "VNM": {
+      "period": "2024",
+      "female": 79.38,
+      "male": 70.05
+    },
+    "VUT": {
+      "period": "2024",
+      "female": 74.11,
+      "male": 69.58
+    },
+    "WSM": {
+      "period": "2024",
+      "female": 73.82,
+      "male": 69.96
+    },
+    "XKX": {
+      "period": "2024",
+      "female": 80.28,
+      "male": 76.01
+    },
+    "YEM": {
+      "period": "2024",
+      "female": 71.55,
+      "male": 67.37
+    },
+    "ZAF": {
+      "period": "2024",
+      "female": 69.79,
+      "male": 62.78
+    },
+    "ZMB": {
+      "period": "2024",
+      "female": 68.87,
+      "male": 64.1
+    },
+    "ZWE": {
+      "period": "2024",
+      "female": 65.31,
+      "male": 60.49
+    }
+  }
+}
