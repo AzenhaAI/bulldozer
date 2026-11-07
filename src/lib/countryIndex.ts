@@ -17,6 +17,15 @@ type SexSplit = { meta: { slug: string }; bySex: Record<string, { period: string
 const SPLITS = Object.values(import.meta.glob('../data/splits/*.json', { eager: true, import: 'default' })) as SexSplit[];
 const SEX = new Map(SPLITS.map((s) => [s.meta.slug, s.bySex]));
 
+/** Lowest and highest value of either sex across every country in a split —
+ *  the axis the profile's women/men scale is drawn on. */
+export function sexRange(slug: string): { min: number; max: number; n: number } | null {
+  const by = SEX.get(slug);
+  if (!by) return null;
+  const vals = Object.values(by).flatMap((r) => [r.female, r.male]);
+  return vals.length ? { min: Math.min(...vals), max: Math.max(...vals), n: Object.keys(by).length } : null;
+}
+
 export interface CountryItem {
   slug: string;
   title: string;
