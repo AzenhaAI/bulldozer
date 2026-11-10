@@ -13,7 +13,7 @@ export function methodologyFor(slug: string): Methodology {
   if (slug.startsWith('wvs-'))
     return { vintage: 'Wave 7 (2017–2022)', method: 'Weighted by W_WEIGHT; Welzel cultural-values index, country mean.' };
   if (slug.startsWith('lits-'))
-    return { vintage: 'LiTS IV (~2022–2023)', method: 'Country mean of the item; transition region only, single wave.' };
+    return { vintage: 'LiTS I–IV (2006, 2010, 2016, 2022–23); which waves asked each item is in the summary', method: 'Weighted country mean of the item from the EBRD microdata; transition region plus a few comparator countries.' };
   if (slug.startsWith('hofstede-'))
     return { vintage: 'Dimension matrix (2010)', method: 'Published national scores (0–100); a fixed model, not a time series.' };
   if (slug === 'wb-account-ownership' || slug === 'wb-debit-card' || slug === 'wb-digital-payments' || slug === 'wb-mobile-money')

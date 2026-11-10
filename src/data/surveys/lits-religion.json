@@ -1,14 +1,15 @@
 {
   "meta": {
     "title": "Importance of Religion",
-    "summary": "Mean rated importance of religion in one’s life. EBRD Life in Transition Survey IV, 2023.",
+    "summary": "Mean rated importance of religion in one’s life. LiTS IV, 2023 (not asked on this scale before).",
     "unit": "mean 1–5",
     "valueLabel": "Importance of religion in life",
     "changeMode": "pp",
-    "source": "EBRD — Life in Transition Survey IV",
+    "method": "Weighted country mean of the answer scale; don’t know, difficult to say and refused left out.",
+    "source": "EBRD — Life in Transition Survey",
     "license": "EBRD terms — public aggregates",
-    "url": "https://www.ebrd.com/what-we-do/economic-research-and-data/data/lits.html",
-    "parsedAt": "2026-08-03",
+    "url": "https://www.ebrd.com/home/what-we-do/office-of-the-chief-economist/lits/life-in-transition-survey-data.html",
+    "parsedAt": "2026-11-10",
     "kind": "survey"
   },
   "data": [
@@ -41,7 +42,7 @@
       "iso": "BLR"
     },
     {
-      "entity": "Bosnia & Herzegov.",
+      "entity": "Bosnia and Herzegovina",
       "group": "Europe",
       "period": "2023",
       "value": 3.55,
@@ -119,13 +120,13 @@
     },
     {
       "entity": "Kosovo",
-      "group": "Europe",
+      "group": "Europe & Central Asia",
       "period": "2023",
       "value": 4.29,
       "iso": "XKX"
     },
     {
-      "entity": "Kyrgyz Republic",
+      "entity": "Kyrgyzstan",
       "group": "Asia",
       "period": "2023",
       "value": 4.12,
@@ -209,7 +210,7 @@
       "iso": "SRB"
     },
     {
-      "entity": "Slovak Republic",
+      "entity": "Slovakia",
       "group": "Europe",
       "period": "2023",
       "value": 2.83,
@@ -251,7 +252,7 @@
       "iso": "UZB"
     },
     {
-      "entity": "West Bank & Gaza",
+      "entity": "Palestine",
       "group": "Asia",
       "period": "2023",
       "value": 4.87,

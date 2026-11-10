@@ -1,17 +1,256 @@
 {
   "meta": {
     "title": "Preference for State Ownership",
-    "summary": "Views on ownership of business and industry (1 = private should increase, 10 = government should increase). EBRD Life in Transition Survey IV, 2023.",
+    "summary": "Views on ownership of business and industry (1 = private should increase, 10 = government should increase). LiTS III–IV, 2016–2023.",
     "unit": "mean 1–10",
     "valueLabel": "Private (1) ↔ state (10)",
     "changeMode": "pp",
-    "source": "EBRD — Life in Transition Survey IV",
+    "method": "Weighted country mean of the answer scale; don’t know, difficult to say and refused left out.",
+    "source": "EBRD — Life in Transition Survey",
     "license": "EBRD terms — public aggregates",
-    "url": "https://www.ebrd.com/what-we-do/economic-research-and-data/data/lits.html",
-    "parsedAt": "2026-08-03",
+    "url": "https://www.ebrd.com/home/what-we-do/office-of-the-chief-economist/lits/life-in-transition-survey-data.html",
+    "parsedAt": "2026-11-10",
     "kind": "survey"
   },
   "data": [
+    {
+      "entity": "Albania",
+      "group": "Europe",
+      "period": "2016",
+      "value": 4.38,
+      "iso": "ALB"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2016",
+      "value": 6.32,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2016",
+      "value": 6.43,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Belarus",
+      "group": "Europe",
+      "period": "2016",
+      "value": 4.64,
+      "iso": "BLR"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "group": "Europe",
+      "period": "2016",
+      "value": 6.01,
+      "iso": "BIH"
+    },
+    {
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.46,
+      "iso": "BGR"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.23,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Cyprus",
+      "group": "Europe",
+      "period": "2016",
+      "value": 4.48,
+      "iso": "CYP"
+    },
+    {
+      "entity": "Czechia",
+      "group": "Europe",
+      "period": "2016",
+      "value": 4.86,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Estonia",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.16,
+      "iso": "EST"
+    },
+    {
+      "entity": "North Macedonia",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.16,
+      "iso": "MKD"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2016",
+      "value": 4.62,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.09,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.3,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.04,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.16,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Kazakhstan",
+      "group": "Asia",
+      "period": "2016",
+      "value": 5.44,
+      "iso": "KAZ"
+    },
+    {
+      "entity": "Kosovo",
+      "group": "Europe & Central Asia",
+      "period": "2016",
+      "value": 5.43,
+      "iso": "XKX"
+    },
+    {
+      "entity": "Kyrgyzstan",
+      "group": "Asia",
+      "period": "2016",
+      "value": 5.55,
+      "iso": "KGZ"
+    },
+    {
+      "entity": "Latvia",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.94,
+      "iso": "LVA"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.24,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Moldova",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.48,
+      "iso": "MDA"
+    },
+    {
+      "entity": "Mongolia",
+      "group": "Asia",
+      "period": "2016",
+      "value": 5.05,
+      "iso": "MNG"
+    },
+    {
+      "entity": "Montenegro",
+      "group": "Europe",
+      "period": "2016",
+      "value": 6.12,
+      "iso": "MNE"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.91,
+      "iso": "POL"
+    },
+    {
+      "entity": "Romania",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.68,
+      "iso": "ROU"
+    },
+    {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "2016",
+      "value": 6.41,
+      "iso": "RUS"
+    },
+    {
+      "entity": "Serbia",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.63,
+      "iso": "SRB"
+    },
+    {
+      "entity": "Slovakia",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.89,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2016",
+      "value": 4.44,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Tajikistan",
+      "group": "Asia",
+      "period": "2016",
+      "value": 5.5,
+      "iso": "TJK"
+    },
+    {
+      "entity": "Türkiye",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.59,
+      "iso": "TUR"
+    },
+    {
+      "entity": "Ukraine",
+      "group": "Europe",
+      "period": "2016",
+      "value": 5.19,
+      "iso": "UKR"
+    },
+    {
+      "entity": "Uzbekistan",
+      "group": "Asia",
+      "period": "2016",
+      "value": 5.48,
+      "iso": "UZB"
+    },
     {
       "entity": "Albania",
       "group": "Europe",
@@ -34,7 +273,7 @@
       "iso": "AZE"
     },
     {
-      "entity": "Bosnia & Herzegov.",
+      "entity": "Bosnia and Herzegovina",
       "group": "Europe",
       "period": "2023",
       "value": 6,
@@ -112,13 +351,13 @@
     },
     {
       "entity": "Kosovo",
-      "group": "Europe",
+      "group": "Europe & Central Asia",
       "period": "2023",
       "value": 6.1,
       "iso": "XKX"
     },
     {
-      "entity": "Kyrgyz Republic",
+      "entity": "Kyrgyzstan",
       "group": "Asia",
       "period": "2023",
       "value": 6.55,
@@ -209,7 +448,7 @@
       "iso": "SRB"
     },
     {
-      "entity": "Slovak Republic",
+      "entity": "Slovakia",
       "group": "Europe",
       "period": "2023",
       "value": 5.87,
@@ -251,7 +490,7 @@
       "iso": "UZB"
     },
     {
-      "entity": "West Bank & Gaza",
+      "entity": "Palestine",
       "group": "Asia",
       "period": "2023",
       "value": 4.8,

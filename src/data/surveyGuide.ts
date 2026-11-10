@@ -320,7 +320,7 @@ const crossGlobal: GuideEntry[] = [
     licence: 'No dataset licence published; EBRD website terms apply.',
     url: 'https://www.ebrd.com/home/what-we-do/office-of-the-chief-economist/lits/life-in-transition-survey-data.html',
     sourceUrl: ['https://www.ebrd.com/home/what-we-do/office-of-the-chief-economist/lits/life-in-transition-survey-data.html', 'https://www.ebrd.com/home/terms-and-conditions.html'],
-    inBullDozer: { used: true, match: ['EBRD — Life in Transition'], prefixes: ['lits'], licenceId: 'ebrd-lits', note: 'LiTS IV' },
+    inBullDozer: { used: true, match: ['EBRD — Life in Transition'], prefixes: ['lits'], licenceId: 'ebrd-lits', note: 'LiTS I–IV (2006–2023)' },
   },
   {
     id: 'sdr2', name: 'Survey Data Recycling database', acronym: 'SDR2',
