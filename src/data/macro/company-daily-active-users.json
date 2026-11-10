@@ -1,0 +1,710 @@
+{
+  "meta": {
+    "title": "Daily Active Users of Internet Companies",
+    "valueLabel": "Daily active users, as each company defines them (millions)",
+    "unit": "million",
+    "changeMode": "pct",
+    "topic": "economy",
+    "summary": "Daily active users reported by listed internet companies in their quarterly earnings releases filed with the SEC, in millions. Each company counts its own way: Meta reports Family daily active people (DAP: people using Facebook, Instagram, Messenger or WhatsApp on a day, averaged over the last month of the quarter); Snap, Roblox and Duolingo average daily active users over the quarter; Reddit reports daily active uniques (DAUq, logged-in or not). Snap added web visits to its DAU in Q1 2024 and calls the effect immaterial; it has said that from Q1 2027 it will report monthly instead of daily users. Not included: Facebook-app DAU and MAU, which Meta stopped reporting after Q4 2023. Coverage: Duolingo 2021-Q2–2026-Q3; Meta 2019-Q4–2026-Q3; Reddit 2024-Q1–2026-Q3; Roblox 2021-Q1–2026-Q3; Snap 2019-Q1–2026-Q3.",
+    "vintage": "Calendar quarters, 2019-Q1 to 2026-Q3; each company from its first release in the period",
+    "method": "Each value is read from the company's own earnings release for that quarter (exhibit 99.x to its 8-K, or 6-K for Spotify) on SEC EDGAR, as first reported: later restatements are not applied. Periods are calendar quarters (every company here has a December year end). Values in millions; a release that rounds (Roblox from Q4 2025, Match Group Q3 2026) is kept as rounded. The filing URL and the exact words or table row of every value are in data/raw/company-metrics/observations.csv.",
+    "source": "SEC EDGAR — company earnings releases (8-K / 6-K exhibits)",
+    "license": "Public information on sec.gov (SEC website dissemination policy)",
+    "url": "https://github.com/AzenhaAI/bulldozer/blob/main/data/raw/company-metrics/observations.csv",
+    "entityType": "company",
+    "parsedAt": "2026-11-10",
+    "kind": "macro"
+  },
+  "data": [
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2021-Q2",
+      "value": 9.1
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2021-Q3",
+      "value": 9.8
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2021-Q4",
+      "value": 10.1
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2022-Q1",
+      "value": 12.5
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2022-Q2",
+      "value": 13.2
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2022-Q3",
+      "value": 14.9
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2022-Q4",
+      "value": 16.3
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2023-Q1",
+      "value": 20.3
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2023-Q2",
+      "value": 21.4
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2023-Q3",
+      "value": 24.2
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2023-Q4",
+      "value": 26.9
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2024-Q1",
+      "value": 31.4
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2024-Q2",
+      "value": 34.1
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2024-Q3",
+      "value": 37.2
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2024-Q4",
+      "value": 40.5
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2025-Q1",
+      "value": 46.6
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2025-Q2",
+      "value": 47.7
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2025-Q3",
+      "value": 50.5
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2025-Q4",
+      "value": 52.7
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2026-Q1",
+      "value": 56.5
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2026-Q2",
+      "value": 58.7
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2026-Q3",
+      "value": 64.9
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2019-Q4",
+      "value": 2260
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2020-Q1",
+      "value": 2360
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2020-Q2",
+      "value": 2470
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2020-Q3",
+      "value": 2540
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2020-Q4",
+      "value": 2600
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2021-Q1",
+      "value": 2720
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2021-Q2",
+      "value": 2760
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2021-Q3",
+      "value": 2810
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2021-Q4",
+      "value": 2820
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2022-Q1",
+      "value": 2870
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2022-Q2",
+      "value": 2880
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2022-Q3",
+      "value": 2930
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2022-Q4",
+      "value": 2960
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2023-Q1",
+      "value": 3020
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2023-Q2",
+      "value": 3070
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2023-Q3",
+      "value": 3140
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2023-Q4",
+      "value": 3190
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2024-Q1",
+      "value": 3240
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2024-Q2",
+      "value": 3270
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2024-Q3",
+      "value": 3290
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2024-Q4",
+      "value": 3350
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2025-Q1",
+      "value": 3430
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2025-Q2",
+      "value": 3480
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2025-Q3",
+      "value": 3540
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2025-Q4",
+      "value": 3580
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2026-Q1",
+      "value": 3560
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2026-Q2",
+      "value": 3600
+    },
+    {
+      "entity": "Meta",
+      "group": "Meta",
+      "period": "2026-Q3",
+      "value": 3640
+    },
+    {
+      "entity": "Reddit",
+      "group": "Reddit",
+      "period": "2024-Q1",
+      "value": 82.7
+    },
+    {
+      "entity": "Reddit",
+      "group": "Reddit",
+      "period": "2024-Q2",
+      "value": 91.2
+    },
+    {
+      "entity": "Reddit",
+      "group": "Reddit",
+      "period": "2024-Q3",
+      "value": 97.2
+    },
+    {
+      "entity": "Reddit",
+      "group": "Reddit",
+      "period": "2024-Q4",
+      "value": 101.7
+    },
+    {
+      "entity": "Reddit",
+      "group": "Reddit",
+      "period": "2025-Q1",
+      "value": 108.1
+    },
+    {
+      "entity": "Reddit",
+      "group": "Reddit",
+      "period": "2025-Q2",
+      "value": 110.4
+    },
+    {
+      "entity": "Reddit",
+      "group": "Reddit",
+      "period": "2025-Q3",
+      "value": 116
+    },
+    {
+      "entity": "Reddit",
+      "group": "Reddit",
+      "period": "2025-Q4",
+      "value": 121.4
+    },
+    {
+      "entity": "Reddit",
+      "group": "Reddit",
+      "period": "2026-Q1",
+      "value": 126.8
+    },
+    {
+      "entity": "Reddit",
+      "group": "Reddit",
+      "period": "2026-Q2",
+      "value": 130.3
+    },
+    {
+      "entity": "Reddit",
+      "group": "Reddit",
+      "period": "2026-Q3",
+      "value": 130.3
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2021-Q1",
+      "value": 42.1
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2021-Q2",
+      "value": 43.2
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2021-Q3",
+      "value": 47.3
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2021-Q4",
+      "value": 49.5
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2022-Q1",
+      "value": 54.1
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2022-Q2",
+      "value": 52.2
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2022-Q3",
+      "value": 58.8
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2022-Q4",
+      "value": 58.8
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2023-Q1",
+      "value": 66.1
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2023-Q2",
+      "value": 65.5
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2023-Q3",
+      "value": 70.2
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2023-Q4",
+      "value": 71.5
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2024-Q1",
+      "value": 77.7
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2024-Q2",
+      "value": 79.5
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2024-Q3",
+      "value": 88.9
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2024-Q4",
+      "value": 85.3
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2025-Q1",
+      "value": 97.8
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2025-Q2",
+      "value": 111.8
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2025-Q3",
+      "value": 151.5
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2025-Q4",
+      "value": 144
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2026-Q1",
+      "value": 132
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2026-Q2",
+      "value": 123
+    },
+    {
+      "entity": "Roblox",
+      "group": "Roblox",
+      "period": "2026-Q3",
+      "value": 138
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2019-Q1",
+      "value": 190
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2019-Q2",
+      "value": 203
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2019-Q3",
+      "value": 210
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2019-Q4",
+      "value": 218
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2020-Q1",
+      "value": 229
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2020-Q2",
+      "value": 238
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2020-Q3",
+      "value": 249
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2020-Q4",
+      "value": 265
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2021-Q1",
+      "value": 280
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2021-Q2",
+      "value": 293
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2021-Q3",
+      "value": 306
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2021-Q4",
+      "value": 319
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2022-Q1",
+      "value": 332
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2022-Q2",
+      "value": 347
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2022-Q3",
+      "value": 363
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2022-Q4",
+      "value": 375
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2023-Q1",
+      "value": 383
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2023-Q2",
+      "value": 397
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2023-Q3",
+      "value": 406
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2023-Q4",
+      "value": 414
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2024-Q1",
+      "value": 422
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2024-Q2",
+      "value": 432
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2024-Q3",
+      "value": 443
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2024-Q4",
+      "value": 453
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2025-Q1",
+      "value": 460
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2025-Q2",
+      "value": 469
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2025-Q3",
+      "value": 477
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2025-Q4",
+      "value": 474
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2026-Q1",
+      "value": 483
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2026-Q2",
+      "value": 493
+    },
+    {
+      "entity": "Snap",
+      "group": "Snap",
+      "period": "2026-Q3",
+      "value": 495
+    }
+  ]
+}

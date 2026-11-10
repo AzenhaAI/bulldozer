@@ -40,6 +40,8 @@ export const sources: Source[] = [
     description: 'Series pulled straight from the open World Bank API: life expectancy (UN World Population Prospects), exchange rates, stock markets, banking access and mobile subscriptions.' },
   { name: 'The Economist — Big Mac Index', url: 'https://github.com/TheEconomist/big-mac-data', status: 'live', category: 'Macro & economics', match: 'Big Mac',
     description: 'The famous burger-nomics gauge of currency valuation and price levels, published since 1986. Semiannual data from The Economist’s open GitHub repo.' },
+  { name: 'SEC EDGAR — company earnings releases', url: 'https://www.sec.gov/edgar/search/', status: 'live', category: 'Macro & economics', match: 'SEC EDGAR',
+    description: 'Quarterly user metrics of listed internet companies — daily and monthly active users, paying users, active accounts, trips, orders and nights booked — read from the earnings releases they file with the U.S. SEC, 2019 onward. Every value links to its filing.' },
 
   // ── Governance & democracy ─────────────────────────────────────────
   { name: 'V-Dem — Varieties of Democracy', url: 'https://www.v-dem.net/data/the-v-dem-dataset/', status: 'live', category: 'Governance & democracy', match: 'V-Dem', dash: 'vdem',

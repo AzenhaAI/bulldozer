@@ -3,8 +3,11 @@ import type { Observation, ChangeMode } from '@lib/analytics';
 import { computeKpi } from '@lib/analytics';
 import { formatChange, pctClass } from '@lib/format';
 
-interface Props { data: Observation[]; unit?: string; mode?: ChangeMode }
-const { data, unit = '', mode = 'pct' } = Astro.props;
+interface Props { data: Observation[]; unit?: string; mode?: ChangeMode; noun?: 'country' | 'company' }
+const { data, unit = '', mode = 'pct', noun = 'country' } = Astro.props;
+// Companies each count users their own way: an average across them means
+// nothing, so the first card counts who reported instead.
+const company = noun === 'company';
 const k = computeKpi(data, mode);
 const avg = k.currCount ? k.totalValue / k.currCount : 0;
 const band = mode === 'pp' ? '±0.5pp band' : '±0.5% band';
@@ -16,6 +19,13 @@ const med = rows.length ? (rows.length % 2 ? rows[(rows.length - 1) / 2].value :
 const f1 = (v: number) => `${Math.abs(v) >= 100 ? Math.round(v).toLocaleString('en-US') : v.toFixed(1)}${unit}`;
 ---
 <div class="kpi-row">
+  {company ? (
+  <div class="kpi">
+    <div class="label">Companies ({k.currPeriod})</div>
+    <div class="value">{k.currCount}</div>
+    <div class="delta flat">reporting this quarter</div>
+  </div>
+  ) : (
   <div class="kpi">
     <div class="label">Avg of {k.currCount} ({k.currPeriod === 'Latest' ? 'latest' : k.currPeriod})</div>
     <div class="value">{avg.toFixed(1)}{unit}</div>
@@ -23,6 +33,7 @@ const f1 = (v: number) => `${Math.abs(v) >= 100 ? Math.round(v).toLocaleString('
       ? <div class="delta flat">{k.currPeriod === 'Latest' ? 'latest year per country' : 'single period'}</div>
       : <div class={`delta ${pctClass(k.totalPct)}`}>{formatChange(k.totalPct, mode)} vs {k.prevPeriod}</div>}
   </div>
+  )}
   {single && rows.length ? <>
   <div class="kpi">
     <div class="label">Median</div>

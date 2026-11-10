@@ -47,15 +47,19 @@ export interface IndexItem {
   slug: string; title: string; kind: string; unit: string; valueLabel: string;
   changeMode: 'pct' | 'pp'; periods: string[];
 }
-interface Props { indicators: IndexItem[]; pinnedSlug?: string; defaultView?: 'bar' | 'table' | 'map' | 'bubbles' }
-const { indicators, pinnedSlug, defaultView = 'bar' } = Astro.props;
+// `noun` names the entities: 'company' for the company-metrics datasets, which
+// have no map position, so their panel drops the map views and the
+// country-spread summary and keeps its own pinned set.
+interface Props { indicators: IndexItem[]; pinnedSlug?: string; defaultView?: 'bar' | 'table' | 'map' | 'bubbles'; noun?: 'country' | 'company' }
+const { indicators, pinnedSlug, defaultView = 'bar', noun = 'country' } = Astro.props;
+const geo = noun === 'country';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const showIndicator = !pinnedSlug && indicators.length > 1;
 // Default to a flagship indicator, not "datasets[0] after alphabetical sort" —
 // that shifts to whatever obscure dataset title happens to sort first
 // whenever a new one is added (e.g. "Acceptance of ..."), which reads as random.
 const defaultSlug = indicators.some((d) => d.slug === 'whr-happiness') ? 'whr-happiness' : indicators[0]?.slug;
-const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView, datasets: indicators };
+const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView: geo ? defaultView : 'bar', datasets: indicators, noun };
 ---
 <div class="datapanel">
   <div class="controls">
@@ -63,12 +67,12 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
       <label>Indicator<select id="sel-indicator"></select></label>
     )}
     <label>Period<select id="sel-period"></select></label>
-    <label>Search country<input id="sel-query" type="search" placeholder="filter…" autocomplete="off" /></label>
+    <label>Search {noun}<input id="sel-query" type="search" placeholder="filter…" autocomplete="off" /></label>
     <div class="view-toggle" id="view-toggle" role="tablist">
       <button data-view="bar" class="active">Bars</button>
       <button data-view="table">Table</button>
-      <button data-view="map">Map</button>
-      <button data-view="bubbles">Bubbles</button>
+      {geo && <button data-view="map">Map</button>}
+      {geo && <button data-view="bubbles">Bubbles</button>}
     </div>
   </div>
 
@@ -76,7 +80,7 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
 
   <div id="view-bar" class="view">
     <div class="bar-controls" id="bar-controls">
-      <label class="inline-add">Add country
+      <label class="inline-add">Add {noun}
         <select id="add-country"><option value="">＋ add…</option></select>
       </label>
       <span id="pinned-chips" class="chips"></span>
@@ -116,7 +120,10 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
   const TOP_N = 7;
   // "My countries" — a saved set that persists across datasets and sessions,
   // so the same countries stay pinned everywhere the panel is used.
-  const MYKEY = 'bd-my-countries';
+  const NOUN = cfg.noun || 'country';
+  const NOUNS = NOUN === 'company' ? 'companies' : 'countries';
+  const GEO = NOUN === 'country';
+  const MYKEY = GEO ? 'bd-my-countries' : 'bd-my-companies';
   const loadMy = () => { try { return new Set(JSON.parse(localStorage.getItem(MYKEY) || '[]')); } catch (e) { return new Set(); } };
   const saveMy = () => { try { localStorage.setItem(MYKEY, JSON.stringify([...state.pinned])); } catch (e) { /* private mode */ } };
   const state = { slug: cfg.pinnedSlug || cfg.defaultSlug || cfg.datasets[0]?.slug, period: null, view: cfg.defaultView || 'bar', query: '', pinned: loadMy(), showAll: false, sortDir: 'desc' };
@@ -126,7 +133,7 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
   // ---- deep-link state from the URL ----
   const params = new URLSearchParams(location.search);
   if (!cfg.pinnedSlug && params.get('i') && cfg.datasets.some((d) => d.slug === params.get('i'))) state.slug = params.get('i');
-  if (['bar', 'table', 'map', 'bubbles'].includes(params.get('v'))) state.view = params.get('v');
+  if ((GEO ? ['bar', 'table', 'map', 'bubbles'] : ['bar', 'table']).includes(params.get('v'))) state.view = params.get('v');
   function syncUrl() {
     const p = new URLSearchParams(location.search);
     if (!cfg.pinnedSlug) p.set('i', state.slug);
@@ -206,15 +213,15 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
     const sel = el('add-country');
     const ordered = state.sortDir === 'asc' ? [...rows].reverse() : rows;
     const shown = new Set(ordered.slice(0, TOP_N).map((r) => r.entity));
-    sel.innerHTML = '<option value="">＋ add country…</option>' +
+    sel.innerHTML = `<option value="">＋ add ${NOUN}…</option>` +
       [...rows].sort((a, b) => a.entity.localeCompare(b.entity))
         .filter((r) => !shown.has(r.entity) && !state.pinned.has(r.entity))
         .map((r) => `<option value="${r.entity}">${r.entity}</option>`).join('');
-    el('pinned-chips').innerHTML = (state.pinned.size ? '<span class="chips-lbl">★ My countries:</span>' : '') +
+    el('pinned-chips').innerHTML = (state.pinned.size ? `<span class="chips-lbl">★ My ${NOUNS}:</span>` : '') +
       [...state.pinned].map((n) =>
         `<span class="chip">${n}<button data-rm="${n}" aria-label="remove">×</button></span>`).join('');
     el('sort-dir').textContent = { desc: '↓ Highest first', asc: '↑ Lowest first', name: 'A–Z' }[state.sortDir];
-    el('sort-dir').setAttribute('aria-label', `Sort: ${{ desc: 'highest first', asc: 'lowest first', name: 'by country name' }[state.sortDir]} — tap to change`);
+    el('sort-dir').setAttribute('aria-label', `Sort: ${{ desc: 'highest first', asc: 'lowest first', name: `by ${NOUN} name` }[state.sortDir]} — tap to change`);
     el('show-all').textContent = state.showAll ? 'Show top 7' : `Show all ${rows.length}`;
     el('show-all').hidden = state.sortDir === 'name';
     el('bar-controls').style.display = state.query ? 'none' : 'flex';
@@ -255,7 +262,8 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
   function renderBars(rows) {
     const m = meta(); const unit = m.unit.includes('%') ? '%' : '';
     renderBarControls(rows);
-    const st = distStats(rows);
+    // A spread across a handful of companies that each count differently says nothing.
+    const st = GEO ? distStats(rows) : null;
     renderDist(st, unit, m.kind === 'survey' ? 'all the people asked' : 'everyone in those countries');
     const top = visibleRows(rows); const vals = top.map((r) => r.value);
     const base = Math.min(0, ...vals), max = Math.max(1, ...vals), span = (max - base) || 1;
@@ -276,11 +284,11 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
 
   function renderTable(rows) {
     const m = meta(); const unit = m.unit.includes('%') ? '%' : '';
-    const head = `<thead><tr><th>Country</th><th>Group</th><th class="num">${m.valueLabel}</th><th class="num">Change</th></tr></thead>`;
+    const head = `<thead><tr><th>${GEO ? 'Country' : 'Company'}</th>${GEO ? '<th>Group</th>' : ''}<th class="num">${m.valueLabel}</th><th class="num">Change</th></tr></thead>`;
     el('table-target').innerHTML = head + '<tbody>' + rows.map((r) => {
       const cls = r.change == null ? 'flat' : moveClass(r.change);
       const chg = r.change == null ? '—' : `<span class="${cls}">${fmtChange(r.change, m.changeMode)}</span>`;
-      return `<tr><td>${flag(r.iso)}${r.entity}</td><td>${r.group || ''}</td><td class="num">${fmtNum(r.value)}${unit}</td><td class="num">${chg}</td></tr>`;
+      return `<tr><td>${flag(r.iso)}${r.entity}</td>${GEO ? `<td>${r.group || ''}</td>` : ''}<td class="num">${fmtNum(r.value)}${unit}</td><td class="num">${chg}</td></tr>`;
     }).join('') + '</tbody>';
   }
 
@@ -406,7 +414,7 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
 
   async function render() {
     const ds = await load(state.slug); const m = meta(); const rows = rowsFor(ds);
-    el('ex-summary').textContent = `${m.title} · ${state.period} · ${rows.length} countries · unit ${m.unit}`;
+    el('ex-summary').textContent = `${m.title} · ${state.period} · ${rows.length} ${rows.length === 1 ? NOUN : NOUNS} · unit ${m.unit}`;
     for (const v of ['bar', 'table', 'map', 'bubbles']) el('view-' + v).hidden = state.view !== v;
     if (state.view === 'bar') renderBars(rows); else if (state.view === 'table') renderTable(rows); else if (state.view === 'bubbles') renderBubbles(rows); else renderMap(rows);
     syncUrl();

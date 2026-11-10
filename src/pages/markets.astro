@@ -2,7 +2,7 @@
 import ChartActions from '@components/ChartActions.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import DataPanel from '@components/DataPanel.astro';
-import { getDataset } from '@data/datasets';
+import { datasets, getDataset } from '@data/datasets';
 import companies from '@data/companies.json';
 import brands from '@data/brands.json';
 import isoAlpha2 from '@data/iso-alpha2.json';
@@ -29,6 +29,11 @@ const panelIndicators = slugs.map((s) => {
   return { slug: d.slug, title: d.title, kind: d.kind, unit: d.unit, valueLabel: d.valueLabel, changeMode: d.changeMode, periods: [...new Set(d.data.map((o) => o.period))].sort() };
 });
 const card = (s: string) => { const d = getDataset(s)!; return { slug: d.slug, title: d.title, source: d.source, summary: d.summary }; };
+// Quarterly user metrics read from the companies' own SEC earnings releases.
+const userMetrics = datasets.filter((d) => d.entityType === 'company').map((d) => ({
+  slug: d.slug, title: d.title, companies: [...new Set(d.data.map((o) => o.entity))].sort(),
+  last: d.data.reduce((m, o) => (o.period > m ? o.period : m), ''),
+}));
 
 // Company bar chart is client-rendered with a metric switcher.
 const coData = companies.map((c) => ({ name: c.name, flag: flagFor(c.iso), logo: c.logo, capBn: c.capBn, capYear: c.capYear, revenueBn: c.revenueBn, profitBn: c.profitBn, employees: c.employees, revYear: c.revYear }));
@@ -50,6 +55,7 @@ const RANKINGS = [
       <nav class="explore-nav">
         <a class="ghost-btn" href="#data">📊 By country</a>
         <a class="ghost-btn" href="#companies">🏢 Companies</a>
+        <a class="ghost-btn" href="#user-metrics">👥 User metrics</a>
         <a class="ghost-btn" href="#brands">™️ Brands</a>
         <a class="ghost-btn" href="#rankings">🔗 Rankings</a>
       </nav>
@@ -145,6 +151,23 @@ const RANKINGS = [
       </div>
     </div>
   </section>
+
+  {userMetrics.length > 0 && (
+  <section class="section" style="padding-top:0" id="user-metrics">
+    <div class="container">
+      <h2>Users, subscribers and bookings by quarter</h2>
+      <p class="sub">Daily and monthly active users, paying users, accounts and bookings of listed internet companies, from the earnings releases they file with the SEC. Every value links to its filing.</p>
+      <div class="grid cols-3">
+        {userMetrics.map((d) => (
+          <a class="card link" href={`${base}/dataset/${d.slug}/`}>
+            <h3 style="font-size:15px">{d.title}</h3>
+            <p class="meta">{d.companies.join(', ')} · to {d.last}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  )}
 
   <section class="section" style="padding-top:0" id="brands">
     <div class="container">
