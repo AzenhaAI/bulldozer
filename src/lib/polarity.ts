@@ -25,6 +25,7 @@ const HIGH = new Set([
   'timss-math-grade4', 'timss-math-grade8', 'timss-science-grade4', 'timss-science-grade8', 'owid-schooling',
   'wb-life-expectancy', 'gapminder-life-expectancy', 'who-uhc', 'dhs-modern-contraception',
   'gapminder-internet', 'lapop-home-broadband', 'wrp-resilience', 'wrp-can-protect',
+  'wb-fixed-broadband', 'apnic-ipv6-capable', 'mlab-download-speed', 'mlab-upload-speed',
 ]);
 
 const LOW = new Set([

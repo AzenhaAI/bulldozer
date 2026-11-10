@@ -42,6 +42,7 @@ export interface Licence {
 
 const CHECKED = '2026-10-11';
 const CHECKED_1012 = '2026-10-12';
+const CHECKED_1110 = '2026-11-10';
 
 export const licences: Licence[] = [
   // ── International organisations ────────────────────────────────────
@@ -64,12 +65,14 @@ export const licences: Licence[] = [
     termsUrl: 'https://www.worldbank.org/ext/en/legal/terms-conditions/datasets',
     licence: `CC BY 4.0, with the World Bank's additional terms for datasets. The data catalog records for World Development Indicators and Worldwide Governance Indicators each state "License: Creative Commons Attribution 4.0".`,
     citation: `The World Bank: Dataset name: Data source (if known).`,
-    note: `Do not imply that the World Bank sponsors or endorses this use. Global Findex figures are taken from the World Bank API, not from the Findex microdata. The governance estimates (control of corruption, government effectiveness, voice & accountability) and the health spending, education spending and infant mortality series were earlier taken from the QoG Standard Dataset; they now come straight from the World Bank API.`,
+    note: `Do not imply that the World Bank sponsors or endorses this use. Global Findex figures are taken from the World Bank API, not from the Findex microdata. The governance estimates (control of corruption, government effectiveness, voice & accountability) and the health spending, education spending and infant mortality series were earlier taken from the QoG Standard Dataset; they now come straight from the World Bank API. Fixed broadband subscriptions (compiled by the ITU) and secure internet servers (from Netcraft) are WDI series whose WDI metadata states "License Type: CC BY-4.0"; ITU's own DataHub and the ITU series on Data360 carry CC BY-NC-SA 3.0 IGO and are not used.`,
     urls: [
       'https://www.worldbank.org/ext/en/legal/terms-conditions/datasets',
       'https://datacatalog.worldbank.org/public-licenses',
       'https://datacatalog.worldbank.org/search/dataset/0038026/Worldwide-Governance-Indicators',
       'https://datacatalog.worldbank.org/search/dataset/0037712/World-Development-Indicators',
+      'https://api.worldbank.org/v2/sources/2/series/IT.NET.BBND.P2/metadata',
+      'https://api.worldbank.org/v2/sources/2/series/IT.NET.SECR.P6/metadata',
     ],
     checked: CHECKED_1012,
   },
@@ -623,6 +626,40 @@ export const licences: Licence[] = [
     urls: ['https://www.ebrd.com/home/terms-and-conditions.html', 'https://www.ebrd.com/home/what-we-do/office-of-the-chief-economist/lits/life-in-transition-survey-data.html'],
     checked: CHECKED,
     review: `T&C §4.1: "for your personal, non-commercial use, without any right to resell, redistribute or create derivative works therefrom".`,
+  },
+  // ── Internet measurement ───────────────────────────────────────────
+  {
+    id: 'm-lab',
+    name: 'M-Lab — Measurement Lab NDT data set',
+    match: ['M-Lab'],
+    termsUrl: 'https://www.measurementlab.net/data/',
+    licence: `CC0 1.0: "All data collected by M-Lab tests are available to the public without restriction under a No Rights Reserved Creative Commons Zero Waiver."`,
+    citation: `The M-Lab test name Data Set, date range used. *M-Lab test URL * For example: The M-Lab NDT Data Set 2009-02-11–2015-12-21. https://measurementlab.net/tests/ndt`,
+    note: `Here: The M-Lab NDT Data Set 2020-01-01–2023-12-31, https://measurementlab.net/tests/ndt, via M-Lab's statistics API (statistics.measurementlab.net). Yearly geometric means are computed by BullDozer from M-Lab's daily per-country figures.`,
+    urls: ['https://www.measurementlab.net/data/', 'https://statistics.measurementlab.net/'],
+    checked: CHECKED_1110,
+  },
+  {
+    id: 'apnic-labs',
+    name: 'APNIC Labs — IPv6 measurement',
+    match: ['APNIC Labs'],
+    termsUrl: 'https://data1.labs.apnic.net/ipv6-data-format.html',
+    licence: `"This data is copyright APNIC. The IPv6 data is made available on the usual 'hold harmless' basis with attribution." Each data file carries "(C) APNIC Pty/Ltd. re-use with attribution permitted".`,
+    citation: `No citation format published; credit APNIC Labs, IPv6 measurement (stats.labs.apnic.net/ipv6).`,
+    note: `Yearly shares are pooled by BullDozer from APNIC's daily per-economy series.`,
+    urls: ['https://data1.labs.apnic.net/ipv6-data-format.html', 'https://stats.labs.apnic.net/ipv6'],
+    checked: CHECKED_1110,
+  },
+  {
+    id: 'majestic',
+    name: 'Majestic Million',
+    match: ['Majestic Million'],
+    termsUrl: 'https://majestic.com/reports/majestic-million',
+    licence: `"Licensed under a Creative Commons Attribution 3.0 Unported License" (the Majestic Million page).`,
+    citation: `No citation format published; credit Majestic, Majestic Million (majestic.com/reports/majestic-million), CC BY 3.0.`,
+    note: `BullDozer publishes only counts per country-code domain, computed from the list; the list itself is not republished.`,
+    urls: ['https://majestic.com/reports/majestic-million'],
+    checked: CHECKED_1110,
   },
   {
     id: 'sdr2',
