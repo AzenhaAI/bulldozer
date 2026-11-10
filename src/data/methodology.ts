@@ -28,7 +28,7 @@ export function methodologyFor(slug: string): Methodology {
   if (slug.startsWith('who-'))
     return { method: 'WHO Global Health Observatory; latest available year per country (varies); both sexes, modelled estimates.' };
   if (slug.startsWith('wgm-'))
-    return { vintage: 'Wellcome Global Monitor 2018 (Gallup)', method: 'Gallup World Poll; weighted shares (Column N %); share giving the stated response.' };
+    return { vintage: 'Wellcome Global Monitor 2018 and 2020 (Gallup); vaccine items 2018 only', method: 'Gallup World Poll; weighted shares, base includes don’t know (as in Wellcome’s crosstabs); share giving the stated response.' };
   if (slug.startsWith('rlms-'))
     return { vintage: 'RLMS-HSE annual waves', method: 'RLMS-HSE longitudinal microdata (Russia only); weighted by inwgt; share/median by survey year.' };
   if (slug.startsWith('cb-'))
