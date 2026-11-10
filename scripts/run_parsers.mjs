@@ -25,6 +25,7 @@ const PARSERS = [
   'parse_risk.mjs', 'parse_owid.mjs', 'parse_maddison.mjs', 'parse_eurostat.mjs',
   'parse_findex.mjs', 'parse_bigmac.mjs', 'parse_cpi.mjs', 'parse_pisa.mjs',
   'parse_qog_originals.mjs', 'parse_vdem_media.mjs', 'parse_fiw.mjs', 'parse_unhcr.mjs', 'parse_eu_cities.mjs',
+  'parse_wb_digital.mjs', 'parse_apnic.mjs', 'parse_mlab.mjs', 'parse_majestic.mjs',
   'parse_who.mjs', 'parse_who_ghe.mjs', 'parse_cses.mjs', 'parse_afrobarometer.mjs', 'parse_iea.mjs', 'parse_lapop.mjs', 'parse_pew.mjs', 'parse_gesis_aggregates.mjs',
   // Read committed per-country CSVs written by scripts/tools/*_aggregate.py.
   'parse_caucasus.mjs', 'parse_wrp_extra.mjs', 'parse_wellcome.mjs', 'parse_sdr2.mjs',
