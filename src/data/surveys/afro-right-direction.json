@@ -19,1505 +19,1720 @@
       "group": "Africa",
       "period": "2019–2021",
       "value": 35.4,
-      "iso": "AGO"
+      "iso": "AGO",
+      "moe": 2.1
     },
     {
       "entity": "Angola",
       "group": "Africa",
       "period": "2021–2023",
       "value": 32.5,
-      "iso": "AGO"
+      "iso": "AGO",
+      "moe": 2.9
     },
     {
       "entity": "Angola",
       "group": "Africa",
       "period": "2024–2025",
       "value": 23.3,
-      "iso": "AGO"
+      "iso": "AGO",
+      "moe": 2.5
     },
     {
       "entity": "Burundi",
       "group": "Africa",
       "period": "2011–2013",
       "value": 51,
-      "iso": "BDI"
+      "iso": "BDI",
+      "moe": 3
     },
     {
       "entity": "Burundi",
       "group": "Africa",
       "period": "2014–2015",
       "value": 52.2,
-      "iso": "BDI"
+      "iso": "BDI",
+      "moe": 3.1
     },
     {
       "entity": "Benin",
       "group": "Africa",
       "period": "2011–2013",
       "value": 58.7,
-      "iso": "BEN"
+      "iso": "BEN",
+      "moe": 3
     },
     {
       "entity": "Benin",
       "group": "Africa",
       "period": "2014–2015",
       "value": 30.1,
-      "iso": "BEN"
+      "iso": "BEN",
+      "moe": 2.7
     },
     {
       "entity": "Benin",
       "group": "Africa",
       "period": "2016–2018",
       "value": 44.2,
-      "iso": "BEN"
+      "iso": "BEN",
+      "moe": 3
     },
     {
       "entity": "Benin",
       "group": "Africa",
       "period": "2019–2021",
       "value": 53.9,
-      "iso": "BEN"
+      "iso": "BEN",
+      "moe": 3
     },
     {
       "entity": "Benin",
       "group": "Africa",
       "period": "2021–2023",
       "value": 58.7,
-      "iso": "BEN"
+      "iso": "BEN",
+      "moe": 2.9
     },
     {
       "entity": "Benin",
       "group": "Africa",
       "period": "2024–2025",
       "value": 49,
-      "iso": "BEN"
+      "iso": "BEN",
+      "moe": 3
     },
     {
       "entity": "Burkina Faso",
       "group": "Africa",
       "period": "2011–2013",
       "value": 62.1,
-      "iso": "BFA"
+      "iso": "BFA",
+      "moe": 2.9
     },
     {
       "entity": "Burkina Faso",
       "group": "Africa",
       "period": "2014–2015",
       "value": 64.8,
-      "iso": "BFA"
+      "iso": "BFA",
+      "moe": 3.1
     },
     {
       "entity": "Burkina Faso",
       "group": "Africa",
       "period": "2016–2018",
       "value": 56.3,
-      "iso": "BFA"
+      "iso": "BFA",
+      "moe": 3.1
     },
     {
       "entity": "Burkina Faso",
       "group": "Africa",
       "period": "2019–2021",
       "value": 35.2,
-      "iso": "BFA"
+      "iso": "BFA",
+      "moe": 3
     },
     {
       "entity": "Burkina Faso",
       "group": "Africa",
       "period": "2021–2023",
       "value": 19.3,
-      "iso": "BFA"
+      "iso": "BFA",
+      "moe": 2.7
     },
     {
       "entity": "Botswana",
       "group": "Africa",
       "period": "2011–2013",
       "value": 57.5,
-      "iso": "BWA"
+      "iso": "BWA",
+      "moe": 3.2
     },
     {
       "entity": "Botswana",
       "group": "Africa",
       "period": "2014–2015",
       "value": 60.1,
-      "iso": "BWA"
+      "iso": "BWA",
+      "moe": 3
     },
     {
       "entity": "Botswana",
       "group": "Africa",
       "period": "2016–2018",
       "value": 60.9,
-      "iso": "BWA"
+      "iso": "BWA",
+      "moe": 3
     },
     {
       "entity": "Botswana",
       "group": "Africa",
       "period": "2019–2021",
       "value": 40.1,
-      "iso": "BWA"
+      "iso": "BWA",
+      "moe": 3
     },
     {
       "entity": "Botswana",
       "group": "Africa",
       "period": "2021–2023",
       "value": 24.1,
-      "iso": "BWA"
+      "iso": "BWA",
+      "moe": 2.6
     },
     {
       "entity": "Botswana",
       "group": "Africa",
       "period": "2024–2025",
       "value": 35.5,
-      "iso": "BWA"
+      "iso": "BWA",
+      "moe": 3.3
     },
     {
       "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2011–2013",
       "value": 57.7,
-      "iso": "CIV"
+      "iso": "CIV",
+      "moe": 3
     },
     {
       "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2014–2015",
       "value": 58,
-      "iso": "CIV"
+      "iso": "CIV",
+      "moe": 2.9
     },
     {
       "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2016–2018",
       "value": 58.9,
-      "iso": "CIV"
+      "iso": "CIV",
+      "moe": 3
     },
     {
       "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2019–2021",
       "value": 48.6,
-      "iso": "CIV"
+      "iso": "CIV",
+      "moe": 3
     },
     {
       "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2021–2023",
       "value": 56.5,
-      "iso": "CIV"
+      "iso": "CIV",
+      "moe": 2.9
     },
     {
       "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2024–2025",
       "value": 57.5,
-      "iso": "CIV"
+      "iso": "CIV",
+      "moe": 2.9
     },
     {
       "entity": "Cameroon",
       "group": "Africa",
       "period": "2011–2013",
       "value": 59.2,
-      "iso": "CMR"
+      "iso": "CMR",
+      "moe": 3.5
     },
     {
       "entity": "Cameroon",
       "group": "Africa",
       "period": "2014–2015",
       "value": 48,
-      "iso": "CMR"
+      "iso": "CMR",
+      "moe": 3.6
     },
     {
       "entity": "Cameroon",
       "group": "Africa",
       "period": "2016–2018",
       "value": 34.4,
-      "iso": "CMR"
+      "iso": "CMR",
+      "moe": 3.3
     },
     {
       "entity": "Cameroon",
       "group": "Africa",
       "period": "2019–2021",
       "value": 36.7,
-      "iso": "CMR"
+      "iso": "CMR",
+      "moe": 3.3
     },
     {
       "entity": "Cameroon",
       "group": "Africa",
       "period": "2021–2023",
       "value": 29.4,
-      "iso": "CMR"
+      "iso": "CMR",
+      "moe": 2.6
     },
     {
       "entity": "Cameroon",
       "group": "Africa",
       "period": "2024–2025",
       "value": 20.9,
-      "iso": "CMR"
+      "iso": "CMR",
+      "moe": 2.3
     },
     {
       "entity": "Congo",
       "group": "Africa",
       "period": "2021–2023",
       "value": 19.5,
-      "iso": "COG"
+      "iso": "COG",
+      "moe": 2.3
     },
     {
       "entity": "Congo",
       "group": "Africa",
       "period": "2024–2025",
       "value": 13.8,
-      "iso": "COG"
+      "iso": "COG",
+      "moe": 2
     },
     {
       "entity": "Comoros",
       "group": "Africa",
       "period": "2024–2025",
       "value": 15,
-      "iso": "COM"
+      "iso": "COM",
+      "moe": 2.1
     },
     {
       "entity": "Cape Verde",
       "group": "Africa",
       "period": "2011–2013",
       "value": 74.6,
-      "iso": "CPV"
+      "iso": "CPV",
+      "moe": 2.7
     },
     {
       "entity": "Cape Verde",
       "group": "Africa",
       "period": "2014–2015",
       "value": 51.3,
-      "iso": "CPV"
+      "iso": "CPV",
+      "moe": 3
     },
     {
       "entity": "Cape Verde",
       "group": "Africa",
       "period": "2016–2018",
       "value": 39.7,
-      "iso": "CPV"
+      "iso": "CPV",
+      "moe": 2.9
     },
     {
       "entity": "Cape Verde",
       "group": "Africa",
       "period": "2019–2021",
       "value": 40.8,
-      "iso": "CPV"
+      "iso": "CPV",
+      "moe": 3
     },
     {
       "entity": "Cape Verde",
       "group": "Africa",
       "period": "2021–2023",
       "value": 35.3,
-      "iso": "CPV"
+      "iso": "CPV",
+      "moe": 2.8
     },
     {
       "entity": "Cape Verde",
       "group": "Africa",
       "period": "2024–2025",
       "value": 33.1,
-      "iso": "CPV"
+      "iso": "CPV",
+      "moe": 2.8
     },
     {
       "entity": "Algeria",
       "group": "Africa",
       "period": "2011–2013",
       "value": 87.7,
-      "iso": "DZA"
+      "iso": "DZA",
+      "moe": 2.2
     },
     {
       "entity": "Algeria",
       "group": "Africa",
       "period": "2014–2015",
       "value": 53.9,
-      "iso": "DZA"
+      "iso": "DZA",
+      "moe": 3.1
     },
     {
       "entity": "Egypt",
       "group": "Africa",
       "period": "2011–2013",
       "value": 20.9,
-      "iso": "EGY"
+      "iso": "EGY",
+      "moe": 2.8
     },
     {
       "entity": "Egypt",
       "group": "Africa",
       "period": "2014–2015",
       "value": 80.3,
-      "iso": "EGY"
+      "iso": "EGY",
+      "moe": 2.8
     },
     {
       "entity": "Ethiopia",
       "group": "Africa",
       "period": "2019–2021",
       "value": 63.6,
-      "iso": "ETH"
+      "iso": "ETH",
+      "moe": 2.3
     },
     {
       "entity": "Ethiopia",
       "group": "Africa",
       "period": "2021–2023",
       "value": 43,
-      "iso": "ETH"
+      "iso": "ETH",
+      "moe": 2.3
     },
     {
       "entity": "Gabon",
       "group": "Africa",
       "period": "2014–2015",
       "value": 34.5,
-      "iso": "GAB"
+      "iso": "GAB",
+      "moe": 2.8
     },
     {
       "entity": "Gabon",
       "group": "Africa",
       "period": "2016–2018",
       "value": 11,
-      "iso": "GAB"
+      "iso": "GAB",
+      "moe": 1.9
     },
     {
       "entity": "Gabon",
       "group": "Africa",
       "period": "2019–2021",
       "value": 8.9,
-      "iso": "GAB"
+      "iso": "GAB",
+      "moe": 1.7
     },
     {
       "entity": "Gabon",
       "group": "Africa",
       "period": "2021–2023",
       "value": 8.5,
-      "iso": "GAB"
+      "iso": "GAB",
+      "moe": 1.7
     },
     {
       "entity": "Gabon",
       "group": "Africa",
       "period": "2024–2025",
       "value": 88.8,
-      "iso": "GAB"
+      "iso": "GAB",
+      "moe": 1.9
     },
     {
       "entity": "Ghana",
       "group": "Africa",
       "period": "2011–2013",
       "value": 38.7,
-      "iso": "GHA"
+      "iso": "GHA",
+      "moe": 2.1
     },
     {
       "entity": "Ghana",
       "group": "Africa",
       "period": "2014–2015",
       "value": 15,
-      "iso": "GHA"
+      "iso": "GHA",
+      "moe": 1.6
     },
     {
       "entity": "Ghana",
       "group": "Africa",
       "period": "2016–2018",
       "value": 50.1,
-      "iso": "GHA"
+      "iso": "GHA",
+      "moe": 2.4
     },
     {
       "entity": "Ghana",
       "group": "Africa",
       "period": "2019–2021",
       "value": 37.5,
-      "iso": "GHA"
+      "iso": "GHA",
+      "moe": 2.2
     },
     {
       "entity": "Ghana",
       "group": "Africa",
       "period": "2021–2023",
       "value": 11.6,
-      "iso": "GHA"
+      "iso": "GHA",
+      "moe": 1.4
     },
     {
       "entity": "Ghana",
       "group": "Africa",
       "period": "2024–2025",
       "value": 16.6,
-      "iso": "GHA"
+      "iso": "GHA",
+      "moe": 1.7
     },
     {
       "entity": "Guinea",
       "group": "Africa",
       "period": "2011–2013",
       "value": 38.8,
-      "iso": "GIN"
+      "iso": "GIN",
+      "moe": 2.8
     },
     {
       "entity": "Guinea",
       "group": "Africa",
       "period": "2014–2015",
       "value": 50.4,
-      "iso": "GIN"
+      "iso": "GIN",
+      "moe": 2.9
     },
     {
       "entity": "Guinea",
       "group": "Africa",
       "period": "2016–2018",
       "value": 35.5,
-      "iso": "GIN"
+      "iso": "GIN",
+      "moe": 2.9
     },
     {
       "entity": "Guinea",
       "group": "Africa",
       "period": "2019–2021",
       "value": 36.1,
-      "iso": "GIN"
+      "iso": "GIN",
+      "moe": 2.9
     },
     {
       "entity": "Guinea",
       "group": "Africa",
       "period": "2021–2023",
       "value": 31.8,
-      "iso": "GIN"
+      "iso": "GIN",
+      "moe": 2.8
     },
     {
       "entity": "Guinea",
       "group": "Africa",
       "period": "2024–2025",
       "value": 34.1,
-      "iso": "GIN"
+      "iso": "GIN",
+      "moe": 2.8
     },
     {
       "entity": "Gambia",
       "group": "Africa",
       "period": "2016–2018",
       "value": 69.5,
-      "iso": "GMB"
+      "iso": "GMB",
+      "moe": 2.7
     },
     {
       "entity": "Gambia",
       "group": "Africa",
       "period": "2019–2021",
       "value": 38.7,
-      "iso": "GMB"
+      "iso": "GMB",
+      "moe": 3
     },
     {
       "entity": "Gambia",
       "group": "Africa",
       "period": "2021–2023",
       "value": 21.7,
-      "iso": "GMB"
+      "iso": "GMB",
+      "moe": 2.4
     },
     {
       "entity": "Gambia",
       "group": "Africa",
       "period": "2024–2025",
       "value": 22.9,
-      "iso": "GMB"
+      "iso": "GMB",
+      "moe": 2.5
     },
     {
       "entity": "Guinea-Bissau",
       "group": "Africa",
       "period": "2024–2025",
       "value": 55.2,
-      "iso": "GNB"
+      "iso": "GNB",
+      "moe": 4.3
     },
     {
       "entity": "Kenya",
       "group": "Africa",
       "period": "2011–2013",
       "value": 25.9,
-      "iso": "KEN"
+      "iso": "KEN",
+      "moe": 2.1
     },
     {
       "entity": "Kenya",
       "group": "Africa",
       "period": "2014–2015",
       "value": 43.7,
-      "iso": "KEN"
+      "iso": "KEN",
+      "moe": 2.2
     },
     {
       "entity": "Kenya",
       "group": "Africa",
       "period": "2016–2018",
       "value": 50.5,
-      "iso": "KEN"
+      "iso": "KEN",
+      "moe": 2.7
     },
     {
       "entity": "Kenya",
       "group": "Africa",
       "period": "2019–2021",
       "value": 44.9,
-      "iso": "KEN"
+      "iso": "KEN",
+      "moe": 2.1
     },
     {
       "entity": "Kenya",
       "group": "Africa",
       "period": "2021–2023",
       "value": 24.8,
-      "iso": "KEN"
+      "iso": "KEN",
+      "moe": 1.8
     },
     {
       "entity": "Kenya",
       "group": "Africa",
       "period": "2024–2025",
       "value": 40.9,
-      "iso": "KEN"
+      "iso": "KEN",
+      "moe": 2.2
     },
     {
       "entity": "Liberia",
       "group": "Africa",
       "period": "2011–2013",
       "value": 54.6,
-      "iso": "LBR"
+      "iso": "LBR",
+      "moe": 3.2
     },
     {
       "entity": "Liberia",
       "group": "Africa",
       "period": "2014–2015",
       "value": 27.4,
-      "iso": "LBR"
+      "iso": "LBR",
+      "moe": 2.9
     },
     {
       "entity": "Liberia",
       "group": "Africa",
       "period": "2016–2018",
       "value": 30.3,
-      "iso": "LBR"
+      "iso": "LBR",
+      "moe": 2.9
     },
     {
       "entity": "Liberia",
       "group": "Africa",
       "period": "2019–2021",
       "value": 19.5,
-      "iso": "LBR"
+      "iso": "LBR",
+      "moe": 2.4
     },
     {
       "entity": "Liberia",
       "group": "Africa",
       "period": "2021–2023",
       "value": 25.8,
-      "iso": "LBR"
+      "iso": "LBR",
+      "moe": 2.7
     },
     {
       "entity": "Liberia",
       "group": "Africa",
       "period": "2024–2025",
       "value": 50,
-      "iso": "LBR"
+      "iso": "LBR",
+      "moe": 3.3
     },
     {
       "entity": "Lesotho",
       "group": "Africa",
       "period": "2011–2013",
       "value": 62.4,
-      "iso": "LSO"
+      "iso": "LSO",
+      "moe": 3.1
     },
     {
       "entity": "Lesotho",
       "group": "Africa",
       "period": "2014–2015",
       "value": 42.5,
-      "iso": "LSO"
+      "iso": "LSO",
+      "moe": 3
     },
     {
       "entity": "Lesotho",
       "group": "Africa",
       "period": "2016–2018",
       "value": 54.5,
-      "iso": "LSO"
+      "iso": "LSO",
+      "moe": 3
     },
     {
       "entity": "Lesotho",
       "group": "Africa",
       "period": "2019–2021",
       "value": 15,
-      "iso": "LSO"
+      "iso": "LSO",
+      "moe": 2.1
     },
     {
       "entity": "Lesotho",
       "group": "Africa",
       "period": "2021–2023",
       "value": 12.2,
-      "iso": "LSO"
+      "iso": "LSO",
+      "moe": 2
     },
     {
       "entity": "Lesotho",
       "group": "Africa",
       "period": "2024–2025",
       "value": 33.7,
-      "iso": "LSO"
+      "iso": "LSO",
+      "moe": 2.8
     },
     {
       "entity": "Morocco",
       "group": "Africa",
       "period": "2011–2013",
       "value": 64.6,
-      "iso": "MAR"
+      "iso": "MAR",
+      "moe": 3
     },
     {
       "entity": "Morocco",
       "group": "Africa",
       "period": "2014–2015",
       "value": 71.4,
-      "iso": "MAR"
+      "iso": "MAR",
+      "moe": 2.7
     },
     {
       "entity": "Morocco",
       "group": "Africa",
       "period": "2016–2018",
       "value": 50.5,
-      "iso": "MAR"
+      "iso": "MAR",
+      "moe": 2.9
     },
     {
       "entity": "Morocco",
       "group": "Africa",
       "period": "2019–2021",
       "value": 70.4,
-      "iso": "MAR"
+      "iso": "MAR",
+      "moe": 2.7
     },
     {
       "entity": "Morocco",
       "group": "Africa",
       "period": "2021–2023",
       "value": 58.4,
-      "iso": "MAR"
+      "iso": "MAR",
+      "moe": 2.9
     },
     {
       "entity": "Morocco",
       "group": "Africa",
       "period": "2024–2025",
       "value": 71.3,
-      "iso": "MAR"
+      "iso": "MAR",
+      "moe": 2.7
     },
     {
       "entity": "Madagascar",
       "group": "Africa",
       "period": "2011–2013",
       "value": 44.9,
-      "iso": "MDG"
+      "iso": "MDG",
+      "moe": 3.3
     },
     {
       "entity": "Madagascar",
       "group": "Africa",
       "period": "2014–2015",
       "value": 25.2,
-      "iso": "MDG"
+      "iso": "MDG",
+      "moe": 2.6
     },
     {
       "entity": "Madagascar",
       "group": "Africa",
       "period": "2016–2018",
       "value": 19.5,
-      "iso": "MDG"
+      "iso": "MDG",
+      "moe": 2.3
     },
     {
       "entity": "Madagascar",
       "group": "Africa",
       "period": "2021–2023",
       "value": 30,
-      "iso": "MDG"
+      "iso": "MDG",
+      "moe": 2.8
     },
     {
       "entity": "Madagascar",
       "group": "Africa",
       "period": "2024–2025",
       "value": 29.3,
-      "iso": "MDG"
+      "iso": "MDG",
+      "moe": 2.8
     },
     {
       "entity": "Mali",
       "group": "Africa",
       "period": "2011–2013",
       "value": 24.6,
-      "iso": "MLI"
+      "iso": "MLI",
+      "moe": 2.7
     },
     {
       "entity": "Mali",
       "group": "Africa",
       "period": "2014–2015",
       "value": 47.6,
-      "iso": "MLI"
+      "iso": "MLI",
+      "moe": 3
     },
     {
       "entity": "Mali",
       "group": "Africa",
       "period": "2016–2018",
       "value": 28.1,
-      "iso": "MLI"
+      "iso": "MLI",
+      "moe": 2.7
     },
     {
       "entity": "Mali",
       "group": "Africa",
       "period": "2019–2021",
       "value": 14.4,
-      "iso": "MLI"
+      "iso": "MLI",
+      "moe": 2.1
     },
     {
       "entity": "Mali",
       "group": "Africa",
       "period": "2021–2023",
       "value": 67.6,
-      "iso": "MLI"
+      "iso": "MLI",
+      "moe": 2.7
     },
     {
       "entity": "Mali",
       "group": "Africa",
       "period": "2024–2025",
       "value": 78.8,
-      "iso": "MLI"
+      "iso": "MLI",
+      "moe": 2.4
     },
     {
       "entity": "Mozambique",
       "group": "Africa",
       "period": "2011–2013",
       "value": 78.8,
-      "iso": "MOZ"
+      "iso": "MOZ",
+      "moe": 2.2
     },
     {
       "entity": "Mozambique",
       "group": "Africa",
       "period": "2014–2015",
       "value": 73.3,
-      "iso": "MOZ"
+      "iso": "MOZ",
+      "moe": 2.4
     },
     {
       "entity": "Mozambique",
       "group": "Africa",
       "period": "2016–2018",
       "value": 64.3,
-      "iso": "MOZ"
+      "iso": "MOZ",
+      "moe": 2.1
     },
     {
       "entity": "Mozambique",
       "group": "Africa",
       "period": "2019–2021",
       "value": 58.1,
-      "iso": "MOZ"
+      "iso": "MOZ",
+      "moe": 3.5
     },
     {
       "entity": "Mozambique",
       "group": "Africa",
       "period": "2021–2023",
       "value": 55.3,
-      "iso": "MOZ"
+      "iso": "MOZ",
+      "moe": 3.7
     },
     {
       "entity": "Mozambique",
       "group": "Africa",
       "period": "2024–2025",
       "value": 41.3,
-      "iso": "MOZ"
+      "iso": "MOZ",
+      "moe": 3
     },
     {
       "entity": "Mauritania",
       "group": "Africa",
       "period": "2021–2023",
       "value": 56.5,
-      "iso": "MRT"
+      "iso": "MRT",
+      "moe": 2.9
     },
     {
       "entity": "Mauritania",
       "group": "Africa",
       "period": "2024–2025",
       "value": 46.2,
-      "iso": "MRT"
+      "iso": "MRT",
+      "moe": 3.8
     },
     {
       "entity": "Mauritius",
       "group": "Africa",
       "period": "2011–2013",
       "value": 56.6,
-      "iso": "MUS"
+      "iso": "MUS",
+      "moe": 3.2
     },
     {
       "entity": "Mauritius",
       "group": "Africa",
       "period": "2014–2015",
       "value": 46.6,
-      "iso": "MUS"
+      "iso": "MUS",
+      "moe": 3.6
     },
     {
       "entity": "Mauritius",
       "group": "Africa",
       "period": "2016–2018",
       "value": 46.8,
-      "iso": "MUS"
+      "iso": "MUS",
+      "moe": 3.3
     },
     {
       "entity": "Mauritius",
       "group": "Africa",
       "period": "2019–2021",
       "value": 43.3,
-      "iso": "MUS"
+      "iso": "MUS",
+      "moe": 3.5
     },
     {
       "entity": "Mauritius",
       "group": "Africa",
       "period": "2021–2023",
       "value": 30.3,
-      "iso": "MUS"
+      "iso": "MUS",
+      "moe": 3.1
     },
     {
       "entity": "Mauritius",
       "group": "Africa",
       "period": "2024–2025",
       "value": 43.4,
-      "iso": "MUS"
+      "iso": "MUS",
+      "moe": 3.2
     },
     {
       "entity": "Malawi",
       "group": "Africa",
       "period": "2011–2013",
       "value": 43.5,
-      "iso": "MWI"
+      "iso": "MWI",
+      "moe": 2.4
     },
     {
       "entity": "Malawi",
       "group": "Africa",
       "period": "2014–2015",
       "value": 19,
-      "iso": "MWI"
+      "iso": "MWI",
+      "moe": 1.8
     },
     {
       "entity": "Malawi",
       "group": "Africa",
       "period": "2016–2018",
       "value": 10.6,
-      "iso": "MWI"
+      "iso": "MWI",
+      "moe": 2.1
     },
     {
       "entity": "Malawi",
       "group": "Africa",
       "period": "2019–2021",
       "value": 14.9,
-      "iso": "MWI"
+      "iso": "MWI",
+      "moe": 2.3
     },
     {
       "entity": "Malawi",
       "group": "Africa",
       "period": "2021–2023",
       "value": 10.6,
-      "iso": "MWI"
+      "iso": "MWI",
+      "moe": 2
     },
     {
       "entity": "Malawi",
       "group": "Africa",
       "period": "2024–2025",
       "value": 22.3,
-      "iso": "MWI"
+      "iso": "MWI",
+      "moe": 2.7
     },
     {
       "entity": "Namibia",
       "group": "Africa",
       "period": "2011–2013",
       "value": 74.7,
-      "iso": "NAM"
+      "iso": "NAM",
+      "moe": 2.6
     },
     {
       "entity": "Namibia",
       "group": "Africa",
       "period": "2014–2015",
       "value": 75.9,
-      "iso": "NAM"
+      "iso": "NAM",
+      "moe": 2.5
     },
     {
       "entity": "Namibia",
       "group": "Africa",
       "period": "2016–2018",
       "value": 41.7,
-      "iso": "NAM"
+      "iso": "NAM",
+      "moe": 3
     },
     {
       "entity": "Namibia",
       "group": "Africa",
       "period": "2019–2021",
       "value": 17.7,
-      "iso": "NAM"
+      "iso": "NAM",
+      "moe": 2.3
     },
     {
       "entity": "Namibia",
       "group": "Africa",
       "period": "2021–2023",
       "value": 23.9,
-      "iso": "NAM"
+      "iso": "NAM",
+      "moe": 2.5
     },
     {
       "entity": "Namibia",
       "group": "Africa",
       "period": "2024–2025",
       "value": 36.7,
-      "iso": "NAM"
+      "iso": "NAM",
+      "moe": 2.8
     },
     {
       "entity": "Niger",
       "group": "Africa",
       "period": "2011–2013",
       "value": 62.5,
-      "iso": "NER"
+      "iso": "NER",
+      "moe": 3.3
     },
     {
       "entity": "Niger",
       "group": "Africa",
       "period": "2014–2015",
       "value": 76.7,
-      "iso": "NER"
+      "iso": "NER",
+      "moe": 2.9
     },
     {
       "entity": "Niger",
       "group": "Africa",
       "period": "2016–2018",
       "value": 32.7,
-      "iso": "NER"
+      "iso": "NER",
+      "moe": 3.2
     },
     {
       "entity": "Niger",
       "group": "Africa",
       "period": "2019–2021",
       "value": 46.8,
-      "iso": "NER"
+      "iso": "NER",
+      "moe": 3.2
     },
     {
       "entity": "Niger",
       "group": "Africa",
       "period": "2021–2023",
       "value": 44.4,
-      "iso": "NER"
+      "iso": "NER",
+      "moe": 3.4
     },
     {
       "entity": "Nigeria",
       "group": "Africa",
       "period": "2011–2013",
       "value": 27,
-      "iso": "NGA"
+      "iso": "NGA",
+      "moe": 2
     },
     {
       "entity": "Nigeria",
       "group": "Africa",
       "period": "2014–2015",
       "value": 23,
-      "iso": "NGA"
+      "iso": "NGA",
+      "moe": 1.9
     },
     {
       "entity": "Nigeria",
       "group": "Africa",
       "period": "2016–2018",
       "value": 37.1,
-      "iso": "NGA"
+      "iso": "NGA",
+      "moe": 2.5
     },
     {
       "entity": "Nigeria",
       "group": "Africa",
       "period": "2019–2021",
       "value": 29.8,
-      "iso": "NGA"
+      "iso": "NGA",
+      "moe": 2.4
     },
     {
       "entity": "Nigeria",
       "group": "Africa",
       "period": "2021–2023",
       "value": 9.6,
-      "iso": "NGA"
+      "iso": "NGA",
+      "moe": 1.5
     },
     {
       "entity": "Nigeria",
       "group": "Africa",
       "period": "2024–2025",
       "value": 6.2,
-      "iso": "NGA"
+      "iso": "NGA",
+      "moe": 1.3
     },
     {
       "entity": "Sudan",
       "group": "Africa",
       "period": "2011–2013",
       "value": 38.5,
-      "iso": "SDN"
+      "iso": "SDN",
+      "moe": 3.2
     },
     {
       "entity": "Sudan",
       "group": "Africa",
       "period": "2014–2015",
       "value": 49.3,
-      "iso": "SDN"
+      "iso": "SDN",
+      "moe": 3.5
     },
     {
       "entity": "Sudan",
       "group": "Africa",
       "period": "2016–2018",
       "value": 21.5,
-      "iso": "SDN"
+      "iso": "SDN",
+      "moe": 2.7
     },
     {
       "entity": "Sudan",
       "group": "Africa",
       "period": "2019–2021",
       "value": 24.2,
-      "iso": "SDN"
+      "iso": "SDN",
+      "moe": 2.2
     },
     {
       "entity": "Sudan",
       "group": "Africa",
       "period": "2021–2023",
       "value": 7.6,
-      "iso": "SDN"
+      "iso": "SDN",
+      "moe": 1.7
     },
     {
       "entity": "Senegal",
       "group": "Africa",
       "period": "2011–2013",
       "value": 67.8,
-      "iso": "SEN"
+      "iso": "SEN",
+      "moe": 2.8
     },
     {
       "entity": "Senegal",
       "group": "Africa",
       "period": "2014–2015",
       "value": 51.4,
-      "iso": "SEN"
+      "iso": "SEN",
+      "moe": 3
     },
     {
       "entity": "Senegal",
       "group": "Africa",
       "period": "2016–2018",
       "value": 62.7,
-      "iso": "SEN"
+      "iso": "SEN",
+      "moe": 2.9
     },
     {
       "entity": "Senegal",
       "group": "Africa",
       "period": "2019–2021",
       "value": 40.1,
-      "iso": "SEN"
+      "iso": "SEN",
+      "moe": 2.9
     },
     {
       "entity": "Senegal",
       "group": "Africa",
       "period": "2021–2023",
       "value": 28.6,
-      "iso": "SEN"
+      "iso": "SEN",
+      "moe": 2.7
     },
     {
       "entity": "Senegal",
       "group": "Africa",
       "period": "2024–2025",
       "value": 68.5,
-      "iso": "SEN"
+      "iso": "SEN",
+      "moe": 2.8
     },
     {
       "entity": "Sierra Leone",
       "group": "Africa",
       "period": "2011–2013",
       "value": 55.7,
-      "iso": "SLE"
+      "iso": "SLE",
+      "moe": 3.4
     },
     {
       "entity": "Sierra Leone",
       "group": "Africa",
       "period": "2014–2015",
       "value": 16.9,
-      "iso": "SLE"
+      "iso": "SLE",
+      "moe": 2.5
     },
     {
       "entity": "Sierra Leone",
       "group": "Africa",
       "period": "2016–2018",
       "value": 50.6,
-      "iso": "SLE"
+      "iso": "SLE",
+      "moe": 3.3
     },
     {
       "entity": "Sierra Leone",
       "group": "Africa",
       "period": "2019–2021",
       "value": 33.5,
-      "iso": "SLE"
+      "iso": "SLE",
+      "moe": 3
     },
     {
       "entity": "Sierra Leone",
       "group": "Africa",
       "period": "2021–2023",
       "value": 32.1,
-      "iso": "SLE"
+      "iso": "SLE",
+      "moe": 2.9
     },
     {
       "entity": "Sierra Leone",
       "group": "Africa",
       "period": "2024–2025",
       "value": 39.8,
-      "iso": "SLE"
+      "iso": "SLE",
+      "moe": 3.2
     },
     {
       "entity": "São Tomé and Príncipe",
       "group": "Africa",
       "period": "2014–2015",
       "value": 65,
-      "iso": "STP"
+      "iso": "STP",
+      "moe": 3.1
     },
     {
       "entity": "São Tomé and Príncipe",
       "group": "Africa",
       "period": "2016–2018",
       "value": 54.8,
-      "iso": "STP"
+      "iso": "STP",
+      "moe": 3.1
     },
     {
       "entity": "São Tomé and Príncipe",
       "group": "Africa",
       "period": "2021–2023",
       "value": 35.5,
-      "iso": "STP"
+      "iso": "STP",
+      "moe": 3
     },
     {
       "entity": "São Tomé and Príncipe",
       "group": "Africa",
       "period": "2024–2025",
       "value": 38.5,
-      "iso": "STP"
+      "iso": "STP",
+      "moe": 3
     },
     {
       "entity": "Eswatini",
       "group": "Africa",
       "period": "2011–2013",
       "value": 50.5,
-      "iso": "SWZ"
+      "iso": "SWZ",
+      "moe": 3.1
     },
     {
       "entity": "Eswatini",
       "group": "Africa",
       "period": "2014–2015",
       "value": 52.6,
-      "iso": "SWZ"
+      "iso": "SWZ",
+      "moe": 3
     },
     {
       "entity": "Eswatini",
       "group": "Africa",
       "period": "2016–2018",
       "value": 55.3,
-      "iso": "SWZ"
+      "iso": "SWZ",
+      "moe": 3.2
     },
     {
       "entity": "Eswatini",
       "group": "Africa",
       "period": "2019–2021",
       "value": 35,
-      "iso": "SWZ"
+      "iso": "SWZ",
+      "moe": 2.9
     },
     {
       "entity": "Eswatini",
       "group": "Africa",
       "period": "2021–2023",
       "value": 14.3,
-      "iso": "SWZ"
+      "iso": "SWZ",
+      "moe": 2.1
     },
     {
       "entity": "Eswatini",
       "group": "Africa",
       "period": "2024–2025",
       "value": 40.5,
-      "iso": "SWZ"
+      "iso": "SWZ",
+      "moe": 3.1
     },
     {
       "entity": "Seychelles",
       "group": "Africa",
       "period": "2021–2023",
       "value": 54.8,
-      "iso": "SYC"
+      "iso": "SYC",
+      "moe": 3.4
     },
     {
       "entity": "Seychelles",
       "group": "Africa",
       "period": "2024–2025",
       "value": 47.7,
-      "iso": "SYC"
+      "iso": "SYC",
+      "moe": 3.2
     },
     {
       "entity": "Chad",
       "group": "Africa",
       "period": "2024–2025",
       "value": 32.1,
-      "iso": "TCD"
+      "iso": "TCD",
+      "moe": 2.8
     },
     {
       "entity": "Togo",
       "group": "Africa",
       "period": "2011–2013",
       "value": 38.3,
-      "iso": "TGO"
+      "iso": "TGO",
+      "moe": 3.1
     },
     {
       "entity": "Togo",
       "group": "Africa",
       "period": "2014–2015",
       "value": 49.1,
-      "iso": "TGO"
+      "iso": "TGO",
+      "moe": 3
     },
     {
       "entity": "Togo",
       "group": "Africa",
       "period": "2016–2018",
       "value": 25.3,
-      "iso": "TGO"
+      "iso": "TGO",
+      "moe": 2.7
     },
     {
       "entity": "Togo",
       "group": "Africa",
       "period": "2019–2021",
       "value": 46.5,
-      "iso": "TGO"
+      "iso": "TGO",
+      "moe": 3.1
     },
     {
       "entity": "Togo",
       "group": "Africa",
       "period": "2021–2023",
       "value": 43.3,
-      "iso": "TGO"
+      "iso": "TGO",
+      "moe": 3
     },
     {
       "entity": "Togo",
       "group": "Africa",
       "period": "2024–2025",
       "value": 36.5,
-      "iso": "TGO"
+      "iso": "TGO",
+      "moe": 2.8
     },
     {
       "entity": "Tunisia",
       "group": "Africa",
       "period": "2011–2013",
       "value": 25.8,
-      "iso": "TUN"
+      "iso": "TUN",
+      "moe": 2.6
     },
     {
       "entity": "Tunisia",
       "group": "Africa",
       "period": "2014–2015",
       "value": 35.1,
-      "iso": "TUN"
+      "iso": "TUN",
+      "moe": 2.8
     },
     {
       "entity": "Tunisia",
       "group": "Africa",
       "period": "2016–2018",
       "value": 16.1,
-      "iso": "TUN"
+      "iso": "TUN",
+      "moe": 2.2
     },
     {
       "entity": "Tunisia",
       "group": "Africa",
       "period": "2019–2021",
       "value": 23.7,
-      "iso": "TUN"
+      "iso": "TUN",
+      "moe": 2.5
     },
     {
       "entity": "Tunisia",
       "group": "Africa",
       "period": "2021–2023",
       "value": 26.1,
-      "iso": "TUN"
+      "iso": "TUN",
+      "moe": 2.6
     },
     {
       "entity": "Tunisia",
       "group": "Africa",
       "period": "2024–2025",
       "value": 50.4,
-      "iso": "TUN"
+      "iso": "TUN",
+      "moe": 2.9
     },
     {
       "entity": "Tanzania",
       "group": "Africa",
       "period": "2011–2013",
       "value": 25.8,
-      "iso": "TZA"
+      "iso": "TZA",
+      "moe": 2
     },
     {
       "entity": "Tanzania",
       "group": "Africa",
       "period": "2014–2015",
       "value": 25.9,
-      "iso": "TZA"
+      "iso": "TZA",
+      "moe": 2
     },
     {
       "entity": "Tanzania",
       "group": "Africa",
       "period": "2016–2018",
       "value": 64.2,
-      "iso": "TZA"
+      "iso": "TZA",
+      "moe": 2.2
     },
     {
       "entity": "Tanzania",
       "group": "Africa",
       "period": "2019–2021",
       "value": 78.9,
-      "iso": "TZA"
+      "iso": "TZA",
+      "moe": 1.8
     },
     {
       "entity": "Tanzania",
       "group": "Africa",
       "period": "2021–2023",
       "value": 60.7,
-      "iso": "TZA"
+      "iso": "TZA",
+      "moe": 2.2
     },
     {
       "entity": "Tanzania",
       "group": "Africa",
       "period": "2024–2025",
       "value": 72.1,
-      "iso": "TZA"
+      "iso": "TZA",
+      "moe": 2.3
     },
     {
       "entity": "Uganda",
       "group": "Africa",
       "period": "2011–2013",
       "value": 22.1,
-      "iso": "UGA"
+      "iso": "UGA",
+      "moe": 2.1
     },
     {
       "entity": "Uganda",
       "group": "Africa",
       "period": "2014–2015",
       "value": 66.4,
-      "iso": "UGA"
+      "iso": "UGA",
+      "moe": 2.2
     },
     {
       "entity": "Uganda",
       "group": "Africa",
       "period": "2016–2018",
       "value": 52.1,
-      "iso": "UGA"
+      "iso": "UGA",
+      "moe": 3.2
     },
     {
       "entity": "Uganda",
       "group": "Africa",
       "period": "2019–2021",
       "value": 61.7,
-      "iso": "UGA"
+      "iso": "UGA",
+      "moe": 3.1
     },
     {
       "entity": "Uganda",
       "group": "Africa",
       "period": "2021–2023",
       "value": 49.2,
-      "iso": "UGA"
+      "iso": "UGA",
+      "moe": 2.4
     },
     {
       "entity": "Uganda",
       "group": "Africa",
       "period": "2024–2025",
       "value": 57.6,
-      "iso": "UGA"
+      "iso": "UGA",
+      "moe": 2.2
     },
     {
       "entity": "South Africa",
       "group": "Africa",
       "period": "2011–2013",
       "value": 50.2,
-      "iso": "ZAF"
+      "iso": "ZAF",
+      "moe": 2.4
     },
     {
       "entity": "South Africa",
       "group": "Africa",
       "period": "2014–2015",
       "value": 33,
-      "iso": "ZAF"
+      "iso": "ZAF",
+      "moe": 2.2
     },
     {
       "entity": "South Africa",
       "group": "Africa",
       "period": "2016–2018",
       "value": 28.8,
-      "iso": "ZAF"
+      "iso": "ZAF",
+      "moe": 2.5
     },
     {
       "entity": "South Africa",
       "group": "Africa",
       "period": "2019–2021",
       "value": 25,
-      "iso": "ZAF"
+      "iso": "ZAF",
+      "moe": 2.5
     },
     {
       "entity": "South Africa",
       "group": "Africa",
       "period": "2021–2023",
       "value": 15.4,
-      "iso": "ZAF"
+      "iso": "ZAF",
+      "moe": 2.2
     },
     {
       "entity": "South Africa",
       "group": "Africa",
       "period": "2024–2025",
       "value": 15.6,
-      "iso": "ZAF"
+      "iso": "ZAF",
+      "moe": 4.2
     },
     {
       "entity": "Zambia",
       "group": "Africa",
       "period": "2011–2013",
       "value": 68.3,
-      "iso": "ZMB"
+      "iso": "ZMB",
+      "moe": 3.1
     },
     {
       "entity": "Zambia",
       "group": "Africa",
       "period": "2014–2015",
       "value": 36.4,
-      "iso": "ZMB"
+      "iso": "ZMB",
+      "moe": 3.2
     },
     {
       "entity": "Zambia",
       "group": "Africa",
       "period": "2016–2018",
       "value": 33.6,
-      "iso": "ZMB"
+      "iso": "ZMB",
+      "moe": 3.1
     },
     {
       "entity": "Zambia",
       "group": "Africa",
       "period": "2019–2021",
       "value": 23.5,
-      "iso": "ZMB"
+      "iso": "ZMB",
+      "moe": 2.5
     },
     {
       "entity": "Zambia",
       "group": "Africa",
       "period": "2021–2023",
       "value": 52.4,
-      "iso": "ZMB"
+      "iso": "ZMB",
+      "moe": 3.1
     },
     {
       "entity": "Zambia",
       "group": "Africa",
       "period": "2024–2025",
       "value": 32.2,
-      "iso": "ZMB"
+      "iso": "ZMB",
+      "moe": 2.8
     },
     {
       "entity": "Zimbabwe",
       "group": "Africa",
       "period": "2011–2013",
       "value": 54.3,
-      "iso": "ZWE"
+      "iso": "ZWE",
+      "moe": 2.2
     },
     {
       "entity": "Zimbabwe",
       "group": "Africa",
       "period": "2014–2015",
       "value": 32.8,
-      "iso": "ZWE"
+      "iso": "ZWE",
+      "moe": 2
     },
     {
       "entity": "Zimbabwe",
       "group": "Africa",
       "period": "2016–2018",
       "value": 36.1,
-      "iso": "ZWE"
+      "iso": "ZWE",
+      "moe": 2.9
     },
     {
       "entity": "Zimbabwe",
       "group": "Africa",
       "period": "2019–2021",
       "value": 31.1,
-      "iso": "ZWE"
+      "iso": "ZWE",
+      "moe": 5.6
     },
     {
       "entity": "Zimbabwe",
       "group": "Africa",
       "period": "2021–2023",
       "value": 28.2,
-      "iso": "ZWE"
+      "iso": "ZWE",
+      "moe": 5.2
     },
     {
       "entity": "Zimbabwe",
       "group": "Africa",
       "period": "2024–2025",
       "value": 40,
-      "iso": "ZWE"
+      "iso": "ZWE",
+      "moe": 2.8
     }
   ]
 }

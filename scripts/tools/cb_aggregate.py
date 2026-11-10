@@ -17,6 +17,7 @@ so the 1–10 mean published for 2013 cannot be recomputed from it.
 """
 import sys
 import pyreadstat
+from moe import share_moe
 
 ITEMS = {
     'trust_army': 'TRUARMY', 'trust_police': 'TRUPOLI', 'trust_eu': 'TRUSTEU',
@@ -38,14 +39,15 @@ for path in sys.argv[1:]:
         row = {'iso3': iso, 'name': name, 'year': int(year)}
         for col, q in ITEMS.items():
             if q not in g:
-                row[col] = ''
+                row[col] = row[col + '_moe'] = ''
                 continue
             v, w = g[q], g['WTIND']
             ok = v.isin([1, 2, 3])
             row[col] = '' if ok.sum() < MIN_N else f'{100 * w[ok & (v == 3)].sum() / w[ok].sum():.4f}'
+            row[col + '_moe'] = share_moe(row[col], w[ok]) if row[col] else ''
         rows.append(row)
 
-keys = ['iso3', 'name', 'year'] + list(ITEMS)
+keys = ['iso3', 'name', 'year'] + list(ITEMS) + [c + '_moe' for c in ITEMS]
 print(','.join(keys))
 for r in rows:
     print(','.join(str(r[k]) for k in keys))

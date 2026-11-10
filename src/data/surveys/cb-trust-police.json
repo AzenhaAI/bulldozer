@@ -19,196 +19,224 @@
       "group": "Europe",
       "period": "2008",
       "value": 35.14,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 2.6
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2009",
       "value": 29.03,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 2.6
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2010",
       "value": 20.45,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 2.2
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2011",
       "value": 30.86,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 2.2
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2012",
       "value": 31.51,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 2.3
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2013",
       "value": 30.43,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 2.6
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2015",
       "value": 30.82,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 2.6
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2017",
       "value": 30.44,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 2.9
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2019",
       "value": 52.94,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 3.3
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2021",
       "value": 20.08,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 2.5
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2024",
       "value": 41.89,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 3.3
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2008",
       "value": 57.47,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 3
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2009",
       "value": 53.96,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 2.8
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2010",
       "value": 67.84,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 2.7
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2011",
       "value": 70.51,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 2.5
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2012",
       "value": 53.91,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 2.4
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2013",
       "value": 60.18,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 2.5
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2015",
       "value": 46.96,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 2.5
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2017",
       "value": 52.82,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 2.6
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2019",
       "value": 49.2,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 2.7
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2021",
       "value": 42.44,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 3.7
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2024",
       "value": 55.84,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 3.7
     },
     {
       "entity": "Azerbaijan",
       "group": "Europe",
       "period": "2008",
       "value": 58.52,
-      "iso": "AZE"
+      "iso": "AZE",
+      "moe": 2.9
     },
     {
       "entity": "Azerbaijan",
       "group": "Europe",
       "period": "2009",
       "value": 41.79,
-      "iso": "AZE"
+      "iso": "AZE",
+      "moe": 3
     },
     {
       "entity": "Azerbaijan",
       "group": "Europe",
       "period": "2010",
       "value": 39.82,
-      "iso": "AZE"
+      "iso": "AZE",
+      "moe": 2.7
     },
     {
       "entity": "Azerbaijan",
       "group": "Europe",
       "period": "2011",
       "value": 38.04,
-      "iso": "AZE"
+      "iso": "AZE",
+      "moe": 3
     },
     {
       "entity": "Azerbaijan",
       "group": "Europe",
       "period": "2012",
       "value": 48.37,
-      "iso": "AZE"
+      "iso": "AZE",
+      "moe": 2.7
     },
     {
       "entity": "Azerbaijan",
       "group": "Europe",
       "period": "2013",
       "value": 49.59,
-      "iso": "AZE"
+      "iso": "AZE",
+      "moe": 2.5
     }
   ]
 }

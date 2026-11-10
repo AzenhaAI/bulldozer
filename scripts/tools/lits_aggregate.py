@@ -25,6 +25,7 @@ Items and the waves that asked them on the same scale:
 import os
 import sys
 import pyreadstat
+from moe import mean_moe
 
 WAVES = {
     '2006': ('l1.dta', 'weight_1', {'trust': 'q302_1', 'self_health': 'q705'}),
@@ -52,15 +53,17 @@ def main(d):
             for col in COLS:
                 q = items.get(col)
                 if not q:
-                    row[col] = ''
+                    row[col] = row[col + '_moe'] = ''
                     continue
                 v, w = g[q], g[wcol]
                 ok = v.between(1, SCALE[col]) & w.notna() & (w > 0)
                 row[col] = '' if ok.sum() < MIN_N else f'{(v[ok] * w[ok]).sum() / w[ok].sum():.6f}'
+                row[col + '_moe'] = mean_moe(v[ok], w[ok]) if row[col] else ''
             rows.append(row)
-    print(','.join(['country', 'wave'] + COLS))
+    keys = ['country', 'wave'] + COLS + [c + '_moe' for c in COLS]
+    print(','.join(keys))
     for r in rows:
-        print(','.join(('"%s"' % r[k]) if k == 'country' else str(r[k]) for k in ['country', 'wave'] + COLS))
+        print(','.join(('"%s"' % r[k]) if k == 'country' else str(r[k]) for k in keys))
 
 
 if __name__ == '__main__':

@@ -2,129 +2,130 @@
 /**
  * Group trend lines on a dataset page, by the chart rules in lib/trend.ts
  * (the app's chart_rules.dart applies the same ones):
- *  - same countries throughout: each group's line averages only the countries
- *    with a reading in every period shown, so a change in who was surveyed
- *    does not read as a change in the value (falls back to all countries,
- *    and says so, where fewer than 3 are in every period);
- *  - x by time, so "2002–2004" and "2021–2023" sit nineteen years apart;
- *  - the axis never goes below zero for data with no negative reading;
- *  - IMF projections dashed;
- *  - a thin dashed Theil–Sen trend per group only where the direction is
- *    consistent (≥ 6 readings, Mann–Kendall p < 0.05), its rate in the legend.
+ *  - each region's line is the MEDIAN of the same countries in every period
+ *    (a mean let Venezuela's 19,906% inflation drag the Americas; a changing
+ *    set of countries showed composition, not change). A region with fewer
+ *    than 3 such countries is not drawn, and the note says so;
+ *  - x by time; the axis zooms to the data; round ticks; a 0 line when
+ *    values cross zero;
+ *  - long series (≥ 20 periods): a LOWESS curve over a faint raw line;
+ *  - a dashed Theil–Sen trend only where the direction is steady (≥ 6
+ *    readings, Mann–Kendall p < 0.05, same sign in both halves), its rate in
+ *    the legend;
+ *  - IMF projections: a shaded "forecast" stretch.
  */
 import type { Observation } from '@lib/analytics';
 import { colorFor } from '@lib/palette';
-import { periodYear, yDomain, nonNegativeFrom, trendOf, isPointUnit } from '@lib/trend';
+import { periodYear, yDomain, niceTicks, trendOf, trendAt, trendRate, lowess, isPointUnit, SMOOTH_MIN_POINTS } from '@lib/trend';
 
 interface Props { data: Observation[]; unit?: string; fullUnit?: string; mode?: 'pp' | 'pct'; projectedFrom?: string }
 const { data, unit = '', fullUnit = unit, mode, projectedFrom } = Astro.props;
 const changeMode = mode ?? (isPointUnit(fullUnit) ? 'pp' : 'pct');
 const proj = projectedFrom ? Number(projectedFrom) : undefined;
+const MIN_PANEL = 3;
 
 const periods = [...new Set(data.map((o) => o.period))].sort((a, b) => periodYear(a) - periodYear(b));
 const xs = periods.map(periodYear);
-// A group of one or two countries is their own line, not a group trend: left out.
-const groupSize = new Map<string, Set<string>>();
-for (const o of data) if (o.group) (groupSize.get(o.group) ?? groupSize.set(o.group, new Set()).get(o.group)!).add(o.entity);
-const groups = [...groupSize.keys()].filter((g) => groupSize.get(g)!.size >= 3);
-const tiny = [...groupSize.keys()].filter((g) => groupSize.get(g)!.size < 3);
+const median = (a: number[]) => { const s = [...a].sort((x, y) => x - y), n = s.length; return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2; };
 
-const series = groups.map((g) => {
-  const rows = data.filter((o) => o.group === g);
-  const byEnt = new Map<string, Map<string, number>>();
-  for (const o of rows) (byEnt.get(o.entity) ?? byEnt.set(o.entity, new Map()).get(o.entity)!).set(o.period, o.value);
-  const always = [...byEnt.entries()].filter(([, m]) => periods.every((p) => m.has(p)));
-  const balanced = always.length >= 3;
-  const members = balanced ? always : [...byEnt.entries()];
-  const pts = periods.map((p) => {
-    const vals = members.map(([, m]) => m.get(p)).filter((v): v is number => v != null);
-    return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
-  });
-  const trend = trendOf(pts.map((y, i) => ({ x: xs[i], y: y ?? NaN })), proj);
-  return { group: g, pts, balanced, n: members.length, trend };
-});
+const byGroup = new Map<string, Map<string, Map<string, number>>>();
+for (const o of data) {
+  if (!o.group) continue;
+  const g = byGroup.get(o.group) ?? byGroup.set(o.group, new Map()).get(o.group)!;
+  (g.get(o.entity) ?? g.set(o.entity, new Map()).get(o.entity)!).set(o.period, o.value);
+}
+const series: { group: string; n: number; pts: number[]; smooth?: number[]; trend: ReturnType<typeof trendOf> }[] = [];
+const dropped: string[] = [];
+for (const [group, ents] of byGroup) {
+  const panel = [...ents.values()].filter((m) => periods.every((p) => m.has(p)));
+  if (panel.length < MIN_PANEL) { dropped.push(group); continue; }
+  const pts = periods.map((p) => median(panel.map((m) => m.get(p)!)));
+  const actual = proj == null ? xs.length : Math.max(1, xs.filter((x) => x < proj).length);
+  const smooth = xs.length >= SMOOTH_MIN_POINTS ? lowess(xs, pts) : undefined;
+  series.push({ group, n: panel.length, pts, smooth, trend: trendOf(pts.slice(0, actual).map((y, i) => ({ x: xs[i], y })), undefined, changeMode === 'pct') }); // levels: fitted on logs
+}
+series.sort((a, b) => b.pts[b.pts.length - 1] - a.pts[a.pts.length - 1]);
 
-const allVals = series.flatMap((s) => s.pts).filter((v): v is number => v != null);
-const trendEnds = series.flatMap((s) => (s.trend?.clear ? [s.trend.intercept + s.trend.slope * s.trend.x0, s.trend.intercept + s.trend.slope * s.trend.x1] : []));
-const [lo, hi] = yDomain([...allVals, ...trendEnds], { nonNegative: nonNegativeFrom(data.map((o) => o.value)) });
-const unbalanced = series.filter((s) => !s.balanced).map((s) => s.group);
+const trendEnds = series.flatMap((s) => (s.trend?.clear ? [trendAt(s.trend, s.trend.x0), trendAt(s.trend, s.trend.x1)] : []));
+const [lo, hi] = series.length ? yDomain([...series.flatMap((s) => s.pts), ...trendEnds]) : [0, 1];
+const ticks = niceTicks(lo, hi, 4);
+const ppUnit = fullUnit.includes('%') ? 'pp' : fullUnit.replace(/^%\s*/, '').trim();
+const fmtTick = (v: number) => `${Math.abs(v) >= 1e4 ? new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(v) : +v.toFixed(2)}${unit}`;
 
 const rate = (s: (typeof series)[number]) => {
   if (!s.trend?.clear) return '';
-  const sl = s.trend.slope, sign = sl > 0 ? '+' : '−';
-  if (changeMode === 'pct') {
-    const vals = s.pts.filter((v): v is number => v != null).sort((a, b) => a - b);
-    const med = vals[Math.floor(vals.length / 2)];
-    return med ? `${sign}${Math.abs((sl / med) * 100).toFixed(1)}%/yr` : '';
-  }
-  return `${sign}${Math.abs(sl).toFixed(Math.abs(sl) >= 10 ? 0 : Math.abs(sl) >= 1 ? 1 : 2)}${unit === '%' ? ' pp' : ''}/yr`;
+  const r = trendRate(s.trend), sign = r > 0 ? '+' : '−', a = Math.abs(r);
+  if (s.trend.log) return `${sign}${a.toFixed(1)}% per year`;
+  return `${sign}${a.toFixed(a >= 10 ? 0 : a >= 1 ? 1 : 2)}${ppUnit ? ' ' + ppUnit : ''} per year`;
 };
 
-// Two drawings of the same lines: a wide one, and a narrow one for phones,
-// where the wide viewBox shrank the axis text to about 4px.
+// Two drawings of the same lines: a wide one, and a narrow one for phones.
 const geom = (W: number, H: number) => {
-  const m = { t: 14, r: 14, b: 32, l: 46 };
+  const m = { t: 18, r: 18, b: 32, l: 52 };
   const iw = W - m.l - m.r, ih = H - m.t - m.b;
   const x0 = xs[0], x1 = xs[xs.length - 1];
   const X = (x: number) => m.l + (x1 === x0 ? iw / 2 : ((x - x0) / (x1 - x0)) * iw);
   const Y = (v: number) => m.t + ih - ((v - lo) / (hi - lo || 1)) * ih;
-  const yTicks = Array.from({ length: 5 }, (_, i) => Math.round((lo + ((hi - lo) * i) / 4) * 10) / 10);
-  // First and last labels sit inside the edges; others only where they do
-  // not touch a neighbour (11px mono ≈ 6.8px per character).
+  // Labels centred on their own year; the first and last are anchored to the
+  // edge so they are not cut; others only where they do not touch a neighbour.
   const wd = (p: string) => p.length * 6.8 + 10;
-  const centre = (i: number) => Math.min(Math.max(X(xs[i]), m.l + wd(periods[i]) / 2), W - m.r - wd(periods[i]) / 2);
   const last = periods.length - 1;
-  const kept: number[] = periods.length > 1 ? [0, last] : [0];
-  for (let i = 1; i < last; i++) if (kept.every((j) => Math.abs(centre(i) - centre(j)) >= (wd(periods[i]) + wd(periods[j])) / 2 + 6)) kept.push(i);
-  const xLabels = kept.sort((a, b) => a - b).map((i) => ({ p: periods[i], cx: centre(i) }));
-  const seg = (pts: (number | null)[], from: number, to: number) => {
-    let d = '', pen = false;
-    for (let i = from; i <= to; i++) {
-      const v = pts[i];
-      if (v == null) { pen = false; continue; }
-      d += `${pen ? 'L' : 'M'}${X(xs[i]).toFixed(1)},${Y(v).toFixed(1)} `;
-      pen = true;
-    }
-    return d.trim();
+  const span = (i: number): [number, number] => {
+    const c = X(xs[i]), w = wd(periods[i]);
+    return i === 0 ? [c, c + w] : i === last ? [c - w, c] : [c - w / 2, c + w / 2];
   };
-  const firstProj = proj == null ? -1 : xs.findIndex((x) => x >= proj);
-  const solid = (pts: (number | null)[]) => seg(pts, 0, firstProj > 0 ? firstProj - 1 : pts.length - 1);
-  const dashed = (pts: (number | null)[]) => (firstProj > 0 ? seg(pts, firstProj - 1, pts.length - 1) : '');
+  const kept: number[] = periods.length > 1 ? [0, last] : [0];
+  for (let i = 1; i < last; i++) {
+    const [a, b] = span(i);
+    if (kept.every((j) => { const [c, d] = span(j); return b + 6 <= c || d + 6 <= a; })) kept.push(i);
+  }
+  const xLabels = kept.sort((a, b) => a - b).map((i) => ({ p: periods[i], x: X(xs[i]), anchor: i === 0 && last > 0 ? 'start' : i === last && last > 0 ? 'end' : 'middle' }));
+  const line = (vals: number[]) => vals.map((v, i) => `${i ? 'L' : 'M'}${X(xs[i]).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
+  // A log fit is a curve on this axis: drawn through 24 steps.
   const trendPath = (t: NonNullable<(typeof series)[number]['trend']>) =>
-    `M${X(t.x0).toFixed(1)},${Y(t.intercept + t.slope * t.x0).toFixed(1)} L${X(t.x1).toFixed(1)},${Y(t.intercept + t.slope * t.x1).toFixed(1)}`;
-  return { W, H, m, Y, yTicks, xLabels, solid, dashed, trendPath };
+    Array.from({ length: t.log ? 25 : 2 }, (_, i) => t.x0 + ((t.x1 - t.x0) * i) / (t.log ? 24 : 1))
+      .map((x, i) => `${i ? 'L' : 'M'}${X(x).toFixed(1)},${Y(trendAt(t, x)).toFixed(1)}`).join(' ');
+  const projX = proj != null && xs.some((x) => x >= proj) ? X(Math.max(x0, xs[xs.findIndex((x) => x >= proj) - 1] ?? x0)) : null;
+  return { W, H, m, Y, line, trendPath, xLabels, projX };
 };
-const views = [{ cls: 'tc-wide', g: geom(760, 340) }, { cls: 'tc-narrow', g: geom(380, 250) }];
+const views = [{ cls: 'tc-wide', g: geom(760, 340) }, { cls: 'tc-narrow', g: geom(380, 260) }];
+const anySmooth = series.some((s) => s.smooth), anyTrend = series.some((s) => s.trend?.clear);
 ---
+{series.length > 0 ? (
 <div class="chart-svg">
   {views.map(({ cls, g }) => (
   <svg class={cls} viewBox={`0 0 ${g.W} ${g.H}`} role="img" aria-label="Trend by group">
-    {g.yTicks.map((v) => (
-      <g><line x1={g.m.l} y1={g.Y(v)} x2={g.W - g.m.r} y2={g.Y(v)} stroke="var(--border)" /><text x={g.m.l - 8} y={g.Y(v) + 4} text-anchor="end" class="axis">{v}{unit}</text></g>
+    {g.projX != null && (
+      <g><rect x={g.projX} y={g.m.t} width={g.W - g.m.r - g.projX} height={g.H - g.m.t - g.m.b} class="tc-proj" />
+      <text x={g.W - g.m.r - 4} y={g.m.t + 12} text-anchor="end" class="axis">IMF forecast</text></g>
+    )}
+    {ticks.map((v) => (
+      <g><line x1={g.m.l} y1={g.Y(v)} x2={g.W - g.m.r} y2={g.Y(v)} stroke="var(--border)" stroke-width={v === 0 ? 1.6 : 1} /><text x={g.m.l - 8} y={g.Y(v) + 4} text-anchor="end" class="axis">{fmtTick(v)}</text></g>
     ))}
-    {g.xLabels.map(({ p, cx }) => (
-      <text x={cx} y={g.H - g.m.b + 20} text-anchor="middle" class="axis">{p}</text>
+    {g.xLabels.map(({ p, x, anchor }) => (
+      <text x={x} y={g.H - g.m.b + 20} text-anchor={anchor} class="axis">{p}</text>
     ))}
     {series.map((s) => s.trend?.clear && (
-      <path d={g.trendPath(s.trend)} fill="none" stroke={colorFor(s.group)} stroke-width="1.2" stroke-dasharray="5 4" opacity="0.6" />
+      <path d={g.trendPath(s.trend)} fill="none" stroke={colorFor(s.group)} stroke-width="1.3" stroke-dasharray="6 4" opacity="0.75" />
     ))}
     {series.map((s) => (
-      <path d={g.solid(s.pts)} fill="none" stroke={colorFor(s.group)} stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" />
+      <path d={g.line(s.pts)} fill="none" stroke={colorFor(s.group)} stroke-width={s.smooth ? 1 : 2.2} opacity={s.smooth ? 0.45 : 1} stroke-linejoin="round" stroke-linecap="round" />
     ))}
-    {series.map((s) => g.dashed(s.pts) && (
-      <path d={g.dashed(s.pts)} fill="none" stroke={colorFor(s.group)} stroke-width="2" stroke-dasharray="4 4" />
+    {series.map((s) => s.smooth && (
+      <path d={g.line(s.smooth)} fill="none" stroke={colorFor(s.group)} stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round" />
     ))}
   </svg>
   ))}
   <div class="legend-regions">
-    {series.map((s) => (<span class="lr"><span class="lr-dot" style={`background:${colorFor(s.group)}`}></span>{s.group}{rate(s) && <em class="lr-rate">{rate(s)}</em>}</span>))}
+    {series.map((s) => (<span class="lr"><span class="lr-dot" style={`background:${colorFor(s.group)}`}></span>{s.group} <span class="lr-n">({s.n})</span>{rate(s) && <em class="lr-rate">{rate(s)}</em>}</span>))}
   </div>
   <p class="tc-note">
-    {unbalanced.length < series.length
-      ? `Each line averages the same countries in every period${unbalanced.length ? ` (${unbalanced.join(', ')}: all countries — too few in every period)` : ''}.`
-      : 'Each line averages the countries with a reading in that period; who is covered changes over time.'}
-    {series.some((s) => s.trend?.clear) && ' Dashed: trend (Theil–Sen), shown where the direction is consistent.'}
-    {proj != null && xs.some((x) => x >= proj) && ` From ${proj}: IMF projections (dashed).`}
-    {tiny.length > 0 && ` Groups of fewer than 3 countries (${tiny.join(', ')}) are not drawn.`}
+    Each line is the median of the same countries in every period (number in brackets).
+    {dropped.length > 0 && ` Not drawn — fewer than ${MIN_PANEL} countries measured every time: ${dropped.join(', ')}.`}
+    {anySmooth && ' Thick curve: smoothed (LOWESS) over the yearly line.'}
+    {anyTrend && ' Dashed: trend, shown only where the direction is steady.'}
   </p>
 </div>
+) : (
+<p class="tc-note">Too few countries were measured in every period to draw regional trends.</p>
+)}

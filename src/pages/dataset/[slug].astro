@@ -7,6 +7,7 @@ import MoversTable from '@components/MoversTable.astro';
 import RankTable from '@components/RankTable.astro';
 import GroupChart from '@components/GroupChart.astro';
 import TrendChart from '@components/TrendChart.astro';
+import { hasRegionalPanel } from '@lib/trend';
 import BivariateMap from '@components/BivariateMap.astro';
 import ChartActions from '@components/ChartActions.astro';
 import { datasets, getDataset } from '@data/datasets';
@@ -166,11 +167,11 @@ const breadcrumbLd = {
     </div>
   </section>
 
-  {periodCount > 2 && (
+  {periodCount > 2 && !ds.latestPerCountry && hasRegionalPanel(ds.data) && (
     <section class="section" style="padding-top:0" id="trend">
       <div class="container">
         <h2>Trend over time</h2>
-        <p class="sub">Group average by period, {[...new Set(ds.data.map((o) => o.period))].sort()[0]}–{[...new Set(ds.data.map((o) => o.period))].sort().at(-1)}.</p>
+        <p class="sub">Regional medians, {String([...new Set(ds.data.map((o) => o.period))].sort()[0]).slice(0, 4)}–{String([...new Set(ds.data.map((o) => o.period))].sort().at(-1)).slice(-4)}.</p>
         <TrendChart data={ds.data} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode === 'pct' ? 'pct' : 'pp'} projectedFrom={ds.projectedFrom} />
         <ChartActions name={`bulldozer-${ds.slug}-trend`} svg="#trend svg" hash="trend" />
       </div>

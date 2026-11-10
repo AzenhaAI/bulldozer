@@ -55,7 +55,8 @@ async function main() {
       if (!(col in r) || r[col] === '') continue;
       const iso = iso20(r.country);
       if (!iso) { if (iso !== null) unknown.add(r.country); continue; }
-      out.push(point(iso, r.country, '2020', r[col]));
+      // 2020 only: the 2018 figures come from crosstabs without sample sizes.
+      out.push({ ...point(iso, r.country, '2020', r[col]), ...(r[col + '_moe'] ? { moe: round(Number(r[col + '_moe']), 1) } : {}) });
     }
     return out;
   };

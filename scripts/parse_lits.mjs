@@ -61,7 +61,8 @@ async function main() {
       const iso = ISO[r.country.toLowerCase()];
       if (!iso) { unknown.add(r.country); continue; }
       data.push({ entity: countryNames[iso]?.common || r.country, group: region.get(iso) || 'Europe & Central Asia',
-        period: r.wave, value: round(Number(r[q.col]), 2), iso });
+        period: r.wave, value: round(Number(r[q.col]), 2), iso,
+        ...(r[q.col + '_moe'] ? { moe: round(Number(r[q.col + '_moe']), 2) } : {}) }); // 95% margin, scripts/tools/moe.py
     }
     await writeDataset('survey', q.slug, {
       title: q.title, summary: q.summary, unit: q.unit, valueLabel: q.valueLabel, changeMode: 'pp',

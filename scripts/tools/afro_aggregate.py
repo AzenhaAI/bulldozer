@@ -24,6 +24,7 @@ Merged files are downloaded from afrobarometer.org (free, no account):
 """
 import re
 import sys
+from moe import share_moe
 import pyreadstat
 
 NA = r'refus|don.?t know|missing|not asked|did not understand|not applicable|no further reply|haven.?t heard'
@@ -104,13 +105,14 @@ def main(path):
         w = g[weight]
         for key in SPEC:
             if key not in found:
-                row[key] = ''
+                row[key] = row[key + '_moe'] = ''
                 continue
             q, yes, ok = found[key]
             valid = g[q].isin(ok)
             row[key] = '' if valid.sum() < MIN_N else f"{100 * w[valid & g[q].isin(yes)].sum() / w[valid].sum():.6f}"
+            row[key + '_moe'] = share_moe(row[key], w[valid]) if row[key] else ''
         out.append(row)
-    keys = ['country', 'respondents', 'year'] + list(SPEC)
+    keys = ['country', 'respondents', 'year'] + list(SPEC) + [k + '_moe' for k in SPEC]
     print(','.join(keys))
     for r in out:
         print(','.join('"%s"' % r[k] if k == 'country' else str(r[k]) for k in keys))
