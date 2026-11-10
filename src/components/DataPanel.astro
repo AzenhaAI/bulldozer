@@ -83,6 +83,7 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
       <button type="button" id="sort-dir" class="ghost-btn" style="margin-left:auto">Highest first</button>
       <button type="button" id="show-all" class="ghost-btn" style="margin-left:0">Show all</button>
     </div>
+    <div class="dp-dist" id="dp-dist" hidden></div>
     <div class="bars" id="bar-target"></div>
   </div>
   <div id="view-table" class="view" hidden><table class="data" id="table-target"></table></div>
@@ -185,6 +186,9 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
   }
 
   function visibleRows(rows) {
+    // A–Z is for finding a country, so it lists every one (a top-7 cut by
+    // alphabet would mean nothing); the rank by value stays on each row.
+    if (state.sortDir === 'name') return [...rows].sort((a, b) => a.entity.localeCompare(b.entity));
     const ordered = state.sortDir === 'asc' ? [...rows].reverse() : rows; // rows is desc by value
     if (state.query) return ordered;            // search overrides the limit
     if (state.showAll) return ordered;
@@ -205,21 +209,63 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
     el('pinned-chips').innerHTML = (state.pinned.size ? '<span class="chips-lbl">★ My countries:</span>' : '') +
       [...state.pinned].map((n) =>
         `<span class="chip">${n}<button data-rm="${n}" aria-label="remove">×</button></span>`).join('');
-    el('sort-dir').textContent = state.sortDir === 'asc' ? 'Lowest first' : 'Highest first';
+    el('sort-dir').textContent = { desc: '↓ Highest first', asc: '↑ Lowest first', name: 'A–Z' }[state.sortDir];
+    el('sort-dir').setAttribute('aria-label', `Sort: ${{ desc: 'highest first', asc: 'lowest first', name: 'by country name' }[state.sortDir]} — tap to change`);
     el('show-all').textContent = state.showAll ? 'Show top 7' : `Show all ${rows.length}`;
+    el('show-all').hidden = state.sortDir === 'name';
     el('bar-controls').style.display = state.query ? 'none' : 'flex';
+  }
+
+  // Median and the middle half of countries, from every country in the period
+  // (not just the rows on screen). Median and quartiles rather than mean and SD:
+  // survey shares are often split into two camps, where a mean describes no one.
+  function distStats(rows) {
+    const v = rows.map((r) => r.value).sort((a, b) => a - b), n = v.length;
+    if (n < 5) return null;
+    const q = (p) => { const i = (n - 1) * p, lo = Math.floor(i); return v[lo] + (v[Math.ceil(i)] - v[lo]) * (i - lo); };
+    const mean = v.reduce((a, b) => a + b, 0) / n;
+    const sd = Math.sqrt(v.reduce((a, b) => a + (b - mean) ** 2, 0) / (n - 1));
+    return { n, min: v[0], max: v[n - 1], q1: q(0.25), med: q(0.5), q3: q(0.75), mean, sd, v };
+  }
+
+  function renderDist(st, unit, label) {
+    const box = el('dp-dist');
+    if (!st || state.query) { box.hidden = true; return; }
+    const lo = Math.min(0, st.min), hi = st.max > 0 ? st.max : 1, span = (hi - lo) || 1;
+    const X = (v) => (8 + (v - lo) / span * 284).toFixed(1);
+    // Many countries would melt into one blob: smaller, fainter dots on more rows.
+    const lanes = st.n > 60 ? 5 : 3, r = st.n > 60 ? 2.1 : 3.4, op = st.n > 60 ? 0.55 : 0.85;
+    const dots = st.v.map((v, i) => `<circle cx="${X(v)}" cy="${(18 + ((i % lanes) - (lanes - 1) / 2) * (st.n > 60 ? 4 : 5)).toFixed(1)}" r="${r}" fill-opacity="${op}" />`).join('');
+    const f = (v) => fmtNum(v) + unit;
+    box.innerHTML =
+      `<p><b>Median ${f(st.med)}</b> · middle half of countries ${f(st.q1)}–${f(st.q3)} · ${st.n} countries</p>` +
+      `<svg viewBox="0 0 300 44" role="img" aria-label="Each country as a dot from ${f(st.min)} to ${f(st.max)}; median ${f(st.med)}">` +
+      `<rect class="dd-band" x="${X(st.q1)}" y="6" width="${(X(st.q3) - X(st.q1)).toFixed(1)}" height="24" rx="4"/>` +
+      `<line class="dd-med" x1="${X(st.med)}" x2="${X(st.med)}" y1="4" y2="32"/><g class="dd-dots">${dots}</g>` +
+      `<text x="8" y="42">${f(lo)}</text><text x="292" y="42" text-anchor="end">${f(hi)}</text></svg>` +
+      `<p class="dd-legend">Each dot is a country · dashed line: median · shaded: middle half</p>` +
+      `<details><summary>Details</summary><p>Average of the ${st.n} countries ${f(st.mean)} — each country counts once, whatever its population, so it is not an average of ${label}. Spread (standard deviation) ${fmtNum(st.sd)}${unit ? ' pp' : ''} · range ${f(st.min)}–${f(st.max)}.</p></details>`;
+    box.hidden = false;
   }
 
   function renderBars(rows) {
     const m = meta(); const unit = m.unit.includes('%') ? '%' : '';
     renderBarControls(rows);
+    const st = distStats(rows);
+    renderDist(st, unit, m.kind === 'survey' ? 'all the people asked' : 'everyone in those countries');
     const top = visibleRows(rows); const vals = top.map((r) => r.value);
     const base = Math.min(0, ...vals), max = Math.max(1, ...vals), span = (max - base) || 1;
+    const pos = (v) => Math.max(0, Math.min(100, (v - base) / span * 100));
+    const guides = st && !state.query
+      ? `<span class="bar-band" style="left:${pos(st.q1)}%;width:${Math.max(0, pos(st.q3) - pos(st.q1))}%"></span><span class="bar-med" style="left:${pos(st.med)}%"></span>`
+      : '';
+    const rankOf = new Map([...rows].sort((a, b) => b.value - a.value).map((r, i) => [r.entity, i + 1]));
     el('bar-target').innerHTML = top.map((r) => {
-      const w = Math.max(0, Math.min(100, (r.value - base) / span * 100));
+      const w = pos(r.value);
       const cls = r.change == null ? 'flat' : moveClass(r.change);
       const chg = r.change == null ? '' : `<em class="${cls}">${fmtChange(r.change, m.changeMode)}</em>`;
-      return `<div class="bar-row"><span>${flag(r.iso)}${r.entity}</span><span class="bar-track"><span class="bar-fill move-${cls}" style="width:${w}%"></span></span><span class="bar-val">${fmtNum(r.value)}${unit}${chg}</span></div>`;
+      const rk = state.sortDir === 'name' ? `<i class="bar-rank">#${rankOf.get(r.entity)}</i>` : '';
+      return `<div class="bar-row"><span class="bar-name" title="${r.entity}">${rk}${flag(r.iso)}${r.entity}</span><span class="bar-track">${guides}<span class="bar-fill move-${cls}" style="width:${w}%"></span></span><span class="bar-val">${fmtNum(r.value)}${unit}${chg}</span></div>`;
     }).join('');
   }
 
@@ -366,7 +412,7 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
   el('add-country').addEventListener('change', (e) => { if (e.target.value) { state.pinned.add(e.target.value); saveMy(); render(); } });
   el('pinned-chips').addEventListener('click', (e) => { const n = e.target.getAttribute('data-rm'); if (n) { state.pinned.delete(n); saveMy(); render(); } });
   el('show-all').addEventListener('click', () => { state.showAll = !state.showAll; render(); });
-  el('sort-dir').addEventListener('click', () => { state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc'; render(); });
+  el('sort-dir').addEventListener('click', () => { state.sortDir = { desc: 'asc', asc: 'name', name: 'desc' }[state.sortDir]; render(); });
   el('view-toggle').addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     state.view = b.dataset.view;

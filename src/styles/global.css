@@ -192,7 +192,23 @@ a:hover { text-decoration: underline; }
 .bars { display: flex; flex-direction: column; gap: 10px; }
 .bar-row { display: grid; grid-template-columns: 140px 1fr 64px; align-items: center; gap: 12px; font-size: 14px; }
 .bar-track { display: block; background: var(--bg-elev); border-radius: 6px; height: 12px; overflow: hidden; border: 1px solid var(--border); }
-.bar-fill { display: block; height: 100%; min-width: 4px; background: linear-gradient(90deg, var(--accent-2), var(--accent)); border-radius: 6px; }
+.bar-track { position: relative; }
+.bar-band { position: absolute; top: 0; bottom: 0; background: color-mix(in srgb, var(--text) 9%, transparent); pointer-events: none; }
+.bar-med { position: absolute; top: 0; bottom: 0; border-left: 1.5px dashed color-mix(in srgb, var(--text) 55%, transparent); z-index: 2; pointer-events: none; }
+.bar-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.bar-rank { font-style: normal; color: var(--text-dim); font-size: 11px; margin-right: 6px; }
+.dp-dist { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px 8px; margin: 4px 0 12px; max-width: 640px; }
+.dp-dist p { margin: 0; font-size: 13px; color: var(--text-dim); }
+.dp-dist p b { color: var(--text); }
+.dp-dist svg { display: block; width: 100%; max-width: 440px; height: auto; margin: 4px 0 0; }
+.dp-dist .dd-band { fill: color-mix(in srgb, var(--text) 8%, transparent); }
+.dp-dist .dd-med { stroke: var(--text); stroke-opacity: .7; stroke-dasharray: 3 3; }
+.dp-dist .dd-dots circle { fill: var(--accent); }
+.dp-dist text { fill: var(--text-dim); font-size: 9.5px; }
+.dp-dist .dd-legend { font-size: 11px; margin-top: 2px; }
+.dp-dist details { margin-top: 4px; font-size: 12px; color: var(--text-dim); }
+.dp-dist summary { cursor: pointer; color: var(--accent); }
+.bar-fill { position: relative; z-index: 1; display: block; height: 100%; min-width: 4px; background: linear-gradient(90deg, var(--accent-2), var(--accent)); border-radius: 6px; }
 /* movement colouring (Madeira dashboard style) */
 .bar-fill.move-up { background: linear-gradient(90deg, #15803d, var(--up)); }
 .bar-fill.move-down { background: linear-gradient(90deg, #b91c1c, var(--down)); }
