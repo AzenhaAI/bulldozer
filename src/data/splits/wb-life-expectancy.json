@@ -1,13 +1,16 @@
 {
   "meta": {
     "slug": "wb-life-expectancy",
-    "dims": [
-      "sex"
-    ],
+    "dims": {
+      "sex": [
+        "Women",
+        "Men"
+      ]
+    },
     "source": "World Bank Open Data (SP.DYN.LE00.FE.IN, SP.DYN.LE00.MA.IN)",
     "url": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN",
-    "parsedAt": "2026-11-09",
-    "note": "Female and male values for the same year as each country's headline figure."
+    "parsedAt": "2026-11-10",
+    "note": "Two groups’ values for the same year as each country’s headline figure."
   },
   "bySex": {
     "ABW": {

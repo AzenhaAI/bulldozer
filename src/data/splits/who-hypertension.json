@@ -1,13 +1,16 @@
 {
   "meta": {
     "slug": "who-hypertension",
-    "dims": [
-      "sex"
-    ],
+    "dims": {
+      "sex": [
+        "Women",
+        "Men"
+      ]
+    },
     "source": "WHO Global Health Observatory (data.who.int)",
     "url": "https://data.who.int/indicators/i/7DA4E68/608DE39",
-    "parsedAt": "2026-11-09",
-    "note": "Female and male values for the same year as each country's headline figure."
+    "parsedAt": "2026-11-10",
+    "note": "Two groups’ values for the same year as each country’s headline figure."
   },
   "bySex": {
     "AFG": {

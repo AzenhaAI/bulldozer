@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { buildCountryIndex, countrySlug, similarCountries } from '@lib/countryIndex';
-import { sexScaleSvg } from '@lib/sexScale';
+import { splitScaleSvg } from '@lib/splitScale';
 import { flagFor } from '@lib/flags';
 import { TOPICS, TOPIC_ORDER } from '@lib/topics';
 import isoAlpha2 from '@data/iso-alpha2.json';
@@ -28,7 +28,8 @@ const find = (slug: string) => c.items.find((i) => i.slug === slug);
 // projection shown with a bare year reads as a measured result. Same rule as
 // Ask AI: the current and the previous year are estimates.
 const thisYear = new Date().getUTCFullYear();
-const sexScale = (it: Parameters<typeof sexScaleSvg>[0]) => sexScaleSvg(it, fmt);
+const splitScales = (it: { slug: string; value: number; unit: string; splits?: import('@lib/countryIndex').Split[] }) =>
+  (it.splits ?? []).map((sp) => splitScaleSvg(it, sp, fmt)).join('');
 const when = (it: { slug: string; period: string }) => {
   const y = Number(String(it.period).match(/\d{4}/)?.[0] ?? 0);
   return it.slug.startsWith('imf-') && y >= thisYear - 1 ? `${it.period} est.` : it.period;
@@ -165,14 +166,21 @@ const jsonLd = {
                 <Fragment>
                 <tr>
                   <td><a href={`${base}/dataset/${it.slug}/`}>{it.title}</a></td>
-                  <td class="num">{fmt(it.value, it.unit)}{it.unit && !it.unit.includes('%') && <span class="ci-unit"> {it.unit}</span>}{it.sex && (
-                    <button type="button" class="ci-sex" aria-expanded="false" aria-controls={`sx-${it.slug}`} title="Show women and men on one scale"><span class="w">Women {fmt(it.sex.female, it.unit)}</span> · <span class="m">Men {fmt(it.sex.male, it.unit)}</span> <span class="ci-sex-caret" aria-hidden="true">▾</span></button>
+                  <td class="num">{fmt(it.value, it.unit)}{it.unit && !it.unit.includes('%') && <span class="ci-unit"> {it.unit}</span>}{it.splits && (
+                    <button type="button" class="ci-sex ci-sex-desk" aria-expanded="false" aria-controls={`sx-${it.slug}`} title="Show the groups on one scale">{it.splits.map((sp) => (
+                      <span class={`sl ${sp.dim}`}><span class="a">{sp.labels[0]} {fmt(sp.a, it.unit)}</span> · <span class="b">{sp.labels[1]} {fmt(sp.b, it.unit)}</span></span>
+                    ))}<span class="ci-sex-caret" aria-hidden="true">▾</span></button>
                   )}</td>
                   <td class="num" style="color:var(--text-dim)" title={it.better === 'low' ? 'Ranked from the highest value; lower is better here' : it.better === 'high' ? 'Ranked from the highest value; higher is better here' : 'Ranked from the highest value; not a judgement of good or bad'}>#{it.rank}/{it.total}</td>
                   <td class="num" style="color:var(--text-dim)" title={it.years > 1 ? `${it.years} readings` : 'Single reading, no trend yet'}>{it.years > 1 && it.first !== it.period ? `${it.first} → ${when(it)}` : it.years === 1 ? `${when(it)} only` : when(it)}</td>
+                  {it.splits && (
+                    <td class="ci-splits-td"><button type="button" class="ci-sex ci-sex-phone" aria-expanded="false" aria-controls={`sx-${it.slug}`} title="Show the groups on one scale">{it.splits.map((sp) => (
+                      <span class={`sl ${sp.dim}`}><span class="a">{sp.labels[0]} {fmt(sp.a, it.unit)}</span> · <span class="b">{sp.labels[1]} {fmt(sp.b, it.unit)}</span></span>
+                    ))}<span class="ci-sex-caret" aria-hidden="true">▾</span></button></td>
+                  )}
                 </tr>
-                {it.sex && (
-                  <tr class="ci-sex-panel" id={`sx-${it.slug}`} hidden><td colspan="4"><Fragment set:html={sexScale(it)} /></td></tr>
+                {it.splits && (
+                  <tr class="ci-sex-panel" id={`sx-${it.slug}`} hidden><td colspan="4"><Fragment set:html={splitScales(it)} /></td></tr>
                 )}
                 </Fragment>
               ))}

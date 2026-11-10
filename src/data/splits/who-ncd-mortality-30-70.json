@@ -1,13 +1,16 @@
 {
   "meta": {
     "slug": "who-ncd-mortality-30-70",
-    "dims": [
-      "sex"
-    ],
+    "dims": {
+      "sex": [
+        "Women",
+        "Men"
+      ]
+    },
     "source": "WHO Global Health Observatory (data.who.int)",
     "url": "https://data.who.int/indicators/i/C540135/1F96863",
-    "parsedAt": "2026-11-09",
-    "note": "Female and male values for the same year as each country's headline figure."
+    "parsedAt": "2026-11-10",
+    "note": "Two groups’ values for the same year as each country’s headline figure."
   },
   "bySex": {
     "AFG": {

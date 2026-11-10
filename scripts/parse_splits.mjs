@@ -1,11 +1,12 @@
 /**
- * Women and men, beside the both-sexes figure we already publish.
+ * Splits beside the headline figure we already publish: women and men, younger
+ * and older, poorer and richer.
  *
- *   node scripts/parse_sex_splits.mjs
+ *   node scripts/parse_splits.mjs
  *
- * For a dataset whose upstream also publishes the series by sex, this writes
- * src/data/splits/<slug>.json with, per country, the female and male values
- * for the SAME year as that country's headline figure in the dataset. A split
+ * For a dataset whose upstream also publishes the series by sex, age group or
+ * income group, this writes src/data/splits/<slug>.json with, per country, the
+ * two groups' values for the SAME year as that country's headline figure. A split
  * from another year beside the headline would read as a contradiction
  * ("82.8 overall, but 84.5 and 81.2 — which year?"), so a country whose
  * upstream has no split for that exact year gets none.
@@ -35,9 +36,9 @@ const put = (m, iso, year, sex, v) => {
   m.set(k, e);
 };
 
-async function worldBank(femaleCode, maleCode) {
+async function worldBank(femaleCode, maleCode, names = ['female', 'male']) {
   const m = new Map();
-  for (const [code, sex] of [[femaleCode, 'female'], [maleCode, 'male']]) {
+  for (const [code, sex] of [[femaleCode, names[0]], [maleCode, names[1]]]) {
     const res = await fetch(`https://api.worldbank.org/v2/country/all/indicator/${code}?format=json&per_page=20000&date=1990:2025`);
     const j = await res.json();
     if (!Array.isArray(j) || !j[1]?.length) throw new Error(`World Bank ${code}: empty`);
@@ -110,6 +111,15 @@ async function gho(code) {
 // ── which datasets get a split, and from where ──────────────────────────────
 
 const TARGETS = [
+  // Global Findex publishes every headline by sex, age and income, same survey and year.
+  { slug: 'wb-account-ownership', fetch: () => worldBank('FX.OWN.TOTL.FE.ZS', 'FX.OWN.TOTL.MA.ZS'),
+    age: () => worldBank('FX.OWN.TOTL.YG.ZS', 'FX.OWN.TOTL.OL.ZS', ['a', 'b']), ageLabels: ['15–24', '25+'],
+    income: () => worldBank('FX.OWN.TOTL.40.ZS', 'FX.OWN.TOTL.60.ZS', ['a', 'b']), incomeLabels: ['Poorest 40%', 'Richest 60%'],
+    source: 'World Bank Global Findex (FX.OWN.TOTL.*)', url: 'https://www.worldbank.org/en/publication/globalfindex' },
+  // Poverty and Inequality Platform: the bottom 40%'s mean beside everyone's, same survey.
+  { slug: 'wb-average-income', fetch: null,
+    income: () => worldBank('SI.SPR.PC40', 'SI.SPR.PCAP', ['a', 'b']), incomeLabels: ['Poorest 40%', 'Everyone'],
+    source: 'World Bank Poverty and Inequality Platform (SI.SPR.PC40)', url: 'https://pip.worldbank.org/' },
   { slug: 'wb-life-expectancy', fetch: () => worldBank('SP.DYN.LE00.FE.IN', 'SP.DYN.LE00.MA.IN'),
     source: 'World Bank Open Data (SP.DYN.LE00.FE.IN, SP.DYN.LE00.MA.IN)', url: 'https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN' },
   { slug: 'who-tobacco', fetch: () => dataWho('M_Est_tob_curr_std'), source: 'WHO Global Health Observatory (data.who.int)', url: 'https://data.who.int/indicators/i/847662C/75DDA77' },
@@ -130,21 +140,40 @@ async function one(t) {
     const cur = head.get(r.iso);
     if (!cur || String(r.period) > cur.period) head.set(r.iso, { period: String(r.period) });
   }
-  const bySex = await t.fetch();
-  const out = {};
-  for (const [iso, { period }] of [...head.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
-    const e = bySex.get(`${iso}|${period}`);
-    if (e && e.female != null && e.male != null) out[iso] = { period, female: round(e.female, 2), male: round(e.male, 2) };
-  }
-  const n = Object.keys(out).length;
+  const isos = [...head.keys()].sort();
+  const pick = (m, keys) => {
+    const out = {};
+    for (const iso of isos) {
+      const { period } = head.get(iso);
+      const e = m.get(`${iso}|${period}`);
+      if (e && keys.every((k) => e[k] != null)) out[iso] = { period, ...Object.fromEntries(keys.map((k) => [k, round(e[k], 2)])) };
+    }
+    return out;
+  };
+  const file = { meta: { slug: t.slug, dims: {}, source: t.source, url: t.url, parsedAt: PARSED,
+    note: 'Two groups’ values for the same year as each country’s headline figure.' } };
+  const report = [];
   // A split for under half the countries means the upstream changed shape;
   // keep what we have rather than publish a thinned file.
-  if (n < head.size / 2) throw new Error(`only ${n} of ${head.size} countries matched by year`);
+  const check = (n, what) => { if (n < head.size / 2) throw new Error(`${what}: only ${n} of ${head.size} countries matched by year`); report.push(`${what} ${n}`); };
+  if (t.fetch) {
+    file.bySex = pick(await t.fetch(), ['female', 'male']);
+    check(Object.keys(file.bySex).length, 'sex');
+    file.meta.dims.sex = ['Women', 'Men'];
+  }
+  if (t.age) {
+    file.byAge = pick(await t.age(), ['a', 'b']);
+    check(Object.keys(file.byAge).length, 'age');
+    file.meta.dims.age = t.ageLabels;
+  }
+  if (t.income) {
+    file.byIncome = pick(await t.income(), ['a', 'b']);
+    check(Object.keys(file.byIncome).length, 'income');
+    file.meta.dims.income = t.incomeLabels;
+  }
   await mkdir(OUT, { recursive: true });
-  const meta = { slug: t.slug, dims: ['sex'], source: t.source, url: t.url, parsedAt: PARSED,
-    note: 'Female and male values for the same year as each country\'s headline figure.' };
-  await writeFile(join(OUT, `${t.slug}.json`), JSON.stringify({ meta, bySex: out }, null, 2) + '\n');
-  console.log(`  ✓ ${t.slug}: women/men for ${n} of ${head.size} countries`);
+  await writeFile(join(OUT, `${t.slug}.json`), JSON.stringify(file, null, 2) + '\n');
+  console.log(`  ✓ ${t.slug}: ${report.join(', ')} of ${head.size} countries`);
 }
 
 for (const t of TARGETS) {

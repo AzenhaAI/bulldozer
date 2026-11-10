@@ -137,6 +137,15 @@ async function main() {
     title: 'Bank Account Ownership', valueLabel: 'Adults (15+) with a financial account', unit: '%', changeMode: 'pp', topic: 'economy',
     summary: 'Share of adults (15+) with an account at a financial institution or mobile-money provider. World Bank Global Findex.', ...WB,
   }, ctx);
+  // Average income from household surveys (Poverty and Inequality Platform).
+  // Surveys run in different years per country, so each country keeps its own
+  // latest year and profiles rank those against each other (latestPerCountry);
+  // the poorest-40% figure for the same survey is a split (parse_sex_splits).
+  await emit('wb-average-income', 'SI.SPR.PCAP', {
+    title: 'Average Income per Person', valueLabel: 'Mean income or consumption per person per day (2021 PPP $)', unit: '$ per day (PPP)', changeMode: 'pct', topic: 'economy',
+    summary: 'Mean household income or consumption per person per day from national household surveys, in 2021 international dollars (adjusted for prices). Each country’s latest survey, so years differ. World Bank Poverty and Inequality Platform.',
+    latestPerCountry: true, ...WB,
+  }, ctx, 2025);
   await emit('wb-bank-branches', 'FB.CBK.BRCH.P5', {
     title: 'Bank Branches', valueLabel: 'Commercial bank branches per 100,000 adults', unit: 'per 100k', changeMode: 'pct', topic: 'economy',
     summary: 'Commercial bank branches per 100,000 adults — a measure of physical financial access. World Bank.', ...WB,

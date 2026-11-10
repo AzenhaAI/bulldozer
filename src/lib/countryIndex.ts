@@ -10,20 +10,46 @@ import countryNames from '@data/country-names.json';
 
 const NAMES: Record<string, { common: string; official: string }> = countryNames;
 
-// Women and men beside the headline, where the upstream publishes the series by
-// sex (scripts/parse_sex_splits.mjs). Shown only when the split is for the same
-// year as the headline, so the three numbers never disagree about when.
-type SexSplit = { meta: { slug: string }; bySex: Record<string, { period: string; female: number; male: number }> };
-const SPLITS = Object.values(import.meta.glob('../data/splits/*.json', { eager: true, import: 'default' })) as SexSplit[];
-const SEX = new Map(SPLITS.map((s) => [s.meta.slug, s.bySex]));
+// Splits beside the headline — women and men, younger and older, poorer and
+// richer — where the upstream publishes them (scripts/parse_splits.mjs). Shown
+// only when the split is for the same year as the headline, so the numbers
+// never disagree about when.
+type Pair = { period: string; a: number; b: number };
+type SplitFile = {
+  meta: { slug: string; dims?: Record<string, [string, string]> };
+  bySex?: Record<string, { period: string; female: number; male: number }>;
+  byAge?: Record<string, Pair>;
+  byIncome?: Record<string, Pair>;
+};
+export type SplitDim = 'sex' | 'age' | 'income';
+export interface Split { dim: SplitDim; labels: [string, string]; a: number; b: number }
+const SPLIT_FILES = Object.values(import.meta.glob('../data/splits/*.json', { eager: true, import: 'default' })) as SplitFile[];
+const SPLIT = new Map(SPLIT_FILES.map((f) => [f.meta.slug, f]));
 
-/** Lowest and highest value of either sex across every country in a split —
- *  the axis the profile's women/men scale is drawn on. */
-export function sexRange(slug: string): { min: number; max: number; n: number } | null {
-  const by = SEX.get(slug);
-  if (!by) return null;
-  const vals = Object.values(by).flatMap((r) => [r.female, r.male]);
-  return vals.length ? { min: Math.min(...vals), max: Math.max(...vals), n: Object.keys(by).length } : null;
+function pairs(f: SplitFile, dim: SplitDim): Record<string, Pair> {
+  if (dim === 'sex') return Object.fromEntries(Object.entries(f.bySex ?? {}).map(([k, v]) => [k, { period: v.period, a: v.female, b: v.male }]));
+  return (dim === 'age' ? f.byAge : f.byIncome) ?? {};
+}
+
+function splitsFor(slug: string, iso: string, period: string): Split[] {
+  const f = SPLIT.get(slug);
+  if (!f) return [];
+  const out: Split[] = [];
+  for (const dim of ['sex', 'age', 'income'] as SplitDim[]) {
+    const p = pairs(f, dim)[iso];
+    if (p && p.period === period) out.push({ dim, labels: f.meta.dims?.[dim] ?? (dim === 'sex' ? ['Women', 'Men'] : ['A', 'B']), a: p.a, b: p.b });
+  }
+  return out;
+}
+
+/** Lowest and highest value of either group across every country in a split —
+ *  the axis the profile's scale is drawn on. */
+export function splitRange(slug: string, dim: SplitDim): { min: number; max: number; n: number } | null {
+  const f = SPLIT.get(slug);
+  if (!f) return null;
+  const rows = Object.values(pairs(f, dim));
+  const vals = rows.flatMap((r) => [r.a, r.b]);
+  return vals.length ? { min: Math.min(...vals), max: Math.max(...vals), n: rows.length } : null;
 }
 
 export interface CountryItem {
@@ -44,6 +70,8 @@ export interface CountryItem {
   better?: 'high' | 'low';
   /** Women and men for the same period, when the source publishes them. */
   sex?: { female: number; male: number };
+  /** Every split for the same period: sex, age group, income group. */
+  splits?: Split[];
 }
 
 export interface CountryProfile {
@@ -76,7 +104,14 @@ export function buildCountryIndex(): CountryProfile[] {
     const replacedIn = ds.supersededBy ? covered.get(ds.supersededBy) : undefined;
     const periods = [...new Set(ds.data.map((o) => o.period))].sort();
     const period = periods[periods.length - 1];
-    const rows = ds.data.filter((o) => o.period === period && o.iso);
+    // Usually one year for everyone; for latestPerCountry series, each country's
+    // newest reading from the last ten years, so a 2023 survey and a 2024 one
+    // are ranked together rather than the 2024 handful alone.
+    const rows = ds.latestPerCountry
+      ? [...ds.data.filter((o) => o.iso && Number(String(o.period).slice(0, 4)) >= Number(String(period).slice(0, 4)) - 10)
+          .reduce((m, o) => (!m.has(o.iso!) || String(o.period) > String(m.get(o.iso!)!.period) ? m.set(o.iso!, o) : m), new Map<string, typeof ds.data[number]>())
+          .values()]
+      : ds.data.filter((o) => o.period === period && o.iso);
     const ranked = [...rows].sort((a, b) => b.value - a.value);
     const total = ranked.length;
     const own = new Map<string, Set<string>>();
@@ -91,10 +126,11 @@ export function buildCountryIndex(): CountryProfile[] {
       votes.set(o.entity, (votes.get(o.entity) ?? 0) + 1);
       byIso[iso].items.push({
         slug: ds.slug, title: ds.title, kind: ds.kind, topic: ds.topic, unit: ds.unit,
-        value: o.value, period, rank: i + 1, total,
+        value: o.value, period: ds.latestPerCountry ? String(o.period) : period, rank: i + 1, total,
         first: [...own.get(iso)!].sort()[0], years: own.get(iso)!.size,
         ...(ds.better ? { better: ds.better } : {}),
-        ...((sx) => (sx && sx.period === period ? { sex: { female: sx.female, male: sx.male } } : {}))(SEX.get(ds.slug)?.[iso]),
+        ...((sp) => (sp.length ? { splits: sp, ...(sp[0].dim === 'sex' ? { sex: { female: sp[0].a, male: sp[0].b } } : {}) } : {}))(
+          splitsFor(ds.slug, iso, ds.latestPerCountry ? String(o.period) : period)),
       });
     });
   }

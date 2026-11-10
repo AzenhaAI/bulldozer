@@ -41,6 +41,9 @@ export interface DatasetMeta {
   method?: string;
   /** 'high' or 'low' when one direction is plainly better; absent when neutral. */
   better?: 'high' | 'low';
+  /** Countries are measured in different years (household surveys): profiles
+   *  rank each country's latest reading against the others', not one year's. */
+  latestPerCountry?: boolean;
 }
 
 export interface Dataset extends DatasetMeta {

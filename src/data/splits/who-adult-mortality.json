@@ -1,13 +1,16 @@
 {
   "meta": {
     "slug": "who-adult-mortality",
-    "dims": [
-      "sex"
-    ],
+    "dims": {
+      "sex": [
+        "Women",
+        "Men"
+      ]
+    },
     "source": "WHO Global Health Observatory",
     "url": "https://www.who.int/data/gho",
-    "parsedAt": "2026-11-09",
-    "note": "Female and male values for the same year as each country's headline figure."
+    "parsedAt": "2026-11-10",
+    "note": "Two groups’ values for the same year as each country’s headline figure."
   },
   "bySex": {
     "AFG": {
