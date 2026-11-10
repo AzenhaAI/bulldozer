@@ -141,7 +141,7 @@ const jsonLd = {
         <p style="display:flex; gap:10px; flex-wrap:wrap">
           {mkIndex && <a class="ghost-btn" style="margin:0; text-decoration:none" href={`/alfacat/ticker/${mkIndex.symbol}/`}>📈 {mkIndex.name}{mkIndex.chgYTD != null ? ` · ${mkIndex.chgYTD > 0 ? '+' : ''}${mkIndex.chgYTD}% this year` : ''}</a>}
           {mkFx && <a class="ghost-btn" style="margin:0; text-decoration:none" href={`/alfacat/ticker/${mkFx.symbol}/`}>💱 {mkFx.symbol.replace(/^(...)(...)$/, '$1/$2')}</a>}
-          {(mk.top ?? []).map((t: any) => <a class="ghost-btn" style="margin:0; text-decoration:none" href={`/alfacat/ticker/${t.symbol}/`}>{t.name}</a>)}
+          {(mk.top ?? []).map((t: any) => <a class="ghost-btn" style="margin:0; text-decoration:none" href={`/alfacat/ticker/${t.symbol.replace(/\./g, "_")}/`}>{t.name}</a>)}
           {mk.screener && <a class="ghost-btn" style="margin:0; text-decoration:none" href={`/alfacat/${mk.screener}`}>All {mk.listings} listed companies →</a>}
         </p>
       </div>
