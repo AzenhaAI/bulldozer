@@ -116,6 +116,10 @@ export function buildCountryIndex(): CountryProfile[] {
     const total = ranked.length;
     const own = new Map<string, Set<string>>();
     for (const o of ds.data) if (o.iso) (own.get(o.iso) ?? own.set(o.iso, new Set()).get(o.iso)!).add(o.period);
+    // Equal values share a rank (1 + the number strictly higher), so sixteen
+    // countries at 0% are not spread from #149 to #164 by sort order.
+    const tieRank: number[] = [];
+    ranked.forEach((o, i) => { tieRank[i] = i > 0 && ranked[i - 1].value === o.value ? tieRank[i - 1] : i + 1; });
     ranked.forEach((o, i) => {
       const iso = o.iso!;
       // One number per question: where a fresher series has this country, the
@@ -126,7 +130,7 @@ export function buildCountryIndex(): CountryProfile[] {
       votes.set(o.entity, (votes.get(o.entity) ?? 0) + 1);
       byIso[iso].items.push({
         slug: ds.slug, title: ds.title, kind: ds.kind, topic: ds.topic, unit: ds.unit,
-        value: o.value, period: ds.latestPerCountry ? String(o.period) : period, rank: i + 1, total,
+        value: o.value, period: ds.latestPerCountry ? String(o.period) : period, rank: tieRank[i], total,
         first: [...own.get(iso)!].sort()[0], years: own.get(iso)!.size,
         ...(ds.better ? { better: ds.better } : {}),
         ...((sp) => (sp.length ? { splits: sp, ...(sp[0].dim === 'sex' ? { sex: { female: sp[0].a, male: sp[0].b } } : {}) } : {}))(
