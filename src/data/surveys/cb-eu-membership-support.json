@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "title": "Support for EU Membership (S. Caucasus)",
+    "valueLabel": "Share who support joining the EU",
+    "unit": "%",
+    "changeMode": "pp",
+    "topic": "attitudes",
+    "method": "Weighted by WTIND. Share answering “trust” among distrust, neither and trust; don’t know and refused are left out of the base.",
+    "summary": "Share who support their country joining the European Union (asked from 2011). Caucasus Barometer 2008–2024 — Armenia and Georgia; Azerbaijan to 2013.",
+    "source": "Caucasus Barometer (CRRC)",
+    "license": "CRRC terms — public aggregates",
+    "url": "https://caucasusbarometer.org/en/downloads/",
+    "parsedAt": "2026-11-10",
+    "kind": "survey"
+  },
+  "data": [
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2011",
+      "value": 69.88,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2012",
+      "value": 62.6,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2013",
+      "value": 45.63,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2015",
+      "value": 44.48,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2017",
+      "value": 41.71,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 53.11,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 43.91,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2024",
+      "value": 48.46,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2011",
+      "value": 78.82,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2012",
+      "value": 81.91,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2013",
+      "value": 71.97,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2015",
+      "value": 49.07,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2017",
+      "value": 52.02,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 60.1,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 69.78,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2024",
+      "value": 74.48,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2011",
+      "value": 58.61,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2012",
+      "value": 57.82,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2013",
+      "value": 40.81,
+      "iso": "AZE"
+    }
+  ]
+}

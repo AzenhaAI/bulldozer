@@ -5,14 +5,50 @@
     "unit": "%",
     "changeMode": "pp",
     "topic": "attitudes",
-    "summary": "Share who somewhat or fully trust the European Union. Caucasus Barometer 2013 — Armenia, Azerbaijan, Georgia.",
+    "method": "Weighted by WTIND. Share answering “trust” among distrust, neither and trust; don’t know and refused are left out of the base.",
+    "summary": "Share who trust the European Union (CRRC’s “trust”, which merges somewhat and fully). Caucasus Barometer 2008–2024 — Armenia and Georgia; Azerbaijan to 2013.",
     "source": "Caucasus Barometer (CRRC)",
     "license": "CRRC terms — public aggregates",
-    "url": "https://caucasusbarometer.org/",
-    "parsedAt": "2026-06-28",
+    "url": "https://caucasusbarometer.org/en/downloads/",
+    "parsedAt": "2026-11-10",
     "kind": "survey"
   },
   "data": [
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2008",
+      "value": 45.44,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2009",
+      "value": 37.4,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2010",
+      "value": 44.12,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2011",
+      "value": 46.19,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2012",
+      "value": 37.08,
+      "iso": "ARM"
+    },
     {
       "entity": "Armenia",
       "group": "Europe",
@@ -21,11 +57,74 @@
       "iso": "ARM"
     },
     {
-      "entity": "Azerbaijan",
+      "entity": "Armenia",
       "group": "Europe",
-      "period": "2013",
-      "value": 29.47,
-      "iso": "AZE"
+      "period": "2015",
+      "value": 32.07,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2017",
+      "value": 36.86,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 43.52,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 57.17,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2024",
+      "value": 32.23,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2008",
+      "value": 64.26,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2009",
+      "value": 54.45,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2010",
+      "value": 56,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2011",
+      "value": 57.28,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2012",
+      "value": 55.19,
+      "iso": "GEO"
     },
     {
       "entity": "Georgia",
@@ -33,6 +132,83 @@
       "period": "2013",
       "value": 39.2,
       "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2015",
+      "value": 32.38,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2017",
+      "value": 37.99,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 41.99,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 45.93,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2024",
+      "value": 61.51,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2008",
+      "value": 44.99,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2009",
+      "value": 38.86,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2010",
+      "value": 27.59,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2011",
+      "value": 27.67,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2012",
+      "value": 39.32,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2013",
+      "value": 29.47,
+      "iso": "AZE"
     }
   ]
 }

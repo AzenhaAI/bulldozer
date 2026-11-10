@@ -32,7 +32,9 @@ export function methodologyFor(slug: string): Methodology {
   if (slug.startsWith('rlms-'))
     return { vintage: 'RLMS-HSE annual waves', method: 'RLMS-HSE longitudinal microdata (Russia only); weighted by inwgt; share/median by survey year.' };
   if (slug.startsWith('cb-'))
-    return { vintage: 'Caucasus Barometer 2013 (last wave incl. Azerbaijan)', method: 'CRRC; weighted by indwt; South Caucasus only (Armenia, Azerbaijan, Georgia).' };
+    return slug === 'cb-life-satisfaction'
+      ? { vintage: 'Caucasus Barometer 2013 (last wave incl. Azerbaijan)', method: 'CRRC; weighted; mean of the 1–10 item. Not extended: CRRC’s time-series files keep only three bands.' }
+      : { vintage: 'Caucasus Barometer 2008–2024 (Azerbaijan to 2013)', method: 'CRRC harmonised time-series files; weighted by WTIND; South Caucasus only (Armenia, Azerbaijan, Georgia).' };
   if (slug.startsWith('sdr2-'))
     return { vintage: 'Pooled harmonized waves (to ~2017)', method: 'SDR2 harmonization across 22 survey projects; weighted by T_WEIGHT_L2U; country mean of the harmonized target item.' };
   if (slug === 'wrp-resilience')

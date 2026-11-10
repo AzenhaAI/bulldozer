@@ -215,7 +215,7 @@ const barometers: GuideEntry[] = [
     licence: 'Free access to the CRRC data archive; no licence text published.',
     url: 'https://caucasusbarometer.org/en/',
     sourceUrl: ['https://caucasusbarometer.org/en/about', 'https://caucasusbarometer.org/en/downloads/'],
-    inBullDozer: { used: true, match: ['Caucasus Barometer'], prefixes: ['cb'], licenceId: 'caucasus-barometer', note: '2013 regional wave' },
+    inBullDozer: { used: true, match: ['Caucasus Barometer'], prefixes: ['cb'], licenceId: 'caucasus-barometer', note: 'time series 2008–2024 (Azerbaijan to 2013)' },
   },
   {
     id: 'asian-barometer', name: 'Asian Barometer Survey', acronym: 'ABS',

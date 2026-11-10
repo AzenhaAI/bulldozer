@@ -1,69 +1,67 @@
 /**
- * Caucasus Barometer (CRRC) — South Caucasus only (Armenia, Azerbaijan,
- * Georgia). We use the 2013 Regional wave because it is the last one that
- * still includes Azerbaijan. Clearly scoped as a regional set — the honest
- * vintage/scope note lives in src/data/methodology.ts (cb-).
- * Python pre-step (cb_agg.py) writes cb_agg.csv:
- *   iso3,name,trust_army,trust_police,trust_eu,life_satisfaction
- *   python3 scratchpad/cb_agg.py CB_2013_Regional_dataset.sav scratchpad/cb_agg.csv
+ * Caucasus Barometer (CRRC) — South Caucasus, 2008–2024: Armenia and Georgia
+ * every survey year, Azerbaijan 2008–2013 (the last years CRRC surveyed it).
+ *
  *   node scripts/parse_caucasus.mjs
+ *
+ * Reads data/raw/caucasus/cb_by_country_year.csv, written once per release by
+ * scripts/tools/cb_aggregate.py from CRRC's harmonised time-series files (free
+ * download). That rule reproduces the 2013 figures this site first published
+ * from the regional file, so the old points sit inside the new series unchanged.
+ *
+ * Life satisfaction stays the single 2013 reading: the time-series files keep
+ * it in three bands only, so the 1–10 mean cannot be extended and its dataset
+ * is left as it is rather than rewritten.
  */
 import { readFile } from 'node:fs/promises';
-import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { parseCsvObjects } from './lib/csv.mjs';
-import { gapminderRows, REGION_4, writeDataset } from './lib/datasets.mjs';
+import { gapminderRows, REGION_4, writeDataset, round } from './lib/datasets.mjs';
 
-const CSV = process.env.CB_CSV ||
-  '/private/tmp/claude-501/-Users-kirillshpara/025d8691-cfe3-48e0-a982-db40cbef8a62/scratchpad/cb_agg.csv';
-const GAP = join(homedir(), 'Library', 'Mobile Documents', 'com~apple~CloudDocs', 'BK', 'Opros', 'Inter_survey', 'Gapminder', 'ddf--entities--geo--country.csv');
-const PERIOD = '2013';
+const CSV = join('data', 'raw', 'caucasus', 'cb_by_country_year.csv');
 const COMMON = {
   source: 'Caucasus Barometer (CRRC)', license: 'CRRC terms — public aggregates',
-  url: 'https://caucasusbarometer.org/', parsedAt: new Date().toISOString().slice(0, 10),
+  url: 'https://caucasusbarometer.org/en/downloads/', parsedAt: new Date().toISOString().slice(0, 10),
 };
+const SCOPE = 'Caucasus Barometer 2008–2024 — Armenia and Georgia; Azerbaijan to 2013.';
+
+const DIMS = [
+  { col: 'trust_army', slug: 'cb-trust-army', topic: 'attitudes', title: 'Trust in the Army (S. Caucasus)', valueLabel: 'Share who trust the army', what: 'the army' },
+  { col: 'trust_police', slug: 'cb-trust-police', topic: 'attitudes', title: 'Trust in the Police (S. Caucasus)', valueLabel: 'Share who trust the police', what: 'the police' },
+  { col: 'trust_eu', slug: 'cb-trust-eu', topic: 'attitudes', title: 'Trust in the EU (S. Caucasus)', valueLabel: 'Share who trust the European Union', what: 'the European Union' },
+  { col: 'trust_parliament', slug: 'cb-trust-parliament', topic: 'governance', title: 'Trust in Parliament (S. Caucasus)', valueLabel: 'Share who trust parliament', what: 'parliament' },
+  { col: 'trust_president', slug: 'cb-trust-president', topic: 'governance', title: 'Trust in the President (S. Caucasus)', valueLabel: 'Share who trust the president', what: 'the president' },
+  { col: 'trust_courts', slug: 'cb-trust-courts', topic: 'governance', title: 'Trust in the Courts (S. Caucasus)', valueLabel: 'Share who trust the legal system', what: 'the court system' },
+  { col: 'trust_media', slug: 'cb-trust-media', topic: 'attitudes', title: 'Trust in the Media (S. Caucasus)', valueLabel: 'Share who trust the media', what: 'the media' },
+  { col: 'trust_religious', slug: 'cb-trust-religious', topic: 'attitudes', title: 'Trust in Religious Institutions (S. Caucasus)', valueLabel: 'Share who trust religious institutions', what: 'religious institutions' },
+  { col: 'eu_support', slug: 'cb-eu-membership-support', topic: 'attitudes', title: 'Support for EU Membership (S. Caucasus)', valueLabel: 'Share who support joining the EU', what: null,
+    summary: 'Share who support their country joining the European Union (asked from 2011).' },
+];
 
 async function region() {
   const m = new Map();
-  try {
-    for (const r of await gapminderRows()) {
-      const a3 = (r.iso3166_1_alpha3 || '').toUpperCase();
-      if (a3) m.set(a3, REGION_4[r.world_4region] || 'Other');
-    }
-  } catch {}
+  for (const r of await gapminderRows()) {
+    const a3 = (r.iso3166_1_alpha3 || '').toUpperCase();
+    if (a3) m.set(a3, REGION_4[r.world_4region] || 'Asia');
+  }
   return m;
 }
 
 async function main() {
-  let text;
-  try { text = await readFile(CSV, 'utf8'); } catch { console.warn('– Caucasus Barometer CSV missing (run Python pre-step); skipped.'); return; }
+  const rows = [...parseCsvObjects(await readFile(CSV, 'utf8'))]; // committed: missing is a real failure
   const reg = await region();
-  const rows = [...parseCsvObjects(text)];
-  const build = (col) => rows
-    .filter((r) => r[col] !== undefined && r[col] !== '')
-    .map((r) => ({ entity: r.name, group: reg.get(r.iso3.toUpperCase()) || 'Other', period: PERIOD, value: Number(r[col]), iso: r.iso3.toUpperCase() }))
-    .filter((o) => o.iso && Number.isFinite(o.value));
-
-  await writeDataset('survey', 'cb-trust-army', {
-    title: 'Trust in the Army (S. Caucasus)', valueLabel: 'Share who trust the army', unit: '%', changeMode: 'pp', topic: 'attitudes',
-    summary: 'Share who somewhat or fully trust the army. Caucasus Barometer 2013 — Armenia, Azerbaijan, Georgia.', ...COMMON,
-  }, build('trust_army'));
-
-  await writeDataset('survey', 'cb-trust-police', {
-    title: 'Trust in the Police (S. Caucasus)', valueLabel: 'Share who trust the police', unit: '%', changeMode: 'pp', topic: 'attitudes',
-    summary: 'Share who somewhat or fully trust the police. Caucasus Barometer 2013 — Armenia, Azerbaijan, Georgia.', ...COMMON,
-  }, build('trust_police'));
-
-  await writeDataset('survey', 'cb-trust-eu', {
-    title: 'Trust in the EU (S. Caucasus)', valueLabel: 'Share who trust the European Union', unit: '%', changeMode: 'pp', topic: 'attitudes',
-    summary: 'Share who somewhat or fully trust the European Union. Caucasus Barometer 2013 — Armenia, Azerbaijan, Georgia.', ...COMMON,
-  }, build('trust_eu'));
-
-  await writeDataset('survey', 'cb-life-satisfaction', {
-    title: 'Life Satisfaction (S. Caucasus)', valueLabel: 'Mean life satisfaction (1–10)', unit: 'index 1–10', changeMode: 'pp', topic: 'wellbeing',
-    summary: 'Mean overall life satisfaction on a 1–10 scale. Caucasus Barometer 2013 — Armenia, Azerbaijan, Georgia.', ...COMMON,
-  }, build('life_satisfaction'));
-
-  console.log('✓ Caucasus Barometer: 4 datasets written');
+  for (const d of DIMS) {
+    const data = rows
+      .filter((r) => r[d.col] !== undefined && r[d.col] !== '')
+      .map((r) => ({ entity: r.name, group: reg.get(r.iso3) || 'Asia', period: String(r.year), value: round(Number(r[d.col]), 2), iso: r.iso3 }))
+      .filter((o) => Number.isFinite(o.value));
+    const summary = d.summary || `Share who trust ${d.what} (CRRC’s “trust”, which merges somewhat and fully).`;
+    await writeDataset('survey', d.slug, {
+      title: d.title, valueLabel: d.valueLabel, unit: '%', changeMode: 'pp', topic: d.topic,
+      method: 'Weighted by WTIND. Share answering “trust” among distrust, neither and trust; don’t know and refused are left out of the base.',
+      summary: `${summary} ${SCOPE}`, ...COMMON,
+    }, data);
+  }
+  console.log(`✓ Caucasus Barometer: ${DIMS.length} datasets from ${rows.length} country-years`);
 }
-main();
+main().catch((e) => { console.error('✗ parse_caucasus failed:', e.message); process.exit(1); });
