@@ -28,6 +28,8 @@ const short = (p?: string) => {
   if (yr === cy) return m[1] || String(yr);
   return m[1] ? `${m[1]} ’${String(yr).slice(2)}` : String(yr);
 };
+// Source in the cell itself: phones show no hover titles.
+const srcShort = (s: string) => ({ Eurostat: 'ESTAT' } as Record<string, string>)[s] ?? s;
 const fmt = (v: number | null | undefined, dp = 1) =>
   v == null ? '' : Math.abs(v) >= 1000 ? Math.round(v).toLocaleString('en-US') : v.toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp });
 
@@ -36,15 +38,15 @@ const cols = [
   { k: 'gdp', g: 'GDP', l: '% on year ago', bad: (v: number) => v < 0 },
   { k: 'gdpQoqAnn', g: 'GDP', l: 'quarter*', bad: (v: number) => v < 0 },
   { k: 'gdpForecast', g: 'GDP', l: `${fy}†`, bad: (v: number) => v < 0 },
-  { k: 'cpi', g: 'Consumer prices', l: '% on year ago', bad: (v: number) => v < 0 },
+  { k: 'cpi', g: 'Consumer prices', l: '% on year ago', bad: () => false },
   { k: 'cpiForecast', g: 'Consumer prices', l: `${fy}†`, bad: () => false },
   { k: 'unemployment', g: 'Unemployment', l: '%', bad: () => false },
-  { k: 'currentAccount', g: 'Current account', l: `% of GDP, ${fy}†`, bad: (v: number) => v < 0 },
-  { k: 'budgetBalance', g: 'Budget balance', l: `% of GDP, ${fy}†`, bad: (v: number) => v < 0 },
+  { k: 'currentAccount', g: 'Current account', l: `% of GDP, ${fy}†`, bad: () => false },
+  { k: 'budgetBalance', g: 'Budget balance', l: `% of GDP, ${fy}†`, bad: () => false },
   { k: 'yield10y', g: '10-yr govt bonds', l: 'yield, %', bad: () => false },
   { k: 'yieldChg', g: '10-yr govt bonds', l: 'change on year, bp', bad: () => false },
   { k: 'fx', g: 'Currency', l: 'per $', bad: () => false },
-  { k: 'fxChg', g: 'Currency', l: '% change on year', bad: (v: number) => v < 0 },
+  { k: 'fxChg', g: 'Currency', l: '% change on year', bad: (v: number) => v <= -5 },
 ] as const;
 
 const rows = economy.rows.map((r: any) => {
@@ -60,7 +62,8 @@ const rows = economy.rows.map((r: any) => {
     yield10y: r.yield10y ? { value: r.yield10y.value, period: r.yield10y.period, source: r.yield10y.source } : null,
     yieldChg: r.yield10y?.changeBp == null ? null : { value: r.yield10y.changeBp, source: r.yield10y.source },
     fx: r.currency ? { value: r.currency.perUsd, period: r.currency.period, source: r.currency.source } : null,
-    fxChg: r.currency?.changeYoy == null ? null : { value: r.currency.changeYoy, source: r.currency.source },
+    // IMF rates are end-of-month: the change carries that month, unlike the ECB's.
+    fxChg: r.currency?.changeYoy == null ? null : { value: r.currency.changeYoy, source: r.currency.source, period: r.currency.source === 'IMF' ? r.currency.period : undefined },
   };
   return { iso: r.iso, name: nameOf.get(r.iso) ?? r.name, vals };
 });
@@ -94,8 +97,8 @@ const dpOf = (k: string, v: number) => (k === 'yieldChg' ? 0 : k === 'yield10y' 
                   if (!v || v.value == null) return <td class="ew-na" data-v="">—</td>;
                   return (
                     <td class:list={[{ 'ew-bad': c.bad(v.value) }]} data-v={v.value} title={`${v.source ?? ''}${v.period ? ', ' + v.period : ''}`}>
-                      <span class="ew-v">{c.k === 'yieldChg' && v.value > 0 ? '+' : ''}{fmt(v.value, dpOf(c.k, v.value))}</span>
-                      {v.period && <span class="ew-p">{short(v.period)}</span>}
+                      <span class="ew-v">{(c.k === 'yieldChg' || c.k === 'fxChg') && v.value > 0 ? '+' : ''}{fmt(v.value, dpOf(c.k, v.value))}</span>
+                      {(v.period || (v.source && !v.source.startsWith('IMF WEO'))) && <span class="ew-p">{short(v.period)}{v.period && v.source ? ' · ' : ''}{v.source && !v.source.startsWith('IMF WEO') ? srcShort(v.source) : ''}</span>}
                     </td>
                   );
                 })}
@@ -109,7 +112,8 @@ const dpOf = (k: string, v: number) => (k === 'yieldChg' ? 0 : k === 'yield10y' 
         Sources: GDP — OECD Quarterly National Accounts, IMF; consumer prices — IMF, OECD, and for euro-area members the harmonised index (Eurostat);
         unemployment — ILO definition (Eurostat, OECD, ILOSTAT, IMF), so national registered rates differ; 10-year yields — OECD, members only, euro area = average of members;
         currencies — ECB reference rates (daily), IMF end-of-month where the ECB has none; a positive change means the currency gained on the dollar.
-        Highlighted: a contraction, a deficit or a falling currency. Hover or long-press a figure for its source.
+        Under each figure: its period and source (ESTAT = Eurostat). Highlighted: GDP falling, or a currency down 5% or more on the dollar over the year.
+        The euro area has no forecasts: the WEO tables on this site cover countries only.
       </p>
 
       <h2 style="margin-top:28px">Commodities</h2>

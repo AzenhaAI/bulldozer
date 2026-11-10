@@ -4,8 +4,8 @@
  *
  *   node scripts/parse_weekly.mjs
  *
- * Writes src/data/weekly/economy.json. For every cell the freshest of the open
- * sources is used, never a paid one:
+ * Writes src/data/weekly/economy.json. Each cell keeps one preferred open
+ * source, falling back to another only when it lags (never a paid source):
  *   GDP, % on a year ago and quarter on quarter (annualised)
  *       OECD Quarterly National Accounts (CC BY 4.0); IMF QNEA for others
  *   Consumer prices, % on a year ago      IMF CPI (monthly); euro area members
@@ -57,9 +57,14 @@ function period(p) {
   if (m) return { key: `${m[1]}-${m[2]}`, label: `${MONTHS[+m[2] - 1]} ${m[1]}`, sort: +m[1] * 12 + (+m[2] - 1) };
   m = String(p).match(/^(\d{4})-Q(\d)$/);
   if (m) return { key: `${m[1]}-Q${m[2]}`, label: `Q${m[2]} ${m[1]}`, sort: +m[1] * 12 + (+m[2]) * 3 - 1 };
-  return { key: String(p), label: String(p), sort: Number(String(p).slice(0, 4)) * 12 + 11 };
+  // An annual figure is an average over the year: it sorts as June, so a Q3
+  // or Q4 reading of the same year counts as fresher.
+  return { key: String(p), label: String(p), sort: Number(String(p).slice(0, 4)) * 12 + 5 };
 }
 
+// Sources that did not answer this run: a missing OECD flow stops the run
+// (the last file stays), others are listed in the JSON as `degraded`.
+const failed = [];
 // The OECD answers 500 to calls in quick succession: space them out and back off.
 let lastOecd = 0;
 async function get(url, accept) {
@@ -83,7 +88,7 @@ async function imf(flow, keyRest, since, agency = 'IMF.STA', countries = COUNTRI
   const codes = countries.map((c) => IMF_CODE[c] || c).join('+');
   const url = `https://api.imf.org/external/sdmx/3.0/data/dataflow/${agency}/${flow}/+/${codes}${keyRest ? '.' + keyRest : ''}?c%5BTIME_PERIOD%5D=ge:${since}`;
   const text = await get(url, IMF_CSV);
-  if (text == null) throw new Error(`IMF ${flow} unavailable`);
+  if (text == null) { failed.push(`IMF ${flow}`); return []; }
   const back = Object.fromEntries(Object.entries(IMF_CODE).map(([k, v]) => [v, k]));
   return [...parseCsvObjects(text)].map((r) => ({ ...r, COUNTRY: back[r.COUNTRY] || r.COUNTRY })).filter((r) => r.OBS_VALUE !== '');
 }
@@ -94,7 +99,7 @@ async function oecd(flow, key, since) {
   const text = await get(url);
   // One flaky source must not sink the week: the cells fall back to the
   // others, and the fill check at the end guards against a broken run.
-  if (text == null) { console.warn(`  – OECD ${flow} unavailable, using the other sources`); return []; }
+  if (text == null) { failed.push(`OECD ${flow}`); return []; }
   const back = Object.fromEntries(Object.entries(OECD_CODE).map(([k, v]) => [v, k]));
   const want = new Set(COUNTRIES);
   return [...parseCsvObjects(text)].map((r) => ({ ...r, REF_AREA: back[r.REF_AREA] || r.REF_AREA })).filter((r) => r.OBS_VALUE !== '' && want.has(r.REF_AREA));
@@ -108,7 +113,7 @@ async function eurostat(table, params) {
   for (const g of geos) q.append('geo', g);
   const text = await get(`https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/${table}?${q}`);
   const out = new Map();
-  if (!text) return out;
+  if (!text) { failed.push(`Eurostat ${table}`); return out; }
   const d = JSON.parse(text);
   const gi = d.dimension.geo.category.index, ti = d.dimension.time.category.index;
   const nT = Object.keys(ti).length;
@@ -138,10 +143,21 @@ function latest(rows, isoKey, periodKey, valueKey, source, filter = () => true) 
   return out;
 }
 
-/** Of two candidate maps, keep per country the fresher reading (ties go to the first). */
-function freshest(...maps) {
+/**
+ * One source per country where it can be: the first map that has the country
+ * wins unless it is more than `lag` months behind the freshest candidate.
+ * Switching between series with different definitions (India's OECD and IMF
+ * CPI differ by up to 0.8 points in the same month) would move the number
+ * for reasons that are not news.
+ */
+function preferred(lag, ...maps) {
   const out = new Map();
-  for (const m of maps) for (const [k, v] of m) if (!out.has(k) || v.sort > out.get(k).sort) out.set(k, v);
+  const isos = new Set(maps.flatMap((m) => [...m.keys()]));
+  for (const iso of isos) {
+    const cands = maps.map((m) => m.get(iso)).filter(Boolean);
+    const best = Math.max(...cands.map((c) => c.sort));
+    out.set(iso, cands.find((c) => best - c.sort <= lag));
+  }
   return out;
 }
 
@@ -149,7 +165,8 @@ const round = (v, dp) => (v == null || !Number.isFinite(v) ? null : Math.round(v
 // A reading more than two years old is not "latest": left blank.
 const STALE_MONTHS = 24;
 const nowSort = new Date().getUTCFullYear() * 12 + new Date().getUTCMonth();
-const cell = (c, dp) => (c && nowSort - c.sort <= STALE_MONTHS ? { value: round(c.value, dp), period: c.label, source: c.source } : null);
+const fresh = (c) => c && nowSort - c.sort <= STALE_MONTHS;
+const cell = (c, dp) => (fresh(c) ? { value: round(c.value, dp), period: c.label, source: c.source } : null);
 
 async function weoForecast(slug, year) {
   try {
@@ -185,27 +202,28 @@ async function main() {
     if (m.has(ago)) imfY.set(iso, { value: (m.get(last) / m.get(ago) - 1) * 100, period: p.key, label: p.label, sort: p.sort, source: 'IMF' });
     if (m.has(prev)) imfQ.set(iso, { value: (m.get(last) / m.get(prev) - 1) * 100, period: p.key, label: p.label, sort: p.sort, source: 'IMF' });
   }
-  const gdpYoy = freshest(gdpY, imfY);
-  const gdpQoq = freshest(gdpQ, imfQ);
+  const gdpYoy = preferred(3, gdpY, imfY);
+  const gdpQoq = preferred(3, gdpQ, imfQ);
 
   // Prices, unemployment, currencies: IMF.
-  const cpiImf = freshest(
-    latest(await imf('CPI', 'CPI._T.YOY_PCH_PA_PT.M', `${y - 1}-M01`), 'COUNTRY', 'TIME_PERIOD', 'OBS_VALUE', 'IMF'),
-    latest(await oecd('OECD.SDD.TPS,DSD_PRICES@DF_PRICES_ALL,1.0', '.M.N.CPI.PA._T.N.GY', `${y - 1}-01`), 'REF_AREA', 'TIME_PERIOD', 'OBS_VALUE', 'OECD'));
-  const hicp = await eurostat('prc_hicp_minr', { unit: 'RCH_A', coicop18: 'TOTAL', sinceTimePeriod: `${y - 1}-01` });
+  // IMF first (one definition for all), the OECD where the IMF is more than a month behind.
+  const cpiImf = preferred(1,
+    latest(await imf('CPI', 'CPI._T.YOY_PCH_PA_PT.M', `${y - 2}-M01`), 'COUNTRY', 'TIME_PERIOD', 'OBS_VALUE', 'IMF'),
+    latest(await oecd('OECD.SDD.TPS,DSD_PRICES@DF_PRICES_ALL,1.0', '.M.N.CPI.PA._T.N.GY', `${y - 2}-01`), 'REF_AREA', 'TIME_PERIOD', 'OBS_VALUE', 'OECD'));
+  const hicp = await eurostat('prc_hicp_minr', { unit: 'RCH_A', coicop18: 'TOTAL', sinceTimePeriod: `${y - 2}-01` });
   // Euro area members: the harmonised index, as weekly tables print them.
   const cpi = new Map(cpiImf);
   for (const [iso, v] of hicp) if (EURO.has(iso)) cpi.set(iso, v);
-  const ls = await imf('LS', 'U.PT.*', `${y - 1}-M01`);
+  const ls = await imf('LS', 'U.PT.*', `${y - 2}-M01`);
   // Unemployment, ILO definition everywhere: the freshest of Eurostat, the
   // OECD's monthly series, ILOSTAT (monthly, then quarterly) and the IMF.
-  const une = await oecd('OECD.SDD.TPS,DSD_LFS@DF_IALFS_UNE_M,1.0', '.UNE_LF_M.PT_LF_SUB..Y._T.Y_GE15..M', `${y - 1}-01`);
+  const une = await oecd('OECD.SDD.TPS,DSD_LFS@DF_IALFS_UNE_M,1.0', '.UNE_LF_M.PT_LF_SUB..Y._T.Y_GE15..M', `${y - 2}-01`);
   const ilo = async (f) => {
-    const t = await get(`https://rplumber.ilo.org/data/indicator/?id=UNE_DEAP_SEX_AGE_RT_${f}&ref_area=${COUNTRIES.filter((c) => c !== 'EA').join('+')}&sex=SEX_T&classif1=AGE_YTHADULT_YGE15&timefrom=${y - 1}&format=.csv`);
+    const t = await get(`https://rplumber.ilo.org/data/indicator/?id=UNE_DEAP_SEX_AGE_RT_${f}&ref_area=${COUNTRIES.filter((c) => c !== 'EA').join('+')}&sex=SEX_T&classif1=AGE_YTHADULT_YGE15&timefrom=${y - 2}&format=.csv`);
     return latest([...parseCsvObjects((t || '').replace(/^\uFEFF/, ''))].map((r) => ({ ...r, time: r.time?.replace(/M(\d\d)$/, '-$1').replace(/Q(\d)$/, '-Q$1') })), 'ref_area', 'time', 'obs_value', 'ILO');
   };
-  const unemp = freshest(
-    await eurostat('une_rt_m', { s_adj: 'SA', age: 'TOTAL', sex: 'T', unit: 'PC_ACT', sinceTimePeriod: `${y - 1}-01` }),
+  const unemp = preferred(2,
+    await eurostat('une_rt_m', { s_adj: 'SA', age: 'TOTAL', sex: 'T', unit: 'PC_ACT', sinceTimePeriod: `${y - 2}-01` }),
     latest(une, 'REF_AREA', 'TIME_PERIOD', 'OBS_VALUE', 'OECD', (r) => r.MEASURE === 'UNE_LF_M' && r.ADJUSTMENT === 'Y' && r.SEX === '_T' && r.AGE === 'Y_GE15' && r.FREQ === 'M'),
     await ilo('M'), await ilo('Q'),
     latest(ls, 'COUNTRY', 'TIME_PERIOD', 'OBS_VALUE', 'IMF'));
@@ -253,7 +271,7 @@ async function main() {
       const [yy, mm] = last.split('-M');
       const ago = `${+yy - 1}-M${mm}`;
       const p = period(last);
-      fxCell = { perUsd: round(fx.get(last), dp(fx.get(last))), period: p.label, source: 'IMF',
+      if (fresh(p)) fxCell = { perUsd: round(fx.get(last), dp(fx.get(last))), period: p.label, source: 'IMF',
         // Positive: the currency gained against the dollar (fewer units per $).
         changeYoy: fx.has(ago) ? round((fx.get(ago) / fx.get(last) - 1) * 100, 1) : null };
     }
@@ -263,14 +281,14 @@ async function main() {
       const ps = [...yl.keys()].sort(); const last = ps.at(-1);
       const [yy, mm] = last.split('-');
       const ago = `${+yy - 1}-${mm}`;
-      ylCell = { value: round(yl.get(last), 2), period: period(last).label, source: 'OECD', changeBp: yl.has(ago) ? Math.round((yl.get(last) - yl.get(ago)) * 100) : null };
+      if (fresh(period(last))) ylCell = { value: round(yl.get(last), 2), period: period(last).label, source: 'OECD', changeBp: yl.has(ago) ? Math.round((yl.get(last) - yl.get(ago)) * 100) : null };
     }
     const q = gdpQoq.get(iso);
     rows.push({
       iso, name: NAME[iso] || countryNames[iso]?.common || iso,
       gdp: cell(gdpYoy.get(iso), 1),
       // Quarter on quarter, annualised as in most weekly tables: (1 + q)^4 − 1.
-      gdpQoqAnn: q ? { value: round(((1 + q.value / 100) ** 4 - 1) * 100, 1), period: q.label, source: q.source } : null,
+      gdpQoqAnn: fresh(q) ? { value: round(((1 + q.value / 100) ** 4 - 1) * 100, 1), period: q.label, source: q.source } : null,
       gdpForecast: round(fGdp.get(iso), 1),
       cpi: cell(cpi.get(iso), 1),
       cpiForecast: round(fCpi.get(iso), 1),
@@ -301,9 +319,11 @@ async function main() {
 
   const filled = (k) => rows.filter((r) => r[k] != null).length;
   console.log(`  GDP ${filled('gdp')}, q/q ${filled('gdpQoqAnn')}, CPI ${filled('cpi')}, unemployment ${filled('unemployment')}, 10y ${filled('yield10y')}, FX ${filled('currency')} of ${rows.length}; commodities ${commodities.length}`);
+  if (failed.length) console.warn(`  – did not answer: ${failed.join('; ')}`);
+  if (failed.some((f) => f.startsWith('OECD'))) throw new Error('an OECD flow did not answer — keeping the last file (run again later)');
   if (filled('gdp') < 30 || filled('cpi') < 30) throw new Error('too few readings — a source changed; keeping the last file');
   await mkdir(join(ROOT, 'src', 'data', 'weekly'), { recursive: true });
-  await writeFile(OUT, JSON.stringify({ asOf: now.toISOString().slice(0, 10), forecastYear: yr, rows, commodities }, null, 1) + '\n');
+  await writeFile(OUT, JSON.stringify({ asOf: now.toISOString().slice(0, 10), forecastYear: yr, degraded: failed, rows, commodities }, null, 1) + '\n');
   console.log(`✓ ${OUT}`);
 }
 
