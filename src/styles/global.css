@@ -762,3 +762,6 @@ html:has(#hdr-burger[aria-expanded="true"]) #a2hs { display: none !important; }
 .ew-small { max-width: 640px; }
 .ew-small .ew-u { font-weight: 400; color: var(--text-dim); font-size: 11px; }
 .ew-note { font-size: 12px; color: var(--text-dim); line-height: 1.5; margin-top: 10px; }
+.ew a.ew-ac { color: var(--accent); text-decoration: none; display: block; font-family: var(--mono); }
+.ew a.ew-ac:hover { text-decoration: underline; }
+.ew td.ew-na a.ew-ac { font-family: inherit; font-size: 11px; }

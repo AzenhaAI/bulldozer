@@ -30,7 +30,7 @@ const PARSERS = [
   'parse_caucasus.mjs', 'parse_wrp_extra.mjs', 'parse_wellcome.mjs', 'parse_sdr2.mjs',
   // The one exception to the note above: women/men splits are matched to each
   // country's headline year in the datasets, so they run after those are written.
-  'parse_weekly.mjs', 'parse_splits.mjs',
+  'parse_weekly.mjs', 'parse_alfacat_links.mjs', 'parse_splits.mjs',
 ];
 
 const filter = process.argv.slice(2);
