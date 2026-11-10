@@ -4,12 +4,13 @@ import { datasets } from '@data/datasets';
 /**
  * Live dataset catalog for the mobile app — same shape as the app's baked
  * lib/catalog.dart (slug/title/unit/kind/topic/source). Lets the app pick up
- * new datasets without a rebuild. Excludes single-country RLMS microdata,
+ * new datasets without a rebuild. Excludes the single-country series (RLMS
+ * microdata, Bank of Russia monthly series),
  * which the app does not surface (mirrors tools/gen_catalog.mjs).
  */
 export const GET: APIRoute = () => {
   const catalog = datasets
-    .filter((d) => !d.slug.startsWith('rlms-'))
+    .filter((d) => !d.slug.startsWith('rlms-') && !d.slug.startsWith('cbr-'))
     .map((d) => {
       // latest data year, so the app can show "data as of YYYY"
       let latest = '';

@@ -1,0 +1,29 @@
+---
+/** A sourced note on withdrawn official statistics (data/methodology.ts StatsNote).
+ *  Closed by default on dataset pages; open where the note is the point. */
+import type { StatsNote } from '@data/methodology';
+interface Props { note: StatsNote; open?: boolean }
+const { note, open = false } = Astro.props;
+---
+<details class="method-note stats-note" open={open}>
+  <summary><b>{note.title}</b></summary>
+  <p>{note.intro}</p>
+  <ul>
+    {note.items.map((it) => (
+      <li>
+        <b>{it.when}.</b> {it.what}{' '}
+        <span class="sn-src">({it.sources.map((s, i) => (
+          <Fragment>{i > 0 && '; '}<a href={s.url} target="_blank" rel="noopener">{s.label}</a></Fragment>
+        ))})</span>
+      </li>
+    ))}
+  </ul>
+  <p class="sn-checked">Sources read {note.checked}.</p>
+</details>
+<style>
+  .stats-note summary { cursor: pointer; }
+  .stats-note p { margin: 8px 0 0; }
+  .stats-note ul { margin: 8px 0 0; padding-left: 18px; }
+  .stats-note li { margin: 4px 0; }
+  .stats-note .sn-checked { font-size: 12px; }
+</style>

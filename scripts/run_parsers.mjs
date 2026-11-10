@@ -23,7 +23,7 @@ const SCRIPTS = dirname(fileURLToPath(import.meta.url));
 const PARSERS = [
   'parse_macro.mjs', 'parse_surveys.mjs', 'parse_tidy.mjs', 'parse_lits.mjs',
   'parse_risk.mjs', 'parse_owid.mjs', 'parse_maddison.mjs', 'parse_eurostat.mjs',
-  'parse_findex.mjs', 'parse_bigmac.mjs', 'parse_cpi.mjs', 'parse_pisa.mjs',
+  'parse_findex.mjs', 'parse_bigmac.mjs', 'parse_cpi.mjs', 'parse_pisa.mjs', 'parse_cbr.mjs',
   'parse_qog_originals.mjs', 'parse_vdem_media.mjs', 'parse_fiw.mjs', 'parse_unhcr.mjs', 'parse_eu_cities.mjs',
   'parse_who.mjs', 'parse_who_ghe.mjs', 'parse_cses.mjs', 'parse_afrobarometer.mjs', 'parse_iea.mjs', 'parse_lapop.mjs', 'parse_pew.mjs', 'parse_gesis_aggregates.mjs',
   // Read committed per-country CSVs written by scripts/tools/*_aggregate.py.

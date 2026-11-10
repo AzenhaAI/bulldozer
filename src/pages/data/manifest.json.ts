@@ -15,7 +15,7 @@ import brands from '@data/brands.json';
  * endpoint and gets listed here; the app auto-discovers it via this manifest.
  */
 export const GET: APIRoute = () => {
-  const cat = datasets.filter((d) => !d.slug.startsWith('rlms-'));
+  const cat = datasets.filter((d) => !d.slug.startsWith('rlms-') && !d.slug.startsWith('cbr-'));
   // freshest parse date across all datasets → "data updated" on Home
   let freshest = '';
   for (const d of cat) if ((d.parsedAt ?? '') > freshest) freshest = d.parsedAt ?? '';

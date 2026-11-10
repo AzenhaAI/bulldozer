@@ -95,6 +95,18 @@ export const licences: Licence[] = [
     checked: CHECKED,
   },
   {
+    id: 'bank-of-russia',
+    name: 'Bank of Russia — key rate, inflation, inflation expectations, exchange rates, money supply',
+    match: ['Bank of Russia'],
+    termsUrl: 'https://www.cbr.ru/eng/user_agreement/',
+    licence: `Bank of Russia website User Agreement (last updated 03.12.2019); no separate open-data licence is published for the statistics.`,
+    citation: `No citation format published. "The link to the Website is mandatory when quoting any materials from the Website, including copyrighted works." BullDozer links each series to its cbr.ru page.`,
+    note: `The consumer price index is Rosstat's, as the Bank of Russia republishes it. The household inflation-expectations survey is conducted by inFOM for the Bank of Russia.`,
+    urls: ['https://www.cbr.ru/eng/user_agreement/', 'https://www.cbr.ru/statistics/data-service/', 'https://www.cbr.ru/development/sxml/'],
+    checked: '2026-11-10',
+    review: `User Agreement, "User's Obligations": "Materials of the Website may only be used with the consent of the rightsholders." The agreement does not say whether statistical series count as such materials; no consent was requested. Owner to decide.`,
+  },
+  {
     id: 'who-data',
     name: 'WHO — data.who.int (Global Health Observatory indicators)',
     match: ['data.who.int'],

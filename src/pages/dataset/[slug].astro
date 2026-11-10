@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Provenance from '@components/Provenance.astro';
+import StatsNote from '@components/StatsNote.astro';
 import KpiRow from '@components/KpiRow.astro';
 import DataPanel from '@components/DataPanel.astro';
 import MoversTable from '@components/MoversTable.astro';
@@ -139,6 +140,7 @@ const breadcrumbLd = {
           {ds.method && <span><b>Method:</b> {ds.method}</span>}
         </p>
       )}
+      {ds.notes && <StatsNote note={ds.notes} />}
       <p style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
         <a class="ghost-btn" style="margin:0; display:inline-block; text-decoration:none" href={`${base}/data/${ds.slug}.csv`} download>↓ Download CSV</a>
         {dashFile && (

@@ -32,6 +32,8 @@ export const sources: Source[] = [
     description: 'Tax wedge on labour — taxes and contributions as a share of total labour cost across OECD countries.' },
   { name: 'BIS — Credit statistics', url: 'https://www.bis.org/statistics/totcredit.htm', status: 'live', category: 'Macro & economics', match: 'Bank for International Settlements',
     description: 'Credit to the private non-financial sector, households and government as a share of GDP, from the Bank for International Settlements.' },
+  { name: 'Bank of Russia — statistics', url: 'https://www.cbr.ru/eng/statistics/', status: 'live', category: 'Macro & economics', match: 'Bank of Russia',
+    description: 'Russia’s central bank: monthly key rate, consumer price inflation (Rosstat’s CPI as the bank republishes it), household inflation expectations, the official ruble–dollar rate and M2 money supply growth — from its open web service, data service and statistical workbooks. Rosstat’s own site does not answer from outside Russia; what it no longer publishes is listed on the Russia profile.' },
   { name: 'Our World in Data', url: 'https://ourworldindata.org/', status: 'live', category: 'Macro & economics', match: 'Our World in Data',
     description: 'Open research and data on development, health, energy, education and more — schooling, poverty, electricity, renewables, military spending and beyond.' },
   { name: 'World Bank — Global Findex', url: 'https://www.worldbank.org/en/publication/globalfindex', status: 'live', category: 'Macro & economics', match: 'Global Findex',

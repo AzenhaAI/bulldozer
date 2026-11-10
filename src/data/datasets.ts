@@ -7,7 +7,7 @@
 import { SUPERSEDED } from '@lib/superseded';
 import type { Observation } from '@lib/analytics';
 import { isOpinionSurvey, topicFor, topicOverride } from '@lib/topics';
-import { methodologyFor } from '@data/methodology';
+import { methodologyFor, type StatsNote } from '@data/methodology';
 import { betterFor } from '@lib/polarity';
 import { canonIso } from '@lib/geo';
 import firstSeenMap from '@data/first-seen.json';
@@ -39,6 +39,8 @@ export interface DatasetMeta {
   vintage?: string;
   /** One-line methodology note (weighting, item, projection caveat). */
   method?: string;
+  /** Sourced note on what the official statistics office no longer publishes. */
+  notes?: StatsNote;
   /** 'high' or 'low' when one direction is plainly better; absent when neutral. */
   better?: 'high' | 'low';
   /** Countries are measured in different years (household surveys): profiles
