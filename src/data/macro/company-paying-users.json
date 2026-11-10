@@ -1,0 +1,608 @@
+{
+  "meta": {
+    "title": "Paying Users of Internet Companies",
+    "valueLabel": "Paying users or paid subscribers, as each company defines them (millions)",
+    "unit": "million",
+    "changeMode": "pct",
+    "topic": "economy",
+    "summary": "Paying users reported by listed consumer-subscription companies in their quarterly earnings releases filed with the SEC, in millions. Spotify premium subscribers and Duolingo paid subscribers are counted at quarter end; Match Group payers (unique payers per brand in a month) and Bumble total paying users are averages over the quarter. Match Group starts in Q2 2021, when it replaced \"average subscribers\" with payers, a different measure. Not included: Netflix paid memberships, which Netflix stopped reporting from Q1 2025. Coverage: Bumble 2020-Q4–2026-Q2; Duolingo 2021-Q2–2026-Q3; Match Group 2021-Q2–2026-Q3; Spotify 2019-Q1–2026-Q3.",
+    "vintage": "Calendar quarters, 2019-Q1 to 2026-Q3; each company from its first release in the period",
+    "method": "Each value is read from the company's own earnings release for that quarter (exhibit 99.x to its 8-K, or 6-K for Spotify) on SEC EDGAR, as first reported: later restatements are not applied. Periods are calendar quarters (every company here has a December year end). Values in millions; a release that rounds (Roblox from Q4 2025, Match Group Q3 2026) is kept as rounded. The filing URL and the exact words or table row of every value are in data/raw/company-metrics/observations.csv.",
+    "source": "SEC EDGAR — company earnings releases (8-K / 6-K exhibits)",
+    "license": "Public information on sec.gov (SEC website dissemination policy)",
+    "url": "https://github.com/AzenhaAI/bulldozer/blob/main/data/raw/company-metrics/observations.csv",
+    "entityType": "company",
+    "parsedAt": "2026-11-10",
+    "kind": "macro"
+  },
+  "data": [
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2020-Q4",
+      "value": 2.693
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2021-Q1",
+      "value": 2.803
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2021-Q2",
+      "value": 2.927
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2021-Q3",
+      "value": 2.866
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2021-Q4",
+      "value": 2.979
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2022-Q1",
+      "value": 3.007
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2022-Q2",
+      "value": 3.021
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2022-Q3",
+      "value": 3.29
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2022-Q4",
+      "value": 3.409
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2023-Q1",
+      "value": 3.46
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2023-Q2",
+      "value": 3.633
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2023-Q3",
+      "value": 3.821
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2023-Q4",
+      "value": 3.969
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2024-Q1",
+      "value": 4.024
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2024-Q2",
+      "value": 4.139
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2024-Q3",
+      "value": 4.256
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2024-Q4",
+      "value": 4.179
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2025-Q1",
+      "value": 4.015
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2025-Q2",
+      "value": 3.777
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2025-Q3",
+      "value": 3.575
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2025-Q4",
+      "value": 3.322
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2026-Q1",
+      "value": 3.166
+    },
+    {
+      "entity": "Bumble",
+      "group": "Bumble",
+      "period": "2026-Q2",
+      "value": 3.157
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2021-Q2",
+      "value": 1.9
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2021-Q3",
+      "value": 2.2
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2021-Q4",
+      "value": 2.5
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2022-Q1",
+      "value": 2.9
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2022-Q2",
+      "value": 3.3
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2022-Q3",
+      "value": 3.7
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2022-Q4",
+      "value": 4.2
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2023-Q1",
+      "value": 4.8
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2023-Q2",
+      "value": 5.2
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2023-Q3",
+      "value": 5.8
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2023-Q4",
+      "value": 6.6
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2024-Q1",
+      "value": 7.4
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2024-Q2",
+      "value": 8
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2024-Q3",
+      "value": 8.6
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2024-Q4",
+      "value": 9.5
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2025-Q1",
+      "value": 10.3
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2025-Q2",
+      "value": 10.9
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2025-Q3",
+      "value": 11.5
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2025-Q4",
+      "value": 12.2
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2026-Q1",
+      "value": 12.5
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2026-Q2",
+      "value": 12.7
+    },
+    {
+      "entity": "Duolingo",
+      "group": "Duolingo",
+      "period": "2026-Q3",
+      "value": 13.1
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2021-Q2",
+      "value": 14.969
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2021-Q3",
+      "value": 16.303
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2021-Q4",
+      "value": 16.249
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2022-Q1",
+      "value": 16.334
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2022-Q2",
+      "value": 16.395
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2022-Q3",
+      "value": 16.548
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2022-Q4",
+      "value": 16.065
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2023-Q1",
+      "value": 15.874
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2023-Q2",
+      "value": 15.63
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2023-Q3",
+      "value": 15.712
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2023-Q4",
+      "value": 15.186
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2024-Q1",
+      "value": 14.93
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2024-Q2",
+      "value": 14.841
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2024-Q3",
+      "value": 15.214
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2024-Q4",
+      "value": 14.607
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2025-Q1",
+      "value": 14.198
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2025-Q2",
+      "value": 14.093
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2025-Q3",
+      "value": 14.527
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2025-Q4",
+      "value": 13.839
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2026-Q1",
+      "value": 13.521
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2026-Q2",
+      "value": 13.25
+    },
+    {
+      "entity": "Match Group",
+      "group": "Match Group",
+      "period": "2026-Q3",
+      "value": 13.8
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2019-Q1",
+      "value": 100
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2019-Q2",
+      "value": 108
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2019-Q3",
+      "value": 113
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2019-Q4",
+      "value": 124
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2020-Q1",
+      "value": 130
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2020-Q2",
+      "value": 138
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2020-Q3",
+      "value": 144
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2020-Q4",
+      "value": 155
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2021-Q1",
+      "value": 158
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2021-Q2",
+      "value": 165
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2021-Q3",
+      "value": 172
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2021-Q4",
+      "value": 180
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2022-Q1",
+      "value": 182
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2022-Q2",
+      "value": 188
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2022-Q3",
+      "value": 195
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2022-Q4",
+      "value": 205
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2023-Q1",
+      "value": 210
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2023-Q2",
+      "value": 220
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2023-Q3",
+      "value": 226
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2023-Q4",
+      "value": 236
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2024-Q1",
+      "value": 239
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2024-Q2",
+      "value": 246
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2024-Q3",
+      "value": 252
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2024-Q4",
+      "value": 263
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2025-Q1",
+      "value": 268
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2025-Q2",
+      "value": 276
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2025-Q3",
+      "value": 281
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2025-Q4",
+      "value": 290
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2026-Q1",
+      "value": 293
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2026-Q2",
+      "value": 300
+    },
+    {
+      "entity": "Spotify",
+      "group": "Spotify",
+      "period": "2026-Q3",
+      "value": 306
+    }
+  ]
+}

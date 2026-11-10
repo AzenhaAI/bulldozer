@@ -34,6 +34,7 @@
     "parse:hofstede": "node scripts/parse_hofstede.mjs",
     "parse:afrobarometer": "node scripts/parse_afrobarometer.mjs",
     "parse:ess": "node scripts/parse_ess.mjs",
+    "parse:company-metrics": "node scripts/parse_company_metrics.mjs",
     "data:build": "node scripts/run_parsers.mjs",
     "digest": "node scripts/telegram_digest.mjs"
   },

@@ -42,6 +42,10 @@ const DASH: Record<string, string> = {
   'eb-': 'eurobarometer', 'issp-': 'issp', 'evs-': 'evs', 'ab-': 'arabbarometer', 'rlms-': 'rlms',
 };
 const dashFile = Object.entries(DASH).find(([p]) => ds.slug.startsWith(p))?.[1];
+// Company datasets (SEC user metrics): entities are companies, so no map, no
+// country wording, and no group table (each company is its own group).
+const company = ds.entityType === 'company';
+const noun = company ? 'company' : 'country';
 const additive = isAdditive(ds.unit);
 // Series measured in different years per country (household surveys): the
 // summary, group table and full ranking use each country's latest reading,
@@ -78,7 +82,7 @@ const lastYear = dsPeriods.at(-1);
 // Only advertise the year when the data is recent — a fresh "— 2025" lifts CTR,
 // but a stale "— 2013" signals outdated data and hurts it, so drop it there.
 const endYear = Number(String(lastYear ?? '').match(/(\d{4})(?!.*\d{4})/)?.[1]);
-const seoTitle = `${ds.title} by Country${endYear >= 2022 ? ` — ${lastYear}` : ''}`;
+const seoTitle = `${ds.title} by ${company ? 'Company' : 'Country'}${endYear >= 2022 ? ` — ${lastYear}` : ''}`;
 // schema.org/Dataset — indexed by Google Dataset Search. Google ranks partly on
 // metadata completeness, so every recommended field it understands is filled in.
 const dsUrl = `https://azenha.ai${base}/dataset/${ds.slug}/`;
@@ -95,8 +99,10 @@ const jsonLd = {
   creator: { '@type': 'Organization', name: ds.source, url: ds.url },
   publisher: { '@type': 'Organization', name: 'BullDozer', url: `https://azenha.ai${base}/` },
   includedInDataCatalog: { '@type': 'DataCatalog', name: 'BullDozer', url: `https://azenha.ai${base}/` },
-  keywords: [ds.title, `${ds.title} by country`, TOPICS[ds.topic]?.label ?? ds.topic, ds.kind === 'survey' ? 'survey data' : 'macro indicator', 'country comparison'],
-  spatialCoverage: { '@type': 'Place', name: countryCount > 50 ? 'World' : `${countryCount} countries` },
+  keywords: company
+    ? [ds.title, `${ds.title} by company`, 'company user metrics', 'SEC filings', 'company comparison']
+    : [ds.title, `${ds.title} by country`, TOPICS[ds.topic]?.label ?? ds.topic, ds.kind === 'survey' ? 'survey data' : 'macro indicator', 'country comparison'],
+  ...(company ? {} : { spatialCoverage: { '@type': 'Place', name: countryCount > 50 ? 'World' : `${countryCount} countries` } }),
   dateModified: ds.parsedAt,
   citation: `${ds.source}. ${ds.url}`,
   ...(ds.method ? { measurementTechnique: ds.method } : {}),
@@ -155,15 +161,17 @@ const breadcrumbLd = {
 
   <section class="section" style="padding-top:0">
     <div class="container">
-      <KpiRow data={latestData} unit={pctUnit} mode={ds.changeMode} />
+      <KpiRow data={latestData} unit={pctUnit} mode={ds.changeMode} noun={noun} />
     </div>
   </section>
 
   <section class="section" style="padding-top:0">
     <div class="container">
       <h2>{ds.valueLabel}</h2>
-      <p class="sub">Interactive — choose a period, search a country, switch between bars, table and map.</p>
-      <DataPanel indicators={panelIndicator} pinnedSlug={ds.slug} />
+      <p class="sub">{company
+        ? 'Interactive — choose a quarter, search a company, switch between bars and table.'
+        : 'Interactive — choose a period, search a country, switch between bars, table and map.'}</p>
+      <DataPanel indicators={panelIndicator} pinnedSlug={ds.slug} noun={noun} />
       <ChartActions name={`bulldozer-${ds.slug}`} svg=".worldmap svg" hash="data" />
     </div>
   </section>
@@ -172,7 +180,7 @@ const breadcrumbLd = {
     <section class="section" style="padding-top:0" id="trend">
       <div class="container">
         <h2>Trend over time</h2>
-        <p class="sub">Group average by period, {[...new Set(ds.data.map((o) => o.period))].sort()[0]}–{[...new Set(ds.data.map((o) => o.period))].sort().at(-1)}.</p>
+        <p class="sub">{company ? 'Each company by quarter' : 'Group average by period'}, {[...new Set(ds.data.map((o) => o.period))].sort()[0]}–{[...new Set(ds.data.map((o) => o.period))].sort().at(-1)}.</p>
         <TrendChart data={ds.data} unit={pctUnit} />
         <ChartActions name={`bulldozer-${ds.slug}-trend`} svg="#trend svg" hash="trend" />
       </div>
@@ -199,7 +207,7 @@ const breadcrumbLd = {
     </section>
   )}
 
-  {groups.length > 0 && !single && (
+  {groups.length > 0 && !single && !company && (
     <section class="section" style="padding-top:0" id="groups">
       <div class="container">
         <h2>By group</h2>

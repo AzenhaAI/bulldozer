@@ -1,0 +1,338 @@
+{
+  "meta": {
+    "title": "Active Accounts at PayPal and Robinhood",
+    "valueLabel": "Active accounts or funded customers at quarter end (millions)",
+    "unit": "million",
+    "changeMode": "pct",
+    "topic": "economy",
+    "summary": "Customer accounts reported by listed fintech companies in their quarterly earnings releases filed with the SEC, in millions, at quarter end. PayPal active accounts are accounts that made a transaction in the past 12 months; Robinhood funded customers are people with a funded account or a transaction in the past 45 days (called net cumulative funded accounts until Q4 2023, same calculation). Not included: Etsy active buyers, whose consolidated count changed with acquisitions and divestitures (Reverb, Depop, Elo7) and whose releases from 2026 no longer state the level. Coverage: PayPal 2019-Q1–2026-Q3; Robinhood 2021-Q2–2026-Q3.",
+    "vintage": "Calendar quarters, 2019-Q1 to 2026-Q3; each company from its first release in the period",
+    "method": "Each value is read from the company's own earnings release for that quarter (exhibit 99.x to its 8-K, or 6-K for Spotify) on SEC EDGAR, as first reported: later restatements are not applied. Periods are calendar quarters (every company here has a December year end). Values in millions; a release that rounds (Roblox from Q4 2025, Match Group Q3 2026) is kept as rounded. The filing URL and the exact words or table row of every value are in data/raw/company-metrics/observations.csv.",
+    "source": "SEC EDGAR — company earnings releases (8-K / 6-K exhibits)",
+    "license": "Public information on sec.gov (SEC website dissemination policy)",
+    "url": "https://github.com/AzenhaAI/bulldozer/blob/main/data/raw/company-metrics/observations.csv",
+    "entityType": "company",
+    "parsedAt": "2026-11-10",
+    "kind": "macro"
+  },
+  "data": [
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2019-Q1",
+      "value": 277
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2019-Q2",
+      "value": 286
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2019-Q3",
+      "value": 295
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2019-Q4",
+      "value": 305
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2020-Q1",
+      "value": 325
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2020-Q2",
+      "value": 346
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2020-Q3",
+      "value": 361
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2020-Q4",
+      "value": 377
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2021-Q1",
+      "value": 392
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2021-Q2",
+      "value": 403
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2021-Q3",
+      "value": 416
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2021-Q4",
+      "value": 426
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2022-Q1",
+      "value": 429
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2022-Q2",
+      "value": 429
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2022-Q3",
+      "value": 432
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2022-Q4",
+      "value": 435
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2023-Q1",
+      "value": 433
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2023-Q2",
+      "value": 431
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2023-Q3",
+      "value": 428
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2023-Q4",
+      "value": 426
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2024-Q1",
+      "value": 427
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2024-Q2",
+      "value": 429
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2024-Q3",
+      "value": 432
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2024-Q4",
+      "value": 434
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2025-Q1",
+      "value": 436
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2025-Q2",
+      "value": 438
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2025-Q3",
+      "value": 438
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2025-Q4",
+      "value": 439
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2026-Q1",
+      "value": 439
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2026-Q2",
+      "value": 439
+    },
+    {
+      "entity": "PayPal",
+      "group": "PayPal",
+      "period": "2026-Q3",
+      "value": 440
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2021-Q2",
+      "value": 22.5
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2021-Q3",
+      "value": 22.4
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2021-Q4",
+      "value": 22.7
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2022-Q1",
+      "value": 22.8
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2022-Q2",
+      "value": 22.9
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2022-Q3",
+      "value": 22.9
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2022-Q4",
+      "value": 23
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2023-Q1",
+      "value": 23.1
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2023-Q2",
+      "value": 23.2
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2023-Q3",
+      "value": 23.3
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2023-Q4",
+      "value": 23.4
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2024-Q1",
+      "value": 23.9
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2024-Q2",
+      "value": 24.2
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2024-Q3",
+      "value": 24.3
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2024-Q4",
+      "value": 25.2
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2025-Q1",
+      "value": 25.8
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2025-Q2",
+      "value": 26.5
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2025-Q3",
+      "value": 26.8
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2025-Q4",
+      "value": 27
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2026-Q1",
+      "value": 27.4
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2026-Q2",
+      "value": 28.4
+    },
+    {
+      "entity": "Robinhood",
+      "group": "Robinhood",
+      "period": "2026-Q3",
+      "value": 28.7
+    }
+  ]
+}

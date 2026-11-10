@@ -46,6 +46,10 @@ export interface DatasetMeta {
   /** Countries are measured in different years (household surveys): profiles
    *  rank each country's latest reading against the others', not one year's. */
   latestPerCountry?: boolean;
+  /** 'company' when the entities are companies, not countries (the SEC
+   *  company-metrics datasets): no map, no country profiles, kept out of the
+   *  country explorers. Absent = countries. */
+  entityType?: 'company';
 }
 
 export interface Dataset extends DatasetMeta {
@@ -98,6 +102,10 @@ export const datasets: Dataset[] = [...build(surveyModules), ...build(macroModul
 export function getDataset(slug: string): Dataset | undefined {
   return datasets.find((d) => d.slug === slug);
 }
+
+/** Datasets whose entities are countries — the ones maps, country profiles
+ *  and the cross-country explorers can use. */
+export const isCountryDataset = (d: Pick<DatasetMeta, 'entityType'>): boolean => d.entityType !== 'company';
 
 export function datasetsByKind(kind: DatasetKind): Dataset[] {
   return datasets.filter((d) => d.kind === kind);
