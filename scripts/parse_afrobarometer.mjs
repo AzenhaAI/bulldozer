@@ -1,25 +1,34 @@
 /**
- * Afrobarometer Round 9 → country-level indicators (weighted %), 39 countries.
+ * Afrobarometer Rounds 2–10 (2002–2025) → country-level indicators (weighted %).
  *
  *   node scripts/parse_afrobarometer.mjs
  *
- * Reads data/raw/afrobarometer/afro_r9_by_country.csv, written once per release
- * by scripts/tools/afro_r9_aggregate.py from the 80 MB merged .sav. This used
- * to read a CSV in a temporary folder, made by a script that no longer
- * existed; the rule it applied was recovered by reproducing its three series
- * exactly and is now written down in the aggregator.
+ * Reads data/raw/afrobarometer/afro_r<N>_by_country.csv, one per round, written
+ * once per release by scripts/tools/afro_aggregate.py from the merged .sav
+ * files (free on afrobarometer.org). The rule is the one first recovered for
+ * Round 9, which the aggregator still reproduces to the decimal; it finds each
+ * question in older rounds by its wording, and leaves out a round that asked it
+ * on a different answer scale.
+ *
+ * Each round is one point, labelled with the years its fieldwork spanned
+ * ("2021–2023"), worked out from the interview dates. One label per round keeps
+ * the countries of a round ranked against each other — per-country years would
+ * rank a 2025 interview only against the handful of countries asked in 2025 —
+ * the way LAPOP's "2025–2026" wave already is.
+ * Round 1 (1999–2001) is not used: its scales differ and it carries no dates.
  */
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { parseCsvObjects } from './lib/csv.mjs';
 import { gapminderRows, REGION_4, writeDataset, round } from './lib/datasets.mjs';
 
-const CSV = process.env.AFRO_CSV || join('data', 'raw', 'afrobarometer', 'afro_r9_by_country.csv');
-const PERIOD = '2023';
+const DIR = join('data', 'raw', 'afrobarometer');
+const ROUNDS = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const ALIAS = {
   'cabo verde': 'CPV', 'congo-brazzaville': 'COG', "côte d'ivoire": 'CIV', 'eswatini': 'SWZ',
-  'tanzania': 'TZA', 'the gambia': 'GMB', 'gambia': 'GMB', 'são tomé and príncipe': 'STP',
+  'tanzania': 'TZA', 'the gambia': 'GMB', 'gambia': 'GMB', 'gambia, the': 'GMB', 'são tomé and príncipe': 'STP',
+  'cote d’ivoire': 'CIV', "cote d'ivoire": 'CIV', 'swaziland': 'SWZ',
 };
 
 const DIMS = [
@@ -53,28 +62,43 @@ async function geoMap() {
 }
 
 async function main() {
-  let text;
-  text = await readFile(CSV, 'utf8');     // committed: a missing file is a real failure, not a skip
   const geo = await geoMap();
-  const rows = [...parseCsvObjects(text)];
   const resolve = (name) => geo.get(name.toLowerCase()) || (ALIAS[name.toLowerCase()] ? { iso: ALIAS[name.toLowerCase()], region: 'Africa' } : null);
-
+  const rounds = [];
+  for (const n of ROUNDS) {
+    const text = await readFile(join(DIR, `afro_r${n}_by_country.csv`), 'utf8'); // committed: a missing file is a real failure
+    const rows = [...parseCsvObjects(text)];
+    const ys = rows.map((r) => Number(r.year)).filter(Boolean);
+    const lo = Math.min(...ys), hi = Math.max(...ys);
+    rounds.push({ n, rows, label: lo === hi ? String(lo) : `${lo}–${hi}` });
+  }
+  const unresolved = new Set();
   for (const d of DIMS) {
-    const data = [];
-    for (const r of rows) {
-      const g = resolve(r.country); const v = Number(r[d.col]);
-      if (!g || r[d.col] === '' || Number.isNaN(v)) continue;
-      data.push({ entity: r.country, group: g.region, period: PERIOD, value: round(v, 1), iso: g.iso });
+    const byKey = new Map(); // iso|round label -> row
+    const asked = new Set();
+    for (const { n, rows, label } of rounds) {
+      for (const r of rows) {
+        const g = resolve(r.country); const v = Number(r[d.col]);
+        if (!g) { unresolved.add(r.country); continue; }
+        if (r[d.col] === '' || r[d.col] === undefined || Number.isNaN(v)) continue;
+        byKey.set(`${g.iso}|${label}`, { entity: r.country, group: g.region, period: label, value: round(v, 1), iso: g.iso });
+        asked.add(n);
+      }
     }
+    const data = [...byKey.values()].sort((a, b) => a.iso.localeCompare(b.iso) || a.period.localeCompare(b.period));
     if (!data.length) continue;
+    const rs = [...asked].sort((a, b) => a - b);
+    const years = data.flatMap((o) => o.period.split('–')).sort();
+    const span = `Rounds ${rs[0]}–${rs[rs.length - 1]}${rs.length < rs[rs.length - 1] - rs[0] + 1 ? ` (asked in ${rs.join(', ')})` : ''}, ${years[0]}–${years[years.length - 1]}`;
     await writeDataset('survey', d.slug, {
       title: d.title, valueLabel: d.valueLabel, unit: '%', changeMode: 'pp', topic: d.topic,
-      method: 'Weighted by withinwt_ea. Share of substantive answers; refused, don’t know and missing are left out of the base.',
-      summary: `${d.summary} Afrobarometer Round 9, ${PERIOD}.`,
-      source: 'Afrobarometer (Round 9)', license: 'Afrobarometer terms — public aggregates',
-      url: 'https://www.afrobarometer.org/', parsedAt: new Date().toISOString().slice(0, 10),
+      method: 'Weighted by withinwt (withinwt_ea from Round 8). Share of substantive answers; refused, don’t know, missing and not-asked are left out of the base. Each round is one point, dated by the years its fieldwork spanned.',
+      summary: `${d.summary} Afrobarometer ${span}.`,
+      source: 'Afrobarometer', license: 'Afrobarometer terms — public aggregates',
+      url: 'https://www.afrobarometer.org/data/', parsedAt: new Date().toISOString().slice(0, 10),
     }, data);
   }
-  console.log(`✓ Afrobarometer → ${rows.length} countries`);
+  if (unresolved.size) console.warn(`  – Afrobarometer: no ISO for ${[...unresolved].join(', ')}`);
+  console.log(`✓ Afrobarometer → rounds ${ROUNDS.join(', ')}`);
 }
 main().catch((e) => { console.error('✗ parse_afrobarometer failed:', e.message); process.exit(1); });

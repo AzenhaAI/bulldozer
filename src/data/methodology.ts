@@ -9,7 +9,7 @@ export function methodologyFor(slug: string): Methodology {
   if (slug.startsWith('ess-'))
     return { vintage: 'Pooled recent rounds (~2017–2023)', method: 'Weighted by post-stratification weight (pspwght); country mean on the 0–10 item.' };
   if (slug.startsWith('afro-'))
-    return { vintage: 'Round 9 (2021–2023)', method: 'Weighted by within-country weight (withinwt_ea); share giving the stated response.' };
+    return { vintage: 'Rounds 2–10 (2002–2025), one point per round', method: 'Weighted by within-country weight (withinwt; withinwt_ea from Round 8); share of substantive answers giving the stated response. A round that asked the question on a different answer scale is left out.' };
   if (slug.startsWith('wvs-'))
     return { vintage: 'Wave 7 (2017–2022)', method: 'Weighted by W_WEIGHT; Welzel cultural-values index, country mean.' };
   if (slug.startsWith('lits-'))

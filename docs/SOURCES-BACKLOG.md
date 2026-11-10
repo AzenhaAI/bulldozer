@@ -30,7 +30,7 @@ aggregator looks every column up by name per release.
 **Afrobarometer Round 9** — 3 → 18 series, 39 countries. The original three
 came from a CSV in a temporary folder whose script was lost; the rule was
 recovered by reproducing them exactly and now lives in
-`scripts/tools/afro_r9_aggregate.py`.
+`scripts/tools/afro_aggregate.py` (all rounds since Nov 2026).
 
 **IEA: TIMSS 2023, PIRLS 2021, ICCS 2022, ICILS 2023** — eight series. Direct
 downloads from iea.nl's data repository, no account. Checked against IEA's

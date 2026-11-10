@@ -170,7 +170,7 @@ const barometers: GuideEntry[] = [
     licence: 'Copyrighted; free to use with acknowledgement of the source.',
     url: 'https://www.afrobarometer.org/',
     sourceUrl: ['https://www.afrobarometer.org/about/', 'https://www.afrobarometer.org/data/data-sets/', 'https://www.afrobarometer.org/data/data-usage-and-access-policy/'],
-    inBullDozer: { used: true, match: ['Afrobarometer'], prefixes: ['afro'], licenceId: 'afrobarometer', note: 'Round 9' },
+    inBullDozer: { used: true, match: ['Afrobarometer'], prefixes: ['afro'], licenceId: 'afrobarometer', note: 'Rounds 2–10 (2002–2025)' },
   },
   {
     id: 'arab-barometer', name: 'Arab Barometer',
