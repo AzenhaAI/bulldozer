@@ -44,6 +44,8 @@ export interface DatasetMeta {
   /** Countries are measured in different years (household surveys): profiles
    *  rank each country's latest reading against the others', not one year's. */
   latestPerCountry?: boolean;
+  /** First projected year (IMF WEO): drawn dashed, left out of trends. */
+  projectedFrom?: string;
 }
 
 export interface Dataset extends DatasetMeta {
