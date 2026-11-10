@@ -410,6 +410,8 @@ table.data td.num { text-align: right; font-family: var(--mono); }
 .drv-val { text-align: right; font-family: var(--mono); font-size: 13px; }
 
 .chart-svg svg { width: 100%; height: auto; display: block; }
+.chart-svg .tc-narrow { display: none; }
+@media (max-width: 560px) { .chart-svg .tc-wide { display: none; } .chart-svg .tc-narrow { display: block; } }
 .chart-svg .axis { font-size: 11px; fill: var(--text-dim); font-family: var(--mono); }
 .chart-svg .axis-title { font-size: 12px; fill: var(--text-dim); }
 .chart-svg .pt-label { font-size: 11px; font-family: var(--font); }
