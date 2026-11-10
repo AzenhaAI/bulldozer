@@ -10,6 +10,26 @@ Eurobarometer (3), Afrobarometer, Arab Barometer, Latinobarómetro, Caucasus
 Barometer, LiTS, Wellcome Global Monitor, World Risk Poll, Digital News Report,
 PISA, EHIS, EU-SILC aggregates, DHS (1 country), RLMS.
 
+## Done — history and fresh waves (10 Nov 2026)
+
+Each from a free download with no account; every aggregator first reproduces
+the figures already published, then extends them. Aggregators live in
+`scripts/tools/`, their per-country output in `data/raw/`, so the weekly run
+needs nothing from the Mac.
+
+| Source | Before | Now | Aggregator |
+|---|---|---|---|
+| **Afrobarometer** | Round 9 only | Rounds 2–10 (2002–2025), 18 series, 45 countries, up to nine points each; Round 10 is new | `afro_aggregate.py` — finds each item by its wording per round, reads codes from value labels; Round 1 and Round 2's trust items left out (other scales) |
+| **Caucasus Barometer** | 2013 only | 2008–2024 (Azerbaijan to 2013), 3 series extended + 6 new | `cb_aggregate.py` — CRRC time-series files |
+| **World Risk Poll** | 2023 only | 2019, 2021, 2023, 2025 | `wrp_aggregate.py` — 2019 and 2025 wording changes noted per series |
+| **LiTS (EBRD)** | wave IV only | 2006, 2010, 2016, 2023 | `lits_aggregate.py` |
+| **Wellcome Global Monitor** | 2018 only | 2018 and 2020 (trust in science, scientists) | `wgm2020_aggregate.py` |
+
+Side effect: the azenha.ai upload hit Cloudflare Pages' 20,000-file cap. The
+287 per-dataset CSVs are now built on request by a Pages Function in the site
+repo (`functions/bulldozer/data/[file].js`), same URLs, same bytes. Headroom
+after that is about 250 files — a new dataset costs about four.
+
 ## Done
 
 **CSES** — added 2026-09-25 (`cses-*`, four series, 51–53 countries). Not the
@@ -105,3 +125,26 @@ with the required acknowledgement, and expect that they may say no.
 2. ~~**Pew**~~ — done 2026-10-11: Spring 2025, 18 series, 24 countries; every figure matches Pew's topline. Earlier waves would add trends.
 3. **ISSP + Eurobarometer** deeper — one GESIS account serves both.
 4. **Asian Barometer** — start the application now; it is the slow one.
+
+## Next — needs an account, so from the laptop (Nov 2026)
+
+GESIS data (ISSP, Eurobarometer, EVS — and so the EVS half of the
+Integrated Values Surveys) cannot go through an AI assistant: GESIS terms §4
+prohibit AI processing (see `src/data/licences.ts`). Those are aggregated by
+hand, as the ISSP modules already were, or taken from published tables
+(Eurobarometer's Commission tables are CC BY 4.0).
+
+| What | Where | Account | Who |
+|---|---|---|---|
+| **Global Flourishing Study** waves 1–2 (22 countries, 2023–24; wave 3 with a preregistration) | osf.io/c8hbk → "Wave 1, Year 1 Mid-Year and Wave 2 Data: Non-sensitive" (osf.io/xk3yc). Files are not listed to anonymous visitors | OSF (free) | download, then any session can aggregate |
+| **WVS trend file 1981–2022** (WVS waves 1–7; the WVS part of the IVS) | worldvaluessurvey.org/WVSEVStrend.jsp | WVS form, non-profit use | download; aggregation allowed (not GESIS) |
+| **ESS rounds 1–11** (2002–2023) | ess.sikt.no data portal | ESS (free), CC BY-NC-SA | download; aggregation allowed |
+| **EVS trend file 1981–2017** | GESIS ZA7503 | GESIS | by hand only |
+| **ISSP repeated modules** (Role of Government 1985–2016, Environment 1993–2020) | GESIS | GESIS | by hand only |
+| **Eurobarometer trends** | GESIS microdata, or Commission tables (CC BY 4.0) | GESIS / none | tables: any session; microdata: by hand |
+| **Pew Global Attitudes 2002–2024** (trend for the Spring 2025 items) | pewresearch.org/global/datasets | Pew (free), research use only | download |
+| **Asian Barometer** wave 6 | asianbarometer.org/datar?page=d10 | written application | apply now; weeks |
+
+Still to check for history from open sources: Arab Barometer waves I–VII
+(arabbarometer.org, form), Latinobarómetro rounds 2025/2026, SDR2 1966–2017
+(Harvard Dataverse, open).
