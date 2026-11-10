@@ -411,8 +411,6 @@ table.data td.num { text-align: right; font-family: var(--mono); }
 
 .chart-svg svg { width: 100%; height: auto; display: block; }
 .chart-svg .tc-narrow { display: none; }
-.legend-regions .lr-rate { font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--text-dim); margin-left: 6px; }
-.chart-svg .tc-note { font-size: 12px; color: var(--text-dim); margin: 8px 0 0; line-height: 1.45; }
 @media (max-width: 560px) { .chart-svg .tc-wide { display: none; } .chart-svg .tc-narrow { display: block; } }
 .chart-svg .axis { font-size: 11px; fill: var(--text-dim); font-family: var(--mono); }
 .chart-svg .axis-title { font-size: 12px; fill: var(--text-dim); }

@@ -171,7 +171,7 @@ const breadcrumbLd = {
       <div class="container">
         <h2>Trend over time</h2>
         <p class="sub">Group average by period, {[...new Set(ds.data.map((o) => o.period))].sort()[0]}–{[...new Set(ds.data.map((o) => o.period))].sort().at(-1)}.</p>
-        <TrendChart data={ds.data} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode === 'pct' ? 'pct' : 'pp'} projectedFrom={ds.projectedFrom} />
+        <TrendChart data={ds.data} unit={pctUnit} />
         <ChartActions name={`bulldozer-${ds.slug}-trend`} svg="#trend svg" hash="trend" />
       </div>
     </section>
