@@ -6,21 +6,44 @@ import { formatChange, pctClass } from '@lib/format';
 interface Props { data: Observation[]; unit?: string; mode?: ChangeMode }
 const { data, unit = '', mode = 'pct' } = Astro.props;
 const k = computeKpi(data, mode);
-const avg = k.totalEntities ? k.totalValue / k.totalEntities : 0;
+const avg = k.currCount ? k.totalValue / k.currCount : 0;
 const band = mode === 'pp' ? '±0.5pp band' : '±0.5% band';
+// One reading per country (or one period): nothing to compare, so the three
+// change cards become the spread of the values instead.
+const single = k.prevPeriod === k.currPeriod;
+const rows = single ? data.filter((o) => o.period === k.currPeriod && Number.isFinite(o.value)).sort((a, b) => a.value - b.value) : [];
+const med = rows.length ? (rows.length % 2 ? rows[(rows.length - 1) / 2].value : (rows[rows.length / 2 - 1].value + rows[rows.length / 2].value) / 2) : NaN;
+const f1 = (v: number) => `${Math.abs(v) >= 100 ? Math.round(v).toLocaleString('en-US') : v.toFixed(1)}${unit}`;
 ---
 <div class="kpi-row">
   <div class="kpi">
-    <div class="label">Avg ({k.currPeriod})</div>
+    <div class="label">Avg of {k.currCount} ({k.currPeriod === 'Latest' ? 'latest' : k.currPeriod})</div>
     <div class="value">{avg.toFixed(1)}{unit}</div>
     {k.prevPeriod === k.currPeriod
-      ? <div class="delta flat">single period</div>
+      ? <div class="delta flat">{k.currPeriod === 'Latest' ? 'latest year per country' : 'single period'}</div>
       : <div class={`delta ${pctClass(k.totalPct)}`}>{formatChange(k.totalPct, mode)} vs {k.prevPeriod}</div>}
   </div>
+  {single && rows.length ? <>
+  <div class="kpi">
+    <div class="label">Median</div>
+    <div class="value">{f1(med)}</div>
+    <div class="delta">half the countries above, half below</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Highest</div>
+    <div class="value">{f1(rows[rows.length - 1].value)}</div>
+    <div class="delta">{rows[rows.length - 1].entity}</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Lowest</div>
+    <div class="value">{f1(rows[0].value)}</div>
+    <div class="delta">{rows[0].entity}</div>
+  </div>
+  </> : <>
   <div class="kpi">
     <div class="label">Improving</div>
     <div class="value up">{k.growthCount}</div>
-    <div class="delta">of {k.totalEntities} tracked</div>
+    <div class="delta">of {k.totalEntities} in both periods</div>
   </div>
   <div class="kpi">
     <div class="label">Declining</div>
@@ -32,4 +55,5 @@ const band = mode === 'pp' ? '±0.5pp band' : '±0.5% band';
     <div class="value flat">{k.stableCount}</div>
     <div class="delta">{band}</div>
   </div>
+  </>}
 </div>

@@ -42,9 +42,18 @@ const DASH: Record<string, string> = {
 };
 const dashFile = Object.entries(DASH).find(([p]) => ds.slug.startsWith(p))?.[1];
 const additive = isAdditive(ds.unit);
-const groups = groupRollups(ds.data, ds.changeMode, additive);
-const single = isSinglePeriod(ds.data);
-const periodCount = new Set(ds.data.map((o) => o.period)).size;
+// Series measured in different years per country (household surveys): the
+// summary, group table and full ranking use each country's latest reading,
+// labelled "Latest". Where every country has just one reading, there is no
+// trend and nothing moved, so those sections are left out.
+const latestData = ds.latestPerCountry
+  ? [...ds.data.reduce((m, o) => (!m.has(o.iso ?? o.entity) || String(o.period) > String(m.get(o.iso ?? o.entity)!.period) ? m.set(o.iso ?? o.entity, o) : m), new Map<string, typeof ds.data[number]>()).values()]
+      .map((o) => ({ ...o, period: 'Latest' }))
+  : ds.data;
+const oneEach = !!ds.latestPerCountry && latestData.length === ds.data.length;
+const groups = groupRollups(latestData, ds.changeMode, additive);
+const single = isSinglePeriod(latestData) || oneEach;
+const periodCount = oneEach ? 1 : new Set(ds.data.map((o) => o.period)).size;
 const pairing = PAIRINGS[ds.slug];
 const related = datasets.filter((d) => d.topic === ds.topic && d.slug !== ds.slug).slice(0, 6);
 // prev/next within the same section + topic, alphabetical — matches list order
@@ -56,6 +65,7 @@ const pctUnit = ds.unit === '%' ? '%' : '';
 const panelIndicator = [{
   slug: ds.slug, title: ds.title, kind: ds.kind, unit: ds.unit, valueLabel: ds.valueLabel,
   changeMode: ds.changeMode, periods: [...new Set(ds.data.map((o) => o.period))].sort(),
+  latestPerCountry: !!ds.latestPerCountry,
 }];
 const backHref = ds.kind === 'survey' ? `${base}/surveys/` : `${base}/macro/`;
 const active = ds.kind === 'survey' ? 'surveys' : 'macro';
@@ -143,7 +153,7 @@ const breadcrumbLd = {
 
   <section class="section" style="padding-top:0">
     <div class="container">
-      <KpiRow data={ds.data} unit={pctUnit} mode={ds.changeMode} />
+      <KpiRow data={latestData} unit={pctUnit} mode={ds.changeMode} />
     </div>
   </section>
 
@@ -192,7 +202,7 @@ const breadcrumbLd = {
       <div class="container">
         <h2>By group</h2>
         <p class="sub">Change by group, latest period.</p>
-        <GroupChart data={ds.data} mode={ds.changeMode} additive={additive} />
+        <GroupChart data={latestData} mode={ds.changeMode} additive={additive} />
         <div style="height:24px"></div>
         <table class="data">
           <thead><tr><th>Group</th><th class="num">Members</th><th class="num">{additive ? 'Total' : 'Avg'}</th><th class="num">Change</th></tr></thead>
@@ -218,7 +228,7 @@ const breadcrumbLd = {
         Every entity in this dataset, in HTML. The interactive panel above shows
         the same numbers; this is the one that survives without JavaScript.
       </p>
-      <RankTable data={ds.data} unit={pctUnit} mode={ds.changeMode} valueLabel={ds.valueLabel} />
+      <RankTable data={latestData} unit={pctUnit} mode={ds.changeMode} valueLabel={ds.valueLabel} />
     </div>
   </section>
 

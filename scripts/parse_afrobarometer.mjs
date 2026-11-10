@@ -21,6 +21,7 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { parseCsvObjects } from './lib/csv.mjs';
 import { gapminderRows, REGION_4, writeDataset, round } from './lib/datasets.mjs';
+import countryNames from '../src/data/country-names.json' with { type: 'json' };
 
 const DIR = join('data', 'raw', 'afrobarometer');
 const ROUNDS = [2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -81,7 +82,8 @@ async function main() {
         const g = resolve(r.country); const v = Number(r[d.col]);
         if (!g) { unresolved.add(r.country); continue; }
         if (r[d.col] === '' || r[d.col] === undefined || Number.isNaN(v)) continue;
-        byKey.set(`${g.iso}|${label}`, { entity: r.country, group: g.region, period: label, value: round(v, 1), iso: g.iso });
+        // One name per country across rounds (files spell Gambia, Cabo Verde, Côte d'Ivoire, Eswatini several ways).
+        byKey.set(`${g.iso}|${label}`, { entity: countryNames[g.iso]?.common || r.country, group: g.region, period: label, value: round(v, 1), iso: g.iso });
         asked.add(n);
       }
     }

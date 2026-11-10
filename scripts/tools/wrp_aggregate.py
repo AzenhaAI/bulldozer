@@ -63,7 +63,13 @@ def main(d):
         path = os.path.join(d, f)
         _, meta = pyreadstat.read_sav(path, metadataonly=True)
         cc = country_column(meta)
-        df, meta = pyreadstat.read_sav(path, usecols=[cc, 'WGT'] + [q for q, _ in items.values()])
+        # 21_wrp.sav also carries the 2019 interviews (Year = 2019): keep only
+        # the wave's own year, or "2021" would blend in 2019 and show 2019 values
+        # for countries not surveyed in 2021 (caught by a fact-check, 10 Nov 2026).
+        ycol = next((c for c in ('Year', 'YEAR_WAVE') if c in meta.column_names), None)
+        df, meta = pyreadstat.read_sav(path, usecols=[cc, 'WGT'] + ([ycol] if ycol else []) + [q for q, _ in items.values()])
+        if ycol:
+            df = df[df[ycol] == int(wave)]
         lab = meta.variable_value_labels.get(cc, {})
         unknown = set()
         for key, g in df.groupby(cc):

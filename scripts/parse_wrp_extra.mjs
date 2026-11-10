@@ -54,7 +54,7 @@ async function main() {
       title: d.title, valueLabel: d.valueLabel, unit: '%', changeMode: 'pp', topic: d.topic,
       method: 'Weighted by WGT. Share of substantive answers; does not apply, don’t know and refused are left out of the base.',
       summary: d.summary, ...COMMON,
-    }, data);
+    }, data, { carryForward: false }); // every wave is recomputed from the microdata; nothing to carry
   }
   console.log(`✓ World Risk Poll: ${DIMS.length} datasets from ${rows.length} country-waves`);
 }

@@ -25,6 +25,8 @@ export interface Kpi {
   totalEntities: number;
   currPeriod: string;
   prevPeriod: string;
+  /** Countries with a value in the current period (the average's base). */
+  currCount: number;
 }
 
 export interface Change {
@@ -76,30 +78,27 @@ export function computeKpi(data: Observation[], mode: ChangeMode = 'pct'): Kpi {
   const curr = entityTotals(data, currPeriod);
   const prev = entityTotals(data, prevPeriod);
 
-  const entities = new Set([...curr.keys(), ...prev.keys()]);
+  // Change is only meaningful for a country present in both periods: one that was
+  // not surveyed is not a zero (a missing Ethiopia showed as "0%, −85pp").
+  const both = [...curr.keys()].filter((e) => prev.has(e));
   let growthCount = 0;
   let declineCount = 0;
   let stableCount = 0;
-  for (const e of entities) {
-    if (!prev.has(e)) continue; // no baseline → not classifiable
-    const change = changeValue(curr.get(e) ?? 0, prev.get(e) ?? 0, mode);
+  for (const e of both) {
+    const change = changeValue(curr.get(e)!, prev.get(e)!, mode);
     if (change > STABLE_BAND) growthCount++;
     else if (change < -STABLE_BAND) declineCount++;
     else stableCount++;
   }
 
-  const sum = (m: Map<string, number>) => [...m.values()].reduce((a, b) => a + b, 0);
-  const mean = (m: Map<string, number>) => (m.size ? sum(m) / m.size : 0);
+  const sum = (m: Map<string, number>, keys?: string[]) => (keys ?? [...m.keys()]).reduce((a, k) => a + (m.get(k) ?? 0), 0);
   const totalValue = sum(curr);
-
-  // Headline delta: rates move in points (mean change), volumes in percent.
-  const headlineDelta =
-    mode === 'pp'
-      ? Math.round((mean(curr) - mean(prev)) * 10) / 10
-      : (() => {
-          const totalPrev = sum(prev);
-          return totalPrev ? Math.round(((totalValue - totalPrev) / totalPrev) * 100) : 0;
-        })();
+  // Headline delta over the same countries in both periods, so a change in who
+  // was surveyed does not read as a change in the value.
+  const headlineDelta = !both.length ? 0
+    : mode === 'pp'
+      ? Math.round(((sum(curr, both) - sum(prev, both)) / both.length) * 10) / 10
+      : (() => { const tp = sum(prev, both); return tp ? Math.round(((sum(curr, both) - tp) / tp) * 100) : 0; })();
 
   return {
     totalValue,
@@ -107,7 +106,8 @@ export function computeKpi(data: Observation[], mode: ChangeMode = 'pct'): Kpi {
     growthCount,
     declineCount,
     stableCount,
-    totalEntities: entities.size,
+    totalEntities: both.length,
+    currCount: curr.size,
     currPeriod,
     prevPeriod,
   };
@@ -119,11 +119,11 @@ export function computeChanges(data: Observation[], mode: ChangeMode = 'pct'): C
   const curr = entityTotals(data, currPeriod);
   const prev = entityTotals(data, prevPeriod);
 
-  const entities = new Set([...curr.keys(), ...prev.keys()]);
   const records: Change[] = [];
-  for (const e of entities) {
-    const cv = curr.get(e) ?? 0;
-    const pv = prev.get(e) ?? 0;
+  for (const e of curr.keys()) {
+    if (!prev.has(e)) continue; // not measured last period: no change to report
+    const cv = curr.get(e)!;
+    const pv = prev.get(e)!;
     if (mode === 'pct' && pv === 0) continue; // undefined percent change
     records.push({ entity: e, curr: cv, prev: pv, delta: cv - pv, pct: changeValue(cv, pv, mode) });
   }
@@ -151,7 +151,8 @@ export function topByVolume(data: Observation[], n = 15): Change[] {
     .sort((a, b) => b[1] - a[1])
     .slice(0, n)
     .map(([entity, cv]) => {
-      const pv = prev.get(entity) ?? 0;
+      const pv = prev.get(entity);
+      if (pv == null) return { entity, curr: cv, prev: NaN, delta: NaN, pct: NaN };
       const delta = cv - pv;
       return { entity, curr: cv, prev: pv, delta, pct: pv ? (delta / pv) * 100 : 0 };
     });
@@ -186,17 +187,20 @@ export function groupRollups(data: Observation[], mode: ChangeMode = 'pct', addi
     const currRows = rows.filter((r) => r.period === currPeriod);
     const prevRows = rows.filter((r) => r.period === prevPeriod);
     const currSum = currRows.reduce((a, b) => a + b.value, 0);
-    const prevSum = prevRows.reduce((a, b) => a + b.value, 0);
     const members = currRows.length;
     if (members === 0) continue;
-
-    // Sum only for additive volumes; otherwise the simple cross-country mean.
-    const currMean = currSum / members;
-    const prevMean = prevSum / (prevRows.length || 1);
-    const value = additive ? r1(currSum) : r1(currMean);
+    const value = additive ? r1(currSum) : r1(currSum / members);
+    // The change compares the same members in both periods.
+    const prevBy = new Map(prevRows.map((r) => [r.entity, r.value]));
+    const pair = currRows.filter((r) => prevBy.has(r.entity));
+    const pcs = pair.reduce((a, b) => a + b.value, 0), pps = pair.reduce((a, b) => a + prevBy.get(b.entity)!, 0);
+    const currMean = pair.length ? pcs / pair.length : 0;
+    const prevMean = pair.length ? pps / pair.length : 0;
+    const prevSum = pps;
+    const currSumPair = pcs;
     let pct: number;
     if (mode === 'pp') pct = r1(currMean - prevMean); // points change of the mean
-    else if (additive) pct = r1(prevSum ? ((currSum - prevSum) / prevSum) * 100 : 0);
+    else if (additive) pct = r1(prevSum ? ((currSumPair - prevSum) / prevSum) * 100 : 0);
     else pct = r1(prevMean ? ((currMean - prevMean) / prevMean) * 100 : 0);
     result.push({ group, members: new Set(currRows.map((r) => r.entity)).size, value, pct });
   }

@@ -151,8 +151,10 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
   let initialPeriod = params.get('p');
   function fillPeriods() {
     const m = meta(); selP.innerHTML = '';
-    for (const p of m.periods) { const o = document.createElement('option'); o.value = p; o.textContent = p; selP.appendChild(o); }
-    state.period = (initialPeriod && m.periods.includes(initialPeriod)) ? initialPeriod : m.periods[m.periods.length - 1];
+    // Countries measured in different years: open on each one's latest reading.
+    const opts = m.latestPerCountry ? ['latest', ...m.periods] : m.periods;
+    for (const p of opts) { const o = document.createElement('option'); o.value = p; o.textContent = p === 'latest' ? 'Latest available' : p; selP.appendChild(o); }
+    state.period = (initialPeriod && opts.includes(initialPeriod)) ? initialPeriod : (m.latestPerCountry ? 'latest' : m.periods[m.periods.length - 1]);
     initialPeriod = null; // only honour the URL period on first load
     selP.value = state.period;
   }
@@ -170,12 +172,14 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
 
   function rowsFor(ds) {
     const m = meta();
+    const latest = state.period === 'latest';
     const idx = m.periods.indexOf(state.period);
-    const prevP = idx > 0 ? m.periods[idx - 1] : null;
+    const prevP = !latest && idx > 0 ? m.periods[idx - 1] : null;
     const byEnt = new Map();
     for (const o of ds.data) {
       let r = byEnt.get(o.entity);
       if (!r) byEnt.set(o.entity, r = { entity: o.entity, group: o.group, iso: o.iso });
+      if (latest) { if (r.year == null || String(o.period) > String(r.year)) { r.value = o.value; r.year = o.period; } continue; }
       if (o.period === state.period) r.value = o.value;
       if (o.period === prevP) r.prev = o.value;
     }
@@ -265,7 +269,8 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView,
       const cls = r.change == null ? 'flat' : moveClass(r.change);
       const chg = r.change == null ? '' : `<em class="${cls}">${fmtChange(r.change, m.changeMode)}</em>`;
       const rk = state.sortDir === 'name' ? `<i class="bar-rank">#${rankOf.get(r.entity)}</i>` : '';
-      return `<div class="bar-row"><span class="bar-name" title="${r.entity}">${rk}${flag(r.iso)}${r.entity}</span><span class="bar-track">${guides}<span class="bar-fill move-${cls}" style="width:${w}%"></span></span><span class="bar-val">${fmtNum(r.value)}${unit}${chg}</span></div>`;
+      const yr = r.year != null ? `<em class="flat">${r.year}</em>` : '';
+      return `<div class="bar-row"><span class="bar-name" title="${r.entity}">${rk}${flag(r.iso)}${r.entity}</span><span class="bar-track">${guides}<span class="bar-fill move-${cls}" style="width:${w}%"></span></span><span class="bar-val">${fmtNum(r.value)}${unit}${chg}${yr}</span></div>`;
     }).join('');
   }
 
