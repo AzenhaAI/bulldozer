@@ -100,7 +100,10 @@ export function pickPeriods(counts, maxYear) {
 // "Swaziland", Kosovo as itself.
 const ISO_BY_NAME = { Swaziland: 'SWZ', Eswatini: 'SWZ', Kosovo: 'XKX' };
 
-export async function writeDataset(kind, slug, meta, data) {
+/** `opts.carryForward: false` turns off the keep-newer-rows guard below, for a
+ *  source whose every release replaces the last one whole — an IMF WEO edition
+ *  that withdraws a country's projection must not have it carried forward. */
+export async function writeDataset(kind, slug, meta, data, opts = {}) {
   for (const r of data) if (!r.iso && ISO_BY_NAME[r.entity]) r.iso = ISO_BY_NAME[r.entity];
   const dir = join(ROOT, 'src', 'data', kind === 'macro' ? 'macro' : 'surveys');
   await mkdir(dir, { recursive: true });
@@ -130,7 +133,7 @@ export async function writeDataset(kind, slug, meta, data) {
   };
   const nowNewest = newest(data);
   const kept = [];
-  for (const [k, p] of newest(prevData)) {
+  for (const [k, p] of (opts.carryForward === false ? [] : newest(prevData))) {
     const n = nowNewest.get(k);
     if (n === undefined || p <= n) continue; // a country gone entirely is the entity-shrink guard's case
     for (const r of prevData) if (key(r) === k && String(r.period) > n) { data.push(r); kept.push(`${k} ${r.period}`); }

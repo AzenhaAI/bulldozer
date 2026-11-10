@@ -4,7 +4,11 @@
  *   node scripts/parse_macro.mjs
  *   IMF_WEO_CSV=/path/to.csv REF_YEAR=2026 node scripts/parse_macro.mjs
  *
- * Source is local/curated (tableau_data); output JSON is committed.
+ * Source: a local tidy WEO export when present (the Mac); otherwise the IMF's
+ * open DataMapper API, which always carries the latest WEO edition — so the
+ * weekly run picks up a new edition (April, October) without the Mac. Country
+ * names and regions are kept from our own files, so a refresh changes numbers,
+ * not labels. Output JSON is committed.
  */
 import { readFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
@@ -58,20 +62,72 @@ const INDICATORS = {
     summary: 'General government net lending/borrowing as a share of GDP.' },
 };
 
+const DATAMAPPER = 'https://www.imf.org/external/datamapper/api/v1';
+// The IMF's CDN refuses requests without a User-Agent (Access Denied page).
+const IMF_HEADERS = { 'User-Agent': 'Mozilla/5.0 (compatible; BullDozer data refresh; +https://azenha.ai/bulldozer/)', Accept: 'application/json' };
+
+/** The latest WEO from the IMF DataMapper API, as rows shaped like the tidy CSV.
+ *  Aggregates (ADVEC, EURO, WEOWORLD…) are dropped by keeping real ISO-3 codes;
+ *  names and regions come from the dataset already on disk, else Gapminder. */
+async function fromDataMapper() {
+  const { readFile: rf } = await import('node:fs/promises');
+  const alpha = JSON.parse(await rf(new URL('../src/data/iso-alpha2.json', import.meta.url), 'utf8'));
+  const known = new Map();
+  try {
+    const cur = JSON.parse(await rf(new URL('../src/data/macro/imf-gdp-growth.json', import.meta.url), 'utf8'));
+    for (const o of cur.data) if (o.iso) known.set(o.iso, { name: o.entity, region: o.group });
+  } catch { /* first run */ }
+  // IMF's own codes for two territories, and Syria, back in the WEO from Oct 2026;
+  // regions in the WEO taxonomy the other rows use.
+  for (const [iso, name, region] of [['UVK', 'Kosovo', 'Europe & Central Asia'], ['WBG', 'West Bank and Gaza', 'Middle East & North Africa'],
+    ['SYR', 'Syria', 'Middle East & North Africa']]) if (!known.has(iso)) known.set(iso, { name, region });
+  const { gapminderRows, REGION_4 } = await import('./lib/datasets.mjs');
+  const geo = new Map();
+  for (const r of await gapminderRows()) {
+    const a3 = (r.iso3166_1_alpha3 || '').toUpperCase();
+    if (a3) geo.set(a3, { name: r.name, region: REGION_4[r.world_4region] || 'Other' });
+  }
+  const meta = await (await fetch(`${DATAMAPPER}/indicators`, { headers: IMF_HEADERS })).json();
+  const edition = (meta.indicators?.NGDP_RPCH?.source || '').match(/\(([^)]+)\)/)?.[1] || 'latest';
+  const rows = [];
+  for (const code of Object.keys(INDICATORS)) {
+    const j = await (await fetch(`${DATAMAPPER}/${code}`, { headers: IMF_HEADERS })).json();
+    const byIso = j.values?.[code] || {};
+    for (const [iso, years] of Object.entries(byIso)) {
+      if (!(iso in alpha) && !known.has(iso)) continue; // UVK, WBG: IMF codes we already use
+      const k = known.get(iso) || geo.get(iso);
+      if (!k) continue;
+      for (const [year, value] of Object.entries(years)) {
+        rows.push({ indicator_code: code, country: k.name, region: k.region, iso3: iso, year, value: String(value), _regionEn: true });
+      }
+    }
+  }
+  return { rows, edition };
+}
+
 async function main() {
-  let text;
+  let text = null;
   try {
     text = await readFile(SRC, 'utf8');
-  } catch {
-    console.warn(`– IMF WEO source not found (${SRC}); skipping macro. Set IMF_WEO_CSV to override.`);
-    return; // soft-skip so CI without the local curated file still succeeds
+  } catch { /* no local export: use the API below */ }
+  let apiRows = null;
+  if (text === null) {
+    try {
+      const { rows, edition } = await fromDataMapper();
+      apiRows = rows;
+      SOURCE.source = `IMF World Economic Outlook (${edition.replace(/^(\w{3})\w* (\d{4})$/, '$1 $2')})`;
+      SOURCE.url = 'https://www.imf.org/external/datamapper/';
+    } catch (e) {
+      console.warn(`– IMF WEO: no local export and the DataMapper API failed (${e.message}); skipped.`);
+      return;
+    }
   }
 
   // Collect: code → country → { region, byYear: {year: value} }
   const collected = {};
   for (const code of Object.keys(INDICATORS)) collected[code] = new Map();
 
-  for (const row of parseCsvObjects(text)) {
+  for (const row of apiRows || parseCsvObjects(text)) {
     const code = row.indicator_code;
     if (!collected[code]) continue;
     const value = Number(row.value);
@@ -79,13 +135,13 @@ async function main() {
     const map = collected[code];
     let rec = map.get(row.country);
     if (!rec) {
-      rec = { region: enRegion(row.region), iso: (row.iso3 || '').toUpperCase(), byYear: {} };
+      rec = { region: row._regionEn ? row.region : enRegion(row.region), iso: (row.iso3 || '').toUpperCase(), byYear: {} };
       map.set(row.country, rec);
     }
     rec.byYear[row.year] = value;
   }
 
-  console.log(`IMF WEO → ${SRC.split('/').pop()} (ref year ${REF_YEAR})`);
+  console.log(`IMF WEO → ${apiRows ? SOURCE.source + ' via DataMapper' : SRC.split('/').pop()} (ref year ${REF_YEAR})`);
   for (const [code, cfg] of Object.entries(INDICATORS)) {
     const map = collected[code];
     const allYears = new Set();
@@ -112,7 +168,7 @@ async function main() {
       valueLabel: cfg.valueLabel,
       changeMode: cfg.changeMode,
       ...SOURCE,
-    }, data);
+    }, data, { carryForward: false }); // each WEO edition replaces the last whole
   }
 }
 

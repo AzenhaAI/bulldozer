@@ -9,7 +9,7 @@
     "source": "World Bank Open Data",
     "license": "CC BY 4.0",
     "url": "https://data.worldbank.org/",
-    "parsedAt": "2026-07-07",
+    "parsedAt": "2026-11-10",
     "kind": "macro"
   },
   "data": [
@@ -1248,8 +1248,8 @@
     {
       "entity": "Sri Lanka",
       "group": "Asia",
-      "period": "2023",
-      "value": 327.51,
+      "period": "2024",
+      "value": 302.12,
       "iso": "LKA"
     },
     {
