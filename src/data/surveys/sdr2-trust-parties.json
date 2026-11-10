@@ -5,852 +5,3198 @@
     "unit": "index 0–10",
     "changeMode": "pp",
     "topic": "attitudes",
-    "summary": "Average trust in political parties on a 0–10 scale, harmonized across survey projects. SDR2 pooled waves.",
+    "summary": "Average trust in political parties on a 0–10 scale, harmonized across survey projects. SDR2, 1966–2017 by five-year period; a period pools the projects that surveyed the country then.",
+    "latestPerCountry": true,
     "source": "SDR2 — Survey Data Recycling (Harvard Dataverse)",
-    "license": "SDR2 terms — public aggregates",
-    "url": "https://dataharmonization.org/",
-    "parsedAt": "2026-06-28",
+    "license": "CC0 1.0",
+    "url": "https://doi.org/10.7910/DVN/YOCX0M",
+    "parsedAt": "2026-11-10",
     "kind": "survey"
   },
   "data": [
     {
       "entity": "Andorra",
       "group": "Europe",
-      "period": "2017",
+      "period": "2005–2009",
       "value": 3.529,
       "iso": "AND"
     },
     {
       "entity": "Albania",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.562,
+      "period": "1995–1999",
+      "value": 3.876,
+      "iso": "ALB"
+    },
+    {
+      "entity": "Albania",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 3.781,
+      "iso": "ALB"
+    },
+    {
+      "entity": "Albania",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.127,
+      "iso": "ALB"
+    },
+    {
+      "entity": "Albania",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.018,
+      "iso": "ALB"
+    },
+    {
+      "entity": "Albania",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.965,
       "iso": "ALB"
     },
     {
       "entity": "Armenia",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.254,
+      "period": "1995–1999",
+      "value": 3.118,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.556,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.437,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 2.781,
       "iso": "ARM"
     },
     {
       "entity": "Argentina",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.084,
+      "period": "1995–1999",
+      "value": 3.117,
+      "iso": "ARG"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 2.501,
+      "iso": "ARG"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.007,
+      "iso": "ARG"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.432,
+      "iso": "ARG"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 3.28,
       "iso": "ARG"
     },
     {
       "entity": "Austria",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.835,
+      "period": "1995–1999",
+      "value": 3.727,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 3.728,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.704,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 4.243,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.857,
       "iso": "AUT"
     },
     {
       "entity": "Australia",
       "group": "Asia",
-      "period": "2017",
-      "value": 3.645,
+      "period": "1995–1999",
+      "value": 3.724,
+      "iso": "AUS"
+    },
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 3.683,
+      "iso": "AUS"
+    },
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 3.498,
       "iso": "AUS"
     },
     {
       "entity": "Azerbaijan",
       "group": "Europe",
-      "period": "2017",
-      "value": 4.573,
+      "period": "1995–1999",
+      "value": 5.134,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 4.949,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 4.125,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 5.37,
       "iso": "AZE"
     },
     {
       "entity": "Bosnia and Herzegovina",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.108,
+      "period": "2000–2004",
+      "value": 3.466,
+      "iso": "BIH"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.092,
+      "iso": "BIH"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.253,
+      "iso": "BIH"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 2.739,
       "iso": "BIH"
     },
     {
       "entity": "Bangladesh",
       "group": "Asia",
-      "period": "2017",
-      "value": 6.08,
+      "period": "1995–1999",
+      "value": 5.876,
+      "iso": "BGD"
+    },
+    {
+      "entity": "Bangladesh",
+      "group": "Asia",
+      "period": "2000–2004",
+      "value": 6.274,
       "iso": "BGD"
     },
     {
       "entity": "Belgium",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.926,
+      "period": "2000–2004",
+      "value": 3.821,
+      "iso": "BEL"
+    },
+    {
+      "entity": "Belgium",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.993,
+      "iso": "BEL"
+    },
+    {
+      "entity": "Belgium",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 4.025,
+      "iso": "BEL"
+    },
+    {
+      "entity": "Belgium",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.724,
       "iso": "BEL"
     },
     {
       "entity": "Burkina Faso",
       "group": "Africa",
-      "period": "2017",
+      "period": "2005–2009",
       "value": 3.733,
       "iso": "BFA"
     },
     {
       "entity": "Bulgaria",
       "group": "Europe",
-      "period": "2017",
-      "value": 2.809,
+      "period": "1990–1994",
+      "value": 3.494,
       "iso": "BGR"
     },
     {
-      "entity": "Bahrain",
-      "group": "Asia",
-      "period": "2017",
-      "value": 4.796,
-      "iso": "BHR"
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 3.54,
+      "iso": "BGR"
     },
     {
-      "entity": "Bolivia, Plurinational State of",
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 2.943,
+      "iso": "BGR"
+    },
+    {
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 2.435,
+      "iso": "BGR"
+    },
+    {
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 2.596,
+      "iso": "BGR"
+    },
+    {
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.102,
+      "iso": "BGR"
+    },
+    {
+      "entity": "Bolivia",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.01,
+      "period": "1995–1999",
+      "value": 3.143,
+      "iso": "BOL"
+    },
+    {
+      "entity": "Bolivia",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 2.45,
+      "iso": "BOL"
+    },
+    {
+      "entity": "Bolivia",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.079,
+      "iso": "BOL"
+    },
+    {
+      "entity": "Bolivia",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.259,
+      "iso": "BOL"
+    },
+    {
+      "entity": "Bolivia",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 3.169,
       "iso": "BOL"
     },
     {
       "entity": "Brazil",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.045,
+      "period": "1995–1999",
+      "value": 3.14,
+      "iso": "BRA"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 3.01,
+      "iso": "BRA"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.183,
+      "iso": "BRA"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.138,
+      "iso": "BRA"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 2.394,
       "iso": "BRA"
     },
     {
       "entity": "Belarus",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.632,
+      "period": "1990–1994",
+      "value": 3.494,
+      "iso": "BLR"
+    },
+    {
+      "entity": "Belarus",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 2.965,
+      "iso": "BLR"
+    },
+    {
+      "entity": "Belarus",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 3.919,
+      "iso": "BLR"
+    },
+    {
+      "entity": "Belarus",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 4.24,
+      "iso": "BLR"
+    },
+    {
+      "entity": "Belarus",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 4.373,
+      "iso": "BLR"
+    },
+    {
+      "entity": "Belarus",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.672,
       "iso": "BLR"
     },
     {
       "entity": "Belize",
       "group": "Americas",
-      "period": "2017",
-      "value": 4.164,
+      "period": "2005–2009",
+      "value": 4.23,
+      "iso": "BLZ"
+    },
+    {
+      "entity": "Belize",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 4.144,
       "iso": "BLZ"
     },
     {
       "entity": "Canada",
       "group": "Americas",
-      "period": "2017",
-      "value": 4.231,
+      "period": "2000–2004",
+      "value": 3.89,
+      "iso": "CAN"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 4.322,
+      "iso": "CAN"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 4.188,
+      "iso": "CAN"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 4.497,
       "iso": "CAN"
     },
     {
       "entity": "Switzerland",
       "group": "Europe",
-      "period": "2017",
-      "value": 4.67,
+      "period": "1995–1999",
+      "value": 3.949,
+      "iso": "CHE"
+    },
+    {
+      "entity": "Switzerland",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 4.58,
+      "iso": "CHE"
+    },
+    {
+      "entity": "Switzerland",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 4.501,
+      "iso": "CHE"
+    },
+    {
+      "entity": "Switzerland",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 4.937,
+      "iso": "CHE"
+    },
+    {
+      "entity": "Switzerland",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 5.24,
       "iso": "CHE"
     },
     {
       "entity": "Chile",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.484,
+      "period": "1990–1994",
+      "value": 5.185,
+      "iso": "CHL"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "1995–1999",
+      "value": 3.77,
+      "iso": "CHL"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 3.173,
+      "iso": "CHL"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.546,
+      "iso": "CHL"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.535,
+      "iso": "CHL"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 2.694,
       "iso": "CHL"
     },
     {
       "entity": "China",
       "group": "Asia",
-      "period": "2017",
-      "value": 7.469,
+      "period": "1990–1994",
+      "value": 6.543,
+      "iso": "CHN"
+    },
+    {
+      "entity": "China",
+      "group": "Asia",
+      "period": "2000–2004",
+      "value": 8.107,
+      "iso": "CHN"
+    },
+    {
+      "entity": "China",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 7.468,
+      "iso": "CHN"
+    },
+    {
+      "entity": "China",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 7.149,
       "iso": "CHN"
     },
     {
       "entity": "Colombia",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.202,
+      "period": "1995–1999",
+      "value": 2.887,
+      "iso": "COL"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 3.014,
+      "iso": "COL"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.539,
+      "iso": "COL"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.284,
+      "iso": "COL"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 2.871,
       "iso": "COL"
     },
     {
       "entity": "Costa Rica",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.384,
+      "period": "1995–1999",
+      "value": 3.389,
+      "iso": "CRI"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 3.269,
+      "iso": "CRI"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.42,
+      "iso": "CRI"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.597,
+      "iso": "CRI"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 3.064,
       "iso": "CRI"
     },
     {
       "entity": "Cyprus",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.299,
+      "period": "2005–2009",
+      "value": 3.871,
       "iso": "CYP"
     },
     {
-      "entity": "Czech Republic",
+      "entity": "Cyprus",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.282,
+      "period": "2010–2014",
+      "value": 3.073,
+      "iso": "CYP"
+    },
+    {
+      "entity": "Cyprus",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 2.545,
+      "iso": "CYP"
+    },
+    {
+      "entity": "Czechia",
+      "group": "Europe",
+      "period": "1990–1994",
+      "value": 4.47,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Czechia",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 3.825,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Czechia",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 3.188,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Czechia",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.026,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Czechia",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 2.96,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Czechia",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.256,
       "iso": "CZE"
     },
     {
       "entity": "Germany",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.638,
+      "period": "2000–2004",
+      "value": 3.309,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.397,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.654,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 4.223,
       "iso": "DEU"
     },
     {
       "entity": "Denmark",
       "group": "Europe",
-      "period": "2017",
-      "value": 4.909,
+      "period": "2000–2004",
+      "value": 4.754,
+      "iso": "DNK"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 5.208,
+      "iso": "DNK"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 4.903,
+      "iso": "DNK"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 4.309,
       "iso": "DNK"
     },
     {
       "entity": "Dominican Republic",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.544,
+      "period": "2000–2004",
+      "value": 3.705,
+      "iso": "DOM"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.764,
+      "iso": "DOM"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.411,
+      "iso": "DOM"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 3.33,
       "iso": "DOM"
     },
     {
       "entity": "Algeria",
       "group": "Africa",
-      "period": "2017",
-      "value": 3.017,
+      "period": "2000–2004",
+      "value": 2.978,
+      "iso": "DZA"
+    },
+    {
+      "entity": "Algeria",
+      "group": "Africa",
+      "period": "2005–2009",
+      "value": 2.961,
+      "iso": "DZA"
+    },
+    {
+      "entity": "Algeria",
+      "group": "Africa",
+      "period": "2010–2014",
+      "value": 3.19,
+      "iso": "DZA"
+    },
+    {
+      "entity": "Algeria",
+      "group": "Africa",
+      "period": "2015–2017",
+      "value": 2.779,
       "iso": "DZA"
     },
     {
       "entity": "Ecuador",
       "group": "Americas",
-      "period": "2017",
-      "value": 2.9,
+      "period": "1995–1999",
+      "value": 3.1,
+      "iso": "ECU"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 2.398,
+      "iso": "ECU"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 2.473,
+      "iso": "ECU"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.446,
+      "iso": "ECU"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 3.654,
       "iso": "ECU"
     },
     {
       "entity": "Estonia",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.407,
+      "period": "1990–1994",
+      "value": 3.219,
+      "iso": "EST"
+    },
+    {
+      "entity": "Estonia",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 3.492,
+      "iso": "EST"
+    },
+    {
+      "entity": "Estonia",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 3.062,
+      "iso": "EST"
+    },
+    {
+      "entity": "Estonia",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.368,
+      "iso": "EST"
+    },
+    {
+      "entity": "Estonia",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.531,
+      "iso": "EST"
+    },
+    {
+      "entity": "Estonia",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.502,
       "iso": "EST"
     },
     {
       "entity": "Egypt",
       "group": "Africa",
-      "period": "2017",
-      "value": 4.001,
+      "period": "2000–2004",
+      "value": 4.912,
+      "iso": "EGY"
+    },
+    {
+      "entity": "Egypt",
+      "group": "Africa",
+      "period": "2010–2014",
+      "value": 3.416,
+      "iso": "EGY"
+    },
+    {
+      "entity": "Egypt",
+      "group": "Africa",
+      "period": "2015–2017",
+      "value": 3.278,
       "iso": "EGY"
     },
     {
       "entity": "Spain",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.643,
+      "period": "1990–1994",
+      "value": 4.866,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 4.19,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 4.151,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.637,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.081,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 2.595,
       "iso": "ESP"
     },
     {
       "entity": "Ethiopia",
       "group": "Africa",
-      "period": "2017",
+      "period": "2005–2009",
       "value": 4.503,
       "iso": "ETH"
     },
     {
       "entity": "Finland",
       "group": "Europe",
-      "period": "2017",
-      "value": 4.418,
+      "period": "1995–1999",
+      "value": 3.418,
+      "iso": "FIN"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 4.116,
+      "iso": "FIN"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 4.485,
+      "iso": "FIN"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 4.586,
+      "iso": "FIN"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 4.496,
       "iso": "FIN"
     },
     {
       "entity": "France",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.166,
+      "period": "2000–2004",
+      "value": 3.204,
+      "iso": "FRA"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.334,
+      "iso": "FRA"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.108,
+      "iso": "FRA"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 2.863,
       "iso": "FRA"
     },
     {
       "entity": "United Kingdom",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.599,
+      "period": "2000–2004",
+      "value": 3.659,
+      "iso": "GBR"
+    },
+    {
+      "entity": "United Kingdom",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.553,
+      "iso": "GBR"
+    },
+    {
+      "entity": "United Kingdom",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.582,
+      "iso": "GBR"
+    },
+    {
+      "entity": "United Kingdom",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.733,
       "iso": "GBR"
     },
     {
       "entity": "Georgia",
       "group": "Europe",
-      "period": "2017",
-      "value": 4.072,
+      "period": "1995–1999",
+      "value": 3.944,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.781,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 4.427,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.853,
       "iso": "GEO"
     },
     {
       "entity": "Ghana",
       "group": "Africa",
-      "period": "2017",
-      "value": 4.561,
+      "period": "2005–2009",
+      "value": 4.568,
+      "iso": "GHA"
+    },
+    {
+      "entity": "Ghana",
+      "group": "Africa",
+      "period": "2010–2014",
+      "value": 4.553,
       "iso": "GHA"
     },
     {
       "entity": "Greece",
       "group": "Europe",
-      "period": "2017",
-      "value": 2.921,
+      "period": "2000–2004",
+      "value": 3.367,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.306,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 2.279,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 2.546,
       "iso": "GRC"
     },
     {
       "entity": "Guatemala",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.191,
+      "period": "1995–1999",
+      "value": 3.727,
+      "iso": "GTM"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 2.81,
+      "iso": "GTM"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.475,
+      "iso": "GTM"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.188,
+      "iso": "GTM"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 2.945,
       "iso": "GTM"
     },
     {
       "entity": "Guyana",
       "group": "Americas",
-      "period": "2017",
-      "value": 4.704,
+      "period": "2005–2009",
+      "value": 4.87,
+      "iso": "GUY"
+    },
+    {
+      "entity": "Guyana",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 4.648,
       "iso": "GUY"
     },
     {
       "entity": "Hong Kong",
       "group": "Asia",
-      "period": "2017",
-      "value": 4.345,
+      "period": "2000–2004",
+      "value": 4.312,
+      "iso": "HKG"
+    },
+    {
+      "entity": "Hong Kong",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 4.324,
+      "iso": "HKG"
+    },
+    {
+      "entity": "Hong Kong",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 4.374,
       "iso": "HKG"
     },
     {
       "entity": "Honduras",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.477,
+      "period": "1995–1999",
+      "value": 4.177,
+      "iso": "HND"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 3.152,
+      "iso": "HND"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.445,
+      "iso": "HND"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.713,
+      "iso": "HND"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 3.051,
       "iso": "HND"
     },
     {
       "entity": "Croatia",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.089,
+      "period": "1990–1994",
+      "value": 6.236,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 3.801,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 2.717,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 2.617,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.208,
       "iso": "HRV"
     },
     {
       "entity": "Haiti",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.446,
+      "period": "2005–2009",
+      "value": 3.449,
+      "iso": "HTI"
+    },
+    {
+      "entity": "Haiti",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.692,
+      "iso": "HTI"
+    },
+    {
+      "entity": "Haiti",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 2.811,
       "iso": "HTI"
     },
     {
       "entity": "Hungary",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.219,
+      "period": "1990–1994",
+      "value": 3.448,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 3.402,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 3.569,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 2.786,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.432,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.386,
       "iso": "HUN"
     },
     {
       "entity": "Indonesia",
       "group": "Asia",
-      "period": "2017",
-      "value": 4.492,
+      "period": "2000–2004",
+      "value": 4.703,
+      "iso": "IDN"
+    },
+    {
+      "entity": "Indonesia",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 4.384,
+      "iso": "IDN"
+    },
+    {
+      "entity": "Indonesia",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 4.482,
       "iso": "IDN"
     },
     {
       "entity": "Ireland",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.558,
+      "period": "2000–2004",
+      "value": 3.835,
+      "iso": "IRL"
+    },
+    {
+      "entity": "Ireland",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.799,
+      "iso": "IRL"
+    },
+    {
+      "entity": "Ireland",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.183,
+      "iso": "IRL"
+    },
+    {
+      "entity": "Ireland",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.644,
       "iso": "IRL"
     },
     {
       "entity": "Israel",
       "group": "Asia",
-      "period": "2017",
-      "value": 3.067,
+      "period": "2005–2009",
+      "value": 2.923,
+      "iso": "ISR"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 3.05,
+      "iso": "ISR"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2015–2017",
+      "value": 3.15,
       "iso": "ISR"
     },
     {
       "entity": "India",
       "group": "Asia",
-      "period": "2017",
-      "value": 4.702,
+      "period": "1990–1994",
+      "value": 5.045,
+      "iso": "IND"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "1995–1999",
+      "value": 4.771,
+      "iso": "IND"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2000–2004",
+      "value": 4.142,
+      "iso": "IND"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 4.899,
+      "iso": "IND"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 4.503,
       "iso": "IND"
     },
     {
       "entity": "Iraq",
       "group": "Asia",
-      "period": "2017",
+      "period": "2010–2014",
       "value": 2.826,
       "iso": "IRQ"
     },
     {
-      "entity": "Iran, Islamic Republic of",
+      "entity": "Iran",
       "group": "Asia",
-      "period": "2017",
-      "value": 4.226,
+      "period": "2000–2004",
+      "value": 4.428,
+      "iso": "IRN"
+    },
+    {
+      "entity": "Iran",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 4.084,
       "iso": "IRN"
     },
     {
       "entity": "Iceland",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.876,
+      "period": "2005–2009",
+      "value": 4.223,
+      "iso": "ISL"
+    },
+    {
+      "entity": "Iceland",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.61,
+      "iso": "ISL"
+    },
+    {
+      "entity": "Iceland",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 4.179,
       "iso": "ISL"
     },
     {
       "entity": "Italy",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.025,
+      "period": "2000–2004",
+      "value": 3.112,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.242,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 2.788,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 2.913,
       "iso": "ITA"
     },
     {
       "entity": "Jamaica",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.758,
+      "period": "2005–2009",
+      "value": 4.025,
+      "iso": "JAM"
+    },
+    {
+      "entity": "Jamaica",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.616,
+      "iso": "JAM"
+    },
+    {
+      "entity": "Jamaica",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 3.638,
       "iso": "JAM"
     },
     {
       "entity": "Jordan",
       "group": "Asia",
-      "period": "2017",
-      "value": 3.251,
+      "period": "2000–2004",
+      "value": 3.565,
+      "iso": "JOR"
+    },
+    {
+      "entity": "Jordan",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 3.932,
+      "iso": "JOR"
+    },
+    {
+      "entity": "Jordan",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 3.252,
+      "iso": "JOR"
+    },
+    {
+      "entity": "Jordan",
+      "group": "Asia",
+      "period": "2015–2017",
+      "value": 1.864,
       "iso": "JOR"
     },
     {
       "entity": "Japan",
       "group": "Asia",
-      "period": "2017",
-      "value": 3.553,
+      "period": "1995–1999",
+      "value": 3.717,
+      "iso": "JPN"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2000–2004",
+      "value": 3.535,
+      "iso": "JPN"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 3.615,
+      "iso": "JPN"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 3.499,
       "iso": "JPN"
     },
     {
       "entity": "Kyrgyzstan",
       "group": "Asia",
-      "period": "2017",
-      "value": 4.162,
+      "period": "2000–2004",
+      "value": 3.718,
+      "iso": "KGZ"
+    },
+    {
+      "entity": "Kyrgyzstan",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 3.956,
+      "iso": "KGZ"
+    },
+    {
+      "entity": "Kyrgyzstan",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 4.565,
+      "iso": "KGZ"
+    },
+    {
+      "entity": "Kyrgyzstan",
+      "group": "Asia",
+      "period": "2015–2017",
+      "value": 3.925,
       "iso": "KGZ"
     },
     {
       "entity": "Cambodia",
       "group": "Asia",
-      "period": "2017",
-      "value": 5.637,
+      "period": "2005–2009",
+      "value": 5.525,
       "iso": "KHM"
     },
     {
-      "entity": "Korea, Republic of",
+      "entity": "Cambodia",
       "group": "Asia",
-      "period": "2017",
-      "value": 3.399,
+      "period": "2010–2014",
+      "value": 5.988,
+      "iso": "KHM"
+    },
+    {
+      "entity": "Cambodia",
+      "group": "Asia",
+      "period": "2015–2017",
+      "value": 5.367,
+      "iso": "KHM"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "1995–1999",
+      "value": 3.915,
+      "iso": "KOR"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2000–2004",
+      "value": 3.091,
+      "iso": "KOR"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 3.397,
+      "iso": "KOR"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 3.577,
+      "iso": "KOR"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2015–2017",
+      "value": 3.436,
       "iso": "KOR"
     },
     {
       "entity": "Kazakhstan",
       "group": "Asia",
-      "period": "2017",
-      "value": 5.185,
+      "period": "2005–2009",
+      "value": 4.683,
+      "iso": "KAZ"
+    },
+    {
+      "entity": "Kazakhstan",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 5.135,
+      "iso": "KAZ"
+    },
+    {
+      "entity": "Kazakhstan",
+      "group": "Asia",
+      "period": "2015–2017",
+      "value": 5.591,
       "iso": "KAZ"
     },
     {
       "entity": "Lebanon",
       "group": "Asia",
-      "period": "2017",
-      "value": 3.06,
+      "period": "2005–2009",
+      "value": 2.894,
+      "iso": "LBN"
+    },
+    {
+      "entity": "Lebanon",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 3.316,
+      "iso": "LBN"
+    },
+    {
+      "entity": "Lebanon",
+      "group": "Asia",
+      "period": "2015–2017",
+      "value": 2.682,
       "iso": "LBN"
     },
     {
       "entity": "Lithuania",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.054,
+      "period": "1990–1994",
+      "value": 3.652,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 3.648,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 3.132,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 2.9,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 2.795,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.052,
       "iso": "LTU"
     },
     {
       "entity": "Luxembourg",
       "group": "Europe",
-      "period": "2017",
-      "value": 4.564,
+      "period": "2000–2004",
+      "value": 4.646,
+      "iso": "LUX"
+    },
+    {
+      "entity": "Luxembourg",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 4.547,
+      "iso": "LUX"
+    },
+    {
+      "entity": "Luxembourg",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 4.458,
+      "iso": "LUX"
+    },
+    {
+      "entity": "Luxembourg",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 4.542,
       "iso": "LUX"
     },
     {
       "entity": "Latvia",
       "group": "Europe",
-      "period": "2017",
-      "value": 2.791,
+      "period": "1990–1994",
+      "value": 3.396,
+      "iso": "LVA"
+    },
+    {
+      "entity": "Latvia",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 2.907,
+      "iso": "LVA"
+    },
+    {
+      "entity": "Latvia",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 2.94,
+      "iso": "LVA"
+    },
+    {
+      "entity": "Latvia",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 2.558,
+      "iso": "LVA"
+    },
+    {
+      "entity": "Latvia",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 2.845,
+      "iso": "LVA"
+    },
+    {
+      "entity": "Latvia",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 2.811,
       "iso": "LVA"
     },
     {
       "entity": "Libya",
       "group": "Africa",
-      "period": "2017",
+      "period": "2010–2014",
       "value": 2.308,
       "iso": "LBY"
     },
     {
       "entity": "Morocco",
       "group": "Africa",
-      "period": "2017",
-      "value": 3.381,
+      "period": "2000–2004",
+      "value": 3.009,
       "iso": "MAR"
     },
     {
-      "entity": "Moldova, Republic of",
+      "entity": "Morocco",
+      "group": "Africa",
+      "period": "2005–2009",
+      "value": 3.527,
+      "iso": "MAR"
+    },
+    {
+      "entity": "Morocco",
+      "group": "Africa",
+      "period": "2010–2014",
+      "value": 3.884,
+      "iso": "MAR"
+    },
+    {
+      "entity": "Morocco",
+      "group": "Africa",
+      "period": "2015–2017",
+      "value": 2.915,
+      "iso": "MAR"
+    },
+    {
+      "entity": "Moldova",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.245,
+      "period": "1995–1999",
+      "value": 3.32,
+      "iso": "MDA"
+    },
+    {
+      "entity": "Moldova",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 3.692,
+      "iso": "MDA"
+    },
+    {
+      "entity": "Moldova",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.472,
+      "iso": "MDA"
+    },
+    {
+      "entity": "Moldova",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.533,
+      "iso": "MDA"
+    },
+    {
+      "entity": "Moldova",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 2.195,
       "iso": "MDA"
     },
     {
       "entity": "Montenegro",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.782,
+      "period": "2000–2004",
+      "value": 3.916,
       "iso": "MNE"
     },
     {
-      "entity": "Macedonia, the former Yugoslav Republic of",
+      "entity": "Montenegro",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.335,
+      "period": "2005–2009",
+      "value": 3.512,
+      "iso": "MNE"
+    },
+    {
+      "entity": "Montenegro",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.91,
+      "iso": "MNE"
+    },
+    {
+      "entity": "Montenegro",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.868,
+      "iso": "MNE"
+    },
+    {
+      "entity": "North Macedonia",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 3.042,
+      "iso": "MKD"
+    },
+    {
+      "entity": "North Macedonia",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 2.813,
+      "iso": "MKD"
+    },
+    {
+      "entity": "North Macedonia",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.194,
+      "iso": "MKD"
+    },
+    {
+      "entity": "North Macedonia",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.547,
+      "iso": "MKD"
+    },
+    {
+      "entity": "North Macedonia",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.413,
       "iso": "MKD"
     },
     {
       "entity": "Mali",
       "group": "Africa",
-      "period": "2017",
+      "period": "2005–2009",
       "value": 4.205,
       "iso": "MLI"
     },
     {
       "entity": "Myanmar",
       "group": "Asia",
-      "period": "2017",
+      "period": "2015–2017",
       "value": 5.19,
       "iso": "MMR"
     },
     {
       "entity": "Mongolia",
       "group": "Asia",
-      "period": "2017",
-      "value": 3.733,
+      "period": "2000–2004",
+      "value": 4.564,
+      "iso": "MNG"
+    },
+    {
+      "entity": "Mongolia",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 4.163,
+      "iso": "MNG"
+    },
+    {
+      "entity": "Mongolia",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 3.479,
+      "iso": "MNG"
+    },
+    {
+      "entity": "Mongolia",
+      "group": "Asia",
+      "period": "2015–2017",
+      "value": 3.072,
       "iso": "MNG"
     },
     {
       "entity": "Malta",
       "group": "Europe",
-      "period": "2017",
-      "value": 4.275,
+      "period": "2005–2009",
+      "value": 4.207,
+      "iso": "MLT"
+    },
+    {
+      "entity": "Malta",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 4.418,
+      "iso": "MLT"
+    },
+    {
+      "entity": "Malta",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 4.273,
       "iso": "MLT"
     },
     {
       "entity": "Mexico",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.556,
+      "period": "1990–1994",
+      "value": 3.674,
+      "iso": "MEX"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "1995–1999",
+      "value": 3.937,
+      "iso": "MEX"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 3.476,
+      "iso": "MEX"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.664,
+      "iso": "MEX"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.431,
+      "iso": "MEX"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 2.944,
       "iso": "MEX"
     },
     {
       "entity": "Malaysia",
       "group": "Asia",
-      "period": "2017",
-      "value": 5.301,
+      "period": "2000–2004",
+      "value": 5.598,
+      "iso": "MYS"
+    },
+    {
+      "entity": "Malaysia",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 5.274,
+      "iso": "MYS"
+    },
+    {
+      "entity": "Malaysia",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 5.249,
       "iso": "MYS"
     },
     {
       "entity": "Nigeria",
       "group": "Africa",
-      "period": "2017",
-      "value": 4.267,
+      "period": "1990–1994",
+      "value": 4.466,
+      "iso": "NGA"
+    },
+    {
+      "entity": "Nigeria",
+      "group": "Africa",
+      "period": "1995–1999",
+      "value": 3.774,
+      "iso": "NGA"
+    },
+    {
+      "entity": "Nigeria",
+      "group": "Africa",
+      "period": "2000–2004",
+      "value": 4.765,
+      "iso": "NGA"
+    },
+    {
+      "entity": "Nigeria",
+      "group": "Africa",
+      "period": "2010–2014",
+      "value": 4.117,
       "iso": "NGA"
     },
     {
       "entity": "Nicaragua",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.335,
+      "period": "1995–1999",
+      "value": 3.847,
+      "iso": "NIC"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 2.79,
+      "iso": "NIC"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.092,
+      "iso": "NIC"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.643,
+      "iso": "NIC"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 3.803,
       "iso": "NIC"
     },
     {
       "entity": "Netherlands",
       "group": "Europe",
-      "period": "2017",
-      "value": 4.673,
+      "period": "2000–2004",
+      "value": 4.537,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 4.681,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 4.698,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 4.742,
       "iso": "NLD"
     },
     {
       "entity": "Norway",
       "group": "Europe",
-      "period": "2017",
-      "value": 4.725,
+      "period": "1995–1999",
+      "value": 4.403,
+      "iso": "NOR"
+    },
+    {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 4.259,
+      "iso": "NOR"
+    },
+    {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 4.454,
+      "iso": "NOR"
+    },
+    {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 5.11,
+      "iso": "NOR"
+    },
+    {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 5.462,
       "iso": "NOR"
     },
     {
       "entity": "New Zealand",
       "group": "Asia",
-      "period": "2017",
-      "value": 3.484,
+      "period": "1995–1999",
+      "value": 3.088,
+      "iso": "NZL"
+    },
+    {
+      "entity": "New Zealand",
+      "group": "Asia",
+      "period": "2000–2004",
+      "value": 3.704,
+      "iso": "NZL"
+    },
+    {
+      "entity": "New Zealand",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 3.825,
       "iso": "NZL"
     },
     {
       "entity": "Panama",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.48,
+      "period": "1995–1999",
+      "value": 3.431,
+      "iso": "PAN"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 3.386,
+      "iso": "PAN"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.465,
+      "iso": "PAN"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.849,
+      "iso": "PAN"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 2.934,
       "iso": "PAN"
     },
     {
       "entity": "Peru",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.011,
+      "period": "1995–1999",
+      "value": 3.153,
+      "iso": "PER"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 2.979,
+      "iso": "PER"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 2.997,
+      "iso": "PER"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.053,
+      "iso": "PER"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 2.855,
       "iso": "PER"
     },
     {
       "entity": "Philippines",
       "group": "Asia",
-      "period": "2017",
-      "value": 4.515,
+      "period": "1995–1999",
+      "value": 4.813,
+      "iso": "PHL"
+    },
+    {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2000–2004",
+      "value": 4.538,
+      "iso": "PHL"
+    },
+    {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 4.08,
+      "iso": "PHL"
+    },
+    {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 4.537,
       "iso": "PHL"
     },
     {
       "entity": "Pakistan",
       "group": "Asia",
-      "period": "2017",
-      "value": 4.047,
+      "period": "1995–1999",
+      "value": 4.488,
+      "iso": "PAK"
+    },
+    {
+      "entity": "Pakistan",
+      "group": "Asia",
+      "period": "2000–2004",
+      "value": 3.868,
+      "iso": "PAK"
+    },
+    {
+      "entity": "Pakistan",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 4.03,
       "iso": "PAK"
     },
     {
       "entity": "Poland",
       "group": "Europe",
-      "period": "2017",
-      "value": 2.815,
+      "period": "1990–1994",
+      "value": 3.008,
+      "iso": "POL"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 3.126,
+      "iso": "POL"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 2.393,
+      "iso": "POL"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 2.615,
+      "iso": "POL"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.015,
+      "iso": "POL"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 2.911,
       "iso": "POL"
     },
     {
       "entity": "Puerto Rico",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.652,
+      "period": "1995–1999",
+      "value": 3.59,
       "iso": "PRI"
     },
     {
-      "entity": "Palestine, State of",
+      "entity": "Puerto Rico",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 3.754,
+      "iso": "PRI"
+    },
+    {
+      "entity": "Palestine",
       "group": "Asia",
-      "period": "2017",
-      "value": 3.564,
+      "period": "2005–2009",
+      "value": 4.265,
+      "iso": "PSE"
+    },
+    {
+      "entity": "Palestine",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 3.487,
+      "iso": "PSE"
+    },
+    {
+      "entity": "Palestine",
+      "group": "Asia",
+      "period": "2015–2017",
+      "value": 2.951,
       "iso": "PSE"
     },
     {
       "entity": "Portugal",
       "group": "Europe",
-      "period": "2017",
-      "value": 2.856,
+      "period": "2000–2004",
+      "value": 3.38,
+      "iso": "PRT"
+    },
+    {
+      "entity": "Portugal",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 2.806,
+      "iso": "PRT"
+    },
+    {
+      "entity": "Portugal",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 2.501,
+      "iso": "PRT"
+    },
+    {
+      "entity": "Portugal",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.016,
       "iso": "PRT"
     },
     {
       "entity": "Paraguay",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.137,
+      "period": "1995–1999",
+      "value": 3.791,
+      "iso": "PRY"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 2.644,
+      "iso": "PRY"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 2.913,
+      "iso": "PRY"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.358,
+      "iso": "PRY"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 3.16,
       "iso": "PRY"
     },
     {
       "entity": "Romania",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.139,
+      "period": "1990–1994",
+      "value": 3.599,
+      "iso": "ROU"
+    },
+    {
+      "entity": "Romania",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 3.32,
+      "iso": "ROU"
+    },
+    {
+      "entity": "Romania",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 2.764,
+      "iso": "ROU"
+    },
+    {
+      "entity": "Romania",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.176,
+      "iso": "ROU"
+    },
+    {
+      "entity": "Romania",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 2.968,
+      "iso": "ROU"
+    },
+    {
+      "entity": "Romania",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.076,
       "iso": "ROU"
     },
     {
       "entity": "Serbia",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.16,
+      "period": "1995–1999",
+      "value": 3.307,
       "iso": "SRB"
     },
     {
-      "entity": "Russian Federation",
+      "entity": "Serbia",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.337,
+      "period": "2000–2004",
+      "value": 3.254,
+      "iso": "SRB"
+    },
+    {
+      "entity": "Serbia",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 2.869,
+      "iso": "SRB"
+    },
+    {
+      "entity": "Serbia",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.156,
+      "iso": "SRB"
+    },
+    {
+      "entity": "Serbia",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.344,
+      "iso": "SRB"
+    },
+    {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "1990–1994",
+      "value": 4.667,
+      "iso": "RUS"
+    },
+    {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 2.702,
+      "iso": "RUS"
+    },
+    {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.137,
+      "iso": "RUS"
+    },
+    {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.358,
+      "iso": "RUS"
+    },
+    {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.785,
       "iso": "RUS"
     },
     {
       "entity": "Rwanda",
       "group": "Africa",
-      "period": "2017",
-      "value": 4.857,
+      "period": "2005–2009",
+      "value": 4.593,
+      "iso": "RWA"
+    },
+    {
+      "entity": "Rwanda",
+      "group": "Africa",
+      "period": "2010–2014",
+      "value": 5.07,
       "iso": "RWA"
     },
     {
       "entity": "Sudan",
       "group": "Africa",
-      "period": "2017",
+      "period": "2010–2014",
       "value": 3.579,
       "iso": "SDN"
     },
     {
       "entity": "Sweden",
       "group": "Europe",
-      "period": "2017",
-      "value": 4.393,
+      "period": "1995–1999",
+      "value": 4.202,
+      "iso": "SWE"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 3.811,
+      "iso": "SWE"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 4.364,
+      "iso": "SWE"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 4.817,
+      "iso": "SWE"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 4.279,
       "iso": "SWE"
     },
     {
       "entity": "Singapore",
       "group": "Asia",
-      "period": "2017",
-      "value": 5.871,
+      "period": "2000–2004",
+      "value": 6.341,
+      "iso": "SGP"
+    },
+    {
+      "entity": "Singapore",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 5.75,
+      "iso": "SGP"
+    },
+    {
+      "entity": "Singapore",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 5.794,
       "iso": "SGP"
     },
     {
       "entity": "Slovenia",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.035,
+      "period": "1990–1994",
+      "value": 3.368,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 3.128,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 3.189,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.477,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 2.645,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 2.702,
       "iso": "SVN"
     },
     {
       "entity": "Slovakia",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.348,
+      "period": "1990–1994",
+      "value": 3.961,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Slovakia",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 3.666,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Slovakia",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 2.912,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Slovakia",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.492,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Slovakia",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 3.195,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Slovakia",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.284,
       "iso": "SVK"
     },
     {
       "entity": "Suriname",
       "group": "Americas",
-      "period": "2017",
+      "period": "2010–2014",
       "value": 4.659,
       "iso": "SUR"
     },
     {
       "entity": "El Salvador",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.583,
+      "period": "1995–1999",
+      "value": 3.807,
+      "iso": "SLV"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 3.417,
+      "iso": "SLV"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.726,
+      "iso": "SLV"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.728,
+      "iso": "SLV"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 2.979,
       "iso": "SLV"
     },
     {
       "entity": "Thailand",
       "group": "Asia",
-      "period": "2017",
-      "value": 4.544,
+      "period": "2000–2004",
+      "value": 4.566,
+      "iso": "THA"
+    },
+    {
+      "entity": "Thailand",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 4.606,
+      "iso": "THA"
+    },
+    {
+      "entity": "Thailand",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 4.476,
       "iso": "THA"
     },
     {
       "entity": "Tajikistan",
       "group": "Asia",
-      "period": "2017",
-      "value": 6.379,
+      "period": "2005–2009",
+      "value": 6.276,
+      "iso": "TJK"
+    },
+    {
+      "entity": "Tajikistan",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 5.941,
+      "iso": "TJK"
+    },
+    {
+      "entity": "Tajikistan",
+      "group": "Asia",
+      "period": "2015–2017",
+      "value": 6.718,
       "iso": "TJK"
     },
     {
       "entity": "Tunisia",
       "group": "Africa",
-      "period": "2017",
-      "value": 2.687,
+      "period": "2010–2014",
+      "value": 2.772,
       "iso": "TUN"
     },
     {
-      "entity": "Turkey",
+      "entity": "Tunisia",
+      "group": "Africa",
+      "period": "2015–2017",
+      "value": 2.531,
+      "iso": "TUN"
+    },
+    {
+      "entity": "Türkiye",
       "group": "Europe",
-      "period": "2017",
-      "value": 3.823,
+      "period": "1995–1999",
+      "value": 3.704,
+      "iso": "TUR"
+    },
+    {
+      "entity": "Türkiye",
+      "group": "Europe",
+      "period": "2000–2004",
+      "value": 3.489,
+      "iso": "TUR"
+    },
+    {
+      "entity": "Türkiye",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 3.572,
+      "iso": "TUR"
+    },
+    {
+      "entity": "Türkiye",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 4.189,
+      "iso": "TUR"
+    },
+    {
+      "entity": "Türkiye",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 4.354,
       "iso": "TUR"
     },
     {
       "entity": "Trinidad and Tobago",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.418,
+      "period": "2005–2009",
+      "value": 3.227,
       "iso": "TTO"
     },
     {
-      "entity": "Taiwan, Province of China",
+      "entity": "Trinidad and Tobago",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.467,
+      "iso": "TTO"
+    },
+    {
+      "entity": "Taiwan",
       "group": "Asia",
-      "period": "2017",
-      "value": 3.645,
+      "period": "1990–1994",
+      "value": 4.607,
       "iso": "TWN"
     },
     {
-      "entity": "Tanzania, United Republic of",
+      "entity": "Taiwan",
+      "group": "Asia",
+      "period": "2000–2004",
+      "value": 3.736,
+      "iso": "TWN"
+    },
+    {
+      "entity": "Taiwan",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 3.358,
+      "iso": "TWN"
+    },
+    {
+      "entity": "Taiwan",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 3.61,
+      "iso": "TWN"
+    },
+    {
+      "entity": "Tanzania",
       "group": "Africa",
-      "period": "2017",
+      "period": "2000–2004",
       "value": 5.504,
       "iso": "TZA"
     },
     {
       "entity": "Ukraine",
       "group": "Europe",
-      "period": "2017",
-      "value": 2.805,
+      "period": "1990–1994",
+      "value": 2.858,
+      "iso": "UKR"
+    },
+    {
+      "entity": "Ukraine",
+      "group": "Europe",
+      "period": "1995–1999",
+      "value": 2.924,
+      "iso": "UKR"
+    },
+    {
+      "entity": "Ukraine",
+      "group": "Europe",
+      "period": "2005–2009",
+      "value": 2.828,
+      "iso": "UKR"
+    },
+    {
+      "entity": "Ukraine",
+      "group": "Europe",
+      "period": "2010–2014",
+      "value": 2.566,
+      "iso": "UKR"
+    },
+    {
+      "entity": "Ukraine",
+      "group": "Europe",
+      "period": "2015–2017",
+      "value": 3.233,
       "iso": "UKR"
     },
     {
       "entity": "Uganda",
       "group": "Africa",
-      "period": "2017",
+      "period": "2000–2004",
       "value": 4.475,
       "iso": "UGA"
     },
     {
-      "entity": "United States of America",
+      "entity": "United States",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.525,
+      "period": "1995–1999",
+      "value": 3.955,
+      "iso": "USA"
+    },
+    {
+      "entity": "United States",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.758,
+      "iso": "USA"
+    },
+    {
+      "entity": "United States",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 3.312,
+      "iso": "USA"
+    },
+    {
+      "entity": "United States",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 3.207,
       "iso": "USA"
     },
     {
       "entity": "Uruguay",
       "group": "Americas",
-      "period": "2017",
-      "value": 4.178,
+      "period": "1995–1999",
+      "value": 4.277,
+      "iso": "URY"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 3.725,
+      "iso": "URY"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 4.318,
+      "iso": "URY"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 4.403,
+      "iso": "URY"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 3.829,
       "iso": "URY"
     },
     {
       "entity": "Uzbekistan",
       "group": "Asia",
-      "period": "2017",
-      "value": 7,
+      "period": "2005–2009",
+      "value": 5.79,
       "iso": "UZB"
     },
     {
-      "entity": "Venezuela, Bolivarian Republic of",
+      "entity": "Uzbekistan",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 7.017,
+      "iso": "UZB"
+    },
+    {
+      "entity": "Uzbekistan",
+      "group": "Asia",
+      "period": "2015–2017",
+      "value": 7.94,
+      "iso": "UZB"
+    },
+    {
+      "entity": "Venezuela",
       "group": "Americas",
-      "period": "2017",
-      "value": 3.577,
+      "period": "1995–1999",
+      "value": 2.842,
       "iso": "VEN"
     },
     {
-      "entity": "Viet Nam",
+      "entity": "Venezuela",
+      "group": "Americas",
+      "period": "2000–2004",
+      "value": 3.176,
+      "iso": "VEN"
+    },
+    {
+      "entity": "Venezuela",
+      "group": "Americas",
+      "period": "2005–2009",
+      "value": 3.971,
+      "iso": "VEN"
+    },
+    {
+      "entity": "Venezuela",
+      "group": "Americas",
+      "period": "2010–2014",
+      "value": 4.17,
+      "iso": "VEN"
+    },
+    {
+      "entity": "Venezuela",
+      "group": "Americas",
+      "period": "2015–2017",
+      "value": 3.373,
+      "iso": "VEN"
+    },
+    {
+      "entity": "Vietnam",
       "group": "Asia",
-      "period": "2017",
-      "value": 7.336,
+      "period": "2000–2004",
+      "value": 7.425,
+      "iso": "VNM"
+    },
+    {
+      "entity": "Vietnam",
+      "group": "Asia",
+      "period": "2005–2009",
+      "value": 7.474,
+      "iso": "VNM"
+    },
+    {
+      "entity": "Vietnam",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 6.947,
       "iso": "VNM"
     },
     {
       "entity": "Yemen",
       "group": "Asia",
-      "period": "2017",
-      "value": 3.162,
+      "period": "2005–2009",
+      "value": 3.183,
+      "iso": "YEM"
+    },
+    {
+      "entity": "Yemen",
+      "group": "Asia",
+      "period": "2010–2014",
+      "value": 3.155,
       "iso": "YEM"
     },
     {
       "entity": "South Africa",
       "group": "Africa",
-      "period": "2017",
-      "value": 4.788,
+      "period": "1990–1994",
+      "value": 5.378,
+      "iso": "ZAF"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "1995–1999",
+      "value": 4.897,
+      "iso": "ZAF"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2000–2004",
+      "value": 4.829,
+      "iso": "ZAF"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2005–2009",
+      "value": 4.66,
+      "iso": "ZAF"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2010–2014",
+      "value": 4.387,
       "iso": "ZAF"
     },
     {
       "entity": "Zambia",
       "group": "Africa",
-      "period": "2017",
+      "period": "2005–2009",
       "value": 3.935,
       "iso": "ZMB"
     },
     {
       "entity": "Zimbabwe",
       "group": "Africa",
-      "period": "2017",
-      "value": 4.338,
+      "period": "2000–2004",
+      "value": 3.999,
+      "iso": "ZWE"
+    },
+    {
+      "entity": "Zimbabwe",
+      "group": "Africa",
+      "period": "2010–2014",
+      "value": 4.526,
       "iso": "ZWE"
     }
   ]

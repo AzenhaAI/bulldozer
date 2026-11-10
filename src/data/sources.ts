@@ -119,7 +119,7 @@ export const sources: Source[] = [
   { name: 'AmericasBarometer (LAPOP Lab)', url: 'https://www.vanderbilt.edu/cgd/americasbarometer/', status: 'live', category: 'Public opinion barometers', match: 'AmericasBarometer (LAPOP',
     description: 'LAPOP Lab\'s survey of the Americas, fielded to a common questionnaire from Canada to Argentina. We aggregated the free 2004–2023 Grand Merge and the 2025/26 wave (325,338 respondents, 28 countries, eleven waves): support for and satisfaction with democracy, trust in elections, police and congress, neighbourhood safety, police bribes, corruption, remittances and home broadband — each country\'s trend since 2004 where LAPOP asked it.' },
   { name: 'SDR — Survey Data Recycling', url: 'https://dataharmonization.org/', status: 'live', category: 'Public opinion barometers', match: 'SDR2', dash: 'sdr2',
-    description: 'Large harmonised ex-post integration of international survey projects. We aggregated the SDR2 master file: political trust (government, parliament, parties, legal system), demonstrations, petitions and union membership.' },
+    description: 'Large harmonised ex-post integration of international survey projects. We aggregated the SDR2 master file (CC0) by country and five-year period, 1966–2017: political trust (government, parliament, parties, legal system), demonstrations, petitions and union membership.' },
 
   // ── Health & demography ────────────────────────────────────────────
   { name: 'DHS — Demographic and Health Surveys', url: 'https://dhsprogram.com/', status: 'live', category: 'Health & demography', match: 'Demographic and Health Surveys', dash: 'dhs',

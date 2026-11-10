@@ -27,7 +27,7 @@ const PARSERS = [
   'parse_qog_originals.mjs', 'parse_vdem_media.mjs', 'parse_fiw.mjs', 'parse_unhcr.mjs', 'parse_eu_cities.mjs',
   'parse_who.mjs', 'parse_who_ghe.mjs', 'parse_cses.mjs', 'parse_afrobarometer.mjs', 'parse_iea.mjs', 'parse_lapop.mjs', 'parse_pew.mjs', 'parse_gesis_aggregates.mjs',
   // Read committed per-country CSVs written by scripts/tools/*_aggregate.py.
-  'parse_caucasus.mjs', 'parse_wrp_extra.mjs', 'parse_wellcome.mjs',
+  'parse_caucasus.mjs', 'parse_wrp_extra.mjs', 'parse_wellcome.mjs', 'parse_sdr2.mjs',
   // The one exception to the note above: women/men splits are matched to each
   // country's headline year in the datasets, so they run after those are written.
   'parse_splits.mjs',

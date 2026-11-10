@@ -36,7 +36,7 @@ export function methodologyFor(slug: string): Methodology {
       ? { vintage: 'Caucasus Barometer 2013 (last wave incl. Azerbaijan)', method: 'CRRC; weighted; mean of the 1–10 item. Not extended: CRRC’s time-series files keep only three bands.' }
       : { vintage: 'Caucasus Barometer 2008–2024 (Azerbaijan to 2013)', method: 'CRRC harmonised time-series files; weighted by WTIND; South Caucasus only (Armenia, Azerbaijan, Georgia).' };
   if (slug.startsWith('sdr2-'))
-    return { vintage: 'Pooled harmonized waves (to ~2017)', method: 'SDR2 harmonization across 22 survey projects; weighted by T_WEIGHT_L2U; country mean of the harmonized target item.' };
+    return { vintage: '1966–2017 by five-year period; each country’s latest period in profiles', method: 'SDR2 harmonization across 22 survey projects; weighted by T_WEIGHT_L2U; a period pools the projects that surveyed the country then, so part of a change between periods can come from a different mix of surveys.' };
   if (slug === 'wrp-resilience')
     return { vintage: 'World Risk Poll 2023', method: 'Weighted by WGT; Resilience Index rescaled to 0–100.' };
   if (slug.startsWith('wrp-'))
