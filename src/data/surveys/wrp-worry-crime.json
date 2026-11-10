@@ -5,14 +5,29 @@
     "unit": "%",
     "changeMode": "pp",
     "topic": "safety",
-    "summary": "Share who are very or somewhat worried that violent crime could cause them serious harm. World Risk Poll 2023.",
+    "method": "Weighted by WGT. Share of substantive answers; does not apply, don’t know and refused are left out of the base.",
+    "summary": "Share who are very or somewhat worried that violent crime could cause them serious harm. World Risk Poll 2019–2025.",
     "source": "World Risk Poll (Lloyd’s Register Foundation / Gallup)",
     "license": "CC BY 4.0",
-    "url": "https://wrp.lrfoundation.org.uk/",
-    "parsedAt": "2026-06-28",
+    "url": "https://www.lrfoundation.org.uk/world-risk-poll-data",
+    "parsedAt": "2026-11-10",
     "kind": "survey"
   },
   "data": [
+    {
+      "entity": "Afghanistan",
+      "group": "Asia",
+      "period": "2019",
+      "value": 89.09,
+      "iso": "AFG"
+    },
+    {
+      "entity": "Afghanistan",
+      "group": "Asia",
+      "period": "2021",
+      "value": 87.63,
+      "iso": "AFG"
+    },
     {
       "entity": "Afghanistan",
       "group": "Asia",
@@ -23,9 +38,44 @@
     {
       "entity": "Albania",
       "group": "Europe",
+      "period": "2019",
+      "value": 68.09,
+      "iso": "ALB"
+    },
+    {
+      "entity": "Albania",
+      "group": "Europe",
+      "period": "2021",
+      "value": 62.05,
+      "iso": "ALB"
+    },
+    {
+      "entity": "Albania",
+      "group": "Europe",
       "period": "2023",
       "value": 60.08,
       "iso": "ALB"
+    },
+    {
+      "entity": "Albania",
+      "group": "Europe",
+      "period": "2025",
+      "value": 63.09,
+      "iso": "ALB"
+    },
+    {
+      "entity": "United Arab Emirates",
+      "group": "Asia",
+      "period": "2019",
+      "value": 45.03,
+      "iso": "ARE"
+    },
+    {
+      "entity": "United Arab Emirates",
+      "group": "Asia",
+      "period": "2021",
+      "value": 34.06,
+      "iso": "ARE"
     },
     {
       "entity": "United Arab Emirates",
@@ -35,11 +85,53 @@
       "iso": "ARE"
     },
     {
+      "entity": "United Arab Emirates",
+      "group": "Asia",
+      "period": "2025",
+      "value": 29.36,
+      "iso": "ARE"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2019",
+      "value": 80.26,
+      "iso": "ARG"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2021",
+      "value": 77.64,
+      "iso": "ARG"
+    },
+    {
       "entity": "Argentina",
       "group": "Americas",
       "period": "2023",
       "value": 79.19,
       "iso": "ARG"
+    },
+    {
+      "entity": "Argentina",
+      "group": "Americas",
+      "period": "2025",
+      "value": 72.8,
+      "iso": "ARG"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 47.1,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 41.6,
+      "iso": "ARM"
     },
     {
       "entity": "Armenia",
@@ -49,11 +141,53 @@
       "iso": "ARM"
     },
     {
+      "entity": "Armenia",
+      "group": "Europe",
+      "period": "2025",
+      "value": 56.4,
+      "iso": "ARM"
+    },
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2019",
+      "value": 64.88,
+      "iso": "AUS"
+    },
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2021",
+      "value": 59.46,
+      "iso": "AUS"
+    },
+    {
       "entity": "Australia",
       "group": "Asia",
       "period": "2023",
       "value": 58.1,
       "iso": "AUS"
+    },
+    {
+      "entity": "Australia",
+      "group": "Asia",
+      "period": "2025",
+      "value": 66.64,
+      "iso": "AUS"
+    },
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2019",
+      "value": 65.57,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2021",
+      "value": 63.65,
+      "iso": "AUT"
     },
     {
       "entity": "Austria",
@@ -63,11 +197,53 @@
       "iso": "AUT"
     },
     {
+      "entity": "Austria",
+      "group": "Europe",
+      "period": "2025",
+      "value": 60.39,
+      "iso": "AUT"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2019",
+      "value": 52.62,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2021",
+      "value": 52.62,
+      "iso": "AZE"
+    },
+    {
       "entity": "Azerbaijan",
       "group": "Europe",
       "period": "2023",
       "value": 28.7,
       "iso": "AZE"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2025",
+      "value": 51.77,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Belgium",
+      "group": "Europe",
+      "period": "2019",
+      "value": 79.43,
+      "iso": "BEL"
+    },
+    {
+      "entity": "Belgium",
+      "group": "Europe",
+      "period": "2021",
+      "value": 66.06,
+      "iso": "BEL"
     },
     {
       "entity": "Belgium",
@@ -77,11 +253,53 @@
       "iso": "BEL"
     },
     {
+      "entity": "Belgium",
+      "group": "Europe",
+      "period": "2025",
+      "value": 72.15,
+      "iso": "BEL"
+    },
+    {
+      "entity": "Benin",
+      "group": "Africa",
+      "period": "2019",
+      "value": 81.97,
+      "iso": "BEN"
+    },
+    {
+      "entity": "Benin",
+      "group": "Africa",
+      "period": "2021",
+      "value": 80.99,
+      "iso": "BEN"
+    },
+    {
       "entity": "Benin",
       "group": "Africa",
       "period": "2023",
       "value": 80.75,
       "iso": "BEN"
+    },
+    {
+      "entity": "Benin",
+      "group": "Africa",
+      "period": "2025",
+      "value": 74.18,
+      "iso": "BEN"
+    },
+    {
+      "entity": "Burkina Faso",
+      "group": "Africa",
+      "period": "2019",
+      "value": 89.92,
+      "iso": "BFA"
+    },
+    {
+      "entity": "Burkina Faso",
+      "group": "Africa",
+      "period": "2021",
+      "value": 88.5,
+      "iso": "BFA"
     },
     {
       "entity": "Burkina Faso",
@@ -91,11 +309,53 @@
       "iso": "BFA"
     },
     {
+      "entity": "Burkina Faso",
+      "group": "Africa",
+      "period": "2025",
+      "value": 61.47,
+      "iso": "BFA"
+    },
+    {
+      "entity": "Bangladesh",
+      "group": "Asia",
+      "period": "2019",
+      "value": 69.25,
+      "iso": "BGD"
+    },
+    {
+      "entity": "Bangladesh",
+      "group": "Asia",
+      "period": "2021",
+      "value": 69.17,
+      "iso": "BGD"
+    },
+    {
       "entity": "Bangladesh",
       "group": "Asia",
       "period": "2023",
       "value": 54.52,
       "iso": "BGD"
+    },
+    {
+      "entity": "Bangladesh",
+      "group": "Asia",
+      "period": "2025",
+      "value": 70.04,
+      "iso": "BGD"
+    },
+    {
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "2019",
+      "value": 71.77,
+      "iso": "BGR"
+    },
+    {
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "2021",
+      "value": 66.36,
+      "iso": "BGR"
     },
     {
       "entity": "Bulgaria",
@@ -105,6 +365,27 @@
       "iso": "BGR"
     },
     {
+      "entity": "Bulgaria",
+      "group": "Europe",
+      "period": "2025",
+      "value": 59.87,
+      "iso": "BGR"
+    },
+    {
+      "entity": "Bahrain",
+      "group": "Asia",
+      "period": "2019",
+      "value": 57.88,
+      "iso": "BHR"
+    },
+    {
+      "entity": "Bahrain",
+      "group": "Asia",
+      "period": "2021",
+      "value": 57.88,
+      "iso": "BHR"
+    },
+    {
       "entity": "Bahrain",
       "group": "Asia",
       "period": "2023",
@@ -112,11 +393,67 @@
       "iso": "BHR"
     },
     {
-      "entity": "Bosnia Herzegovina",
+      "entity": "Bahrain",
+      "group": "Asia",
+      "period": "2025",
+      "value": 35.82,
+      "iso": "BHR"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "group": "Europe",
+      "period": "2019",
+      "value": 64.01,
+      "iso": "BIH"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "group": "Europe",
+      "period": "2021",
+      "value": 64.37,
+      "iso": "BIH"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
       "group": "Europe",
       "period": "2023",
       "value": 65.4,
       "iso": "BIH"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "group": "Europe",
+      "period": "2025",
+      "value": 57.63,
+      "iso": "BIH"
+    },
+    {
+      "entity": "Belarus",
+      "group": "Europe",
+      "period": "2019",
+      "value": 62.8,
+      "iso": "BLR"
+    },
+    {
+      "entity": "Belarus",
+      "group": "Europe",
+      "period": "2021",
+      "value": 62.8,
+      "iso": "BLR"
+    },
+    {
+      "entity": "Bolivia",
+      "group": "Americas",
+      "period": "2019",
+      "value": 85.62,
+      "iso": "BOL"
+    },
+    {
+      "entity": "Bolivia",
+      "group": "Americas",
+      "period": "2021",
+      "value": 87.43,
+      "iso": "BOL"
     },
     {
       "entity": "Bolivia",
@@ -126,11 +463,53 @@
       "iso": "BOL"
     },
     {
+      "entity": "Bolivia",
+      "group": "Americas",
+      "period": "2025",
+      "value": 84.76,
+      "iso": "BOL"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2019",
+      "value": 94.85,
+      "iso": "BRA"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2021",
+      "value": 93.94,
+      "iso": "BRA"
+    },
+    {
       "entity": "Brazil",
       "group": "Americas",
       "period": "2023",
       "value": 91.39,
       "iso": "BRA"
+    },
+    {
+      "entity": "Brazil",
+      "group": "Americas",
+      "period": "2025",
+      "value": 91.81,
+      "iso": "BRA"
+    },
+    {
+      "entity": "Botswana",
+      "group": "Africa",
+      "period": "2019",
+      "value": 81.61,
+      "iso": "BWA"
+    },
+    {
+      "entity": "Botswana",
+      "group": "Africa",
+      "period": "2021",
+      "value": 81.61,
+      "iso": "BWA"
     },
     {
       "entity": "Botswana",
@@ -140,11 +519,53 @@
       "iso": "BWA"
     },
     {
+      "entity": "Botswana",
+      "group": "Africa",
+      "period": "2025",
+      "value": 80.57,
+      "iso": "BWA"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2019",
+      "value": 58.81,
+      "iso": "CAN"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2021",
+      "value": 57.24,
+      "iso": "CAN"
+    },
+    {
       "entity": "Canada",
       "group": "Americas",
       "period": "2023",
       "value": 61.87,
       "iso": "CAN"
+    },
+    {
+      "entity": "Canada",
+      "group": "Americas",
+      "period": "2025",
+      "value": 63.7,
+      "iso": "CAN"
+    },
+    {
+      "entity": "Switzerland",
+      "group": "Europe",
+      "period": "2019",
+      "value": 56.85,
+      "iso": "CHE"
+    },
+    {
+      "entity": "Switzerland",
+      "group": "Europe",
+      "period": "2021",
+      "value": 53.01,
+      "iso": "CHE"
     },
     {
       "entity": "Switzerland",
@@ -154,11 +575,53 @@
       "iso": "CHE"
     },
     {
+      "entity": "Switzerland",
+      "group": "Europe",
+      "period": "2025",
+      "value": 56.09,
+      "iso": "CHE"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2019",
+      "value": 86.85,
+      "iso": "CHL"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2021",
+      "value": 82.57,
+      "iso": "CHL"
+    },
+    {
       "entity": "Chile",
       "group": "Americas",
       "period": "2023",
       "value": 87.68,
       "iso": "CHL"
+    },
+    {
+      "entity": "Chile",
+      "group": "Americas",
+      "period": "2025",
+      "value": 84.13,
+      "iso": "CHL"
+    },
+    {
+      "entity": "China",
+      "group": "Asia",
+      "period": "2019",
+      "value": 45.2,
+      "iso": "CHN"
+    },
+    {
+      "entity": "China",
+      "group": "Asia",
+      "period": "2021",
+      "value": 36.35,
+      "iso": "CHN"
     },
     {
       "entity": "China",
@@ -168,11 +631,53 @@
       "iso": "CHN"
     },
     {
+      "entity": "China",
+      "group": "Asia",
+      "period": "2025",
+      "value": 60.01,
+      "iso": "CHN"
+    },
+    {
+      "entity": "Ivory Coast",
+      "group": "Africa",
+      "period": "2019",
+      "value": 86.66,
+      "iso": "CIV"
+    },
+    {
+      "entity": "Ivory Coast",
+      "group": "Africa",
+      "period": "2021",
+      "value": 83.46,
+      "iso": "CIV"
+    },
+    {
       "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2023",
       "value": 79.05,
       "iso": "CIV"
+    },
+    {
+      "entity": "Ivory Coast",
+      "group": "Africa",
+      "period": "2025",
+      "value": 81.36,
+      "iso": "CIV"
+    },
+    {
+      "entity": "Cameroon",
+      "group": "Africa",
+      "period": "2019",
+      "value": 83.85,
+      "iso": "CMR"
+    },
+    {
+      "entity": "Cameroon",
+      "group": "Africa",
+      "period": "2021",
+      "value": 84.64,
+      "iso": "CMR"
     },
     {
       "entity": "Cameroon",
@@ -182,24 +687,80 @@
       "iso": "CMR"
     },
     {
-      "entity": "Congo Kinshasa",
+      "entity": "Cameroon",
+      "group": "Africa",
+      "period": "2025",
+      "value": 86.1,
+      "iso": "CMR"
+    },
+    {
+      "entity": "DR Congo",
       "group": "Africa",
       "period": "2023",
       "value": 83.74,
       "iso": "COD"
     },
     {
-      "entity": "Congo Brazzaville",
+      "entity": "DR Congo",
+      "group": "Africa",
+      "period": "2025",
+      "value": 75.17,
+      "iso": "COD"
+    },
+    {
+      "entity": "Congo",
+      "group": "Africa",
+      "period": "2019",
+      "value": 81.96,
+      "iso": "COG"
+    },
+    {
+      "entity": "Congo",
+      "group": "Africa",
+      "period": "2021",
+      "value": 82.03,
+      "iso": "COG"
+    },
+    {
+      "entity": "Congo",
       "group": "Africa",
       "period": "2023",
       "value": 79.28,
       "iso": "COG"
     },
     {
+      "entity": "Congo",
+      "group": "Africa",
+      "period": "2025",
+      "value": 91.24,
+      "iso": "COG"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2019",
+      "value": 84.66,
+      "iso": "COL"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2021",
+      "value": 81.85,
+      "iso": "COL"
+    },
+    {
       "entity": "Colombia",
       "group": "Americas",
       "period": "2023",
       "value": 75.72,
+      "iso": "COL"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2025",
+      "value": 80.75,
       "iso": "COL"
     },
     {
@@ -210,11 +771,53 @@
       "iso": "COM"
     },
     {
+      "entity": "Comoros",
+      "group": "Africa",
+      "period": "2025",
+      "value": 83.69,
+      "iso": "COM"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2019",
+      "value": 81.2,
+      "iso": "CRI"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2021",
+      "value": 76.7,
+      "iso": "CRI"
+    },
+    {
       "entity": "Costa Rica",
       "group": "Americas",
       "period": "2023",
       "value": 83.48,
       "iso": "CRI"
+    },
+    {
+      "entity": "Costa Rica",
+      "group": "Americas",
+      "period": "2025",
+      "value": 79.81,
+      "iso": "CRI"
+    },
+    {
+      "entity": "Cyprus",
+      "group": "Europe",
+      "period": "2019",
+      "value": 83.33,
+      "iso": "CYP"
+    },
+    {
+      "entity": "Cyprus",
+      "group": "Europe",
+      "period": "2021",
+      "value": 78.58,
+      "iso": "CYP"
     },
     {
       "entity": "Cyprus",
@@ -224,11 +827,46 @@
       "iso": "CYP"
     },
     {
-      "entity": "Czech Republic",
+      "entity": "Cyprus",
+      "group": "Europe",
+      "period": "2025",
+      "value": 69.92,
+      "iso": "CYP"
+    },
+    {
+      "entity": "Czechia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 45.66,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Czechia",
       "group": "Europe",
       "period": "2023",
       "value": 48.94,
       "iso": "CZE"
+    },
+    {
+      "entity": "Czechia",
+      "group": "Europe",
+      "period": "2025",
+      "value": 45.04,
+      "iso": "CZE"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2019",
+      "value": 69.27,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2021",
+      "value": 68.3,
+      "iso": "DEU"
     },
     {
       "entity": "Germany",
@@ -238,11 +876,53 @@
       "iso": "DEU"
     },
     {
+      "entity": "Germany",
+      "group": "Europe",
+      "period": "2025",
+      "value": 65.29,
+      "iso": "DEU"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2019",
+      "value": 47.48,
+      "iso": "DNK"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2021",
+      "value": 41.46,
+      "iso": "DNK"
+    },
+    {
       "entity": "Denmark",
       "group": "Europe",
       "period": "2023",
       "value": 34.75,
       "iso": "DNK"
+    },
+    {
+      "entity": "Denmark",
+      "group": "Europe",
+      "period": "2025",
+      "value": 43.47,
+      "iso": "DNK"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2019",
+      "value": 75.76,
+      "iso": "DOM"
+    },
+    {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2021",
+      "value": 70.35,
+      "iso": "DOM"
     },
     {
       "entity": "Dominican Republic",
@@ -252,11 +932,53 @@
       "iso": "DOM"
     },
     {
+      "entity": "Dominican Republic",
+      "group": "Americas",
+      "period": "2025",
+      "value": 73.5,
+      "iso": "DOM"
+    },
+    {
+      "entity": "Algeria",
+      "group": "Africa",
+      "period": "2019",
+      "value": 75.27,
+      "iso": "DZA"
+    },
+    {
+      "entity": "Algeria",
+      "group": "Africa",
+      "period": "2021",
+      "value": 79.88,
+      "iso": "DZA"
+    },
+    {
       "entity": "Algeria",
       "group": "Africa",
       "period": "2023",
       "value": 69.24,
       "iso": "DZA"
+    },
+    {
+      "entity": "Algeria",
+      "group": "Africa",
+      "period": "2025",
+      "value": 64.08,
+      "iso": "DZA"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2019",
+      "value": 90.29,
+      "iso": "ECU"
+    },
+    {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2021",
+      "value": 87.71,
+      "iso": "ECU"
     },
     {
       "entity": "Ecuador",
@@ -266,11 +988,53 @@
       "iso": "ECU"
     },
     {
+      "entity": "Ecuador",
+      "group": "Americas",
+      "period": "2025",
+      "value": 93.5,
+      "iso": "ECU"
+    },
+    {
+      "entity": "Egypt",
+      "group": "Africa",
+      "period": "2019",
+      "value": 75.18,
+      "iso": "EGY"
+    },
+    {
+      "entity": "Egypt",
+      "group": "Africa",
+      "period": "2021",
+      "value": 69.17,
+      "iso": "EGY"
+    },
+    {
       "entity": "Egypt",
       "group": "Africa",
       "period": "2023",
       "value": 60.45,
       "iso": "EGY"
+    },
+    {
+      "entity": "Egypt",
+      "group": "Africa",
+      "period": "2025",
+      "value": 71.33,
+      "iso": "EGY"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2019",
+      "value": 82.29,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2021",
+      "value": 80.64,
+      "iso": "ESP"
     },
     {
       "entity": "Spain",
@@ -280,11 +1044,53 @@
       "iso": "ESP"
     },
     {
+      "entity": "Spain",
+      "group": "Europe",
+      "period": "2025",
+      "value": 75.54,
+      "iso": "ESP"
+    },
+    {
+      "entity": "Estonia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 50.18,
+      "iso": "EST"
+    },
+    {
+      "entity": "Estonia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 46.42,
+      "iso": "EST"
+    },
+    {
       "entity": "Estonia",
       "group": "Europe",
       "period": "2023",
       "value": 42.64,
       "iso": "EST"
+    },
+    {
+      "entity": "Estonia",
+      "group": "Europe",
+      "period": "2025",
+      "value": 48.11,
+      "iso": "EST"
+    },
+    {
+      "entity": "Ethiopia",
+      "group": "Africa",
+      "period": "2019",
+      "value": 59.92,
+      "iso": "ETH"
+    },
+    {
+      "entity": "Ethiopia",
+      "group": "Africa",
+      "period": "2021",
+      "value": 59.92,
+      "iso": "ETH"
     },
     {
       "entity": "Ethiopia",
@@ -294,11 +1100,53 @@
       "iso": "ETH"
     },
     {
+      "entity": "Ethiopia",
+      "group": "Africa",
+      "period": "2025",
+      "value": 48.67,
+      "iso": "ETH"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2019",
+      "value": 54.42,
+      "iso": "FIN"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2021",
+      "value": 49.1,
+      "iso": "FIN"
+    },
+    {
       "entity": "Finland",
       "group": "Europe",
       "period": "2023",
       "value": 53.58,
       "iso": "FIN"
+    },
+    {
+      "entity": "Finland",
+      "group": "Europe",
+      "period": "2025",
+      "value": 52.36,
+      "iso": "FIN"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2019",
+      "value": 76.01,
+      "iso": "FRA"
+    },
+    {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2021",
+      "value": 70.56,
+      "iso": "FRA"
     },
     {
       "entity": "France",
@@ -308,11 +1156,53 @@
       "iso": "FRA"
     },
     {
+      "entity": "France",
+      "group": "Europe",
+      "period": "2025",
+      "value": 66.36,
+      "iso": "FRA"
+    },
+    {
+      "entity": "Gabon",
+      "group": "Africa",
+      "period": "2019",
+      "value": 91.96,
+      "iso": "GAB"
+    },
+    {
+      "entity": "Gabon",
+      "group": "Africa",
+      "period": "2021",
+      "value": 93.03,
+      "iso": "GAB"
+    },
+    {
       "entity": "Gabon",
       "group": "Africa",
       "period": "2023",
       "value": 83.08,
       "iso": "GAB"
+    },
+    {
+      "entity": "Gabon",
+      "group": "Africa",
+      "period": "2025",
+      "value": 84.7,
+      "iso": "GAB"
+    },
+    {
+      "entity": "United Kingdom",
+      "group": "Europe",
+      "period": "2019",
+      "value": 64.67,
+      "iso": "GBR"
+    },
+    {
+      "entity": "United Kingdom",
+      "group": "Europe",
+      "period": "2021",
+      "value": 57.05,
+      "iso": "GBR"
     },
     {
       "entity": "United Kingdom",
@@ -322,11 +1212,53 @@
       "iso": "GBR"
     },
     {
+      "entity": "United Kingdom",
+      "group": "Europe",
+      "period": "2025",
+      "value": 53.39,
+      "iso": "GBR"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 54.01,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 51.24,
+      "iso": "GEO"
+    },
+    {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2023",
       "value": 46.92,
       "iso": "GEO"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2025",
+      "value": 57.61,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Ghana",
+      "group": "Africa",
+      "period": "2019",
+      "value": 78.54,
+      "iso": "GHA"
+    },
+    {
+      "entity": "Ghana",
+      "group": "Africa",
+      "period": "2021",
+      "value": 77.08,
+      "iso": "GHA"
     },
     {
       "entity": "Ghana",
@@ -336,11 +1268,53 @@
       "iso": "GHA"
     },
     {
+      "entity": "Ghana",
+      "group": "Africa",
+      "period": "2025",
+      "value": 87.23,
+      "iso": "GHA"
+    },
+    {
+      "entity": "Guinea",
+      "group": "Africa",
+      "period": "2019",
+      "value": 84.87,
+      "iso": "GIN"
+    },
+    {
+      "entity": "Guinea",
+      "group": "Africa",
+      "period": "2021",
+      "value": 84.04,
+      "iso": "GIN"
+    },
+    {
       "entity": "Guinea",
       "group": "Africa",
       "period": "2023",
       "value": 86.15,
       "iso": "GIN"
+    },
+    {
+      "entity": "Guinea",
+      "group": "Africa",
+      "period": "2025",
+      "value": 81.51,
+      "iso": "GIN"
+    },
+    {
+      "entity": "Gambia",
+      "group": "Africa",
+      "period": "2019",
+      "value": 75.36,
+      "iso": "GMB"
+    },
+    {
+      "entity": "Gambia",
+      "group": "Africa",
+      "period": "2021",
+      "value": 75.36,
+      "iso": "GMB"
     },
     {
       "entity": "Gambia",
@@ -350,11 +1324,53 @@
       "iso": "GMB"
     },
     {
+      "entity": "Gambia",
+      "group": "Africa",
+      "period": "2025",
+      "value": 72.48,
+      "iso": "GMB"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2019",
+      "value": 85.69,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2021",
+      "value": 83.33,
+      "iso": "GRC"
+    },
+    {
       "entity": "Greece",
       "group": "Europe",
       "period": "2023",
       "value": 83.06,
       "iso": "GRC"
+    },
+    {
+      "entity": "Greece",
+      "group": "Europe",
+      "period": "2025",
+      "value": 79.42,
+      "iso": "GRC"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2019",
+      "value": 77.06,
+      "iso": "GTM"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2021",
+      "value": 77.06,
+      "iso": "GTM"
     },
     {
       "entity": "Guatemala",
@@ -364,11 +1380,53 @@
       "iso": "GTM"
     },
     {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2025",
+      "value": 65.51,
+      "iso": "GTM"
+    },
+    {
+      "entity": "Hong Kong",
+      "group": "Asia",
+      "period": "2019",
+      "value": 83.31,
+      "iso": "HKG"
+    },
+    {
+      "entity": "Hong Kong",
+      "group": "Asia",
+      "period": "2021",
+      "value": 71.72,
+      "iso": "HKG"
+    },
+    {
       "entity": "Hong Kong",
       "group": "Asia",
       "period": "2023",
       "value": 61.67,
       "iso": "HKG"
+    },
+    {
+      "entity": "Hong Kong",
+      "group": "Asia",
+      "period": "2025",
+      "value": 52.58,
+      "iso": "HKG"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2019",
+      "value": 70.04,
+      "iso": "HND"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2021",
+      "value": 67.03,
+      "iso": "HND"
     },
     {
       "entity": "Honduras",
@@ -378,11 +1436,53 @@
       "iso": "HND"
     },
     {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2025",
+      "value": 67.97,
+      "iso": "HND"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 59.88,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 48.59,
+      "iso": "HRV"
+    },
+    {
       "entity": "Croatia",
       "group": "Europe",
       "period": "2023",
       "value": 53.54,
       "iso": "HRV"
+    },
+    {
+      "entity": "Croatia",
+      "group": "Europe",
+      "period": "2025",
+      "value": 56.95,
+      "iso": "HRV"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2019",
+      "value": 47.68,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2021",
+      "value": 47.62,
+      "iso": "HUN"
     },
     {
       "entity": "Hungary",
@@ -392,11 +1492,53 @@
       "iso": "HUN"
     },
     {
+      "entity": "Hungary",
+      "group": "Europe",
+      "period": "2025",
+      "value": 49.32,
+      "iso": "HUN"
+    },
+    {
+      "entity": "Indonesia",
+      "group": "Asia",
+      "period": "2019",
+      "value": 79.27,
+      "iso": "IDN"
+    },
+    {
+      "entity": "Indonesia",
+      "group": "Asia",
+      "period": "2021",
+      "value": 76.26,
+      "iso": "IDN"
+    },
+    {
       "entity": "Indonesia",
       "group": "Asia",
       "period": "2023",
       "value": 76.91,
       "iso": "IDN"
+    },
+    {
+      "entity": "Indonesia",
+      "group": "Asia",
+      "period": "2025",
+      "value": 80.04,
+      "iso": "IDN"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2019",
+      "value": 55.53,
+      "iso": "IND"
+    },
+    {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2021",
+      "value": 56.54,
+      "iso": "IND"
     },
     {
       "entity": "India",
@@ -406,11 +1548,53 @@
       "iso": "IND"
     },
     {
+      "entity": "India",
+      "group": "Asia",
+      "period": "2025",
+      "value": 59.62,
+      "iso": "IND"
+    },
+    {
+      "entity": "Ireland",
+      "group": "Europe",
+      "period": "2019",
+      "value": 66.81,
+      "iso": "IRL"
+    },
+    {
+      "entity": "Ireland",
+      "group": "Europe",
+      "period": "2021",
+      "value": 62.16,
+      "iso": "IRL"
+    },
+    {
       "entity": "Ireland",
       "group": "Europe",
       "period": "2023",
       "value": 59.12,
       "iso": "IRL"
+    },
+    {
+      "entity": "Ireland",
+      "group": "Europe",
+      "period": "2025",
+      "value": 60.76,
+      "iso": "IRL"
+    },
+    {
+      "entity": "Iran",
+      "group": "Asia",
+      "period": "2019",
+      "value": 54.6,
+      "iso": "IRN"
+    },
+    {
+      "entity": "Iran",
+      "group": "Asia",
+      "period": "2021",
+      "value": 54.04,
+      "iso": "IRN"
     },
     {
       "entity": "Iran",
@@ -422,9 +1606,37 @@
     {
       "entity": "Iraq",
       "group": "Asia",
+      "period": "2019",
+      "value": 78.8,
+      "iso": "IRQ"
+    },
+    {
+      "entity": "Iraq",
+      "group": "Asia",
+      "period": "2021",
+      "value": 78.19,
+      "iso": "IRQ"
+    },
+    {
+      "entity": "Iraq",
+      "group": "Asia",
       "period": "2023",
       "value": 67.42,
       "iso": "IRQ"
+    },
+    {
+      "entity": "Iraq",
+      "group": "Asia",
+      "period": "2025",
+      "value": 58.01,
+      "iso": "IRQ"
+    },
+    {
+      "entity": "Iceland",
+      "group": "Europe",
+      "period": "2021",
+      "value": 36.36,
+      "iso": "ISL"
     },
     {
       "entity": "Iceland",
@@ -434,11 +1646,53 @@
       "iso": "ISL"
     },
     {
+      "entity": "Iceland",
+      "group": "Europe",
+      "period": "2025",
+      "value": 50.9,
+      "iso": "ISL"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2019",
+      "value": 64.59,
+      "iso": "ISR"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2021",
+      "value": 61.74,
+      "iso": "ISR"
+    },
+    {
       "entity": "Israel",
       "group": "Asia",
       "period": "2023",
       "value": 60.07,
       "iso": "ISR"
+    },
+    {
+      "entity": "Israel",
+      "group": "Asia",
+      "period": "2025",
+      "value": 61.1,
+      "iso": "ISR"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2019",
+      "value": 82.81,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2021",
+      "value": 79.74,
+      "iso": "ITA"
     },
     {
       "entity": "Italy",
@@ -448,11 +1702,74 @@
       "iso": "ITA"
     },
     {
+      "entity": "Italy",
+      "group": "Europe",
+      "period": "2025",
+      "value": 85.98,
+      "iso": "ITA"
+    },
+    {
+      "entity": "Jamaica",
+      "group": "Americas",
+      "period": "2019",
+      "value": 83.64,
+      "iso": "JAM"
+    },
+    {
+      "entity": "Jamaica",
+      "group": "Americas",
+      "period": "2021",
+      "value": 83.18,
+      "iso": "JAM"
+    },
+    {
+      "entity": "Jamaica",
+      "group": "Americas",
+      "period": "2025",
+      "value": 79.85,
+      "iso": "JAM"
+    },
+    {
+      "entity": "Jordan",
+      "group": "Asia",
+      "period": "2019",
+      "value": 76.76,
+      "iso": "JOR"
+    },
+    {
+      "entity": "Jordan",
+      "group": "Asia",
+      "period": "2021",
+      "value": 64.48,
+      "iso": "JOR"
+    },
+    {
       "entity": "Jordan",
       "group": "Asia",
       "period": "2023",
       "value": 67.7,
       "iso": "JOR"
+    },
+    {
+      "entity": "Jordan",
+      "group": "Asia",
+      "period": "2025",
+      "value": 68.15,
+      "iso": "JOR"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2019",
+      "value": 83.11,
+      "iso": "JPN"
+    },
+    {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2021",
+      "value": 77.49,
+      "iso": "JPN"
     },
     {
       "entity": "Japan",
@@ -462,11 +1779,53 @@
       "iso": "JPN"
     },
     {
+      "entity": "Japan",
+      "group": "Asia",
+      "period": "2025",
+      "value": 78.96,
+      "iso": "JPN"
+    },
+    {
+      "entity": "Kazakhstan",
+      "group": "Asia",
+      "period": "2019",
+      "value": 68.32,
+      "iso": "KAZ"
+    },
+    {
+      "entity": "Kazakhstan",
+      "group": "Asia",
+      "period": "2021",
+      "value": 65.36,
+      "iso": "KAZ"
+    },
+    {
       "entity": "Kazakhstan",
       "group": "Asia",
       "period": "2023",
       "value": 67.18,
       "iso": "KAZ"
+    },
+    {
+      "entity": "Kazakhstan",
+      "group": "Asia",
+      "period": "2025",
+      "value": 70.31,
+      "iso": "KAZ"
+    },
+    {
+      "entity": "Kenya",
+      "group": "Africa",
+      "period": "2019",
+      "value": 71.58,
+      "iso": "KEN"
+    },
+    {
+      "entity": "Kenya",
+      "group": "Africa",
+      "period": "2021",
+      "value": 73.32,
+      "iso": "KEN"
     },
     {
       "entity": "Kenya",
@@ -476,11 +1835,53 @@
       "iso": "KEN"
     },
     {
+      "entity": "Kenya",
+      "group": "Africa",
+      "period": "2025",
+      "value": 76.93,
+      "iso": "KEN"
+    },
+    {
+      "entity": "Kyrgyzstan",
+      "group": "Asia",
+      "period": "2019",
+      "value": 68.67,
+      "iso": "KGZ"
+    },
+    {
+      "entity": "Kyrgyzstan",
+      "group": "Asia",
+      "period": "2021",
+      "value": 66.7,
+      "iso": "KGZ"
+    },
+    {
       "entity": "Kyrgyzstan",
       "group": "Asia",
       "period": "2023",
       "value": 76.99,
       "iso": "KGZ"
+    },
+    {
+      "entity": "Kyrgyzstan",
+      "group": "Asia",
+      "period": "2025",
+      "value": 71.41,
+      "iso": "KGZ"
+    },
+    {
+      "entity": "Cambodia",
+      "group": "Asia",
+      "period": "2019",
+      "value": 56.64,
+      "iso": "KHM"
+    },
+    {
+      "entity": "Cambodia",
+      "group": "Asia",
+      "period": "2021",
+      "value": 56.59,
+      "iso": "KHM"
     },
     {
       "entity": "Cambodia",
@@ -490,11 +1891,53 @@
       "iso": "KHM"
     },
     {
+      "entity": "Cambodia",
+      "group": "Asia",
+      "period": "2025",
+      "value": 63.56,
+      "iso": "KHM"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2019",
+      "value": 80.27,
+      "iso": "KOR"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2021",
+      "value": 79.36,
+      "iso": "KOR"
+    },
+    {
       "entity": "South Korea",
       "group": "Asia",
       "period": "2023",
       "value": 86.37,
       "iso": "KOR"
+    },
+    {
+      "entity": "South Korea",
+      "group": "Asia",
+      "period": "2025",
+      "value": 74.9,
+      "iso": "KOR"
+    },
+    {
+      "entity": "Kuwait",
+      "group": "Asia",
+      "period": "2019",
+      "value": 62.42,
+      "iso": "KWT"
+    },
+    {
+      "entity": "Kuwait",
+      "group": "Asia",
+      "period": "2021",
+      "value": 62.42,
+      "iso": "KWT"
     },
     {
       "entity": "Kuwait",
@@ -504,11 +1947,53 @@
       "iso": "KWT"
     },
     {
+      "entity": "Kuwait",
+      "group": "Asia",
+      "period": "2025",
+      "value": 34.35,
+      "iso": "KWT"
+    },
+    {
+      "entity": "Laos",
+      "group": "Asia",
+      "period": "2019",
+      "value": 51.61,
+      "iso": "LAO"
+    },
+    {
+      "entity": "Laos",
+      "group": "Asia",
+      "period": "2021",
+      "value": 47.92,
+      "iso": "LAO"
+    },
+    {
       "entity": "Laos",
       "group": "Asia",
       "period": "2023",
       "value": 48.62,
       "iso": "LAO"
+    },
+    {
+      "entity": "Laos",
+      "group": "Asia",
+      "period": "2025",
+      "value": 55.71,
+      "iso": "LAO"
+    },
+    {
+      "entity": "Lebanon",
+      "group": "Asia",
+      "period": "2019",
+      "value": 90.14,
+      "iso": "LBN"
+    },
+    {
+      "entity": "Lebanon",
+      "group": "Asia",
+      "period": "2021",
+      "value": 84.36,
+      "iso": "LBN"
     },
     {
       "entity": "Lebanon",
@@ -518,11 +2003,53 @@
       "iso": "LBN"
     },
     {
+      "entity": "Lebanon",
+      "group": "Asia",
+      "period": "2025",
+      "value": 90.58,
+      "iso": "LBN"
+    },
+    {
+      "entity": "Liberia",
+      "group": "Africa",
+      "period": "2019",
+      "value": 80.19,
+      "iso": "LBR"
+    },
+    {
+      "entity": "Liberia",
+      "group": "Africa",
+      "period": "2021",
+      "value": 80.19,
+      "iso": "LBR"
+    },
+    {
       "entity": "Liberia",
       "group": "Africa",
       "period": "2023",
       "value": 82.54,
       "iso": "LBR"
+    },
+    {
+      "entity": "Liberia",
+      "group": "Africa",
+      "period": "2025",
+      "value": 81.32,
+      "iso": "LBR"
+    },
+    {
+      "entity": "Libya",
+      "group": "Africa",
+      "period": "2019",
+      "value": 76.23,
+      "iso": "LBY"
+    },
+    {
+      "entity": "Libya",
+      "group": "Africa",
+      "period": "2021",
+      "value": 76.23,
+      "iso": "LBY"
     },
     {
       "entity": "Libya",
@@ -532,11 +2059,74 @@
       "iso": "LBY"
     },
     {
+      "entity": "Libya",
+      "group": "Africa",
+      "period": "2025",
+      "value": 63.35,
+      "iso": "LBY"
+    },
+    {
+      "entity": "Sri Lanka",
+      "group": "Asia",
+      "period": "2019",
+      "value": 63.11,
+      "iso": "LKA"
+    },
+    {
+      "entity": "Sri Lanka",
+      "group": "Asia",
+      "period": "2021",
+      "value": 60.45,
+      "iso": "LKA"
+    },
+    {
       "entity": "Sri Lanka",
       "group": "Asia",
       "period": "2023",
       "value": 66.37,
       "iso": "LKA"
+    },
+    {
+      "entity": "Sri Lanka",
+      "group": "Asia",
+      "period": "2025",
+      "value": 64.27,
+      "iso": "LKA"
+    },
+    {
+      "entity": "Lesotho",
+      "group": "Africa",
+      "period": "2019",
+      "value": 82.97,
+      "iso": "LSO"
+    },
+    {
+      "entity": "Lesotho",
+      "group": "Africa",
+      "period": "2021",
+      "value": 82.97,
+      "iso": "LSO"
+    },
+    {
+      "entity": "Lesotho",
+      "group": "Africa",
+      "period": "2025",
+      "value": 73.47,
+      "iso": "LSO"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2019",
+      "value": 44.83,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2021",
+      "value": 46.67,
+      "iso": "LTU"
     },
     {
       "entity": "Lithuania",
@@ -546,11 +2136,53 @@
       "iso": "LTU"
     },
     {
+      "entity": "Lithuania",
+      "group": "Europe",
+      "period": "2025",
+      "value": 49.37,
+      "iso": "LTU"
+    },
+    {
+      "entity": "Luxembourg",
+      "group": "Europe",
+      "period": "2019",
+      "value": 62.48,
+      "iso": "LUX"
+    },
+    {
+      "entity": "Luxembourg",
+      "group": "Europe",
+      "period": "2021",
+      "value": 62.48,
+      "iso": "LUX"
+    },
+    {
       "entity": "Luxembourg",
       "group": "Europe",
       "period": "2023",
       "value": 62.79,
       "iso": "LUX"
+    },
+    {
+      "entity": "Luxembourg",
+      "group": "Europe",
+      "period": "2025",
+      "value": 62.91,
+      "iso": "LUX"
+    },
+    {
+      "entity": "Latvia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 61.4,
+      "iso": "LVA"
+    },
+    {
+      "entity": "Latvia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 58.5,
+      "iso": "LVA"
     },
     {
       "entity": "Latvia",
@@ -560,11 +2192,53 @@
       "iso": "LVA"
     },
     {
+      "entity": "Latvia",
+      "group": "Europe",
+      "period": "2025",
+      "value": 60.64,
+      "iso": "LVA"
+    },
+    {
+      "entity": "Morocco",
+      "group": "Africa",
+      "period": "2019",
+      "value": 85.94,
+      "iso": "MAR"
+    },
+    {
+      "entity": "Morocco",
+      "group": "Africa",
+      "period": "2021",
+      "value": 84.68,
+      "iso": "MAR"
+    },
+    {
       "entity": "Morocco",
       "group": "Africa",
       "period": "2023",
       "value": 74.98,
       "iso": "MAR"
+    },
+    {
+      "entity": "Morocco",
+      "group": "Africa",
+      "period": "2025",
+      "value": 75.11,
+      "iso": "MAR"
+    },
+    {
+      "entity": "Moldova",
+      "group": "Europe",
+      "period": "2019",
+      "value": 80.7,
+      "iso": "MDA"
+    },
+    {
+      "entity": "Moldova",
+      "group": "Europe",
+      "period": "2021",
+      "value": 76.67,
+      "iso": "MDA"
     },
     {
       "entity": "Moldova",
@@ -574,11 +2248,53 @@
       "iso": "MDA"
     },
     {
+      "entity": "Moldova",
+      "group": "Europe",
+      "period": "2025",
+      "value": 72.36,
+      "iso": "MDA"
+    },
+    {
+      "entity": "Madagascar",
+      "group": "Africa",
+      "period": "2019",
+      "value": 70.54,
+      "iso": "MDG"
+    },
+    {
+      "entity": "Madagascar",
+      "group": "Africa",
+      "period": "2021",
+      "value": 70.54,
+      "iso": "MDG"
+    },
+    {
       "entity": "Madagascar",
       "group": "Africa",
       "period": "2023",
       "value": 64.86,
       "iso": "MDG"
+    },
+    {
+      "entity": "Madagascar",
+      "group": "Africa",
+      "period": "2025",
+      "value": 73.17,
+      "iso": "MDG"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2019",
+      "value": 86.6,
+      "iso": "MEX"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2021",
+      "value": 86.41,
+      "iso": "MEX"
     },
     {
       "entity": "Mexico",
@@ -588,11 +2304,53 @@
       "iso": "MEX"
     },
     {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2025",
+      "value": 84.21,
+      "iso": "MEX"
+    },
+    {
+      "entity": "North Macedonia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 84.35,
+      "iso": "MKD"
+    },
+    {
+      "entity": "North Macedonia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 72.57,
+      "iso": "MKD"
+    },
+    {
       "entity": "North Macedonia",
       "group": "Europe",
       "period": "2023",
       "value": 74.13,
       "iso": "MKD"
+    },
+    {
+      "entity": "North Macedonia",
+      "group": "Europe",
+      "period": "2025",
+      "value": 70.52,
+      "iso": "MKD"
+    },
+    {
+      "entity": "Mali",
+      "group": "Africa",
+      "period": "2019",
+      "value": 90.38,
+      "iso": "MLI"
+    },
+    {
+      "entity": "Mali",
+      "group": "Africa",
+      "period": "2021",
+      "value": 92,
+      "iso": "MLI"
     },
     {
       "entity": "Mali",
@@ -602,11 +2360,53 @@
       "iso": "MLI"
     },
     {
+      "entity": "Mali",
+      "group": "Africa",
+      "period": "2025",
+      "value": 82.55,
+      "iso": "MLI"
+    },
+    {
+      "entity": "Malta",
+      "group": "Europe",
+      "period": "2019",
+      "value": 77.22,
+      "iso": "MLT"
+    },
+    {
+      "entity": "Malta",
+      "group": "Europe",
+      "period": "2021",
+      "value": 73.82,
+      "iso": "MLT"
+    },
+    {
       "entity": "Malta",
       "group": "Europe",
       "period": "2023",
       "value": 75.36,
       "iso": "MLT"
+    },
+    {
+      "entity": "Malta",
+      "group": "Europe",
+      "period": "2025",
+      "value": 74.8,
+      "iso": "MLT"
+    },
+    {
+      "entity": "Myanmar",
+      "group": "Asia",
+      "period": "2019",
+      "value": 71.87,
+      "iso": "MMR"
+    },
+    {
+      "entity": "Myanmar",
+      "group": "Asia",
+      "period": "2021",
+      "value": 73.98,
+      "iso": "MMR"
     },
     {
       "entity": "Myanmar",
@@ -616,11 +2416,53 @@
       "iso": "MMR"
     },
     {
+      "entity": "Myanmar",
+      "group": "Asia",
+      "period": "2025",
+      "value": 72.54,
+      "iso": "MMR"
+    },
+    {
+      "entity": "Montenegro",
+      "group": "Europe",
+      "period": "2019",
+      "value": 74.15,
+      "iso": "MNE"
+    },
+    {
+      "entity": "Montenegro",
+      "group": "Europe",
+      "period": "2021",
+      "value": 74.15,
+      "iso": "MNE"
+    },
+    {
       "entity": "Montenegro",
       "group": "Europe",
       "period": "2023",
       "value": 44.38,
       "iso": "MNE"
+    },
+    {
+      "entity": "Montenegro",
+      "group": "Europe",
+      "period": "2025",
+      "value": 61.08,
+      "iso": "MNE"
+    },
+    {
+      "entity": "Mongolia",
+      "group": "Asia",
+      "period": "2019",
+      "value": 89.19,
+      "iso": "MNG"
+    },
+    {
+      "entity": "Mongolia",
+      "group": "Asia",
+      "period": "2021",
+      "value": 86.46,
+      "iso": "MNG"
     },
     {
       "entity": "Mongolia",
@@ -630,11 +2472,53 @@
       "iso": "MNG"
     },
     {
+      "entity": "Mongolia",
+      "group": "Asia",
+      "period": "2025",
+      "value": 88.39,
+      "iso": "MNG"
+    },
+    {
+      "entity": "Mozambique",
+      "group": "Africa",
+      "period": "2019",
+      "value": 79.73,
+      "iso": "MOZ"
+    },
+    {
+      "entity": "Mozambique",
+      "group": "Africa",
+      "period": "2021",
+      "value": 77.31,
+      "iso": "MOZ"
+    },
+    {
       "entity": "Mozambique",
       "group": "Africa",
       "period": "2023",
       "value": 70.57,
       "iso": "MOZ"
+    },
+    {
+      "entity": "Mozambique",
+      "group": "Africa",
+      "period": "2025",
+      "value": 78.91,
+      "iso": "MOZ"
+    },
+    {
+      "entity": "Mauritania",
+      "group": "Africa",
+      "period": "2019",
+      "value": 69.51,
+      "iso": "MRT"
+    },
+    {
+      "entity": "Mauritania",
+      "group": "Africa",
+      "period": "2021",
+      "value": 69.51,
+      "iso": "MRT"
     },
     {
       "entity": "Mauritania",
@@ -644,11 +2528,53 @@
       "iso": "MRT"
     },
     {
+      "entity": "Mauritania",
+      "group": "Africa",
+      "period": "2025",
+      "value": 66.05,
+      "iso": "MRT"
+    },
+    {
+      "entity": "Mauritius",
+      "group": "Africa",
+      "period": "2019",
+      "value": 94.54,
+      "iso": "MUS"
+    },
+    {
+      "entity": "Mauritius",
+      "group": "Africa",
+      "period": "2021",
+      "value": 93.07,
+      "iso": "MUS"
+    },
+    {
       "entity": "Mauritius",
       "group": "Africa",
       "period": "2023",
       "value": 89.46,
       "iso": "MUS"
+    },
+    {
+      "entity": "Mauritius",
+      "group": "Africa",
+      "period": "2025",
+      "value": 93.48,
+      "iso": "MUS"
+    },
+    {
+      "entity": "Malawi",
+      "group": "Africa",
+      "period": "2019",
+      "value": 86.73,
+      "iso": "MWI"
+    },
+    {
+      "entity": "Malawi",
+      "group": "Africa",
+      "period": "2021",
+      "value": 86.73,
+      "iso": "MWI"
     },
     {
       "entity": "Malawi",
@@ -658,11 +2584,53 @@
       "iso": "MWI"
     },
     {
+      "entity": "Malawi",
+      "group": "Africa",
+      "period": "2025",
+      "value": 84.13,
+      "iso": "MWI"
+    },
+    {
+      "entity": "Malaysia",
+      "group": "Asia",
+      "period": "2019",
+      "value": 87.09,
+      "iso": "MYS"
+    },
+    {
+      "entity": "Malaysia",
+      "group": "Asia",
+      "period": "2021",
+      "value": 80.4,
+      "iso": "MYS"
+    },
+    {
       "entity": "Malaysia",
       "group": "Asia",
       "period": "2023",
       "value": 84.74,
       "iso": "MYS"
+    },
+    {
+      "entity": "Malaysia",
+      "group": "Asia",
+      "period": "2025",
+      "value": 89.15,
+      "iso": "MYS"
+    },
+    {
+      "entity": "Namibia",
+      "group": "Africa",
+      "period": "2019",
+      "value": 84.48,
+      "iso": "NAM"
+    },
+    {
+      "entity": "Namibia",
+      "group": "Africa",
+      "period": "2021",
+      "value": 83.98,
+      "iso": "NAM"
     },
     {
       "entity": "Namibia",
@@ -672,6 +2640,27 @@
       "iso": "NAM"
     },
     {
+      "entity": "Namibia",
+      "group": "Africa",
+      "period": "2025",
+      "value": 72.83,
+      "iso": "NAM"
+    },
+    {
+      "entity": "Niger",
+      "group": "Africa",
+      "period": "2019",
+      "value": 66.27,
+      "iso": "NER"
+    },
+    {
+      "entity": "Niger",
+      "group": "Africa",
+      "period": "2021",
+      "value": 66.27,
+      "iso": "NER"
+    },
+    {
       "entity": "Niger",
       "group": "Africa",
       "period": "2023",
@@ -679,11 +2668,53 @@
       "iso": "NER"
     },
     {
+      "entity": "Niger",
+      "group": "Africa",
+      "period": "2025",
+      "value": 66.34,
+      "iso": "NER"
+    },
+    {
+      "entity": "Nigeria",
+      "group": "Africa",
+      "period": "2019",
+      "value": 64.5,
+      "iso": "NGA"
+    },
+    {
+      "entity": "Nigeria",
+      "group": "Africa",
+      "period": "2021",
+      "value": 74.62,
+      "iso": "NGA"
+    },
+    {
       "entity": "Nigeria",
       "group": "Africa",
       "period": "2023",
       "value": 72.72,
       "iso": "NGA"
+    },
+    {
+      "entity": "Nigeria",
+      "group": "Africa",
+      "period": "2025",
+      "value": 72.9,
+      "iso": "NGA"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2019",
+      "value": 57.97,
+      "iso": "NIC"
+    },
+    {
+      "entity": "Nicaragua",
+      "group": "Americas",
+      "period": "2021",
+      "value": 50.26,
+      "iso": "NIC"
     },
     {
       "entity": "Nicaragua",
@@ -695,9 +2726,44 @@
     {
       "entity": "Netherlands",
       "group": "Europe",
+      "period": "2019",
+      "value": 68.88,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2021",
+      "value": 68.37,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
       "period": "2023",
       "value": 72.96,
       "iso": "NLD"
+    },
+    {
+      "entity": "Netherlands",
+      "group": "Europe",
+      "period": "2025",
+      "value": 73.67,
+      "iso": "NLD"
+    },
+    {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2019",
+      "value": 44.45,
+      "iso": "NOR"
+    },
+    {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2021",
+      "value": 37.98,
+      "iso": "NOR"
     },
     {
       "entity": "Norway",
@@ -707,11 +2773,53 @@
       "iso": "NOR"
     },
     {
+      "entity": "Norway",
+      "group": "Europe",
+      "period": "2025",
+      "value": 38.66,
+      "iso": "NOR"
+    },
+    {
+      "entity": "Nepal",
+      "group": "Asia",
+      "period": "2019",
+      "value": 64.38,
+      "iso": "NPL"
+    },
+    {
+      "entity": "Nepal",
+      "group": "Asia",
+      "period": "2021",
+      "value": 60.52,
+      "iso": "NPL"
+    },
+    {
       "entity": "Nepal",
       "group": "Asia",
       "period": "2023",
       "value": 66.46,
       "iso": "NPL"
+    },
+    {
+      "entity": "Nepal",
+      "group": "Asia",
+      "period": "2025",
+      "value": 69.53,
+      "iso": "NPL"
+    },
+    {
+      "entity": "New Zealand",
+      "group": "Asia",
+      "period": "2019",
+      "value": 70.17,
+      "iso": "NZL"
+    },
+    {
+      "entity": "New Zealand",
+      "group": "Asia",
+      "period": "2021",
+      "value": 68.01,
+      "iso": "NZL"
     },
     {
       "entity": "New Zealand",
@@ -721,11 +2829,60 @@
       "iso": "NZL"
     },
     {
+      "entity": "New Zealand",
+      "group": "Asia",
+      "period": "2025",
+      "value": 66.45,
+      "iso": "NZL"
+    },
+    {
+      "entity": "Oman",
+      "group": "Asia",
+      "period": "2025",
+      "value": 40.36,
+      "iso": "OMN"
+    },
+    {
+      "entity": "Pakistan",
+      "group": "Asia",
+      "period": "2019",
+      "value": 87.18,
+      "iso": "PAK"
+    },
+    {
+      "entity": "Pakistan",
+      "group": "Asia",
+      "period": "2021",
+      "value": 70.34,
+      "iso": "PAK"
+    },
+    {
       "entity": "Pakistan",
       "group": "Asia",
       "period": "2023",
       "value": 73.92,
       "iso": "PAK"
+    },
+    {
+      "entity": "Pakistan",
+      "group": "Asia",
+      "period": "2025",
+      "value": 54.23,
+      "iso": "PAK"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2019",
+      "value": 82.33,
+      "iso": "PAN"
+    },
+    {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2021",
+      "value": 77.32,
+      "iso": "PAN"
     },
     {
       "entity": "Panama",
@@ -735,11 +2892,53 @@
       "iso": "PAN"
     },
     {
+      "entity": "Panama",
+      "group": "Americas",
+      "period": "2025",
+      "value": 75.77,
+      "iso": "PAN"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2019",
+      "value": 91.38,
+      "iso": "PER"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2021",
+      "value": 88.86,
+      "iso": "PER"
+    },
+    {
       "entity": "Peru",
       "group": "Americas",
       "period": "2023",
       "value": 88.61,
       "iso": "PER"
+    },
+    {
+      "entity": "Peru",
+      "group": "Americas",
+      "period": "2025",
+      "value": 91.86,
+      "iso": "PER"
+    },
+    {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2019",
+      "value": 88.47,
+      "iso": "PHL"
+    },
+    {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2021",
+      "value": 86.68,
+      "iso": "PHL"
     },
     {
       "entity": "Philippines",
@@ -749,11 +2948,53 @@
       "iso": "PHL"
     },
     {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2025",
+      "value": 88.3,
+      "iso": "PHL"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2019",
+      "value": 65.08,
+      "iso": "POL"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2021",
+      "value": 66.2,
+      "iso": "POL"
+    },
+    {
       "entity": "Poland",
       "group": "Europe",
       "period": "2023",
       "value": 62.45,
       "iso": "POL"
+    },
+    {
+      "entity": "Poland",
+      "group": "Europe",
+      "period": "2025",
+      "value": 59.96,
+      "iso": "POL"
+    },
+    {
+      "entity": "Portugal",
+      "group": "Europe",
+      "period": "2019",
+      "value": 83.63,
+      "iso": "PRT"
+    },
+    {
+      "entity": "Portugal",
+      "group": "Europe",
+      "period": "2021",
+      "value": 78.98,
+      "iso": "PRT"
     },
     {
       "entity": "Portugal",
@@ -763,11 +3004,53 @@
       "iso": "PRT"
     },
     {
+      "entity": "Portugal",
+      "group": "Europe",
+      "period": "2025",
+      "value": 81,
+      "iso": "PRT"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2019",
+      "value": 69.02,
+      "iso": "PRY"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2021",
+      "value": 68.46,
+      "iso": "PRY"
+    },
+    {
       "entity": "Paraguay",
       "group": "Americas",
       "period": "2023",
       "value": 67.23,
       "iso": "PRY"
+    },
+    {
+      "entity": "Paraguay",
+      "group": "Americas",
+      "period": "2025",
+      "value": 73.64,
+      "iso": "PRY"
+    },
+    {
+      "entity": "Palestine",
+      "group": "Asia",
+      "period": "2019",
+      "value": 74.57,
+      "iso": "PSE"
+    },
+    {
+      "entity": "Palestine",
+      "group": "Asia",
+      "period": "2021",
+      "value": 74.57,
+      "iso": "PSE"
     },
     {
       "entity": "Palestine",
@@ -777,11 +3060,53 @@
       "iso": "PSE"
     },
     {
+      "entity": "Palestine",
+      "group": "Asia",
+      "period": "2025",
+      "value": 70.17,
+      "iso": "PSE"
+    },
+    {
+      "entity": "Romania",
+      "group": "Europe",
+      "period": "2019",
+      "value": 72.17,
+      "iso": "ROU"
+    },
+    {
+      "entity": "Romania",
+      "group": "Europe",
+      "period": "2021",
+      "value": 68.11,
+      "iso": "ROU"
+    },
+    {
       "entity": "Romania",
       "group": "Europe",
       "period": "2023",
       "value": 61.4,
       "iso": "ROU"
+    },
+    {
+      "entity": "Romania",
+      "group": "Europe",
+      "period": "2025",
+      "value": 59.71,
+      "iso": "ROU"
+    },
+    {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 67.15,
+      "iso": "RUS"
+    },
+    {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 69.52,
+      "iso": "RUS"
     },
     {
       "entity": "Russia",
@@ -791,11 +3116,67 @@
       "iso": "RUS"
     },
     {
+      "entity": "Russia",
+      "group": "Europe",
+      "period": "2025",
+      "value": 74.19,
+      "iso": "RUS"
+    },
+    {
+      "entity": "Rwanda",
+      "group": "Africa",
+      "period": "2019",
+      "value": 66.4,
+      "iso": "RWA"
+    },
+    {
+      "entity": "Rwanda",
+      "group": "Africa",
+      "period": "2021",
+      "value": 66.4,
+      "iso": "RWA"
+    },
+    {
+      "entity": "Saudi Arabia",
+      "group": "Asia",
+      "period": "2019",
+      "value": 60.64,
+      "iso": "SAU"
+    },
+    {
+      "entity": "Saudi Arabia",
+      "group": "Asia",
+      "period": "2021",
+      "value": 53.87,
+      "iso": "SAU"
+    },
+    {
       "entity": "Saudi Arabia",
       "group": "Asia",
       "period": "2023",
       "value": 43.76,
       "iso": "SAU"
+    },
+    {
+      "entity": "Saudi Arabia",
+      "group": "Asia",
+      "period": "2025",
+      "value": 35.73,
+      "iso": "SAU"
+    },
+    {
+      "entity": "Senegal",
+      "group": "Africa",
+      "period": "2019",
+      "value": 90.56,
+      "iso": "SEN"
+    },
+    {
+      "entity": "Senegal",
+      "group": "Africa",
+      "period": "2021",
+      "value": 86.89,
+      "iso": "SEN"
     },
     {
       "entity": "Senegal",
@@ -805,11 +3186,53 @@
       "iso": "SEN"
     },
     {
+      "entity": "Senegal",
+      "group": "Africa",
+      "period": "2025",
+      "value": 82.36,
+      "iso": "SEN"
+    },
+    {
+      "entity": "Singapore",
+      "group": "Asia",
+      "period": "2019",
+      "value": 42.8,
+      "iso": "SGP"
+    },
+    {
+      "entity": "Singapore",
+      "group": "Asia",
+      "period": "2021",
+      "value": 37.84,
+      "iso": "SGP"
+    },
+    {
       "entity": "Singapore",
       "group": "Asia",
       "period": "2023",
       "value": 43.59,
       "iso": "SGP"
+    },
+    {
+      "entity": "Singapore",
+      "group": "Asia",
+      "period": "2025",
+      "value": 46.29,
+      "iso": "SGP"
+    },
+    {
+      "entity": "Sierra Leone",
+      "group": "Africa",
+      "period": "2019",
+      "value": 78.95,
+      "iso": "SLE"
+    },
+    {
+      "entity": "Sierra Leone",
+      "group": "Africa",
+      "period": "2021",
+      "value": 81.17,
+      "iso": "SLE"
     },
     {
       "entity": "Sierra Leone",
@@ -819,10 +3242,38 @@
       "iso": "SLE"
     },
     {
+      "entity": "Sierra Leone",
+      "group": "Africa",
+      "period": "2025",
+      "value": 64.81,
+      "iso": "SLE"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2019",
+      "value": 73.91,
+      "iso": "SLV"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2021",
+      "value": 66.39,
+      "iso": "SLV"
+    },
+    {
       "entity": "El Salvador",
       "group": "Americas",
       "period": "2023",
       "value": 38.27,
+      "iso": "SLV"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2025",
+      "value": 34.63,
       "iso": "SLV"
     },
     {
@@ -833,11 +3284,53 @@
       "iso": "SOM"
     },
     {
+      "entity": "Somalia",
+      "group": "Africa",
+      "period": "2025",
+      "value": 54.79,
+      "iso": "SOM"
+    },
+    {
+      "entity": "Serbia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 62.22,
+      "iso": "SRB"
+    },
+    {
+      "entity": "Serbia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 60.9,
+      "iso": "SRB"
+    },
+    {
       "entity": "Serbia",
       "group": "Europe",
       "period": "2023",
       "value": 60.71,
       "iso": "SRB"
+    },
+    {
+      "entity": "Serbia",
+      "group": "Europe",
+      "period": "2025",
+      "value": 65.78,
+      "iso": "SRB"
+    },
+    {
+      "entity": "Slovakia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 73.91,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Slovakia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 68.35,
+      "iso": "SVK"
     },
     {
       "entity": "Slovakia",
@@ -847,6 +3340,27 @@
       "iso": "SVK"
     },
     {
+      "entity": "Slovakia",
+      "group": "Europe",
+      "period": "2025",
+      "value": 69.45,
+      "iso": "SVK"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2019",
+      "value": 66.26,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2021",
+      "value": 58.09,
+      "iso": "SVN"
+    },
+    {
       "entity": "Slovenia",
       "group": "Europe",
       "period": "2023",
@@ -854,11 +3368,53 @@
       "iso": "SVN"
     },
     {
+      "entity": "Slovenia",
+      "group": "Europe",
+      "period": "2025",
+      "value": 54.43,
+      "iso": "SVN"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2019",
+      "value": 49.86,
+      "iso": "SWE"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2021",
+      "value": 45.55,
+      "iso": "SWE"
+    },
+    {
       "entity": "Sweden",
       "group": "Europe",
       "period": "2023",
       "value": 44.34,
       "iso": "SWE"
+    },
+    {
+      "entity": "Sweden",
+      "group": "Europe",
+      "period": "2025",
+      "value": 43.73,
+      "iso": "SWE"
+    },
+    {
+      "entity": "Eswatini",
+      "group": "Africa",
+      "period": "2019",
+      "value": 82.49,
+      "iso": "SWZ"
+    },
+    {
+      "entity": "Eswatini",
+      "group": "Africa",
+      "period": "2021",
+      "value": 82.49,
+      "iso": "SWZ"
     },
     {
       "entity": "Eswatini",
@@ -870,9 +3426,44 @@
     {
       "entity": "Chad",
       "group": "Africa",
+      "period": "2019",
+      "value": 78.88,
+      "iso": "TCD"
+    },
+    {
+      "entity": "Chad",
+      "group": "Africa",
+      "period": "2021",
+      "value": 78.88,
+      "iso": "TCD"
+    },
+    {
+      "entity": "Chad",
+      "group": "Africa",
       "period": "2023",
       "value": 71.42,
       "iso": "TCD"
+    },
+    {
+      "entity": "Chad",
+      "group": "Africa",
+      "period": "2025",
+      "value": 78.5,
+      "iso": "TCD"
+    },
+    {
+      "entity": "Togo",
+      "group": "Africa",
+      "period": "2019",
+      "value": 81.3,
+      "iso": "TGO"
+    },
+    {
+      "entity": "Togo",
+      "group": "Africa",
+      "period": "2021",
+      "value": 77.25,
+      "iso": "TGO"
     },
     {
       "entity": "Togo",
@@ -882,11 +3473,53 @@
       "iso": "TGO"
     },
     {
+      "entity": "Togo",
+      "group": "Africa",
+      "period": "2025",
+      "value": 63.45,
+      "iso": "TGO"
+    },
+    {
+      "entity": "Thailand",
+      "group": "Asia",
+      "period": "2019",
+      "value": 67.32,
+      "iso": "THA"
+    },
+    {
+      "entity": "Thailand",
+      "group": "Asia",
+      "period": "2021",
+      "value": 65.11,
+      "iso": "THA"
+    },
+    {
       "entity": "Thailand",
       "group": "Asia",
       "period": "2023",
       "value": 58.58,
       "iso": "THA"
+    },
+    {
+      "entity": "Thailand",
+      "group": "Asia",
+      "period": "2025",
+      "value": 64.74,
+      "iso": "THA"
+    },
+    {
+      "entity": "Tajikistan",
+      "group": "Asia",
+      "period": "2019",
+      "value": 31.1,
+      "iso": "TJK"
+    },
+    {
+      "entity": "Tajikistan",
+      "group": "Asia",
+      "period": "2021",
+      "value": 39.6,
+      "iso": "TJK"
     },
     {
       "entity": "Tajikistan",
@@ -896,6 +3529,41 @@
       "iso": "TJK"
     },
     {
+      "entity": "Tajikistan",
+      "group": "Asia",
+      "period": "2025",
+      "value": 51.1,
+      "iso": "TJK"
+    },
+    {
+      "entity": "Turkmenistan",
+      "group": "Asia",
+      "period": "2019",
+      "value": 46.58,
+      "iso": "TKM"
+    },
+    {
+      "entity": "Turkmenistan",
+      "group": "Asia",
+      "period": "2021",
+      "value": 46.58,
+      "iso": "TKM"
+    },
+    {
+      "entity": "Tunisia",
+      "group": "Africa",
+      "period": "2019",
+      "value": 74.21,
+      "iso": "TUN"
+    },
+    {
+      "entity": "Tunisia",
+      "group": "Africa",
+      "period": "2021",
+      "value": 69.99,
+      "iso": "TUN"
+    },
+    {
       "entity": "Tunisia",
       "group": "Africa",
       "period": "2023",
@@ -903,11 +3571,53 @@
       "iso": "TUN"
     },
     {
-      "entity": "Turkey",
+      "entity": "Tunisia",
+      "group": "Africa",
+      "period": "2025",
+      "value": 61.89,
+      "iso": "TUN"
+    },
+    {
+      "entity": "Türkiye",
+      "group": "Europe",
+      "period": "2019",
+      "value": 75.73,
+      "iso": "TUR"
+    },
+    {
+      "entity": "Türkiye",
+      "group": "Europe",
+      "period": "2021",
+      "value": 79.2,
+      "iso": "TUR"
+    },
+    {
+      "entity": "Türkiye",
       "group": "Europe",
       "period": "2023",
       "value": 78.74,
       "iso": "TUR"
+    },
+    {
+      "entity": "Türkiye",
+      "group": "Europe",
+      "period": "2025",
+      "value": 73.79,
+      "iso": "TUR"
+    },
+    {
+      "entity": "Taiwan",
+      "group": "Asia",
+      "period": "2019",
+      "value": 72.74,
+      "iso": "TWN"
+    },
+    {
+      "entity": "Taiwan",
+      "group": "Asia",
+      "period": "2021",
+      "value": 64.28,
+      "iso": "TWN"
     },
     {
       "entity": "Taiwan",
@@ -917,11 +3627,53 @@
       "iso": "TWN"
     },
     {
+      "entity": "Taiwan",
+      "group": "Asia",
+      "period": "2025",
+      "value": 60.49,
+      "iso": "TWN"
+    },
+    {
+      "entity": "Tanzania",
+      "group": "Africa",
+      "period": "2019",
+      "value": 64.61,
+      "iso": "TZA"
+    },
+    {
+      "entity": "Tanzania",
+      "group": "Africa",
+      "period": "2021",
+      "value": 65.83,
+      "iso": "TZA"
+    },
+    {
       "entity": "Tanzania",
       "group": "Africa",
       "period": "2023",
       "value": 64.06,
       "iso": "TZA"
+    },
+    {
+      "entity": "Tanzania",
+      "group": "Africa",
+      "period": "2025",
+      "value": 65.72,
+      "iso": "TZA"
+    },
+    {
+      "entity": "Uganda",
+      "group": "Africa",
+      "period": "2019",
+      "value": 74.43,
+      "iso": "UGA"
+    },
+    {
+      "entity": "Uganda",
+      "group": "Africa",
+      "period": "2021",
+      "value": 73.32,
+      "iso": "UGA"
     },
     {
       "entity": "Uganda",
@@ -931,11 +3683,53 @@
       "iso": "UGA"
     },
     {
+      "entity": "Uganda",
+      "group": "Africa",
+      "period": "2025",
+      "value": 75.63,
+      "iso": "UGA"
+    },
+    {
+      "entity": "Ukraine",
+      "group": "Europe",
+      "period": "2019",
+      "value": 72.73,
+      "iso": "UKR"
+    },
+    {
+      "entity": "Ukraine",
+      "group": "Europe",
+      "period": "2021",
+      "value": 73.78,
+      "iso": "UKR"
+    },
+    {
       "entity": "Ukraine",
       "group": "Europe",
       "period": "2023",
       "value": 72.92,
       "iso": "UKR"
+    },
+    {
+      "entity": "Ukraine",
+      "group": "Europe",
+      "period": "2025",
+      "value": 74.55,
+      "iso": "UKR"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2019",
+      "value": 82.86,
+      "iso": "URY"
+    },
+    {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2021",
+      "value": 76.79,
+      "iso": "URY"
     },
     {
       "entity": "Uruguay",
@@ -945,11 +3739,53 @@
       "iso": "URY"
     },
     {
+      "entity": "Uruguay",
+      "group": "Americas",
+      "period": "2025",
+      "value": 77.51,
+      "iso": "URY"
+    },
+    {
+      "entity": "United States",
+      "group": "Americas",
+      "period": "2019",
+      "value": 65.11,
+      "iso": "USA"
+    },
+    {
+      "entity": "United States",
+      "group": "Americas",
+      "period": "2021",
+      "value": 65.52,
+      "iso": "USA"
+    },
+    {
       "entity": "United States",
       "group": "Americas",
       "period": "2023",
       "value": 68.98,
       "iso": "USA"
+    },
+    {
+      "entity": "United States",
+      "group": "Americas",
+      "period": "2025",
+      "value": 59.28,
+      "iso": "USA"
+    },
+    {
+      "entity": "Uzbekistan",
+      "group": "Asia",
+      "period": "2019",
+      "value": 29.69,
+      "iso": "UZB"
+    },
+    {
+      "entity": "Uzbekistan",
+      "group": "Asia",
+      "period": "2021",
+      "value": 26.44,
+      "iso": "UZB"
     },
     {
       "entity": "Uzbekistan",
@@ -959,11 +3795,53 @@
       "iso": "UZB"
     },
     {
+      "entity": "Uzbekistan",
+      "group": "Asia",
+      "period": "2025",
+      "value": 33.98,
+      "iso": "UZB"
+    },
+    {
+      "entity": "Venezuela",
+      "group": "Americas",
+      "period": "2019",
+      "value": 84.4,
+      "iso": "VEN"
+    },
+    {
+      "entity": "Venezuela",
+      "group": "Americas",
+      "period": "2021",
+      "value": 82.61,
+      "iso": "VEN"
+    },
+    {
       "entity": "Venezuela",
       "group": "Americas",
       "period": "2023",
       "value": 74.95,
       "iso": "VEN"
+    },
+    {
+      "entity": "Venezuela",
+      "group": "Americas",
+      "period": "2025",
+      "value": 68.01,
+      "iso": "VEN"
+    },
+    {
+      "entity": "Vietnam",
+      "group": "Asia",
+      "period": "2019",
+      "value": 69.17,
+      "iso": "VNM"
+    },
+    {
+      "entity": "Vietnam",
+      "group": "Asia",
+      "period": "2021",
+      "value": 64.3,
+      "iso": "VNM"
     },
     {
       "entity": "Vietnam",
@@ -973,11 +3851,53 @@
       "iso": "VNM"
     },
     {
+      "entity": "Vietnam",
+      "group": "Asia",
+      "period": "2025",
+      "value": 69.56,
+      "iso": "VNM"
+    },
+    {
+      "entity": "Kosovo",
+      "group": "Other",
+      "period": "2019",
+      "value": 64.84,
+      "iso": "XKX"
+    },
+    {
+      "entity": "Kosovo",
+      "group": "Other",
+      "period": "2021",
+      "value": 60.81,
+      "iso": "XKX"
+    },
+    {
       "entity": "Kosovo",
       "group": "Other",
       "period": "2023",
       "value": 62.33,
       "iso": "XKX"
+    },
+    {
+      "entity": "Kosovo",
+      "group": "Other",
+      "period": "2025",
+      "value": 59.31,
+      "iso": "XKX"
+    },
+    {
+      "entity": "Yemen",
+      "group": "Asia",
+      "period": "2019",
+      "value": 76.17,
+      "iso": "YEM"
+    },
+    {
+      "entity": "Yemen",
+      "group": "Asia",
+      "period": "2021",
+      "value": 76.17,
+      "iso": "YEM"
     },
     {
       "entity": "Yemen",
@@ -989,9 +3909,44 @@
     {
       "entity": "South Africa",
       "group": "Africa",
+      "period": "2019",
+      "value": 88.66,
+      "iso": "ZAF"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2021",
+      "value": 88.8,
+      "iso": "ZAF"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
       "period": "2023",
       "value": 85.62,
       "iso": "ZAF"
+    },
+    {
+      "entity": "South Africa",
+      "group": "Africa",
+      "period": "2025",
+      "value": 83.37,
+      "iso": "ZAF"
+    },
+    {
+      "entity": "Zambia",
+      "group": "Africa",
+      "period": "2019",
+      "value": 79.2,
+      "iso": "ZMB"
+    },
+    {
+      "entity": "Zambia",
+      "group": "Africa",
+      "period": "2021",
+      "value": 77.32,
+      "iso": "ZMB"
     },
     {
       "entity": "Zambia",
@@ -1001,10 +3956,38 @@
       "iso": "ZMB"
     },
     {
+      "entity": "Zambia",
+      "group": "Africa",
+      "period": "2025",
+      "value": 75.24,
+      "iso": "ZMB"
+    },
+    {
+      "entity": "Zimbabwe",
+      "group": "Africa",
+      "period": "2019",
+      "value": 69.86,
+      "iso": "ZWE"
+    },
+    {
+      "entity": "Zimbabwe",
+      "group": "Africa",
+      "period": "2021",
+      "value": 72.77,
+      "iso": "ZWE"
+    },
+    {
       "entity": "Zimbabwe",
       "group": "Africa",
       "period": "2023",
       "value": 72.71,
+      "iso": "ZWE"
+    },
+    {
+      "entity": "Zimbabwe",
+      "group": "Africa",
+      "period": "2025",
+      "value": 72.07,
       "iso": "ZWE"
     }
   ]

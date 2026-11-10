@@ -40,6 +40,6 @@ export function methodologyFor(slug: string): Methodology {
   if (slug === 'wrp-resilience')
     return { vintage: 'World Risk Poll 2023', method: 'Weighted by WGT; Resilience Index rescaled to 0–100.' };
   if (slug.startsWith('wrp-'))
-    return { vintage: 'World Risk Poll 2023 (Gallup)', method: 'Weighted by WGT; share giving the stated response, country level.' };
+    return { vintage: 'World Risk Poll 2019–2025 (Gallup); which waves asked each question is in the summary', method: 'Weighted by WGT; share giving the stated response among substantive answers, country level.' };
   return {};
 }

@@ -85,7 +85,7 @@ export const sources: Source[] = [
     description: 'Eighth-graders’ ability to use computers to find, judge and create information, and — where countries opted in — computational thinking. 2023 cycle.' },
 
   { name: 'World Risk Poll', url: 'https://wrp.lrfoundation.org.uk/', status: 'live', category: 'Risk & resilience', match: 'World Risk Poll', dash: 'wrp',
-    description: 'Lloyd’s Register Foundation / Gallup global study of how people experience and cope with risk — the Resilience Index.' },
+    description: 'Lloyd’s Register Foundation / Gallup global study of how people experience and cope with risk — the Resilience Index (2023), and from the open microdata four waves 2019–2025, about 140 countries: climate change as a threat, worry about violent crime, disasters, confidence in protecting one’s family, discrimination by skin colour.' },
   { name: 'WorldRiskIndex', url: 'https://weltrisikobericht.de/en/', status: 'live', category: 'Risk & resilience', match: 'WorldRiskIndex',
     description: 'IFHV / Bündnis Entwicklung Hilft model of disaster risk from extreme natural events and climate change — exposure × vulnerability.' },
   { name: 'INFORM Risk Index', url: 'https://drmkc.jrc.ec.europa.eu/inform-index', status: 'live', category: 'Risk & resilience', match: 'INFORM',
