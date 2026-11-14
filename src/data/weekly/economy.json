@@ -1,0 +1,1606 @@
+{
+ "asOf": "2026-11-10",
+ "forecastYear": "2026",
+ "rows": [
+  {
+   "iso": "USA",
+   "name": "United States",
+   "gdp": {
+    "value": 2.1,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 3.4,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 2.3,
+   "cpi": {
+    "value": 3.7,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 3.6,
+   "unemployment": {
+    "value": 4.1,
+    "period": "Oct 2026",
+    "source": "OECD"
+   },
+   "currentAccount": -3.9,
+   "budgetBalance": -8.5,
+   "yield10y": {
+    "value": 5.13,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 107
+   },
+   "currency": null
+  },
+  {
+   "iso": "CHN",
+   "name": "China",
+   "gdp": {
+    "value": 4.5,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 4.9,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 4.5,
+   "cpi": {
+    "value": 0.9,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 1,
+   "unemployment": null,
+   "currentAccount": 4,
+   "budgetBalance": -8,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 6.67,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": 6.7
+   }
+  },
+  {
+   "iso": "JPN",
+   "name": "Japan",
+   "gdp": {
+    "value": 0.7,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 1.4,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 0.7,
+   "cpi": {
+    "value": 2.2,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 2,
+   "unemployment": {
+    "value": 2.4,
+    "period": "Sep 2026",
+    "source": "OECD"
+   },
+   "currentAccount": 4.6,
+   "budgetBalance": -1.4,
+   "yield10y": {
+    "value": 2.76,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 110
+   },
+   "currency": {
+    "perUsd": 158,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -2.6
+   }
+  },
+  {
+   "iso": "GBR",
+   "name": "United Kingdom",
+   "gdp": {
+    "value": 1.4,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 2.1,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 1.3,
+   "cpi": {
+    "value": 3.7,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 3.3,
+   "unemployment": {
+    "value": 4.7,
+    "period": "Jul 2026",
+    "source": "OECD"
+   },
+   "currentAccount": -3.3,
+   "budgetBalance": -3.8,
+   "yield10y": {
+    "value": 5.34,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 77
+   },
+   "currency": {
+    "perUsd": 0.75,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": 1.8
+   }
+  },
+  {
+   "iso": "CAN",
+   "name": "Canada",
+   "gdp": {
+    "value": 1,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 1.2,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 1.1,
+   "cpi": {
+    "value": 3.1,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 2.8,
+   "unemployment": {
+    "value": 6.7,
+    "period": "Oct 2026",
+    "source": "OECD"
+   },
+   "currentAccount": -0.1,
+   "budgetBalance": -2.5,
+   "yield10y": {
+    "value": 3.9,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 77
+   },
+   "currency": {
+    "perUsd": 1.41,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -0.9
+   }
+  },
+  {
+   "iso": "EA",
+   "name": "Euro area",
+   "gdp": {
+    "value": 1.3,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 1.7,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": null,
+   "cpi": {
+    "value": 4,
+    "period": "Oct 2026",
+    "source": "Eurostat"
+   },
+   "cpiForecast": null,
+   "unemployment": {
+    "value": 6.5,
+    "period": "Sep 2026",
+    "source": "Eurostat"
+   },
+   "currentAccount": null,
+   "budgetBalance": null,
+   "yield10y": {
+    "value": 4.17,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 105
+   },
+   "currency": {
+    "perUsd": 0.89,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -3.1
+   }
+  },
+  {
+   "iso": "AUT",
+   "name": "Austria",
+   "gdp": {
+    "value": 0.6,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 0.9,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 0.6,
+   "cpi": {
+    "value": 3.5,
+    "period": "Oct 2026",
+    "source": "Eurostat"
+   },
+   "cpiForecast": 3.1,
+   "unemployment": {
+    "value": 6.3,
+    "period": "Sep 2026",
+    "source": "Eurostat"
+   },
+   "currentAccount": 1.4,
+   "budgetBalance": -4.2,
+   "yield10y": {
+    "value": 3.69,
+    "period": "Sep 2026",
+    "source": "OECD",
+    "changeBp": 66
+   },
+   "currency": {
+    "perUsd": 0.89,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -3.1
+   }
+  },
+  {
+   "iso": "BEL",
+   "name": "Belgium",
+   "gdp": {
+    "value": 0.7,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 1.2,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 0.7,
+   "cpi": {
+    "value": 5.2,
+    "period": "Oct 2026",
+    "source": "Eurostat"
+   },
+   "cpiForecast": 3.8,
+   "unemployment": {
+    "value": 6,
+    "period": "Sep 2026",
+    "source": "Eurostat"
+   },
+   "currentAccount": -2.8,
+   "budgetBalance": -5.3,
+   "yield10y": {
+    "value": 4.38,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 119
+   },
+   "currency": {
+    "perUsd": 0.89,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -3.1
+   }
+  },
+  {
+   "iso": "FRA",
+   "name": "France",
+   "gdp": {
+    "value": -0.1,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": -0.5,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 0.4,
+   "cpi": {
+    "value": 3.8,
+    "period": "Oct 2026",
+    "source": "Eurostat"
+   },
+   "cpiForecast": 2.4,
+   "unemployment": {
+    "value": 8.5,
+    "period": "Sep 2026",
+    "source": "Eurostat"
+   },
+   "currentAccount": -0.7,
+   "budgetBalance": -5.4,
+   "yield10y": {
+    "value": 4.9,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 146
+   },
+   "currency": {
+    "perUsd": 0.89,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -3.1
+   }
+  },
+  {
+   "iso": "DEU",
+   "name": "Germany",
+   "gdp": {
+    "value": 1.2,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 0.9,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 1.3,
+   "cpi": {
+    "value": 2.8,
+    "period": "Oct 2026",
+    "source": "Eurostat"
+   },
+   "cpiForecast": 2.7,
+   "unemployment": {
+    "value": 4.1,
+    "period": "Sep 2026",
+    "source": "Eurostat"
+   },
+   "currentAccount": 4.5,
+   "budgetBalance": -4.3,
+   "yield10y": {
+    "value": 3.42,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 80
+   },
+   "currency": {
+    "perUsd": 0.89,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -3.1
+   }
+  },
+  {
+   "iso": "GRC",
+   "name": "Greece",
+   "gdp": {
+    "value": 1.9,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 1.4,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 1.8,
+   "cpi": {
+    "value": 5.6,
+    "period": "Oct 2026",
+    "source": "Eurostat"
+   },
+   "cpiForecast": 4.2,
+   "unemployment": {
+    "value": 7.6,
+    "period": "Sep 2026",
+    "source": "Eurostat"
+   },
+   "currentAccount": -6.6,
+   "budgetBalance": 0.3,
+   "yield10y": {
+    "value": 4.41,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 111
+   },
+   "currency": {
+    "perUsd": 0.89,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -3.1
+   }
+  },
+  {
+   "iso": "ITA",
+   "name": "Italy",
+   "gdp": {
+    "value": 0.8,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 0.1,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 0.8,
+   "cpi": {
+    "value": 5.6,
+    "period": "Oct 2026",
+    "source": "Eurostat"
+   },
+   "cpiForecast": 3.3,
+   "unemployment": {
+    "value": 6.3,
+    "period": "Sep 2026",
+    "source": "Eurostat"
+   },
+   "currentAccount": 0.7,
+   "budgetBalance": -2.9,
+   "yield10y": {
+    "value": 4.36,
+    "period": "Sep 2026",
+    "source": "OECD",
+    "changeBp": 80
+   },
+   "currency": {
+    "perUsd": 0.89,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -3.1
+   }
+  },
+  {
+   "iso": "NLD",
+   "name": "Netherlands",
+   "gdp": {
+    "value": 2.1,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 2.6,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 1.5,
+   "cpi": {
+    "value": 3.3,
+    "period": "Oct 2026",
+    "source": "Eurostat"
+   },
+   "cpiForecast": 2.9,
+   "unemployment": {
+    "value": 4,
+    "period": "Sep 2026",
+    "source": "Eurostat"
+   },
+   "currentAccount": 8.3,
+   "budgetBalance": -2.7,
+   "yield10y": {
+    "value": 3.56,
+    "period": "Sep 2026",
+    "source": "OECD",
+    "changeBp": 68
+   },
+   "currency": {
+    "perUsd": 0.89,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -3.1
+   }
+  },
+  {
+   "iso": "ESP",
+   "name": "Spain",
+   "gdp": {
+    "value": 2.7,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 2.6,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 2.5,
+   "cpi": {
+    "value": 4.9,
+    "period": "Oct 2026",
+    "source": "Eurostat"
+   },
+   "cpiForecast": 3.7,
+   "unemployment": {
+    "value": 10.3,
+    "period": "Sep 2026",
+    "source": "Eurostat"
+   },
+   "currentAccount": 2.6,
+   "budgetBalance": -2.4,
+   "yield10y": {
+    "value": 4.07,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 92
+   },
+   "currency": {
+    "perUsd": 0.89,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -3.1
+   }
+  },
+  {
+   "iso": "CZE",
+   "name": "Czechia",
+   "gdp": {
+    "value": 1.6,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 2,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 1.8,
+   "cpi": {
+    "value": 2.5,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 2.1,
+   "unemployment": {
+    "value": 2.8,
+    "period": "Sep 2026",
+    "source": "Eurostat"
+   },
+   "currentAccount": -1.9,
+   "budgetBalance": -2.7,
+   "yield10y": {
+    "value": 5.24,
+    "period": "Sep 2026",
+    "source": "OECD",
+    "changeBp": 82
+   },
+   "currency": {
+    "perUsd": 21.7,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -3.3
+   }
+  },
+  {
+   "iso": "DNK",
+   "name": "Denmark",
+   "gdp": {
+    "value": 5.7,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 3.6,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 3.7,
+   "cpi": {
+    "value": 2.2,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 1.8,
+   "unemployment": {
+    "value": 6.8,
+    "period": "Sep 2026",
+    "source": "Eurostat"
+   },
+   "currentAccount": 11.2,
+   "budgetBalance": 1.2,
+   "yield10y": {
+    "value": 3.29,
+    "period": "Sep 2026",
+    "source": "OECD",
+    "changeBp": 75
+   },
+   "currency": {
+    "perUsd": 6.67,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -3.2
+   }
+  },
+  {
+   "iso": "NOR",
+   "name": "Norway",
+   "gdp": {
+    "value": 1.6,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 2.7,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 1.5,
+   "cpi": {
+    "value": 3.4,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 3.2,
+   "unemployment": {
+    "value": 5,
+    "period": "Sep 2026",
+    "source": "OECD"
+   },
+   "currentAccount": 20.7,
+   "budgetBalance": 13.5,
+   "yield10y": {
+    "value": 4.43,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 47
+   },
+   "currency": {
+    "perUsd": 9.47,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": 6.7
+   }
+  },
+  {
+   "iso": "POL",
+   "name": "Poland",
+   "gdp": {
+    "value": 4,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 4.5,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 3.4,
+   "cpi": {
+    "value": 3.2,
+    "period": "Aug 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 3.2,
+   "unemployment": {
+    "value": 3.4,
+    "period": "Sep 2026",
+    "source": "Eurostat"
+   },
+   "currentAccount": -1.9,
+   "budgetBalance": -7.2,
+   "yield10y": {
+    "value": 6.32,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 92
+   },
+   "currency": {
+    "perUsd": 3.91,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -6.5
+   }
+  },
+  {
+   "iso": "RUS",
+   "name": "Russia",
+   "gdp": null,
+   "gdpQoqAnn": null,
+   "gdpForecast": 0.9,
+   "cpi": {
+    "value": 6.3,
+    "period": "Aug 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 6.1,
+   "unemployment": {
+    "value": 2.3,
+    "period": "Jul 2026",
+    "source": "IMF"
+   },
+   "currentAccount": 3.8,
+   "budgetBalance": -3.2,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 79.9,
+    "period": "Jul 2026",
+    "source": "IMF",
+    "changeYoy": 2.5
+   }
+  },
+  {
+   "iso": "SWE",
+   "name": "Sweden",
+   "gdp": {
+    "value": 2.8,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 1.8,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 2.5,
+   "cpi": {
+    "value": 1.1,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 1.1,
+   "unemployment": {
+    "value": 8.6,
+    "period": "Sep 2026",
+    "source": "Eurostat"
+   },
+   "currentAccount": 7.3,
+   "budgetBalance": -2.5,
+   "yield10y": {
+    "value": 3.17,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 59
+   },
+   "currency": {
+    "perUsd": 9.8,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -3.1
+   }
+  },
+  {
+   "iso": "CHE",
+   "name": "Switzerland",
+   "gdp": {
+    "value": 2.6,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 7.8,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 1.9,
+   "cpi": {
+    "value": 1,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 0.7,
+   "unemployment": {
+    "value": 4.8,
+    "period": "Jun 2026",
+    "source": "ILO"
+   },
+   "currentAccount": 6.2,
+   "budgetBalance": -0.2,
+   "yield10y": {
+    "value": 0.51,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 33
+   },
+   "currency": {
+    "perUsd": 0.82,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -1.9
+   }
+  },
+  {
+   "iso": "TUR",
+   "name": "Türkiye",
+   "gdp": {
+    "value": 2.6,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 4.6,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 2.7,
+   "cpi": {
+    "value": 29.7,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 31.2,
+   "unemployment": {
+    "value": 8.4,
+    "period": "Sep 2026",
+    "source": "OECD"
+   },
+   "currentAccount": -2.9,
+   "budgetBalance": -3.1,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 50.2,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -15.9
+   }
+  },
+  {
+   "iso": "AUS",
+   "name": "Australia",
+   "gdp": {
+    "value": 2.1,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 1.7,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 1.9,
+   "cpi": {
+    "value": 4,
+    "period": "Aug 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 3.9,
+   "unemployment": {
+    "value": 4.7,
+    "period": "Sep 2026",
+    "source": "OECD"
+   },
+   "currentAccount": -3.1,
+   "budgetBalance": -3.2,
+   "yield10y": {
+    "value": 5.28,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 105
+   },
+   "currency": {
+    "perUsd": 1.45,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": 5.7
+   }
+  },
+  {
+   "iso": "HKG",
+   "name": "Hong Kong",
+   "gdp": null,
+   "gdpQoqAnn": null,
+   "gdpForecast": 3.8,
+   "cpi": {
+    "value": 1.7,
+    "period": "Aug 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 1.9,
+   "unemployment": {
+    "value": 3.7,
+    "period": "2025",
+    "source": "IMF"
+   },
+   "currentAccount": 13.8,
+   "budgetBalance": -4.4,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 7.84,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -0.9
+   }
+  },
+  {
+   "iso": "IND",
+   "name": "India",
+   "gdp": {
+    "value": 8.1,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 7.3,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 7,
+   "cpi": {
+    "value": 4.4,
+    "period": "Jul 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 5,
+   "unemployment": {
+    "value": 4.3,
+    "period": "Q4 2025",
+    "source": "ILO"
+   },
+   "currentAccount": -1.5,
+   "budgetBalance": -7.5,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 93.9,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -5.6
+   }
+  },
+  {
+   "iso": "IDN",
+   "name": "Indonesia",
+   "gdp": {
+    "value": 5.6,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 5.7,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 5.1,
+   "cpi": {
+    "value": 3.3,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 3.3,
+   "unemployment": null,
+   "currentAccount": -1.6,
+   "budgetBalance": -2.9,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 18063,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -7.6
+   }
+  },
+  {
+   "iso": "MYS",
+   "name": "Malaysia",
+   "gdp": {
+    "value": 5.3,
+    "period": "Q1 2026",
+    "source": "IMF"
+   },
+   "gdpQoqAnn": {
+    "value": 0,
+    "period": "Q1 2026",
+    "source": "IMF"
+   },
+   "gdpForecast": 5.2,
+   "cpi": {
+    "value": 1.8,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 2.2,
+   "unemployment": null,
+   "currentAccount": 2.1,
+   "budgetBalance": -3.5,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 4.06,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": 2.6
+   }
+  },
+  {
+   "iso": "PAK",
+   "name": "Pakistan",
+   "gdp": null,
+   "gdpQoqAnn": null,
+   "gdpForecast": 3.6,
+   "cpi": {
+    "value": 9.6,
+    "period": "Oct 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 7.1,
+   "unemployment": {
+    "value": 7.1,
+    "period": "Q4 2025",
+    "source": "ILO"
+   },
+   "currentAccount": 0,
+   "budgetBalance": -2.6,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 277,
+    "period": "Sep 2026",
+    "source": "IMF",
+    "changeYoy": 1.5
+   }
+  },
+  {
+   "iso": "PHL",
+   "name": "Philippines",
+   "gdp": {
+    "value": 2.8,
+    "period": "Q1 2026",
+    "source": "IMF"
+   },
+   "gdpQoqAnn": {
+    "value": 3.8,
+    "period": "Q1 2026",
+    "source": "IMF"
+   },
+   "gdpForecast": 3.4,
+   "cpi": {
+    "value": 7.2,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 5.6,
+   "unemployment": {
+    "value": 2.5,
+    "period": "Q4 2025",
+    "source": "ILO"
+   },
+   "currentAccount": -4.8,
+   "budgetBalance": -4.2,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 62.9,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -6.3
+   }
+  },
+  {
+   "iso": "SGP",
+   "name": "Singapore",
+   "gdp": {
+    "value": 5.7,
+    "period": "Q4 2025",
+    "source": "IMF"
+   },
+   "gdpQoqAnn": {
+    "value": 5.2,
+    "period": "Q4 2025",
+    "source": "IMF"
+   },
+   "gdpForecast": 5,
+   "cpi": {
+    "value": 2.2,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 2.3,
+   "unemployment": {
+    "value": 2.6,
+    "period": "Q4 2025",
+    "source": "ILO"
+   },
+   "currentAccount": 16.7,
+   "budgetBalance": 3.7,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 1.28,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": 1.9
+   }
+  },
+  {
+   "iso": "KOR",
+   "name": "South Korea",
+   "gdp": {
+    "value": 3.4,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 3.9,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 3.3,
+   "cpi": {
+    "value": 2.8,
+    "period": "Oct 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 2.7,
+   "unemployment": {
+    "value": 2.6,
+    "period": "Sep 2026",
+    "source": "OECD"
+   },
+   "currentAccount": 18.8,
+   "budgetBalance": -1.3,
+   "yield10y": {
+    "value": 4.21,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 128
+   },
+   "currency": {
+    "perUsd": 1339,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": 8.6
+   }
+  },
+  {
+   "iso": "TWN",
+   "name": "Taiwan",
+   "gdp": null,
+   "gdpQoqAnn": null,
+   "gdpForecast": 10.7,
+   "cpi": null,
+   "cpiForecast": 2,
+   "unemployment": null,
+   "currentAccount": 22,
+   "budgetBalance": 0.3,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 31.4,
+    "period": "Dec 2025",
+    "source": "IMF",
+    "changeYoy": 4.3
+   }
+  },
+  {
+   "iso": "THA",
+   "name": "Thailand",
+   "gdp": {
+    "value": 1.9,
+    "period": "Q2 2026",
+    "source": "IMF"
+   },
+   "gdpQoqAnn": {
+    "value": -0.7,
+    "period": "Q2 2026",
+    "source": "IMF"
+   },
+   "gdpForecast": 2.1,
+   "cpi": {
+    "value": 2.5,
+    "period": "Aug 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 2.1,
+   "unemployment": {
+    "value": 1.1,
+    "period": "Jul 2026",
+    "source": "IMF"
+   },
+   "currentAccount": -1.2,
+   "budgetBalance": -3.3,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 33.5,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -3.4
+   }
+  },
+  {
+   "iso": "ARG",
+   "name": "Argentina",
+   "gdp": {
+    "value": 1.4,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": -2.3,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 2.1,
+   "cpi": {
+    "value": 33.5,
+    "period": "Aug 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 32.5,
+   "unemployment": {
+    "value": 7.9,
+    "period": "Q2 2026",
+    "source": "ILO"
+   },
+   "currentAccount": 0.6,
+   "budgetBalance": 0.4,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 1513,
+    "period": "Sep 2026",
+    "source": "IMF",
+    "changeYoy": -9.1
+   }
+  },
+  {
+   "iso": "BRA",
+   "name": "Brazil",
+   "gdp": {
+    "value": 1.9,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 1.9,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 2.2,
+   "cpi": {
+    "value": 4.6,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 4.4,
+   "unemployment": {
+    "value": 5.4,
+    "period": "Q2 2026",
+    "source": "ILO"
+   },
+   "currentAccount": -2.4,
+   "budgetBalance": -8.1,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 5.55,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -4.3
+   }
+  },
+  {
+   "iso": "CHL",
+   "name": "Chile",
+   "gdp": {
+    "value": -0.3,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": -0.1,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 0.6,
+   "cpi": {
+    "value": 4.1,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 3.7,
+   "unemployment": {
+    "value": 9.6,
+    "period": "Aug 2026",
+    "source": "OECD"
+   },
+   "currentAccount": -0.3,
+   "budgetBalance": -2,
+   "yield10y": {
+    "value": 6.05,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 47
+   },
+   "currency": {
+    "perUsd": 993,
+    "period": "Oct 2026",
+    "source": "IMF",
+    "changeYoy": -5.3
+   }
+  },
+  {
+   "iso": "COL",
+   "name": "Colombia",
+   "gdp": {
+    "value": 3.4,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 5.2,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 2.2,
+   "cpi": {
+    "value": 6.3,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 6,
+   "unemployment": {
+    "value": 8.5,
+    "period": "Sep 2026",
+    "source": "OECD"
+   },
+   "currentAccount": -2.6,
+   "budgetBalance": -6.9,
+   "yield10y": {
+    "value": 13.25,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 120
+   },
+   "currency": {
+    "perUsd": 3132,
+    "period": "Jul 2026",
+    "source": "IMF",
+    "changeYoy": 33.4
+   }
+  },
+  {
+   "iso": "MEX",
+   "name": "Mexico",
+   "gdp": {
+    "value": 3,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 3.6,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 1.5,
+   "cpi": {
+    "value": 3.5,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 3.8,
+   "unemployment": {
+    "value": 2.6,
+    "period": "Sep 2026",
+    "source": "OECD"
+   },
+   "currentAccount": -0.3,
+   "budgetBalance": -4.2,
+   "yield10y": {
+    "value": 9.25,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 54
+   },
+   "currency": {
+    "perUsd": 18.6,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": -0.8
+   }
+  },
+  {
+   "iso": "PER",
+   "name": "Peru",
+   "gdp": null,
+   "gdpQoqAnn": null,
+   "gdpForecast": 3,
+   "cpi": {
+    "value": 4.1,
+    "period": "Aug 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 3.8,
+   "unemployment": {
+    "value": 3.6,
+    "period": "Jun 2026",
+    "source": "ILO"
+   },
+   "currentAccount": 4,
+   "budgetBalance": -1.5,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 3.46,
+    "period": "Oct 2026",
+    "source": "IMF",
+    "changeYoy": -1.9
+   }
+  },
+  {
+   "iso": "EGY",
+   "name": "Egypt",
+   "gdp": null,
+   "gdpQoqAnn": null,
+   "gdpForecast": 5.1,
+   "cpi": {
+    "value": 14.5,
+    "period": "Aug 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 13.3,
+   "unemployment": null,
+   "currentAccount": -4.4,
+   "budgetBalance": -11.4,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 50.9,
+    "period": "Aug 2026",
+    "source": "IMF",
+    "changeYoy": -4.6
+   }
+  },
+  {
+   "iso": "ISR",
+   "name": "Israel",
+   "gdp": {
+    "value": 7.5,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 15.4,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 4.5,
+   "cpi": {
+    "value": 1.6,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 1.8,
+   "unemployment": {
+    "value": 3,
+    "period": "Sep 2026",
+    "source": "OECD"
+   },
+   "currentAccount": 1.1,
+   "budgetBalance": -5.8,
+   "yield10y": {
+    "value": 4.25,
+    "period": "Oct 2026",
+    "source": "OECD",
+    "changeBp": 28
+   },
+   "currency": {
+    "perUsd": 3.17,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": 2.1
+   }
+  },
+  {
+   "iso": "SAU",
+   "name": "Saudi Arabia",
+   "gdp": {
+    "value": -4,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": 5.3,
+    "period": "Q3 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": -3.3,
+   "cpi": {
+    "value": 1.9,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 1.9,
+   "unemployment": {
+    "value": 3.1,
+    "period": "Q1 2026",
+    "source": "ILO"
+   },
+   "currentAccount": -3.5,
+   "budgetBalance": -6.5,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 3.75,
+    "period": "Oct 2026",
+    "source": "IMF",
+    "changeYoy": 0
+   }
+  },
+  {
+   "iso": "ZAF",
+   "name": "South Africa",
+   "gdp": {
+    "value": 0.9,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpQoqAnn": {
+    "value": -1,
+    "period": "Q2 2026",
+    "source": "OECD"
+   },
+   "gdpForecast": 1,
+   "cpi": {
+    "value": 4.5,
+    "period": "Sep 2026",
+    "source": "IMF"
+   },
+   "cpiForecast": 4.4,
+   "unemployment": {
+    "value": 32,
+    "period": "Q2 2026",
+    "source": "ILO"
+   },
+   "currentAccount": -0.7,
+   "budgetBalance": -4.4,
+   "yield10y": null,
+   "currency": {
+    "perUsd": 16.4,
+    "period": "10 Nov 2026",
+    "source": "ECB",
+    "changeYoy": 4.8
+   }
+  }
+ ],
+ "commodities": [
+  {
+   "name": "Brent crude",
+   "unit": "$ a barrel",
+   "value": 102,
+   "period": "Sep 2026",
+   "changeMonth": 15.8,
+   "changeYear": 50.9,
+   "source": "IMF"
+  },
+  {
+   "name": "Gold",
+   "unit": "$ an ounce",
+   "value": 4334.7,
+   "period": "Sep 2026",
+   "changeMonth": -1.9,
+   "changeYear": 18.2,
+   "source": "IMF"
+  },
+  {
+   "name": "Food (IMF index)",
+   "unit": "index",
+   "value": 137.1,
+   "period": "Sep 2026",
+   "changeMonth": 0.8,
+   "changeYear": 8.3,
+   "source": "IMF"
+  },
+  {
+   "name": "Metals (IMF index)",
+   "unit": "index",
+   "value": 289.4,
+   "period": "Sep 2026",
+   "changeMonth": -0.4,
+   "changeYear": 21.3,
+   "source": "IMF"
+  },
+  {
+   "name": "All commodities (IMF index)",
+   "unit": "index",
+   "value": 222.4,
+   "period": "Sep 2026",
+   "changeMonth": 8.2,
+   "changeYear": 32.8,
+   "source": "IMF"
+  }
+ ]
+}

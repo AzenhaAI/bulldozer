@@ -1,7 +1,7 @@
 /** Shared region colour palette for editorial charts. */
 export const regionColor: Record<string, string> = {
   'Europe & Central Asia': '#60a5fa',
-  'Americas': '#f59e0b',
+  'Americas': '#facc15', // yellow, not amber: amber and Africa's orange could not be told apart
   'East Asia & Pacific': '#34d399',
   'South Asia': '#a78bfa',
   'Middle East & North Africa': '#f472b6',

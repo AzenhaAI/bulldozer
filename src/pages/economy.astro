@@ -1,0 +1,182 @@
+---
+/**
+ * Economy this week — one dense table of the latest headline indicators for
+ * 43 economies, each figure with its own period; written by
+ * scripts/parse_weekly.mjs from open sources only (OECD, IMF, Eurostat, ILO,
+ * ECB). The layout follows the weekly indicator pages of the financial press;
+ * none of their figures are used.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import economy from '@data/weekly/economy.json';
+import alfacat from '@data/alfacat.json';
+import countryCurrency from '@data/country-currency.json';
+import { countrySlug, buildCountryIndex } from '@lib/countryIndex';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// AlfaCat, the sister site for end-of-day market data, lives next door.
+const AC = '/alfacat';
+const EURO = new Set(['AUT', 'BEL', 'FRA', 'DEU', 'GRC', 'ITA', 'NLD', 'ESP', 'EA']);
+const ac = (alfacat as any).byIso as Record<string, any>;
+const acFx = (alfacat as any).fx as Record<string, { symbol: string }>;
+const allProfiles = buildCountryIndex();
+const profiles = new Set(allProfiles.map((c) => c.iso));
+const nameOf = new Map(allProfiles.map((c) => [c.iso, c.name]));
+
+type Cell = { value: number | null; period?: string; source?: string } | null;
+const fy = economy.forecastYear;
+const asOf = new Date(economy.asOf + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+// "Sep 2026" → "Sep", "Q3 2026" → "Q3" when it is this year or last; older keeps the year.
+const short = (p?: string) => {
+  if (!p) return '';
+  const m = p.match(/^(.*?)\s?(\d{4})$/); // "Sep 2026", "Q3 2026", "10 Nov 2026", "2025"
+  if (!m) return p;
+  const yr = +m[2], cy = +economy.asOf.slice(0, 4);
+  if (yr === cy) return m[1] || String(yr);
+  return m[1] ? `${m[1]} ’${String(yr).slice(2)}` : String(yr);
+};
+// Source in the cell itself: phones show no hover titles.
+const srcShort = (s: string) => ({ Eurostat: 'ESTAT' } as Record<string, string>)[s] ?? s;
+const fmt = (v: number | null | undefined, dp = 1) =>
+  v == null ? '' : Math.abs(v) >= 1000 ? Math.round(v).toLocaleString('en-US') : v.toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+
+// Columns: key, group, label, how to read the value and whether low is bad.
+const cols = [
+  { k: 'gdp', g: 'GDP', l: '% on year ago', bad: (v: number) => v < 0 },
+  { k: 'gdpQoqAnn', g: 'GDP', l: 'quarter*', bad: (v: number) => v < 0 },
+  { k: 'gdpForecast', g: 'GDP', l: `${fy}†`, bad: (v: number) => v < 0 },
+  { k: 'cpi', g: 'Consumer prices', l: '% on year ago', bad: () => false },
+  { k: 'cpiForecast', g: 'Consumer prices', l: `${fy}†`, bad: () => false },
+  { k: 'unemployment', g: 'Unemployment', l: '%', bad: () => false },
+  { k: 'currentAccount', g: 'Current account', l: `% of GDP, ${fy}†`, bad: () => false },
+  { k: 'budgetBalance', g: 'Budget balance', l: `% of GDP, ${fy}†`, bad: () => false },
+  { k: 'yield10y', g: '10-yr govt bonds', l: 'yield, %', bad: () => false },
+  { k: 'yieldChg', g: '10-yr govt bonds', l: 'change on year, bp', bad: () => false },
+  { k: 'fx', g: 'Currency', l: 'per $', bad: () => false },
+  { k: 'fxChg', g: 'Currency', l: '% change on year', bad: (v: number) => v <= -5 },
+  { k: 'stocks', g: 'Stocks · AlfaCat', l: 'index, % this year', bad: (v: number) => v <= -10 },
+] as const;
+
+const rows = economy.rows.map((r: any) => {
+  const c = (x: Cell): Cell => x ?? null;
+  const vals: Record<string, Cell> = {
+    gdp: c(r.gdp), gdpQoqAnn: c(r.gdpQoqAnn),
+    gdpForecast: r.gdpForecast == null ? null : { value: r.gdpForecast, source: 'IMF WEO' },
+    cpi: c(r.cpi),
+    cpiForecast: r.cpiForecast == null ? null : { value: r.cpiForecast, source: 'IMF WEO' },
+    unemployment: c(r.unemployment),
+    currentAccount: r.currentAccount == null ? null : { value: r.currentAccount, source: 'IMF WEO' },
+    budgetBalance: r.budgetBalance == null ? null : { value: r.budgetBalance, source: 'IMF WEO' },
+    yield10y: r.yield10y ? { value: r.yield10y.value, period: r.yield10y.period, source: r.yield10y.source } : null,
+    yieldChg: r.yield10y?.changeBp == null ? null : { value: r.yield10y.changeBp, source: r.yield10y.source },
+    fx: r.currency ? { value: r.currency.perUsd, period: r.currency.period, source: r.currency.source } : null,
+    // IMF rates are end-of-month: the change carries that month, unlike the ECB's.
+    stocks: ac[r.iso]?.index?.chgYTD == null ? null : { value: ac[r.iso].index.chgYTD, source: 'AlfaCat', period: ac[r.iso].index.name.replace(/ \(.*\)$/, '') },
+    fxChg: r.currency?.changeYoy == null ? null : { value: r.currency.changeYoy, source: r.currency.source, period: r.currency.source === 'IMF' ? r.currency.period : undefined },
+  };
+  const cur = EURO.has(r.iso) ? 'EUR' : (countryCurrency as any)[r.iso]?.code;
+  const links: Record<string, string> = {};
+  if (acFx[cur]) links.fx = links.fxChg = `${AC}/ticker/${acFx[cur].symbol}/`;
+  if (ac[r.iso]?.index) links.stocks = `${AC}/ticker/${ac[r.iso].index.symbol}/`;
+  return { iso: r.iso, name: nameOf.get(r.iso) ?? r.name, vals, links, screener: ac[r.iso]?.screener ? `${AC}/${ac[r.iso].screener}` : null, listings: ac[r.iso]?.listings ?? 0 };
+});
+// ECB rates share one date: it goes in the heading, not in every cell.
+const ecbDate = economy.rows.find((r: any) => r.currency?.source === 'ECB')?.currency.period;
+for (const r of rows) if (r.vals.fx?.source === 'ECB') r.vals.fx = { ...r.vals.fx, period: undefined };
+const fxCol = cols.find((c) => c.k === 'fx')!;
+const colLabel = (c: (typeof cols)[number]) => (c === fxCol && ecbDate ? `per $, ${short(ecbDate)}` : c.l);
+const groups = cols.reduce((a: { g: string; n: number }[], c) => (a.at(-1)?.g === c.g ? (a.at(-1)!.n++, a) : [...a, { g: c.g, n: 1 }]), []);
+const dpOf = (k: string, v: number) => (k === 'yieldChg' ? 0 : k === 'stocks' ? 1 : k === 'yield10y' ? 2 : k === 'fx' ? (v >= 100 ? 0 : v >= 10 ? 1 : 2) : 1);
+---
+<BaseLayout title="Economy this week" active="macro" description={`Latest GDP, inflation, unemployment, bond yields and currencies for ${rows.length} economies, from open sources (OECD, IMF, Eurostat, ILO, ECB). Updated ${asOf}.`}>
+  <section class="section">
+    <div class="container">
+      <span class="kicker">Macro · weekly</span>
+      <h1>Economy this week</h1>
+      <p class="sub">The latest reading of each headline indicator for {rows.length} economies, updated {asOf}. Every figure carries its own period — data arrive at different times. Tap a column heading to sort; tap a country for its profile.</p>
+
+      <div class="ew-wrap" role="region" aria-label="Economic indicators table" tabindex="0">
+        <table class="ew" id="ew">
+          <thead>
+            <tr class="ew-groups"><th rowspan="2" class="ew-c">Country</th>{groups.map((g) => <th colspan={g.n}>{g.g}</th>)}</tr>
+            <tr>{cols.map((c, i) => <th><button type="button" data-col={i + 1}>{colLabel(c)}</button></th>)}</tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr>
+                <th class="ew-c" scope="row">{profiles.has(r.iso) ? <a href={`${base}/country/${countrySlug(r.name)}/`}>{r.name}</a> : r.name}</th>
+                {cols.map((c) => {
+                  const v = r.vals[c.k];
+                  if (c.k === 'stocks' && (!v || v.value == null)) return r.screener
+                    ? <td class="ew-na" data-v=""><a class="ew-ac" href={r.screener} title={`${r.listings} listed companies on AlfaCat`}>{r.listings} cos →</a></td>
+                    : <td class="ew-na" data-v="">—</td>;
+                  if (!v || v.value == null) return <td class="ew-na" data-v="">—</td>;
+                  const href = r.links[c.k];
+                  return (
+                    <td class:list={[{ 'ew-bad': c.bad(v.value) }]} data-v={v.value} title={`${v.source ?? ''}${v.period ? ', ' + v.period : ''}`}>
+                      {href
+                        ? <a class="ew-v ew-ac" href={href}>{(c.k === 'yieldChg' || c.k === 'fxChg' || c.k === 'stocks') && v.value > 0 ? '+' : ''}{fmt(v.value, dpOf(c.k, v.value))}</a>
+                        : <span class="ew-v">{(c.k === 'yieldChg' || c.k === 'fxChg' || c.k === 'stocks') && v.value > 0 ? '+' : ''}{fmt(v.value, dpOf(c.k, v.value))}</span>}
+                      {(v.period || (v.source && !v.source.startsWith('IMF WEO'))) && <span class="ew-p">{short(v.period)}{v.period && v.source ? ' · ' : ''}{v.source && !v.source.startsWith('IMF WEO') ? srcShort(v.source) : ''}</span>}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="ew-note">
+        * Quarter on previous quarter, annualised. † IMF World Economic Outlook forecast for {fy}.
+        Sources: GDP — OECD Quarterly National Accounts, IMF; consumer prices — IMF, OECD, and for euro-area members the harmonised index (Eurostat);
+        unemployment — ILO definition (Eurostat, OECD, ILOSTAT, IMF), so national registered rates differ; 10-year yields — OECD, members only, euro area = average of members;
+        currencies — ECB reference rates (daily), IMF end-of-month where the ECB has none; a positive change means the currency gained on the dollar.
+        Under each figure: its period and source (ESTAT = Eurostat). Highlighted: GDP falling, or a currency down 5% or more on the dollar over the year.
+        The euro area has no forecasts: the WEO tables on this site cover countries only.
+        Stocks: the country's benchmark index on <a href={`${AC}/markets/`}>AlfaCat</a>, our sister site for end-of-day market data (prices of {(alfacat as any).asof}); where AlfaCat follows a market without its index, the link opens that country's listed companies.
+        Currency figures link to their pair on AlfaCat for the daily chart.
+      </p>
+
+      <h2 style="margin-top:28px">Commodities</h2>
+      <div class="ew-wrap">
+        <table class="ew ew-small">
+          <thead><tr><th class="ew-c">Monthly average</th><th>Latest</th><th>Month</th><th>% on month</th><th>% on year</th></tr></thead>
+          <tbody>
+            {economy.commodities.map((c: any) => (
+              <tr>
+                <th class="ew-c" scope="row">{c.name}<span class="ew-u"> {c.unit}</span></th>
+                <td>{fmt(c.value, c.value >= 1000 ? 0 : 1)}</td><td>{short(c.period)}</td>
+                <td class:list={[{ 'ew-bad': c.changeMonth < 0 }]}>{fmt(c.changeMonth)}</td>
+                <td class:list={[{ 'ew-bad': c.changeYear < 0 }]}>{fmt(c.changeYear)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="ew-note">IMF Primary Commodity Prices, monthly averages in US dollars; indices 2016 = 100.</p>
+    </div>
+  </section>
+
+  <script is:inline>
+    // Sort by a column: first tap high → low, second low → high, third back to the list order.
+    (() => {
+      const t = document.getElementById('ew'); if (!t) return;
+      const body = t.tBodies[0];
+      const orig = [...body.rows];
+      let col = -1, dir = 0;
+      t.tHead.addEventListener('click', (e) => {
+        const b = e.target.closest('button[data-col]'); if (!b) return;
+        const c = +b.dataset.col;
+        dir = c === col ? (dir + 1) % 3 : 1; col = c;
+        t.tHead.querySelectorAll('button').forEach((x) => x.removeAttribute('aria-sort'));
+        if (dir) b.setAttribute('aria-sort', dir === 1 ? 'descending' : 'ascending');
+        const rows = dir === 0 ? orig : [...orig].sort((a, b2) => {
+          const va = a.cells[c].dataset.v, vb = b2.cells[c].dataset.v;
+          if (va === '' && vb === '') return 0; if (va === '') return 1; if (vb === '') return -1;
+          return dir === 1 ? vb - va : va - vb;
+        });
+        body.replaceChildren(...rows);
+      });
+    })();
+  </script>
+</BaseLayout>

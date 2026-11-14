@@ -53,7 +53,8 @@ async function main() {
   for (const d of DIMS) {
     const data = rows
       .filter((r) => r[d.col] !== undefined && r[d.col] !== '')
-      .map((r) => ({ entity: r.name, group: reg.get(r.iso3) || 'Asia', period: String(r.year), value: round(Number(r[d.col]), 2), iso: r.iso3 }))
+      .map((r) => ({ entity: r.name, group: reg.get(r.iso3) || 'Asia', period: String(r.year), value: round(Number(r[d.col]), 2), iso: r.iso3,
+        ...(r[d.col + '_moe'] ? { moe: round(Number(r[d.col + '_moe']), 1) } : {}) })) // 95% margin, scripts/tools/moe.py
       .filter((o) => Number.isFinite(o.value));
     const summary = d.summary || `Share who trust ${d.what} (CRRC’s “trust”, which merges somewhat and fully).`;
     await writeDataset('survey', d.slug, {

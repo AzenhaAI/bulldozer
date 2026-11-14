@@ -48,6 +48,7 @@ async function main() {
       .map((r) => ({
         entity: countryNames[r.iso3]?.common || geo.get(r.iso3)?.name || r.iso3,
         group: geo.get(r.iso3)?.region || 'Other', period: r.wave, value: round(Number(r[d.col]), 2), iso: r.iso3,
+        ...(r[d.col + '_moe'] ? { moe: round(Number(r[d.col + '_moe']), 1) } : {}), // 95% margin, scripts/tools/moe.py
       }))
       .filter((o) => Number.isFinite(o.value));
     await writeDataset('survey', d.slug, {

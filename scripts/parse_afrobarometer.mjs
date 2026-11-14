@@ -83,7 +83,8 @@ async function main() {
         if (!g) { unresolved.add(r.country); continue; }
         if (r[d.col] === '' || r[d.col] === undefined || Number.isNaN(v)) continue;
         // One name per country across rounds (files spell Gambia, Cabo Verde, Côte d'Ivoire, Eswatini several ways).
-        byKey.set(`${g.iso}|${label}`, { entity: countryNames[g.iso]?.common || r.country, group: g.region, period: label, value: round(v, 1), iso: g.iso });
+        byKey.set(`${g.iso}|${label}`, { entity: countryNames[g.iso]?.common || r.country, group: g.region, period: label, value: round(v, 1), iso: g.iso,
+          ...(r[d.col + '_moe'] ? { moe: round(Number(r[d.col + '_moe']), 1) } : {}) }); // 95% margin, scripts/tools/moe.py
         asked.add(n);
       }
     }

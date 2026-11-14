@@ -24,6 +24,7 @@ Wording across waves, and what is left out:
 import os
 import sys
 import pyreadstat
+from moe import share_moe
 
 WAVES = {
     '2019': ('19_wrp.sav', {'climate_threat': ('L5', [1, 2]), 'worry_crime': ('L6C', [1, 2])}),
@@ -84,18 +85,20 @@ def main(d):
             row = {'iso3': iso, 'wave': wave}
             for col in COLS:
                 if col not in items:
-                    row[col] = ''
+                    row[col] = row[col + '_moe'] = ''
                     continue
                 q, yes = items[col]
                 v, w = g[q], g['WGT']
                 base = v.notna() & ~v.isin(NOT_BASE)
                 row[col] = '' if base.sum() < MIN_N else f'{100 * w[base & v.isin(yes)].sum() / w[base].sum():.6f}'
+                row[col + '_moe'] = share_moe(row[col], w[base]) if row[col] else ''
             rows.append(row)
         if unknown:
             print(f'{wave}: no ISO3 for {sorted(unknown)}', file=sys.stderr)
-    print(','.join(['iso3', 'wave'] + COLS))
+    keys = ['iso3', 'wave'] + COLS + [c + '_moe' for c in COLS]
+    print(','.join(keys))
     for r in sorted(rows, key=lambda r: (r['iso3'], r['wave'])):
-        print(','.join(str(r[k]) for k in ['iso3', 'wave'] + COLS))
+        print(','.join(str(r[k]) for k in keys))
 
 
 if __name__ == '__main__':

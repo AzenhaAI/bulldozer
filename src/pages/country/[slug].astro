@@ -9,6 +9,8 @@ import { TOPICS, TOPIC_ORDER } from '@lib/topics';
 import isoAlpha2 from '@data/iso-alpha2.json';
 import countryCurrency from '@data/country-currency.json';
 import subregions from '@data/subregions.json';
+import alfacat from '@data/alfacat.json';
+import economy from '@data/weekly/economy.json';
 
 export function getStaticPaths() {
   return buildCountryIndex().map((c) => ({ params: { slug: countrySlug(c.name) }, props: { iso: c.iso } }));
@@ -22,6 +24,15 @@ const flag = flagFor(c.iso);
 const alpha2 = (isoAlpha2 as Record<string, string>)[c.iso.toUpperCase()];
 const statsNote = COUNTRY_NOTES[c.iso];
 const cur = (countryCurrency as Record<string, { code: string; name: string; symbol: string }>)[c.iso];
+// Markets on AlfaCat, the sister site (scripts/parse_alfacat_links.mjs): the
+// benchmark index, the largest listings where market value is known, the
+// currency pair, and a screener of the country's companies.
+const EURO_AC = new Set(['AUT', 'BEL', 'FRA', 'DEU', 'GRC', 'ITA', 'NLD', 'ESP', 'FIN', 'IRL', 'PRT', 'SVK', 'SVN', 'EST', 'LVA', 'LTU', 'LUX', 'MLT', 'CYP', 'HRV', 'BGR']);
+const mk = (alfacat as any).byIso[c.iso] ?? {};
+const mkIndex = mk.index ?? (EURO_AC.has(c.iso) ? (alfacat as any).byIso.EA?.index : null);
+const mkFx = (alfacat as any).fx[EURO_AC.has(c.iso) ? 'EUR' : cur?.code ?? ''];
+const markets = mkIndex || mk.top?.length || mk.screener || mkFx;
+const inWeekly = (economy as any).rows.some((r: any) => r.iso === c.iso);
 
 const fmt = (v: number, unit: string) =>
   `${v.toLocaleString('en-US', { maximumFractionDigits: 1 })}${unit && unit.includes('%') ? '%' : ''}`;
@@ -124,6 +135,21 @@ const jsonLd = {
       )}
     </div>
   </section>
+
+  {(markets || inWeekly) && (
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <h2 style="font-size:18px">Markets &amp; this week</h2>
+        <p class="sub">Daily market data for {c.name} lives on <a href="/alfacat/">AlfaCat</a>, our sister site{inWeekly ? <>; the latest GDP, prices, jobs and rates are in <a href={`${base}/economy/`}>Economy this week</a></> : ''}.</p>
+        <p style="display:flex; gap:10px; flex-wrap:wrap">
+          {mkIndex && <a class="ghost-btn" style="margin:0; text-decoration:none" href={`/alfacat/ticker/${mkIndex.symbol}/`}>📈 {mkIndex.name}{mkIndex.chgYTD != null ? ` · ${mkIndex.chgYTD > 0 ? '+' : ''}${mkIndex.chgYTD}% this year` : ''}</a>}
+          {mkFx && <a class="ghost-btn" style="margin:0; text-decoration:none" href={`/alfacat/ticker/${mkFx.symbol}/`}>💱 {mkFx.symbol.replace(/^(...)(...)$/, '$1/$2')}</a>}
+          {(mk.top ?? []).map((t: any) => <a class="ghost-btn" style="margin:0; text-decoration:none" href={`/alfacat/ticker/${t.symbol.replace(/\./g, "_")}/`}>{t.name}</a>)}
+          {mk.screener && <a class="ghost-btn" style="margin:0; text-decoration:none" href={`/alfacat/${mk.screener}`}>All {mk.listings} listed companies →</a>}
+        </p>
+      </div>
+    </section>
+  )}
 
   {similar.length > 0 && (
     <section class="section" style="padding-top:0">

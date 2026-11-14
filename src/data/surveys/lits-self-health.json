@@ -18,945 +18,1080 @@
       "group": "Europe",
       "period": "2006",
       "value": 2.43,
-      "iso": "ALB"
+      "iso": "ALB",
+      "moe": 0.07
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2006",
       "value": 3.05,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 0.07
     },
     {
       "entity": "Azerbaijan",
       "group": "Europe",
       "period": "2006",
       "value": 3.19,
-      "iso": "AZE"
+      "iso": "AZE",
+      "moe": 0.07
     },
     {
       "entity": "Belarus",
       "group": "Europe",
       "period": "2006",
       "value": 2.89,
-      "iso": "BLR"
+      "iso": "BLR",
+      "moe": 0.06
     },
     {
       "entity": "Bosnia and Herzegovina",
       "group": "Europe",
       "period": "2006",
       "value": 2.72,
-      "iso": "BIH"
+      "iso": "BIH",
+      "moe": 0.08
     },
     {
       "entity": "Bulgaria",
       "group": "Europe",
       "period": "2006",
       "value": 2.74,
-      "iso": "BGR"
+      "iso": "BGR",
+      "moe": 0.07
     },
     {
       "entity": "Croatia",
       "group": "Europe",
       "period": "2006",
       "value": 2.93,
-      "iso": "HRV"
+      "iso": "HRV",
+      "moe": 0.08
     },
     {
       "entity": "Czechia",
       "group": "Europe",
       "period": "2006",
       "value": 2.5,
-      "iso": "CZE"
+      "iso": "CZE",
+      "moe": 0.07
     },
     {
       "entity": "Estonia",
       "group": "Europe",
       "period": "2006",
       "value": 2.98,
-      "iso": "EST"
+      "iso": "EST",
+      "moe": 0.06
     },
     {
       "entity": "North Macedonia",
       "group": "Europe",
       "period": "2006",
       "value": 2.37,
-      "iso": "MKD"
+      "iso": "MKD",
+      "moe": 0.07
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2006",
       "value": 3.01,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 0.08
     },
     {
       "entity": "Hungary",
       "group": "Europe",
       "period": "2006",
       "value": 2.89,
-      "iso": "HUN"
+      "iso": "HUN",
+      "moe": 0.07
     },
     {
       "entity": "Kazakhstan",
       "group": "Asia",
       "period": "2006",
       "value": 2.91,
-      "iso": "KAZ"
+      "iso": "KAZ",
+      "moe": 0.06
     },
     {
       "entity": "Kyrgyzstan",
       "group": "Asia",
       "period": "2006",
       "value": 2.59,
-      "iso": "KGZ"
+      "iso": "KGZ",
+      "moe": 0.06
     },
     {
       "entity": "Latvia",
       "group": "Europe",
       "period": "2006",
       "value": 2.98,
-      "iso": "LVA"
+      "iso": "LVA",
+      "moe": 0.06
     },
     {
       "entity": "Lithuania",
       "group": "Europe",
       "period": "2006",
       "value": 3.17,
-      "iso": "LTU"
+      "iso": "LTU",
+      "moe": 0.07
     },
     {
       "entity": "Moldova",
       "group": "Europe",
       "period": "2006",
       "value": 3.26,
-      "iso": "MDA"
+      "iso": "MDA",
+      "moe": 0.07
     },
     {
       "entity": "Mongolia",
       "group": "Asia",
       "period": "2006",
       "value": 2.59,
-      "iso": "MNG"
+      "iso": "MNG",
+      "moe": 0.05
     },
     {
       "entity": "Montenegro",
       "group": "Europe",
       "period": "2006",
       "value": 2.38,
-      "iso": "MNE"
+      "iso": "MNE",
+      "moe": 0.08
     },
     {
       "entity": "Poland",
       "group": "Europe",
       "period": "2006",
       "value": 2.75,
-      "iso": "POL"
+      "iso": "POL",
+      "moe": 0.07
     },
     {
       "entity": "Romania",
       "group": "Europe",
       "period": "2006",
       "value": 2.97,
-      "iso": "ROU"
+      "iso": "ROU",
+      "moe": 0.08
     },
     {
       "entity": "Russia",
       "group": "Europe",
       "period": "2006",
       "value": 2.95,
-      "iso": "RUS"
+      "iso": "RUS",
+      "moe": 0.06
     },
     {
       "entity": "Serbia",
       "group": "Europe",
       "period": "2006",
       "value": 2.76,
-      "iso": "SRB"
+      "iso": "SRB",
+      "moe": 0.08
     },
     {
       "entity": "Slovakia",
       "group": "Europe",
       "period": "2006",
       "value": 2.56,
-      "iso": "SVK"
+      "iso": "SVK",
+      "moe": 0.07
     },
     {
       "entity": "Slovenia",
       "group": "Europe",
       "period": "2006",
       "value": 2.53,
-      "iso": "SVN"
+      "iso": "SVN",
+      "moe": 0.07
     },
     {
       "entity": "Tajikistan",
       "group": "Asia",
       "period": "2006",
       "value": 2.66,
-      "iso": "TJK"
+      "iso": "TJK",
+      "moe": 0.06
     },
     {
       "entity": "Türkiye",
       "group": "Europe",
       "period": "2006",
       "value": 2.81,
-      "iso": "TUR"
+      "iso": "TUR",
+      "moe": 0.07
     },
     {
       "entity": "Ukraine",
       "group": "Europe",
       "period": "2006",
       "value": 3.06,
-      "iso": "UKR"
+      "iso": "UKR",
+      "moe": 0.06
     },
     {
       "entity": "Uzbekistan",
       "group": "Asia",
       "period": "2006",
       "value": 2.7,
-      "iso": "UZB"
+      "iso": "UZB",
+      "moe": 0.06
     },
     {
       "entity": "Albania",
       "group": "Europe",
       "period": "2010",
       "value": 1.89,
-      "iso": "ALB"
+      "iso": "ALB",
+      "moe": 0.06
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2010",
       "value": 2.83,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 0.05
     },
     {
       "entity": "Azerbaijan",
       "group": "Europe",
       "period": "2010",
       "value": 2.66,
-      "iso": "AZE"
+      "iso": "AZE",
+      "moe": 0.05
     },
     {
       "entity": "Belarus",
       "group": "Europe",
       "period": "2010",
       "value": 2.7,
-      "iso": "BLR"
+      "iso": "BLR",
+      "moe": 0.05
     },
     {
       "entity": "Bosnia and Herzegovina",
       "group": "Europe",
       "period": "2010",
       "value": 2.36,
-      "iso": "BIH"
+      "iso": "BIH",
+      "moe": 0.06
     },
     {
       "entity": "Bulgaria",
       "group": "Europe",
       "period": "2010",
       "value": 2.62,
-      "iso": "BGR"
+      "iso": "BGR",
+      "moe": 0.06
     },
     {
       "entity": "Croatia",
       "group": "Europe",
       "period": "2010",
       "value": 2.48,
-      "iso": "HRV"
+      "iso": "HRV",
+      "moe": 0.07
     },
     {
       "entity": "Czechia",
       "group": "Europe",
       "period": "2010",
       "value": 2.31,
-      "iso": "CZE"
+      "iso": "CZE",
+      "moe": 0.06
     },
     {
       "entity": "Estonia",
       "group": "Europe",
       "period": "2010",
       "value": 2.7,
-      "iso": "EST"
+      "iso": "EST",
+      "moe": 0.06
     },
     {
       "entity": "North Macedonia",
       "group": "Europe",
       "period": "2010",
       "value": 2.18,
-      "iso": "MKD"
+      "iso": "MKD",
+      "moe": 0.06
     },
     {
       "entity": "France",
       "group": "Europe",
       "period": "2010",
       "value": 2.2,
-      "iso": "FRA"
+      "iso": "FRA",
+      "moe": 0.05
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2010",
       "value": 3.05,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 0.06
     },
     {
       "entity": "Germany",
       "group": "Europe",
       "period": "2010",
       "value": 2.26,
-      "iso": "DEU"
+      "iso": "DEU",
+      "moe": 0.05
     },
     {
       "entity": "Hungary",
       "group": "Europe",
       "period": "2010",
       "value": 2.81,
-      "iso": "HUN"
+      "iso": "HUN",
+      "moe": 0.06
     },
     {
       "entity": "Italy",
       "group": "Europe",
       "period": "2010",
       "value": 2.23,
-      "iso": "ITA"
+      "iso": "ITA",
+      "moe": 0.05
     },
     {
       "entity": "Kazakhstan",
       "group": "Asia",
       "period": "2010",
       "value": 2.63,
-      "iso": "KAZ"
+      "iso": "KAZ",
+      "moe": 0.05
     },
     {
       "entity": "Kosovo",
       "group": "Europe & Central Asia",
       "period": "2010",
       "value": 1.67,
-      "iso": "XKX"
+      "iso": "XKX",
+      "moe": 0.05
     },
     {
       "entity": "Kyrgyzstan",
       "group": "Asia",
       "period": "2010",
       "value": 2.24,
-      "iso": "KGZ"
+      "iso": "KGZ",
+      "moe": 0.05
     },
     {
       "entity": "Latvia",
       "group": "Europe",
       "period": "2010",
       "value": 2.87,
-      "iso": "LVA"
+      "iso": "LVA",
+      "moe": 0.06
     },
     {
       "entity": "Lithuania",
       "group": "Europe",
       "period": "2010",
       "value": 2.89,
-      "iso": "LTU"
+      "iso": "LTU",
+      "moe": 0.06
     },
     {
       "entity": "Moldova",
       "group": "Europe",
       "period": "2010",
       "value": 2.96,
-      "iso": "MDA"
+      "iso": "MDA",
+      "moe": 0.06
     },
     {
       "entity": "Mongolia",
       "group": "Asia",
       "period": "2010",
       "value": 2.55,
-      "iso": "MNG"
+      "iso": "MNG",
+      "moe": 0.05
     },
     {
       "entity": "Montenegro",
       "group": "Europe",
       "period": "2010",
       "value": 2.01,
-      "iso": "MNE"
+      "iso": "MNE",
+      "moe": 0.06
     },
     {
       "entity": "Poland",
       "group": "Europe",
       "period": "2010",
       "value": 2.43,
-      "iso": "POL"
+      "iso": "POL",
+      "moe": 0.05
     },
     {
       "entity": "Romania",
       "group": "Europe",
       "period": "2010",
       "value": 2.78,
-      "iso": "ROU"
+      "iso": "ROU",
+      "moe": 0.06
     },
     {
       "entity": "Russia",
       "group": "Europe",
       "period": "2010",
       "value": 2.79,
-      "iso": "RUS"
+      "iso": "RUS",
+      "moe": 0.04
     },
     {
       "entity": "Serbia",
       "group": "Europe",
       "period": "2010",
       "value": 2.56,
-      "iso": "SRB"
+      "iso": "SRB",
+      "moe": 0.05
     },
     {
       "entity": "Slovakia",
       "group": "Europe",
       "period": "2010",
       "value": 2.09,
-      "iso": "SVK"
+      "iso": "SVK",
+      "moe": 0.05
     },
     {
       "entity": "Slovenia",
       "group": "Europe",
       "period": "2010",
       "value": 2.32,
-      "iso": "SVN"
+      "iso": "SVN",
+      "moe": 0.06
     },
     {
       "entity": "Sweden",
       "group": "Europe",
       "period": "2010",
       "value": 2.02,
-      "iso": "SWE"
+      "iso": "SWE",
+      "moe": 0.06
     },
     {
       "entity": "Tajikistan",
       "group": "Asia",
       "period": "2010",
       "value": 2.24,
-      "iso": "TJK"
+      "iso": "TJK",
+      "moe": 0.05
     },
     {
       "entity": "Türkiye",
       "group": "Europe",
       "period": "2010",
       "value": 2.28,
-      "iso": "TUR"
+      "iso": "TUR",
+      "moe": 0.06
     },
     {
       "entity": "United Kingdom",
       "group": "Europe",
       "period": "2010",
       "value": 2.27,
-      "iso": "GBR"
+      "iso": "GBR",
+      "moe": 0.05
     },
     {
       "entity": "Ukraine",
       "group": "Europe",
       "period": "2010",
       "value": 2.81,
-      "iso": "UKR"
+      "iso": "UKR",
+      "moe": 0.04
     },
     {
       "entity": "Uzbekistan",
       "group": "Asia",
       "period": "2010",
       "value": 2.22,
-      "iso": "UZB"
+      "iso": "UZB",
+      "moe": 0.04
     },
     {
       "entity": "Albania",
       "group": "Europe",
       "period": "2016",
       "value": 2.05,
-      "iso": "ALB"
+      "iso": "ALB",
+      "moe": 0.05
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2016",
       "value": 2.82,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 0.07
     },
     {
       "entity": "Azerbaijan",
       "group": "Europe",
       "period": "2016",
       "value": 2.61,
-      "iso": "AZE"
+      "iso": "AZE",
+      "moe": 0.06
     },
     {
       "entity": "Belarus",
       "group": "Europe",
       "period": "2016",
       "value": 2.73,
-      "iso": "BLR"
+      "iso": "BLR",
+      "moe": 0.05
     },
     {
       "entity": "Bosnia and Herzegovina",
       "group": "Europe",
       "period": "2016",
       "value": 2.2,
-      "iso": "BIH"
+      "iso": "BIH",
+      "moe": 0.05
     },
     {
       "entity": "Bulgaria",
       "group": "Europe",
       "period": "2016",
       "value": 2.24,
-      "iso": "BGR"
+      "iso": "BGR",
+      "moe": 0.06
     },
     {
       "entity": "Croatia",
       "group": "Europe",
       "period": "2016",
       "value": 2.38,
-      "iso": "HRV"
+      "iso": "HRV",
+      "moe": 0.05
     },
     {
       "entity": "Cyprus",
       "group": "Europe",
       "period": "2016",
       "value": 2.09,
-      "iso": "CYP"
+      "iso": "CYP",
+      "moe": 0.06
     },
     {
       "entity": "Czechia",
       "group": "Europe",
       "period": "2016",
       "value": 2.34,
-      "iso": "CZE"
+      "iso": "CZE",
+      "moe": 0.05
     },
     {
       "entity": "Estonia",
       "group": "Europe",
       "period": "2016",
       "value": 2.65,
-      "iso": "EST"
+      "iso": "EST",
+      "moe": 0.05
     },
     {
       "entity": "North Macedonia",
       "group": "Europe",
       "period": "2016",
       "value": 2.19,
-      "iso": "MKD"
+      "iso": "MKD",
+      "moe": 0.05
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2016",
       "value": 2.9,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 0.06
     },
     {
       "entity": "Germany",
       "group": "Europe",
       "period": "2016",
       "value": 2.28,
-      "iso": "DEU"
+      "iso": "DEU",
+      "moe": 0.09
     },
     {
       "entity": "Greece",
       "group": "Europe",
       "period": "2016",
       "value": 1.89,
-      "iso": "GRC"
+      "iso": "GRC",
+      "moe": 0.05
     },
     {
       "entity": "Hungary",
       "group": "Europe",
       "period": "2016",
       "value": 2.44,
-      "iso": "HUN"
+      "iso": "HUN",
+      "moe": 0.06
     },
     {
       "entity": "Italy",
       "group": "Europe",
       "period": "2016",
       "value": 2.45,
-      "iso": "ITA"
+      "iso": "ITA",
+      "moe": 0.06
     },
     {
       "entity": "Kazakhstan",
       "group": "Asia",
       "period": "2016",
       "value": 2.4,
-      "iso": "KAZ"
+      "iso": "KAZ",
+      "moe": 0.05
     },
     {
       "entity": "Kosovo",
       "group": "Europe & Central Asia",
       "period": "2016",
       "value": 2.13,
-      "iso": "XKX"
+      "iso": "XKX",
+      "moe": 0.05
     },
     {
       "entity": "Kyrgyzstan",
       "group": "Asia",
       "period": "2016",
       "value": 2.34,
-      "iso": "KGZ"
+      "iso": "KGZ",
+      "moe": 0.05
     },
     {
       "entity": "Latvia",
       "group": "Europe",
       "period": "2016",
       "value": 2.71,
-      "iso": "LVA"
+      "iso": "LVA",
+      "moe": 0.05
     },
     {
       "entity": "Lithuania",
       "group": "Europe",
       "period": "2016",
       "value": 2.67,
-      "iso": "LTU"
+      "iso": "LTU",
+      "moe": 0.05
     },
     {
       "entity": "Moldova",
       "group": "Europe",
       "period": "2016",
       "value": 2.81,
-      "iso": "MDA"
+      "iso": "MDA",
+      "moe": 0.06
     },
     {
       "entity": "Mongolia",
       "group": "Asia",
       "period": "2016",
       "value": 2.48,
-      "iso": "MNG"
+      "iso": "MNG",
+      "moe": 0.04
     },
     {
       "entity": "Montenegro",
       "group": "Europe",
       "period": "2016",
       "value": 2.05,
-      "iso": "MNE"
+      "iso": "MNE",
+      "moe": 0.06
     },
     {
       "entity": "Poland",
       "group": "Europe",
       "period": "2016",
       "value": 2.31,
-      "iso": "POL"
+      "iso": "POL",
+      "moe": 0.1
     },
     {
       "entity": "Romania",
       "group": "Europe",
       "period": "2016",
       "value": 2.47,
-      "iso": "ROU"
+      "iso": "ROU",
+      "moe": 0.06
     },
     {
       "entity": "Russia",
       "group": "Europe",
       "period": "2016",
       "value": 2.71,
-      "iso": "RUS"
+      "iso": "RUS",
+      "moe": 0.06
     },
     {
       "entity": "Serbia",
       "group": "Europe",
       "period": "2016",
       "value": 2.31,
-      "iso": "SRB"
+      "iso": "SRB",
+      "moe": 0.05
     },
     {
       "entity": "Slovakia",
       "group": "Europe",
       "period": "2016",
       "value": 2.38,
-      "iso": "SVK"
+      "iso": "SVK",
+      "moe": 0.06
     },
     {
       "entity": "Slovenia",
       "group": "Europe",
       "period": "2016",
       "value": 2.35,
-      "iso": "SVN"
+      "iso": "SVN",
+      "moe": 0.06
     },
     {
       "entity": "Tajikistan",
       "group": "Asia",
       "period": "2016",
       "value": 2.38,
-      "iso": "TJK"
+      "iso": "TJK",
+      "moe": 0.05
     },
     {
       "entity": "Türkiye",
       "group": "Europe",
       "period": "2016",
       "value": 2.07,
-      "iso": "TUR"
+      "iso": "TUR",
+      "moe": 0.05
     },
     {
       "entity": "Ukraine",
       "group": "Europe",
       "period": "2016",
       "value": 2.66,
-      "iso": "UKR"
+      "iso": "UKR",
+      "moe": 0.05
     },
     {
       "entity": "Uzbekistan",
       "group": "Asia",
       "period": "2016",
       "value": 2.38,
-      "iso": "UZB"
+      "iso": "UZB",
+      "moe": 0.04
     },
     {
       "entity": "Albania",
       "group": "Europe",
       "period": "2023",
       "value": 2.05,
-      "iso": "ALB"
+      "iso": "ALB",
+      "moe": 0.07
     },
     {
       "entity": "Armenia",
       "group": "Europe",
       "period": "2023",
       "value": 2.89,
-      "iso": "ARM"
+      "iso": "ARM",
+      "moe": 0.07
     },
     {
       "entity": "Azerbaijan",
       "group": "Europe",
       "period": "2023",
       "value": 2.43,
-      "iso": "AZE"
+      "iso": "AZE",
+      "moe": 0.07
     },
     {
       "entity": "Belarus",
       "group": "Europe",
       "period": "2023",
       "value": 2.43,
-      "iso": "BLR"
+      "iso": "BLR",
+      "moe": 0.05
     },
     {
       "entity": "Bosnia and Herzegovina",
       "group": "Europe",
       "period": "2023",
       "value": 2.04,
-      "iso": "BIH"
+      "iso": "BIH",
+      "moe": 0.07
     },
     {
       "entity": "Bulgaria",
       "group": "Europe",
       "period": "2023",
       "value": 2.29,
-      "iso": "BGR"
+      "iso": "BGR",
+      "moe": 0.07
     },
     {
       "entity": "Croatia",
       "group": "Europe",
       "period": "2023",
       "value": 2.06,
-      "iso": "HRV"
+      "iso": "HRV",
+      "moe": 0.07
     },
     {
       "entity": "Czechia",
       "group": "Europe",
       "period": "2023",
       "value": 2.04,
-      "iso": "CZE"
+      "iso": "CZE",
+      "moe": 0.05
     },
     {
       "entity": "Estonia",
       "group": "Europe",
       "period": "2023",
       "value": 2.52,
-      "iso": "EST"
+      "iso": "EST",
+      "moe": 0.06
     },
     {
       "entity": "Georgia",
       "group": "Europe",
       "period": "2023",
       "value": 2.65,
-      "iso": "GEO"
+      "iso": "GEO",
+      "moe": 0.08
     },
     {
       "entity": "Germany",
       "group": "Europe",
       "period": "2023",
       "value": 2.25,
-      "iso": "DEU"
+      "iso": "DEU",
+      "moe": 0.05
     },
     {
       "entity": "Greece",
       "group": "Europe",
       "period": "2023",
       "value": 1.72,
-      "iso": "GRC"
+      "iso": "GRC",
+      "moe": 0.06
     },
     {
       "entity": "Hungary",
       "group": "Europe",
       "period": "2023",
       "value": 2.17,
-      "iso": "HUN"
+      "iso": "HUN",
+      "moe": 0.06
     },
     {
       "entity": "Jordan",
       "group": "Asia",
       "period": "2023",
       "value": 2.35,
-      "iso": "JOR"
+      "iso": "JOR",
+      "moe": 0.08
     },
     {
       "entity": "Kazakhstan",
       "group": "Asia",
       "period": "2023",
       "value": 2.35,
-      "iso": "KAZ"
+      "iso": "KAZ",
+      "moe": 0.07
     },
     {
       "entity": "Kosovo",
       "group": "Europe & Central Asia",
       "period": "2023",
       "value": 1.83,
-      "iso": "XKX"
+      "iso": "XKX",
+      "moe": 0.06
     },
     {
       "entity": "Kyrgyzstan",
       "group": "Asia",
       "period": "2023",
       "value": 2.39,
-      "iso": "KGZ"
+      "iso": "KGZ",
+      "moe": 0.06
     },
     {
       "entity": "Latvia",
       "group": "Europe",
       "period": "2023",
       "value": 2.68,
-      "iso": "LVA"
+      "iso": "LVA",
+      "moe": 0.06
     },
     {
       "entity": "Lebanon",
       "group": "Asia",
       "period": "2023",
       "value": 2.25,
-      "iso": "LBN"
+      "iso": "LBN",
+      "moe": 0.07
     },
     {
       "entity": "Lithuania",
       "group": "Europe",
       "period": "2023",
       "value": 2.15,
-      "iso": "LTU"
+      "iso": "LTU",
+      "moe": 0.06
     },
     {
       "entity": "Moldova",
       "group": "Europe",
       "period": "2023",
       "value": 2.8,
-      "iso": "MDA"
+      "iso": "MDA",
+      "moe": 0.06
     },
     {
       "entity": "Mongolia",
       "group": "Asia",
       "period": "2023",
       "value": 2.37,
-      "iso": "MNG"
+      "iso": "MNG",
+      "moe": 0.06
     },
     {
       "entity": "Montenegro",
       "group": "Europe",
       "period": "2023",
       "value": 2.11,
-      "iso": "MNE"
+      "iso": "MNE",
+      "moe": 0.07
     },
     {
       "entity": "Morocco",
       "group": "Africa",
       "period": "2023",
       "value": 2.4,
-      "iso": "MAR"
+      "iso": "MAR",
+      "moe": 0.08
     },
     {
       "entity": "North Macedonia",
       "group": "Europe",
       "period": "2023",
       "value": 2,
-      "iso": "MKD"
+      "iso": "MKD",
+      "moe": 0.07
     },
     {
       "entity": "Poland",
       "group": "Europe",
       "period": "2023",
       "value": 2.14,
-      "iso": "POL"
+      "iso": "POL",
+      "moe": 0.06
     },
     {
       "entity": "Romania",
       "group": "Europe",
       "period": "2023",
       "value": 2.03,
-      "iso": "ROU"
+      "iso": "ROU",
+      "moe": 0.06
     },
     {
       "entity": "Russia",
       "group": "Europe",
       "period": "2023",
       "value": 2.51,
-      "iso": "RUS"
+      "iso": "RUS",
+      "moe": 0.06
     },
     {
       "entity": "Serbia",
       "group": "Europe",
       "period": "2023",
       "value": 2.15,
-      "iso": "SRB"
+      "iso": "SRB",
+      "moe": 0.07
     },
     {
       "entity": "Slovakia",
       "group": "Europe",
       "period": "2023",
       "value": 2.24,
-      "iso": "SVK"
+      "iso": "SVK",
+      "moe": 0.07
     },
     {
       "entity": "Slovenia",
       "group": "Europe",
       "period": "2023",
       "value": 2.23,
-      "iso": "SVN"
+      "iso": "SVN",
+      "moe": 0.06
     },
     {
       "entity": "Tajikistan",
       "group": "Asia",
       "period": "2023",
       "value": 2.35,
-      "iso": "TJK"
+      "iso": "TJK",
+      "moe": 0.06
     },
     {
       "entity": "Tunisia",
       "group": "Africa",
       "period": "2023",
       "value": 2.64,
-      "iso": "TUN"
+      "iso": "TUN",
+      "moe": 0.06
     },
     {
       "entity": "Türkiye",
       "group": "Europe",
       "period": "2023",
       "value": 2.32,
-      "iso": "TUR"
+      "iso": "TUR",
+      "moe": 0.06
     },
     {
       "entity": "Uzbekistan",
       "group": "Asia",
       "period": "2023",
       "value": 2.08,
-      "iso": "UZB"
+      "iso": "UZB",
+      "moe": 0.07
     },
     {
       "entity": "Palestine",
       "group": "Asia",
       "period": "2023",
       "value": 1.95,
-      "iso": "PSE"
+      "iso": "PSE",
+      "moe": 0.07
     },
     {
       "entity": "Algeria",
       "group": "Africa",
       "period": "2023",
       "value": 2.42,
-      "iso": "DZA"
+      "iso": "DZA",
+      "moe": 0.06
     }
   ]
 }

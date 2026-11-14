@@ -13,14 +13,16 @@ The 2018 vaccine questions were not asked in 2020.
 """
 import sys
 import pyreadstat
+from moe import share_moe
 
 df, meta = pyreadstat.read_sav(sys.argv[1], usecols=['COUNTRYNEW', 'WGT', 'W6', 'W5C'])
 lab = meta.variable_value_labels.get('COUNTRYNEW', {})
-print('country,trust_science,trust_scientists')
+print('country,trust_science,trust_scientists,trust_science_moe,trust_scientists_moe')
 for c, g in sorted(df.groupby('COUNTRYNEW'), key=lambda t: str(lab.get(t[0], t[0]))):
-    out = []
+    out, moe = [], []
     for q in ('W6', 'W5C'):
         v, w = g[q], g['WGT']
         base = v.isin([1, 2, 3, 4, 99])
         out.append('' if base.sum() < 300 else f'{100 * w[base & v.isin([1, 2])].sum() / w[base].sum():.6f}')
-    print('"%s",%s' % (str(lab.get(c, c)).strip(), ','.join(out)))
+        moe.append(share_moe(out[-1], w[base]) if out[-1] else '')
+    print('"%s",%s' % (str(lab.get(c, c)).strip(), ','.join(out + moe)))

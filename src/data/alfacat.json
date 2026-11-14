@@ -1,0 +1,197 @@
+{
+ "asof": "2026-11-09",
+ "source": "https://azenha.ai/alfacat/",
+ "byIso": {
+  "USA": {
+   "index": {
+    "symbol": "SPY",
+    "name": "S&P 500 ETF",
+    "chgYTD": 10.4,
+    "asof": "2026-11-09"
+   },
+   "top": [
+    {
+     "symbol": "AAPL",
+     "name": "Apple",
+     "chgYTD": 29
+    },
+    {
+     "symbol": "NVDA",
+     "name": "NVIDIA",
+     "chgYTD": -4.2
+    },
+    {
+     "symbol": "MSFT",
+     "name": "Microsoft",
+     "chgYTD": 12.7
+    },
+    {
+     "symbol": "GOOGL",
+     "name": "Alphabet",
+     "chgYTD": -7.9
+    },
+    {
+     "symbol": "GOOG",
+     "name": "Alphabet Inc. (Class C)",
+     "chgYTD": -8.9
+    }
+   ],
+   "listings": 1519,
+   "screener": "screener/?region=us"
+  },
+  "GBR": {
+   "index": {
+    "symbol": "FTSE100",
+    "name": "FTSE 100 (London)",
+    "chgYTD": 8.6,
+    "asof": "2026-11-09"
+   },
+   "listings": 98,
+   "screener": "screener/?region=eu&off=XETRA%2CParis%2CAmsterdam%2CBrussels%2CMCE%2CMilan%2CSwiss%2CStockholm"
+  },
+  "HKG": {
+   "index": {
+    "symbol": "HSI",
+    "name": "Hang Seng (Hong Kong)",
+    "chgYTD": -4.6,
+    "asof": "2026-11-09"
+   },
+   "listings": 85,
+   "screener": "screener/?region=asia&off=NSE%2CASX%2CTokyo%2CSES%2CKSE"
+  },
+  "JPN": {
+   "index": {
+    "symbol": "N225",
+    "name": "Nikkei 225 (Tokyo)",
+    "chgYTD": 16.8,
+    "asof": "2026-11-09"
+   },
+   "listings": 223,
+   "screener": "screener/?region=asia&off=NSE%2CHKEX%2CASX%2CSES%2CKSE"
+  },
+  "DEU": {
+   "index": {
+    "symbol": "DAX",
+    "name": "DAX 40 (Frankfurt)",
+    "chgYTD": 7.3,
+    "asof": "2026-11-09"
+   },
+   "listings": 40,
+   "screener": "screener/?region=eu&off=Paris%2CAmsterdam%2CLSE%2CBrussels%2CMCE%2CMilan%2CSwiss%2CStockholm"
+  },
+  "EA": {
+   "index": {
+    "symbol": "STOXX50",
+    "name": "Euro Stoxx 50",
+    "chgYTD": 8.5,
+    "asof": "2026-11-09"
+   }
+  },
+  "CHN": {
+   "index": {
+    "symbol": "SHCOMP",
+    "name": "Shanghai Composite",
+    "chgYTD": -7.8,
+    "asof": "2026-11-09"
+   }
+  },
+  "RUS": {
+   "listings": 12,
+   "screener": "screener/?region=ru"
+  },
+  "FRA": {
+   "listings": 39,
+   "screener": "screener/?region=eu&off=XETRA%2CAmsterdam%2CLSE%2CBrussels%2CMCE%2CMilan%2CSwiss%2CStockholm"
+  },
+  "NLD": {
+   "listings": 25,
+   "screener": "screener/?region=eu&off=XETRA%2CParis%2CLSE%2CBrussels%2CMCE%2CMilan%2CSwiss%2CStockholm"
+  },
+  "BEL": {
+   "listings": 2,
+   "screener": "screener/?region=eu&off=XETRA%2CParis%2CAmsterdam%2CLSE%2CMCE%2CMilan%2CSwiss%2CStockholm"
+  },
+  "ESP": {
+   "listings": 35,
+   "screener": "screener/?region=eu&off=XETRA%2CParis%2CAmsterdam%2CLSE%2CBrussels%2CMilan%2CSwiss%2CStockholm"
+  },
+  "ITA": {
+   "listings": 40,
+   "screener": "screener/?region=eu&off=XETRA%2CParis%2CAmsterdam%2CLSE%2CBrussels%2CMCE%2CSwiss%2CStockholm"
+  },
+  "CHE": {
+   "listings": 20,
+   "screener": "screener/?region=eu&off=XETRA%2CParis%2CAmsterdam%2CLSE%2CBrussels%2CMCE%2CMilan%2CStockholm"
+  },
+  "IND": {
+   "listings": 48,
+   "screener": "screener/?region=asia&off=HKEX%2CASX%2CTokyo%2CSES%2CKSE"
+  },
+  "SWE": {
+   "listings": 29,
+   "screener": "screener/?region=eu&off=XETRA%2CParis%2CAmsterdam%2CLSE%2CBrussels%2CMCE%2CMilan%2CSwiss"
+  },
+  "AUS": {
+   "listings": 49,
+   "screener": "screener/?region=asia&off=NSE%2CHKEX%2CTokyo%2CSES%2CKSE"
+  },
+  "CAN": {
+   "listings": 60,
+   "screener": "screener/?region=ca"
+  },
+  "SGP": {
+   "listings": 30,
+   "screener": "screener/?region=asia&off=NSE%2CHKEX%2CASX%2CTokyo%2CKSE"
+  },
+  "KOR": {
+   "listings": 199,
+   "screener": "screener/?region=asia&off=NSE%2CHKEX%2CASX%2CTokyo%2CSES"
+  }
+ },
+ "fx": {
+  "EUR": {
+   "symbol": "EURUSD",
+   "inverse": true
+  },
+  "JPY": {
+   "symbol": "USDJPY",
+   "inverse": false
+  },
+  "GBP": {
+   "symbol": "GBPUSD",
+   "inverse": true
+  },
+  "AUD": {
+   "symbol": "AUDUSD",
+   "inverse": true
+  },
+  "CAD": {
+   "symbol": "USDCAD",
+   "inverse": false
+  },
+  "CHF": {
+   "symbol": "USDCHF",
+   "inverse": false
+  },
+  "CNY": {
+   "symbol": "USDCNY",
+   "inverse": false
+  },
+  "HKD": {
+   "symbol": "USDHKD",
+   "inverse": false
+  },
+  "INR": {
+   "symbol": "USDINR",
+   "inverse": false
+  },
+  "SEK": {
+   "symbol": "USDSEK",
+   "inverse": false
+  },
+  "RUB": {
+   "symbol": "USDRUB",
+   "inverse": false
+  }
+ }
+}

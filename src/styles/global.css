@@ -411,6 +411,8 @@ table.data td.num { text-align: right; font-family: var(--mono); }
 
 .chart-svg svg { width: 100%; height: auto; display: block; }
 .chart-svg .tc-narrow { display: none; }
+.chart-svg .tc-proj { fill: var(--text-dim); opacity: 0.08; }
+.legend-regions .lr-n { color: var(--text-dim); font-size: 11px; }
 .legend-regions .lr-rate { font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--text-dim); margin-left: 6px; }
 .chart-svg .tc-note { font-size: 12px; color: var(--text-dim); margin: 8px 0 0; line-height: 1.45; }
 @media (max-width: 560px) { .chart-svg .tc-wide { display: none; } .chart-svg .tc-narrow { display: block; } }
@@ -739,3 +741,27 @@ html[data-theme='light'] #co-slope { --rib: #c3ccd2; --tickc: #9aa4ad; }
 }
 /* The install banner sat over the bottom of the open ☰ menu on phones (QA, 29 Oct 2026). */
 html:has(#hdr-burger[aria-expanded="true"]) #a2hs { display: none !important; }
+
+/* Economy this week (pages/economy.astro): a dense table, country column
+   pinned, columns scroll sideways on phones. */
+.ew-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); border-radius: 10px; margin-top: 14px; }
+.ew { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+.ew th, .ew td { padding: 6px 8px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--border); }
+.ew thead th { font-size: 11px; font-weight: 600; color: var(--text-dim); vertical-align: bottom; background: var(--bg-elev, var(--bg)); }
+.ew .ew-groups th { color: var(--text); font-size: 12px; border-bottom: 0; text-align: center; border-left: 1px solid var(--border); }
+.ew thead button { all: unset; cursor: pointer; display: inline-block; min-height: 32px; line-height: 1.2; white-space: normal; max-width: 92px; text-align: right; }
+.ew thead button[aria-sort="descending"]::after { content: " ↓"; color: var(--accent); }
+.ew thead button[aria-sort="ascending"]::after { content: " ↑"; color: var(--accent); }
+.ew .ew-c { position: sticky; left: 0; z-index: 1; text-align: left; background: var(--bg); font-weight: 600; min-width: 112px; }
+.ew thead .ew-c { z-index: 2; background: var(--bg-elev, var(--bg)); }
+.ew tbody tr:nth-child(5n) td, .ew tbody tr:nth-child(5n) th { border-bottom-color: var(--text-dim); }
+.ew td .ew-v { display: block; font-family: var(--mono); }
+.ew td .ew-p { display: block; font-size: 10px; color: var(--text-dim); }
+.ew td.ew-bad { background: color-mix(in srgb, #ef4444 16%, transparent); }
+.ew td.ew-na { color: var(--text-dim); }
+.ew-small { max-width: 640px; }
+.ew-small .ew-u { font-weight: 400; color: var(--text-dim); font-size: 11px; }
+.ew-note { font-size: 12px; color: var(--text-dim); line-height: 1.5; margin-top: 10px; }
+.ew a.ew-ac { color: var(--accent); text-decoration: none; display: block; font-family: var(--mono); }
+.ew a.ew-ac:hover { text-decoration: underline; }
+.ew td.ew-na a.ew-ac { font-family: inherit; font-size: 11px; }
