@@ -50,7 +50,12 @@ const trendEnds = series.flatMap((s) => (s.trend?.clear ? [trendAt(s.trend, s.tr
 const [lo, hi] = series.length ? yDomain([...series.flatMap((s) => s.pts), ...trendEnds]) : [0, 1];
 const ticks = niceTicks(lo, hi, 4);
 const ppUnit = fullUnit.includes('%') ? 'pp' : fullUnit.replace(/^%\s*/, '').trim();
-const fmtTick = (v: number) => `${Math.abs(v) >= 1e4 ? new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(v) : +v.toFixed(2)}${unit}`;
+// As many decimals as the tick step needs: a fixed two places read
+// 0.81, 0.81, 0.80, 0.80 on a 0.0025 step (Albania's HDI in the app, 14 Nov).
+const step = ticks.length > 1 ? ticks[1] - ticks[0] : 1;
+let tickDp = 0;
+for (let sc = step; tickDp < 6 && Math.abs(sc - Math.round(sc)) > 1e-6; sc *= 10) tickDp++;
+const fmtTick = (v: number) => `${Math.abs(v) >= 1e4 ? new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(v) : v.toFixed(tickDp)}${unit}`;
 
 const rate = (s: (typeof series)[number]) => {
   if (!s.trend?.clear) return '';

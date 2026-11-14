@@ -48,7 +48,7 @@ const INDICATORS = {
     summary: 'Gross domestic product based on purchasing-power-parity, billions of international dollars.' },
   PPPPC: { slug: 'imf-gdp-per-capita-ppp', title: 'GDP per Capita (PPP)', unit: 'intl$', valueLabel: 'GDP per capita, PPP', changeMode: 'pct', dp: 0,
     summary: 'GDP per capita based on purchasing-power-parity, international dollars.' },
-  PPPSH: { slug: 'imf-world-gdp-share', title: 'Share of World GDP (PPP)', unit: '%', valueLabel: 'Share of world GDP', changeMode: 'pp', dp: 2,
+  PPPSH: { slug: 'imf-world-gdp-share', title: 'Share of World GDP (PPP)', unit: '%', valueLabel: 'Share of world GDP', changeMode: 'pp', dp: 3,
     summary: 'Country share of world GDP, PPP basis.' },
   // Three decimals, not one. Stored in millions, one decimal rounds anything
   // under fifty thousand people to zero — San Marino, Nauru, Tuvalu, Palau,

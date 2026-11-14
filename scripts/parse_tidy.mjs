@@ -32,7 +32,7 @@ const SOURCES = [
     url: 'https://databank.worldbank.org/source/world-development-indicators',
     indicators: {
       'SP.DYN.TFRT.IN': pp('Fertility Rate', 'births/woman', 2),
-      'EN.GHG.CO2.PC.CE.AR5': pct('CO₂ per Capita', 't', 2),
+      'EN.GHG.CO2.PC.CE.AR5': pct('CO₂ per Capita', 't', 3),
     },
   },
   {
