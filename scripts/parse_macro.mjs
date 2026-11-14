@@ -80,7 +80,7 @@ async function fromDataMapper() {
   // IMF's own codes for two territories, and Syria, back in the WEO from Oct 2026;
   // regions in the WEO taxonomy the other rows use.
   for (const [iso, name, region] of [['UVK', 'Kosovo', 'Europe & Central Asia'], ['WBG', 'West Bank and Gaza', 'Middle East & North Africa'],
-    ['SYR', 'Syria', 'Middle East & North Africa']]) if (!known.has(iso)) known.set(iso, { name, region });
+    ['SYR', 'Syria', 'Middle East & North Africa']]) known.set(iso, { name, region }); // these win: an earlier run filed UVK and WBG under "Advanced / other"
   const { gapminderRows, REGION_4 } = await import('./lib/datasets.mjs');
   const geo = new Map();
   for (const r of await gapminderRows()) {
@@ -168,6 +168,9 @@ async function main() {
       valueLabel: cfg.valueLabel,
       changeMode: cfg.changeMode,
       ...SOURCE,
+      // A WEO edition's own year and later are IMF projections, not outturns:
+      // charts draw them dashed and leave them out of any trend.
+      projectedFrom: String(SOURCE.source.match(/\d{4}/)?.[0] ?? REF_YEAR),
     }, data, { carryForward: false }); // each WEO edition replaces the last whole
   }
 }

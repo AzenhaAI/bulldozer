@@ -50,6 +50,8 @@ export interface DatasetMeta {
    *  company-metrics datasets): no map, no country profiles, kept out of the
    *  country explorers. Absent = countries. */
   entityType?: 'company';
+  /** First projected year (IMF WEO): drawn dashed, left out of trends. */
+  projectedFrom?: string;
 }
 
 export interface Dataset extends DatasetMeta {

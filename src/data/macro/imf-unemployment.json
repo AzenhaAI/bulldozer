@@ -9,6 +9,7 @@
     "license": "IMF terms — public data",
     "url": "https://www.imf.org/external/datamapper/",
     "parsedAt": "2026-11-10",
+    "projectedFrom": "2026",
     "kind": "macro"
   },
   "data": [
@@ -3108,42 +3109,42 @@
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2019",
       "value": 25.7,
       "iso": "UVK"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2020",
       "value": 26,
       "iso": "UVK"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2021",
       "value": 20.8,
       "iso": "UVK"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2022",
       "value": 12.6,
       "iso": "UVK"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2023",
       "value": 10.9,
       "iso": "UVK"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2024",
       "value": 10.8,
       "iso": "UVK"
@@ -6083,28 +6084,28 @@
     },
     {
       "entity": "West Bank and Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2019",
       "value": 25.4,
       "iso": "WBG"
     },
     {
       "entity": "West Bank and Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2020",
       "value": 25.9,
       "iso": "WBG"
     },
     {
       "entity": "West Bank and Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2021",
       "value": 26.4,
       "iso": "WBG"
     },
     {
       "entity": "West Bank and Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2022",
       "value": 24.4,
       "iso": "WBG"

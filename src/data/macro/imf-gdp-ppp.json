@@ -9,6 +9,7 @@
     "license": "IMF terms — public data",
     "url": "https://www.imf.org/external/datamapper/",
     "parsedAt": "2026-11-10",
+    "projectedFrom": "2026",
     "kind": "macro"
   },
   "data": [
@@ -4998,56 +4999,56 @@
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2019",
       "value": 21.1,
       "iso": "UVK"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2020",
       "value": 20.2,
       "iso": "UVK"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2021",
       "value": 23.4,
       "iso": "UVK"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2022",
       "value": 26.1,
       "iso": "UVK"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2023",
       "value": 28.2,
       "iso": "UVK"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2024",
       "value": 30.3,
       "iso": "UVK"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2025",
       "value": 32.2,
       "iso": "UVK"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2026",
       "value": 34.4,
       "iso": "UVK"
@@ -10640,49 +10641,49 @@
     },
     {
       "entity": "West Bank and Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2019",
       "value": 30.5,
       "iso": "WBG"
     },
     {
       "entity": "West Bank and Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2020",
       "value": 28.6,
       "iso": "WBG"
     },
     {
       "entity": "West Bank and Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2021",
       "value": 27.9,
       "iso": "WBG"
     },
     {
       "entity": "West Bank and Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2022",
       "value": 31.1,
       "iso": "WBG"
     },
     {
       "entity": "West Bank and Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2023",
       "value": 31.9,
       "iso": "WBG"
     },
     {
       "entity": "West Bank and Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2024",
       "value": 25.3,
       "iso": "WBG"
     },
     {
       "entity": "West Bank and Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2025",
       "value": 27.1,
       "iso": "WBG"
