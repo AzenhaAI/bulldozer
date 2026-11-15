@@ -16,9 +16,11 @@ import { join } from 'node:path';
 import { parseCsvObjects } from './lib/csv.mjs';
 import { enRegion, latestN, writeDataset, round } from './lib/datasets.mjs';
 
-const SRC =
-  process.env.IMF_WEO_CSV ||
-  join(homedir(), 'Documents', 'tableau_data', 'macro', 'imf_weo_apr2026_tidy.csv');
+// A local export only when asked for by name. The default used to be the Mac's
+// Apr 2026 tidy CSV, which silently won over the DataMapper API: a rerun on
+// 14 Nov 2026 put April's WEO back over October's (Germany 2026 growth 0.8
+// instead of 1.3) — caught by the 15 Nov review.
+const SRC = process.env.IMF_WEO_CSV || '';
 const REF_YEAR = Number(process.env.REF_YEAR) || new Date().getFullYear();
 
 const SOURCE = {
@@ -107,9 +109,11 @@ async function fromDataMapper() {
 
 async function main() {
   let text = null;
-  try {
-    text = await readFile(SRC, 'utf8');
-  } catch { /* no local export: use the API below */ }
+  if (SRC) {
+    try {
+      text = await readFile(SRC, 'utf8');
+    } catch { /* no local export: use the API below */ }
+  }
   let apiRows = null;
   if (text === null) {
     try {
