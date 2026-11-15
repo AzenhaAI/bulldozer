@@ -380,9 +380,13 @@ for (const [iso, m] of Object.entries(countryMeta as Record<string, any>)) {
     justify-content: center; padding: 6px 14px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border);
     font-family: var(--mono); font-size: 11px; color: var(--text-dim); white-space: nowrap; }
   .gx-panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; min-height: 320px; }
+  .gx-grid > * { min-width: 0; }
   @media (max-width: 860px) {
     .gx-grid { grid-template-columns: 1fr; }
-    .gx-legend { position: static; transform: none; margin-top: 8px; }
+    /* The stage is a flex row, so a static legend became a column beside the
+       globe and ran off the right edge on a phone (Kirill, 16 Nov 2026). */
+    .gx-stage { flex-direction: column; align-items: center; }
+    .gx-legend { position: static; transform: none; margin-top: 8px; white-space: normal; border-radius: 14px; max-width: 100%; }
   }
 </style>
 
