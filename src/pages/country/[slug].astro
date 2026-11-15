@@ -198,7 +198,7 @@ const jsonLd = {
               {t.items.map((it) => (
                 <Fragment>
                 <tr>
-                  <td><a href={`${base}/dataset/${it.slug}/`}>{it.title}</a></td>
+                  <td><a href={/^(eb|evs|issp)-/.test(it.slug) ? `${base}/dataset/${it.slug}/` : `${base}/country/${countrySlug(c.name)}/${it.slug}/`}>{it.title}</a></td>
                   <td class="num">{fmt(it.value, it.unit)}{it.unit && !it.unit.includes('%') && <span class="ci-unit"> {it.unit}</span>}{it.splits && (
                     <button type="button" class="ci-sex ci-sex-desk" aria-expanded="false" aria-controls={`sx-${it.slug}`} title="Show the groups on one scale">{it.splits.map((sp) => (
                       <span class={`sl ${sp.dim}`}><span class="a">{sp.labels[0]} {fmt(sp.a, it.unit)}</span> · <span class="b">{sp.labels[1]} {fmt(sp.b, it.unit)}</span></span>
