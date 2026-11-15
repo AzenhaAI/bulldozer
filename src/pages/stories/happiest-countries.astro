@@ -16,18 +16,55 @@ function latestRows(slug: string) {
   return { rows, period, ds };
 }
 
+/** Rows of `slug` for one period. */
+function rowsAt(slug: string, period: string) {
+  const ds = getDataset(slug);
+  if (!ds) return [] as any[];
+  return ds.data.filter((o) => o.period === period);
+}
+
 const happy = latestRows('whr-happiness');
 const ranked = [...happy.rows].sort((a, b) => b.value - a.value);
 const top = ranked[0];
 const top20 = ranked.slice(0, 20);
 const hMax = ranked[0].value;
 
-// Happiness vs GDP per capita (PPP) — join by ISO
-const gdp = latestRows('imf-gdp-per-capita-ppp');
-const gdpByIso = new Map(gdp.rows.filter((r) => r.iso).map((r) => [r.iso, r.value]));
+// WHR labels each score by the last survey year of a three-year pool: the
+// period "2025" is the World Happiness Report 2026, from surveys 2023–2025
+// (Finland 7.764). The report edition is therefore period + 1.
+const lastSurvey = Number(happy.period);
+const edition = String(lastSurvey + 1);
+const surveyYears = `${lastSurvey - 2}–${lastSurvey}`;
+
+// Gaps among the leaders too small to rank. Roughly 1,000 respondents a year
+// over three years, with answers spread by 1.5–2 ladder points, put the 95%
+// interval of a country mean at several hundredths either side; WHR publishes
+// these intervals with every score. A gap under 0.02 is well inside them.
+const ties = ranked.slice(0, 5).flatMap((r, i, a) =>
+  i > 0 && a[i - 1].value - r.value < 0.02 ? [{ a: a[i - 1], b: r, gap: a[i - 1].value - r.value }] : []);
+
+// Happiness vs GDP per capita (PPP) — join by ISO. GDP is pinned to the last
+// survey year of the happiness pool: the IMF's latest year is a projection.
+const gdpRows = rowsAt('imf-gdp-per-capita-ppp', happy.period);
+const gdpByIso = new Map(gdpRows.filter((r) => r.iso).map((r) => [r.iso, r.value]));
 const points = happy.rows
   .filter((r) => r.iso && gdpByIso.has(r.iso))
   .map((r) => ({ x: gdpByIso.get(r.iso)!, y: r.value, label: r.entity, group: r.group, highlight: r.entity === top.entity }));
+
+// Least-squares slope of happiness on log10(GDP), for all countries and for
+// the poorer and richer halves (split at the median income).
+function slope(ps: { x: number; y: number }[]) {
+  const xs = ps.map((p) => Math.log10(p.x)), ys = ps.map((p) => p.y);
+  const mx = xs.reduce((s, v) => s + v, 0) / xs.length, my = ys.reduce((s, v) => s + v, 0) / ys.length;
+  let sxy = 0, sxx = 0;
+  for (let i = 0; i < xs.length; i++) { sxy += (xs[i] - mx) * (ys[i] - my); sxx += (xs[i] - mx) ** 2; }
+  return sxy / sxx;
+}
+const byIncome = [...points].sort((a, b) => a.x - b.x);
+const half = Math.floor(byIncome.length / 2);
+const poorer = byIncome.slice(0, half), richer = byIncome.slice(half);
+const perDoubling = (b: number) => b * Math.log10(2);
+const dAll = perDoubling(slope(points)), dPoor = perDoubling(slope(poorer)), dRich = perDoubling(slope(richer));
 
 // Drivers of happiness for the #1 country
 const driverDefs = [
@@ -39,11 +76,12 @@ const driverDefs = [
   { slug: 'whr-driver-corruption', label: 'Low corruption', color: '#fb923c' },
 ];
 const drivers = driverDefs.map((d) => {
-  const { rows } = latestRows(d.slug);
-  const row = rows.find((r) => r.entity === top.entity);
+  const row = rowsAt(d.slug, happy.period).find((r) => r.entity === top.entity);
   return { ...d, value: row ? row.value : 0 };
 }).sort((a, b) => b.value - a.value);
 const dMax = Math.max(...drivers.map((d) => d.value), 0.1);
+const explained = drivers.reduce((s, d) => s + d.value, 0);
+const remainder = top.value - explained;
 
 // Regional averages
 const byRegion = new Map<string, number[]>();
@@ -60,13 +98,13 @@ const rMax = Math.max(...regions.map((r) => r.avg));
 
 const medal = (i: number) => ['#FFD24A', '#C7CDD4', '#E08A4B'][i] || 'var(--accent)';
 ---
-<BaseLayout title="The World's Happiest Countries 2025: Full Ranking" active="news"
-  description={`${top.entity} is the world's happiest country (${happy.period}). A visual story from the World Happiness Report.`}>
+<BaseLayout title={`The World's Happiest Countries ${edition}: Full Ranking`} active="news"
+  description={`${top.entity} is the world's happiest country in the World Happiness Report ${edition} (surveys ${surveyYears}). A visual story from the report's data.`}>
   <script type="application/ld+json" set:html={JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "The World's Happiest Countries 2025: Full Ranking",
-    description: `${top.entity} is the world's happiest country (${happy.period}). A visual story from the World Happiness Report.`,
+    headline: `The World's Happiest Countries ${edition}: Full Ranking`,
+    description: `${top.entity} is the world's happiest country in the World Happiness Report ${edition} (surveys ${surveyYears}). A visual story from the report's data.`,
     url: 'https://azenha.ai/bulldozer/stories/happiest-countries',
     image: 'https://azenha.ai/bulldozer/og.png',
     datePublished: '2026-06-28',
@@ -77,16 +115,17 @@ const medal = (i: number) => ['#FFD24A', '#C7CDD4', '#E08A4B'][i] || 'var(--acce
   <section class="story-hero">
     <div class="container">
       <a class="back-link" href={`${base}/`}>← News</a>
-      <span class="kicker">Data story · World Happiness Report {happy.period}</span>
+      <span class="kicker">Data story · World Happiness Report {edition}</span>
       <h1>The world’s happiest<br/>country is <span class="hl">{top.entity}</span>.</h1>
       <div class="hero-figure">
         <div class="hero-num">{top.value.toFixed(3)}</div>
-        <div class="hero-cap">life-evaluation score (0–10)<br/>#1 of {ranked.length} countries · {top.group}</div>
+        <div class="hero-cap">life-evaluation score (0–10), surveys {surveyYears}<br/>#1 of {ranked.length} countries · {top.group}</div>
       </div>
       <p class="sub" style="max-width:640px">
-        Each year the Gallup World Poll asks people to rate their life on a ladder from 0 to 10.
+        Each year the Gallup World Poll asks people to rate their life on a ladder from 0 to 10; the
+        World Happiness Report {edition} averages each country’s answers over {surveyYears}.
         {top.entity} tops the ranking again — but the score is only half the story. Below: who else leads,
-        how happiness tracks income, and what actually drives it.
+        how happiness tracks income, and how the report’s model accounts for the scores.
       </p>
     </div>
   </section>
@@ -94,7 +133,8 @@ const medal = (i: number) => ['#FFD24A', '#C7CDD4', '#E08A4B'][i] || 'var(--acce
   <section class="section">
     <div class="container">
       <h2>The top 20</h2>
-      <p class="sub">Life-evaluation score, {happy.period}.</p>
+      <p class="sub">Life-evaluation score, World Happiness Report {edition} (surveys {surveyYears}).
+        {ties.map((t) => ` ${t.a.entity} (${t.a.value.toFixed(3)}) and ${t.b.entity} (${t.b.value.toFixed(3)}) are ${t.gap.toFixed(3)} apart — inside the 95% confidence intervals WHR publishes, so they are statistically tied.`).join('')}</p>
       <div class="rank">
         {top20.map((r, i) => (
           <div class="rank-row">
@@ -110,8 +150,12 @@ const medal = (i: number) => ['#FFD24A', '#C7CDD4', '#E08A4B'][i] || 'var(--acce
 
   <section class="section" style="padding-top:0">
     <div class="container">
-      <h2>Richer tends to mean happier — up to a point</h2>
-      <p class="sub">Each dot is a country: GDP per capita (PPP, log scale) vs happiness. {points.length} countries.</p>
+      <h2>Each doubling of income goes with a similar gain in happiness</h2>
+      <p class="sub">Each dot is a country: GDP per capita (PPP, log scale, {happy.period}) vs happiness. {points.length} countries.
+        Across all of them, a country with twice the income scores about {dAll.toFixed(2)} ladder points higher —
+        {dPoor.toFixed(2)} among the poorer half and {dRich.toFixed(2)} among the richer half, so on this scale the
+        relationship does not flatten out at the top. It is an association between countries, not a measure of
+        what more money does for any one of them.</p>
       <Scatter points={points} xLabel="GDP per capita, PPP (international $, log scale)" yLabel="Happiness (0–10)" xLog={true} labelTop={6} />
       <ChartActions name="bulldozer-happiness-income" svg=".sc-wrap svg" hash="chart" />
       <div class="legend-regions">
@@ -124,8 +168,11 @@ const medal = (i: number) => ['#FFD24A', '#C7CDD4', '#E08A4B'][i] || 'var(--acce
 
   <section class="section" style="padding-top:0">
     <div class="container">
-      <h2>What makes {top.entity} happy</h2>
-      <p class="sub">How much each factor contributes to {top.entity}’s score (ladder points).</p>
+      <h2>How the report’s model accounts for {top.entity}’s score</h2>
+      <p class="sub">WHR fits one regression across all countries and splits each score into six factors (ladder points).
+        It shows how the factors are associated with life evaluations between countries, not what causes them.
+        The six bars add up to {explained.toFixed(2)} of {top.entity}’s {top.value.toFixed(3)}; the remaining
+        {remainder.toFixed(2)} is the report’s “dystopia” benchmark plus the part the model does not explain (the residual).</p>
       <div class="drivers">
         {drivers.map((d) => (
           <div class="drv-row">
@@ -141,7 +188,7 @@ const medal = (i: number) => ['#FFD24A', '#C7CDD4', '#E08A4B'][i] || 'var(--acce
   <section class="section" style="padding-top:0">
     <div class="container">
       <h2>Happiness by region</h2>
-      <p class="sub">Average life-evaluation score, {happy.period}.</p>
+      <p class="sub">Average life-evaluation score of the countries in each region (each country counted once), surveys {surveyYears}.</p>
       <div class="bars">
         {regions.map((r) => (
           <div class="bar-row">

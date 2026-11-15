@@ -16,6 +16,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const indicators = datasets.filter(isCountryDataset).map((d) => ({
   slug: d.slug, title: d.title, kind: d.kind, unit: d.unit, valueLabel: d.valueLabel, topic: d.topic,
   changeMode: d.changeMode, periods: [...new Set(d.data.map((o) => o.period))].sort(),
+  projectedFrom: d.projectedFrom ?? null,
 }));
 ---
 <BaseLayout title="Charts" active="explore">

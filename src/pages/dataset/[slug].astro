@@ -24,8 +24,7 @@ const PAIRINGS: Record<string, { y: string; title: string }> = {
   'imf-gdp-growth': { y: 'imf-inflation', title: 'Growth × inflation' },
   'imf-inflation': { y: 'imf-gdp-growth', title: 'Inflation × growth' },
 };
-import { groupRollups, isSinglePeriod, isAdditive } from '@lib/analytics';
-import { formatChange, pctClass, formatNum } from '@lib/format';
+import { groupRollups, isSinglePeriod, isAdditive, changeSpec, formatDelta, formatValue, toneOf } from '@lib/analytics';
 import { TOPICS } from '@lib/topics';
 
 export function getStaticPaths() {
@@ -68,10 +67,14 @@ const sidx = siblings.findIndex((d) => d.slug === ds.slug);
 const prevDs = sidx > 0 ? siblings[sidx - 1] : null;
 const nextDs = sidx < siblings.length - 1 ? siblings[sidx + 1] : null;
 const pctUnit = ds.unit === '%' ? '%' : '';
+// One unit of change and one stable band for every view on the page (the band
+// is sized on the whole series, as the interactive panel does).
+const spec = changeSpec(ds.data, ds.unit, ds.changeMode, ds.better);
 const panelIndicator = [{
   slug: ds.slug, title: ds.title, kind: ds.kind, unit: ds.unit, valueLabel: ds.valueLabel,
   changeMode: ds.changeMode, periods: [...new Set(ds.data.map((o) => o.period))].sort(),
   latestPerCountry: !!ds.latestPerCountry,
+  projectedFrom: ds.projectedFrom ?? null,
 }];
 const backHref = ds.kind === 'survey' ? `${base}/surveys/` : `${base}/macro/`;
 const active = ds.kind === 'survey' ? 'surveys' : 'macro';
@@ -88,6 +91,16 @@ const seoTitle = `${ds.title} by ${company ? 'Company' : 'Country'}${endYear >= 
 // metadata completeness, so every recommended field it understands is filled in.
 const dsUrl = `https://azenha.ai${base}/dataset/${ds.slug}/`;
 const countryCount = new Set(ds.data.map((o) => o.entity)).size;
+// Served by a Pages Function built from the JSON (azenha functions/bulldozer/data/[file].js): no file per dataset, under the 20,000-file upload limit.
+const csvHref = `${base}/data/${ds.slug}.csv`;
+const periodRange = dsPeriods.length > 1 ? `${dsPeriods[0]}–${dsPeriods.at(-1)}` : String(dsPeriods[0] ?? '');
+// "Cite this": the access date is the build date; the button below swaps in
+// the reader's own date when copying.
+const accessed = new Date().toISOString().slice(0, 10);
+// The edition/vintage clause only, not the whole methodological note.
+const vintageShort = ds.vintage ? ds.vintage.split(/;|\. /)[0].trim() : '';
+const citeEdition = vintageShort && vintageShort.length <= 70 ? `, ${vintageShort}` : '';
+const citation = `BullDozer Stats (Azenha AI), ${ds.title}, from ${ds.source}${citeEdition}, accessed ${accessed}, ${dsUrl}`;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
@@ -110,7 +123,7 @@ const jsonLd = {
   temporalCoverage: dsPeriods.length > 1 ? `${dsPeriods[0]}/${dsPeriods.at(-1)}` : dsPeriods[0],
   variableMeasured: ds.valueLabel,
   distribution: [
-    { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: `https://azenha.ai${base}/data/${ds.slug}.csv` },
+    { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: `https://azenha.ai${csvHref}` },
     { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: `https://azenha.ai${base}/data/${ds.slug}.json` },
   ],
 };
@@ -149,7 +162,7 @@ const breadcrumbLd = {
       )}
       {ds.notes && <StatsNote note={ds.notes} />}
       <p style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
-        <a class="ghost-btn" style="margin:0; display:inline-block; text-decoration:none" href={`${base}/data/${ds.slug}.csv`} download>↓ Download CSV</a>
+        <a class="ghost-btn" style="margin:0; display:inline-block; text-decoration:none" href={csvHref} download={`${ds.slug}.csv`}>↓ Download CSV</a>
         {dashFile && (
           <>
             <a class="ghost-btn" style="margin:0; display:inline-block; text-decoration:none" href={`${base}/dashboards/${dashFile}`} target="_blank" rel="noopener">📊 Detailed results dashboard ↗</a>
@@ -157,12 +170,31 @@ const breadcrumbLd = {
           </>
         )}
       </p>
+      <div class="cite-box" id="cite">
+        <b>Cite this</b>
+        <code id="cite-text" data-pre={`BullDozer Stats (Azenha AI), ${ds.title}, from ${ds.source}${citeEdition}, accessed `} data-post={`, ${dsUrl}`}>{citation}</code>
+        <button type="button" class="ghost-btn" id="cite-copy" style="margin:0">Copy citation</button>
+      </div>
+      <script>
+        // Today's date, not the build date, when the reader copies it.
+        const c = document.getElementById('cite-text');
+        const b = document.getElementById('cite-copy');
+        if (c && b) {
+          c.textContent = (c.dataset.pre || '') + new Date().toISOString().slice(0, 10) + (c.dataset.post || '');
+          b.addEventListener('click', async () => {
+            const t = c.textContent || '';
+            try { await navigator.clipboard.writeText(t); b.textContent = '✓ Copied'; }
+            catch (e) { window.prompt('Copy citation:', t); }
+            setTimeout(() => { b.textContent = 'Copy citation'; }, 1400);
+          });
+        }
+      </script>
     </div>
   </section>
 
   <section class="section" style="padding-top:0">
     <div class="container">
-      <KpiRow data={latestData} unit={pctUnit} mode={ds.changeMode} noun={noun} />
+      <KpiRow data={latestData} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode} noun={noun} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} />
     </div>
   </section>
 
@@ -173,7 +205,7 @@ const breadcrumbLd = {
         ? 'Interactive — choose a quarter, search a company, switch between bars and table.'
         : 'Interactive — choose a period, search a country, switch between bars, table and map.'}</p>
       <DataPanel indicators={panelIndicator} pinnedSlug={ds.slug} noun={noun} />
-      <ChartActions name={`bulldozer-${ds.slug}`} svg=".worldmap svg" hash="data" />
+      <ChartActions name={`bulldozer-${ds.slug}`} svg=".worldmap svg" hash="data" title={ds.title} source={ds.source} period={periodRange} url={dsUrl} />
     </div>
   </section>
 
@@ -183,7 +215,7 @@ const breadcrumbLd = {
         <h2>Trend over time</h2>
         <p class="sub">{company ? 'Each company by quarter' : 'Regional medians'}, {String([...new Set(ds.data.map((o) => o.period))].sort()[0]).slice(0, 4)}–{String([...new Set(ds.data.map((o) => o.period))].sort().at(-1)).slice(-4)}.</p>
         <TrendChart data={ds.data} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode === 'pct' ? 'pct' : 'pp'} projectedFrom={ds.projectedFrom} />
-        <ChartActions name={`bulldozer-${ds.slug}-trend`} svg="#trend svg" hash="trend" />
+        <ChartActions name={`bulldozer-${ds.slug}-trend`} svg="#trend svg" hash="trend" title={`${ds.title} — trend by region`} source={ds.source} period={periodRange} url={dsUrl} />
       </div>
     </section>
   )}
@@ -193,7 +225,7 @@ const breadcrumbLd = {
       <div class="container">
         <h2>Two dimensions at once</h2>
         <BivariateMap xSlug={ds.slug} ySlug={pairing.y} title={pairing.title} />
-        <ChartActions name={`bulldozer-${ds.slug}-map`} svg="#bivariate svg" hash="bivariate" />
+        <ChartActions name={`bulldozer-${ds.slug}-map`} svg="#bivariate svg" hash="bivariate" title={pairing.title} source={ds.source} url={dsUrl} />
       </div>
     </section>
   )}
@@ -203,7 +235,7 @@ const breadcrumbLd = {
       <div class="container">
         <h2>Movers</h2>
         <p class="sub">Biggest period-over-period changes.</p>
-        <MoversTable data={ds.data} n={5} unit={pctUnit} mode={ds.changeMode} />
+        <MoversTable data={ds.data} n={5} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode} better={ds.better} />
       </div>
     </section>
   )}
@@ -213,7 +245,7 @@ const breadcrumbLd = {
       <div class="container">
         <h2>By group</h2>
         <p class="sub">Change by group, latest period.</p>
-        <GroupChart data={latestData} mode={ds.changeMode} additive={additive} />
+        <GroupChart data={latestData} mode={ds.changeMode} additive={additive} unit={ds.unit} better={ds.better} bandData={ds.data} />
         <div style="height:24px"></div>
         <table class="data">
           <thead><tr><th>Group</th><th class="num">Members</th><th class="num">{additive ? 'Total' : 'Avg'}</th><th class="num">Change</th></tr></thead>
@@ -222,8 +254,8 @@ const breadcrumbLd = {
               <tr>
                 <td>{g.group}</td>
                 <td class="num">{g.members}</td>
-                <td class="num">{formatNum(g.value)}{pctUnit}</td>
-                <td class={`num ${pctClass(g.pct)}`}>{formatChange(g.pct, ds.changeMode)}</td>
+                <td class="num">{formatValue(g.value, ds.unit)}{pctUnit}</td>
+                <td class={`num ${toneOf(g.pct, spec)}`}>{formatDelta(g.pct, spec)}</td>
               </tr>
             ))}
           </tbody>
@@ -239,7 +271,7 @@ const breadcrumbLd = {
         Every entity in this dataset, in HTML. The interactive panel above shows
         the same numbers; this is the one that survives without JavaScript.
       </p>
-      <RankTable data={latestData} unit={pctUnit} mode={ds.changeMode} valueLabel={ds.valueLabel} />
+      <RankTable data={latestData} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode} valueLabel={ds.valueLabel} better={ds.better} bandData={ds.data} />
     </div>
   </section>
 

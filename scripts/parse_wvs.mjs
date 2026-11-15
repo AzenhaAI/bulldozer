@@ -24,6 +24,9 @@ async function geoMap() {
       if (a3) m.set(a3, { name: r.name, region: REGION_4[r.world_4region] || 'Other' });
     }
   } catch {}
+  // WVS fields Northern Ireland as "NIR": named and placed here; writeDataset
+  // marks it sub-national (iso '', sub: true) so it is not ranked as a country.
+  m.set('NIR', { name: 'Northern Ireland', region: 'Europe' });
   return m;
 }
 

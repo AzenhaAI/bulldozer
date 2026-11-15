@@ -62,6 +62,8 @@ export interface CountryItem {
   period: string;
   rank: number;
   total: number;
+  /** How many countries share this exact value (only when more than one). */
+  ties?: number;
   /** This country's earliest period in the series and how many periods it has:
    *  1 means a single figure, so no trend to show (testers' R15, 2 Nov 2026). */
   first: string;
@@ -102,13 +104,19 @@ export function buildCountryIndex(): CountryProfile[] {
 
   for (const ds of datasets) {
     const replacedIn = ds.supersededBy ? covered.get(ds.supersededBy) : undefined;
-    const periods = [...new Set(ds.data.map((o) => o.period))].sort();
+    // Rank on the last observed year: IMF series end in the IMF's projection
+    // for the current year, and a forecast ranked as a result put Spain's 2026
+    // unemployment in the worst quarter as if it were fact (review, 15 Nov 2026).
+    const pf = ds.projectedFrom ? String(ds.projectedFrom) : null;
+    const allPeriods = [...new Set(ds.data.map((o) => o.period))].sort();
+    const observed = pf ? allPeriods.filter((p) => String(p).slice(0, 4) < pf) : allPeriods;
+    const periods = observed.length ? observed : allPeriods;
     const period = periods[periods.length - 1];
     // Usually one year for everyone; for latestPerCountry series, each country's
     // newest reading from the last ten years, so a 2023 survey and a 2024 one
     // are ranked together rather than the 2024 handful alone.
     const rows = ds.latestPerCountry
-      ? [...ds.data.filter((o) => o.iso && Number(String(o.period).slice(0, 4)) >= Number(String(period).slice(0, 4)) - 10)
+      ? [...ds.data.filter((o) => o.iso && String(o.period) <= String(period) && Number(String(o.period).slice(0, 4)) >= Number(String(period).slice(0, 4)) - 10)
           .reduce((m, o) => (!m.has(o.iso!) || String(o.period) > String(m.get(o.iso!)!.period) ? m.set(o.iso!, o) : m), new Map<string, typeof ds.data[number]>())
           .values()]
       : ds.data.filter((o) => o.period === period && o.iso);
@@ -120,6 +128,10 @@ export function buildCountryIndex(): CountryProfile[] {
     // countries at 0% are not spread from #149 to #164 by sort order.
     const tieRank: number[] = [];
     ranked.forEach((o, i) => { tieRank[i] = i > 0 && ranked[i - 1].value === o.value ? tieRank[i - 1] : i + 1; });
+    // The size of each tie, so "62 countries at FAO's 2.5% floor" read as tied
+    // lowest, not "#105 of 166, middle half" (review, 15 Nov 2026).
+    const tieCount = new Map<number, number>();
+    for (const o of ranked) tieCount.set(o.value, (tieCount.get(o.value) ?? 0) + 1);
     ranked.forEach((o, i) => {
       const iso = o.iso!;
       // One number per question: where a fresher series has this country, the
@@ -131,6 +143,7 @@ export function buildCountryIndex(): CountryProfile[] {
       byIso[iso].items.push({
         slug: ds.slug, title: ds.title, kind: ds.kind, topic: ds.topic, unit: ds.unit,
         value: o.value, period: ds.latestPerCountry ? String(o.period) : period, rank: tieRank[i], total,
+        ...((tieCount.get(o.value) ?? 1) > 1 ? { ties: tieCount.get(o.value)! } : {}),
         first: [...own.get(iso)!].sort()[0], years: own.get(iso)!.size,
         ...(ds.better ? { better: ds.better } : {}),
         ...((sp) => (sp.length ? { splits: sp, ...(sp[0].dim === 'sex' ? { sex: { female: sp[0].a, male: sp[0].b } } : {}) } : {}))(

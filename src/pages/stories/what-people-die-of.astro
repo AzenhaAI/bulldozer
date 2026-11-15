@@ -65,16 +65,30 @@ const cancerSorted = [...cancer].sort((a, b) => b.value - a.value);
 const cHi = cancerSorted[0], cLo = cancerSorted.at(-1)!;
 
 // ---- 1. two worlds: leading cause per country ------------------------------------
-const leading = new Map<string, number>();
+const leadOf = new Map<string, string>();
 for (const iso of isos) {
-  let best = CAUSES[0], bv = -1;
-  for (const c of CAUSES) { const v = cause[c.slug].get(iso)?.value ?? -1; if (v > bv) { bv = v; best = c; } }
-  leading.set(best.slug, (leading.get(best.slug) ?? 0) + 1);
+  let best = CAUSES[0].slug, bv = -1;
+  for (const c of CAUSES) { const v = cause[c.slug].get(iso)?.value ?? -1; if (v > bv) { bv = v; best = c.slug; } }
+  leadOf.set(iso, best);
 }
+const leading = new Map<string, number>();
+for (const slug of leadOf.values()) leading.set(slug, (leading.get(slug) ?? 0) + 1);
 const leadRows = CAUSES.map((c) => ({ ...c, n: leading.get(c.slug) ?? 0 })).filter((c) => c.n > 0).sort((a, b) => b.n - a.n);
 const leadMax = leadRows[0].n;
 const comm = [...cause['who-ghe-communicable'].values()].sort((a, b) => a.value - b.value);
 const commLo = comm[0], commHi = comm.at(-1)!;
+// 2021 is a COVID-19 year, and WHO's GHE files COVID-19 deaths under the
+// communicable group. So "infection-led" here includes countries where COVID-19
+// made the group the largest, at life expectancies a "never got that far"
+// reading would not predict. Counted, not assumed: how many of the
+// infection-led countries still had a life expectancy above 70.
+const infLed = isos.filter((i) => leadOf.get(i) === 'who-ghe-communicable');
+const infLedLe = infLed.filter((i) => le.has(i));
+const infLedLong = infLedLe.filter((i) => le.get(i)!.value > 70);
+// Two named examples: Peru (infection group far above heart disease) and the
+// United States, where the group is a sixth of deaths without leading.
+const exPer = { comm: cause['who-ghe-communicable'].get('PER'), cvd: cause['who-ghe-cardiovascular'].get('PER') };
+const exUsa = cause['who-ghe-communicable'].get('USA');
 
 // ---- 2. the clock: cancer share vs life expectancy -----------------------------
 const clock = isos.filter((i) => le.has(i));
@@ -104,6 +118,13 @@ const deciles = Array.from({ length: 10 }, (_, d) => {
 const decMax = Math.max(...deciles.flatMap((x) => [x.cvd, x.cancer]));
 const cvdPeak = deciles.reduce((a, b) => (b.cvd > a.cvd ? b : a));
 const cvdTop = [...cause['who-ghe-cardiovascular'].values()].sort((a, b) => b.value - a.value).slice(0, 3);
+// Income decile (as in the chart) of each top-share country.
+const decileOf = (iso: string) => {
+  const k = withGdp.indexOf(iso), n = withGdp.length;
+  if (k < 0) return 0;
+  for (let d = 0; d < 10; d++) if (k < Math.floor(((d + 1) * n) / 10)) return d + 1;
+  return 10;
+};
 const richCvd = [...cause['who-ghe-cardiovascular'].values()].filter((r) => ['CHE', 'NOR', 'JPN'].includes(r.iso!));
 
 // ---- 4. what we do not know: WHO data grades -----------------------------------------
@@ -125,7 +146,7 @@ const diaSorted = [...cause['who-ghe-diabetes'].values()].sort((a, b) => b.value
 const diaHi = diaSorted.slice(0, 3), diaLo = diaSorted.at(-1)!;
 
 const title = 'What the world dies of — and why cancer is a sign of a long life';
-const description = `Cancer causes ${pct(cHi.value)} of deaths in ${cHi.entity} and ${pct(cLo.value)} in ${cLo.entity}. It tracks how long people live, not how rich they are. WHO Global Health Estimates, 2021, ${isos.length} countries.`;
+const description = `Cancer causes ${pct(cHi.value)} of deaths in ${cHi.entity} and ${pct(cLo.value)} in ${cLo.entity}. Across countries it tracks how long people live far more closely than how rich they are. WHO Global Health Estimates, 2021 (a COVID-19 year), ${isos.length} countries.`;
 ---
 <BaseLayout title={title} active="news" description={description}>
   <script type="application/ld+json" set:html={JSON.stringify({
@@ -152,8 +173,9 @@ const description = `Cancer causes ${pct(cHi.value)} of deaths in ${cHi.entity} 
       <p class="sub" style="max-width:660px">
         That gap is not a verdict on Danish oncology. Cancer is mostly a disease of age, and in
         {' '}{cLo.entity} too few people reach the age at which it strikes — they die earlier, of
-        other things. Across {isos.length} countries, what a population dies of says less about how
-        good its hospitals are than about how long its people get to live.
+        other things. Across {isos.length} countries, the share of deaths from cancer goes with how
+        long people live more closely than with how rich their country is. These are 2021 figures, a
+        year in which COVID-19 added deaths to every country’s total; read the shares with that in mind.
       </p>
     </div>
   </section>
@@ -161,7 +183,7 @@ const description = `Cancer causes ${pct(cHi.value)} of deaths in ${cHi.entity} 
   <section class="section">
     <div class="container">
       <h2>Two worlds</h2>
-      <p class="sub">The single largest cause of death in each country, 2021.</p>
+      <p class="sub">The single largest cause of death in each country, 2021 — a COVID-19 year.</p>
       <div class="bars">
         {leadRows.map((c) => (
           <div class="bar-row">
@@ -172,10 +194,12 @@ const description = `Cancer causes ${pct(cHi.value)} of deaths in ${cHi.entity} 
         ))}
       </div>
       <p class="sub" style="margin-top:16px; max-width:680px">
-        Two causes split the world almost evenly. Where heart disease leads, people have lived long
-        enough to wear out; where infections, childbirth and newborn conditions lead, many never got
-        that far. Infections account for {pct(commLo.value)} of deaths in {commLo.entity} and
-        {' '}{pct(commHi.value)} in {commHi.entity}.
+        Two groups lead in almost the same number of countries. One caution first: in 2021 the
+        infections, maternal and newborn group includes COVID-19, which WHO counts as a communicable
+        disease. In {exPer.comm?.entity} the group is {pct(exPer.comm?.value ?? 0)} of deaths, against {pct(exPer.cvd?.value ?? 0)} for heart disease;
+        even in the {exUsa?.entity} it is {pct(exUsa?.value ?? 0)}. So the split is not simply long lives against short ones:
+        {' '}{infLedLong.length} of the {infLedLe.length} infection-led countries had a life expectancy above 70.
+        The group ranges from {pct(commLo.value)} of deaths in {commLo.entity} to {pct(commHi.value)} in {commHi.entity}.
       </p>
     </div>
   </section>
@@ -192,11 +216,12 @@ const description = `Cancer causes ${pct(cHi.value)} of deaths in ${cHi.entity} 
         ))}
       </div>
       <p class="sub" style="margin-top:16px; max-width:680px">
-        Richer countries have more cancer deaths too (correlation with income {f2(rGdp)}), but income and
-        longevity move together, so the question is which one is doing the work. Hold income constant
-        and cancer still tracks life expectancy strongly ({f2(pLe)}). Hold life expectancy constant and
-        the link to income almost disappears ({f2(pGdp)}). Money matters to the cancer share only
-        insofar as it buys years.
+        Richer countries have a larger cancer share too (correlation with income {f2(rGdp)}), but income and
+        longevity move together, so it helps to separate them. Hold income constant and the cancer share
+        still tracks life expectancy strongly (partial correlation {f2(pLe)}). Hold life expectancy constant
+        and the association with income is much weaker ({f2(pGdp)}). Most of what income and the cancer
+        share have in common runs alongside longevity. These are correlations across countries in one
+        year, so they show which measures go together, not what causes what.
       </p>
     </div>
   </section>
@@ -219,9 +244,9 @@ const description = `Cancer causes ${pct(cHi.value)} of deaths in ${cHi.entity} 
       <p class="sub" style="margin-top:16px; max-width:680px">
         Cancer climbs with income almost without a break, from {pct(deciles[0].cancer)} to {pct(deciles[9].cancer)}.
         Cardiovascular disease does not: it peaks in decile {cvdPeak.d} at {pct(cvdPeak.cvd)} and falls
-        back among the richest. The world’s highest shares are in {cvdTop.map((r) => `${r.entity} (${pct(r.value)})`).join(', ')}
-        {' '}— upper-middle-income countries where people live long enough for the heart to fail, but where
-        prevention and treatment lag. In {richCvd.map((r) => `${r.entity} ${pct(r.value)}`).join(', ')}, it is well below that.
+        back among the richest. The world’s highest shares are in {cvdTop.map((r) => `${r.entity} (${pct(r.value)}, income decile ${decileOf(r.iso!)})`).join(', ')}
+        {' '}— none of them in the richest decile. In
+        {' '}{richCvd.map((r) => `${r.entity} ${pct(r.value)}`).join(', ')}, it is well below that.
         Dementia and other neurological causes follow the rich-world pattern most sharply: a median of
         {' '}{pct(deciles[7].neuro)} of deaths in decile 8, {pct(deciles[9].neuro)} in decile 10.
       </p>

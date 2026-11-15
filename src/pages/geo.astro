@@ -36,7 +36,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <div class="container">
       <span class="kicker">Compare</span>
       <h2>Country vs country</h2>
-      <p class="sub">Put a few countries side by side across every indicator. Highest in each row is highlighted.</p>
+      <p class="sub">Put a few countries side by side across every indicator, with the year of each value. Where one direction is plainly better, the better value in the row is highlighted; download the table as CSV.</p>
       <CompareCountries />
       <ChartActions name="bulldozer-compare" svg=".worldmap svg" hash="compare" />
     </div>

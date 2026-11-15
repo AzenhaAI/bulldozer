@@ -2030,56 +2030,56 @@
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2018",
       "value": 0.74,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2019",
       "value": 0.749,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2020",
       "value": 0.748,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2021",
       "value": 0.755,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2022",
       "value": 0.76,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2023",
       "value": 0.748,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2024",
       "value": 0.751,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2025",
       "value": 0.771,
       "iso": "XKX"
@@ -7294,115 +7294,131 @@
     },
     {
       "entity": "Palestine/Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2018",
       "value": 0.334,
-      "iso": "PSG"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Palestine/Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2019",
       "value": 0.341,
-      "iso": "PSG"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Palestine/Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2020",
       "value": 0.379,
-      "iso": "PSG"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Palestine/Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2021",
       "value": 0.362,
-      "iso": "PSG"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Palestine/Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2022",
       "value": 0.391,
-      "iso": "PSG"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Palestine/Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2023",
       "value": 0.36,
-      "iso": "PSG"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Palestine/Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2024",
       "value": 0.24,
-      "iso": "PSG"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Palestine/Gaza",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2025",
       "value": 0.28,
-      "iso": "PSG"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Somaliland",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2018",
       "value": 0.395,
-      "iso": "SML"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Somaliland",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2019",
       "value": 0.402,
-      "iso": "SML"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Somaliland",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2020",
       "value": 0.456,
-      "iso": "SML"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Somaliland",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2021",
       "value": 0.446,
-      "iso": "SML"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Somaliland",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2022",
       "value": 0.447,
-      "iso": "SML"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Somaliland",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2023",
       "value": 0.472,
-      "iso": "SML"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Somaliland",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2024",
       "value": 0.474,
-      "iso": "SML"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Somaliland",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2025",
       "value": 0.468,
-      "iso": "SML"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Uzbekistan",
@@ -9982,59 +9998,67 @@
     },
     {
       "entity": "Zanzibar",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2018",
       "value": 0.687,
-      "iso": "ZZB"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Zanzibar",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2019",
       "value": 0.692,
-      "iso": "ZZB"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Zanzibar",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2020",
       "value": 0.674,
-      "iso": "ZZB"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Zanzibar",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2021",
       "value": 0.687,
-      "iso": "ZZB"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Zanzibar",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2022",
       "value": 0.696,
-      "iso": "ZZB"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Zanzibar",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2023",
       "value": 0.705,
-      "iso": "ZZB"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Zanzibar",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2024",
       "value": 0.692,
-      "iso": "ZZB"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Zanzibar",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2025",
       "value": 0.697,
-      "iso": "ZZB"
+      "iso": "",
+      "sub": true
     }
   ]
 }

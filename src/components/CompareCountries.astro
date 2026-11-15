@@ -4,25 +4,35 @@ import isoAlpha2 from '@data/iso-alpha2.json';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: TOPICS[id].icon }));
 ---
-<div class="compare">
+<div class="compare" data-base={base}>
   <div class="controls">
     <label>Add country<select id="cmp-add"><option value="">＋ add…</option></select></label>
     <span id="cmp-chips" class="chips"></span>
+    <button type="button" id="cmp-csv" class="ghost-btn" style="margin-left:auto">↓ CSV</button>
   </div>
   <div id="cmp-table" style="overflow-x:auto; margin-top:8px"></div>
+  <p class="sub" style="font-size:12px; margin-top:8px">
+    Each cell is the latest year for that country (shown under the value). Highlighted: the better value, only where
+    one direction is plainly better (higher life expectancy, lower child mortality); opinions, spending and other
+    neutral series are left unmarked.
+  </p>
 </div>
 
 <script type="application/json" id="cmp-topics" set:html={JSON.stringify(topicMeta)}></script>
 <script type="application/json" id="cmp-a2" set:html={JSON.stringify(isoAlpha2)}></script>
-<script define:vars={{ base }}>
-  const TOPICS = JSON.parse(document.getElementById('cmp-topics').textContent);
-  const isoAlpha2 = JSON.parse(document.getElementById('cmp-a2').textContent);
-  const flag = (iso) => { const a2 = iso && isoAlpha2[iso.toUpperCase()]; return a2 ? String.fromCodePoint(...[...a2].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65)) + ' ' : ''; };
-  const add = document.getElementById('cmp-add');
-  const chipsEl = document.getElementById('cmp-chips');
-  const tableEl = document.getElementById('cmp-table');
-  let countries = [], byIso = {};
-  const fmtNum = (n) => n.toLocaleString('en-US', { maximumFractionDigits: 1 });
+<script>
+  import { formatValue } from '@lib/analytics';
+  const root = document.querySelector('.compare') as HTMLElement;
+  const base = root.dataset.base || '';
+  const TOPICS = JSON.parse(document.getElementById('cmp-topics')!.textContent || '[]');
+  const isoAlpha2 = JSON.parse(document.getElementById('cmp-a2')!.textContent || '{}');
+  const flag = (iso: string) => { const a2 = iso && isoAlpha2[iso.toUpperCase()]; return a2 ? String.fromCodePoint(...[...a2].map((c: string) => 0x1f1e6 + c.charCodeAt(0) - 65)) + ' ' : ''; };
+  const add = document.getElementById('cmp-add') as HTMLSelectElement;
+  const chipsEl = document.getElementById('cmp-chips')!;
+  const tableEl = document.getElementById('cmp-table')!;
+  let countries: any[] = [], byIso: Record<string, any> = {};
+  // Unit as a short suffix after the value ("%"), and as the row's own label.
+  const suffix = (unit: string) => (unit && unit.includes('%') ? '%' : '');
 
   const params = new URLSearchParams(location.search);
   let selected = (params.get('cmp') || 'USA,CHN,DEU').split(',').filter(Boolean);
@@ -41,38 +51,68 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
         .map((c) => `<option value="${c.iso}">${flag(c.iso)}${c.name}</option>`).join('');
   }
 
-  function renderTable() {
+  // Indicator rows, grouped by topic, each with one cell per country.
+  function tableRows() {
     const cols = selected.map((iso) => byIso[iso]).filter(Boolean);
-    if (!cols.length) { tableEl.innerHTML = '<p class="sub">Add a country to compare.</p>'; return; }
-    // union of indicators, keyed by slug → {title, topic, unit}
-    const ind = new Map();
+    const ind = new Map<string, any>();
     for (const c of cols) for (const it of c.items) if (!ind.has(it.slug)) ind.set(it.slug, it);
-    let html = `<table class="data"><thead><tr><th>Indicator</th>${cols.map((c) => `<th class="num">${flag(c.iso)}${c.name}</th>`).join('')}</tr></thead><tbody>`;
+    const out: { topic: any; rows: { r: any; cells: ({ value: number; period: string } | null)[] }[] }[] = [];
     for (const t of TOPICS) {
       const rows = [...ind.values()].filter((i) => i.topic === t.id).sort((a, b) => a.title.localeCompare(b.title));
       if (!rows.length) continue;
-      html += `<tr><td colspan="${cols.length + 1}" style="padding-top:16px;color:var(--text-dim);font-size:12px;text-transform:uppercase;letter-spacing:1px">${t.icon} ${t.label}</td></tr>`;
-      for (const r of rows) {
-        const vals = cols.map((c) => { const it = c.items.find((x) => x.slug === r.slug); return it ? it.value : null; });
-        const max = Math.max(...vals.filter((v) => v != null));
-        const unit = r.unit && r.unit.includes('%') ? '%' : '';
-        html += `<tr><td><a href="${base}/dataset/${r.slug}/">${r.title}</a></td>` +
-          vals.map((v) => v == null ? '<td class="num" style="color:var(--text-dim)">—</td>'
-            : `<td class="num"${v === max ? ' style="color:var(--accent);font-weight:600"' : ''}>${fmtNum(v)}${unit}</td>`).join('') + '</tr>';
+      out.push({ topic: t, rows: rows.map((r) => ({ r, cells: cols.map((c) => { const it = c.items.find((x: any) => x.slug === r.slug); return it ? { value: it.value, period: String(it.period) } : null; }) })) });
+    }
+    return { cols, out };
+  }
+
+  function renderTable() {
+    const { cols, out } = tableRows();
+    if (!cols.length) { tableEl.innerHTML = '<p class="sub">Add a country to compare.</p>'; return; }
+    let html = `<table class="data"><thead><tr><th>Indicator</th><th>Unit</th>${cols.map((c) => `<th class="num">${flag(c.iso)}${c.name}</th>`).join('')}</tr></thead><tbody>`;
+    for (const { topic: t, rows } of out) {
+      html += `<tr><td colspan="${cols.length + 2}" style="padding-top:16px;color:var(--text-dim);font-size:12px;text-transform:uppercase;letter-spacing:1px">${t.icon} ${t.label}</td></tr>`;
+      for (const { r, cells } of rows) {
+        // The better value, by the indicator's polarity; none when neutral or
+        // when fewer than two countries have a value.
+        const vals = cells.filter(Boolean).map((c) => c!.value);
+        const best = r.better && vals.length > 1 ? (r.better === 'low' ? Math.min(...vals) : Math.max(...vals)) : null;
+        const sfx = suffix(r.unit);
+        html += `<tr><td><a href="${base}/dataset/${r.slug}/">${r.title}</a></td><td style="color:var(--text-dim);font-size:12px">${r.unit || ''}</td>` +
+          cells.map((c) => c == null ? '<td class="num" style="color:var(--text-dim)">—</td>'
+            : `<td class="num"${best != null && c.value === best ? ` style="color:var(--accent);font-weight:600" title="${r.better === 'low' ? 'Lowest, and lower is better' : 'Highest, and higher is better'}"` : ''}>${formatValue(c.value, r.unit)}${sfx}<br><small style="color:var(--text-dim);font-weight:400">${c.period}</small></td>`).join('') + '</tr>';
       }
     }
     tableEl.innerHTML = html + '</tbody></table>';
   }
 
+  // The table as CSV: one row per indicator × country, with year and unit.
+  function downloadCsv() {
+    const { cols, out } = tableRows();
+    if (!cols.length) return;
+    const q = (v: unknown) => { const s = v == null ? '' : String(v); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+    const lines = ['topic,indicator,unit,country,iso3,period,value,better,dataset_url'];
+    for (const { topic: t, rows } of out) for (const { r, cells } of rows) cells.forEach((c, i) => {
+      if (!c) return;
+      lines.push([t.label, r.title, r.unit, cols[i].name, cols[i].iso, c.period, c.value, r.better || '', `https://azenha.ai${base}/dataset/${r.slug}/`].map(q).join(','));
+    });
+    const blob = new Blob(['\ufeff' + lines.join('\r\n') + '\r\n'], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `bulldozer_compare_${cols.map((c) => c.iso).join('-')}.csv`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  }
+
   function render() { renderChips(); renderTable(); syncUrl(); }
 
   add.addEventListener('change', () => { if (add.value && selected.length < 5 && !selected.includes(add.value)) { selected.push(add.value); render(); } });
-  chipsEl.addEventListener('click', (e) => { const iso = e.target.getAttribute('data-rm'); if (iso) { selected = selected.filter((x) => x !== iso); render(); } });
+  chipsEl.addEventListener('click', (e) => { const iso = (e.target as HTMLElement).getAttribute('data-rm'); if (iso) { selected = selected.filter((x) => x !== iso); render(); } });
+  document.getElementById('cmp-csv')!.addEventListener('click', downloadCsv);
 
   fetch(`${base}/data/country-index.json`).then((r) => r.json()).then((data) => {
-    countries = data; byIso = Object.fromEntries(data.map((c) => [c.iso, c]));
+    countries = data; byIso = Object.fromEntries(data.map((c: any) => [c.iso, c]));
     selected = selected.filter((iso) => byIso[iso]);
-    if (!selected.length) selected = data.slice(0, 3).map((c) => c.iso);
+    if (!selected.length) selected = data.slice(0, 3).map((c: any) => c.iso);
     render();
   });
 </script>

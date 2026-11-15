@@ -1,45 +1,37 @@
 ---
-import type { Observation, ChangeMode } from '@lib/analytics';
-import { topGrowth, topDecline } from '@lib/analytics';
-import { formatChange, pctClass, formatNum } from '@lib/format';
+import type { Observation, ChangeMode, Better } from '@lib/analytics';
+import { topGrowth, topDecline, changeSpec, formatDelta, formatValue, toneOf } from '@lib/analytics';
 import { flagFor } from '@lib/flags';
 
-interface Props { data: Observation[]; n?: number; unit?: string; mode?: ChangeMode }
-const { data, n = 5, unit = '', mode = 'pct' } = Astro.props;
-const up = topGrowth(data, n, mode);
-const down = topDecline(data, n, mode);
+interface Props { data: Observation[]; n?: number; unit?: string; fullUnit?: string; mode?: ChangeMode; better?: Better }
+const { data, n = 5, unit = '', fullUnit = unit, mode = 'pct', better } = Astro.props;
+const spec = changeSpec(data, fullUnit, mode, better);
+// Only moves outside the stable band are movers.
+const up = topGrowth(data, n, mode).filter((r) => r.pct > spec.band);
+const down = topDecline(data, n, mode).filter((r) => r.pct < -spec.band);
 const isoOf = new Map(data.filter((o) => o.iso).map((o) => [o.entity, o.iso!]));
 const label = (e: string) => { const f = flagFor(isoOf.get(e)); return f ? f + ' ' + e : e; };
+const tables = [
+  { title: better === 'high' ? 'Top risers (improving)' : better === 'low' ? 'Top risers (worsening)' : 'Top risers', rows: up },
+  { title: better === 'high' ? 'Top fallers (worsening)' : better === 'low' ? 'Top fallers (improving)' : 'Top fallers', rows: down },
+];
 ---
 <div class="grid cols-2">
+  {tables.map((t) => (
   <div>
-    <h3>Top risers</h3>
+    <h3>{t.title}</h3>
     <table class="data">
       <thead><tr><th>Entity</th><th class="num">Now</th><th class="num">Change</th></tr></thead>
       <tbody>
-        {up.map((r) => (
+        {t.rows.length ? t.rows.map((r) => (
           <tr>
             <td>{label(r.entity)}</td>
-            <td class="num">{formatNum(r.curr)}{unit}</td>
-            <td class={`num ${pctClass(r.pct)}`}>{formatChange(r.pct, mode)}</td>
+            <td class="num">{formatValue(r.curr, fullUnit)}{unit}</td>
+            <td class={`num ${toneOf(r.pct, spec)}`}>{formatDelta(r.pct, spec)}</td>
           </tr>
-        ))}
+        )) : <tr><td colspan="3" class="flat">None outside the stable band.</td></tr>}
       </tbody>
     </table>
   </div>
-  <div>
-    <h3>Top fallers</h3>
-    <table class="data">
-      <thead><tr><th>Entity</th><th class="num">Now</th><th class="num">Change</th></tr></thead>
-      <tbody>
-        {down.map((r) => (
-          <tr>
-            <td>{label(r.entity)}</td>
-            <td class="num">{formatNum(r.curr)}{unit}</td>
-            <td class={`num ${pctClass(r.pct)}`}>{formatChange(r.pct, mode)}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
+  ))}
 </div>

@@ -5,6 +5,7 @@ import { COUNTRY_NOTES } from '@data/methodology';
 import { buildCountryIndex, countrySlug, similarCountries } from '@lib/countryIndex';
 import { splitScaleSvg } from '@lib/splitScale';
 import { flagFor } from '@lib/flags';
+import { formatValue } from '@lib/analytics';
 import { TOPICS, TOPIC_ORDER } from '@lib/topics';
 import isoAlpha2 from '@data/iso-alpha2.json';
 import countryCurrency from '@data/country-currency.json';
@@ -34,8 +35,11 @@ const mkFx = (alfacat as any).fx[EURO_AC.has(c.iso) ? 'EUR' : cur?.code ?? ''];
 const markets = mkIndex || mk.top?.length || mk.screener || mkFx;
 const inWeekly = (economy as any).rows.some((r: any) => r.iso === c.iso);
 
+// Precision per scale (lib/analytics formatValue): a one-place maximum printed
+// Government Effectiveness −0.04 as "-0", V-Dem's 0.954 as "1" and Maddison's
+// GDP as "3,187,412,907,763".
 const fmt = (v: number, unit: string) =>
-  `${v.toLocaleString('en-US', { maximumFractionDigits: 1 })}${unit && unit.includes('%') ? '%' : ''}`;
+  `${formatValue(v, unit)}${unit && unit.includes('%') ? '%' : ''}`;
 const find = (slug: string) => c.items.find((i) => i.slug === slug);
 
 // IMF series run past the last closed year into the IMF's own projections; a

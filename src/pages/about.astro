@@ -4,6 +4,10 @@ import { datasets } from '@data/datasets';
 import { sources } from '@data/sources';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const live = sources.filter((s) => s.status === 'live').length;
+// The mobile app's catalog leaves out the single-country Russian series (RLMS
+// microdata, Bank of Russia monthly series) — same filter as data/catalog.json.
+const webOnly = datasets.filter((d) => d.slug.startsWith('rlms-') || d.slug.startsWith('cbr-')).length;
+const inApp = datasets.length - webOnly;
 ---
 <BaseLayout title="About" description="How BullDozer is built: only public, parsed data, with cited provenance and transparent methodology.">
   <section class="section">
@@ -13,22 +17,28 @@ const live = sources.filter((s) => s.status === 'live').length;
       <p class="sub">
         BullDozer turns <b>public, parsed</b> survey and macro data into clean dashboards, maps and visual stories —
         built on the Madeira Ativa analytics engine. {datasets.length} datasets from {live} live sources, every number cited.
+        The mobile app carries {inApp} of them; the other {webOnly} are single-country Russian series (RLMS-HSE
+        microdata and Bank of Russia monthly data), published on the website only.
       </p>
 
-      <div class="gloss-term"><h3>Only public, redistributable data</h3>
-        <p>Every dataset comes from an open, redistributable source (IMF, World Bank, OWID, V-Dem, WVS, Gallup-based polls and more). Each carries its source, licence, unit and parse date. We do not use paywalled or proprietary feeds.</p></div>
+      <div class="gloss-term"><h3>Public data, with each source’s own terms</h3>
+        <p>Every dataset is built from data its producer makes available to the public free of charge (IMF, World Bank, OWID, V-Dem, WVS, Gallup-based polls and more); some microdata, such as the DHS surveys, needs a free registration, and we publish only country-level aggregates of it. Each dataset carries its source, licence, unit and parse date. We do not use paid subscriptions or private data feeds.</p>
+        <p>Public does not always mean openly licensed. The Forbes Global 2000 and Kantar BrandZ rankings are their owners’ copyrighted content (all rights reserved), shown as country counts and totals taken from Wikipedia’s tables. Other sources keep all rights or limit commercial use — among them the Fraser Institute, Freedom House, the IEA studies and the Hofstede dimension scores — and the World Happiness Report states no licence for its data. The <a href={`${base}/licences/`}>licences page</a> gives every source’s terms, and any data owner can ask us to remove their data.</p></div>
 
       <div class="gloss-term"><h3>One concept, one source</h3>
         <p>Where several sources publish the same metric, we pick a single primary to avoid duplicates — economics from the IMF, development from Gapminder/OWID, governance from V-Dem/QoG, culture from WVS/Hofstede.</p></div>
 
       <div class="gloss-term"><h3>How change is measured</h3>
-        <p>Rates and percentages are compared in <b>percentage points</b>; counts and volumes in <b>percent</b>. Countries are classified improving / declining / stable within a ±0.5 band so noise isn’t read as a trend. See the <a href={`${base}/glossary/`}>glossary</a>.</p></div>
+        <p>Rates and percentages are compared in <b>percentage points</b>; counts and volumes in <b>percent</b>. Countries are classified improving / declining / stable. Stable band — see method note. See the <a href={`${base}/glossary/`}>glossary</a>.</p></div>
 
       <div class="gloss-term"><h3>Microdata, aggregated transparently</h3>
         <p>Survey microdata (World Values Survey, World Risk Poll, RLMS…) is aggregated to country level with survey weights. Single-wave surveys show no period-over-period change.</p></div>
 
       <div class="gloss-term"><h3>Freshness</h3>
         <p>Macro and survey releases follow a calendar (IMF WEO twice a year, World Happiness in March, V-Dem in March…). See the <a href={`${base}/`}>release calendar</a> on the homepage. Every dataset is downloadable as CSV.</p></div>
+
+      <div class="gloss-term" id="corrections"><h3>Corrections</h3>
+        <p>Found a wrong number, a mislabelled year or a claim the data does not support? Write to <a href="mailto:agent@azenha.ai">agent@azenha.ai</a> with the page and what you think is wrong. We check it against the source, fix it, and log every correction with its date.</p></div>
 
       <p class="sub" style="margin-top:24px">
         Browse the <a href={`${base}/macro/`}>data</a>, open the <a href={`${base}/explore/`}>explorer</a>, or read the <a href={`${base}/`}>stories</a>.

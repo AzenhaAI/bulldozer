@@ -26,7 +26,7 @@ const FINANCE = ['wb-account-ownership', 'findex-digital-payments', 'wb-mobile-m
 const slugs = [...MARKET, ...FINANCE].filter((s) => getDataset(s));
 const panelIndicators = slugs.map((s) => {
   const d = getDataset(s)!;
-  return { slug: d.slug, title: d.title, kind: d.kind, unit: d.unit, valueLabel: d.valueLabel, changeMode: d.changeMode, periods: [...new Set(d.data.map((o) => o.period))].sort() };
+  return { slug: d.slug, title: d.title, kind: d.kind, unit: d.unit, valueLabel: d.valueLabel, changeMode: d.changeMode, periods: [...new Set(d.data.map((o) => o.period))].sort(), projectedFrom: d.projectedFrom ?? null };
 });
 const card = (s: string) => { const d = getDataset(s)!; return { slug: d.slug, title: d.title, source: d.source, summary: d.summary }; };
 // Quarterly user metrics read from the companies' own SEC earnings releases.

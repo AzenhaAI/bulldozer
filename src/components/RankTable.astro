@@ -15,13 +15,13 @@
  * whose previous value is 0 to avoid dividing by it — fine for a top-five
  * movers list, wrong for a ranking that claims to be complete.
  */
-import type { Observation, ChangeMode } from '@lib/analytics';
-import { periods, entityTotals, changeValue, isSinglePeriod } from '@lib/analytics';
-import { formatChange, pctClass, formatNum } from '@lib/format';
+import type { Observation, ChangeMode, Better } from '@lib/analytics';
+import { periods, entityTotals, changeValue, isSinglePeriod, changeSpec, formatDelta, formatValue, toneOf } from '@lib/analytics';
 import { flagFor } from '@lib/flags';
 
-interface Props { data: Observation[]; unit?: string; mode?: ChangeMode; valueLabel?: string }
-const { data, unit = '', mode = 'pct', valueLabel = 'Value' } = Astro.props;
+interface Props { data: Observation[]; unit?: string; fullUnit?: string; mode?: ChangeMode; valueLabel?: string; better?: Better; bandData?: Observation[] }
+const { data, unit = '', fullUnit = unit, mode = 'pct', valueLabel = 'Value', better, bandData } = Astro.props;
+const spec = changeSpec(bandData ?? data, fullUnit, mode, better);
 
 const all = periods(data);
 const currPeriod = all[all.length - 1];
@@ -64,10 +64,10 @@ const rows = [...curr.entries()]
         <tr>
           <td class="num">{i + 1}</td>
           <td>{flagFor(isoOf.get(r.entity)) ? flagFor(isoOf.get(r.entity)) + ' ' : ''}{r.entity}</td>
-          <td class="num">{formatNum(r.value)}{unit}</td>
+          <td class="num">{formatValue(r.value, fullUnit)}{unit}</td>
           {!single && (
-            <td class={`num ${r.pct === null ? '' : pctClass(r.pct)}`}>
-              {r.pct === null ? '—' : formatChange(r.pct, mode)}
+            <td class={`num ${r.pct === null ? '' : toneOf(r.pct, spec)}`}>
+              {r.pct === null ? '—' : formatDelta(r.pct, spec)}
             </td>
           )}
         </tr>

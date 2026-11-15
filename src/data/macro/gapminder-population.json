@@ -5,7 +5,7 @@
     "unit": "million",
     "changeMode": "pct",
     "topic": "demographics",
-    "summary": "Total population (millions) — the long Gapminder series, 1800–2020. Used for bubble size on the bubble chart.",
+    "summary": "Total population (millions) — the long Gapminder series, 1800–2013. Used for bubble size on the bubble chart.",
     "source": "Gapminder",
     "license": "CC BY 4.0. Based on free material from GAPMINDER.ORG, CC-BY LICENSE",
     "url": "https://www.gapminder.org/data/",

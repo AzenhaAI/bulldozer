@@ -1,22 +1,42 @@
 ---
-import type { Observation, ChangeMode } from '@lib/analytics';
-import { computeKpi } from '@lib/analytics';
-import { formatChange, pctClass } from '@lib/format';
+import type { Observation, ChangeMode, Better } from '@lib/analytics';
+import { computeKpi, changeSpec, formatDelta, formatValue, toneOf, quantile } from '@lib/analytics';
 
-interface Props { data: Observation[]; unit?: string; mode?: ChangeMode; noun?: 'country' | 'company' }
-const { data, unit = '', mode = 'pct', noun = 'country' } = Astro.props;
+// `fullUnit` is the dataset's unit ("years", "index 0–1"): it decides the unit
+// of change and the decimals. `unit` is the short suffix printed after values.
+// `bandData` sizes the stable band (default: `data`); pass the whole series so
+// the band matches the panel and the movers.
+interface Props { data: Observation[]; unit?: string; fullUnit?: string; mode?: ChangeMode; noun?: 'country' | 'company'; better?: Better; bandData?: Observation[]; projectedFrom?: string }
+const { data, unit: unitIn = '', fullUnit = unitIn, mode = 'pct', noun = 'country', better, bandData, projectedFrom } = Astro.props;
+// "% YoY", "% of GDP": still a percent after the number.
+const unit = unitIn || (fullUnit.includes('%') ? '%' : '');
 // Companies each count users their own way: an average across them means
 // nothing, so the first card counts who reported instead.
 const company = noun === 'company';
-const k = computeKpi(data, mode);
-const avg = k.currCount ? k.totalValue / k.currCount : 0;
-const band = mode === 'pp' ? '±0.5pp band' : '±0.5% band';
+const spec = changeSpec(bandData ?? data, fullUnit, mode, better);
+const k = computeKpi(data, mode, spec.band);
+const fv = (v: number) => `${formatValue(v, fullUnit)}${unit}`;
+// Stable band as the reader sees it: "±0.5%", "±0.02 points", "±0.4pp".
+const bandText = mode === 'pct' ? `±${spec.band}%` : `±${formatDelta(spec.band, spec).replace(/^[+−]/, '')}`;
 // One reading per country (or one period): nothing to compare, so the three
 // change cards become the spread of the values instead.
 const single = k.prevPeriod === k.currPeriod;
 const rows = single ? data.filter((o) => o.period === k.currPeriod && Number.isFinite(o.value)).sort((a, b) => a.value - b.value) : [];
-const med = rows.length ? (rows.length % 2 ? rows[(rows.length - 1) / 2].value : (rows[rows.length / 2 - 1].value + rows[rows.length / 2].value) / 2) : NaN;
-const f1 = (v: number) => `${Math.abs(v) >= 100 ? Math.round(v).toLocaleString('en-US') : v.toFixed(1)}${unit}`;
+const sortedVals = rows.map((r) => r.value);
+const q1 = quantile(sortedVals, 0.25), q3 = quantile(sortedVals, 0.75);
+// Improving / declining follow which way is better; with no better direction
+// the cards say plainly what happened: rose, fell, flat.
+const rose = { n: k.growthCount, cls: toneOf(1e9, spec) };
+const fell = { n: k.declineCount, cls: toneOf(-1e9, spec) };
+const cards = !better
+  ? [{ label: 'Rose', ...rose, note: `of ${k.totalEntities} in both periods` }, { label: 'Fell', ...fell, note: 'period over period' }]
+  : better === 'high'
+    ? [{ label: 'Improving', ...rose, note: `rose, of ${k.totalEntities} in both periods` }, { label: 'Worsening', ...fell, note: 'fell, period over period' }]
+    : [{ label: 'Improving', ...fell, note: `fell, of ${k.totalEntities} in both periods` }, { label: 'Worsening', ...rose, note: 'rose, period over period' }];
+const nouns = company ? 'companies' : k.currCount === 1 ? 'country' : 'countries';
+// IMF WEO runs into its own projections: say so on the headline period.
+const projected = (p: string) => !!projectedFrom && Number(String(p).slice(0, 4)) >= Number(String(projectedFrom).slice(0, 4));
+const periodLabel = k.currPeriod === 'Latest' ? 'latest' : projected(k.currPeriod) ? `${k.currPeriod}, projection` : k.currPeriod;
 ---
 <div class="kpi-row">
   {company ? (
@@ -27,44 +47,41 @@ const f1 = (v: number) => `${Math.abs(v) >= 100 ? Math.round(v).toLocaleString('
   </div>
   ) : (
   <div class="kpi">
-    <div class="label">Avg of {k.currCount} ({k.currPeriod === 'Latest' ? 'latest' : k.currPeriod})</div>
-    <div class="value">{avg.toFixed(1)}{unit}</div>
-    {k.prevPeriod === k.currPeriod
+    <div class="label">Median of {k.currCount} {nouns} ({periodLabel})</div>
+    <div class="value">{fv(k.medianValue)}</div>
+    {single
       ? <div class="delta flat">{k.currPeriod === 'Latest' ? 'latest year per country' : 'single period'}</div>
-      : <div class={`delta ${pctClass(k.totalPct)}`}>{formatChange(k.totalPct, mode)} vs {k.prevPeriod}</div>}
+      : <div class={`delta ${toneOf(k.totalPct, spec)}`} title="Change in the median of the countries measured in both periods">{formatDelta(k.totalPct, spec)} vs {k.prevPeriod}{projected(k.prevPeriod) ? ' (projection)' : ''}</div>}
   </div>
   )}
   {single && rows.length ? <>
   <div class="kpi">
-    <div class="label">Median</div>
-    <div class="value">{f1(med)}</div>
-    <div class="delta">half the countries above, half below</div>
+    <div class="label">Middle half</div>
+    <div class="value" style="font-size:22px">{fv(q1)} – {fv(q3)}</div>
+    <div class="delta">a quarter of the countries below, a quarter above</div>
   </div>
   <div class="kpi">
     <div class="label">Highest</div>
-    <div class="value">{f1(rows[rows.length - 1].value)}</div>
+    <div class="value">{fv(rows[rows.length - 1].value)}</div>
     <div class="delta">{rows[rows.length - 1].entity}</div>
   </div>
   <div class="kpi">
     <div class="label">Lowest</div>
-    <div class="value">{f1(rows[0].value)}</div>
+    <div class="value">{fv(rows[0].value)}</div>
     <div class="delta">{rows[0].entity}</div>
   </div>
   </> : <>
+  {cards.map((c) => (
   <div class="kpi">
-    <div class="label">Improving</div>
-    <div class="value up">{k.growthCount}</div>
-    <div class="delta">of {k.totalEntities} in both periods</div>
+    <div class="label">{c.label}</div>
+    <div class={`value ${c.cls}`}>{c.n}</div>
+    <div class="delta">{c.note}</div>
   </div>
+  ))}
   <div class="kpi">
-    <div class="label">Declining</div>
-    <div class="value down">{k.declineCount}</div>
-    <div class="delta">period over period</div>
-  </div>
-  <div class="kpi">
-    <div class="label">Stable</div>
+    <div class="label">{better ? 'Stable' : 'Flat'}</div>
     <div class="value flat">{k.stableCount}</div>
-    <div class="delta">{band}</div>
+    <div class="delta" title="Changes this small count as no change; the band scales with the spread of the data">within {bandText}</div>
   </div>
   </>}
 </div>

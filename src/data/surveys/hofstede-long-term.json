@@ -7,7 +7,7 @@
     "topic": "attitudes",
     "summary": "Future-oriented pragmatism vs respect for tradition and the present. Hofstede’s cultural dimensions.",
     "source": "Hofstede cultural dimensions (G. Hofstede)",
-    "license": "Public — Hofstede model",
+    "license": "© Geert Hofstede — free for research; commercial use needs permission",
     "url": "https://geerthofstede.com/research-and-vsm/dimension-data-matrix/",
     "parsedAt": "2026-06-28",
     "kind": "survey"
@@ -29,14 +29,14 @@
     },
     {
       "entity": "Brazil",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 65,
       "iso": "BRA"
     },
     {
       "entity": "Canada",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 23,
       "iso": "CAN"
@@ -183,7 +183,7 @@
     },
     {
       "entity": "United States",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 29,
       "iso": "USA"

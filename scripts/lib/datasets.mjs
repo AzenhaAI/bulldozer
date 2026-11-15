@@ -5,6 +5,7 @@ import { dirname, join } from 'node:path';
 import { homedir } from 'node:os';
 import { parseCsvObjects } from './csv.mjs';
 import { fingerprint, compareFingerprints, acceptedSlugs, loadPolicy } from './guard.mjs';
+import { markSubnational } from './regions.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 export const ROOT = join(__dirname, '..', '..');
@@ -14,12 +15,22 @@ export const ROOT = join(__dirname, '..', '..');
  *  the bundled snapshot so ISO→region mapping never hard-fails the build. */
 const GAPMINDER_CSV = join(homedir(), 'Library', 'Mobile Documents', 'com~apple~CloudDocs', 'BK', 'Opros', 'Inter_survey', 'Gapminder', 'ddf--entities--geo--country.csv');
 export async function gapminderRows() {
+  let rows;
   try {
-    return [...parseCsvObjects(await readFile(GAPMINDER_CSV, 'utf8'))];
+    rows = [...parseCsvObjects(await readFile(GAPMINDER_CSV, 'utf8'))];
   } catch {
-    return JSON.parse(await readFile(join(__dirname, 'gapminder_geo.json'), 'utf8'));
+    rows = JSON.parse(await readFile(join(__dirname, 'gapminder_geo.json'), 'utf8'));
   }
+  // Codes Gapminder's registry lacks: without them Kosovo sat in "Other" (and
+  // was named "XKX") in a dozen World Bank, Wellcome and World Risk Poll sets.
+  const have = new Set(rows.map((r) => (r.iso3166_1_alpha3 || '').toUpperCase()));
+  for (const extra of GAPMINDER_EXTRA) if (!have.has(extra.iso3166_1_alpha3)) rows.push(extra);
+  return rows;
 }
+const GAPMINDER_EXTRA = [
+  { iso3166_1_alpha3: 'XKX', iso3166_1_alpha2: 'XK', world_4region: 'europe', name: 'Kosovo' },
+  { iso3166_1_alpha3: 'BES', iso3166_1_alpha2: 'BQ', world_4region: 'americas', name: 'Caribbean Netherlands' },
+];
 
 /** Russian → English region labels used across the tidy macro/survey files.
  *  Keys stay as \u escapes on purpose (repo policy: ASCII-only sources) —
@@ -99,12 +110,19 @@ export function pickPeriods(counts, maxYear) {
 // reaches the map or the country page: Eswatini sat out 18 series as
 // "Swaziland", Kosovo as itself.
 const ISO_BY_NAME = { Swaziland: 'SWZ', Eswatini: 'SWZ', Kosovo: 'XKX' };
+// One name per country: WHR ran "Swaziland" (2018-20) beside "Eswatini", and
+// World Bank series with no name for Kosovo fell back to its code "XKX".
+const NAME_FIX = { Swaziland: 'Eswatini', XKX: 'Kosovo' };
 
 /** `opts.carryForward: false` turns off the keep-newer-rows guard below, for a
  *  source whose every release replaces the last one whole — an IMF WEO edition
  *  that withdraws a country's projection must not have it carried forward. */
 export async function writeDataset(kind, slug, meta, data, opts = {}) {
-  for (const r of data) if (!r.iso && ISO_BY_NAME[r.entity]) r.iso = ISO_BY_NAME[r.entity];
+  for (const r of data) {
+    if (!r.iso && ISO_BY_NAME[r.entity]) r.iso = ISO_BY_NAME[r.entity];
+    if (NAME_FIX[r.entity] && (r.entity !== 'XKX' || r.iso === 'XKX')) r.entity = NAME_FIX[r.entity];
+    markSubnational(r); // Zanzibar, Somaliland, Channel Islands...: kept, not ranked
+  }
   const dir = join(ROOT, 'src', 'data', kind === 'macro' ? 'macro' : 'surveys');
   await mkdir(dir, { recursive: true });
   const dest = join(dir, `${slug}.json`);

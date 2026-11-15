@@ -61,6 +61,10 @@ export function methodologyFor(slug: string): Methodology {
     return { vintage: 'Wave 7 (2017–2022)', method: 'Weighted by W_WEIGHT; Welzel cultural-values index, country mean.' };
   if (slug.startsWith('lits-'))
     return { vintage: 'LiTS I–IV (2006, 2010, 2016, 2022–23); which waves asked each item is in the summary', method: 'Weighted country mean of the item from the EBRD microdata; transition region plus a few comparator countries.' };
+  if (slug === 'whr-happiness')
+    return { vintage: 'World Happiness Report editions; each period is the last survey year of a three-year pool (2025 = WHR 2026, surveys 2023–2025)', method: 'Gallup World Poll; national mean of the Cantril ladder (0–10) over three years of surveys. WHR publishes a 95% confidence interval with every score, so neighbouring ranks are often statistically tied.' };
+  if (slug.startsWith('whr-driver-'))
+    return { vintage: 'World Happiness Report editions; each period is the last survey year of a three-year pool (2025 = WHR 2026, surveys 2023–2025)', method: 'WHR’s split of each score from one cross-country regression: the ladder points the model associates with this factor. An association between countries, not a measured cause; the six factors leave out the “dystopia” benchmark and the unexplained residual.' };
   if (slug.startsWith('hofstede-'))
     return { vintage: 'Dimension matrix (2010)', method: 'Published national scores (0–100); a fixed model, not a time series.' };
   if (slug === 'wb-account-ownership' || slug === 'wb-debit-card' || slug === 'wb-digital-payments' || slug === 'wb-mobile-money')

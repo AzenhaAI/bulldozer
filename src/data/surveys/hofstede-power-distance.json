@@ -7,7 +7,7 @@
     "topic": "attitudes",
     "summary": "How much less powerful members accept that power is distributed unequally. Hofstede’s cultural dimensions.",
     "source": "Hofstede cultural dimensions (G. Hofstede)",
-    "license": "Public — Hofstede model",
+    "license": "© Geert Hofstede — free for research; commercial use needs permission",
     "url": "https://geerthofstede.com/research-and-vsm/dimension-data-matrix/",
     "parsedAt": "2026-06-28",
     "kind": "survey"
@@ -15,7 +15,7 @@
   "data": [
     {
       "entity": "Argentina",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 49,
       "iso": "ARG"
@@ -50,7 +50,7 @@
     },
     {
       "entity": "Brazil",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 69,
       "iso": "BRA"
@@ -64,14 +64,14 @@
     },
     {
       "entity": "Canada",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 39,
       "iso": "CAN"
     },
     {
       "entity": "Chile",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 63,
       "iso": "CHL"
@@ -85,14 +85,14 @@
     },
     {
       "entity": "Colombia",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 67,
       "iso": "COL"
     },
     {
       "entity": "Costa Rica",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 35,
       "iso": "CRI"
@@ -113,14 +113,14 @@
     },
     {
       "entity": "Ecuador",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 78,
       "iso": "ECU"
     },
     {
       "entity": "El Salvador",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 66,
       "iso": "SLV"
@@ -162,7 +162,7 @@
     },
     {
       "entity": "Guatemala",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 95,
       "iso": "GTM"
@@ -225,7 +225,7 @@
     },
     {
       "entity": "Jamaica",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 45,
       "iso": "JAM"
@@ -260,7 +260,7 @@
     },
     {
       "entity": "Mexico",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 81,
       "iso": "MEX"
@@ -302,14 +302,14 @@
     },
     {
       "entity": "Panama",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 95,
       "iso": "PAN"
     },
     {
       "entity": "Peru",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 64,
       "iso": "PER"
@@ -386,7 +386,7 @@
     },
     {
       "entity": "Surinam",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 85,
       "iso": "SUR"
@@ -421,7 +421,7 @@
     },
     {
       "entity": "Trinidad",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 47,
       "iso": "TTO"
@@ -442,21 +442,21 @@
     },
     {
       "entity": "United States",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 40,
       "iso": "USA"
     },
     {
       "entity": "Uruguay",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 61,
       "iso": "URY"
     },
     {
       "entity": "Venezuela",
-      "group": "Other",
+      "group": "Americas",
       "period": "2010",
       "value": 81,
       "iso": "VEN"

@@ -407,7 +407,7 @@ export const licences: Licence[] = [
     citation: `Dimension data matrix, version 2015 12 08, as presented in Cultures and Organizations 3rd edition 2010 (geerthofstede.com).`,
     urls: ['https://geerthofstede.com/research-and-vsm/dimension-data-matrix/', 'https://geerthofstede.com/contact/'],
     checked: CHECKED,
-    review: `"Researchers can use them without asking for permission. Those who are considering commercial use should contact us."`,
+    review: `"Researchers can use them without asking for permission. Those who are considering commercial use should contact us." The dataset meta of the five hofstede-* files says "Public — Hofstede model", which reads as unrestricted; it should match the licence above.`,
   },
 
   // ── Gallup-based and risk studies ──────────────────────────────────
@@ -419,7 +419,8 @@ export const licences: Licence[] = [
     licence: `No licence stated. The data for Figure 2.1 are a free download; the report "may be reproduced using the following reference".`,
     citation: `Helliwell, J. F., Layard, R., Sachs, J. D., De Neve, J.-E., Aknin, L. B., & Wang, S. (Eds.). (2026). World Happiness Report 2026. University of Oxford: Wellbeing Research Centre.`,
     urls: ['https://worldhappiness.report/data-sharing/', 'https://worldhappiness.report/faq/', 'https://files.worldhappiness.report/WHR26.pdf'],
-    checked: CHECKED,
+    checked: '2026-11-15',
+    review: `Re-read 2026-11-15: neither the data-sharing page nor the FAQ names a licence or Creative Commons. The dataset meta written by scripts/parse_surveys.mjs ("CC BY 4.0") is wrong and should read "No licence stated".`,
   },
   {
     id: 'wellcome-global-monitor',

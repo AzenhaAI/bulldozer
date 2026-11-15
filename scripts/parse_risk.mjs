@@ -13,6 +13,10 @@ import { join } from 'node:path';
 import { parseCsvObjects } from './lib/csv.mjs';
 import { gapminderRows, REGION_4, pickPeriodsN, writeDataset, round } from './lib/datasets.mjs';
 
+// Common English names by ISO-3: WorldRiskIndex still spells Libya "Libyan Arab
+// Jamahiriya" and that reached the rankings (review, 15 Nov 2026).
+const NAMES = JSON.parse(await readFile(new URL('../src/data/country-names.json', import.meta.url), 'utf8'));
+
 const H = homedir();
 const WRP_CSV = process.env.WRP_CSV ||
   '/private/tmp/claude-501/-Users-kirillshpara/025d8691-cfe3-48e0-a982-db40cbef8a62/scratchpad/wrp/23_wrp.csv';
@@ -42,7 +46,7 @@ async function emit(slug, meta, rows, region) {
   const periods = pickPeriodsN(yearCounts, 8);
   const data = rows
     .filter((r) => periods.includes(r.period))
-    .map((r) => ({ entity: r.entity, group: region.get(r.iso) || 'Other', period: r.period, value: r.value, iso: r.iso }));
+    .map((r) => ({ entity: NAMES[r.iso]?.common || r.entity, group: region.get(r.iso) || 'Other', period: r.period, value: r.value, iso: r.iso }));
   await writeDataset('survey', slug, { ...meta, changeMode: 'pp' }, data);
 }
 

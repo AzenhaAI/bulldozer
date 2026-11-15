@@ -1,25 +1,28 @@
 ---
-import type { Observation, ChangeMode } from '@lib/analytics';
-import { groupRollups } from '@lib/analytics';
-import { formatChange } from '@lib/format';
+import type { Observation, ChangeMode, Better } from '@lib/analytics';
+import { groupRollups, changeSpec, formatDelta, toneOf } from '@lib/analytics';
 
 // Diverging bar chart of period-over-period change per group — the web port of
-// the Madeira dashboard trend chart (green = up, red = down, from a zero axis).
-interface Props { data: Observation[]; mode?: ChangeMode; additive?: boolean }
-const { data, mode = 'pct', additive = false } = Astro.props;
+// the Madeira dashboard trend chart, from a zero axis. Colour follows which way
+// is better (green better, red worse, grey when neither way is better).
+interface Props { data: Observation[]; mode?: ChangeMode; additive?: boolean; unit?: string; better?: Better; bandData?: Observation[] }
+const { data, mode = 'pct', additive = false, unit = '', better, bandData } = Astro.props;
+const spec = changeSpec(bandData ?? data, unit, mode, better);
 const groups = groupRollups(data, mode, additive).sort((a, b) => b.pct - a.pct);
-const maxAbs = Math.max(1, ...groups.map((g) => Math.abs(g.pct)));
+const maxAbs = Math.max(1e-9, ...groups.map((g) => Math.abs(g.pct)));
 const half = (pct: number) => (Math.abs(pct) / maxAbs) * 50;
 ---
 <div class="gchart">
-  {groups.map((g) => (
+  {groups.map((g) => {
+    const tone = toneOf(g.pct, spec);
+    return (
     <div class="gchart-row">
       <span>{g.group}</span>
       <span class="gchart-rail">
         <span class="gchart-zero"></span>
-        <span class={`gchart-bar ${g.pct >= 0 ? 'pos' : 'neg'}`} style={`width:${half(g.pct)}%`}></span>
+        <span class={`gchart-bar ${g.pct >= 0 ? 'pos' : 'neg'} ${tone === 'flat' || tone === 'neutral' ? 'neutral' : tone}`} style={`width:${half(g.pct)}%`}></span>
       </span>
-      <span class={`gchart-val ${g.pct > 0 ? 'up' : g.pct < 0 ? 'down' : 'flat'}`}>{formatChange(g.pct, mode)}</span>
+      <span class={`gchart-val ${tone}`}>{formatDelta(g.pct, spec)}</span>
     </div>
-  ))}
+  ); })}
 </div>

@@ -6,6 +6,8 @@ import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { feature } from 'topojson-client';
 import { geoNaturalEarth1, geoCentroid, geoPath } from 'd3-geo';
+import { betterFor } from '@lib/polarity';
+import { changeUnit } from '@lib/analytics';
 
 // Projected country centroids for the Bubbles view — same projection and
 // frame as WorldMap, so bubbles start from each country's map position.
@@ -45,7 +47,7 @@ for (const [a3, ll] of Object.entries(MICRO)) {
 // dashboard (pinned to one indicator).
 export interface IndexItem {
   slug: string; title: string; kind: string; unit: string; valueLabel: string;
-  changeMode: 'pct' | 'pp'; periods: string[];
+  changeMode: 'pct' | 'pp'; periods: string[]; projectedFrom?: string | null;
 }
 // `noun` names the entities: 'company' for the company-metrics datasets, which
 // have no map position, so their panel drops the map views and the
@@ -59,7 +61,10 @@ const showIndicator = !pinnedSlug && indicators.length > 1;
 // that shifts to whatever obscure dataset title happens to sort first
 // whenever a new one is added (e.g. "Acceptance of ..."), which reads as random.
 const defaultSlug = indicators.some((d) => d.slug === 'whr-happiness') ? 'whr-happiness' : indicators[0]?.slug;
-const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView: geo ? defaultView : 'bar', datasets: indicators, noun };
+// Which way is better (colours the change labels) and the unit a change is
+// stated in ("pp" only for % shares, "years", "points"…), per indicator.
+const enriched = indicators.map((d) => ({ ...d, better: betterFor(d.slug) ?? null, chgSuffix: changeUnit(d.unit, d.changeMode) }));
+const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView: geo ? defaultView : 'bar', datasets: enriched, noun };
 ---
 <div class="datapanel">
   <div class="controls">
@@ -108,6 +113,7 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
 <script type="application/json" id="bd-a2" set:html={JSON.stringify(isoAlpha2)}></script>
 
 <script>
+  import { stableBand, quantile, formatValue, formatDelta, toneOf } from '@lib/analytics';
   const cfg = JSON.parse(document.getElementById('bd-config').textContent);
   const isoNumeric = JSON.parse(document.getElementById('bd-iso').textContent); // numeric -> alpha3
   const isoAlpha2 = JSON.parse(document.getElementById('bd-a2').textContent);   // alpha3 -> alpha2
@@ -160,22 +166,35 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
     const m = meta(); selP.innerHTML = '';
     // Countries measured in different years: open on each one's latest reading.
     const opts = m.latestPerCountry ? ['latest', ...m.periods] : m.periods;
-    for (const p of opts) { const o = document.createElement('option'); o.value = p; o.textContent = p === 'latest' ? 'Latest available' : p; selP.appendChild(o); }
-    state.period = (initialPeriod && opts.includes(initialPeriod)) ? initialPeriod : (m.latestPerCountry ? 'latest' : m.periods[m.periods.length - 1]);
+    // Projections are marked in the list and never the default: IMF series end in
+    // the IMF's own forecast for the current year (statistical review, 15 Nov 2026).
+    const pf = m.projectedFrom ? Number(String(m.projectedFrom).slice(0, 4)) : null;
+    const isProj = (p) => pf != null && Number(String(p).slice(0, 4)) >= pf;
+    for (const p of opts) { const o = document.createElement('option'); o.value = p; o.textContent = p === 'latest' ? 'Latest available' : (isProj(p) ? `${p} (IMF projection)` : p); selP.appendChild(o); }
+    const observed = m.periods.filter((p) => !isProj(p));
+    const lastObserved = observed.length ? observed[observed.length - 1] : m.periods[m.periods.length - 1];
+    state.period = (initialPeriod && opts.includes(initialPeriod)) ? initialPeriod : (m.latestPerCountry ? 'latest' : lastObserved);
     initialPeriod = null; // only honour the URL period on first load
     selP.value = state.period;
   }
 
+  // Stable band per dataset, sized on the whole series (lib/analytics
+  // stableBand) — the same band the dataset page's cards and tables use.
+  const bands = new Map();
   async function load(slug) {
     if (cache.has(slug)) return cache.get(slug);
     const ds = await (await fetch(`${BASE}/data/${slug}.json`)).json();
+    const m = cfg.datasets.find((d) => d.slug === slug);
+    bands.set(slug, stableBand(ds.data.map((o) => o.value), m ? m.changeMode : 'pct'));
     cache.set(slug, ds); return ds;
   }
 
   const changeVal = (cv, pv, mode) => mode === 'pp' ? cv - pv : (pv ? (cv - pv) / pv * 100 : 0);
-  const fmtChange = (v, mode) => (v > 0 ? '+' : '') + v.toFixed(Math.abs(v) < 1 ? 2 : 1) + (mode === 'pp' ? 'pp' : '%');
-  const fmtNum = (n) => n.toLocaleString('en-US', { maximumFractionDigits: 1 });
-  const moveClass = (v) => v > 0.5 ? 'up' : v < -0.5 ? 'down' : 'flat';
+  const specOf = (m) => ({ mode: m.changeMode, suffix: m.chgSuffix || (m.changeMode === 'pp' ? 'pp' : '%'), band: bands.get(m.slug) ?? 0.5, better: m.better || undefined });
+  const fmtChange = (v, m) => formatDelta(v, specOf(m));
+  const toneClass = (v, m) => toneOf(v, specOf(m));
+  // Precision per scale (0–1 indices two places, huge numbers "3.19 tn").
+  const fmtNum = (n) => formatValue(n, (meta() || {}).unit || '');
 
   function rowsFor(ds) {
     const m = meta();
@@ -233,7 +252,7 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
   function distStats(rows) {
     const v = rows.map((r) => r.value).sort((a, b) => a - b), n = v.length;
     if (n < 5) return null;
-    const q = (p) => { const i = (n - 1) * p, lo = Math.floor(i); return v[lo] + (v[Math.ceil(i)] - v[lo]) * (i - lo); };
+    const q = (p) => quantile(v, p);
     const mean = v.reduce((a, b) => a + b, 0) / n;
     const sd = Math.sqrt(v.reduce((a, b) => a + (b - mean) ** 2, 0) / (n - 1));
     return { n, min: v[0], max: v[n - 1], q1: q(0.25), med: q(0.5), q3: q(0.75), mean, sd, v };
@@ -266,19 +285,26 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
     const st = GEO ? distStats(rows) : null;
     renderDist(st, unit, m.kind === 'survey' ? 'all the people asked' : 'everyone in those countries');
     const top = visibleRows(rows); const vals = top.map((r) => r.value);
-    const base = Math.min(0, ...vals), max = Math.max(1, ...vals), span = (max - base) || 1;
-    const pos = (v) => Math.max(0, Math.min(100, (v - base) / span * 100));
+    // A visible zero axis with bars running both ways: length = |value|. The
+    // old scale started at the minimum, so with Kuwait at −16.7% Austria's
+    // 0.6% drew almost as long as Armenia's 5.5%.
+    const lo = Math.min(0, ...vals), hi = Math.max(0, ...vals), span = (hi - lo) || 1;
+    const pos = (v) => Math.max(0, Math.min(100, (v - lo) / span * 100));
+    const zero = pos(0);
+    const zeroLine = lo < 0 ? `<span class="bar-zero" style="left:${zero.toFixed(2)}%"></span>` : '';
     const guides = st && !state.query
       ? `<span class="bar-band" style="left:${pos(st.q1)}%;width:${Math.max(0, pos(st.q3) - pos(st.q1))}%"></span><span class="bar-med" style="left:${pos(st.med)}%"></span>`
       : '';
     const rankOf = new Map([...rows].sort((a, b) => b.value - a.value).map((r, i) => [r.entity, i + 1]));
     el('bar-target').innerHTML = top.map((r) => {
-      const w = pos(r.value);
-      const cls = r.change == null ? 'flat' : moveClass(r.change);
-      const chg = r.change == null ? '' : `<em class="${cls}">${fmtChange(r.change, m.changeMode)}</em>`;
+      const p = pos(r.value), left = Math.min(p, zero), w = Math.abs(p - zero);
+      // One fill for every bar: the bar is the value. The change is the small
+      // label, coloured by whether it went the better way.
+      const cls = r.change == null ? 'flat' : toneClass(r.change, m);
+      const chg = r.change == null ? '' : `<em class="${cls}">${fmtChange(r.change, m)}</em>`;
       const rk = state.sortDir === 'name' ? `<i class="bar-rank">#${rankOf.get(r.entity)}</i>` : '';
       const yr = r.year != null ? `<em class="flat">${r.year}</em>` : '';
-      return `<div class="bar-row"><span class="bar-name" title="${r.entity}">${rk}${flag(r.iso)}${r.entity}</span><span class="bar-track">${guides}<span class="bar-fill move-${cls}" style="width:${w}%"></span></span><span class="bar-val">${fmtNum(r.value)}${unit}${chg}${yr}</span></div>`;
+      return `<div class="bar-row"><span class="bar-name" title="${r.entity}">${rk}${flag(r.iso)}${r.entity}</span><span class="bar-track">${guides}${zeroLine}<span class="bar-fill${r.value < 0 ? ' neg' : ''}" style="margin-left:${left.toFixed(2)}%;width:${w.toFixed(2)}%"></span></span><span class="bar-val">${fmtNum(r.value)}${unit}${chg}${yr}</span></div>`;
     }).join('');
   }
 
@@ -286,38 +312,83 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
     const m = meta(); const unit = m.unit.includes('%') ? '%' : '';
     const head = `<thead><tr><th>${GEO ? 'Country' : 'Company'}</th>${GEO ? '<th>Group</th>' : ''}<th class="num">${m.valueLabel}</th><th class="num">Change</th></tr></thead>`;
     el('table-target').innerHTML = head + '<tbody>' + rows.map((r) => {
-      const cls = r.change == null ? 'flat' : moveClass(r.change);
-      const chg = r.change == null ? '—' : `<span class="${cls}">${fmtChange(r.change, m.changeMode)}</span>`;
+      const cls = r.change == null ? 'flat' : toneClass(r.change, m);
+      const chg = r.change == null ? '—' : `<span class="${cls}">${fmtChange(r.change, m)}</span>`;
       return `<tr><td>${flag(r.iso)}${r.entity}</td>${GEO ? `<td>${r.group || ''}</td>` : ''}<td class="num">${fmtNum(r.value)}${unit}</td><td class="num">${chg}</td></tr>`;
     }).join('') + '</tbody>';
   }
 
-  const mix = (a, b, t) => { t = Math.max(0, Math.min(1, t)); const c = a.map((x, i) => Math.round(x + (b[i] - x) * t)); return `rgb(${c[0]},${c[1]},${c[2]})`; };
-  const DARK = [28, 31, 35], AMBER = [255, 176, 0], GREY = [70, 74, 82], RED = [248, 113, 113], GREEN = [52, 211, 153];
+  const isLight = () => document.documentElement.getAttribute('data-theme') === 'light';
+  // Five quantile classes, theme-aware: light runs pale → dark amber, dark runs
+  // dark → bright amber, so "more" is always the stronger contrast with the
+  // page and the lowest class never melts into the no-data grey.
+  const SEQ_LIGHT = ['#fbecc8', '#f5cd73', '#e5a32b', '#b97400', '#6e4300'];
+  const SEQ_DARK = ['#4a3913', '#7a5610', '#b07a06', '#e09d00', '#ffd055'];
+  // Signed data (GDP growth): blue below zero, orange above, zero between the
+  // two middle classes — a colour-blind-safe diverging pair (PuOr-like).
+  const DIV = ['#2166ac', '#67a9cf', '#c6dbef', '#fdd0a2', '#f08c3a', '#b35806'];
+  const seqRamp = () => isLight() ? SEQ_LIGHT : SEQ_DARK;
+
+  // Breaks and colours for one set of values. Sequential: quintiles (ties
+  // collapse a class rather than repeat a break). Diverging: symmetric around
+  // 0, clamped at the 95th percentile of |v| so one outlier (Venezuela) does
+  // not wash every other country into the centre.
+  function classesFor(vals) {
+    const v = vals.filter(Number.isFinite).sort((a, b) => a - b);
+    if (!v.length) return { diverging: false, breaks: [], colors: [], classOf: () => -1 };
+    const diverging = v[0] < 0 && v[v.length - 1] > 0;
+    if (diverging) {
+      const abs = v.map(Math.abs).sort((a, b) => a - b);
+      const L = quantile(abs, 0.95) || abs[abs.length - 1] || 1;
+      const breaks = [-2 * L / 3, -L / 3, 0, L / 3, 2 * L / 3];
+      const classOf = (x) => { let i = 0; while (i < breaks.length && x >= breaks[i]) i++; return i; };
+      return { diverging, breaks, colors: DIV, classOf, L };
+    }
+    const raw = [0.2, 0.4, 0.6, 0.8].map((p) => quantile(v, p));
+    const breaks = raw.filter((b, i) => b > v[0] && (i === 0 || b > raw[i - 1]));
+    const ramp = seqRamp();
+    const k = breaks.length + 1;
+    // Spread the classes over the whole ramp when ties leave fewer than five.
+    const colors = Array.from({ length: k }, (_, i) => ramp[k === 1 ? ramp.length - 1 : Math.round(i * (ramp.length - 1) / (k - 1))]);
+    const classOf = (x) => { let i = 0; while (i < breaks.length && x >= breaks[i]) i++; return i; };
+    return { diverging, breaks, colors, classOf };
+  }
+
+  // Legend text for class i: "< 2.1", "2.1–5.0", "≥ 9.8".
+  function classLabels(c, f) {
+    const n = c.colors.length;
+    return c.colors.map((_, i) => {
+      if (n === 1) return 'all';
+      if (i === 0) return `< ${f(c.breaks[0])}`;
+      if (i === n - 1) return `≥ ${f(c.breaks[n - 2])}`;
+      return `${f(c.breaks[i - 1])} – ${f(c.breaks[i])}`;
+    });
+  }
+  function legendSteps(c, f, noData = true) {
+    const labels = classLabels(c, f);
+    return `<span class="lg-steps">${c.colors.map((col, i) => `<span class="lg-step"><i style="background:${col}"></i><small>${labels[i]}</small></span>`).join('')}` +
+      (noData ? `<span class="lg-step nodata"><i></i><small>No data</small></span>` : '') + `</span>`;
+  }
 
   function renderMap(rows) {
     const m = meta(); const unit = m.unit.includes('%') ? '%' : '';
     const byIso = new Map(); for (const r of rows) if (r.iso) byIso.set(r.iso, r.value);
-    const vals = [...byIso.values()]; const min = Math.min(...vals), max = Math.max(...vals);
-    const diverging = min < 0 && max > 0; // signed indicator → red ↔ green around zero
-    // Shade by rank, not raw value: one outlier (Hong Kong at 1,114% of GDP)
-    // would otherwise squash every other country into near-background black.
-    const sorted = [...vals].sort((a, b) => a - b);
-    const rankT = (v) => sorted.length > 1 ? sorted.indexOf(v) / (sorted.length - 1) : 1;
-    const colorFor = (v) => diverging
-      ? (v < 0 ? mix(GREY, RED, v / min) : mix(GREY, GREEN, v / max))
-      : mix(DARK, AMBER, 0.08 + 0.92 * rankT(v));
+    const c = classesFor([...byIso.values()]);
+    const f = (v) => fmtNum(v) + unit;
+    const svg = el('view-map').querySelector('svg');
+    const hatch = svg && svg.querySelector('pattern') ? `url(#${svg.querySelector('pattern').id})` : 'var(--bg-elev)';
     el('view-map').querySelectorAll('.country').forEach((p) => {
       // data-num is zero-padded ("076"); iso-numeric keys are unpadded ("76")
       const iso = isoNumeric[String(Number(p.getAttribute('data-num')))];
       const v = iso != null ? byIso.get(iso) : undefined;
-      if (v == null) { p.setAttribute('fill', 'var(--bg-elev)'); p.style.opacity = '0.5'; }
-      else { p.setAttribute('fill', colorFor(v)); p.style.opacity = '1'; }
+      if (v == null) { p.setAttribute('fill', hatch); p.style.opacity = '1'; }
+      else { p.setAttribute('fill', c.colors[c.classOf(v)]); p.style.opacity = '1'; }
     });
-    const bar = diverging
-      ? 'linear-gradient(90deg,#f87171,#464a52,#34d399)'
-      : 'linear-gradient(90deg,var(--bg-card),var(--accent))';
-    el('map-legend').innerHTML = `<span>${isFinite(min) ? fmtNum(min) : '—'}${unit}</span><span class="legend-bar" style="background:${bar}"></span><span>${isFinite(max) ? fmtNum(max) : '—'}${unit}</span><span class="legend-label">${m.valueLabel} · ${state.period}${diverging ? ' · 0-centred' : ' · shaded by rank'}</span>`;
+    if (svg) svg.dataset.period = state.period === 'latest' ? 'latest available' : String(state.period);
+    const how = c.diverging ? `centred on 0 · clamped at ±${f(c.L)}` : 'quintiles: a fifth of countries each';
+    el('map-legend').innerHTML = byIso.size
+      ? `${legendSteps(c, f)}<span class="legend-label">${m.valueLabel} · ${state.period} · ${how}</span>`
+      : '<span class="legend-label">No countries with map positions for this period.</span>';
   }
 
   // Dorling-style bubble map: a circle per country, area = value, anchored at
@@ -346,25 +417,25 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
       }
       for (const n of nodes) { n.x = Math.max(n.r + 2, Math.min(W - n.r - 2, n.x)); n.y = Math.max(n.r + 2, Math.min(H - n.r - 2, n.y)); }
     }
-    const absSorted = data.map((r) => Math.abs(r.value)).sort((x, y) => x - y);
-    const rankT = (v) => absSorted.length > 1 ? absSorted.indexOf(Math.abs(v)) / (absSorted.length - 1) : 1;
+    // Same classes and colours as the map, from every country in the period.
+    const cls = classesFor(rows.map((r) => r.value));
+    const lum = (hex) => { const h = hex.replace('#', ''); const [r, g, b] = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) / 255); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
     el('bubble-target').dataset.lbl = m.valueLabel;
     el('bubble-nodes').innerHTML = nodes.map((n) => {
-      const t = signed ? Math.abs(n.value) / maxV : 0.15 + 0.85 * rankT(n.value);
-      const col = signed ? (n.value < 0 ? mix(GREY, RED, Math.abs(n.value) / maxV) : mix(GREY, GREEN, n.value / maxV)) : mix(DARK, AMBER, t);
-      const dark = !signed && t > 0.55;
-      const txt = dark ? '#1a1300' : '#e7e9ec';
+      const col = cls.colors[cls.classOf(n.value)] || '#9aa1a9';
+      const txt = lum(col) > 0.5 ? '#1a1300' : '#f3f4f6';
       const a2 = isoAlpha2[n.iso] || n.iso.slice(0, 2);
       const showCode = n.r > 9, showVal = n.r > 19;
       const ent = String(n.entity).replace(/"/g, '&quot;');
       return `<g transform="translate(${n.x.toFixed(1)},${n.y.toFixed(1)})" data-e="${ent}" data-iso="${n.iso}"` +
         ` data-v="${fmtNum(n.value)}${unit}" data-r="#${n.rank} of ${rows.length}"` +
-        ` data-c="${n.change == null ? '' : fmtChange(n.change, m.changeMode)}" data-g="${n.group || ''}">` +
+        ` data-c="${n.change == null ? '' : fmtChange(n.change, m)}" data-g="${n.group || ''}">` +
         `<circle r="${n.r.toFixed(1)}" fill="${col}" fill-opacity="0.94" stroke="rgba(0,0,0,0.35)" stroke-width="1"></circle>` +
         (showCode ? `<text class="bub-t" fill="${txt}" y="${showVal ? -2.5 : 4}">${a2}</text>` : '') +
         (showVal ? `<text class="bub-v" fill="${txt}" y="12">${fmtNum(n.value)}${unit}</text>` : '') + `</g>`;
     }).join('');
-    el('bubble-legend').innerHTML = `<span class="legend-label">${m.valueLabel} · ${state.period} · bubble size = value · top ${nodes.length} of ${rows.length} countries · hover or tap a bubble</span>`;
+    const fb = (v) => fmtNum(v) + unit;
+    el('bubble-legend').innerHTML = `${legendSteps(cls, fb, false)}<span class="legend-label">${m.valueLabel} · ${state.period} · bubble size = ${signed ? '|value|' : 'value'} · top ${nodes.length} of ${rows.length} countries · hover or tap a bubble</span>`;
   }
 
   // Bubble tooltip: hover for the full story, click/tap to pin it.
@@ -432,6 +503,10 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
     [...el('view-toggle').children].forEach((x) => x.classList.toggle('active', x === b));
     render();
   });
+
+  // The map's ramp depends on the theme: redraw when it is switched.
+  new MutationObserver(() => { if (state.view === 'map' || state.view === 'bubbles') render(); })
+    .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
   // reflect restored view in the toggle
   [...el('view-toggle').children].forEach((x) => x.classList.toggle('active', x.dataset.view === state.view));

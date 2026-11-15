@@ -349,8 +349,8 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
         );
       })}
     </nav>
-<!-- Install prompt — the reference copy, inserted before </body>.
-     Source of truth: ~/Projects/_stores/ios-install-hint.html
+{/* Install prompt, inserted before </body>. A JSX comment, so it is not
+     shipped in the HTML (an HTML comment here leaked a local path into every page).
 
      One banner, two behaviours, because the platforms differ:
 
@@ -370,7 +370,7 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
 
      iPadOS needs its own check: since version 13 an iPad reports itself as a
      Mac, so a plain /iPad/ userAgent test no longer catches it — we detect it
-     by MacIntel reporting touch points. -->
+     by MacIntel reporting touch points. */}
 <div id="a2hs" hidden>
   <p id="a2hs-text"></p>
   <button type="button" id="a2hs-go" hidden>Install</button>

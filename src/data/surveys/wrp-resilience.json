@@ -105,7 +105,7 @@
     },
     {
       "entity": "Brazil",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 48.3,
       "iso": "BRA"
@@ -140,21 +140,21 @@
     },
     {
       "entity": "El Salvador",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 58.4,
       "iso": "SLV"
     },
     {
       "entity": "Uruguay",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 54.7,
       "iso": "URY"
     },
     {
       "entity": "Guatemala",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 46.5,
       "iso": "GTM"
@@ -231,7 +231,7 @@
     },
     {
       "entity": "Canada",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 63.3,
       "iso": "CAN"
@@ -301,7 +301,7 @@
     },
     {
       "entity": "Kosovo",
-      "group": "Other",
+      "group": "Europe",
       "period": "2023",
       "value": 52.1,
       "iso": "XKX"
@@ -378,7 +378,7 @@
     },
     {
       "entity": "Dominican Republic",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 54.8,
       "iso": "DOM"
@@ -392,21 +392,21 @@
     },
     {
       "entity": "Bolivia",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 47.9,
       "iso": "BOL"
     },
     {
       "entity": "Argentina",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 46.4,
       "iso": "ARG"
     },
     {
       "entity": "Peru",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 48.3,
       "iso": "PER"
@@ -462,7 +462,7 @@
     },
     {
       "entity": "Paraguay",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 52.1,
       "iso": "PRY"
@@ -546,7 +546,7 @@
     },
     {
       "entity": "Venezuela",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 43.5,
       "iso": "VEN"
@@ -588,7 +588,7 @@
     },
     {
       "entity": "Honduras",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 45,
       "iso": "HND"
@@ -602,7 +602,7 @@
     },
     {
       "entity": "Ecuador",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 42,
       "iso": "ECU"
@@ -616,7 +616,7 @@
     },
     {
       "entity": "Nicaragua",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 57.4,
       "iso": "NIC"
@@ -707,7 +707,7 @@
     },
     {
       "entity": "Mexico",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 51,
       "iso": "MEX"
@@ -840,7 +840,7 @@
     },
     {
       "entity": "Colombia",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 45.1,
       "iso": "COL"
@@ -875,7 +875,7 @@
     },
     {
       "entity": "Panama",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 49.8,
       "iso": "PAN"
@@ -889,7 +889,7 @@
     },
     {
       "entity": "United States",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 62.8,
       "iso": "USA"
@@ -966,7 +966,7 @@
     },
     {
       "entity": "Chile",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 51.7,
       "iso": "CHL"
@@ -994,7 +994,7 @@
     },
     {
       "entity": "Costa Rica",
-      "group": "Other",
+      "group": "Americas",
       "period": "2023",
       "value": 53.8,
       "iso": "CRI"

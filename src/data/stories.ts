@@ -11,13 +11,13 @@ export const stories: Story[] = [
     slug: 'happiest-countries',
     tag: 'World Happiness Report',
     title: 'The world’s happiest countries',
-    dek: 'Who tops the ranking, how happiness tracks income, and what actually drives it.',
+    dek: 'Who tops the World Happiness Report 2026, how happiness tracks income, and how the report’s model accounts for the scores.',
   },
   {
     slug: 'what-people-die-of',
     tag: 'WHO Global Health Estimates',
     title: 'What the world dies of',
-    dek: 'Cancer is a sign of a long life: causes of death track how long people live, not how rich they are.',
+    dek: 'Cancer is a sign of a long life: across countries, the cancer share of deaths tracks life expectancy far more closely than income (2021, a COVID-19 year).',
   },
   {
     slug: 'strongest-democracies',

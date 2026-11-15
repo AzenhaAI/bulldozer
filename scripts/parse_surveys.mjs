@@ -13,6 +13,7 @@ import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { parseCsvRows, parseCsvObjects } from './lib/csv.mjs';
 import { enRegion, REGION_4, latestN, pickPeriodsN, writeDataset, round } from './lib/datasets.mjs';
+import { WB_REGION_FIX } from './lib/regions.mjs';
 
 const ICLOUD = join(homedir(), 'Library', 'Mobile Documents', 'com~apple~CloudDocs');
 const GAPMINDER_DIR = process.env.GAPMINDER_DIR || join(ICLOUD, 'BK', 'Opros', 'Inter_survey', 'Gapminder');
@@ -53,16 +54,19 @@ const GAPMINDER = [
     summary: 'Annual growth of GDP per capita.' },
   { file: 'ddf--datapoints--median_age_years--by--geo--time.csv',
     slug: 'gapminder-median-age', title: 'Median Age', unit: 'years', valueLabel: 'Median age', changeMode: 'pp', dp: 1,
-    summary: 'Median age of the population.' },
-  { file: 'ddf--datapoints--murder_per_100000_people--by--geo--time.csv',
-    slug: 'gapminder-homicide', title: 'Homicide Rate', unit: 'per 100k', valueLabel: 'Homicides', changeMode: 'pct', dp: 1,
-    summary: 'Intentional homicides per 100,000 people.' },
+    // Gapminder carries UN WPP 2024 here: estimates to 2023, medium-variant
+    // projections from 2024 (values match WPP 2024 to the decimal).
+    projectedFrom: '2024', summary: 'Median age of the population.' },
+  // gapminder-homicide is NOT here any more: Gapminder's murder_per_100000_people
+  // is modelled and disagreed with UNODC on 757 of 918 country-years (El Salvador
+  // 2022: 54.1 vs 7.9; review, 15 Nov 2026). The slug is now written by
+  // parse_wb_homicide.mjs from World Bank VC.IHR.PSRC.P5 (UNODC).
   { file: 'ddf--datapoints--urban_population_percent_of_total--by--geo--time.csv',
     slug: 'gapminder-urban', title: 'Urban Population', unit: '%', valueLabel: 'Urban population', changeMode: 'pp', dp: 1,
     summary: 'Share of the population living in urban areas.' },
   { file: 'ddf--datapoints--population_density_per_square_km--by--geo--time.csv',
     slug: 'gapminder-density', title: 'Population Density', unit: 'per km²', valueLabel: 'Population density', changeMode: 'pct', dp: 1,
-    summary: 'People per square kilometre of land area.' },
+    projectedFrom: '2024', summary: 'People per square kilometre of land area.' }, // UN WPP 2024, as median age
 ];
 
 async function loadGeoMap() {
@@ -125,6 +129,7 @@ async function parseGapminder(geoMap) {
       valueLabel: cfg.valueLabel,
       changeMode: cfg.changeMode,
       ...GAPMINDER_SRC,
+      ...(cfg.projectedFrom ? { projectedFrom: cfg.projectedFrom } : {}),
     }, data);
   }
 }
@@ -186,6 +191,12 @@ async function parseWHR(geoMap) {
     const map = byCode.get(row.indicator_code);
     let rec = map.get(row.country);
     if (!rec) map.set(row.country, (rec = { region: enRegion(row.region), byYear: {} }));
+    // The tidy export files countries whose spelling its lookup misses (Russian
+    // Federation, Viet Nam, DR Congo...) under "—": give them their WB region.
+    if (rec.region === 'Advanced / other') {
+      const fix = WB_REGION_FIX[name2iso.get(row.country.toLowerCase())] || WB_REGION_FIX[row.country];
+      if (fix) rec.region = fix;
+    }
     rec.byYear[row.year] = v;
   }
 
@@ -201,12 +212,14 @@ async function parseWHR(geoMap) {
     }
     await writeDataset('survey', cfg.slug, {
       title: cfg.title,
-      summary: `${cfg.summary} World Happiness Report, ${keep[0]}–${keep.at(-1)}.`,
+      // A period is the last year of a 3-year survey pool, published the next year.
+      summary: `${cfg.summary} World Happiness Report editions ${+keep[0] + 1}–${+keep.at(-1) + 1} (3-year survey averages ending ${keep[0]}–${keep.at(-1)}).`,
       unit: cfg.unit,
       valueLabel: cfg.valueLabel,
       changeMode: 'pp',
       source: 'World Happiness Report (Gallup World Poll)',
-      license: 'CC BY 4.0',
+      // WHR's data pages name no licence (checked 15 Nov 2026; see /licences).
+      license: 'No licence stated — see azenha.ai/bulldozer/licences',
       url: 'https://worldhappiness.report/',
       parsedAt: new Date().toISOString().slice(0, 10),
     }, data);

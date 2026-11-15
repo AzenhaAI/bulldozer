@@ -62,8 +62,9 @@ const mostSurvival = top(points, (p) => -p.x)[0];
   <section class="section" style="padding-top:0">
     <div class="container">
       <h2>The four extremes</h2>
+      <p class="sub">Of the {points.length} countries in World Values Survey wave 7 (2017–2022) — not of every country in the world.</p>
       <div class="grid cols-2">
-        <div class="card"><h3>Most secular-rational</h3><p class="meta">{mostSecular.label} — religion and tradition weigh least on public life.</p></div>
+        <div class="card"><h3>Most secular-rational</h3><p class="meta">{mostSecular.label}, of the {points.length} WVS wave-7 countries — religion and tradition weigh least on public life.</p></div>
         <div class="card"><h3>Most traditional</h3><p class="meta">{mostTraditional.label} — religion, family and authority are central.</p></div>
         <div class="card"><h3>Most self-expression</h3><p class="meta">{mostSelfExp.label} — emphasis on freedom, tolerance and participation.</p></div>
         <div class="card"><h3>Most survival-oriented</h3><p class="meta">{mostSurvival.label} — security and economic survival come first.</p></div>

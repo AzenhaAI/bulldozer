@@ -2,7 +2,7 @@
  * Long historical Gapminder series for the bubble chart / bar race:
  *  - income per person (PPP), 1800→2018  (local DDF)
  *  - life expectancy at birth, 1800→2020 (open-numbers GitHub)
- *  - total population, 1800→2020          (open-numbers GitHub)
+ *  - total population, 1800→2013          (open-numbers GitHub; the file ends there)
  * geo → ISO3/name/region via the local entities file.
  *   node scripts/parse_gapminder_long.mjs
  */
@@ -76,9 +76,13 @@ async function main() {
   // total population — long (1800→2020), stored in millions
   const popCsv = await fetchText('https://raw.githubusercontent.com/open-numbers/ddf--gapminder--systema_globalis/master/countries-etc-datapoints/ddf--datapoints--total_population_with_projections--by--geo--time.csv');
   const pop = toObs(popCsv, geo, 1e6);
+  // The span is read off the data: the summary said 1800–2020 while the
+  // systema_globalis file stops at 2013 (review, 15 Nov 2026).
+  const popYears = pop.map((o) => Number(o.period));
+  const popSpan = `${Math.min(...popYears)}–${Math.max(...popYears)}`;
   await writeDataset('macro', 'gapminder-population', {
     title: 'Population', valueLabel: 'Total population (millions)', unit: 'million', changeMode: 'pct', topic: 'demographics',
-    summary: 'Total population (millions) — the long Gapminder series, 1800–2020. Used for bubble size on the bubble chart.', ...COMMON,
+    summary: `Total population (millions) — the long Gapminder series, ${popSpan}. Used for bubble size on the bubble chart.`, ...COMMON,
   }, pop);
   console.log(`✓ gapminder-population: ${pop.length} obs, ${yrs(pop)} years`);
 }

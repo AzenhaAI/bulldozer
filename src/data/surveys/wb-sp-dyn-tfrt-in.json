@@ -1918,59 +1918,67 @@
     },
     {
       "entity": "Channel Islands",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2017",
       "value": 1.41,
-      "iso": "CHI"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Channel Islands",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2018",
       "value": 1.37,
-      "iso": "CHI"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Channel Islands",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2019",
       "value": 1.35,
-      "iso": "CHI"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Channel Islands",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2020",
       "value": 1.33,
-      "iso": "CHI"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Channel Islands",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2021",
       "value": 1.36,
-      "iso": "CHI"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Channel Islands",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2022",
       "value": 1.37,
-      "iso": "CHI"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Channel Islands",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2023",
       "value": 1.37,
-      "iso": "CHI"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Channel Islands",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2024",
       "value": 1.37,
-      "iso": "CHI"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Chile",
@@ -6678,56 +6686,56 @@
     },
     {
       "entity": "St. Martin (French part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2017",
       "value": 2.66,
       "iso": "MAF"
     },
     {
       "entity": "St. Martin (French part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2018",
       "value": 2.73,
       "iso": "MAF"
     },
     {
       "entity": "St. Martin (French part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2019",
       "value": 2.79,
       "iso": "MAF"
     },
     {
       "entity": "St. Martin (French part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2020",
       "value": 2.83,
       "iso": "MAF"
     },
     {
       "entity": "St. Martin (French part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2021",
       "value": 2.8,
       "iso": "MAF"
     },
     {
       "entity": "St. Martin (French part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2022",
       "value": 2.76,
       "iso": "MAF"
     },
     {
       "entity": "St. Martin (French part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2023",
       "value": 2.72,
       "iso": "MAF"
     },
     {
       "entity": "St. Martin (French part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2024",
       "value": 2.67,
       "iso": "MAF"
@@ -10318,56 +10326,56 @@
     },
     {
       "entity": "Sint Maarten (Dutch part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2017",
       "value": 1.57,
       "iso": "SXM"
     },
     {
       "entity": "Sint Maarten (Dutch part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2018",
       "value": 1.52,
       "iso": "SXM"
     },
     {
       "entity": "Sint Maarten (Dutch part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2019",
       "value": 1.48,
       "iso": "SXM"
     },
     {
       "entity": "Sint Maarten (Dutch part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2020",
       "value": 1.47,
       "iso": "SXM"
     },
     {
       "entity": "Sint Maarten (Dutch part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2021",
       "value": 1.46,
       "iso": "SXM"
     },
     {
       "entity": "Sint Maarten (Dutch part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2022",
       "value": 1.45,
       "iso": "SXM"
     },
     {
       "entity": "Sint Maarten (Dutch part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2023",
       "value": 1.45,
       "iso": "SXM"
     },
     {
       "entity": "Sint Maarten (Dutch part)",
-      "group": "Advanced / other",
+      "group": "Americas",
       "period": "2024",
       "value": 1.44,
       "iso": "SXM"
@@ -11886,56 +11894,56 @@
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2017",
       "value": 1.62,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2018",
       "value": 1.58,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2019",
       "value": 1.58,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2020",
       "value": 1.57,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2021",
       "value": 1.56,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2022",
       "value": 1.56,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2023",
       "value": 1.55,
       "iso": "XKX"
     },
     {
       "entity": "Kosovo",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2024",
       "value": 1.54,
       "iso": "XKX"

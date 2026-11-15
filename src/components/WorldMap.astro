@@ -23,6 +23,13 @@ const { legendId = 'map-legend', showLegend = true } = Astro.props;
 ---
 <div class="worldmap">
   <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="World choropleth" preserveAspectRatio="xMidYMid meet">
+    {/* Hatched fill for countries with no data, so they never read as the lowest class. */}
+    <defs>
+      <pattern id={`nodata-${legendId}`} patternUnits="userSpaceOnUse" width="5" height="5" patternTransform="rotate(45)">
+        <rect width="5" height="5" fill="var(--bg-elev)" />
+        <line x1="0" y1="0" x2="0" y2="5" stroke="var(--border)" stroke-width="2" />
+      </pattern>
+    </defs>
     <rect x="0" y="0" width={W} height={H} fill="transparent" />
     {countries.map((c: any) => (
       <path

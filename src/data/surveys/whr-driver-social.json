@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "Happiness Driver: Social Support",
-    "summary": "Contribution of social support to the happiness score. World Happiness Report, 2019–2025.",
+    "summary": "Contribution of social support to the happiness score. World Happiness Report editions 2020–2026 (3-year survey averages ending 2019–2025).",
     "unit": "ladder pts",
     "valueLabel": "Social support contribution",
     "changeMode": "pp",
     "source": "World Happiness Report (Gallup World Poll)",
-    "license": "CC BY 4.0",
+    "license": "No licence stated — see azenha.ai/bulldozer/licences",
     "url": "https://worldhappiness.report/",
     "parsedAt": "2026-08-03",
     "kind": "survey"
@@ -994,49 +994,49 @@
     },
     {
       "entity": "United Arab Emirates",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2019",
       "value": 1.251,
       "iso": "ARE"
     },
     {
       "entity": "United Arab Emirates",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2020",
       "value": 0.86,
       "iso": "ARE"
     },
     {
       "entity": "United Arab Emirates",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2021",
       "value": 0.98,
       "iso": "ARE"
     },
     {
       "entity": "United Arab Emirates",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2022",
       "value": 1.223,
       "iso": "ARE"
     },
     {
       "entity": "United Arab Emirates",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2023",
       "value": 1.164,
       "iso": "ARE"
     },
     {
       "entity": "United Arab Emirates",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2024",
       "value": 1.294,
       "iso": "ARE"
     },
     {
       "entity": "United Arab Emirates",
-      "group": "Advanced / other",
+      "group": "Middle East & North Africa",
       "period": "2025",
       "value": 1.096,
       "iso": "ARE"
@@ -1351,49 +1351,49 @@
     },
     {
       "entity": "United Kingdom",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2019",
       "value": 1.458,
       "iso": "GBR"
     },
     {
       "entity": "United Kingdom",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2020",
       "value": 1.062,
       "iso": "GBR"
     },
     {
       "entity": "United Kingdom",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2021",
       "value": 1.143,
       "iso": "GBR"
     },
     {
       "entity": "United Kingdom",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2022",
       "value": 1.366,
       "iso": "GBR"
     },
     {
       "entity": "United Kingdom",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2023",
       "value": 1.326,
       "iso": "GBR"
     },
     {
       "entity": "United Kingdom",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2024",
       "value": 1.562,
       "iso": "GBR"
     },
     {
       "entity": "United Kingdom",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2025",
       "value": 1.458,
       "iso": "GBR"
@@ -2128,49 +2128,49 @@
     },
     {
       "entity": "Viet Nam",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2019",
       "value": 1.253,
       "iso": "VNM"
     },
     {
       "entity": "Viet Nam",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2020",
       "value": 0.873,
       "iso": "VNM"
     },
     {
       "entity": "Viet Nam",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2021",
       "value": 0.932,
       "iso": "VNM"
     },
     {
       "entity": "Viet Nam",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2022",
       "value": 1.212,
       "iso": "VNM"
     },
     {
       "entity": "Viet Nam",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2023",
       "value": 1.267,
       "iso": "VNM"
     },
     {
       "entity": "Viet Nam",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2024",
       "value": 1.533,
       "iso": "VNM"
     },
     {
       "entity": "Viet Nam",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2025",
       "value": 1.375,
       "iso": "VNM"
@@ -2569,49 +2569,49 @@
     },
     {
       "entity": "Slovakia",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2019",
       "value": 1.424,
       "iso": "SVK"
     },
     {
       "entity": "Slovakia",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2020",
       "value": 1.066,
       "iso": "SVK"
     },
     {
       "entity": "Slovakia",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2021",
       "value": 1.232,
       "iso": "SVK"
     },
     {
       "entity": "Slovakia",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2022",
       "value": 1.544,
       "iso": "SVK"
     },
     {
       "entity": "Slovakia",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2023",
       "value": 1.54,
       "iso": "SVK"
     },
     {
       "entity": "Slovakia",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2024",
       "value": 1.762,
       "iso": "SVK"
     },
     {
       "entity": "Slovakia",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2025",
       "value": 1.63,
       "iso": "SVK"
@@ -3115,98 +3115,98 @@
     },
     {
       "entity": "Kyrgyzstan",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2019",
       "value": 1.341,
       "iso": "KGZ"
     },
     {
       "entity": "Kyrgyzstan",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2020",
       "value": 0.971,
       "iso": "KGZ"
     },
     {
       "entity": "Kyrgyzstan",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2021",
       "value": 1.109,
       "iso": "KGZ"
     },
     {
       "entity": "Kyrgyzstan",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2022",
       "value": 1.439,
       "iso": "KGZ"
     },
     {
       "entity": "Kyrgyzstan",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2023",
       "value": 1.477,
       "iso": "KGZ"
     },
     {
       "entity": "Kyrgyzstan",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2024",
       "value": 1.715,
       "iso": "KGZ"
     },
     {
       "entity": "Kyrgyzstan",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2025",
       "value": 1.565,
       "iso": "KGZ"
     },
     {
       "entity": "Republic of Korea",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2019",
       "value": 1.134,
       "iso": "KOR"
     },
     {
       "entity": "Republic of Korea",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2020",
       "value": 0.758,
       "iso": "KOR"
     },
     {
       "entity": "Republic of Korea",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2021",
       "value": 0.886,
       "iso": "KOR"
     },
     {
       "entity": "Republic of Korea",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2022",
       "value": 1.188,
       "iso": "KOR"
     },
     {
       "entity": "Republic of Korea",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2023",
       "value": 1.178,
       "iso": "KOR"
     },
     {
       "entity": "Republic of Korea",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2024",
       "value": 1.357,
       "iso": "KOR"
     },
     {
       "entity": "Republic of Korea",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2025",
       "value": 1.23,
       "iso": "KOR"
@@ -3626,49 +3626,49 @@
     },
     {
       "entity": "Republic of Moldova",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2019",
       "value": 1.237,
       "iso": "MDA"
     },
     {
       "entity": "Republic of Moldova",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2020",
       "value": 0.888,
       "iso": "MDA"
     },
     {
       "entity": "Republic of Moldova",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2021",
       "value": 1.008,
       "iso": "MDA"
     },
     {
       "entity": "Republic of Moldova",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2022",
       "value": 1.302,
       "iso": "MDA"
     },
     {
       "entity": "Republic of Moldova",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2023",
       "value": 1.277,
       "iso": "MDA"
     },
     {
       "entity": "Republic of Moldova",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2024",
       "value": 1.43,
       "iso": "MDA"
     },
     {
       "entity": "Republic of Moldova",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2025",
       "value": 1.277,
       "iso": "MDA"
@@ -3724,49 +3724,49 @@
     },
     {
       "entity": "Russian Federation",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2019",
       "value": 1.379,
       "iso": "RUS"
     },
     {
       "entity": "Russian Federation",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2020",
       "value": 0.992,
       "iso": "RUS"
     },
     {
       "entity": "Russian Federation",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2021",
       "value": 1.095,
       "iso": "RUS"
     },
     {
       "entity": "Russian Federation",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2022",
       "value": 1.383,
       "iso": "RUS"
     },
     {
       "entity": "Russian Federation",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2023",
       "value": 1.351,
       "iso": "RUS"
     },
     {
       "entity": "Russian Federation",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2024",
       "value": 1.549,
       "iso": "RUS"
     },
     {
       "entity": "Russian Federation",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2025",
       "value": 1.331,
       "iso": "RUS"
@@ -4249,49 +4249,49 @@
     },
     {
       "entity": "Hong Kong SAR of China",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2019",
       "value": 1.244,
       "iso": "HKG"
     },
     {
       "entity": "Hong Kong SAR of China",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2020",
       "value": 0.841,
       "iso": "HKG"
     },
     {
       "entity": "Hong Kong SAR of China",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2021",
       "value": 0.954,
       "iso": "HKG"
     },
     {
       "entity": "Hong Kong SAR of China",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2022",
       "value": 1.201,
       "iso": "HKG"
     },
     {
       "entity": "Hong Kong SAR of China",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2023",
       "value": 1.184,
       "iso": "HKG"
     },
     {
       "entity": "Hong Kong SAR of China",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2024",
       "value": 1.41,
       "iso": "HKG"
     },
     {
       "entity": "Hong Kong SAR of China",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2025",
       "value": 1.33,
       "iso": "HKG"
@@ -4347,49 +4347,49 @@
     },
     {
       "entity": "Lao PDR",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2019",
       "value": 0.987,
       "iso": "LAO"
     },
     {
       "entity": "Lao PDR",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2020",
       "value": 0.598,
       "iso": "LAO"
     },
     {
       "entity": "Lao PDR",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2021",
       "value": 0.654,
       "iso": "LAO"
     },
     {
       "entity": "Lao PDR",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2022",
       "value": 0.853,
       "iso": "LAO"
     },
     {
       "entity": "Lao PDR",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2023",
       "value": 0.846,
       "iso": "LAO"
     },
     {
       "entity": "Lao PDR",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2024",
       "value": 1.01,
       "iso": "LAO"
     },
     {
       "entity": "Lao PDR",
-      "group": "Advanced / other",
+      "group": "East Asia & Pacific",
       "period": "2025",
       "value": 0.866,
       "iso": "LAO"
@@ -4641,49 +4641,49 @@
     },
     {
       "entity": "Côte d’Ivoire",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2019",
       "value": 0.8,
       "iso": "CIV"
     },
     {
       "entity": "Côte d’Ivoire",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2020",
       "value": 0.409,
       "iso": "CIV"
     },
     {
       "entity": "Côte d’Ivoire",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2021",
       "value": 0.442,
       "iso": "CIV"
     },
     {
       "entity": "Côte d’Ivoire",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2022",
       "value": 0.584,
       "iso": "CIV"
     },
     {
       "entity": "Côte d’Ivoire",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2023",
       "value": 0.578,
       "iso": "CIV"
     },
     {
       "entity": "Côte d’Ivoire",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2024",
       "value": 0.76,
       "iso": "CIV"
     },
     {
       "entity": "Côte d’Ivoire",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2025",
       "value": 0.694,
       "iso": "CIV"
@@ -5768,49 +5768,49 @@
     },
     {
       "entity": "Congo",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2019",
       "value": 0.758,
       "iso": "COG"
     },
     {
       "entity": "Congo",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2020",
       "value": 0.392,
       "iso": "COG"
     },
     {
       "entity": "Congo",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2021",
       "value": 0.405,
       "iso": "COG"
     },
     {
       "entity": "Congo",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2022",
       "value": 0.665,
       "iso": "COG"
     },
     {
       "entity": "Congo",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2023",
       "value": 0.622,
       "iso": "COG"
     },
     {
       "entity": "Congo",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2024",
       "value": 0.796,
       "iso": "COG"
     },
     {
       "entity": "Congo",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2025",
       "value": 0.554,
       "iso": "COG"
@@ -6622,35 +6622,35 @@
     },
     {
       "entity": "DR Congo",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2019",
       "value": 0.833,
       "iso": "COD"
     },
     {
       "entity": "DR Congo",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2022",
       "value": 0.784,
       "iso": "COD"
     },
     {
       "entity": "DR Congo",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2023",
       "value": 0.665,
       "iso": "COD"
     },
     {
       "entity": "DR Congo",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2024",
       "value": 0.929,
       "iso": "COD"
     },
     {
       "entity": "DR Congo",
-      "group": "Advanced / other",
+      "group": "Sub-Saharan Africa",
       "period": "2025",
       "value": 0.792,
       "iso": "COD"
@@ -7035,24 +7035,27 @@
     },
     {
       "entity": "North Cyprus",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2019",
       "value": 1.183,
-      "iso": ""
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "North Cyprus",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2020",
       "value": 0.806,
-      "iso": ""
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "North Cyprus",
-      "group": "Advanced / other",
+      "group": "Europe & Central Asia",
       "period": "2021",
       "value": 0.888,
-      "iso": ""
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Rwanda",
@@ -7090,15 +7093,15 @@
       "iso": "MDV"
     },
     {
-      "entity": "Swaziland",
-      "group": "Advanced / other",
+      "entity": "Eswatini",
+      "group": "Sub-Saharan Africa",
       "period": "2019",
       "value": 1.065,
       "iso": "SWZ"
     },
     {
-      "entity": "Swaziland",
-      "group": "Advanced / other",
+      "entity": "Eswatini",
+      "group": "Sub-Saharan Africa",
       "period": "2020",
       "value": 0.693,
       "iso": "SWZ"

@@ -1,36 +1,39 @@
 ---
-import type { Observation, ChangeMode } from '@lib/analytics';
-import { topByVolume, computeChanges } from '@lib/analytics';
-import { formatChange, pctClass, formatNum } from '@lib/format';
+import type { Observation, ChangeMode, Better } from '@lib/analytics';
+import { topByVolume, computeChanges, changeSpec, formatDelta, formatValue, toneOf } from '@lib/analytics';
 import { flagFor } from '@lib/flags';
 
-interface Props { data: Observation[]; n?: number; unit?: string; mode?: ChangeMode }
-const { data, n = 10, unit = '', mode = 'pct' } = Astro.props;
+interface Props { data: Observation[]; n?: number; unit?: string; fullUnit?: string; mode?: ChangeMode; better?: Better }
+const { data, n = 10, unit = '', fullUnit = unit, mode = 'pct', better } = Astro.props;
 const rows = topByVolume(data, n);
 const isoOf = new Map(data.filter((o) => o.iso).map((o) => [o.entity, o.iso!]));
 const label = (e: string) => { const f = flagFor(isoOf.get(e)); return f ? f + ' ' + e : e; };
+const spec = changeSpec(data, fullUnit, mode, better);
 
-// Movement per entity, to colour bars green/red/grey (Madeira dashboard style).
+// The bar is the value; the change is only the small label, coloured by
+// whether it went the better way (neutral when neither way is better).
 const changeByEntity = new Map(computeChanges(data, mode).map((c) => [c.entity, c.pct]));
 
-// Anchor the scale at zero (or below, if values go negative).
+// A visible zero axis, bars running both ways from it: length = |value|.
 const values = rows.map((r) => r.curr);
-const base = Math.min(0, ...values);
-const max = Math.max(1, ...values);
-const span = max - base || 1;
-const width = (v: number) => Math.max(0, Math.min(100, ((v - base) / span) * 100));
+const lo = Math.min(0, ...values);
+const hi = Math.max(0, ...values);
+const span = hi - lo || 1;
+const pos = (v: number) => ((v - lo) / span) * 100;
+const zero = pos(0);
+const geom = (v: number) => { const p = pos(v); return `margin-left:${Math.min(p, zero).toFixed(2)}%;width:${Math.abs(p - zero).toFixed(2)}%`; };
 ---
 <div class="bars">
   {rows.map((r) => {
     const ch = changeByEntity.get(r.entity);
-    const cls = ch === undefined ? 'flat' : pctClass(ch);
+    const cls = ch === undefined ? 'flat' : toneOf(ch, spec);
     return (
       <div class="bar-row">
         <span>{label(r.entity)}</span>
-        <span class="bar-track"><span class={`bar-fill move-${cls}`} style={`width:${width(r.curr)}%`}></span></span>
+        <span class="bar-track">{lo < 0 && <span class="bar-zero" style={`left:${zero.toFixed(2)}%`}></span>}<span class={`bar-fill${r.curr < 0 ? ' neg' : ''}`} style={geom(r.curr)}></span></span>
         <span class="bar-val">
-          {formatNum(r.curr)}{unit}
-          {ch !== undefined && <em class={cls}>{formatChange(ch, mode)}</em>}
+          {formatValue(r.curr, fullUnit)}{unit}
+          {ch !== undefined && <em class={cls}>{formatDelta(ch, spec)}</em>}
         </span>
       </div>
     );

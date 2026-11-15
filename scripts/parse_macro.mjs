@@ -70,10 +70,12 @@ const IMF_HEADERS = { 'User-Agent': 'Mozilla/5.0 (compatible; BullDozer data ref
 
 /** The latest WEO from the IMF DataMapper API, as rows shaped like the tidy CSV.
  *  Aggregates (ADVEC, EURO, WEOWORLD…) are dropped by keeping real ISO-3 codes;
- *  names and regions come from the dataset already on disk, else Gapminder. */
+ *  regions come from the dataset already on disk, else the Gapminder snapshot;
+ *  names from country-names.json (common English name), else those. */
 async function fromDataMapper() {
   const { readFile: rf } = await import('node:fs/promises');
   const alpha = JSON.parse(await rf(new URL('../src/data/iso-alpha2.json', import.meta.url), 'utf8'));
+  const names = JSON.parse(await rf(new URL('../src/data/country-names.json', import.meta.url), 'utf8'));
   const known = new Map();
   try {
     const cur = JSON.parse(await rf(new URL('../src/data/macro/imf-gdp-growth.json', import.meta.url), 'utf8'));
@@ -83,9 +85,11 @@ async function fromDataMapper() {
   // regions in the WEO taxonomy the other rows use.
   for (const [iso, name, region] of [['UVK', 'Kosovo', 'Europe & Central Asia'], ['WBG', 'West Bank and Gaza', 'Middle East & North Africa'],
     ['SYR', 'Syria', 'Middle East & North Africa']]) known.set(iso, { name, region }); // these win: an earlier run filed UVK and WBG under "Advanced / other"
-  const { gapminderRows, REGION_4 } = await import('./lib/datasets.mjs');
+  // Regions for a country new to the WEO from the bundled Gapminder snapshot,
+  // read directly: gapminderRows() would prefer the owner's iCloud copy.
+  const { REGION_4 } = await import('./lib/datasets.mjs');
   const geo = new Map();
-  for (const r of await gapminderRows()) {
+  for (const r of JSON.parse(await rf(new URL('./lib/gapminder_geo.json', import.meta.url), 'utf8'))) {
     const a3 = (r.iso3166_1_alpha3 || '').toUpperCase();
     if (a3) geo.set(a3, { name: r.name, region: REGION_4[r.world_4region] || 'Other' });
   }
@@ -99,8 +103,12 @@ async function fromDataMapper() {
       if (!(iso in alpha) && !known.has(iso)) continue; // UVK, WBG: IMF codes we already use
       const k = known.get(iso) || geo.get(iso);
       if (!k) continue;
+      // Common English name by ISO-3: names kept from earlier files carried the
+      // WEO's own spellings ("China, People's Republic of", "Türkiye, Republic
+      // of", "Gambia, The", "Taiwan Province of China") into the rankings.
+      const name = names[iso]?.common || k.name;
       for (const [year, value] of Object.entries(years)) {
-        rows.push({ indicator_code: code, country: k.name, region: k.region, iso3: iso, year, value: String(value), _regionEn: true });
+        rows.push({ indicator_code: code, country: name, region: k.region, iso3: iso, year, value: String(value), _regionEn: true });
       }
     }
   }

@@ -8,66 +8,10 @@
     "source": "OECD Taxing Wages",
     "license": "OECD terms — public data",
     "url": "https://www.oecd.org/en/data/datasets/taxing-wages.html",
-    "parsedAt": "2026-11-14",
+    "parsedAt": "2026-11-15",
     "kind": "macro"
   },
   "data": [
-    {
-      "entity": "OECD average country",
-      "group": "OECD",
-      "period": "2016",
-      "value": 35.2,
-      "iso": "OECD_REP"
-    },
-    {
-      "entity": "OECD average country",
-      "group": "OECD",
-      "period": "2017",
-      "value": 35.1,
-      "iso": "OECD_REP"
-    },
-    {
-      "entity": "OECD average country",
-      "group": "OECD",
-      "period": "2018",
-      "value": 34.9,
-      "iso": "OECD_REP"
-    },
-    {
-      "entity": "OECD average country",
-      "group": "OECD",
-      "period": "2019",
-      "value": 34.9,
-      "iso": "OECD_REP"
-    },
-    {
-      "entity": "OECD average country",
-      "group": "OECD",
-      "period": "2020",
-      "value": 34.7,
-      "iso": "OECD_REP"
-    },
-    {
-      "entity": "OECD average country",
-      "group": "OECD",
-      "period": "2021",
-      "value": 34.6,
-      "iso": "OECD_REP"
-    },
-    {
-      "entity": "OECD average country",
-      "group": "OECD",
-      "period": "2022",
-      "value": 34.7,
-      "iso": "OECD_REP"
-    },
-    {
-      "entity": "OECD average country",
-      "group": "OECD",
-      "period": "2023",
-      "value": 34.8,
-      "iso": "OECD_REP"
-    },
     {
       "entity": "Lithuania",
       "group": "Europe & Central Asia",
@@ -2195,62 +2139,6 @@
       "period": "2023",
       "value": 42.3,
       "iso": "PRT"
-    },
-    {
-      "entity": "European Union (22 countries) in OECD",
-      "group": "OECD",
-      "period": "2016",
-      "value": 42.4,
-      "iso": "EU22OECD"
-    },
-    {
-      "entity": "European Union (22 countries) in OECD",
-      "group": "OECD",
-      "period": "2017",
-      "value": 42.2,
-      "iso": "EU22OECD"
-    },
-    {
-      "entity": "European Union (22 countries) in OECD",
-      "group": "OECD",
-      "period": "2018",
-      "value": 42,
-      "iso": "EU22OECD"
-    },
-    {
-      "entity": "European Union (22 countries) in OECD",
-      "group": "OECD",
-      "period": "2019",
-      "value": 42,
-      "iso": "EU22OECD"
-    },
-    {
-      "entity": "European Union (22 countries) in OECD",
-      "group": "OECD",
-      "period": "2020",
-      "value": 41.6,
-      "iso": "EU22OECD"
-    },
-    {
-      "entity": "European Union (22 countries) in OECD",
-      "group": "OECD",
-      "period": "2021",
-      "value": 41.4,
-      "iso": "EU22OECD"
-    },
-    {
-      "entity": "European Union (22 countries) in OECD",
-      "group": "OECD",
-      "period": "2022",
-      "value": 41.4,
-      "iso": "EU22OECD"
-    },
-    {
-      "entity": "European Union (22 countries) in OECD",
-      "group": "OECD",
-      "period": "2023",
-      "value": 41.6,
-      "iso": "EU22OECD"
     }
   ]
 }

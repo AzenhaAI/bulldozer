@@ -50,7 +50,7 @@
     },
     {
       "entity": "Canada",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.478,
       "iso": "CAN"
@@ -71,7 +71,7 @@
     },
     {
       "entity": "Chile",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.462,
       "iso": "CHL"
@@ -113,7 +113,7 @@
     },
     {
       "entity": "Mexico",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.428,
       "iso": "MEX"
@@ -134,14 +134,14 @@
     },
     {
       "entity": "Argentina",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.421,
       "iso": "ARG"
     },
     {
       "entity": "Venezuela",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.419,
       "iso": "VEN"
@@ -169,7 +169,7 @@
     },
     {
       "entity": "Guatemala",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.405,
       "iso": "GTM"
@@ -182,11 +182,12 @@
       "iso": "CHN"
     },
     {
-      "entity": "NIR",
-      "group": "Other",
+      "entity": "Northern Ireland",
+      "group": "Europe",
       "period": "2022",
       "value": 0.4,
-      "iso": "NIR"
+      "iso": "",
+      "sub": true
     },
     {
       "entity": "Thailand",
@@ -218,21 +219,21 @@
     },
     {
       "entity": "USA",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.381,
       "iso": "USA"
     },
     {
       "entity": "Peru",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.379,
       "iso": "PER"
     },
     {
       "entity": "Uruguay",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.379,
       "iso": "URY"
@@ -246,7 +247,7 @@
     },
     {
       "entity": "Bolivia",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.371,
       "iso": "BOL"
@@ -267,14 +268,14 @@
     },
     {
       "entity": "Nicaragua",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.357,
       "iso": "NIC"
     },
     {
       "entity": "Brazil",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.349,
       "iso": "BRA"
@@ -288,7 +289,7 @@
     },
     {
       "entity": "Colombia",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.338,
       "iso": "COL"
@@ -302,7 +303,7 @@
     },
     {
       "entity": "Ecuador",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.323,
       "iso": "ECU"
@@ -379,7 +380,7 @@
     },
     {
       "entity": "Puerto Rico",
-      "group": "Other",
+      "group": "Americas",
       "period": "2022",
       "value": 0.262,
       "iso": "PRI"

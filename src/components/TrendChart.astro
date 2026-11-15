@@ -94,6 +94,12 @@ const geom = (W: number, H: number) => {
   return { W, H, m, Y, line, trendPath, xLabels, projX };
 };
 const views = [{ cls: 'tc-wide', g: geom(760, 340) }, { cls: 'tc-narrow', g: geom(380, 260) }];
+// A zoomed axis exaggerates change: say so when 0 is off the chart.
+const noZero = series.length > 0 && (lo > 0 || hi < 0);
+const topTick = ticks.length ? Math.max(...ticks) : null;
+// The unit rides on the top tick ("80 years", "0.9 index 0–1"); a bare "%"
+// is already on every tick.
+const unitLabel = fullUnit && fullUnit !== '%' ? fullUnit : '';
 const anySmooth = series.some((s) => s.smooth), anyTrend = series.some((s) => s.trend?.clear);
 ---
 {series.length > 0 ? (
@@ -105,8 +111,12 @@ const anySmooth = series.some((s) => s.smooth), anyTrend = series.some((s) => s.
       <text x={g.W - g.m.r - 4} y={g.m.t + 12} text-anchor="end" class="axis">IMF forecast</text></g>
     )}
     {ticks.map((v) => (
-      <g><line x1={g.m.l} y1={g.Y(v)} x2={g.W - g.m.r} y2={g.Y(v)} stroke="var(--border)" stroke-width={v === 0 ? 1.6 : 1} /><text x={g.m.l - 8} y={g.Y(v) + 4} text-anchor="end" class="axis">{fmtTick(v)}</text></g>
+      <g><line x1={g.m.l} y1={g.Y(v)} x2={g.W - g.m.r} y2={g.Y(v)} stroke="var(--border)" stroke-width={v === 0 ? 1.6 : 1} /><text x={g.m.l - 8} y={g.Y(v) + 4} text-anchor="end" class="axis">{fmtTick(v)}</text>
+      {v === topTick && unitLabel && <text x={g.m.l + 4} y={g.Y(v) - 4} text-anchor="start" class="axis tc-unit">{unitLabel}</text>}</g>
     ))}
+    {noZero && (
+      <g class="tc-nozero"><path d={`M${g.m.l - 5},${g.H - g.m.b - 2} l5,-4 l5,4`} fill="none" stroke="var(--text-dim)" stroke-width="1" /><text x={g.m.l + 8} y={g.H - g.m.b - 4} text-anchor="start" class="axis">axis does not start at 0</text></g>
+    )}
     {g.xLabels.map(({ p, x, anchor }) => (
       <text x={x} y={g.H - g.m.b + 20} text-anchor={anchor} class="axis">{p}</text>
     ))}

@@ -12,6 +12,7 @@ import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { parseCsvObjects } from './lib/csv.mjs';
 import { enRegion, pickPeriodsN, writeDataset, round } from './lib/datasets.mjs';
+import { WB_REGION_FIX } from './lib/regions.mjs';
 
 const H = homedir();
 const TD = join(H, 'Documents', 'tableau_data');
@@ -102,9 +103,15 @@ async function parseSource(src) {
     if (!cfg) continue;
     const v = Number(row.value);
     if (!row.country || row.value === '' || Number.isNaN(v)) continue;
+    // Aggregates ("OECD average country" OECD_REP, "EU22OECD") are not countries:
+    // they took ranks #11 and #25 of 40 on the tax wedge (review, 15 Nov 2026).
+    if (row.iso3 && !/^[A-Za-z]{3}$/.test(row.iso3)) continue;
     const map = byCode.get(row.indicator_code);
     let rec = map.get(row.country);
     if (!rec) map.set(row.country, (rec = { region: enRegion(row.region), iso: (row.iso3 || '').toUpperCase(), byYear: {} }));
+    // "—" in the export is a failed region lookup (Kosovo, Zanzibar, Channel
+    // Islands...), not a region: use the World Bank region where we know it.
+    if (rec.region === 'Advanced / other' && WB_REGION_FIX[rec.iso]) rec.region = WB_REGION_FIX[rec.iso];
     rec.byYear[row.year] = v;
     const yc = yearCounts.get(row.indicator_code);
     yc.set(row.year, (yc.get(row.year) ?? 0) + 1);
