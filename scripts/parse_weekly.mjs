@@ -257,6 +257,16 @@ async function main() {
   // Forecasts for this year from the WEO datasets on the site.
   const yr = String(y);
   const [fGdp, fCpi, fCa, fBud] = await Promise.all(['imf-gdp-growth', 'imf-inflation', 'imf-current-account', 'imf-fiscal-balance'].map((s) => weoForecast(s, yr)));
+  // The euro area is an IMF aggregate (code EURO), not in the country datasets:
+  // its forecasts came out blank (QA, 15 Nov 2026). Read them from DataMapper.
+  await Promise.all([[fGdp, 'NGDP_RPCH'], [fCpi, 'PCPIPCH'], [fCa, 'BCA_NGDPD'], [fBud, 'GGXCNL_NGDP']].map(async ([m, code]) => {
+    if (m.has('EA')) return;
+    try {
+      const j = await (await fetch(`https://www.imf.org/external/datamapper/api/v1/${code}/EURO`, { headers: { 'User-Agent': 'Mozilla/5.0 (BullDozer data refresh)' } })).json();
+      const v = j?.values?.[code]?.EURO?.[yr];
+      if (typeof v === 'number') m.set('EA', v);
+    } catch { /* left blank, as before */ }
+  }));
 
   const rows = [];
   const dp = (v) => (v >= 100 ? 0 : v >= 10 ? 1 : 2);

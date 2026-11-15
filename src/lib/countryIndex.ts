@@ -3,7 +3,7 @@
  * Shared by the /data/country-index.json endpoint (interactive Geo panel)
  * and the static /country/[slug] SEO pages.
  */
-import { SUPERSEDED } from '@lib/superseded';
+import { SUPERSEDED, DUPLICATE_OF } from '@lib/superseded';
 import { datasets } from '@data/datasets';
 import { bestCountryName } from '@lib/geo';
 import countryNames from '@data/country-names.json';
@@ -98,7 +98,7 @@ export function buildCountryIndex(): CountryProfile[] {
   // only in Gapminder's 2013 figure, and that stays, dated, rather than nothing.
   const covered = new Map<string, Set<string>>();
   for (const ds of datasets) {
-    if (!Object.values(SUPERSEDED).includes(ds.slug)) continue;
+    if (!Object.values(SUPERSEDED).includes(ds.slug) && !Object.values(DUPLICATE_OF).includes(ds.slug)) continue;
     covered.set(ds.slug, new Set(ds.data.filter((o) => o.iso).map((o) => o.iso!)));
   }
 

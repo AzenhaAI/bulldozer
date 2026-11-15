@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// Every correction to a published number, label or claim, newest first. Add an
+// entry whenever a fix changes what a reader saw (about.astro promises this).
+const log: { date: string; what: string; link?: string }[] = [
+  { date: '2026-11-15', what: 'Homicide rates now come from UNODC via the World Bank. The series shown before was Gapminder’s modelled estimate, which differed from the official figures (El Salvador 2022: 54.1 shown, 7.9 official).', link: '/dataset/gapminder-homicide/' },
+  { date: '2026-11-15', what: 'Country ranks on IMF series use the last observed year, not the IMF’s projection for the current year; projections are labelled.', link: '/dataset/imf-gdp-growth/' },
+  { date: '2026-11-15', what: '“Improving” and “Worsening” now follow whether higher or lower is better on each indicator; before, a rise always counted as an improvement (inflation, going without food).' },
+  { date: '2026-11-15', what: 'Tied values share one rank, and a value at a floor (FAO’s 2.5% undernourishment) reads as tied lowest instead of a middle place.' },
+  { date: '2026-11-15', what: 'Aggregates (“OECD average country”, “EU 22”) removed from the tax-wedge ranking; Zanzibar, Somaliland, Palestine/Gaza and other sub-national units are no longer ranked as countries.', link: '/dataset/oecd-oecd-taxwedge/' },
+  { date: '2026-11-15', what: 'Regions corrected in the World Happiness, Hofstede, WVS and World Risk Poll series (the UK, Russia, Korea, DR Congo and the Americas had been placed in “Other”).' },
+  { date: '2026-11-15', what: 'Corruption Perceptions Index: CPI 2025 added (182 countries); Kosovo’s earlier years filled in.', link: '/dataset/cpi-corruption-perceptions/' },
+  { date: '2026-11-15', what: 'Happiness story: figures are World Happiness Report 2026 (surveys 2023–25), not 2025; Iceland and Denmark are statistically tied; the income link is described as an association.', link: '/stories/happiest-countries/' },
+  { date: '2026-11-15', what: 'Causes-of-death story: 2021 “communicable” deaths include COVID-19, now stated; Uzbekistan is lower-middle income, not upper-middle.', link: '/stories/what-people-die-of/' },
+  { date: '2026-11-15', what: 'Bars with negative values start from zero (they started from the lowest value, which reversed the visual order).' },
+  { date: '2026-11-14', what: 'Child mortality shown per 1,000 births with one decimal: rounding to a one-place percentage made 25 of 199 country series look flat.', link: '/dataset/owid-child-mortality/' },
+];
+---
+<BaseLayout title="Corrections" description="Every correction to a number, label or claim on BullDozer Stats, with its date.">
+  <section class="section">
+    <div class="container" style="max-width:760px">
+      <h1>Corrections</h1>
+      <p class="sub">Every fix that changed what a reader saw, newest first. Report an error to <a href="mailto:agent@azenha.ai">agent@azenha.ai</a>.</p>
+      {log.map((e) => (
+        <div class="gloss-term">
+          <h3 style="font-size:13px;color:var(--text-dim)">{e.date}</h3>
+          <p>{e.what}{e.link && <> <a href={`${base}${e.link}`}>See the page →</a></>}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

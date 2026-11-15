@@ -17,4 +17,13 @@ export const SUPERSEDED: Record<string, string> = {
   'wb-digital-payments': 'findex-digital-payments', // ends 2017; Findex runs to 2024
 };
 
+// The same figures under two of our slugs (not an older series): kept as
+// datasets, left out of country profiles, briefs and comparisons so a country
+// does not show one number twice (QA, 15 Nov 2026: CPI 26 twice for Nigeria;
+// Findex account ownership 98.4 and 98.38 with two different ranks).
+export const DUPLICATE_OF: Record<string, string> = {
+  'qog-ti-cpi': 'cpi-corruption-perceptions',
+  'wb-account-ownership': 'findex-account-ownership',
+};
+
 export const isSuperseded = (slug: string): boolean => slug in SUPERSEDED;

@@ -82,7 +82,13 @@ const dsPeriods = [...new Set(ds.data.map((o) => o.period))].sort();
 // SEO title targets the high-intent "<indicator> by country" query pattern that
 // actually ranks for us (worldpopulationreview model), suffixed with the latest
 // data year. The on-page H1 keeps the short, clean indicator name.
-const lastYear = dsPeriods.at(-1);
+// The last observed year names the page and heads the KPIs: IMF series end in
+// a projection, and "— 2026" over a chart that opens on 2025 contradicted it.
+const pfYear = ds.projectedFrom ? Number(String(ds.projectedFrom).slice(0, 4)) : null;
+const isProjected = (p: unknown) => pfYear != null && Number(String(p).slice(0, 4)) >= pfYear;
+const observedPeriods = dsPeriods.filter((p) => !isProjected(p));
+const lastYear = (observedPeriods.length ? observedPeriods : dsPeriods).at(-1);
+const kpiData = pfYear != null ? latestData.filter((o) => !isProjected(o.period)) : latestData;
 // Only advertise the year when the data is recent — a fresh "— 2025" lifts CTR,
 // but a stale "— 2013" signals outdated data and hurts it, so drop it there.
 const endYear = Number(String(lastYear ?? '').match(/(\d{4})(?!.*\d{4})/)?.[1]);
@@ -194,7 +200,7 @@ const breadcrumbLd = {
 
   <section class="section" style="padding-top:0">
     <div class="container">
-      <KpiRow data={latestData} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode} noun={noun} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} />
+      <KpiRow data={kpiData.length ? kpiData : latestData} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode} noun={noun} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} />
     </div>
   </section>
 
