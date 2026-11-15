@@ -1,0 +1,97 @@
+name: Publish the site
+
+# The Monday refresh (update-data.yml) commits fresh datasets here, but
+# azenha.ai only changes when the built site is copied into AzenhaAI/azenha
+# and deployed — until now that was done by hand, so a refresh could sit
+# unpublished for a week (owner, 15 Nov 2026: publish weekly on its own).
+#
+# This job builds the site the way scripts/deploy_site.sh does and pushes it
+# into azenha/bulldozer/. The push starts azenha's own deploy workflow
+# ("Deploy after a BullDozer push"), which holds the Cloudflare credentials.
+#
+# Needs one secret here: AZENHA_DEPLOY_TOKEN, a token with Contents: Read and
+# write on AzenhaAI/azenha (the AlfaCat pipeline uses the same kind).
+
+on:
+  workflow_run:
+    workflows: ['Update data']
+    types: [completed]
+  workflow_dispatch: {}
+
+concurrency:
+  group: publish-bulldozer
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm ci
+
+      - name: Check the token can reach azenha
+        env:
+          GH_TOKEN: ${{ secrets.AZENHA_DEPLOY_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::AZENHA_DEPLOY_TOKEN is not set in AzenhaAI/bulldozer — the data is committed, but azenha.ai is not republished."
+            exit 1
+          fi
+          code=$(curl -s -o /dev/null -w '%{http_code}' -H "Authorization: Bearer $GH_TOKEN" \
+                 -H "Accept: application/vnd.github+json" https://api.github.com/repos/AzenhaAI/azenha)
+          [ "$code" = "200" ] || { echo "::error::AZENHA_DEPLOY_TOKEN cannot reach AzenhaAI/azenha (HTTP $code): give it Contents: Read and write on that repository."; exit 1; }
+
+      - name: Build
+        run: |
+          node scripts/gen_first_seen.mjs
+          npm run build
+          pages=$(find dist -name index.html | wc -l | tr -d ' ')
+          echo "pages=$pages"
+          [ "$pages" -ge 100 ] || { echo "::error::only $pages pages built — refusing to publish"; exit 1; }
+
+      - name: Checkout azenha (deploy target)
+        uses: actions/checkout@v4
+        with:
+          repository: AzenhaAI/azenha
+          token: ${{ secrets.AZENHA_DEPLOY_TOKEN }}
+          path: azenha
+
+      - name: Copy the build into azenha/bulldozer
+        run: |
+          DEST=azenha/bulldozer
+          rsync -a dist/_astro/ "$DEST/_astro/"                       # add, never remove
+          # The APK is not in git (store builds stay out of the public repo),
+          # so the CI build has no downloads/ — keep the published copy.
+          rsync -a --delete --exclude '_astro' --exclude 'downloads' dist/ "$DEST/"
+          comm -23 <(cd "$DEST/_astro" && ls | sort) <(cd dist/_astro && ls | sort) \
+            | while read -r f; do rm -f "$DEST/_astro/$f"; done
+
+      - name: Stay under the 20,000-file upload limit
+        run: |
+          cd azenha
+          n=$(find . -type f -not -path './.git/*' \
+                | grep -v -E '^\./(telegram-worker|\.github|\.wrangler|scripts|parsers|\.claude|data-archive|node_modules|ativa-next/src)/' \
+                | grep -v -E '(\.DS_Store|requirements-madeira\.txt|\.gitignore)$' | wc -l | tr -d ' ')
+          echo "deployable files: $n"
+          [ "$n" -lt 19950 ] || { echo "::error::$n files — a deploy over 20,000 fails for every section of azenha.ai. Not publishing."; exit 1; }
+
+      - name: Commit & push to azenha (starts its deploy)
+        run: |
+          cd azenha
+          git config user.name "bulldozer-bot"
+          git config user.email "agent@azenha.ai"
+          git add -A bulldozer
+          if git diff --cached --quiet; then echo "Nothing changed on the site."; exit 0; fi
+          git commit -m "BullDozer: weekly data refresh ($(date -u +%Y-%m-%d))"
+          git push
