@@ -15,12 +15,14 @@ export const ROOT = join(__dirname, '..', '..');
  *  the bundled snapshot so ISO→region mapping never hard-fails the build. */
 const GAPMINDER_CSV = join(homedir(), 'Library', 'Mobile Documents', 'com~apple~CloudDocs', 'BK', 'Opros', 'Inter_survey', 'Gapminder', 'ddf--entities--geo--country.csv');
 export async function gapminderRows() {
+  // The repo's snapshot by default. The owner's iCloud folder is read only when
+  // asked for by name (BD_GAPMINDER_FROM_ICLOUD=1): local runs must not open it
+  // unasked (owner's rule), and CI never had it anyway.
   let rows;
-  try {
-    rows = [...parseCsvObjects(await readFile(GAPMINDER_CSV, 'utf8'))];
-  } catch {
-    rows = JSON.parse(await readFile(join(__dirname, 'gapminder_geo.json'), 'utf8'));
+  if (process.env.BD_GAPMINDER_FROM_ICLOUD === '1') {
+    try { rows = [...parseCsvObjects(await readFile(GAPMINDER_CSV, 'utf8'))]; } catch { /* fall through */ }
   }
+  rows ??= JSON.parse(await readFile(join(__dirname, 'gapminder_geo.json'), 'utf8'));
   // Codes Gapminder's registry lacks: without them Kosovo sat in "Other" (and
   // was named "XKX") in a dozen World Bank, Wellcome and World Risk Poll sets.
   const have = new Set(rows.map((r) => (r.iso3166_1_alpha3 || '').toUpperCase()));

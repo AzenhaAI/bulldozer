@@ -104,7 +104,10 @@ async function ghoLatest(code, { dim = 'SEX_BTSX', maxYear = 2024 } = {}) {
     if (r.NumericValue == null || r.TimeDim > maxYear) continue;
     const iso = r.SpatialDim, year = r.TimeDim;
     const cur = latest.get(iso);
-    if (!cur || year > cur.year) latest.set(iso, { year, value: r.NumericValue });
+    // WHO publishes the bounds of its uncertainty interval beside each modelled
+    // estimate (Low/High); kept so charts can show how sure the figure is.
+    const lo = typeof r.Low === 'number' ? r.Low : null, hi = typeof r.High === 'number' ? r.High : null;
+    if (!cur || year > cur.year) latest.set(iso, { year, value: r.NumericValue, lo, hi });
   }
   return latest;
 }
@@ -112,10 +115,13 @@ async function ghoLatest(code, { dim = 'SEX_BTSX', maxYear = 2024 } = {}) {
 async function emit(slug, fetchLatest, meta, g) {
   let latest;
   try { latest = await fetchLatest(); } catch (e) { console.warn(`– ${slug}: ${e.message}; skipped.`); process.exitCode = 1; return; }
-  const data = [...latest.entries()].map(([iso, { year, value }]) => {
+  const data = [...latest.entries()].map(([iso, { year, value, lo, hi }]) => {
     const info = g.get(iso);
-    return { entity: info?.name || iso, group: info?.region || 'Other', period: String(year), value: round(value, 2), iso };
+    const row = { entity: info?.name || iso, group: info?.region || 'Other', period: String(year), value: round(value, 2), iso };
+    if (lo != null && hi != null && lo <= value && value <= hi && hi > lo) Object.assign(row, { lo: round(lo, 2), hi: round(hi, 2) });
+    return row;
   });
+  if (data.some((r) => r.lo != null)) meta = { ...meta, ciLabel: "WHO's uncertainty interval" };
   // Upstream row order varies between calls; sort so a refresh diffs cleanly.
   data.sort((a, b) => a.iso.localeCompare(b.iso));
   await writeDataset('macro', slug, { ...meta, parsedAt: PARSED }, data);
