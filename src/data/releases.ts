@@ -25,7 +25,7 @@ export const releases: Release[] = [
     description: 'Annual state of democracy worldwide, with updated electoral and liberal democracy indices.',
     url: 'https://www.v-dem.net/publications/democracy-reports/' },
   { name: 'Transparency Int’l — Corruption Perceptions Index', window: 'February', months: [2], kind: 'survey',
-    description: 'The most-cited global corruption ranking, scoring 180 countries.',
+    description: 'The most-cited global corruption ranking, scoring 182 countries in its 2025 edition.',
     url: 'https://www.transparency.org/en/cpi' },
   { name: 'Freedom House — Freedom in the World', window: 'February / March', months: [2, 3], kind: 'survey',
     description: 'Annual assessment of political rights and civil liberties across the globe.',

@@ -57,7 +57,7 @@ export const sources: Source[] = [
   { name: 'Quality of Government (QoG)', url: 'https://www.gu.se/en/quality-government/qog-data', status: 'live', category: 'Governance & democracy', match: 'Quality of Government',
     description: 'University of Gothenburg compilation harmonising governance, corruption, rule-of-law and institutional indicators. Only the Freedom House status series is still read from it; the other former QoG series now come straight from the World Bank and Transparency International.' },
   { name: 'Transparency International — CPI', url: 'https://www.transparency.org/en/cpi', status: 'live', category: 'Governance & democracy', match: 'Transparency International',
-    description: 'The Corruption Perceptions Index — perceived public-sector corruption in 180 countries, scored 0–100 from expert assessments and business surveys.' },
+    description: 'The Corruption Perceptions Index — perceived public-sector corruption in 182 countries (2025 edition), scored 0–100 from expert assessments and business surveys.' },
   { name: 'World Bank — Worldwide Governance Indicators', url: 'https://www.worldbank.org/en/publication/worldwide-governance-indicators', status: 'live', category: 'Governance & democracy', match: 'Worldwide Governance Indicators',
     description: 'World Bank estimates of six dimensions of governance for 200+ economies since 1996. We publish control of corruption, government effectiveness, and voice & accountability, from the open World Bank API.' },
   { name: 'Freedom House — Freedom in the World', url: 'https://freedomhouse.org/report/freedom-world', status: 'live', category: 'Governance & democracy', match: 'Freedom House',
