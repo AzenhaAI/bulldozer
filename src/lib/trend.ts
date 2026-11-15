@@ -84,6 +84,31 @@ export function mannKendall(ys: number[]): { s: number; z: number; p: number } {
   return { s, z, p: 2 * (1 - phi(Math.abs(z))) };
 }
 
+/**
+ * Mann–Kendall p corrected for serial correlation (Yue & Wang 2004, effective
+ * sample size), the same as the app's chart_rules.dart: the lag-1
+ * autocorrelation r of the residuals from the Theil–Sen line inflates Var(S) by
+ * n/n* = 1 + 2/(n(n−1)(n−2)) · Σ (n−k)(n−k−1)(n−k−2) r^k, when r > 0.
+ */
+export function mannKendallCorrectedP(xs: number[], ys: number[], line: { slope: number; intercept: number }): number {
+  const mk = mannKendall(ys);
+  const n = ys.length;
+  if (n < 4 || mk.z === 0) return mk.p;
+  const e = ys.map((y, i) => y - (line.intercept + line.slope * xs[i]));
+  const mean = e.reduce((a, b) => a + b, 0) / n;
+  let num = 0, den = 0;
+  for (let i = 0; i < n; i++) {
+    den += (e[i] - mean) ** 2;
+    if (i > 0) num += (e[i] - mean) * (e[i - 1] - mean);
+  }
+  const r = den === 0 ? 0 : num / den;
+  if (r <= 0) return mk.p;
+  let sum = 0;
+  for (let k = 1; k < n; k++) sum += (n - k) * (n - k - 1) * (n - k - 2) * r ** k;
+  const factor = 1 + (2 / (n * (n - 1) * (n - 2))) * sum;
+  return 2 * (1 - phi(Math.abs(mk.z / Math.sqrt(factor))));
+}
+
 export const TREND_MIN_POINTS = 6;
 export const TREND_P = 0.05;
 
@@ -113,7 +138,7 @@ export function trendOf(points: { x: number; y: number }[], projectedFrom?: numb
   const useLog = log && pts.every((p) => p.y > 0);
   const xs = pts.map((p) => p.x), ys = pts.map((p) => (useLog ? Math.log(p.y) : p.y));
   const { slope, intercept } = theilSen(xs, ys);
-  const { p } = mannKendall(ys);
+  const p = mannKendallCorrectedP(xs, ys, { slope, intercept });
   // The same direction in each half: a rise then a fall is not one trend.
   const h = Math.floor(pts.length / 2);
   const s1 = theilSen(xs.slice(0, h), ys.slice(0, h)).slope, s2 = theilSen(xs.slice(-h), ys.slice(-h)).slope;

@@ -9,7 +9,7 @@ export const glossary: Term[] = [
   {
     term: 'Period-over-period change',
     short: 'How a value moved versus the previous period.',
-    body: 'The difference between the latest period and the one before it. Shares, rates and scores are compared as a plain difference — in percentage points for percentages, otherwise in the indicator’s own unit (years, points); counts and money are compared in percent. Each entity is classified as improving, declining or stable. Stable band — see method note.',
+    body: 'The difference between the latest period and the one before it. Shares, rates and scores are compared as a plain difference — in percentage points for percentages, otherwise in the indicator’s own unit (years, points); counts and money are compared in percent. Each entity is classified as improving, declining or stable, where improving means moving in the indicator’s better direction (rose and fell where neither direction is better). A change counts as stable when it is smaller than 1/40 of the cross-country interquartile range — about ±0.5 pp on a typical percentage share; counts and money are stable within ±0.5%.',
   },
   {
     term: 'Percentage points',
@@ -44,7 +44,7 @@ export const glossary: Term[] = [
   {
     term: 'Why there is no trend line',
     short: 'A straight line is drawn only when the series really moves one way.',
-    body: 'A trend line appears only with at least 6 readings, a Mann–Kendall test with p < 0.05, and the same direction in the first and the second half of the series. A series that rises and then falls gets no line, because a single straight line would misdescribe it.',
+    body: 'A trend line appears only with at least 6 readings, a Mann–Kendall test with p < 0.05 after a correction for serial correlation (yearly figures move in runs, which makes chance drifts look like trends), the same direction in the first and the second half of the series, and — for surveys — a change larger than the margin of error. A series that rises and then falls gets no line, because a single straight line would misdescribe it.',
   },
   {
     term: 'Group rollup',
