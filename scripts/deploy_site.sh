@@ -30,6 +30,7 @@ DEST="$SITE/bulldozer"
 # recognised as new.
 echo "→ first-seen dates"
 node scripts/gen_first_seen.mjs
+node scripts/dashboard_meta.mjs
 
 echo "→ building"
 cd "$HERE"

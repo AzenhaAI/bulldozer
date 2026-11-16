@@ -27,6 +27,7 @@ const PAIRINGS: Record<string, { y: string; title: string }> = {
 import { groupRollups, isSinglePeriod, isAdditive, changeSpec, formatDelta, formatColumn, toneOf, moverBase } from '@lib/analytics';
 import { TOPICS } from '@lib/topics';
 import { normaliseGroups } from '@lib/regions';
+import { datasetDescription } from '@lib/seoDescription';
 import countryNames from '@data/country-names.json';
 
 export function getStaticPaths() {
@@ -152,6 +153,11 @@ const accessed = new Date().toISOString().slice(0, 10);
 const vintageShort = ds.vintage ? ds.vintage.split(/;|\. /)[0].trim() : '';
 const citeEdition = vintageShort && vintageShort.length <= 70 ? `, ${vintageShort}` : '';
 const citation = `BullDozer Stats (Azenha AI), ${ds.title}, from ${ds.source}${citeEdition}, accessed ${accessed}, ${dsUrl}`;
+// Meta and og:description, from the ranking the page shows (lib/seoDescription).
+const seoDesc = datasetDescription({
+  title: ds.title, source: ds.source, unit: ds.unit, data: latestData, projectedFrom: ds.projectedFrom,
+  categories: cats, better: ds.better, incomparable: !!ds.incomparable, company, floor: ds.floor,
+});
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
@@ -190,7 +196,7 @@ const breadcrumbLd = {
   ],
 };
 ---
-<BaseLayout title={seoTitle} description={ds.summary} active={active} ogPath={`/og/${ds.slug}.png`}>
+<BaseLayout title={seoTitle} description={seoDesc} active={active} ogPath={`/og/${ds.slug}.png`}>
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
   <section class="section">
