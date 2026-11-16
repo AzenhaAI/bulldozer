@@ -96,6 +96,26 @@ const siteLd = isHome ? {
       founder: { '@type': 'Organization', name: 'Azenha AI', url: 'https://azenha.ai/' },
       sameAs: ['https://azenha.ai/'],
     },
+    // The apps, so search can show them with the site (16 Nov 2026, SEO
+    // session). Category follows the App Store's primary genre, Education.
+    {
+      '@type': 'MobileApplication',
+      '@id': `https://azenha.ai${base}/#app`,
+      name: 'BullDozer Stats',
+      operatingSystem: 'iOS, Android',
+      applicationCategory: 'EducationalApplication',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+      url: `https://azenha.ai${base}/`,
+      downloadUrl: [
+        'https://apps.apple.com/app/id6797664814',
+        'https://play.google.com/store/apps/details?id=ai.azenha.bulldozer',
+      ],
+      sameAs: [
+        'https://apps.apple.com/app/id6797664814',
+        'https://play.google.com/store/apps/details?id=ai.azenha.bulldozer',
+      ],
+      publisher: { '@type': 'Organization', name: 'Azenha AI', url: 'https://azenha.ai/' },
+    },
   ],
 } : null;
 const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
