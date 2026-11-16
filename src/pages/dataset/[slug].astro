@@ -24,7 +24,7 @@ const PAIRINGS: Record<string, { y: string; title: string }> = {
   'imf-gdp-growth': { y: 'imf-inflation', title: 'Growth × inflation' },
   'imf-inflation': { y: 'imf-gdp-growth', title: 'Inflation × growth' },
 };
-import { groupRollups, isSinglePeriod, isAdditive, changeSpec, formatDelta, formatValue, toneOf } from '@lib/analytics';
+import { groupRollups, isSinglePeriod, isAdditive, changeSpec, formatDelta, formatColumn, toneOf, moverBase } from '@lib/analytics';
 import { TOPICS } from '@lib/topics';
 import { normaliseGroups } from '@lib/regions';
 import countryNames from '@data/country-names.json';
@@ -126,6 +126,13 @@ const groups = groupRollups(kpiData.length ? kpiData : latestData, ds.changeMode
 // while the ranking showed its observed 252%.
 const observedData = pfYear != null ? pageData.filter((o) => !isProjected(o.period)) : pageData;
 const moverPeriods = [...new Set(observedData.map((o) => o.period))].sort();
+// Counts: relative movers need a minimum earlier value (lib/analytics
+// moverBase), stated under the heading.
+const moversBase = moverBase(observedData, ds.unit, ds.changeMode);
+const moversUnit = /^people$/i.test(ds.unit.trim()) ? ' people' : '';
+// The group averages as one column: one decimal count ("80.0" beside
+// "73.4" years), whole numbers for counts of people.
+const groupTexts = formatColumn(groups.map((g) => g.value), ds.unit, ds.floor);
 const groupsPeriod = moverPeriods.length > 1 ? `${moverPeriods.at(-2)} to ${moverPeriods.at(-1)}` : 'latest period';
 // Only advertise the year when the data is recent — a fresh "— 2025" lifts CTR,
 // but a stale "— 2013" signals outdated data and hurts it, so drop it there.
@@ -259,7 +266,7 @@ const breadcrumbLd = {
         ds.incomparable ? (
         <p class="method-note" id="no-summary"><b>No cross-country summary.</b> {ds.incomparable}</p>
       ) : (
-        <KpiRow data={kpiData.length ? kpiData : latestData} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode} noun={noun} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} />
+        <KpiRow data={kpiData.length ? kpiData : latestData} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode} noun={noun} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} floor={ds.floor} />
       )
       )}
     </div>
@@ -305,7 +312,7 @@ const breadcrumbLd = {
     <section class="section" style="padding-top:0">
       <div class="container">
         <h2>Movers</h2>
-        <p class="sub">Biggest changes{moverPeriods.length > 1 ? `, ${moverPeriods.at(-2)} to ${moverPeriods.at(-1)}` : ''}{pfYear != null ? ' (observed years; the IMF projection is not counted)' : ''}.</p>
+        <p class="sub">Biggest changes{moverPeriods.length > 1 ? `, ${moverPeriods.at(-2)} to ${moverPeriods.at(-1)}` : ''}{pfYear != null ? ' (observed years; the IMF projection is not counted)' : ''}.{moversBase > 0 && ` Only ${noun === 'company' ? 'companies' : 'countries'} with at least ${moversBase.toLocaleString('en-US')}${moversUnit} in ${moverPeriods.at(-2)}: a percent change on a smaller base is noise (20 becoming 80 is +300%).`}</p>
         <MoversTable data={observedData} n={5} unit={valSuffix} fullUnit={ds.unit} mode={ds.changeMode} better={ds.better} bandData={ds.data} />
       </div>
     </section>
@@ -321,11 +328,11 @@ const breadcrumbLd = {
         <table class="data">
           <thead><tr><th>Group</th><th class="num">Members</th><th class="num">{additive ? 'Total' : 'Avg'}</th><th class="num">Change</th></tr></thead>
           <tbody>
-            {groups.map((g) => (
+            {groups.map((g, i) => (
               <tr>
                 <td>{g.group}</td>
                 <td class="num">{g.members}</td>
-                <td class="num">{formatValue(g.value, ds.unit)}{valSuffix}</td>
+                <td class="num">{groupTexts[i]}{valSuffix}</td>
                 <td class={`num ${toneOf(g.pct, spec)}`}>{formatDelta(g.pct, spec.mode === 'pp' ? { ...spec, band: Math.max(spec.band, 0.01) } : spec)}</td>
               </tr>
             ))}
@@ -342,7 +349,7 @@ const breadcrumbLd = {
         Every entity in this dataset, in HTML. The interactive panel above shows
         the same numbers; this is the one that survives without JavaScript.
       </p>
-      <RankTable data={latestData} unit={valSuffix} fullUnit={ds.unit} mode={ds.changeMode} valueLabel={ds.valueLabel} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} categories={cats} noun={noun} incomparable={!!ds.incomparable} />
+      <RankTable data={latestData} unit={valSuffix} fullUnit={ds.unit} mode={ds.changeMode} valueLabel={ds.valueLabel} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} categories={cats} noun={noun} incomparable={!!ds.incomparable} floor={ds.floor} />
     </div>
   </section>
 

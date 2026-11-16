@@ -1,13 +1,13 @@
 ---
 import type { Observation, ChangeMode, Better } from '@lib/analytics';
-import { computeKpi, changeSpec, formatDelta, formatValue, toneOf, quantile, alignDecimals } from '@lib/analytics';
+import { computeKpi, changeSpec, formatDelta, formatValue, toneOf, quantile, alignDecimalsTo } from '@lib/analytics';
 
 // `fullUnit` is the dataset's unit ("years", "index 0–1"): it decides the unit
 // of change and the decimals. `unit` is the short suffix printed after values.
 // `bandData` sizes the stable band (default: `data`); pass the whole series so
 // the band matches the panel and the movers.
-interface Props { data: (Observation & { year?: string })[]; unit?: string; fullUnit?: string; mode?: ChangeMode; noun?: 'country' | 'company'; better?: Better; bandData?: Observation[]; projectedFrom?: string }
-const { data, unit: unitIn = '', fullUnit = unitIn, mode = 'pct', noun = 'country', better, bandData, projectedFrom } = Astro.props;
+interface Props { data: (Observation & { year?: string })[]; unit?: string; fullUnit?: string; mode?: ChangeMode; noun?: 'country' | 'company'; better?: Better; bandData?: Observation[]; projectedFrom?: string; floor?: number }
+const { data, unit: unitIn = '', fullUnit = unitIn, mode = 'pct', noun = 'country', better, bandData, projectedFrom, floor } = Astro.props;
 // "% YoY", "% of GDP": still a percent after the number.
 const unit = unitIn || (fullUnit.includes('%') ? '%' : '');
 // Companies each count users their own way: an average across them means
@@ -15,7 +15,11 @@ const unit = unitIn || (fullUnit.includes('%') ? '%' : '');
 const company = noun === 'company';
 const spec = changeSpec(bandData ?? data, fullUnit, mode, better);
 const k = computeKpi(data, mode, spec.band);
-const fv = (v: number) => `${formatValue(v, fullUnit)}${unit}`;
+// Every figure on the cards with the decimals of the ranking it summarises:
+// a median of "10" over a ranking of "10.4, 5.4" read as a rounder number
+// than it is (WHO suicide rate), "3%" beside "2.8%" (IMF inflation).
+const refTexts = data.filter((o) => o.period === k.currPeriod && Number.isFinite(o.value)).map((o) => formatValue(o.value, fullUnit, floor));
+const fv = (v: number) => `${alignDecimalsTo([formatValue(v, fullUnit, floor)], refTexts)[0]}${unit}`;
 // Stable band as the reader sees it: "±0.5%", "±0.02 points", "±0.4pp".
 const bandText = mode === 'pct' ? `±${spec.band}%` : `±${formatDelta(spec.band, spec).replace(/^[+−]/, '')}`;
 // One reading per country (or one period): nothing to compare, so the three
@@ -26,7 +30,7 @@ const sortedVals = rows.map((r) => r.value);
 const q1 = quantile(sortedVals, 0.25), q3 = quantile(sortedVals, 0.75);
 // Both ends of a range with the same decimals: "18% – 61.5%" read as two
 // precisions; now "18.0% – 61.5%".
-const pair = alignDecimals([formatValue(q1, fullUnit), formatValue(q3, fullUnit)]).map((t) => t + unit);
+const pair = alignDecimalsTo([formatValue(q1, fullUnit, floor), formatValue(q3, fullUnit, floor)], refTexts).map((t) => t + unit);
 // Improving / declining follow which way is better; with no better direction
 // the cards say plainly what happened: rose, fell, flat.
 const rose = { n: k.growthCount, cls: toneOf(1e9, spec) };

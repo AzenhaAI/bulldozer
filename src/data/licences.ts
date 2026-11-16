@@ -394,7 +394,7 @@ export const licences: Licence[] = [
     termsUrl: 'https://www.sec.gov/privacy',
     licence: `Information presented on sec.gov is considered public information and may be copied or further distributed by users of the web site without the SEC's permission.`,
     citation: `Please consider appropriate citation to the SEC as the source.`,
-    note: `The figures are the companies' own, from earnings releases they filed with the SEC (exhibits to Forms 8-K and 6-K); each value links to its filing in data/raw/company-metrics/observations.csv. "SEC" and the EDGAR names and logo are not used as branding.`,
+    note: `The figures are the companies' own, from earnings releases they filed with the SEC (exhibits to Forms 8-K and 6-K); the "Open source" link on each company dataset page opens the file that lists every value with its filing. "SEC" and the EDGAR names and logo are not used as branding.`,
     urls: ['https://www.sec.gov/privacy', 'https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data'],
     checked: '2026-11-10',
   },

@@ -165,10 +165,22 @@ function scaleDecimals(unit: string): number | undefined {
   return undefined;
 }
 
-/** A value as text, with sensible precision for its scale (no unit suffix). */
-export function formatValue(v: number, unit = ''): string {
+/** Counts of whole things (people, companies, sites): an average of them is
+ *  still printed as a whole number, "115 people", not "115.4". */
+export function isCount(unit: string): boolean {
+  return /^(people|count|sites)$/i.test((unit || '').trim());
+}
+
+/**
+ * A value as text, with sensible precision for its scale (no unit suffix).
+ * `floor`: the source's own rounding step (IMF world-GDP shares come to three
+ * places, with micro-states at 0): anything below it, a source zero included,
+ * prints as "<0.01" rather than a precise-looking "0.003" or "0.00".
+ */
+export function formatValue(v: number, unit = '', floor?: number): string {
   if (!Number.isFinite(v)) return '—';
   const a = Math.abs(v);
+  if (floor && a < floor) return `${v < 0 ? '−' : ''}<${floor}`;
   // Millions and up in the compact style the chart axes use ("2.67M" beside
   // an axis at "5K"); "2.67 m" next to "5K" read as two conventions.
   if (a >= 1e6) {
@@ -176,7 +188,7 @@ export function formatValue(v: number, unit = ''): string {
     return `${v < 0 ? '−' : ''}${(a / d).toFixed(2)}${s}`;
   }
   const fixed = scaleDecimals(unit);
-  const dp = fixed ?? (a >= 1000 ? 0 : a >= 100 ? 1 : a >= 1 ? 1 : a >= 0.01 || a === 0 ? 2 : 3);
+  const dp = fixed ?? (isCount(unit) ? 0 : a >= 1000 ? 0 : a >= 100 ? 1 : a >= 1 ? 1 : a >= 0.01 || a === 0 ? 2 : 3);
   const r = Number(v.toFixed(dp));
   // A tiny share is not zero: "<0.001", never "0.000".
   if (r === 0 && v !== 0) return `${v < 0 ? '−' : ''}<${(10 ** -dp).toFixed(dp)}`;
@@ -187,7 +199,7 @@ export function formatValue(v: number, unit = ''): string {
 /**
  * formatValue texts of one list with the same decimals: formatValue drops a
  * trailing zero, so a column read "41.4%, 4%, 0%" or a range "18% – 61.5%".
- * A whole number below 1,000 gets the decimals its magnitude would show (one
+ * A number below 1,000 gets the decimals its magnitude would show (one
  * from 1 up, two below 1), but no more than the list already shows; texts
  * with a magnitude suffix ("2.67M") or "<0.001" are left as they are, and so
  * is a list of whole numbers (people, counts).
@@ -197,11 +209,59 @@ export function alignDecimals(texts: string[]): string[] {
   const maxDp = Math.max(0, ...texts.map(dpOf));
   if (!maxDp) return texts;
   return texts.map((t) => {
-    if (dpOf(t) !== 0) return t;
+    const d = dpOf(t);
+    if (d < 0) return t;
     const a = Math.abs(Number(t.replace(/[,−]/g, '')));
     if (a >= 1000) return t;
-    return `${t}.${'0'.repeat(Math.min(maxDp, a >= 1 ? 1 : 2))}`;
+    // A dropped trailing zero after the point too: "0.3%" beside "0.64%"
+    // (world GDP shares by region) becomes "0.30%".
+    const want = Math.min(maxDp, a >= 1 ? 1 : 2);
+    return d >= want ? t : `${t}${d ? '' : '.'}${'0'.repeat(want - d)}`;
   });
+}
+
+/** `texts` with the decimals of the list they summarise (`ref`): a median of
+ *  "3" beside a ranking of "2.8, 4.1" reads "3.0", as the ranking would. */
+export function alignDecimalsTo(texts: string[], ref: string[]): string[] {
+  return alignDecimals([...texts, ...ref]).slice(0, texts.length);
+}
+
+/**
+ * One column of values as text: formatValue, then one decimal count
+ * (alignDecimals) and one style of large number. A count column that mixes
+ * "2.67M" with "351,209" (UNHCR refugees) is written out in full, since a
+ * table can afford the digits; "0.35M" would hide the small ones.
+ */
+export function formatColumn(values: number[], unit = '', floor?: number): string[] {
+  const texts = values.map((v) => formatValue(v, unit, floor));
+  const max = Math.max(0, ...values.filter(Number.isFinite).map(Math.abs));
+  const mixed = texts.some((t) => /[MBT]$/.test(t)) && values.some((v) => Math.abs(v) >= 1000 && Math.abs(v) < 1e6);
+  if (isCount(unit) && mixed && max < 1e9) {
+    return values.map((v, i) => (Math.abs(v) >= 1e6 ? `${v < 0 ? '−' : ''}${Math.round(Math.abs(v)).toLocaleString('en-US')}` : texts[i]));
+  }
+  return alignDecimals(texts);
+}
+
+/**
+ * Smallest earlier value a country needs to be listed among the relative
+ * movers of a count (0 = no minimum). Percent change on a tiny base is noise:
+ * Luxembourg's 20 refugees becoming 80 topped the risers at +300%. The floor
+ * is the lower quartile of the earlier period (the smallest quarter of
+ * countries is left out), and at least 1,000 for counts of people; rounded
+ * down to two significant figures so the page can state it plainly.
+ */
+export function moverBase(data: Observation[], unit: string, mode: ChangeMode): number {
+  if (mode !== 'pct' || !isCount(unit)) return 0;
+  const [prevPeriod, currPeriod] = lastTwoPeriods(data);
+  if (prevPeriod === currPeriod) return 0;
+  const prev = [...entityTotals(data, prevPeriod).values()].filter(Number.isFinite).sort((a, b) => a - b);
+  const people = /^people$/i.test(unit.trim());
+  // A quartile of a handful of countries would cut real ones: needs 20.
+  const q = prev.length >= 20 ? quantile(prev, 0.25) : 0;
+  const base = Math.max(q, people ? 1000 : 0);
+  if (base <= 0) return 0;
+  const p = 10 ** (Math.floor(Math.log10(base)) - 1);
+  return Math.floor(base / p) * p;
 }
 
 /**
@@ -315,15 +375,16 @@ export function computeChanges(data: Observation[], mode: ChangeMode = 'pct'): C
   return records.sort((a, b) => b.pct - a.pct);
 }
 
-export function topGrowth(data: Observation[], n = 10, mode: ChangeMode = 'pct'): Change[] {
+/** `minPrev`: leave out entities whose earlier value is below it (moverBase). */
+export function topGrowth(data: Observation[], n = 10, mode: ChangeMode = 'pct', minPrev = 0): Change[] {
   return computeChanges(data, mode)
-    .filter((c) => c.pct > 0)
+    .filter((c) => c.pct > 0 && c.prev >= minPrev)
     .slice(0, n);
 }
 
-export function topDecline(data: Observation[], n = 10, mode: ChangeMode = 'pct'): Change[] {
+export function topDecline(data: Observation[], n = 10, mode: ChangeMode = 'pct', minPrev = 0): Change[] {
   return computeChanges(data, mode)
-    .filter((c) => c.pct < 0)
+    .filter((c) => c.pct < 0 && c.prev >= minPrev)
     .sort((a, b) => a.pct - b.pct)
     .slice(0, n);
 }

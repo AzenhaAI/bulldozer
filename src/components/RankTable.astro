@@ -16,7 +16,7 @@
  * movers list, wrong for a ranking that claims to be complete.
  */
 import type { Observation, ChangeMode, Better } from '@lib/analytics';
-import { periods, entityTotals, changeValue, isSinglePeriod, changeSpec, formatDelta, formatValue, toneOf, sharedRanks, alignDecimals } from '@lib/analytics';
+import { periods, entityTotals, changeValue, isSinglePeriod, changeSpec, formatDelta, toneOf, sharedRanks, formatColumn } from '@lib/analytics';
 import { flagFor } from '@lib/flags';
 import countryNames from '@data/country-names.json';
 
@@ -34,8 +34,10 @@ interface Props {
   projectedFrom?: string; categories?: Record<string, string>; noun?: 'country' | 'company';
   /** Values in a different unit per country (currencies): listed A–Z, unranked. */
   incomparable?: boolean;
+  /** Source rounding step (datasets.ts FLOORS): smaller values print "<step". */
+  floor?: number;
 }
-const { data, unit = '', fullUnit = unit, mode = 'pct', valueLabel = 'Value', better, bandData, projectedFrom, categories, noun, incomparable } = Astro.props;
+const { data, unit = '', fullUnit = unit, mode = 'pct', valueLabel = 'Value', better, bandData, projectedFrom, categories, noun, incomparable, floor } = Astro.props;
 const spec = changeSpec(bandData ?? data, fullUnit, mode, better);
 // At most two decimals in a change ("+0.59 points", not "+0.590 points");
 // the stable band still decides the colour.
@@ -80,8 +82,9 @@ const rows = [...curr.entries()]
 .sort((a, b) => incomparable ? shown(a.entity).localeCompare(shown(b.entity)) : categories
     ? (better === 'high' ? b.value - a.value : a.value - b.value) || shown(a.entity).localeCompare(shown(b.entity))
     : b.value - a.value);
-// One decimal style down the value column ("4.0%", not "4%", beside "41.4%").
-const valTexts = alignDecimals(rows.map((r) => formatValue(r.value, fullUnit)));
+// One decimal style down the value column ("4.0%", not "4%", beside "41.4%"),
+// and one style of large number (formatColumn).
+const valTexts = formatColumn(rows.map((r) => r.value), fullUnit, floor);
 // Ranks compare what is printed: equal values share a rank ("28=").
 const ranks = sharedRanks(rows.map((r, i) => cat(r.value) ?? valTexts[i]));
 const orderNote = incomparable ? 'A–Z: each value is in its own currency, so the countries are not ranked.' : categories ? `${cat(rows[0]?.value ?? NaN) ?? 'Best'} first; countries in the same status share a rank.` : 'Highest first; equal values share a rank.';
@@ -110,7 +113,8 @@ const orderNote = incomparable ? 'A–Z: each value is in its own currency, so t
         <tr>
           {!incomparable && <td class="num">{ranks[i].label}</td>}
           <td>{flagFor(isoOf.get(r.entity)) ? flagFor(isoOf.get(r.entity)) + ' ' : ''}{shown(r.entity)}</td>
-          <td class="num">{cat(r.value) ?? `${valTexts[i]}${unit}`}</td>
+          {/* A source zero under a rounding floor is the source's rounding, not nothing. */}
+          <td class="num" title={floor && r.value === 0 ? 'rounded to zero in the source' : undefined}>{cat(r.value) ?? `${valTexts[i]}${unit}`}</td>
           {latest && <td class="num">{yearOf.get(r.entity) ?? ''}</td>}
           {!single && !latest && (
             <td class={`num ${r.pct === null || (categories && r.pct === 0) ? '' : toneOf(r.pct, spec)}`}>

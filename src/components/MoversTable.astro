@@ -1,6 +1,6 @@
 ---
 import type { Observation, ChangeMode, Better } from '@lib/analytics';
-import { topGrowth, topDecline, changeSpec, formatDelta, formatValue, toneOf, alignDecimals } from '@lib/analytics';
+import { topGrowth, topDecline, changeSpec, formatDelta, formatColumn, toneOf, moverBase } from '@lib/analytics';
 import { flagFor } from '@lib/flags';
 
 // `bandData` sizes the stable band (default: `data`): the dataset page passes
@@ -10,19 +10,23 @@ interface Props { data: Observation[]; n?: number; unit?: string; fullUnit?: str
 const { data, n = 5, unit = '', fullUnit = unit, mode = 'pct', better, bandData } = Astro.props;
 const spec = changeSpec(bandData ?? data, fullUnit, mode, better);
 // Only moves outside the stable band are movers.
-const up = topGrowth(data, n, mode).filter((r) => r.pct > spec.band);
-const down = topDecline(data, n, mode).filter((r) => r.pct < -spec.band);
+// Counts: no relative movers on a tiny base (moverBase; the page's sub-line
+// states the minimum).
+const base = moverBase(data, fullUnit, mode);
+const up = topGrowth(data, n, mode, base).filter((r) => r.pct > spec.band);
+const down = topDecline(data, n, mode, base).filter((r) => r.pct < -spec.band);
 const isoOf = new Map(data.filter((o) => o.iso).map((o) => [o.entity, o.iso!]));
 const label = (e: string) => { const f = flagFor(isoOf.get(e)); return f ? f + ' ' + e : e; };
-// One decimal style down both "Now" columns ("4.0%" beside "41.4%", not "4%").
+// One decimal style and one style of large number down both "Now" columns
+// ("4.0%" beside "41.4%", not "4%"; "2,672,345" beside "351,209", not "2.67M").
 const nowText = new Map<object, string>();
-{ const all = [...up, ...down]; alignDecimals(all.map((r) => formatValue(r.curr, fullUnit))).forEach((t, i) => nowText.set(all[i], t)); }
+{ const all = [...up, ...down]; formatColumn(all.map((r) => r.curr), fullUnit).forEach((t, i) => nowText.set(all[i], t)); }
 const tables = [
   { title: better === 'high' ? 'Top risers (improving)' : better === 'low' ? 'Top risers (worsening)' : 'Top risers', rows: up },
   { title: better === 'high' ? 'Top fallers (worsening)' : better === 'low' ? 'Top fallers (improving)' : 'Top fallers', rows: down },
 ];
 ---
-<div class="grid cols-2">
+<div class="grid cols-2 movers">
   {tables.map((t) => (
   <div>
     <h3>{t.title}</h3>
@@ -41,3 +45,16 @@ const tables = [
   </div>
   ))}
 </div>
+
+<style>
+  /* Phones turn every table.data into a scrolling block (global.css), which
+     shrinks it to its content: Top risers and Top fallers came out at two
+     different widths, one above the other. These three columns fit a phone,
+     so each table stays a full-width table. */
+  @media (max-width: 560px) {
+    .movers table.data { display: table; width: 100%; table-layout: fixed; }
+    /* Fixed column shares, so the two tables' columns also line up. */
+    .movers th:nth-child(2) { width: 32%; }
+    .movers th:nth-child(3) { width: 28%; }
+  }
+</style>

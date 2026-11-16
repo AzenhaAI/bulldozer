@@ -104,7 +104,29 @@ const geom = (W: number, H: number) => {
     const [a, b] = span(i);
     if (kept.every((j) => { const [c, d] = span(j); return b + 6 <= c || d + 6 <= a; })) kept.push(i);
   }
-  const xLabels = kept.sort((a, b) => a - b).map((i) => ({ p: periods[i], x: X(xs[i]), anchor: i === 0 && last > 0 ? 'start' : i === last && last > 0 ? 'end' : 'middle' }));
+  let xLabels = kept.sort((a, b) => a - b).map((i) => ({ p: periods[i], x: X(xs[i]), anchor: i === 0 && last > 0 ? 'start' : i === last && last > 0 ? 'end' : 'middle' }));
+  // Plain years: labels on an even step (every 1, 2, 5, 10… years, on
+  // multiples of it), the smallest step whose labels do not touch. Greedy
+  // packing gave 1990, 1994, 1997 … 2018, 2024 (World Bank life expectancy).
+  // The last year is added only where it does not crowd the step before it.
+  if (periods.length > 2 && periods.every((p) => /^\d{4}$/.test(p))) {
+    const lw = wd('0000');
+    const pos = (y: number, anchor: string): [number, number] => {
+      const c = X(y);
+      return anchor === 'start' ? [c, c + lw] : anchor === 'end' ? [c - lw, c] : [c - lw / 2, c + lw / 2];
+    };
+    const anchorOf = (y: number) => (y === x0 ? 'start' : y === x1 ? 'end' : 'middle');
+    const fits = (ys: number[]) => ys.every((y, i) => !i || pos(ys[i - 1], anchorOf(ys[i - 1]))[1] + 6 <= pos(y, anchorOf(y))[0]);
+    for (const stepY of [1, 2, 5, 10, 20, 25, 50, 100]) {
+      const ys: number[] = [];
+      for (let y = Math.ceil(x0 / stepY) * stepY; y <= x1; y += stepY) ys.push(y);
+      if (ys.length < 2 && stepY > 1) break;
+      if (!fits(ys)) continue;
+      if (ys.at(-1) !== x1 && fits([...ys, x1])) ys.push(x1);
+      xLabels = ys.map((y) => ({ p: String(y), x: X(y), anchor: anchorOf(y) }));
+      break;
+    }
+  }
   const line = (vals: number[]) => vals.map((v, i) => `${i ? 'L' : 'M'}${X(xs[i]).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
   // A log fit is a curve on this axis: drawn through 24 steps.
   const trendPath = (t: NonNullable<(typeof series)[number]['trend']>) =>

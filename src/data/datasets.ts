@@ -60,6 +60,9 @@ export interface DatasetMeta {
    *  currency): the reason, in one line. Pages then show no cross-country
    *  median, spread, map colour scale or bubble sizes. */
   incomparable?: string;
+  /** The source's rounding step (lib/analytics formatValue `floor`): smaller
+   *  values, and the source's zeros, which are that rounding, print as "<step". */
+  floor?: number;
 }
 
 export interface Dataset extends DatasetMeta {
@@ -86,6 +89,13 @@ const INCOMPARABLE: Record<string, string> = {
   'wb-exchange-rate': 'Each country is in its own currency, so a median, a spread or a colour scale across countries would compare yen with euros: each value only says how many local units buy one US dollar.',
 };
 
+/** Series rounded at source, by slug: the rounding step. The IMF gives world
+ *  GDP shares to three places, so Kiribati, Palau and Tuvalu come as 0 and
+ *  read "0.00%" — not a zero economy, just below the IMF's rounding. */
+const FLOORS: Record<string, number> = {
+  'imf-world-gdp-share': 0.01,
+};
+
 /**
  * The SEC company series share one method text in the parser
  * (scripts/parse_company_metrics.mjs), which names Spotify's 6-K and the
@@ -93,13 +103,19 @@ const INCOMPARABLE: Record<string, string> = {
  * neither company appears (PayPal and Robinhood only). Each page gets the
  * clauses for the companies it actually holds.
  */
-function companyMethod(method: string | undefined, data: Observation[]): string | undefined {
+function companyMethod(method: string | undefined, data: Observation[], slug: string): string | undefined {
   if (!method) return method;
   const has = new Set(data.map((o) => o.entity));
   let m = method;
   if (!has.has('Spotify')) m = m.replace(/, or 6-K for Spotify\)/, ')');
   const rounded = [has.has('Roblox') && 'Roblox from Q4 2025', has.has('Match Group') && 'Match Group Q3 2026'].filter(Boolean);
   m = m.replace(/; a release that rounds \([^)]*\) is kept as rounded\./, rounded.length ? `; a release that rounds (${rounded.join(', ')}) is kept as rounded.` : '.');
+  // The parser names its repo file (data/raw/company-metrics/observations.csv),
+  // a path no reader of the site can open. Point to the dataset's own CSV (a
+  // Pages Function serves it from the JSON); the filing URLs and as-reported
+  // words stay in the source file that "Open source" links to.
+  m = m.replace(/The filing URL and the exact words or table row of every value are in data\/raw\/company-metrics\/observations\.csv\./,
+    `Every value is in the dataset's CSV, https://azenha.ai/bulldozer/data/${slug}.csv; the filing URL and the exact words or table row behind each one are in the source file linked as "Open source".`);
   return m;
 }
 
@@ -138,7 +154,8 @@ function build(modules: Record<string, { default: RawDataset }>): Dataset[] {
       ...(raw.meta.latestPerCountry == null && oneReadingEach(raw.data) ? { latestPerCountry: true } : {}),
       ...(CATEGORIES[slug] ? { categories: CATEGORIES[slug] } : {}),
       ...(INCOMPARABLE[slug] ? { incomparable: INCOMPARABLE[slug] } : {}),
-      ...(raw.meta.entityType === 'company' ? { method: companyMethod(raw.meta.method, raw.data) } : {}),
+      ...(FLOORS[slug] ? { floor: FLOORS[slug] } : {}),
+      ...(raw.meta.entityType === 'company' ? { method: companyMethod(raw.meta.method, raw.data, slug) } : {}),
       // A fresher series of ours measures the same thing (lib/superseded.ts).
       ...(SUPERSEDED[slug] ? { title: `${raw.meta.title} (historical)`, supersededBy: SUPERSEDED[slug] } : {}),
       ...(DUPLICATE_OF[slug] ? { supersededBy: DUPLICATE_OF[slug] } : {}),

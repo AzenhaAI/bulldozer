@@ -23,7 +23,7 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
 <script type="application/json" id="cmp-topics" set:html={JSON.stringify(topicMeta)}></script>
 <script type="application/json" id="cmp-a2" set:html={JSON.stringify(isoAlpha2)}></script>
 <script>
-  import { formatValue } from '@lib/analytics';
+  import { formatValue, alignDecimals } from '@lib/analytics';
   const root = document.querySelector('.compare') as HTMLElement;
   const base = root.dataset.base || '';
   const TOPICS = JSON.parse(document.getElementById('cmp-topics')!.textContent || '[]');
@@ -79,11 +79,14 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
         const vals = cells.filter(Boolean).map((c) => c!.value);
         const best = r.better && vals.length > 1 ? (r.better === 'low' ? Math.min(...vals) : Math.max(...vals)) : null;
         const sfx = suffix(r.unit);
+        // One decimal count across the row: "97.0%" beside "89.4%", not "97%".
+        const texts = alignDecimals(cells.filter(Boolean).map((c) => formatValue(c!.value, r.unit)));
+        let ti = 0;
         // The unit also rides under the name: on phones the Unit column is
         // hidden to leave room for the countries.
         html += `<tr><td class="cmp-ind"><a href="${base}/dataset/${r.slug}/">${r.title}</a>${r.unit ? `<small class="cmp-u">${r.unit}</small>` : ''}</td><td class="cmp-unit" style="color:var(--text-dim);font-size:12px">${r.unit || ''}</td>` +
           cells.map((c) => c == null ? '<td class="num" style="color:var(--text-dim)">—</td>'
-            : `<td class="num"${best != null && c.value === best ? ` style="color:var(--accent);font-weight:600" title="${r.better === 'low' ? 'Lowest, and lower is better' : 'Highest, and higher is better'}"` : ''}>${formatValue(c.value, r.unit)}${sfx}<br><small style="color:var(--text-dim);font-weight:400">${c.period}</small></td>`).join('') + '</tr>';
+            : `<td class="num"${best != null && c.value === best ? ` style="color:var(--accent);font-weight:600" title="${r.better === 'low' ? 'Lowest, and lower is better' : 'Highest, and higher is better'}"` : ''}>${texts[ti++]}${sfx}<br><small style="color:var(--text-dim);font-weight:400">${c.period}</small></td>`).join('') + '</tr>';
       }
     }
     tableEl.innerHTML = html + '</tbody></table>';
@@ -161,6 +164,11 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
   /* The wrapper scrolls, not the table: phones make every table.data its own
      scroller (global.css), which the edge fade and hint could not watch. */
   .compare .cmp-scroll table.data { display: table; overflow: visible; }
+  /* Separate borders: with collapsed ones the row line belongs to the table
+     grid, and the sticky cell's opaque background painted over it on some
+     rows (no line under "Big Mac Price" at 360 px). Each cell now draws its
+     own bottom border, the sticky one included. */
+  .compare .cmp-scroll table.data { border-collapse: separate; border-spacing: 0; }
   /* The indicator column stays in view while the countries scroll under it;
      an opaque background so the values do not show through. */
   .compare .cmp-ind { position: sticky; left: 0; z-index: 2; background: var(--bg); }
