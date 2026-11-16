@@ -11,7 +11,8 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
     <button type="button" id="cmp-csv" class="ghost-btn" style="margin-left:auto">↓ CSV</button>
   </div>
   <p id="cmp-msg" class="cmp-msg" role="status" aria-live="polite" hidden></p>
-  <div id="cmp-table" style="overflow-x:auto; margin-top:8px"></div>
+  <p id="cmp-hint" class="cmp-hint" hidden>Swipe sideways for more countries →</p>
+  <div class="cmp-wrap" id="cmp-wrap"><div id="cmp-table" class="cmp-scroll"></div></div>
   <p class="sub" style="font-size:12px; margin-top:8px">
     Each cell is the latest year for that country (shown under the value). Highlighted: the better value, only where
     one direction is plainly better (higher life expectancy, lower child mortality); opinions, spending and other
@@ -69,22 +70,43 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
   function renderTable() {
     const { cols, out } = tableRows();
     if (!cols.length) { tableEl.innerHTML = '<p class="sub">Add a country to compare.</p>'; return; }
-    let html = `<table class="data"><thead><tr><th>Indicator</th><th>Unit</th>${cols.map((c) => `<th class="num">${flag(c.iso)}${c.name}</th>`).join('')}</tr></thead><tbody>`;
+    let html = `<table class="data"><thead><tr><th class="cmp-ind">Indicator</th><th class="cmp-unit">Unit</th>${cols.map((c) => `<th class="num">${flag(c.iso)}${c.name}</th>`).join('')}</tr></thead><tbody>`;
     for (const { topic: t, rows } of out) {
-      html += `<tr><td colspan="${cols.length + 2}" style="padding-top:16px;color:var(--text-dim);font-size:12px;text-transform:uppercase;letter-spacing:1px">${t.icon} ${t.label}</td></tr>`;
+      html += `<tr class="cmp-topic"><td colspan="${cols.length + 2}" style="padding-top:16px;color:var(--text-dim);font-size:12px;text-transform:uppercase;letter-spacing:1px"><span class="cmp-topic-lbl">${t.icon} ${t.label}</span></td></tr>`;
       for (const { r, cells } of rows) {
         // The better value, by the indicator's polarity; none when neutral or
         // when fewer than two countries have a value.
         const vals = cells.filter(Boolean).map((c) => c!.value);
         const best = r.better && vals.length > 1 ? (r.better === 'low' ? Math.min(...vals) : Math.max(...vals)) : null;
         const sfx = suffix(r.unit);
-        html += `<tr><td><a href="${base}/dataset/${r.slug}/">${r.title}</a></td><td style="color:var(--text-dim);font-size:12px">${r.unit || ''}</td>` +
+        // The unit also rides under the name: on phones the Unit column is
+        // hidden to leave room for the countries.
+        html += `<tr><td class="cmp-ind"><a href="${base}/dataset/${r.slug}/">${r.title}</a>${r.unit ? `<small class="cmp-u">${r.unit}</small>` : ''}</td><td class="cmp-unit" style="color:var(--text-dim);font-size:12px">${r.unit || ''}</td>` +
           cells.map((c) => c == null ? '<td class="num" style="color:var(--text-dim)">—</td>'
             : `<td class="num"${best != null && c.value === best ? ` style="color:var(--accent);font-weight:600" title="${r.better === 'low' ? 'Lowest, and lower is better' : 'Highest, and higher is better'}"` : ''}>${formatValue(c.value, r.unit)}${sfx}<br><small style="color:var(--text-dim);font-weight:400">${c.period}</small></td>`).join('') + '</tr>';
       }
     }
     tableEl.innerHTML = html + '</tbody></table>';
+    // Re-measured whenever the table's size settles (fonts, styles, rotation).
+    const t = tableEl.querySelector('table');
+    if (t && 'ResizeObserver' in window) { ro ??= new ResizeObserver(edges); ro.disconnect(); ro.observe(t); ro.observe(tableEl); }
+    edges();
   }
+  let ro: ResizeObserver | undefined;
+
+  // Sideways scroll on phones: the indicator column stays put (sticky), a fade
+  // marks the edge where more columns are hidden, and a line says so. The
+  // table used to slide off to the right with nothing to tell that it could.
+  const wrapEl = document.getElementById('cmp-wrap')!;
+  const hintEl = document.getElementById('cmp-hint')!;
+  function edges() {
+    const more = tableEl.scrollWidth - tableEl.clientWidth > 2;
+    const atEnd = tableEl.scrollLeft + tableEl.clientWidth >= tableEl.scrollWidth - 2;
+    wrapEl.classList.toggle('fade-r', more && !atEnd);
+    hintEl.hidden = !more;
+  }
+  tableEl.addEventListener('scroll', edges, { passive: true });
+  window.addEventListener('resize', edges);
 
   // The table as CSV: one row per indicator × country, with year and unit.
   function downloadCsv() {
@@ -134,4 +156,26 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
   .compare .chip { padding-top: 0; padding-bottom: 0; padding-right: 2px; }
   .compare .chip button { min-width: 32px; min-height: 32px; display: inline-flex; align-items: center; justify-content: center; font-size: 17px; }
   .compare .cmp-msg { margin: 8px 0 0; font-size: 13px; color: var(--accent); }
+  .compare .cmp-wrap { position: relative; margin-top: 8px; }
+  .compare .cmp-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* The wrapper scrolls, not the table: phones make every table.data its own
+     scroller (global.css), which the edge fade and hint could not watch. */
+  .compare .cmp-scroll table.data { display: table; overflow: visible; }
+  /* The indicator column stays in view while the countries scroll under it;
+     an opaque background so the values do not show through. */
+  .compare .cmp-ind { position: sticky; left: 0; z-index: 2; background: var(--bg); }
+  .compare .cmp-topic td { background: transparent; }
+  .compare .cmp-topic-lbl { position: sticky; left: 10px; }
+  .compare .cmp-u { display: none; color: var(--text-dim); font-size: 11px; font-weight: 400; margin-top: 2px; }
+  /* A fade on the right edge while more columns are hidden behind it (none
+     on the left: the sticky indicator column sits there). */
+  .compare .cmp-wrap::after { content: ''; position: absolute; top: 0; bottom: 0; right: 0; width: 28px; pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 3; background: linear-gradient(90deg, transparent, var(--bg)); }
+  .compare .cmp-wrap.fade-r::after { opacity: 1; }
+  .compare .cmp-hint { margin: 8px 0 0; font-size: 12px; color: var(--text-dim); }
+  .compare .cmp-hint[hidden] { display: none; }
+  @media (max-width: 560px) {
+    .compare .cmp-unit { display: none; }
+    .compare .cmp-u { display: block; }
+    .compare .cmp-ind { min-width: 128px; max-width: 150px; box-shadow: 1px 0 0 var(--border); }
+  }
 </style>

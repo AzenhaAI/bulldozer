@@ -26,6 +26,8 @@ const PAIRINGS: Record<string, { y: string; title: string }> = {
 };
 import { groupRollups, isSinglePeriod, isAdditive, changeSpec, formatDelta, formatValue, toneOf } from '@lib/analytics';
 import { TOPICS } from '@lib/topics';
+import { normaliseGroups } from '@lib/regions';
+import countryNames from '@data/country-names.json';
 
 export function getStaticPaths() {
   return datasets.map((d) => ({ params: { slug: d.slug } }));
@@ -47,6 +49,15 @@ const dashFile = Object.entries(DASH).find(([p]) => ds.slug.startsWith(p))?.[1];
 const company = ds.entityType === 'company';
 const noun = company ? 'company' : 'country';
 const additive = isAdditive(ds.unit);
+// Every section of the page reads the same rows: everyday country names
+// ("Czechia", "Hong Kong", as the ranking and the panel print them, not the
+// source's "Czech Republic" or "Hong Kong, China") and one region scheme
+// (lib/regions: Kosovo with the rest of Europe, the Pacific out of Asia).
+const NAMES = countryNames as Record<string, { common: string }>;
+const pageData = company ? ds.data : normaliseGroups(ds.data.map((o) => {
+  const n = o.iso ? NAMES[o.iso]?.common : undefined;
+  return n && n !== o.entity ? { ...o, entity: n } : o;
+}));
 // Series measured in different years per country (household surveys): the
 // summary, group table and full ranking use each country's latest reading,
 // labelled "Latest". Where every country has just one reading, there is no
@@ -54,12 +65,12 @@ const additive = isAdditive(ds.unit);
 // "Latest" is each country's newest reading of the last ten years, the window
 // the country profiles and the panel use; `year` keeps the reading's own year
 // for the ranking's Year column.
-const lpcEnd = Math.max(...ds.data.map((o) => Number(String(o.period).slice(0, 4))).filter(Number.isFinite));
+const lpcEnd = Math.max(...pageData.map((o) => Number(String(o.period).slice(0, 4))).filter(Number.isFinite));
 const latestData: (typeof ds.data[number] & { year?: string })[] = ds.latestPerCountry
-  ? [...ds.data.filter((o) => !(Number(String(o.period).slice(0, 4)) < lpcEnd - 10))
+  ? [...pageData.filter((o) => !(Number(String(o.period).slice(0, 4)) < lpcEnd - 10))
       .reduce((m, o) => (!m.has(o.iso ?? o.entity) || String(o.period) > String(m.get(o.iso ?? o.entity)!.period) ? m.set(o.iso ?? o.entity, o) : m), new Map<string, typeof ds.data[number]>()).values()]
       .map((o) => ({ ...o, period: 'Latest', year: String(o.period) }))
-  : ds.data;
+  : pageData;
 const oneEach = !!ds.latestPerCountry && new Set(ds.data.map((o) => o.iso ?? o.entity)).size === ds.data.length;
 const single = isSinglePeriod(latestData) || oneEach;
 const periodCount = oneEach ? 1 : new Set(ds.data.map((o) => o.period)).size;
@@ -110,6 +121,12 @@ const lastYear = (observedPeriods.length ? observedPeriods : dsPeriods).at(-1);
 const kpiData = pfYear != null ? latestData.filter((o) => !isProjected(o.period)) : latestData;
 // Groups on observed years too: "latest period" was the IMF's projection.
 const groups = groupRollups(kpiData.length ? kpiData : latestData, ds.changeMode, additive);
+// Movers and every other "this happened" statement stop at the last observed
+// year too: Movers listed Venezuela at the IMF's projected 467.9% for 2026
+// while the ranking showed its observed 252%.
+const observedData = pfYear != null ? pageData.filter((o) => !isProjected(o.period)) : pageData;
+const moverPeriods = [...new Set(observedData.map((o) => o.period))].sort();
+const groupsPeriod = moverPeriods.length > 1 ? `${moverPeriods.at(-2)} to ${moverPeriods.at(-1)}` : 'latest period';
 // Only advertise the year when the data is recent — a fresh "— 2025" lifts CTR,
 // but a stale "— 2013" signals outdated data and hurts it, so drop it there.
 const endYear = Number(String(lastYear ?? '').match(/(\d{4})(?!.*\d{4})/)?.[1]);
@@ -239,7 +256,11 @@ const breadcrumbLd = {
           )}
         </div>
       ) : (
+        ds.incomparable ? (
+        <p class="method-note" id="no-summary"><b>No cross-country summary.</b> {ds.incomparable}</p>
+      ) : (
         <KpiRow data={kpiData.length ? kpiData : latestData} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode} noun={noun} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} />
+      )
       )}
     </div>
   </section>
@@ -256,13 +277,16 @@ const breadcrumbLd = {
     </div>
   </section>
 
-  {periodCount > 2 && !ds.latestPerCountry && hasRegionalPanel(ds.data) && (
+  {/* A category scale has no median: its trend is the share of countries in
+      each category per year (medians of Freedom House codes drew six regions
+      as three flat lines on a "1=free…3=not" axis). */}
+  {periodCount > 2 && !ds.latestPerCountry && (cats || hasRegionalPanel(pageData)) && (
     <section class="section" style="padding-top:0" id="trend">
       <div class="container">
         <h2>Trend over time</h2>
-        <p class="sub">{company ? 'Each company by quarter' : 'Regional medians'}, {String([...new Set(ds.data.map((o) => o.period))].sort()[0]).slice(0, 4)}–{String([...new Set(ds.data.map((o) => o.period))].sort().at(-1)).slice(-4)}.</p>
-        <TrendChart data={ds.data} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode === 'pct' ? 'pct' : 'pp'} projectedFrom={ds.projectedFrom} />
-        <ChartActions name={`bulldozer-${ds.slug}-trend`} svg="#trend svg" hash="trend" title={`${ds.title} — trend by region`} source={ds.source} period={periodRange} url={dsUrl} />
+        <p class="sub">{cats ? `Share of countries in each status` : company ? 'Each company by quarter' : 'Regional medians'}, {String(dsPeriods[0]).slice(0, 4)}–{String(dsPeriods.at(-1)).slice(-4)}.</p>
+        <TrendChart data={pageData} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode === 'pct' ? 'pct' : 'pp'} projectedFrom={ds.projectedFrom} categories={cats} better={ds.better} />
+        <ChartActions name={`bulldozer-${ds.slug}-trend`} svg="#trend svg" hash="trend" title={`${ds.title} — ${cats ? 'share of countries by status' : 'trend by region'}`} source={ds.source} period={periodRange} url={dsUrl} />
       </div>
     </section>
   )}
@@ -281,8 +305,8 @@ const breadcrumbLd = {
     <section class="section" style="padding-top:0">
       <div class="container">
         <h2>Movers</h2>
-        <p class="sub">Biggest period-over-period changes.</p>
-        <MoversTable data={ds.data} n={5} unit={valSuffix} fullUnit={ds.unit} mode={ds.changeMode} better={ds.better} />
+        <p class="sub">Biggest changes{moverPeriods.length > 1 ? `, ${moverPeriods.at(-2)} to ${moverPeriods.at(-1)}` : ''}{pfYear != null ? ' (observed years; the IMF projection is not counted)' : ''}.</p>
+        <MoversTable data={observedData} n={5} unit={valSuffix} fullUnit={ds.unit} mode={ds.changeMode} better={ds.better} bandData={ds.data} />
       </div>
     </section>
   )}
@@ -291,7 +315,7 @@ const breadcrumbLd = {
     <section class="section" style="padding-top:0" id="groups">
       <div class="container">
         <h2>By group</h2>
-        <p class="sub">Change by group, latest period.</p>
+        <p class="sub">Change by group, {groupsPeriod}.</p>
         <GroupChart data={kpiData.length ? kpiData : latestData} mode={ds.changeMode} additive={additive} unit={ds.unit} better={ds.better} bandData={ds.data} />
         <div style="height:24px"></div>
         <table class="data">
@@ -313,12 +337,12 @@ const breadcrumbLd = {
 
   <section class="section" style="padding-top:0" id="full">
     <div class="container">
-      <h2>{ds.title} — full ranking</h2>
+      <h2>{ds.title} — {ds.incomparable ? 'all countries' : 'full ranking'}</h2>
       <p class="sub">
         Every entity in this dataset, in HTML. The interactive panel above shows
         the same numbers; this is the one that survives without JavaScript.
       </p>
-      <RankTable data={latestData} unit={valSuffix} fullUnit={ds.unit} mode={ds.changeMode} valueLabel={ds.valueLabel} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} categories={cats} noun={noun} />
+      <RankTable data={latestData} unit={valSuffix} fullUnit={ds.unit} mode={ds.changeMode} valueLabel={ds.valueLabel} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} categories={cats} noun={noun} incomparable={!!ds.incomparable} />
     </div>
   </section>
 

@@ -1,12 +1,12 @@
 ---
 import type { Observation, ChangeMode, Better } from '@lib/analytics';
-import { computeKpi, changeSpec, formatDelta, formatValue, toneOf, quantile } from '@lib/analytics';
+import { computeKpi, changeSpec, formatDelta, formatValue, toneOf, quantile, alignDecimals } from '@lib/analytics';
 
 // `fullUnit` is the dataset's unit ("years", "index 0–1"): it decides the unit
 // of change and the decimals. `unit` is the short suffix printed after values.
 // `bandData` sizes the stable band (default: `data`); pass the whole series so
 // the band matches the panel and the movers.
-interface Props { data: Observation[]; unit?: string; fullUnit?: string; mode?: ChangeMode; noun?: 'country' | 'company'; better?: Better; bandData?: Observation[]; projectedFrom?: string }
+interface Props { data: (Observation & { year?: string })[]; unit?: string; fullUnit?: string; mode?: ChangeMode; noun?: 'country' | 'company'; better?: Better; bandData?: Observation[]; projectedFrom?: string }
 const { data, unit: unitIn = '', fullUnit = unitIn, mode = 'pct', noun = 'country', better, bandData, projectedFrom } = Astro.props;
 // "% YoY", "% of GDP": still a percent after the number.
 const unit = unitIn || (fullUnit.includes('%') ? '%' : '');
@@ -24,6 +24,9 @@ const single = k.prevPeriod === k.currPeriod;
 const rows = single ? data.filter((o) => o.period === k.currPeriod && Number.isFinite(o.value)).sort((a, b) => a.value - b.value) : [];
 const sortedVals = rows.map((r) => r.value);
 const q1 = quantile(sortedVals, 0.25), q3 = quantile(sortedVals, 0.75);
+// Both ends of a range with the same decimals: "18% – 61.5%" read as two
+// precisions; now "18.0% – 61.5%".
+const pair = alignDecimals([formatValue(q1, fullUnit), formatValue(q3, fullUnit)]).map((t) => t + unit);
 // Improving / declining follow which way is better; with no better direction
 // the cards say plainly what happened: rose, fell, flat.
 const rose = { n: k.growthCount, cls: toneOf(1e9, spec) };
@@ -36,7 +39,13 @@ const cards = !better
 const nouns = company ? 'companies' : k.currCount === 1 ? 'country' : 'countries';
 // IMF WEO runs into its own projections: say so on the headline period.
 const projected = (p: string) => !!projectedFrom && Number(String(p).slice(0, 4)) >= Number(String(projectedFrom).slice(0, 4));
-const periodLabel = k.currPeriod === 'Latest' ? 'latest' : projected(k.currPeriod) ? `${k.currPeriod}, projection` : k.currPeriod;
+// Each country's latest reading (World Bank most-recent-value series): the
+// label names the years, and Highest / Lowest carry their own year when it is
+// not the newest one (Algeria's 0.19% market cap is from 2018).
+const yrs = rows.map((r) => r.year).filter((y): y is string => !!y).sort();
+const headYear = yrs.at(-1);
+const yearNote = (r: { year?: string }) => (r.year && r.year !== headYear ? ` · ${r.year}` : '');
+const periodLabel = k.currPeriod === 'Latest' ? (yrs.length ? `latest, ${yrs[0] === headYear ? headYear : `${yrs[0]}–${headYear}`}` : 'latest') : projected(k.currPeriod) ? `${k.currPeriod}, projection` : k.currPeriod;
 ---
 <div class="kpi-row">
   {company ? (
@@ -57,18 +66,18 @@ const periodLabel = k.currPeriod === 'Latest' ? 'latest' : projected(k.currPerio
   {single && rows.length ? <>
   <div class="kpi">
     <div class="label">Middle half</div>
-    <div class="value" style="font-size:22px">{fv(q1)} – {fv(q3)}</div>
+    <div class="value" style="font-size:22px">{pair[0]} – {pair[1]}</div>
     <div class="delta">a quarter of the countries below, a quarter above</div>
   </div>
   <div class="kpi">
     <div class="label">Highest</div>
     <div class="value">{fv(rows[rows.length - 1].value)}</div>
-    <div class="delta">{rows[rows.length - 1].entity}</div>
+    <div class="delta">{rows[rows.length - 1].entity}{yearNote(rows[rows.length - 1])}</div>
   </div>
   <div class="kpi">
     <div class="label">Lowest</div>
     <div class="value">{fv(rows[0].value)}</div>
-    <div class="delta">{rows[0].entity}</div>
+    <div class="delta">{rows[0].entity}{yearNote(rows[0])}</div>
   </div>
   </> : <>
   {cards.map((c) => (

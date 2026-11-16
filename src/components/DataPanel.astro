@@ -76,8 +76,11 @@ const enriched = indicators.map((d) => {
   const full = getDataset(d.slug);
   const latestPerCountry = !!(d.latestPerCountry ?? full?.latestPerCountry);
   const oneEach = latestPerCountry && !!full && new Set(full.data.map((o) => o.iso ?? o.entity)).size === full.data.length;
-  return { ...d, better: betterFor(d.slug) ?? null, chgSuffix: changeUnit(d.unit, d.changeMode), latestPerCountry, oneEach, categories: full?.categories ?? null, source: full?.source ?? '' };
+  return { ...d, better: betterFor(d.slug) ?? null, chgSuffix: changeUnit(d.unit, d.changeMode), latestPerCountry, oneEach, categories: full?.categories ?? null, incomparable: full?.incomparable ?? null, source: full?.source ?? '' };
 });
+// A pinned series in a different currency per country has no bubble view:
+// circle sizes would compare yen with euros (datasets.ts INCOMPARABLE).
+const noBubbles = !!(pinnedSlug && getDataset(pinnedSlug)?.incomparable);
 const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView: geo ? defaultView : 'bar', datasets: enriched, noun };
 // Everyday country names ("United Kingdom", not the ISO list's "United Kingdom
 // of Great Britain and Northern Ireland (the)"), the same ones the country
@@ -95,7 +98,7 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
       <button data-view="bar" class="active">Bars</button>
       <button data-view="table">Table</button>
       {geo && <button data-view="map">Map</button>}
-      {geo && <button data-view="bubbles">Bubbles</button>}
+      {geo && !noBubbles && <button data-view="bubbles">Bubbles</button>}
     </div>
   </div>
 
@@ -132,7 +135,9 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
 <script type="application/json" id="bd-names" set:html={JSON.stringify(commonNames)}></script>
 
 <script>
-  import { stableBand, quantile, formatValue, formatDelta, toneOf } from '@lib/analytics';
+  import { stableBand, quantile, formatValue, formatDelta, toneOf, sharedRanks, alignDecimals } from '@lib/analytics';
+  import { normaliseGroups } from '@lib/regions';
+  import { categoryColors } from '@lib/palette';
   const cfg = JSON.parse(document.getElementById('bd-config').textContent);
   const isoNumeric = JSON.parse(document.getElementById('bd-iso').textContent); // numeric -> alpha3
   const isoAlpha2 = JSON.parse(document.getElementById('bd-a2').textContent);   // alpha3 -> alpha2
@@ -161,6 +166,8 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
   const params = new URLSearchParams(location.search);
   if (!cfg.pinnedSlug && params.get('i') && cfg.datasets.some((d) => d.slug === params.get('i'))) state.slug = params.get('i');
   if ((GEO ? ['bar', 'table', 'map', 'bubbles'] : ['bar', 'table']).includes(params.get('v'))) state.view = params.get('v');
+  // A view the page does not offer (bubbles of an incomparable series) falls back to bars.
+  if (!document.querySelector(`#view-toggle [data-view="${state.view}"]`)) state.view = 'bar';
   function syncUrl() {
     const p = new URLSearchParams(location.search);
     if (!cfg.pinnedSlug) p.set('i', state.slug);
@@ -212,6 +219,8 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
     // Everyday names for countries (see bd-names): rows, search, pins and
     // the "add country" list all use them.
     if (GEO) for (const o of ds.data) if (o.iso && NAMES[o.iso]) o.entity = NAMES[o.iso];
+    // One region scheme, as on the rest of the page (lib/regions).
+    if (GEO) ds.data = normaliseGroups(ds.data);
     bands.set(slug, stableBand(ds.data.map((o) => o.value), m ? m.changeMode : 'pct'));
     cache.set(slug, ds); return ds;
   }
@@ -222,13 +231,20 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
   // 1–5 mean shown as 3.46. The band itself still decides the colour.
   const fmtChange = (v, m) => { const sp = specOf(m); return formatDelta(v, sp.mode === 'pp' ? { ...sp, band: Math.max(sp.band, 0.01) } : sp); };
   const toneClass = (v, m) => toneOf(v, specOf(m));
-  // Precision per scale (0–1 indices two places, huge numbers "3.19 tn").
+  // Precision per scale (0–1 indices two places, huge numbers "3.19T").
   const fmtNum = (n) => formatValue(n, (meta() || {}).unit || '');
   // Category scales (Freedom House status): a value is a name, and a change
   // is a move to another category, not "0.00 points".
   const catName = (m, v) => (m.categories ? m.categories[String(v)] : null);
   const unitOf = (m) => (m.unit.includes('%') ? '%' : '');
   const valText = (m, v) => catName(m, v) || (fmtNum(v) + unitOf(m));
+  // Values of one list with one decimal style ("4.0%" beside "41.4%"), over
+  // every row of the period so it does not change with "Show all".
+  const listTexts = (m, rows) => {
+    if (m.categories) return new Map(rows.map((r) => [r.entity, valText(m, r.value)]));
+    const t = alignDecimals(rows.map((r) => fmtNum(r.value)));
+    return new Map(rows.map((r, i) => [r.entity, t[i] + unitOf(m)]));
+  };
   const chgText = (m, r) => {
     if (r.change == null) return '';
     if (m.categories) return r.prev !== r.value && catName(m, r.prev) ? `was ${catName(m, r.prev)}` : '';
@@ -265,8 +281,17 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
     let rows = [...byEnt.values()].filter((r) => r.value != null);
     rows.forEach((r) => { r.change = r.prev != null ? changeVal(r.value, r.prev, m.changeMode) : null; });
     if (state.query) { const q = state.query.toLowerCase(); rows = rows.filter((r) => r.entity.toLowerCase().includes(q) || (r.group || '').toLowerCase().includes(q)); }
-    return rows.sort((a, b) => b.value - a.value);
+    return rows.sort(rankCmp(m));
   }
+
+  // Rank order. A category scale is ordered by category, the better one first,
+  // then by name: by code size, "Highest first" opened on Not free. Numbers:
+  // highest first.
+  const rankCmp = (m) => m.categories
+    ? (a, b) => (m.better === 'high' ? b.value - a.value : a.value - b.value) || a.entity.localeCompare(b.entity)
+    : (a, b) => b.value - a.value;
+  // Shared ranks on the printed value ("28=" for both of two 2.50s).
+  const ranksOf = (m, rows) => { const rk = sharedRanks(rows.map((r) => valText(m, r.value))); return new Map(rows.map((r, i) => [r.entity, rk[i].label])); };
 
   function visibleRows(rows) {
     // A–Z is for finding a country, so it lists every one (a top-7 cut by
@@ -278,7 +303,9 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
     const top = ordered.slice(0, TOP_N);
     const names = new Set(top.map((r) => r.entity));
     const extra = ordered.filter((r) => state.pinned.has(r.entity) && !names.has(r.entity));
-    return [...top, ...extra].sort((a, b) => state.sortDir === 'asc' ? a.value - b.value : b.value - a.value);
+    // Pinned extras slot in where they rank (category order included).
+    const at = new Map(ordered.map((r, i) => [r.entity, i]));
+    return [...top, ...extra].sort((a, b) => at.get(a.entity) - at.get(b.entity));
   }
 
   function renderBarControls(rows) {
@@ -292,8 +319,10 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
     el('pinned-chips').innerHTML = (state.pinned.size ? `<span class="chips-lbl">★ My ${NOUNS}:</span>` : '') +
       [...state.pinned].map((n) =>
         `<span class="chip">${esc(n)}<button type="button" data-rm="${esc(n)}" aria-label="Remove ${esc(n)}">×</button></span>`).join('');
-    el('sort-dir').textContent = { desc: '↓ Highest first', asc: '↑ Lowest first', name: 'A–Z' }[state.sortDir];
-    el('sort-dir').setAttribute('aria-label', `Sort: ${{ desc: 'highest first', asc: 'lowest first', name: `by ${NOUN} name` }[state.sortDir]} — tap to change`);
+    // Categories are not high or low: best first / worst first.
+    const cat = !!meta().categories;
+    el('sort-dir').textContent = { desc: cat ? '↓ Best first' : '↓ Highest first', asc: cat ? '↑ Worst first' : '↑ Lowest first', name: 'A–Z' }[state.sortDir];
+    el('sort-dir').setAttribute('aria-label', `Sort: ${{ desc: cat ? 'best first' : 'highest first', asc: cat ? 'worst first' : 'lowest first', name: `by ${NOUN} name` }[state.sortDir]} — tap to change`);
     el('show-all').textContent = state.showAll ? 'Show top 7' : `Show all ${rows.length}`;
     // Nothing more to show (a company dataset with two companies): no button.
     el('show-all').hidden = state.sortDir === 'name' || rows.length <= TOP_N;
@@ -337,7 +366,8 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
     renderBarControls(rows);
     // A spread across a handful of companies that each count differently says
     // nothing, and a median of category codes means nothing either.
-    const st = GEO && !m.categories ? distStats(rows) : null;
+    // Nor does a spread of values each in its own currency (exchange rates).
+    const st = GEO && !m.categories && !m.incomparable ? distStats(rows) : null;
     renderDist(st, unit, m.kind === 'survey' ? 'all the people asked' : 'everyone in those countries');
     const top = visibleRows(rows); const vals = top.map((r) => r.value);
     // A visible zero axis with bars running both ways: length = |value|. The
@@ -350,9 +380,19 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
     const guides = st && !state.query
       ? `<span class="bar-band" style="left:${pos(st.q1)}%;width:${Math.max(0, pos(st.q3) - pos(st.q1))}%"></span><span class="bar-med" style="left:${pos(st.med)}%"></span>`
       : '';
-    const rankOf = new Map([...rows].sort((a, b) => b.value - a.value).map((r, i) => [r.entity, i + 1]));
+    const rankOf = ranksOf(m, rows);
+    const vt = listTexts(m, rows);
+    // Category scale: a coloured chip with the category's name, not a bar
+    // whose length is a code (Not free drawn three times as long as Free).
+    const cc = m.categories ? categoryClasses(m) : null;
     el('bar-target').innerHTML = top.map((r) => {
       const p = pos(r.value), left = Math.min(p, zero), w = Math.abs(p - zero);
+      if (cc) {
+        const col = cc.colors[cc.classOf(r.value)] || '#9aa1a9';
+        const ct = chgText(m, r);
+        const rkc = state.sortDir === 'name' ? `<i class="bar-rank">#${rankOf.get(r.entity)}</i>` : '';
+        return `<div class="bar-row bar-row-cat"><span class="bar-name" title="${esc(r.entity)}">${rkc}${flag(r.iso)}${esc(r.entity)}</span><span class="bar-track bar-track-cat"><span class="bar-cat" style="background:${col};color:${lum(col) > 0.5 ? '#1a1300' : '#fff'}">${esc(valText(m, r.value))}</span></span><span class="bar-val">${ct ? `<em class="${r.change == null ? 'flat' : toneClass(r.change, m)}">${ct}</em>` : ''}</span></div>`;
+      }
       // One fill for every bar: the bar is the value. The change is the small
       // label, coloured by whether it went the better way.
       const cls = r.change == null ? 'flat' : toneClass(r.change, m);
@@ -360,7 +400,9 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
       const chg = ct ? `<em class="${cls}">${ct}</em>` : '';
       const rk = state.sortDir === 'name' ? `<i class="bar-rank">#${rankOf.get(r.entity)}</i>` : '';
       const yr = r.year != null ? `<em class="flat">${r.year}</em>` : '';
-      return `<div class="bar-row"><span class="bar-name" title="${esc(r.entity)}">${rk}${flag(r.iso)}${esc(r.entity)}</span><span class="bar-track">${guides}${zeroLine}<span class="bar-fill${r.value < 0 ? ' neg' : ''}" style="margin-left:${left.toFixed(2)}%;width:${w.toFixed(2)}%"></span></span><span class="bar-val">${valText(m, r.value)}${chg}${yr}</span></div>`;
+      // Values in different currencies: listed, not drawn as lengths.
+      const fill = m.incomparable ? '' : `${guides}${zeroLine}<span class="bar-fill${r.value < 0 ? ' neg' : ''}" style="margin-left:${left.toFixed(2)}%;width:${w.toFixed(2)}%"></span>`;
+      return `<div class="bar-row"><span class="bar-name" title="${esc(r.entity)}">${rk}${flag(r.iso)}${esc(r.entity)}</span><span class="bar-track${m.incomparable ? ' bar-track-none' : ''}">${fill}</span><span class="bar-val">${vt.get(r.entity)}${chg}${yr}</span></div>`;
     }).join('');
   }
 
@@ -368,16 +410,21 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
     const m = meta(); const unit = m.unit.includes('%') ? '%' : '';
     // Each country's latest reading has nothing to compare with: no change column.
     const showChg = state.period !== 'latest';
-    const head = `<thead><tr><th>${GEO ? 'Country' : 'Company'}</th>${GEO ? '<th class="dp-grp">Group</th>' : ''}<th class="num">${m.valueLabel}</th>${showChg ? '<th class="num">Change</th>' : ''}</tr></thead>`;
+    // Each reading's own year in a column of its own, not squeezed into the value cell.
+    const showYear = state.period === 'latest';
+    const head = `<thead><tr><th>${GEO ? 'Country' : 'Company'}</th>${GEO ? '<th class="dp-grp">Group</th>' : ''}<th class="num">${m.valueLabel}</th>${showYear ? '<th class="num">Year</th>' : ''}${showChg ? '<th class="num">Change</th>' : ''}</tr></thead>`;
+    const vt = listTexts(m, rows);
     el('table-target').innerHTML = head + '<tbody>' + rows.map((r) => {
       const cls = r.change == null ? 'flat' : toneClass(r.change, m);
       const ct = chgText(m, r);
       const chg = ct ? `<span class="${cls}">${ct}</span>` : (m.categories && r.change != null ? 'same' : '—');
-      return `<tr><td>${flag(r.iso)}${esc(r.entity)}</td>${GEO ? `<td class="dp-grp">${r.group || ''}</td>` : ''}<td class="num">${valText(m, r.value)}${r.year != null && state.period === 'latest' ? ` <small class="flat">${r.year}</small>` : ''}</td>${showChg ? `<td class="num">${chg}</td>` : ''}</tr>`;
+      return `<tr><td>${flag(r.iso)}${esc(r.entity)}</td>${GEO ? `<td class="dp-grp">${r.group || ''}</td>` : ''}<td class="num">${vt.get(r.entity)}</td>${showYear ? `<td class="num">${r.year != null ? r.year : ''}</td>` : ''}${showChg ? `<td class="num">${chg}</td>` : ''}</tr>`;
     }).join('') + '</tbody>';
   }
 
   const isLight = () => document.documentElement.getAttribute('data-theme') === 'light';
+  // Relative luminance of a hex colour, to pick dark or light text on it.
+  const lum = (hex) => { const h = hex.replace('#', ''); const [r, g, b] = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) / 255); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
   // Five quantile classes, theme-aware: light runs pale → dark amber, dark runs
   // dark → bright amber, so "more" is always the stronger contrast with the
   // page and the lowest class never melts into the no-data grey.
@@ -401,9 +448,10 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
   };
   // Category scales: one class per category, in code order, on the same ramp.
   function categoryClasses(m) {
-    const codes = Object.keys(m.categories).map(Number).sort((a, b) => a - b);
-    const ramp = seqRamp();
-    const colors = codes.map((_, i) => ramp[codes.length === 1 ? ramp.length - 1 : Math.round(i * (ramp.length - 1) / (codes.length - 1))]);
+    // Best category first, in the category colours the chips and the trend
+    // lines use (lib/palette), so one status is one colour on the whole page.
+    const codes = Object.keys(m.categories).map(Number).sort((a, b) => (m.better === 'high' ? b - a : a - b));
+    const colors = categoryColors(codes.length);
     return { diverging: false, categorical: true, codes, breaks: [], colors, classOf: (x) => codes.indexOf(Number(x)), labels: codes.map((c) => m.categories[String(c)]) };
   }
   function classesFor(vals) {
@@ -455,7 +503,11 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
     const byIso = new Map(); for (const r of rows) if (r.iso) byIso.set(r.iso, r.value);
     mapRows = new Map(rows.filter((r) => r.iso).map((r) => [r.iso, r]));
     hideMapTip();
-    const c = classesFor([...byIso.values()]);
+    // Different currencies: one colour for "has data", no scale, and the line
+    // that says why. The tooltip still gives each country's own value.
+    const c = m.incomparable
+      ? { diverging: false, breaks: [], colors: [isLight() ? SEQ_LIGHT[2] : SEQ_DARK[3]], classOf: () => 0, labels: ['Has data'] }
+      : classesFor([...byIso.values()]);
     const f = (v) => fmtNum(v) + unit;
     const svg = el('view-map').querySelector('svg');
     const hatch = svg && svg.querySelector('pattern') ? `url(#${svg.querySelector('pattern').id})` : 'var(--bg-elev)';
@@ -467,7 +519,7 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
       else { p.setAttribute('fill', c.colors[c.classOf(v)]); p.style.opacity = '1'; }
     });
     if (svg) svg.dataset.period = periodLabel();
-    const how = c.categorical ? 'one colour per category' : c.diverging ? `centred on 0 · clamped at ±${f(c.L)}` : c.colors.length < 5 ? `${c.colors.length} classes of about equal size` : 'quintiles: a fifth of countries each';
+    const how = m.incomparable ? 'no colour scale: each country is in its own currency' : c.categorical ? 'one colour per category' : c.diverging ? `centred on 0 · clamped at ±${f(c.L)}` : c.colors.length < 5 ? `${c.colors.length} classes of about equal size` : 'quintiles: a fifth of countries each';
     const caption = `${m.valueLabel} · ${periodLabel()} · ${how}`;
     lastLegend = byIso.size ? { colors: c.colors, labels: classLabels(c, f), noData: true, caption } : null;
     el('map-legend').innerHTML = byIso.size
@@ -520,7 +572,9 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
   // the country's map position and gently pushed apart until nothing overlaps.
   function renderBubbles(rows) {
     const m = meta(); const unit = m.unit.includes('%') ? '%' : '';
-    const data = rows.map((r, i) => ({ ...r, rank: i + 1 })).filter((r) => r.iso && CENT[r.iso]).slice(0, 60);
+    if (m.incomparable) { el('bubble-nodes').innerHTML = ''; lastLegend = null; el('bubble-legend').innerHTML = '<span class="legend-label">No bubbles: each country is in its own currency, so circle sizes would not compare.</span>'; return; }
+    const rk = ranksOf(m, rows);
+    const data = rows.map((r) => ({ ...r, rank: rk.get(r.entity) })).filter((r) => r.iso && CENT[r.iso]).slice(0, 60);
     // reset any lingering hover highlight from a previous indicator/period
     el('bubble-nodes').classList.remove('focus');
     el('view-bubbles').querySelectorAll('.bubble-basemap.hl').forEach((p) => p.classList.remove('hl'));
@@ -544,7 +598,6 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
     }
     // Same classes and colours as the map, from every country in the period.
     const cls = classesFor(rows.map((r) => r.value));
-    const lum = (hex) => { const h = hex.replace('#', ''); const [r, g, b] = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) / 255); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
     el('bubble-target').dataset.lbl = m.valueLabel;
     el('bubble-nodes').innerHTML = nodes.map((n) => {
       const col = cls.colors[cls.classOf(n.value)] || '#9aa1a9';
@@ -712,7 +765,13 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
   async function render() {
     const ds = await load(state.slug); const m = meta(); const rows = rowsFor(ds);
     lastRows = rows;
-    el('ex-summary').textContent = `${m.title} · ${periodLabel()} · ${rows.length} ${rows.length === 1 ? NOUN : NOUNS} · unit ${m.unit}`;
+    // On a dataset page the heading above is the value label: the summary
+    // repeats it rather than the dataset title ("Stock Market Capitalisation"
+    // under "Listed-company market cap").
+    // The unit is left out where the label already carries it, and for a
+    // category scale, whose "1=free…3=not" codes are shown by name.
+    const label = cfg.pinnedSlug ? m.valueLabel : m.title;
+    el('ex-summary').textContent = `${label} · ${periodLabel()} · ${rows.length} ${rows.length === 1 ? NOUN : NOUNS}${label.includes(m.unit) || m.categories ? '' : ` · unit ${m.unit}`}`;
     for (const v of ['bar', 'table', 'map', 'bubbles']) el('view-' + v).hidden = state.view !== v;
     if (state.view === 'bar') renderBars(rows); else if (state.view === 'table') renderTable(rows); else if (state.view === 'bubbles') renderBubbles(rows); else renderMap(rows);
     syncUrl();
@@ -751,6 +810,10 @@ const commonNames = Object.fromEntries(Object.entries(countryNames as Record<str
   .datapanel .bar-controls .ghost-btn { min-height: 32px; }
   .datapanel :global(.chip) { padding-top: 0; padding-bottom: 0; }
   .datapanel :global(.chip button) { display: inline-flex; align-items: center; justify-content: center; min-width: 32px; min-height: 32px; margin-right: -4px; }
+  /* Category scale: a status chip where a bar would be (a bar's length would
+     be a code). Exchange rates: no bar at all, values only. */
+  .datapanel :global(.bar-track-cat), .datapanel :global(.bar-track-none) { background: none; border: 0; height: auto; overflow: visible; }
+  .datapanel :global(.bar-cat) { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; line-height: 18px; white-space: nowrap; }
   /* The table scrolls sideways inside the panel rather than being cut off;
      on phones the region column gives way to the values. */
   #view-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }

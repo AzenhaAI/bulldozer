@@ -1,16 +1,22 @@
 ---
 import type { Observation, ChangeMode, Better } from '@lib/analytics';
-import { topGrowth, topDecline, changeSpec, formatDelta, formatValue, toneOf } from '@lib/analytics';
+import { topGrowth, topDecline, changeSpec, formatDelta, formatValue, toneOf, alignDecimals } from '@lib/analytics';
 import { flagFor } from '@lib/flags';
 
-interface Props { data: Observation[]; n?: number; unit?: string; fullUnit?: string; mode?: ChangeMode; better?: Better }
-const { data, n = 5, unit = '', fullUnit = unit, mode = 'pct', better } = Astro.props;
-const spec = changeSpec(data, fullUnit, mode, better);
+// `bandData` sizes the stable band (default: `data`): the dataset page passes
+// observed years as `data` and the whole series here, so the band matches the
+// KPI cards and the panel.
+interface Props { data: Observation[]; n?: number; unit?: string; fullUnit?: string; mode?: ChangeMode; better?: Better; bandData?: Observation[] }
+const { data, n = 5, unit = '', fullUnit = unit, mode = 'pct', better, bandData } = Astro.props;
+const spec = changeSpec(bandData ?? data, fullUnit, mode, better);
 // Only moves outside the stable band are movers.
 const up = topGrowth(data, n, mode).filter((r) => r.pct > spec.band);
 const down = topDecline(data, n, mode).filter((r) => r.pct < -spec.band);
 const isoOf = new Map(data.filter((o) => o.iso).map((o) => [o.entity, o.iso!]));
 const label = (e: string) => { const f = flagFor(isoOf.get(e)); return f ? f + ' ' + e : e; };
+// One decimal style down both "Now" columns ("4.0%" beside "41.4%", not "4%").
+const nowText = new Map<object, string>();
+{ const all = [...up, ...down]; alignDecimals(all.map((r) => formatValue(r.curr, fullUnit))).forEach((t, i) => nowText.set(all[i], t)); }
 const tables = [
   { title: better === 'high' ? 'Top risers (improving)' : better === 'low' ? 'Top risers (worsening)' : 'Top risers', rows: up },
   { title: better === 'high' ? 'Top fallers (worsening)' : better === 'low' ? 'Top fallers (improving)' : 'Top fallers', rows: down },
@@ -26,7 +32,7 @@ const tables = [
         {t.rows.length ? t.rows.map((r) => (
           <tr>
             <td>{label(r.entity)}</td>
-            <td class="num">{formatValue(r.curr, fullUnit)}{unit}</td>
+            <td class="num">{nowText.get(r)}{unit}</td>
             <td class={`num ${toneOf(r.pct, spec)}`}>{formatDelta(r.pct, spec)}</td>
           </tr>
         )) : <tr><td colspan="3" class="flat">None outside the stable band.</td></tr>}

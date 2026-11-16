@@ -12,15 +12,21 @@
  *  - a dashed Theil–Sen trend only where the direction is steady (≥ 6
  *    readings, Mann–Kendall p < 0.05, same sign in both halves), its rate in
  *    the legend;
- *  - IMF projections: a shaded "forecast" stretch.
+ *  - IMF projections: a shaded "forecast" stretch;
+ *  - a category scale (Freedom House status) has no median: each line is the
+ *    share of the countries rated that year that are in one category.
  */
 import type { Observation } from '@lib/analytics';
-import { colorFor } from '@lib/palette';
+import { colorFor, categoryColors } from '@lib/palette';
 import { periodYear, yDomain, niceTicks, trendOf, trendAt, trendRate, lowess, isPointUnit, SMOOTH_MIN_POINTS } from '@lib/trend';
 
-interface Props { data: Observation[]; unit?: string; fullUnit?: string; mode?: 'pp' | 'pct'; projectedFrom?: string }
-const { data, unit = '', fullUnit = unit, mode, projectedFrom } = Astro.props;
-const changeMode = mode ?? (isPointUnit(fullUnit) ? 'pp' : 'pct');
+interface Props { data: Observation[]; unit?: string; fullUnit?: string; mode?: 'pp' | 'pct'; projectedFrom?: string; categories?: Record<string, string>; better?: 'high' | 'low' }
+const { data, categories, better } = Astro.props;
+// Shares of countries are percentages, whatever the codes' own unit says.
+const unit = categories ? '%' : Astro.props.unit ?? '';
+const fullUnit = categories ? '%' : Astro.props.fullUnit ?? unit;
+const projectedFrom = Astro.props.projectedFrom;
+const changeMode = categories ? 'pp' : Astro.props.mode ?? (isPointUnit(fullUnit) ? 'pp' : 'pct');
 const proj = projectedFrom ? Number(projectedFrom) : undefined;
 const MIN_PANEL = 3;
 
@@ -34,9 +40,20 @@ for (const o of data) {
   const g = byGroup.get(o.group) ?? byGroup.set(o.group, new Map()).get(o.group)!;
   (g.get(o.entity) ?? g.set(o.entity, new Map()).get(o.entity)!).set(o.period, o.value);
 }
-const series: { group: string; n: number; pts: number[]; smooth?: number[]; trend: ReturnType<typeof trendOf> }[] = [];
+const series: { group: string; n: number; pts: number[]; smooth?: number[]; trend: ReturnType<typeof trendOf>; color?: string }[] = [];
 const dropped: string[] = [];
-for (const [group, ents] of byGroup) {
+// Category scale: one line per category, best first, as a share of the
+// countries rated in that year (the count rated is in the note).
+const catCodes = categories ? Object.keys(categories).map(Number).sort((a, b) => (better === 'high' ? b - a : a - b)) : [];
+const ratedPerPeriod = periods.map((p) => data.filter((o) => o.period === p && Number.isFinite(o.value)).length);
+const catColors = categoryColors(catCodes.length);
+catCodes.forEach((code, ci) => {
+  const pts = periods.map((p, i) => (ratedPerPeriod[i] ? (data.filter((o) => o.period === p && o.value === code).length / ratedPerPeriod[i]) * 100 : NaN));
+  const smooth = xs.length >= SMOOTH_MIN_POINTS ? lowess(xs, pts) : undefined;
+  series.push({ group: categories![String(code)], n: 0, pts, smooth, trend: trendOf(pts.map((y, i) => ({ x: xs[i], y })), undefined, false), color: catColors[ci] });
+});
+const lineColor = (s: (typeof series)[number]) => s.color ?? colorFor(s.group);
+for (const [group, ents] of (categories ? new Map() : byGroup)) {
   const panel = [...ents.values()].filter((m) => periods.every((p) => m.has(p)));
   if (panel.length < MIN_PANEL) { dropped.push(group); continue; }
   const pts = periods.map((p) => median(panel.map((m) => m.get(p)!)));
@@ -44,7 +61,7 @@ for (const [group, ents] of byGroup) {
   const smooth = xs.length >= SMOOTH_MIN_POINTS ? lowess(xs, pts) : undefined;
   series.push({ group, n: panel.length, pts, smooth, trend: trendOf(pts.slice(0, actual).map((y, i) => ({ x: xs[i], y })), undefined, changeMode === 'pct') }); // levels: fitted on logs
 }
-series.sort((a, b) => b.pts[b.pts.length - 1] - a.pts[a.pts.length - 1]);
+if (!categories) series.sort((a, b) => b.pts[b.pts.length - 1] - a.pts[a.pts.length - 1]);
 
 const trendEnds = series.flatMap((s) => (s.trend?.clear ? [trendAt(s.trend, s.trend.x0), trendAt(s.trend, s.trend.x1)] : []));
 const [lo, hi] = series.length ? yDomain([...series.flatMap((s) => s.pts), ...trendEnds]) : [0, 1];
@@ -124,21 +141,23 @@ const anySmooth = series.some((s) => s.smooth), anyTrend = series.some((s) => s.
       <text x={x} y={g.H - g.m.b + 20} text-anchor={anchor} class="axis">{p}</text>
     ))}
     {series.map((s) => s.trend?.clear && (
-      <path d={g.trendPath(s.trend)} fill="none" stroke={colorFor(s.group)} stroke-width="1.3" stroke-dasharray="6 4" opacity="0.75" />
+      <path d={g.trendPath(s.trend)} fill="none" stroke={lineColor(s)} stroke-width="1.3" stroke-dasharray="6 4" opacity="0.75" />
     ))}
     {series.map((s) => (
-      <path d={g.line(s.pts)} fill="none" stroke={colorFor(s.group)} stroke-width={s.smooth ? 1 : 2.2} opacity={s.smooth ? 0.45 : 1} stroke-linejoin="round" stroke-linecap="round" />
+      <path d={g.line(s.pts)} fill="none" stroke={lineColor(s)} stroke-width={s.smooth ? 1 : 2.2} opacity={s.smooth ? 0.45 : 1} stroke-linejoin="round" stroke-linecap="round" />
     ))}
     {series.map((s) => s.smooth && (
-      <path d={g.line(s.smooth)} fill="none" stroke={colorFor(s.group)} stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round" />
+      <path d={g.line(s.smooth)} fill="none" stroke={lineColor(s)} stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round" />
     ))}
   </svg>
   ))}
   <div class="legend-regions">
-    {series.map((s) => (<span class="lr"><span class="lr-dot" style={`background:${colorFor(s.group)}`}></span>{s.group} <span class="lr-n">({s.n})</span>{rate(s) && <em class="lr-rate">{rate(s)}</em>}</span>))}
+    {series.map((s) => (<span class="lr"><span class="lr-dot" style={`background:${lineColor(s)}`}></span>{s.group} {!categories && <span class="lr-n">({s.n})</span>}{rate(s) && <em class="lr-rate">{rate(s)}</em>}</span>))}
   </div>
   <p class="tc-note">
-    Each line is the median of the same countries in every period (number in brackets).
+    {categories
+      ? `Each line is the share of the countries rated that year (${Math.min(...ratedPerPeriod) === Math.max(...ratedPerPeriod) ? Math.max(...ratedPerPeriod) : `${Math.min(...ratedPerPeriod)}–${Math.max(...ratedPerPeriod)}`} countries) that are in that status.`
+      : 'Each line is the median of the same countries in every period (number in brackets).'}
     {dropped.length > 0 && ` Not drawn — fewer than ${MIN_PANEL} countries measured every time: ${dropped.join(', ')}.`}
     {anySmooth && ' Thick curve: smoothed (LOWESS) over the yearly line.'}
     {anyTrend && ' Dashed: trend, shown only where the direction is steady.'}

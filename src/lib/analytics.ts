@@ -115,7 +115,9 @@ export function changeSpec(data: Observation[], unit: string, mode: ChangeMode, 
 
 /** Decimals a change needs so that the stable band itself is visible. */
 export function changeDecimals(spec: Pick<ChangeSpec, 'mode' | 'band'>, value: number): number {
-  if (spec.mode === 'pct') return Math.abs(value) < 1 ? 2 : 1;
+  // Relative changes: one decimal for every row, which already shows the ±0.5%
+  // band. Two places below 1% printed "−0.87%" next to "+4.4%" in one list.
+  if (spec.mode === 'pct') return 1;
   if (!(spec.band > 0)) return Math.abs(value) < 1 ? 2 : 1;
   // Capped at 2: a band of 0.005 gave "+0.590 points", false precision (QA, 16 Nov 2026).
   return Math.max(0, Math.min(2, Math.ceil(-Math.log10(spec.band))));
@@ -126,6 +128,9 @@ export function formatDelta(value: number, spec: Pick<ChangeSpec, 'mode' | 'band
   if (!Number.isFinite(value)) return '—';
   const dp = changeDecimals(spec, value);
   const r = Number(value.toFixed(dp));
+  // A real but tiny change is not "0.0%": it reads as "<0.1%" (always inside
+  // the stable band, so its colour already says flat).
+  if (r === 0 && value !== 0) return `<${(10 ** -dp).toFixed(dp)}${spec.suffix}`;
   const sign = r > 0 ? '+' : r < 0 ? '−' : '';
   return `${sign}${Math.abs(r).toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp })}${spec.suffix}`;
 }
@@ -164,15 +169,55 @@ function scaleDecimals(unit: string): number | undefined {
 export function formatValue(v: number, unit = ''): string {
   if (!Number.isFinite(v)) return '—';
   const a = Math.abs(v);
+  // Millions and up in the compact style the chart axes use ("2.67M" beside
+  // an axis at "5K"); "2.67 m" next to "5K" read as two conventions.
   if (a >= 1e6) {
-    const [d, s] = a >= 1e12 ? [1e12, 'tn'] : a >= 1e9 ? [1e9, 'bn'] : [1e6, 'm'];
-    return `${v < 0 ? '−' : ''}${(a / d).toFixed(2)} ${s}`;
+    const [d, s] = a >= 1e12 ? [1e12, 'T'] : a >= 1e9 ? [1e9, 'B'] : [1e6, 'M'];
+    return `${v < 0 ? '−' : ''}${(a / d).toFixed(2)}${s}`;
   }
   const fixed = scaleDecimals(unit);
   const dp = fixed ?? (a >= 1000 ? 0 : a >= 100 ? 1 : a >= 1 ? 1 : a >= 0.01 || a === 0 ? 2 : 3);
   const r = Number(v.toFixed(dp));
+  // A tiny share is not zero: "<0.001", never "0.000".
+  if (r === 0 && v !== 0) return `${v < 0 ? '−' : ''}<${(10 ** -dp).toFixed(dp)}`;
   const out = Math.abs(r).toLocaleString('en-US', { minimumFractionDigits: fixed ?? 0, maximumFractionDigits: dp });
   return r < 0 ? `−${out}` : out;
+}
+
+/**
+ * formatValue texts of one list with the same decimals: formatValue drops a
+ * trailing zero, so a column read "41.4%, 4%, 0%" or a range "18% – 61.5%".
+ * A whole number below 1,000 gets the decimals its magnitude would show (one
+ * from 1 up, two below 1), but no more than the list already shows; texts
+ * with a magnitude suffix ("2.67M") or "<0.001" are left as they are, and so
+ * is a list of whole numbers (people, counts).
+ */
+export function alignDecimals(texts: string[]): string[] {
+  const dpOf = (t: string) => (/^−?[\d,]+\.(\d+)$/.exec(t)?.[1].length ?? (/^−?[\d,]+$/.test(t) ? 0 : -1));
+  const maxDp = Math.max(0, ...texts.map(dpOf));
+  if (!maxDp) return texts;
+  return texts.map((t) => {
+    if (dpOf(t) !== 0) return t;
+    const a = Math.abs(Number(t.replace(/[,−]/g, '')));
+    if (a >= 1000) return t;
+    return `${t}.${'0'.repeat(Math.min(maxDp, a >= 1 ? 1 : 2))}`;
+  });
+}
+
+/**
+ * Competition ranks ("1, 2, 2, 4") for rows already in rank order, keyed by
+ * what the reader sees: rows whose values print the same share a rank
+ * (Bulgaria and Lebanon, both 2.50 on LiTS trust, were #28 and #29; every
+ * "Free" country was numbered 1 to 58). `label` is "28=" for a shared rank.
+ */
+export function sharedRanks(keys: string[]): { rank: number; tied: boolean; label: string }[] {
+  const ranks = keys.map((k, i) => i);
+  for (let i = 1; i < keys.length; i++) if (keys[i] === keys[i - 1]) ranks[i] = ranks[i - 1];
+  return keys.map((k, i) => {
+    const tied = (i > 0 && keys[i - 1] === k) || (i < keys.length - 1 && keys[i + 1] === k);
+    const rank = ranks[i] + 1;
+    return { rank, tied, label: `${rank}${tied ? '=' : ''}` };
+  });
 }
 
 /** Period-over-period change of one entity, in the units of `mode`:

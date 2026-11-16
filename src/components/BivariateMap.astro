@@ -9,15 +9,20 @@ const { xSlug, ySlug, title } = Astro.props;
 
 const xDs = getDataset(xSlug)!;
 const yDs = getDataset(ySlug)!;
+// The last OBSERVED year of each series: IMF series end in the IMF's own
+// projection for the current year, which this map used to colour as fact.
 const latest = (ds: any) => {
-  const p = [...new Set(ds.data.map((o: any) => o.period))].sort();
+  const pf = ds.projectedFrom ? Number(String(ds.projectedFrom).slice(0, 4)) : null;
+  const p = [...new Set(ds.data.map((o: any) => String(o.period)))].sort()
+    .filter((q) => pf == null || Number(q.slice(0, 4)) < pf);
   const period = p[p.length - 1];
   const m = new Map<string, number>();
-  for (const o of ds.data) if (o.period === period && o.iso) m.set(o.iso, o.value);
-  return m;
+  for (const o of ds.data) if (String(o.period) === period && o.iso) m.set(o.iso, o.value);
+  return { m, period };
 };
-const xByIso = latest(xDs);
-const yByIso = latest(yDs);
+const xLatest = latest(xDs), yLatest = latest(yDs);
+const xByIso = xLatest.m;
+const yByIso = yLatest.m;
 
 const common = [...xByIso.keys()].filter((iso) => yByIso.has(iso));
 const xT = terciles(common.map((iso) => xByIso.get(iso)!));
@@ -35,7 +40,7 @@ const fillFor = (num: string) => {
 const legendRows = [2, 1, 0].map((yi) => [0, 1, 2].map((xi) => bivColor(xi, yi)));
 ---
 <div class="bivmap">
-  {title && <p class="sub" style="margin-bottom:10px">{title}</p>}
+  {title && <p class="sub" style="margin-bottom:10px">{title} · {xDs.valueLabel} {xLatest.period}, {yDs.valueLabel} {yLatest.period} · {common.length} countries, each split into thirds</p>}
   <div class="bivmap-grid">
     <div class="worldmap">
       <svg viewBox={`0 0 ${MAP_W} ${MAP_H}`} role="img" aria-label={`${xDs.title} vs ${yDs.title}`} preserveAspectRatio="xMidYMid meet">

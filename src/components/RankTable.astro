@@ -16,7 +16,7 @@
  * movers list, wrong for a ranking that claims to be complete.
  */
 import type { Observation, ChangeMode, Better } from '@lib/analytics';
-import { periods, entityTotals, changeValue, isSinglePeriod, changeSpec, formatDelta, formatValue, toneOf } from '@lib/analytics';
+import { periods, entityTotals, changeValue, isSinglePeriod, changeSpec, formatDelta, formatValue, toneOf, sharedRanks, alignDecimals } from '@lib/analytics';
 import { flagFor } from '@lib/flags';
 import countryNames from '@data/country-names.json';
 
@@ -32,8 +32,10 @@ import countryNames from '@data/country-names.json';
 interface Props {
   data: (Observation & { year?: string })[]; unit?: string; fullUnit?: string; mode?: ChangeMode; valueLabel?: string; better?: Better; bandData?: Observation[];
   projectedFrom?: string; categories?: Record<string, string>; noun?: 'country' | 'company';
+  /** Values in a different unit per country (currencies): listed A–Z, unranked. */
+  incomparable?: boolean;
 }
-const { data, unit = '', fullUnit = unit, mode = 'pct', valueLabel = 'Value', better, bandData, projectedFrom, categories, noun } = Astro.props;
+const { data, unit = '', fullUnit = unit, mode = 'pct', valueLabel = 'Value', better, bandData, projectedFrom, categories, noun, incomparable } = Astro.props;
 const spec = changeSpec(bandData ?? data, fullUnit, mode, better);
 // At most two decimals in a change ("+0.59 points", not "+0.590 points");
 // the stable band still decides the colour.
@@ -72,7 +74,17 @@ const rows = [...curr.entries()]
       : changeValue(value, pv, mode);
     return { entity, value, pct, pv };
   })
-  .sort((a, b) => b.value - a.value);
+  // A category scale is ordered by category, the better one first (Freedom
+  // House: Free, Partly free, Not free), not by the size of its code: "Highest
+  // first" put Not free at the top. Within a category, by name.
+.sort((a, b) => incomparable ? shown(a.entity).localeCompare(shown(b.entity)) : categories
+    ? (better === 'high' ? b.value - a.value : a.value - b.value) || shown(a.entity).localeCompare(shown(b.entity))
+    : b.value - a.value);
+// One decimal style down the value column ("4.0%", not "4%", beside "41.4%").
+const valTexts = alignDecimals(rows.map((r) => formatValue(r.value, fullUnit)));
+// Ranks compare what is printed: equal values share a rank ("28=").
+const ranks = sharedRanks(rows.map((r, i) => cat(r.value) ?? valTexts[i]));
+const orderNote = incomparable ? 'A–Z: each value is in its own currency, so the countries are not ranked.' : categories ? `${cat(rows[0]?.value ?? NaN) ?? 'Best'} first; countries in the same status share a rank.` : 'Highest first; equal values share a rank.';
 ---
 {rows.length > 0 && (
   <table class="data">
@@ -82,11 +94,11 @@ const rows = [...curr.entries()]
         : `${rows.length} ${rows.length === 1 ? nouns.replace(/ies$/, 'y') : nouns}, ${currPeriod}`}
       {!single && prevPeriod && !latest && <span>, change vs {prevPeriod}</span>}.
       {projYears.length > 0 && <span> {currPeriod} is the last observed year; the IMF projection for {projYears.join(', ')} is not ranked here (pick it in the period list above).</span>}
-      {' '}Highest first.
+      {' '}{orderNote}
     </caption>
     <thead>
       <tr>
-        <th class="num" style="width:3em">#</th>
+        {!incomparable && <th class="num" style="width:3em">#</th>}
         <th>{noun === 'company' ? 'Company' : noun === 'country' ? 'Country' : 'Entity'}</th>
         <th class="num">{valueLabel}</th>
         {latest && <th class="num">Year</th>}
@@ -96,9 +108,9 @@ const rows = [...curr.entries()]
     <tbody>
       {rows.map((r, i) => (
         <tr>
-          <td class="num">{i + 1}</td>
+          {!incomparable && <td class="num">{ranks[i].label}</td>}
           <td>{flagFor(isoOf.get(r.entity)) ? flagFor(isoOf.get(r.entity)) + ' ' : ''}{shown(r.entity)}</td>
-          <td class="num">{cat(r.value) ?? `${formatValue(r.value, fullUnit)}${unit}`}</td>
+          <td class="num">{cat(r.value) ?? `${valTexts[i]}${unit}`}</td>
           {latest && <td class="num">{yearOf.get(r.entity) ?? ''}</td>}
           {!single && !latest && (
             <td class={`num ${r.pct === null || (categories && r.pct === 0) ? '' : toneOf(r.pct, spec)}`}>

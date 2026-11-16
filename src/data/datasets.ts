@@ -56,6 +56,10 @@ export interface DatasetMeta {
    *  free): shown by name, mapped by category, never averaged or "changed by
    *  0.00 points". */
   categories?: Record<string, string>;
+  /** Values that cannot be compared across countries (each in its own
+   *  currency): the reason, in one line. Pages then show no cross-country
+   *  median, spread, map colour scale or bubble sizes. */
+  incomparable?: string;
 }
 
 export interface Dataset extends DatasetMeta {
@@ -76,6 +80,28 @@ function deriveChangeMode(unit: string): ChangeMode {
 const CATEGORIES: Record<string, Record<string, string>> = {
   'qog-fh-status': { 1: 'Free', 2: 'Partly free', 3: 'Not free' },
 };
+
+/** Series whose values are in a different unit for every country, by slug. */
+const INCOMPARABLE: Record<string, string> = {
+  'wb-exchange-rate': 'Each country is in its own currency, so a median, a spread or a colour scale across countries would compare yen with euros: each value only says how many local units buy one US dollar.',
+};
+
+/**
+ * The SEC company series share one method text in the parser
+ * (scripts/parse_company_metrics.mjs), which names Spotify's 6-K and the
+ * Roblox and Match Group roundings on every page, including pages where
+ * neither company appears (PayPal and Robinhood only). Each page gets the
+ * clauses for the companies it actually holds.
+ */
+function companyMethod(method: string | undefined, data: Observation[]): string | undefined {
+  if (!method) return method;
+  const has = new Set(data.map((o) => o.entity));
+  let m = method;
+  if (!has.has('Spotify')) m = m.replace(/, or 6-K for Spotify\)/, ')');
+  const rounded = [has.has('Roblox') && 'Roblox from Q4 2025', has.has('Match Group') && 'Match Group Q3 2026'].filter(Boolean);
+  m = m.replace(/; a release that rounds \([^)]*\) is kept as rounded\./, rounded.length ? `; a release that rounds (${rounded.join(', ')}) is kept as rounded.` : '.');
+  return m;
+}
 
 /** One reading per country, spread over several years: the World Bank "most
  *  recent value" pulls (market cap, exchange rate, bank branches…). Such a
@@ -111,6 +137,8 @@ function build(modules: Record<string, { default: RawDataset }>): Dataset[] {
       firstSeen: (firstSeenMap as Record<string, string>)[slug],
       ...(raw.meta.latestPerCountry == null && oneReadingEach(raw.data) ? { latestPerCountry: true } : {}),
       ...(CATEGORIES[slug] ? { categories: CATEGORIES[slug] } : {}),
+      ...(INCOMPARABLE[slug] ? { incomparable: INCOMPARABLE[slug] } : {}),
+      ...(raw.meta.entityType === 'company' ? { method: companyMethod(raw.meta.method, raw.data) } : {}),
       // A fresher series of ours measures the same thing (lib/superseded.ts).
       ...(SUPERSEDED[slug] ? { title: `${raw.meta.title} (historical)`, supersededBy: SUPERSEDED[slug] } : {}),
       ...(DUPLICATE_OF[slug] ? { supersededBy: DUPLICATE_OF[slug] } : {}),

@@ -253,7 +253,12 @@ html[data-theme='light'] .th-to-light, html:not([data-theme='light']) .th-to-dar
 .dp-dist text { fill: var(--text-dim); font-size: 9.5px; }
 .dp-dist .dd-legend { font-size: 11px; margin-top: 2px; }
 .dp-dist details { margin-top: 4px; font-size: 12px; color: var(--text-dim); }
-.dp-dist summary { cursor: pointer; color: var(--accent); }
+/* A 32 px tap target: the bare text line was 19 px tall on phones. */
+.dp-dist summary { cursor: pointer; color: var(--accent); display: flex; align-items: center; min-height: 32px; width: max-content; padding-right: 8px; }
+/* display:flex drops the native disclosure triangle: drawn back here. */
+.dp-dist summary::-webkit-details-marker { display: none; }
+.dp-dist summary::before { content: '▸'; margin-right: 6px; }
+.dp-dist details[open] > summary::before { content: '▾'; }
 .bar-fill { position: relative; z-index: 1; display: block; height: 100%; min-width: 4px; background: linear-gradient(90deg, var(--accent-2-fill), var(--accent-fill)); border-radius: 6px; }
 /* movement colouring (Madeira dashboard style) */
 .bar-fill.move-up { background: linear-gradient(90deg, #15803d, var(--up)); }

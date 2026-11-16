@@ -7,25 +7,14 @@ import { SUPERSEDED, DUPLICATE_OF } from '@lib/superseded';
 import { datasets } from '@data/datasets';
 import { bestCountryName } from '@lib/geo';
 import countryNames from '@data/country-names.json';
-import subregions from '@data/subregions.json';
+import { continentOf } from '@lib/regions';
 
 const NAMES: Record<string, { common: string; official: string }> = countryNames;
 
 // The region comes from whichever dataset row met the country first, and those
 // sources (Gapminder's four regions, WHR) fold the Pacific into Asia: Australia,
-// Fiji and Tonga were listed under ASIA (QA, 15 Nov 2026). The UN M49 sub-region
-// is the authority for Oceania, and fills the continent where no source gave one.
-const SUBREGION = subregions as Record<string, string>;
-const OCEANIA = new Set(['Australia and New Zealand', 'Melanesia', 'Micronesia', 'Polynesia']);
-function continentOf(iso: string, fromSource: string): string {
-  const sub = SUBREGION[iso];
-  if (sub && OCEANIA.has(sub)) return 'Oceania';
-  if (fromSource || !sub) return fromSource;
-  if (/Asia$/.test(sub)) return 'Asia';
-  if (/Africa$/.test(sub)) return 'Africa';
-  if (/Europe$/.test(sub)) return 'Europe';
-  return 'Americas'; // Caribbean, Central, North and South America
-}
+// Fiji and Tonga were listed under ASIA (QA, 15 Nov 2026). continentOf (lib/
+// regions, shared with the dataset pages) puts them in Oceania by UN sub-region.
 
 // Splits beside the headline — women and men, younger and older, poorer and
 // richer — where the upstream publishes them (scripts/parse_splits.mjs). Shown
