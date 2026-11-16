@@ -1,0 +1,268 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EduTabs from '@components/EduTabs.astro';
+
+// How to collect analytics for a small app studio: the App Store, Google Play,
+// the website, and how the three are joined. Written from building exactly
+// such a pipeline for our own four apps (Nov 2026), with everything private
+// left out: no hosts, keys, project or account numbers. Every factual line
+// links to the official page it was checked against on CHECKED; what no
+// official page states is phrased as our own observation or left out.
+const CHECKED = '16 November 2026';
+
+type Card = { title: string; points: string[]; links: [string, string][] };
+
+const appStore: Card[] = [
+  {
+    title: 'Sales reports — the complete count',
+    points: [
+      'One row per app, product type, country and day; the Units column is the count.',
+      'The product type separates first downloads (1, 1F, 1T; F1 on the Mac) from re-downloads (3, 3F) and updates (7, 7F, 7T; F7) — keep only first downloads in “new users”.',
+      'A day runs midnight to midnight Pacific time; the daily report generally appears the next day, by about 8 a.m. Pacific.',
+      'The API asks for your vendor number (shown in Payments and Financial Reports).',
+    ],
+    links: [['Product type identifiers', 'https://developer.apple.com/help/app-store-connect/reference/product-type-identifiers/'], ['Report availability', 'https://developer.apple.com/help/app-store-connect/reference/reporting/sales-and-trends-reports-availability/']],
+  },
+  {
+    title: 'Analytics Reports API — what people did',
+    points: [
+      'You create a report request per app. ONGOING keeps producing daily reports; ONE_TIME_SNAPSHOT goes back as far as data exists, once (one snapshot request a month).',
+      'Categories: APP_STORE_ENGAGEMENT (impressions, product page views), COMMERCE (downloads), APP_USAGE (installations, sessions, active devices, deletions), PERFORMANCE (crashes), FRAMEWORK_USAGE.',
+      'Report files are deleted after 35 days — download and keep them if you want long history.',
+      'Usage metrics come only from people who opted in to share data with developers, so they undercount; below 5 users they are not generated at all. Detailed reports add a little random noise and drop values from fewer than 5 users.',
+      'Only an API key with the Admin role can create report requests — the key’s role counts, not yours.',
+    ],
+    links: [['Analytics (API)', 'https://developer.apple.com/documentation/appstoreconnectapi/analytics'], ['Analytics reports and privacy', 'https://developer.apple.com/documentation/analytics-reports/privacy'], ['Metric definitions', 'https://developer.apple.com/help/app-store-connect-analytics/reference/metrics-definitions']],
+  },
+  {
+    title: 'Campaign links, in-app events, custom product pages',
+    points: [
+      'Generate a campaign link in App Analytics → Acquisition → Campaigns: it adds your account’s provider token (pt=) and your campaign token (ct=, up to 30 characters). A campaign shows up after 24 hours and at least 5 first-time downloads.',
+      'Engagement data is split by page type, so a custom product page or an in-app event page gets its own views.',
+      'Downloads carry a source: search, browse, app referrer, web referrer, campaign.',
+    ],
+    links: [['Campaign links', 'https://developer.apple.com/help/app-store-connect-analytics/acquisition/campaign-links/']],
+  },
+];
+
+const play: Card[] = [
+  {
+    title: 'Bulk reports in Cloud Storage — installs and uninstalls',
+    points: [
+      'Every developer account has a Cloud Storage bucket (its name starts with pubsite_prod_rev) holding monthly CSV files per app and dimension — overview, country, device and more. They are UTF-16 encoded.',
+      'Data is captured daily but posted a few days later, so the latest days are always missing.',
+      'Daily user installs count Google accounts; daily device installs count devices; “installs on active devices” is how many devices have the app now.',
+      'Store performance files hold listing visitors and acquisitions — their ratio is the listing conversion.',
+      'The bucket address is in Play Console → Download reports → Statistics → Copy Cloud Storage URI.',
+    ],
+    links: [['Download and export monthly reports', 'https://support.google.com/googleplay/android-developer/answer/6135870']],
+  },
+  {
+    title: 'Developer Reporting API — crashes and ANRs',
+    points: [
+      'Daily crash rate and ANR (“app not responding”) rate, plus the user-perceived versions that Google uses for store visibility.',
+      'The data comes from users who share usage and diagnostics. With too few of them Play simply says there are not enough data points — empty means “too few users”, not “no crashes”. Google publishes no exact threshold.',
+    ],
+    links: [['Crash rate (API)', 'https://developers.google.com/play/developer/reporting/reference/rest/v1beta1/vitals.crashrate'], ['Android vitals', 'https://support.google.com/googleplay/android-developer/answer/9844486']],
+  },
+  {
+    title: 'Publishing API — reviews, and a trap',
+    points: [
+      'Written reviews can be read without opening an edit.',
+      'Track details need an edit, and Google’s rule is blunt: creating a new edit invalidates any edit already open, and committing one invalidates all others for the app — for example a build upload running at the same time. Do not poll edits from a dashboard.',
+      'No Google API tells you that a release is “in review” or “approved”.',
+    ],
+    links: [['Edits', 'https://developers.google.com/android-publisher/edits'], ['Reviews', 'https://developers.google.com/android-publisher/reply-to-reviews']],
+  },
+  {
+    title: 'Campaign tags on Play links',
+    points: [
+      'A Play link takes a referrer parameter with URL-encoded UTM tags (512 characters at most), e.g. …&referrer=utm_source%3Dsite%26utm_campaign%3Dhero.',
+      'The app can read them once after install through the Play Install Referrer API.',
+      'In Play Console, UTM source and campaign appear as filters in Grow users → Store performance → Conversion analysis, for the “ads and referrals” traffic source.',
+    ],
+    links: [['Play Install Referrer', 'https://developer.android.com/google/play/installreferrer'], ['Store performance', 'https://support.google.com/googleplay/android-developer/answer/6263332']],
+  },
+];
+
+const site: Card[] = [
+  {
+    title: 'Google Analytics 4 — people and clicks',
+    points: [
+      'A cookie holds a random client_id per browser: a “user” is a browser, not a person.',
+      'Device category gives the mobile share.',
+      'Enhanced measurement records outbound clicks (a click event with outbound = true — taps on store badges) and file downloads without extra code.',
+      'Its file-download list includes .zip and .exe but not .apk or .dmg: count app files from the server side or send your own event.',
+      'Ad blockers and declined consent hide visits, so GA4 undercounts. Event data retention defaults to 2 months; raise it to 14.',
+    ],
+    links: [['Enhanced measurement', 'https://support.google.com/analytics/answer/9216061'], ['Data retention', 'https://support.google.com/analytics/answer/7667196']],
+  },
+  {
+    title: 'Cloudflare — every request at the edge',
+    points: [
+      'HTTP analytics counts requests on the server side: every page and file, with or without JavaScript — bots and retries included, so it overcounts people.',
+      'Web Analytics is a separate beacon in the browser that uses no cookies or local storage; it keeps six months of data.',
+      'At high volume the data is sampled, and HTTP analytics keeps about a month on every plan — so take a daily snapshot if you want long trends.',
+    ],
+    links: [['Zone analytics', 'https://developers.cloudflare.com/analytics/account-and-zone-analytics/zone-analytics/'], ['Sampling', 'https://developers.cloudflare.com/analytics/graphql-api/sampling/'], ['Web Analytics FAQ', 'https://developers.cloudflare.com/web-analytics/faq/']],
+  },
+];
+
+const pitfalls: [string, string][] = [
+  ['Time zones', 'Apple days and Play vitals follow Pacific time, other sources use UTC or your own zone. One evening install can land on different dates.'],
+  ['Lag', 'Yesterday is usually incomplete and recent days can be revised. Compare complete weeks.'],
+  ['Download ≠ install ≠ user', 'A download may never be opened; Play counts accounts and devices separately; only opted-in data says “active”.'],
+  ['Re-downloads and updates', 'Neither is a new user. Keep both out of acquisition.'],
+  ['Partial deletions', 'iOS deletions come only from opted-in users; Play uninstalls are complete.'],
+  ['Conversion denominators', 'Downloads ÷ impressions and downloads ÷ page views are different rates — say which one.'],
+  ['Small numbers', 'At three installs a day one tester doubles the chart, and privacy thresholds hide small rows. Read weeks.'],
+  ['Bots on file downloads', 'Server logs count crawlers fetching your APK; GA4 does not see .apk or .dmg at all without a custom event. Use the server count, filtered.'],
+  ['Double counting', 'One person on iPhone and Android who also takes the APK is three installs. “New users” across stores means installs, not unique people.'],
+  ['Your own traffic', 'Testing from your own phone inflates small numbers. GA4 can exclude internal traffic; stores cannot.'],
+];
+
+const glossary: [string, string, string][] = [
+  ['Impression', 'The app was shown in a list, search result or referral', 'App Store analytics'],
+  ['Product page view', 'Someone opened the store page', 'App Store analytics'],
+  ['First-time download', 'An account downloads the app for the first time', 'App Store sales and analytics'],
+  ['Session', 'The app in the foreground for a stretch of time', 'App Store analytics (opt-in)'],
+  ['User installs', 'Google accounts that installed, counted once', 'Play bulk reports'],
+  ['Device installs', 'Devices that installed', 'Play bulk reports'],
+  ['Installs on active devices', 'Devices with the app currently installed', 'Play bulk reports'],
+  ['Listing acquisition', 'An install by someone who visited the listing', 'Play store performance'],
+  ['Crash / ANR rate', 'Share of daily users who hit a crash or a frozen app', 'Play Reporting API'],
+  ['client_id', 'The random per-browser ID in the GA4 cookie', 'GA4'],
+  ['pt / ct', 'Provider token / campaign token in an App Store link', 'App Store links'],
+  ['referrer (UTM)', 'Campaign tags carried through a Play link', 'Play links, Install Referrer'],
+];
+
+const drills: string[] = [
+  'App Store Connect → Users and Access → Integrations → App Store Connect API: read the Access column of each key. That role, not yours, decides what the key may do.',
+  'App Store Connect → your app → Analytics: take impressions, product page views and downloads for 30 days and compute both conversion rates by hand.',
+  'Play Console → Download reports → Statistics: download this month’s installs CSV (it is UTF-16) and explain why daily user installs and daily device installs differ.',
+  'GA4 → Admin → Data streams → your web stream → Enhanced measurement: check that outbound clicks and file downloads are on, then tap a download on your phone and find it in Realtime.',
+  'Build one App Store campaign link and one Play link with UTM tags for the same button; a few days later find that campaign in both consoles.',
+];
+---
+<BaseLayout
+  title="App analytics — where the numbers come from"
+  description="How to collect analytics for an app across the App Store, Google Play and its website: which source counts what, how to join them without personal IDs, and the pitfalls that make honest numbers disagree."
+  active="edu"
+>
+  <section class="section">
+    <div class="container">
+      <EduTabs current="app-analytics" />
+      <span class="kicker">Edu · App analytics</span>
+      <h1>App analytics — where the numbers come from</h1>
+      <p class="sub">
+        An app with a website is counted in at least four places that never talk to each other: App Store Connect, Google
+        Play, a web analytics tool and the server or CDN. Each counts something slightly different, at a different time of
+        day, with its own blind spots. This is the map we drew while wiring up our own apps — every factual line links to
+        the official page it was checked against on {CHECKED}.
+      </p>
+
+      <div class="card aa-note">
+        <h3>Keys stay home</h3>
+        <p class="meta">
+          A simple, safe shape: a scheduled script on your own machine reads the store APIs with keys that never leave it,
+          and publishes only finished numbers to a private dashboard. Read-only keys where the store allows it; a separate
+          key for analytics; nothing that can submit or edit a listing.
+        </p>
+      </div>
+
+      <h2>🍎 App Store</h2>
+      <p class="sub">Two separate datasets: sales reports count transactions, analytics reports count what people did.</p>
+      <div class="grid cols-2">
+        {appStore.map((c) => (
+          <div class="card"><h3>{c.title}</h3><ul class="aa-list">{c.points.map((p) => <li>{p}</li>)}</ul>
+            <p class="meta">{c.links.map(([t, u], k) => (<>{k > 0 && ' · '}<a href={u} rel="noopener">{t}</a></>))}</p></div>
+        ))}
+      </div>
+
+      <h2>🤖 Google Play</h2>
+      <p class="sub">No single analytics API: installs live in files, quality in one API, reviews in another.</p>
+      <div class="grid cols-2">
+        {play.map((c) => (
+          <div class="card"><h3>{c.title}</h3><ul class="aa-list">{c.points.map((p) => <li>{p}</li>)}</ul>
+            <p class="meta">{c.links.map(([t, u], k) => (<>{k > 0 && ' · '}<a href={u} rel="noopener">{t}</a></>))}</p></div>
+        ))}
+      </div>
+
+      <h2>🌐 The website</h2>
+      <p class="sub">Two views of the same visits: one in the browser, one on the server. Real people sit between them.</p>
+      <div class="grid cols-2">
+        {site.map((c) => (
+          <div class="card"><h3>{c.title}</h3><ul class="aa-list">{c.points.map((p) => <li>{p}</li>)}</ul>
+            <p class="meta">{c.links.map(([t, u], k) => (<>{k > 0 && ' · '}<a href={u} rel="noopener">{t}</a></>))}</p></div>
+        ))}
+      </div>
+
+      <h2>🔗 Joining it up: site → store → app</h2>
+      <p class="sub">
+        No identifier survives the whole trip. The analytics cookie stays in the browser, and Apple and Google install the
+        app inside their own stores without telling you who tapped your link. Since iOS 14.5 the advertising identifier is
+        all zeros unless the user accepts the App Tracking Transparency prompt, and in the EU personal tracking needs consent.
+      </p>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>By channel — no personal data</h3>
+          <ul class="aa-list">
+            <li>Tag every link with the page or button it sits on: ct= on App Store links, UTM in the Play referrer, ?src= on direct file downloads.</li>
+            <li>Each source reports counts per tag per day; join the aggregates on channel and date.</li>
+            <li>The result is a funnel per channel — visits → clicks → installs — with no cookie banner and no policy change.</li>
+          </ul>
+          <p class="meta"><a href="https://developer.apple.com/documentation/adsupport/asidentifiermanager/advertisingidentifier" rel="noopener">Advertising identifier and ATT</a></p>
+        </div>
+        <div class="card">
+          <h3>Per user — what it would take</h3>
+          <ul class="aa-list">
+            <li>A site ID carried into the app: a deep link on iOS, the Install Referrer on Android.</li>
+            <li>The app sends an install ID plus that site ID to your own backend, which joins them.</li>
+            <li>A consent banner, updated privacy policies, App Store privacy labels and Play Data safety forms — and a release of every app.</li>
+            <li>At small volumes channel-level numbers answer the same questions, so start there.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>⚠️ Why two honest numbers disagree</h2>
+      <div class="grid cols-2">
+        {pitfalls.map(([t, w]) => (<div class="card"><h3>{t}</h3><p class="aa-what">{w}</p></div>))}
+      </div>
+
+      <h2>🛠 Try it yourself</h2>
+      <ol class="aa-drills">{drills.map((d) => <li>{d}</li>)}</ol>
+
+      <h2>📖 Glossary</h2>
+      <div class="aa-table-wrap">
+        <table class="aa-table">
+          <thead><tr><th>Term</th><th>Meaning</th><th>Where it lives</th></tr></thead>
+          <tbody>{glossary.map(([t, m, w]) => (<tr><td class="aa-term">{t}</td><td data-label="Meaning">{m}</td><td data-label="Where">{w}</td></tr>))}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .aa-note { margin: 18px 0 8px; border-left: 3px solid var(--accent, #f2a900); }
+  .aa-list { margin: 8px 0; padding-left: 18px; font-size: 14px; line-height: 1.5; }
+  .aa-list li { margin: 4px 0; overflow-wrap: anywhere; }
+  .aa-drills li, .aa-what, .sub { overflow-wrap: anywhere; }
+  .aa-what { font-size: 14px; margin: 8px 0; line-height: 1.5; }
+  .aa-drills { font-size: 15px; line-height: 1.55; padding-left: 22px; }
+  .aa-drills li { margin: 8px 0; }
+  .aa-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .aa-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+  .aa-table th, .aa-table td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border, rgba(127,127,127,.25)); vertical-align: top; }
+  .aa-table th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; opacity: .75; }
+  .aa-term { font-weight: 600; white-space: nowrap; }
+  h2 { margin-top: 34px; }
+  @media (max-width: 640px) {
+    .aa-table-wrap { overflow: visible; }
+    .aa-table, .aa-table tbody { display: block; min-width: 0; }
+    .aa-table thead { display: none; }
+    .aa-table tr { display: block; padding: 12px 14px; margin: 0 0 10px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; }
+    .aa-table td { display: block; padding: 2px 0; border: 0; }
+    .aa-table td[data-label]::before { content: attr(data-label) ": "; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .8px; color: var(--text-dim); }
+  }
+</style>
