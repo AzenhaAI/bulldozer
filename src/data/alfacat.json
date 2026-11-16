@@ -1,39 +1,39 @@
 {
- "asof": "2026-11-09",
+ "asof": "2026-11-13",
  "source": "https://azenha.ai/alfacat/",
  "byIso": {
   "USA": {
    "index": {
     "symbol": "SPY",
     "name": "S&P 500 ETF",
-    "chgYTD": 10.4,
-    "asof": "2026-11-09"
+    "chgYTD": 10.6,
+    "asof": "2026-11-13"
    },
    "top": [
     {
      "symbol": "AAPL",
      "name": "Apple",
-     "chgYTD": 29
+     "chgYTD": 31
     },
     {
      "symbol": "NVDA",
      "name": "NVIDIA",
-     "chgYTD": -4.2
+     "chgYTD": -12.7
     },
     {
      "symbol": "MSFT",
      "name": "Microsoft",
-     "chgYTD": 12.7
+     "chgYTD": 8.3
     },
     {
      "symbol": "GOOGL",
      "name": "Alphabet",
-     "chgYTD": -7.9
+     "chgYTD": -5.5
     },
     {
      "symbol": "GOOG",
      "name": "Alphabet Inc. (Class C)",
-     "chgYTD": -8.9
+     "chgYTD": -6.8
     }
    ],
    "listings": 1519,
@@ -43,8 +43,8 @@
    "index": {
     "symbol": "FTSE100",
     "name": "FTSE 100 (London)",
-    "chgYTD": 8.6,
-    "asof": "2026-11-09"
+    "chgYTD": 9.8,
+    "asof": "2026-11-13"
    },
    "listings": 98,
    "screener": "screener/?region=eu&off=XETRA%2CParis%2CAmsterdam%2CBrussels%2CMCE%2CMilan%2CSwiss%2CStockholm"
@@ -53,8 +53,8 @@
    "index": {
     "symbol": "HSI",
     "name": "Hang Seng (Hong Kong)",
-    "chgYTD": -4.6,
-    "asof": "2026-11-09"
+    "chgYTD": -7.8,
+    "asof": "2026-11-13"
    },
    "listings": 85,
    "screener": "screener/?region=asia&off=NSE%2CASX%2CTokyo%2CSES%2CKSE"
@@ -63,8 +63,8 @@
    "index": {
     "symbol": "N225",
     "name": "Nikkei 225 (Tokyo)",
-    "chgYTD": 16.8,
-    "asof": "2026-11-09"
+    "chgYTD": 21.5,
+    "asof": "2026-11-13"
    },
    "listings": 223,
    "screener": "screener/?region=asia&off=NSE%2CHKEX%2CASX%2CSES%2CKSE"
@@ -73,8 +73,8 @@
    "index": {
     "symbol": "DAX",
     "name": "DAX 40 (Frankfurt)",
-    "chgYTD": 7.3,
-    "asof": "2026-11-09"
+    "chgYTD": 9.2,
+    "asof": "2026-11-13"
    },
    "listings": 40,
    "screener": "screener/?region=eu&off=Paris%2CAmsterdam%2CLSE%2CBrussels%2CMCE%2CMilan%2CSwiss%2CStockholm"
@@ -83,16 +83,16 @@
    "index": {
     "symbol": "STOXX50",
     "name": "Euro Stoxx 50",
-    "chgYTD": 8.5,
-    "asof": "2026-11-09"
+    "chgYTD": 10.2,
+    "asof": "2026-11-13"
    }
   },
   "CHN": {
    "index": {
     "symbol": "SHCOMP",
     "name": "Shanghai Composite",
-    "chgYTD": -7.8,
-    "asof": "2026-11-09"
+    "chgYTD": -8.4,
+    "asof": "2026-11-13"
    }
   },
   "RUS": {

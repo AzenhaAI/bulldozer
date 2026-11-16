@@ -7,7 +7,7 @@
     "source": "WorldRiskIndex (IFHV / Bündnis Entwicklung Hilft)",
     "license": "CC BY 4.0",
     "url": "https://weltrisikobericht.de/en/",
-    "parsedAt": "2026-11-09",
+    "parsedAt": "2026-11-16",
     "changeMode": "pp",
     "kind": "survey"
   },
@@ -153,7 +153,7 @@
       "iso": "BTN"
     },
     {
-      "entity": "Bolivarian Republic of Venezuela",
+      "entity": "Venezuela",
       "group": "Americas",
       "period": "2019",
       "value": 19.65,
@@ -181,7 +181,7 @@
       "iso": "BRA"
     },
     {
-      "entity": "Brunei Darussalam",
+      "entity": "Brunei",
       "group": "Asia",
       "period": "2019",
       "value": 2.34,
@@ -286,7 +286,7 @@
       "iso": "CRI"
     },
     {
-      "entity": "Cote d'Ivoire",
+      "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2019",
       "value": 3.3,
@@ -314,21 +314,21 @@
       "iso": "CYP"
     },
     {
-      "entity": "Czech Republic",
+      "entity": "Czechia",
       "group": "Europe",
       "period": "2019",
       "value": 1.06,
       "iso": "CZE"
     },
     {
-      "entity": "Democratic People's Republic of Korea",
+      "entity": "North Korea",
       "group": "Asia",
       "period": "2019",
       "value": 11.55,
       "iso": "PRK"
     },
     {
-      "entity": "Democratic Republic of Congo",
+      "entity": "DR Congo",
       "group": "Africa",
       "period": "2019",
       "value": 11.75,
@@ -419,7 +419,7 @@
       "iso": "ETH"
     },
     {
-      "entity": "Federated States of Micronesia",
+      "entity": "Micronesia",
       "group": "Asia",
       "period": "2019",
       "value": 8.09,
@@ -566,7 +566,7 @@
       "iso": "IDN"
     },
     {
-      "entity": "Iran (Islamic Republic of)",
+      "entity": "Iran",
       "group": "Asia",
       "period": "2019",
       "value": 17.84,
@@ -657,7 +657,7 @@
       "iso": "KGZ"
     },
     {
-      "entity": "Lao People's Democratic Republic",
+      "entity": "Laos",
       "group": "Asia",
       "period": "2019",
       "value": 3.02,
@@ -692,7 +692,7 @@
       "iso": "LBR"
     },
     {
-      "entity": "Libyan Arab Jamahiriya",
+      "entity": "Libya",
       "group": "Africa",
       "period": "2019",
       "value": 15.69,
@@ -958,7 +958,7 @@
       "iso": "PHL"
     },
     {
-      "entity": "Plurinational State of Bolivia",
+      "entity": "Bolivia",
       "group": "Americas",
       "period": "2019",
       "value": 3.42,
@@ -986,21 +986,21 @@
       "iso": "QAT"
     },
     {
-      "entity": "Republic of Congo",
+      "entity": "Congo",
       "group": "Africa",
       "period": "2019",
       "value": 6.39,
       "iso": "COG"
     },
     {
-      "entity": "Republic of Korea",
+      "entity": "South Korea",
       "group": "Asia",
       "period": "2019",
       "value": 10.56,
       "iso": "KOR"
     },
     {
-      "entity": "Republic of Moldova",
+      "entity": "Moldova",
       "group": "Europe",
       "period": "2019",
       "value": 1.2,
@@ -1014,7 +1014,7 @@
       "iso": "ROU"
     },
     {
-      "entity": "Russian Federation",
+      "entity": "Russia",
       "group": "Europe",
       "period": "2019",
       "value": 30.99,
@@ -1063,7 +1063,7 @@
       "iso": "SMR"
     },
     {
-      "entity": "Sao Tome and Principe",
+      "entity": "São Tomé and Príncipe",
       "group": "Africa",
       "period": "2019",
       "value": 0.68,
@@ -1196,7 +1196,7 @@
       "iso": "CHE"
     },
     {
-      "entity": "Syrian Arab Republic",
+      "entity": "Syria",
       "group": "Asia",
       "period": "2019",
       "value": 12.56,
@@ -1252,7 +1252,7 @@
       "iso": "TUN"
     },
     {
-      "entity": "Turkey",
+      "entity": "Türkiye",
       "group": "Europe",
       "period": "2019",
       "value": 15.23,
@@ -1294,21 +1294,21 @@
       "iso": "ARE"
     },
     {
-      "entity": "United Kingdom of Great Britain and Northern Ireland",
+      "entity": "United Kingdom",
       "group": "Europe",
       "period": "2019",
       "value": 6.11,
       "iso": "GBR"
     },
     {
-      "entity": "United Republic of Tanzania",
+      "entity": "Tanzania",
       "group": "Africa",
       "period": "2019",
       "value": 12.78,
       "iso": "TZA"
     },
     {
-      "entity": "United States of America",
+      "entity": "United States",
       "group": "Americas",
       "period": "2019",
       "value": 24.7,
@@ -1336,7 +1336,7 @@
       "iso": "VUT"
     },
     {
-      "entity": "Viet Nam",
+      "entity": "Vietnam",
       "group": "Asia",
       "period": "2019",
       "value": 25.84,
@@ -1504,7 +1504,7 @@
       "iso": "BTN"
     },
     {
-      "entity": "Bolivarian Republic of Venezuela",
+      "entity": "Venezuela",
       "group": "Americas",
       "period": "2020",
       "value": 18.34,
@@ -1532,7 +1532,7 @@
       "iso": "BRA"
     },
     {
-      "entity": "Brunei Darussalam",
+      "entity": "Brunei",
       "group": "Asia",
       "period": "2020",
       "value": 2.12,
@@ -1637,7 +1637,7 @@
       "iso": "CRI"
     },
     {
-      "entity": "Cote d'Ivoire",
+      "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2020",
       "value": 3.3,
@@ -1665,21 +1665,21 @@
       "iso": "CYP"
     },
     {
-      "entity": "Czech Republic",
+      "entity": "Czechia",
       "group": "Europe",
       "period": "2020",
       "value": 1.16,
       "iso": "CZE"
     },
     {
-      "entity": "Democratic People's Republic of Korea",
+      "entity": "North Korea",
       "group": "Asia",
       "period": "2020",
       "value": 11.52,
       "iso": "PRK"
     },
     {
-      "entity": "Democratic Republic of Congo",
+      "entity": "DR Congo",
       "group": "Africa",
       "period": "2020",
       "value": 10.75,
@@ -1770,7 +1770,7 @@
       "iso": "ETH"
     },
     {
-      "entity": "Federated States of Micronesia",
+      "entity": "Micronesia",
       "group": "Asia",
       "period": "2020",
       "value": 7.97,
@@ -1917,7 +1917,7 @@
       "iso": "IDN"
     },
     {
-      "entity": "Iran (Islamic Republic of)",
+      "entity": "Iran",
       "group": "Asia",
       "period": "2020",
       "value": 17.77,
@@ -2008,7 +2008,7 @@
       "iso": "KGZ"
     },
     {
-      "entity": "Lao People's Democratic Republic",
+      "entity": "Laos",
       "group": "Asia",
       "period": "2020",
       "value": 3,
@@ -2043,7 +2043,7 @@
       "iso": "LBR"
     },
     {
-      "entity": "Libyan Arab Jamahiriya",
+      "entity": "Libya",
       "group": "Africa",
       "period": "2020",
       "value": 14.2,
@@ -2309,7 +2309,7 @@
       "iso": "PHL"
     },
     {
-      "entity": "Plurinational State of Bolivia",
+      "entity": "Bolivia",
       "group": "Americas",
       "period": "2020",
       "value": 3.12,
@@ -2337,21 +2337,21 @@
       "iso": "QAT"
     },
     {
-      "entity": "Republic of Congo",
+      "entity": "Congo",
       "group": "Africa",
       "period": "2020",
       "value": 4.06,
       "iso": "COG"
     },
     {
-      "entity": "Republic of Korea",
+      "entity": "South Korea",
       "group": "Asia",
       "period": "2020",
       "value": 10.32,
       "iso": "KOR"
     },
     {
-      "entity": "Republic of Moldova",
+      "entity": "Moldova",
       "group": "Europe",
       "period": "2020",
       "value": 1.22,
@@ -2365,7 +2365,7 @@
       "iso": "ROU"
     },
     {
-      "entity": "Russian Federation",
+      "entity": "Russia",
       "group": "Europe",
       "period": "2020",
       "value": 30.87,
@@ -2414,7 +2414,7 @@
       "iso": "SMR"
     },
     {
-      "entity": "Sao Tome and Principe",
+      "entity": "São Tomé and Príncipe",
       "group": "Africa",
       "period": "2020",
       "value": 0.68,
@@ -2547,7 +2547,7 @@
       "iso": "CHE"
     },
     {
-      "entity": "Syrian Arab Republic",
+      "entity": "Syria",
       "group": "Asia",
       "period": "2020",
       "value": 12.71,
@@ -2603,7 +2603,7 @@
       "iso": "TUN"
     },
     {
-      "entity": "Turkey",
+      "entity": "Türkiye",
       "group": "Europe",
       "period": "2020",
       "value": 16.18,
@@ -2645,21 +2645,21 @@
       "iso": "ARE"
     },
     {
-      "entity": "United Kingdom of Great Britain and Northern Ireland",
+      "entity": "United Kingdom",
       "group": "Europe",
       "period": "2020",
       "value": 6.08,
       "iso": "GBR"
     },
     {
-      "entity": "United Republic of Tanzania",
+      "entity": "Tanzania",
       "group": "Africa",
       "period": "2020",
       "value": 16.02,
       "iso": "TZA"
     },
     {
-      "entity": "United States of America",
+      "entity": "United States",
       "group": "Americas",
       "period": "2020",
       "value": 24.71,
@@ -2687,7 +2687,7 @@
       "iso": "VUT"
     },
     {
-      "entity": "Viet Nam",
+      "entity": "Vietnam",
       "group": "Asia",
       "period": "2020",
       "value": 25.73,
@@ -2855,7 +2855,7 @@
       "iso": "BTN"
     },
     {
-      "entity": "Bolivarian Republic of Venezuela",
+      "entity": "Venezuela",
       "group": "Americas",
       "period": "2021",
       "value": 18.25,
@@ -2883,7 +2883,7 @@
       "iso": "BRA"
     },
     {
-      "entity": "Brunei Darussalam",
+      "entity": "Brunei",
       "group": "Asia",
       "period": "2021",
       "value": 2.14,
@@ -2988,7 +2988,7 @@
       "iso": "CRI"
     },
     {
-      "entity": "Cote d'Ivoire",
+      "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2021",
       "value": 3,
@@ -3016,21 +3016,21 @@
       "iso": "CYP"
     },
     {
-      "entity": "Czech Republic",
+      "entity": "Czechia",
       "group": "Europe",
       "period": "2021",
       "value": 1.13,
       "iso": "CZE"
     },
     {
-      "entity": "Democratic People's Republic of Korea",
+      "entity": "North Korea",
       "group": "Asia",
       "period": "2021",
       "value": 10.79,
       "iso": "PRK"
     },
     {
-      "entity": "Democratic Republic of Congo",
+      "entity": "DR Congo",
       "group": "Africa",
       "period": "2021",
       "value": 10.69,
@@ -3121,7 +3121,7 @@
       "iso": "ETH"
     },
     {
-      "entity": "Federated States of Micronesia",
+      "entity": "Micronesia",
       "group": "Asia",
       "period": "2021",
       "value": 7.89,
@@ -3268,7 +3268,7 @@
       "iso": "IDN"
     },
     {
-      "entity": "Iran (Islamic Republic of)",
+      "entity": "Iran",
       "group": "Asia",
       "period": "2021",
       "value": 20.29,
@@ -3359,7 +3359,7 @@
       "iso": "KGZ"
     },
     {
-      "entity": "Lao People's Democratic Republic",
+      "entity": "Laos",
       "group": "Asia",
       "period": "2021",
       "value": 2.86,
@@ -3394,7 +3394,7 @@
       "iso": "LBR"
     },
     {
-      "entity": "Libyan Arab Jamahiriya",
+      "entity": "Libya",
       "group": "Africa",
       "period": "2021",
       "value": 15.34,
@@ -3660,7 +3660,7 @@
       "iso": "PHL"
     },
     {
-      "entity": "Plurinational State of Bolivia",
+      "entity": "Bolivia",
       "group": "Americas",
       "period": "2021",
       "value": 3.03,
@@ -3688,21 +3688,21 @@
       "iso": "QAT"
     },
     {
-      "entity": "Republic of Congo",
+      "entity": "Congo",
       "group": "Africa",
       "period": "2021",
       "value": 3.53,
       "iso": "COG"
     },
     {
-      "entity": "Republic of Korea",
+      "entity": "South Korea",
       "group": "Asia",
       "period": "2021",
       "value": 10.32,
       "iso": "KOR"
     },
     {
-      "entity": "Republic of Moldova",
+      "entity": "Moldova",
       "group": "Europe",
       "period": "2021",
       "value": 1.21,
@@ -3716,7 +3716,7 @@
       "iso": "ROU"
     },
     {
-      "entity": "Russian Federation",
+      "entity": "Russia",
       "group": "Europe",
       "period": "2021",
       "value": 30.03,
@@ -3765,7 +3765,7 @@
       "iso": "SMR"
     },
     {
-      "entity": "Sao Tome and Principe",
+      "entity": "São Tomé and Príncipe",
       "group": "Africa",
       "period": "2021",
       "value": 0.94,
@@ -3898,7 +3898,7 @@
       "iso": "CHE"
     },
     {
-      "entity": "Syrian Arab Republic",
+      "entity": "Syria",
       "group": "Asia",
       "period": "2021",
       "value": 12.84,
@@ -3954,7 +3954,7 @@
       "iso": "TUN"
     },
     {
-      "entity": "Turkey",
+      "entity": "Türkiye",
       "group": "Europe",
       "period": "2021",
       "value": 16.62,
@@ -3996,21 +3996,21 @@
       "iso": "ARE"
     },
     {
-      "entity": "United Kingdom of Great Britain and Northern Ireland",
+      "entity": "United Kingdom",
       "group": "Europe",
       "period": "2021",
       "value": 6.04,
       "iso": "GBR"
     },
     {
-      "entity": "United Republic of Tanzania",
+      "entity": "Tanzania",
       "group": "Africa",
       "period": "2021",
       "value": 15.98,
       "iso": "TZA"
     },
     {
-      "entity": "United States of America",
+      "entity": "United States",
       "group": "Americas",
       "period": "2021",
       "value": 24.42,
@@ -4038,7 +4038,7 @@
       "iso": "VUT"
     },
     {
-      "entity": "Viet Nam",
+      "entity": "Vietnam",
       "group": "Asia",
       "period": "2021",
       "value": 24.88,
@@ -4206,7 +4206,7 @@
       "iso": "BTN"
     },
     {
-      "entity": "Bolivarian Republic of Venezuela",
+      "entity": "Venezuela",
       "group": "Americas",
       "period": "2022",
       "value": 18.16,
@@ -4234,7 +4234,7 @@
       "iso": "BRA"
     },
     {
-      "entity": "Brunei Darussalam",
+      "entity": "Brunei",
       "group": "Asia",
       "period": "2022",
       "value": 2.32,
@@ -4339,7 +4339,7 @@
       "iso": "CRI"
     },
     {
-      "entity": "Cote d'Ivoire",
+      "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2022",
       "value": 3.33,
@@ -4367,21 +4367,21 @@
       "iso": "CYP"
     },
     {
-      "entity": "Czech Republic",
+      "entity": "Czechia",
       "group": "Europe",
       "period": "2022",
       "value": 1.08,
       "iso": "CZE"
     },
     {
-      "entity": "Democratic People's Republic of Korea",
+      "entity": "North Korea",
       "group": "Asia",
       "period": "2022",
       "value": 10.63,
       "iso": "PRK"
     },
     {
-      "entity": "Democratic Republic of Congo",
+      "entity": "DR Congo",
       "group": "Africa",
       "period": "2022",
       "value": 10.79,
@@ -4472,7 +4472,7 @@
       "iso": "ETH"
     },
     {
-      "entity": "Federated States of Micronesia",
+      "entity": "Micronesia",
       "group": "Asia",
       "period": "2022",
       "value": 7.82,
@@ -4619,7 +4619,7 @@
       "iso": "IDN"
     },
     {
-      "entity": "Iran (Islamic Republic of)",
+      "entity": "Iran",
       "group": "Asia",
       "period": "2022",
       "value": 17.78,
@@ -4710,7 +4710,7 @@
       "iso": "KGZ"
     },
     {
-      "entity": "Lao People's Democratic Republic",
+      "entity": "Laos",
       "group": "Asia",
       "period": "2022",
       "value": 2.89,
@@ -4745,7 +4745,7 @@
       "iso": "LBR"
     },
     {
-      "entity": "Libyan Arab Jamahiriya",
+      "entity": "Libya",
       "group": "Africa",
       "period": "2022",
       "value": 13.88,
@@ -5011,7 +5011,7 @@
       "iso": "PHL"
     },
     {
-      "entity": "Plurinational State of Bolivia",
+      "entity": "Bolivia",
       "group": "Americas",
       "period": "2022",
       "value": 2.94,
@@ -5039,21 +5039,21 @@
       "iso": "QAT"
     },
     {
-      "entity": "Republic of Congo",
+      "entity": "Congo",
       "group": "Africa",
       "period": "2022",
       "value": 4.45,
       "iso": "COG"
     },
     {
-      "entity": "Republic of Korea",
+      "entity": "South Korea",
       "group": "Asia",
       "period": "2022",
       "value": 10.53,
       "iso": "KOR"
     },
     {
-      "entity": "Republic of Moldova",
+      "entity": "Moldova",
       "group": "Europe",
       "period": "2022",
       "value": 1.22,
@@ -5067,7 +5067,7 @@
       "iso": "ROU"
     },
     {
-      "entity": "Russian Federation",
+      "entity": "Russia",
       "group": "Europe",
       "period": "2022",
       "value": 30.22,
@@ -5116,7 +5116,7 @@
       "iso": "SMR"
     },
     {
-      "entity": "Sao Tome and Principe",
+      "entity": "São Tomé and Príncipe",
       "group": "Africa",
       "period": "2022",
       "value": 0.94,
@@ -5249,7 +5249,7 @@
       "iso": "CHE"
     },
     {
-      "entity": "Syrian Arab Republic",
+      "entity": "Syria",
       "group": "Asia",
       "period": "2022",
       "value": 12.8,
@@ -5305,7 +5305,7 @@
       "iso": "TUN"
     },
     {
-      "entity": "Turkey",
+      "entity": "Türkiye",
       "group": "Europe",
       "period": "2022",
       "value": 14.31,
@@ -5347,21 +5347,21 @@
       "iso": "ARE"
     },
     {
-      "entity": "United Kingdom of Great Britain and Northern Ireland",
+      "entity": "United Kingdom",
       "group": "Europe",
       "period": "2022",
       "value": 6.07,
       "iso": "GBR"
     },
     {
-      "entity": "United Republic of Tanzania",
+      "entity": "Tanzania",
       "group": "Africa",
       "period": "2022",
       "value": 15.63,
       "iso": "TZA"
     },
     {
-      "entity": "United States of America",
+      "entity": "United States",
       "group": "Americas",
       "period": "2022",
       "value": 24.27,
@@ -5389,7 +5389,7 @@
       "iso": "VUT"
     },
     {
-      "entity": "Viet Nam",
+      "entity": "Vietnam",
       "group": "Asia",
       "period": "2022",
       "value": 24.47,
@@ -5557,7 +5557,7 @@
       "iso": "BTN"
     },
     {
-      "entity": "Bolivarian Republic of Venezuela",
+      "entity": "Venezuela",
       "group": "Americas",
       "period": "2023",
       "value": 17.86,
@@ -5585,7 +5585,7 @@
       "iso": "BRA"
     },
     {
-      "entity": "Brunei Darussalam",
+      "entity": "Brunei",
       "group": "Asia",
       "period": "2023",
       "value": 2.2,
@@ -5690,7 +5690,7 @@
       "iso": "CRI"
     },
     {
-      "entity": "Cote d'Ivoire",
+      "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2023",
       "value": 2.99,
@@ -5718,21 +5718,21 @@
       "iso": "CYP"
     },
     {
-      "entity": "Czech Republic",
+      "entity": "Czechia",
       "group": "Europe",
       "period": "2023",
       "value": 1.19,
       "iso": "CZE"
     },
     {
-      "entity": "Democratic People's Republic of Korea",
+      "entity": "North Korea",
       "group": "Asia",
       "period": "2023",
       "value": 9.74,
       "iso": "PRK"
     },
     {
-      "entity": "Democratic Republic of Congo",
+      "entity": "DR Congo",
       "group": "Africa",
       "period": "2023",
       "value": 10.72,
@@ -5823,7 +5823,7 @@
       "iso": "ETH"
     },
     {
-      "entity": "Federated States of Micronesia",
+      "entity": "Micronesia",
       "group": "Asia",
       "period": "2023",
       "value": 8.7,
@@ -5970,7 +5970,7 @@
       "iso": "IDN"
     },
     {
-      "entity": "Iran (Islamic Republic of)",
+      "entity": "Iran",
       "group": "Asia",
       "period": "2023",
       "value": 17.75,
@@ -6061,7 +6061,7 @@
       "iso": "KGZ"
     },
     {
-      "entity": "Lao People's Democratic Republic",
+      "entity": "Laos",
       "group": "Asia",
       "period": "2023",
       "value": 2.97,
@@ -6096,7 +6096,7 @@
       "iso": "LBR"
     },
     {
-      "entity": "Libyan Arab Jamahiriya",
+      "entity": "Libya",
       "group": "Africa",
       "period": "2023",
       "value": 15.52,
@@ -6362,7 +6362,7 @@
       "iso": "PHL"
     },
     {
-      "entity": "Plurinational State of Bolivia",
+      "entity": "Bolivia",
       "group": "Americas",
       "period": "2023",
       "value": 3.02,
@@ -6390,21 +6390,21 @@
       "iso": "QAT"
     },
     {
-      "entity": "Republic of Congo",
+      "entity": "Congo",
       "group": "Africa",
       "period": "2023",
       "value": 4.08,
       "iso": "COG"
     },
     {
-      "entity": "Republic of Korea",
+      "entity": "South Korea",
       "group": "Asia",
       "period": "2023",
       "value": 10.48,
       "iso": "KOR"
     },
     {
-      "entity": "Republic of Moldova",
+      "entity": "Moldova",
       "group": "Europe",
       "period": "2023",
       "value": 1.22,
@@ -6418,7 +6418,7 @@
       "iso": "ROU"
     },
     {
-      "entity": "Russian Federation",
+      "entity": "Russia",
       "group": "Europe",
       "period": "2023",
       "value": 30.03,
@@ -6467,7 +6467,7 @@
       "iso": "SMR"
     },
     {
-      "entity": "Sao Tome and Principe",
+      "entity": "São Tomé and Príncipe",
       "group": "Africa",
       "period": "2023",
       "value": 0.85,
@@ -6600,7 +6600,7 @@
       "iso": "CHE"
     },
     {
-      "entity": "Syrian Arab Republic",
+      "entity": "Syria",
       "group": "Asia",
       "period": "2023",
       "value": 12.79,
@@ -6656,7 +6656,7 @@
       "iso": "TUN"
     },
     {
-      "entity": "Turkey",
+      "entity": "Türkiye",
       "group": "Europe",
       "period": "2023",
       "value": 14.79,
@@ -6698,21 +6698,21 @@
       "iso": "ARE"
     },
     {
-      "entity": "United Kingdom of Great Britain and Northern Ireland",
+      "entity": "United Kingdom",
       "group": "Europe",
       "period": "2023",
       "value": 6.09,
       "iso": "GBR"
     },
     {
-      "entity": "United Republic of Tanzania",
+      "entity": "Tanzania",
       "group": "Africa",
       "period": "2023",
       "value": 15.72,
       "iso": "TZA"
     },
     {
-      "entity": "United States of America",
+      "entity": "United States",
       "group": "Americas",
       "period": "2023",
       "value": 24.03,
@@ -6740,7 +6740,7 @@
       "iso": "VUT"
     },
     {
-      "entity": "Viet Nam",
+      "entity": "Vietnam",
       "group": "Asia",
       "period": "2023",
       "value": 25.3,
@@ -6908,7 +6908,7 @@
       "iso": "BTN"
     },
     {
-      "entity": "Bolivarian Republic of Venezuela",
+      "entity": "Venezuela",
       "group": "Americas",
       "period": "2024",
       "value": 17.72,
@@ -6936,7 +6936,7 @@
       "iso": "BRA"
     },
     {
-      "entity": "Brunei Darussalam",
+      "entity": "Brunei",
       "group": "Asia",
       "period": "2024",
       "value": 2.07,
@@ -7041,7 +7041,7 @@
       "iso": "CRI"
     },
     {
-      "entity": "Cote d'Ivoire",
+      "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2024",
       "value": 2.98,
@@ -7069,21 +7069,21 @@
       "iso": "CYP"
     },
     {
-      "entity": "Czech Republic",
+      "entity": "Czechia",
       "group": "Europe",
       "period": "2024",
       "value": 1.24,
       "iso": "CZE"
     },
     {
-      "entity": "Democratic People's Republic of Korea",
+      "entity": "North Korea",
       "group": "Asia",
       "period": "2024",
       "value": 10.42,
       "iso": "PRK"
     },
     {
-      "entity": "Democratic Republic of Congo",
+      "entity": "DR Congo",
       "group": "Africa",
       "period": "2024",
       "value": 10.74,
@@ -7174,7 +7174,7 @@
       "iso": "ETH"
     },
     {
-      "entity": "Federated States of Micronesia",
+      "entity": "Micronesia",
       "group": "Asia",
       "period": "2024",
       "value": 8.04,
@@ -7321,7 +7321,7 @@
       "iso": "IDN"
     },
     {
-      "entity": "Iran (Islamic Republic of)",
+      "entity": "Iran",
       "group": "Asia",
       "period": "2024",
       "value": 18.79,
@@ -7412,7 +7412,7 @@
       "iso": "KGZ"
     },
     {
-      "entity": "Lao People's Democratic Republic",
+      "entity": "Laos",
       "group": "Asia",
       "period": "2024",
       "value": 2.99,
@@ -7447,7 +7447,7 @@
       "iso": "LBR"
     },
     {
-      "entity": "Libyan Arab Jamahiriya",
+      "entity": "Libya",
       "group": "Africa",
       "period": "2024",
       "value": 15.28,
@@ -7713,7 +7713,7 @@
       "iso": "PHL"
     },
     {
-      "entity": "Plurinational State of Bolivia",
+      "entity": "Bolivia",
       "group": "Americas",
       "period": "2024",
       "value": 3.1,
@@ -7741,21 +7741,21 @@
       "iso": "QAT"
     },
     {
-      "entity": "Republic of Congo",
+      "entity": "Congo",
       "group": "Africa",
       "period": "2024",
       "value": 3.67,
       "iso": "COG"
     },
     {
-      "entity": "Republic of Korea",
+      "entity": "South Korea",
       "group": "Asia",
       "period": "2024",
       "value": 10.19,
       "iso": "KOR"
     },
     {
-      "entity": "Republic of Moldova",
+      "entity": "Moldova",
       "group": "Europe",
       "period": "2024",
       "value": 1.19,
@@ -7769,7 +7769,7 @@
       "iso": "ROU"
     },
     {
-      "entity": "Russian Federation",
+      "entity": "Russia",
       "group": "Europe",
       "period": "2024",
       "value": 30.57,
@@ -7818,7 +7818,7 @@
       "iso": "SMR"
     },
     {
-      "entity": "Sao Tome and Principe",
+      "entity": "São Tomé and Príncipe",
       "group": "Africa",
       "period": "2024",
       "value": 0.85,
@@ -7951,7 +7951,7 @@
       "iso": "CHE"
     },
     {
-      "entity": "Syrian Arab Republic",
+      "entity": "Syria",
       "group": "Asia",
       "period": "2024",
       "value": 11.51,
@@ -8007,7 +8007,7 @@
       "iso": "TUN"
     },
     {
-      "entity": "Turkey",
+      "entity": "Türkiye",
       "group": "Europe",
       "period": "2024",
       "value": 14.57,
@@ -8049,21 +8049,21 @@
       "iso": "ARE"
     },
     {
-      "entity": "United Kingdom of Great Britain and Northern Ireland",
+      "entity": "United Kingdom",
       "group": "Europe",
       "period": "2024",
       "value": 5.41,
       "iso": "GBR"
     },
     {
-      "entity": "United Republic of Tanzania",
+      "entity": "Tanzania",
       "group": "Africa",
       "period": "2024",
       "value": 14.01,
       "iso": "TZA"
     },
     {
-      "entity": "United States of America",
+      "entity": "United States",
       "group": "Americas",
       "period": "2024",
       "value": 24.15,
@@ -8091,7 +8091,7 @@
       "iso": "VUT"
     },
     {
-      "entity": "Viet Nam",
+      "entity": "Vietnam",
       "group": "Asia",
       "period": "2024",
       "value": 24.74,
@@ -8259,7 +8259,7 @@
       "iso": "BTN"
     },
     {
-      "entity": "Bolivarian Republic of Venezuela",
+      "entity": "Venezuela",
       "group": "Americas",
       "period": "2025",
       "value": 17.61,
@@ -8287,7 +8287,7 @@
       "iso": "BRA"
     },
     {
-      "entity": "Brunei Darussalam",
+      "entity": "Brunei",
       "group": "Asia",
       "period": "2025",
       "value": 2.07,
@@ -8392,7 +8392,7 @@
       "iso": "CRI"
     },
     {
-      "entity": "Cote d'Ivoire",
+      "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2025",
       "value": 2.98,
@@ -8420,21 +8420,21 @@
       "iso": "CYP"
     },
     {
-      "entity": "Czech Republic",
+      "entity": "Czechia",
       "group": "Europe",
       "period": "2025",
       "value": 1.23,
       "iso": "CZE"
     },
     {
-      "entity": "Democratic People's Republic of Korea",
+      "entity": "North Korea",
       "group": "Asia",
       "period": "2025",
       "value": 10.37,
       "iso": "PRK"
     },
     {
-      "entity": "Democratic Republic of Congo",
+      "entity": "DR Congo",
       "group": "Africa",
       "period": "2025",
       "value": 10.76,
@@ -8525,7 +8525,7 @@
       "iso": "ETH"
     },
     {
-      "entity": "Federated States of Micronesia",
+      "entity": "Micronesia",
       "group": "Asia",
       "period": "2025",
       "value": 8.07,
@@ -8672,7 +8672,7 @@
       "iso": "IDN"
     },
     {
-      "entity": "Iran (Islamic Republic of)",
+      "entity": "Iran",
       "group": "Asia",
       "period": "2025",
       "value": 18.77,
@@ -8763,7 +8763,7 @@
       "iso": "KGZ"
     },
     {
-      "entity": "Lao People's Democratic Republic",
+      "entity": "Laos",
       "group": "Asia",
       "period": "2025",
       "value": 2.99,
@@ -8798,7 +8798,7 @@
       "iso": "LBR"
     },
     {
-      "entity": "Libyan Arab Jamahiriya",
+      "entity": "Libya",
       "group": "Africa",
       "period": "2025",
       "value": 15.15,
@@ -9064,7 +9064,7 @@
       "iso": "PHL"
     },
     {
-      "entity": "Plurinational State of Bolivia",
+      "entity": "Bolivia",
       "group": "Americas",
       "period": "2025",
       "value": 3.17,
@@ -9092,21 +9092,21 @@
       "iso": "QAT"
     },
     {
-      "entity": "Republic of Congo",
+      "entity": "Congo",
       "group": "Africa",
       "period": "2025",
       "value": 3.67,
       "iso": "COG"
     },
     {
-      "entity": "Republic of Korea",
+      "entity": "South Korea",
       "group": "Asia",
       "period": "2025",
       "value": 10.2,
       "iso": "KOR"
     },
     {
-      "entity": "Republic of Moldova",
+      "entity": "Moldova",
       "group": "Europe",
       "period": "2025",
       "value": 1.19,
@@ -9120,7 +9120,7 @@
       "iso": "ROU"
     },
     {
-      "entity": "Russian Federation",
+      "entity": "Russia",
       "group": "Europe",
       "period": "2025",
       "value": 30.58,
@@ -9169,7 +9169,7 @@
       "iso": "SMR"
     },
     {
-      "entity": "Sao Tome and Principe",
+      "entity": "São Tomé and Príncipe",
       "group": "Africa",
       "period": "2025",
       "value": 0.85,
@@ -9302,7 +9302,7 @@
       "iso": "CHE"
     },
     {
-      "entity": "Syrian Arab Republic",
+      "entity": "Syria",
       "group": "Asia",
       "period": "2025",
       "value": 11.55,
@@ -9358,7 +9358,7 @@
       "iso": "TUN"
     },
     {
-      "entity": "Turkey",
+      "entity": "Türkiye",
       "group": "Europe",
       "period": "2025",
       "value": 14.56,
@@ -9400,21 +9400,21 @@
       "iso": "ARE"
     },
     {
-      "entity": "United Kingdom of Great Britain and Northern Ireland",
+      "entity": "United Kingdom",
       "group": "Europe",
       "period": "2025",
       "value": 4.95,
       "iso": "GBR"
     },
     {
-      "entity": "United Republic of Tanzania",
+      "entity": "Tanzania",
       "group": "Africa",
       "period": "2025",
       "value": 12.53,
       "iso": "TZA"
     },
     {
-      "entity": "United States of America",
+      "entity": "United States",
       "group": "Americas",
       "period": "2025",
       "value": 24.17,
@@ -9442,7 +9442,7 @@
       "iso": "VUT"
     },
     {
-      "entity": "Viet Nam",
+      "entity": "Vietnam",
       "group": "Asia",
       "period": "2025",
       "value": 24.83,
@@ -9610,7 +9610,7 @@
       "iso": "BTN"
     },
     {
-      "entity": "Bolivarian Republic of Venezuela",
+      "entity": "Venezuela",
       "group": "Americas",
       "period": "2026",
       "value": 17.61,
@@ -9638,7 +9638,7 @@
       "iso": "BRA"
     },
     {
-      "entity": "Brunei Darussalam",
+      "entity": "Brunei",
       "group": "Asia",
       "period": "2026",
       "value": 2.07,
@@ -9743,7 +9743,7 @@
       "iso": "CRI"
     },
     {
-      "entity": "Cote d'Ivoire",
+      "entity": "Ivory Coast",
       "group": "Africa",
       "period": "2026",
       "value": 2.98,
@@ -9771,21 +9771,21 @@
       "iso": "CYP"
     },
     {
-      "entity": "Czech Republic",
+      "entity": "Czechia",
       "group": "Europe",
       "period": "2026",
       "value": 1.23,
       "iso": "CZE"
     },
     {
-      "entity": "Democratic People's Republic of Korea",
+      "entity": "North Korea",
       "group": "Asia",
       "period": "2026",
       "value": 10.37,
       "iso": "PRK"
     },
     {
-      "entity": "Democratic Republic of Congo",
+      "entity": "DR Congo",
       "group": "Africa",
       "period": "2026",
       "value": 10.76,
@@ -9876,7 +9876,7 @@
       "iso": "ETH"
     },
     {
-      "entity": "Federated States of Micronesia",
+      "entity": "Micronesia",
       "group": "Asia",
       "period": "2026",
       "value": 8.07,
@@ -10023,7 +10023,7 @@
       "iso": "IDN"
     },
     {
-      "entity": "Iran (Islamic Republic of)",
+      "entity": "Iran",
       "group": "Asia",
       "period": "2026",
       "value": 18.77,
@@ -10114,7 +10114,7 @@
       "iso": "KGZ"
     },
     {
-      "entity": "Lao People's Democratic Republic",
+      "entity": "Laos",
       "group": "Asia",
       "period": "2026",
       "value": 2.99,
@@ -10149,7 +10149,7 @@
       "iso": "LBR"
     },
     {
-      "entity": "Libyan Arab Jamahiriya",
+      "entity": "Libya",
       "group": "Africa",
       "period": "2026",
       "value": 15.15,
@@ -10415,7 +10415,7 @@
       "iso": "PHL"
     },
     {
-      "entity": "Plurinational State of Bolivia",
+      "entity": "Bolivia",
       "group": "Americas",
       "period": "2026",
       "value": 3.17,
@@ -10443,21 +10443,21 @@
       "iso": "QAT"
     },
     {
-      "entity": "Republic of Congo",
+      "entity": "Congo",
       "group": "Africa",
       "period": "2026",
       "value": 3.67,
       "iso": "COG"
     },
     {
-      "entity": "Republic of Korea",
+      "entity": "South Korea",
       "group": "Asia",
       "period": "2026",
       "value": 10.2,
       "iso": "KOR"
     },
     {
-      "entity": "Republic of Moldova",
+      "entity": "Moldova",
       "group": "Europe",
       "period": "2026",
       "value": 1.19,
@@ -10471,7 +10471,7 @@
       "iso": "ROU"
     },
     {
-      "entity": "Russian Federation",
+      "entity": "Russia",
       "group": "Europe",
       "period": "2026",
       "value": 30.58,
@@ -10520,7 +10520,7 @@
       "iso": "SMR"
     },
     {
-      "entity": "Sao Tome and Principe",
+      "entity": "São Tomé and Príncipe",
       "group": "Africa",
       "period": "2026",
       "value": 0.85,
@@ -10653,7 +10653,7 @@
       "iso": "CHE"
     },
     {
-      "entity": "Syrian Arab Republic",
+      "entity": "Syria",
       "group": "Asia",
       "period": "2026",
       "value": 11.55,
@@ -10709,7 +10709,7 @@
       "iso": "TUN"
     },
     {
-      "entity": "Turkey",
+      "entity": "Türkiye",
       "group": "Europe",
       "period": "2026",
       "value": 14.56,
@@ -10751,21 +10751,21 @@
       "iso": "ARE"
     },
     {
-      "entity": "United Kingdom of Great Britain and Northern Ireland",
+      "entity": "United Kingdom",
       "group": "Europe",
       "period": "2026",
       "value": 4.95,
       "iso": "GBR"
     },
     {
-      "entity": "United Republic of Tanzania",
+      "entity": "Tanzania",
       "group": "Africa",
       "period": "2026",
       "value": 12.53,
       "iso": "TZA"
     },
     {
-      "entity": "United States of America",
+      "entity": "United States",
       "group": "Americas",
       "period": "2026",
       "value": 24.17,
@@ -10793,7 +10793,7 @@
       "iso": "VUT"
     },
     {
-      "entity": "Viet Nam",
+      "entity": "Vietnam",
       "group": "Asia",
       "period": "2026",
       "value": 24.83,

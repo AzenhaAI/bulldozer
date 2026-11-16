@@ -9,7 +9,7 @@
     "source": "EBRD — Life in Transition Survey",
     "license": "EBRD terms — public aggregates",
     "url": "https://www.ebrd.com/home/what-we-do/office-of-the-chief-economist/lits/life-in-transition-survey-data.html",
-    "parsedAt": "2026-11-10",
+    "parsedAt": "2026-11-16",
     "kind": "survey"
   },
   "data": [
@@ -375,7 +375,7 @@
     },
     {
       "entity": "Kosovo",
-      "group": "Europe & Central Asia",
+      "group": "Europe",
       "period": "2010",
       "value": 3.17,
       "iso": "XKX",
@@ -663,7 +663,7 @@
     },
     {
       "entity": "Kosovo",
-      "group": "Europe & Central Asia",
+      "group": "Europe",
       "period": "2016",
       "value": 2.82,
       "iso": "XKX",
@@ -919,7 +919,7 @@
     },
     {
       "entity": "Kosovo",
-      "group": "Europe & Central Asia",
+      "group": "Europe",
       "period": "2023",
       "value": 2.66,
       "iso": "XKX",
