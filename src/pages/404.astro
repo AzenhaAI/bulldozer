@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// Built as dist/404.html, deployed as /bulldozer/404.html. Cloudflare Pages
+// serves the nearest 404.html up the path, so a dead /bulldozer/* link lands
+// here, inside BullDozer's own header and bottom bar, instead of on the
+// root azenha.ai error page.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const links = [
+  { label: '🏠 Home', href: `${base}/`, desc: 'Stories and what is new' },
+  { label: '📈 Stats', href: `${base}/macro/`, desc: 'Economy, health, governance' },
+  { label: '🗳️ Polls', href: `${base}/surveys/`, desc: 'Values and opinion surveys' },
+  { label: '🌍 Geo', href: `${base}/geo/`, desc: 'Maps of every indicator' },
+  { label: '🎓 Edu', href: `${base}/edu/`, desc: 'Guides to dashboards and sources' },
+];
+---
+<BaseLayout title="Page not found" description="This BullDozer page does not exist. Search the datasets and countries, or start from a section.">
+  <section class="section">
+    <div class="container nf">
+      <span class="kicker">Error 404</span>
+      <h1>Page not found</h1>
+      <p class="sub">The link may be old or mistyped. Search the datasets and countries, or start from a section below.</p>
+
+      <form class="nf-search" id="nf-form" action={`${base}/explore/`} method="get" role="search">
+        <label class="nf-sr" for="nf-q">Search datasets and countries</label>
+        <input type="search" id="nf-q" name="q" placeholder="e.g. inflation or Brazil" autocomplete="off" />
+        <button type="submit" class="nf-go">Search</button>
+      </form>
+      <div class="nf-results" id="nf-results" aria-live="polite"></div>
+
+      <div class="nf-links">
+        {links.map((l) => (
+          <a class="card link nf-link" href={l.href}><b>{l.label}</b><span class="meta">{l.desc}</span></a>
+        ))}
+      </div>
+      <p class="meta nf-mail">Followed a broken link on this site? Tell us at <a href="mailto:agent@azenha.ai">agent@azenha.ai</a>.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline define:vars={{ base }}>
+  (function () {
+    // Live results from the same index the header search uses. The box starts
+    // with words from the dead URL, so /bulldozer/dataset/imf-inflaton/ already
+    // suggests the inflation datasets. Plain ES5-level JS: inline scripts are
+    // not transpiled and must run on old Safari.
+    var form = document.getElementById('nf-form');
+    var input = document.getElementById('nf-q');
+    var out = document.getElementById('nf-results');
+    var index = null;
+    var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+    // Words are cut to their first five letters so a typo late in a word
+    // ("inflaton") still finds the right titles.
+    var words = function (q) { return q.toLowerCase().split(/\s+/).filter(function (w) { return w.length > 1; }).map(function (w) { return w.length > 5 ? w.slice(0, 5) : w; }); };
+    var paint = function () {
+      var q = input.value.trim();
+      if (!index || !q) { out.innerHTML = ''; return; }
+      var ws = words(q);
+      var hits = index.map(function (it) {
+        var l = it[1].toLowerCase();
+        var n = 0;
+        ws.forEach(function (w) { if (l.indexOf(w) >= 0) n++; });
+        return n ? [n, it] : null;
+      }).filter(Boolean).sort(function (a, b) { return b[0] - a[0] || a[1][1].localeCompare(b[1][1]); }).slice(0, 8);
+      out.innerHTML = hits.length
+        ? hits.map(function (h) { return '<a class="nf-hit" href="' + base + esc(h[1][2]) + '">' + esc(h[1][0]) + ' ' + esc(h[1][1]) + '</a>'; }).join('')
+        : '<p class="meta">Nothing found for “' + esc(q) + '”.</p>';
+    };
+    // Guess from the path: last meaningful segment, dashes to spaces.
+    var segs = location.pathname.replace(/^\/bulldozer\/?/, '').split('/').filter(Boolean);
+    var guess = segs.length ? decodeURIComponent(segs[segs.length - 1]).replace(/\.html?$/, '').replace(/[-_]+/g, ' ') : '';
+    if (/^(dataset|country|stories|surveys|macro|404)$/.test(guess)) guess = '';
+    input.value = guess;
+    input.addEventListener('input', paint);
+    // Without JS the form falls back to the Charts page. With JS, Enter opens
+    // the top hit; /explore/ does not read ?q=, so never send people there.
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var first = out.querySelector('a');
+      if (first) location.href = first.href; else paint();
+    });
+    fetch(base + '/data/search.json').then(function (r) { return r.json(); }).then(function (j) { index = j; paint(); }).catch(function () {});
+  })();
+</script>
+
+<style>
+  .nf { max-width: 760px; }
+  .nf h1 { margin-bottom: 8px; }
+  .nf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .nf-search { display: flex; gap: 8px; margin: 18px 0 8px; }
+  .nf-search input { flex: 1; min-width: 0; min-height: 44px; background: var(--bg-card); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 0 14px; font-size: 16px; font-family: var(--font); }
+  .nf-search input:focus { outline: none; border-color: var(--accent); }
+  .nf-go { min-height: 44px; padding: 0 18px; border-radius: 10px; border: 1px solid var(--accent-fill); background: var(--accent-fill); color: #1a1300; font-weight: 700; font-family: var(--font); font-size: 15px; cursor: pointer; }
+  .nf-results { display: flex; flex-direction: column; margin: 0 0 18px; }
+  .nf-results :global(.nf-hit) { display: block; padding: 10px 4px; border-bottom: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 15px; }
+  .nf-results :global(.nf-hit:hover) { color: var(--accent); }
+  .nf-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
+  .nf-link { display: flex; flex-direction: column; gap: 4px; text-decoration: none; color: var(--text); min-height: 44px; }
+  .nf-mail { margin-top: 22px; }
+</style>

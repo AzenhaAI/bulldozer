@@ -229,7 +229,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .q-rules { color: var(--text-dim); line-height: 1.7; }
   .q-best { font-family: var(--mono); font-size: 13px; color: var(--accent); }
   .q-primary {
-    background: linear-gradient(120deg, var(--accent), var(--accent-2)); color: #0e0f11; border: 0; border-radius: 8px;
+    background: linear-gradient(120deg, var(--accent-fill), var(--accent-2-fill)); color: #0e0f11; border: 0; border-radius: 8px;
     padding: 10px 22px; font-weight: 700; font-size: 15px; cursor: pointer; font-family: inherit;
     transition: transform 0.15s;
   }
@@ -241,7 +241,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     border-bottom: 1px dashed rgba(255, 176, 0, 0.45); padding-bottom: 10px; margin-bottom: 14px;
   }
   .q-top #q-worth {
-    display: inline-block; background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    display: inline-block; background: linear-gradient(120deg, var(--accent-fill), var(--accent-2-fill));
     color: #1a1300; font-weight: 700; padding: 2px 11px; border-radius: 999px;
   }
   .q-top #q-worth.q-bump { animation: q-bump 0.45s cubic-bezier(0.2, 1.6, 0.4, 1); }

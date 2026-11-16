@@ -12,6 +12,7 @@ import countryCurrency from '@data/country-currency.json';
 import subregions from '@data/subregions.json';
 import alfacat from '@data/alfacat.json';
 import economy from '@data/weekly/economy.json';
+import { datasets } from '@data/datasets';
 
 export function getStaticPaths() {
   return buildCountryIndex().map((c) => ({ params: { slug: countrySlug(c.name) }, props: { iso: c.iso } }));
@@ -43,14 +44,17 @@ const fmt = (v: number, unit: string) =>
 const find = (slug: string) => c.items.find((i) => i.slug === slug);
 
 // IMF series run past the last closed year into the IMF's own projections; a
-// projection shown with a bare year reads as a measured result. Same rule as
-// Ask AI: the current and the previous year are estimates.
-const thisYear = new Date().getUTCFullYear();
+// projection shown with a bare year reads as a measured result. The dataset's
+// own projectedFrom decides, the same year the country index ranks on and the
+// indicator pages mark: a calendar rule ("this year and last") put "2025 est."
+// here beside a 2025 the dataset and its page call actual (QA, 15 Nov 2026).
+const PROJECTED_FROM = new Map(datasets.filter((d) => d.projectedFrom).map((d) => [d.slug, Number(String(d.projectedFrom).slice(0, 4))]));
 const splitScales = (it: { slug: string; value: number; unit: string; splits?: import('@lib/countryIndex').Split[] }) =>
   (it.splits ?? []).map((sp) => splitScaleSvg(it, sp, fmt)).join('');
 const when = (it: { slug: string; period: string }) => {
   const y = Number(String(it.period).match(/\d{4}/)?.[0] ?? 0);
-  return it.slug.startsWith('imf-') && y >= thisYear - 1 ? `${it.period} est.` : it.period;
+  const pf = PROJECTED_FROM.get(it.slug);
+  return pf && y >= pf ? `${it.period} est.` : it.period;
 };
 // Headline stats — same recipe as the interactive Geo panel.
 const gdp = find('imf-gdp-per-capita-ppp') || find('imf-gdp-per-capita');

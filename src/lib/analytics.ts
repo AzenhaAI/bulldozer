@@ -117,7 +117,8 @@ export function changeSpec(data: Observation[], unit: string, mode: ChangeMode, 
 export function changeDecimals(spec: Pick<ChangeSpec, 'mode' | 'band'>, value: number): number {
   if (spec.mode === 'pct') return Math.abs(value) < 1 ? 2 : 1;
   if (!(spec.band > 0)) return Math.abs(value) < 1 ? 2 : 1;
-  return Math.max(0, Math.min(3, Math.ceil(-Math.log10(spec.band))));
+  // Capped at 2: a band of 0.005 gave "+0.590 points", false precision (QA, 16 Nov 2026).
+  return Math.max(0, Math.min(2, Math.ceil(-Math.log10(spec.band))));
 }
 
 /** "+0.2 years", "−1.4pp", "+0.10 points", "+3.1%". */

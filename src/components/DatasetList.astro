@@ -10,12 +10,24 @@ const groups = TOPIC_ORDER
   .map((id) => ({ topic: TOPICS[id], list: items.filter((d) => d.topic === id) }))
   .filter((g) => g.list.length);
 
-// study filter chips — one per source, biggest studies first
-const short = (s: string) => s.split(' — ')[0].split(' (')[0];
-const bySource = new Map<string, number>();
-for (const d of items) bySource.set(d.source, (bySource.get(d.source) ?? 0) + 1);
+// study filter chips — one per study, biggest studies first. Keyed on the
+// short name: "Gapminder — Life expectancy" and "Gapminder (Systema Globalis)"
+// are one study, and keying on the full source string showed "Gapminder 9"
+// and "Gapminder 3" side by side.
+// "World Bank — World Development Indicators" is the same database as "World
+// Bank Open Data"; the governance indicators are their own study.
+const short = (s: string) =>
+  /World Development Indicators/.test(s) ? 'World Bank Open Data'
+  : /Worldwide Governance Indicators/.test(s) ? 'World Bank WGI'
+  : s.split(' — ')[0].split(' (')[0].trim();
+const bySource = new Map<string, { n: number; full: Set<string> }>();
+for (const d of items) {
+  const k = short(d.source);
+  const e = bySource.get(k) ?? { n: 0, full: new Set<string>() };
+  e.n++; e.full.add(d.source); bySource.set(k, e);
+}
 const chips = [...bySource.entries()]
-  .map(([full, n]) => ({ full, label: short(full), n }))
+  .map(([label, e]) => ({ label, n: e.n, title: [...e.full].join(' · ') }))
   .sort((a, b) => b.n - a.n || a.label.localeCompare(b.label));
 ---
 <div class="dlist">
@@ -23,7 +35,7 @@ const chips = [...bySource.entries()]
   <div class="dlist-filters" id="dlist-filters">
     <button type="button" class="fchip active" data-src="">All studies</button>
     {chips.map((c) => (
-      <button type="button" class="fchip" data-src={c.full} title={c.full}>{c.label} <span class="fchip-n">{c.n}</span></button>
+      <button type="button" class="fchip" data-src={c.label} title={c.title}>{c.label} <span class="fchip-n">{c.n}</span></button>
     ))}
   </div>
   <div id="dlist-empty" class="sub" hidden>No indicators match.</div>
@@ -38,7 +50,7 @@ const chips = [...bySource.entries()]
       <div class="grid cols-2 topic-body">
         {g.list.map((d) => (
           <a class="card link dl-card" href={`${base}/dataset/${d.slug}/`}
-             data-src={d.source}
+             data-src={short(d.source)}
              data-text={`${d.title} ${d.source} ${d.valueLabel}`.toLowerCase()}>
             <h3 style="font-size:16px"><span class="ind-ic" aria-hidden="true">{g.topic.icon}</span>{d.title}{newSlugs.has(d.slug) && <span class="new-badge">New</span>}</h3>
             <p class="meta">{d.summary}</p>
@@ -83,3 +95,8 @@ const chips = [...bySource.entries()]
     apply();
   });
 </script>
+
+<style>
+  /* Filter chips are tap targets: at least 32 px tall. */
+  .dlist-filters .fchip { min-height: 32px; }
+</style>

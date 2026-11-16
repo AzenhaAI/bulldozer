@@ -80,7 +80,9 @@ export const sources: Source[] = [
     description: 'Geert Hofstede’s six (here five) dimensions of national culture — power distance, individualism, masculinity, uncertainty avoidance and long-term orientation.' },
   { name: 'European Values Study (EVS)', url: 'https://europeanvaluesstudy.eu/', status: 'live', category: 'Wellbeing & values', match: 'European Values Study', dash: 'evs',
     description: 'Large-scale, repeated survey of human values across Europe. Extended dashboard from the 2017 wave: 36 countries, weighted, by sex and age — happiness, trust, politics, religion and social tolerance.' },
-  { name: 'Wellcome Global Monitor', url: 'https://wellcome.org/reports/wellcome-global-monitor', status: 'live', category: 'Wellbeing & values', match: 'Wellcome Global Monitor', dash: 'wellcome',
+  // The old wellcome.org/reports/wellcome-global-monitor overview page is gone (404 since the site
+  // moved under /insights/); link the 2020 Covid-19 wave, the one our dashboard aggregates.
+  { name: 'Wellcome Global Monitor', url: 'https://wellcome.org/insights/reports/wellcome-global-monitor-covid-19-2020', status: 'live', category: 'Wellbeing & values', match: 'Wellcome Global Monitor', dash: 'wellcome',
     description: 'Gallup study of how people worldwide think and feel about science and health. We aggregated 2018 and 2020 (the Covid-19 wave, 113 countries): trust in science and scientists; vaccine safety and effectiveness from 2018.' },
   // ── Education & skills ─────────────────────────────────────────────
   { name: 'PISA — Programme for International Student Assessment', url: 'https://www.oecd.org/en/about/programmes/pisa.html', status: 'live', category: 'Education & skills', match: 'PISA international student assessment',

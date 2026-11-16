@@ -61,7 +61,13 @@ const sorted = [...licences].sort((a, b) => a.name.localeCompare(b.name));
 <style>
   .takedown-note { margin: 0 0 4px; font-size: 14px; }
   .lic-toc { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; margin: 8px 0 28px; }
-  .lic { scroll-margin-top: 80px; }
+  /* ~60 source links, 20px tall and tightly packed, were hard to hit on a
+     phone. Give each a 34px pill there; desktop keeps the compact list. */
+  @media (max-width: 760px) {
+    .lic-toc { gap: 6px; }
+    .lic-toc a { display: inline-flex; align-items: center; min-height: 34px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-card); text-decoration: none; }
+  }
+  .lic { scroll-margin-top: 90px; }
   .lic dl { display: grid; grid-template-columns: 96px 1fr; gap: 4px 12px; margin: 6px 0 0; font-size: 14px; }
   .lic dt { color: var(--text-dim); font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 1px; padding-top: 3px; }
   .lic dd { margin: 0; color: var(--text); overflow-wrap: anywhere; }

@@ -26,6 +26,7 @@ const config = { base };
 
   function render() {
     const me = countries.find((c) => c.iso === sel.value); if (!me) return;
+    el('simc-list').hidden = false;
     const mv = vecOf(me);
     const scored = [];
     for (const c of countries) {
@@ -41,7 +42,7 @@ const config = { base };
     const top = scored.slice(0, 8);
     el('simc-list').innerHTML = top.map((x) => {
       const w = Math.round(x.sim * 100);
-      return `<a class="simc-row" href="${cfg.base}/geo?c=${x.c.iso}#country">
+      return `<a class="simc-row" href="${cfg.base}/geo/?c=${x.c.iso}#country">
         <span class="simc-name">${flag(x.c.iso)}${x.c.name}</span>
         <span class="bar-track"><span class="bar-fill co-bar" style="width:${w}%"></span></span>
         <span class="bar-val">${w}% match · ${x.c.region}</span></a>`;
@@ -50,11 +51,38 @@ const config = { base };
   }
 
   (window.__bdCountryIndex ??= (async (u) => { for (let i = 0; i < 4; i++) { try { const r = await fetch(u); if (r.ok) return await r.json(); } catch { /* retry */ } await new Promise((res) => setTimeout(res, 700 * (i + 1))); } window.__bdCountryIndex = undefined; throw new Error('country index unavailable'); })(`${cfg.base}/data/country-index.json`)).then((d) => {
+    window.__bdCountryIndexData = d;
     countries = d.filter((c) => c.items.length >= 10);
     sel.innerHTML = countries.map((c) => `<option value="${c.iso}">${flag(c.iso)}${c.name}</option>`).join('');
-    const want = new URLSearchParams(location.search).get('sim');
+    // ?sim= wins; otherwise the country already picked in the Geo panel above,
+    // so the section never sits on Germany while the page is about Japan.
+    const geoSel = document.getElementById('country-sel');
+    const want = new URLSearchParams(location.search).get('sim') || (geoSel && geoSel.value);
     sel.value = (want && countries.some((c) => c.iso === want)) ? want : (countries.find((c) => c.iso === 'DEU') || countries[0]).iso;
     render();
   });
   sel.addEventListener('change', render);
+  // Follow the Geo picker (CountryPanel fires this on every pick).
+  document.addEventListener('bd:geo-country', (e) => {
+    const iso = e.detail && e.detail.iso;
+    if (!countries.length || !iso) return;
+    if (countries.some((c) => c.iso === iso)) { sel.value = iso; render(); return; }
+    // Too few indicators for a fair match (Wallis and Futuna has five): say so
+    // instead of leaving the previous country's neighbours on screen.
+    const c = (window.__bdCountryIndexData || []).find((x) => x.iso === iso);
+    el('simc-list').hidden = true;
+    el('simc-note').textContent = `${c ? c.name : iso} has too few indicators for a profile match; pick another country here.`;
+  });
 </script>
+
+<style is:global>
+  /* Phones: the 200px name column plus "62% match · Africa" left the bar a 2px
+     track. Name and match share the first line, the bar gets the full second. */
+  .simc-row .bar-val { white-space: nowrap; }
+  @media (max-width: 560px) {
+    .simc-row { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name val" "bar bar"; gap: 6px 10px; }
+    .simc-row .simc-name { grid-area: name; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .simc-row .bar-val { grid-area: val; }
+    .simc-row .bar-track { grid-area: bar; }
+  }
+</style>

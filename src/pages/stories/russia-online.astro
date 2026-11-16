@@ -58,7 +58,7 @@ const youngOld = age.length ? `${age[0].group} ${age[0].pct}% vs 65+ ${age[age.l
         {age.map((a) => (
           <div class="bar-row">
             <span>{a.group}</span>
-            <span class="bar-track"><span class="bar-fill" style={`width:${(a.pct / 100) * 100}%; background:linear-gradient(90deg,var(--accent-2),var(--accent))`}></span></span>
+            <span class="bar-track"><span class="bar-fill" style={`width:${(a.pct / 100) * 100}%; background:linear-gradient(90deg,var(--accent-2-fill),var(--accent-fill))`}></span></span>
             <span class="bar-val">{a.pct}%</span>
           </div>
         ))}

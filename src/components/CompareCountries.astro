@@ -6,10 +6,11 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
 ---
 <div class="compare" data-base={base}>
   <div class="controls">
-    <label>Add country<select id="cmp-add"><option value="">＋ add…</option></select></label>
+    <label>Add country (up to 5)<select id="cmp-add"><option value="">＋ add…</option></select></label>
     <span id="cmp-chips" class="chips"></span>
     <button type="button" id="cmp-csv" class="ghost-btn" style="margin-left:auto">↓ CSV</button>
   </div>
+  <p id="cmp-msg" class="cmp-msg" role="status" aria-live="polite" hidden></p>
   <div id="cmp-table" style="overflow-x:auto; margin-top:8px"></div>
   <p class="sub" style="font-size:12px; margin-top:8px">
     Each cell is the latest year for that country (shown under the value). Highlighted: the better value, only where
@@ -45,7 +46,7 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
 
   function renderChips() {
     chipsEl.innerHTML = selected.map((iso) =>
-      `<span class="chip">${flag(iso)}${(byIso[iso] || {}).name || iso}<button data-rm="${iso}">×</button></span>`).join('');
+      `<span class="chip">${flag(iso)}${(byIso[iso] || {}).name || iso}<button type="button" data-rm="${iso}" aria-label="Remove ${(byIso[iso] || {}).name || iso}">×</button></span>`).join('');
     add.innerHTML = '<option value="">＋ add country…</option>' +
       countries.filter((c) => !selected.includes(c.iso))
         .map((c) => `<option value="${c.iso}">${flag(c.iso)}${c.name}</option>`).join('');
@@ -105,14 +106,32 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
 
   function render() { renderChips(); renderTable(); syncUrl(); }
 
-  add.addEventListener('change', () => { if (add.value && selected.length < 5 && !selected.includes(add.value)) { selected.push(add.value); render(); } });
-  chipsEl.addEventListener('click', (e) => { const iso = (e.target as HTMLElement).getAttribute('data-rm'); if (iso) { selected = selected.filter((x) => x !== iso); render(); } });
+  // A sixth pick was dropped silently while the select kept showing it: say
+  // why, and put the select back on its placeholder.
+  const MAX = 5;
+  const msgEl = document.getElementById('cmp-msg')!;
+  const say = (t: string) => { msgEl.textContent = t; msgEl.hidden = !t; };
+  add.addEventListener('change', () => {
+    const iso = add.value;
+    if (!iso) return;
+    if (selected.length >= MAX) { add.value = ''; say(`Up to ${MAX} countries side by side; remove one (×) to add ${(byIso[iso] || {}).name || iso}.`); return; }
+    if (!selected.includes(iso)) selected.push(iso);
+    say(''); render();
+  });
+  chipsEl.addEventListener('click', (e) => { const b = (e.target as HTMLElement).closest('[data-rm]'); const iso = b && b.getAttribute('data-rm'); if (iso) { selected = selected.filter((x) => x !== iso); say(''); render(); } });
   document.getElementById('cmp-csv')!.addEventListener('click', downloadCsv);
 
   (window.__bdCountryIndex ??= (async (u) => { for (let i = 0; i < 4; i++) { try { const r = await fetch(u); if (r.ok) return await r.json(); } catch { /* retry */ } await new Promise((res) => setTimeout(res, 700 * (i + 1))); } window.__bdCountryIndex = undefined; throw new Error('country index unavailable'); })(`${base}/data/country-index.json`)).then((data) => {
     countries = data; byIso = Object.fromEntries(data.map((c: any) => [c.iso, c]));
-    selected = selected.filter((iso) => byIso[iso]);
+    selected = [...new Set(selected.filter((iso) => byIso[iso]))].slice(0, MAX); // a hand-edited ?cmp= can list more
     if (!selected.length) selected = data.slice(0, 3).map((c: any) => c.iso);
     render();
   });
 </script>
+
+<style is:global>
+  /* The chip "×" was a 13x15 target; 32px square keeps it tappable. */
+  .compare .chip { padding-top: 0; padding-bottom: 0; padding-right: 2px; }
+  .compare .chip button { min-width: 32px; min-height: 32px; display: inline-flex; align-items: center; justify-content: center; font-size: 17px; }
+  .compare .cmp-msg { margin: 8px 0 0; font-size: 13px; color: var(--accent); }
+</style>

@@ -67,7 +67,8 @@ const desc = description ?? `Bulldoze the noise. Mine the signal. ${nDatasets} p
 const canonical = new URL(Astro.url.pathname, 'https://azenha.ai').href;
 // Site-level entity markup, homepage only (Google reads WebSite/SearchAction from
 // the site root). The SearchAction declares the on-site search so Google can offer
-// a sitelinks search box; ?q= is handled by the search overlay below.
+// a sitelinks search box. Any page opened with ?q= opens the search overlay
+// below with that query filled in, so the root is the lightest valid target.
 const isHome = Astro.url.pathname.replace(/\/$/, '') === base;
 const siteLd = isHome ? {
   '@context': 'https://schema.org',
@@ -82,7 +83,7 @@ const siteLd = isHome ? {
       inLanguage: 'en',
       potentialAction: {
         '@type': 'SearchAction',
-        target: { '@type': 'EntryPoint', urlTemplate: `https://azenha.ai${base}/explore/?q={search_term_string}` },
+        target: { '@type': 'EntryPoint', urlTemplate: `https://azenha.ai${base}/?q={search_term_string}` },
         'query-input': 'required name=search_term_string',
       },
     },
@@ -108,13 +109,45 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     <link rel="manifest" href={`${base}/manifest.webmanifest`} />
     <meta name="theme-color" content="#0e0f11" />
     <script is:inline>
-      // Apply the saved theme before first paint to avoid a flash (default: dark).
-      try {
-        if (localStorage.getItem('bd-theme') === 'light') {
-          document.documentElement.setAttribute('data-theme', 'light');
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f6f2');
+      // Theme, decided before first paint so there is no flash of the wrong one.
+      // A choice the visitor made (bd-theme = light | dark) wins; without one the
+      // site follows the OS setting, and keeps following it if that changes
+      // (it used to be dark for everyone until toggled). The html[data-theme]
+      // attribute is the single source of truth: every toggle label is chosen
+      // from it in CSS (.th-to-light / .th-to-dark), so they cannot disagree.
+      (function () {
+        var d = document.documentElement;
+        var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: light)') : null;
+        var saved = function () {
+          try { var v = localStorage.getItem('bd-theme'); return v === 'light' || v === 'dark' ? v : null; }
+          catch (e) { return null; }
+        };
+        var apply = function (t) {
+          if (t === 'light') d.setAttribute('data-theme', 'light'); else d.removeAttribute('data-theme');
+          var m = document.querySelector('meta[name="theme-color"]');
+          if (m) m.setAttribute('content', t === 'light' ? '#f7f6f2' : '#0e0f11');
+        };
+        var current = function () { return d.getAttribute('data-theme') === 'light' ? 'light' : 'dark'; };
+        apply(saved() || (mq && mq.matches ? 'light' : 'dark'));
+        window.bdTheme = {
+          get: current,
+          toggle: function () {
+            var next = current() === 'light' ? 'dark' : 'light';
+            apply(next);
+            try { localStorage.setItem('bd-theme', next); } catch (e) { /* private mode */ }
+          },
+        };
+        if (mq) {
+          var follow = function (e) { if (!saved()) apply(e.matches ? 'light' : 'dark'); };
+          if (mq.addEventListener) mq.addEventListener('change', follow);
+          else if (mq.addListener) mq.addListener(follow);
         }
-      } catch (e) { /* private mode etc. */ }
+        // Every [data-theme-toggle] on the page, present now or rendered later.
+        document.addEventListener('click', function (e) {
+          var t = e.target && e.target.closest && e.target.closest('[data-theme-toggle]');
+          if (t) window.bdTheme.toggle();
+        });
+      })();
     </script>
     <link rel="apple-touch-icon" href={`${base}/icon-192.png`} />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -211,7 +244,7 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
         </nav>
         <div class="header-tools">
           <button type="button" class="hdr-icon" id="hdr-search" aria-label="Search datasets and countries (Cmd+K)">🔍</button>
-          <button type="button" class="hdr-icon" id="hdr-theme" aria-label="Toggle light/dark theme">☀️</button>
+          <button type="button" class="hdr-icon" id="hdr-theme" data-theme-toggle aria-label="Toggle light/dark theme"><span class="th-to-light" aria-hidden="true">☀️</span><span class="th-to-dark" aria-hidden="true">🌙</span></button>
           <div class="burger-wrap">
             <button type="button" class="hdr-icon" id="hdr-burger" aria-label="More sections" aria-expanded="false" aria-controls="burger-menu">☰</button>
             <nav class="burger-menu" id="burger-menu" hidden>
@@ -222,7 +255,7 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
               ))}
               <div class="bm-sep" role="separator"></div>
               <button type="button" class="bm-tool" id="bm-search">🔍 Search</button>
-              <button type="button" class="bm-tool" id="bm-theme">☀️ Light theme</button>
+              <button type="button" class="bm-tool" id="bm-theme" data-theme-toggle><span class="th-to-light">☀️ Light theme</span><span class="th-to-dark">🌙 Dark theme</span></button>
             </nav>
           </div>
         </div>
@@ -236,31 +269,18 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     </div>
     <script is:inline>
       (() => {
-        // Theme toggle — same storage/flag the homepage toggle uses.
-        const tBtn = document.getElementById('hdr-theme');
-        const icon = () => { tBtn.textContent = document.documentElement.getAttribute('data-theme') === 'light' ? '🌙' : '☀️'; };
-        tBtn.addEventListener('click', () => {
-          const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-          if (next === 'light') document.documentElement.setAttribute('data-theme', 'light');
-          else document.documentElement.removeAttribute('data-theme');
-          try { localStorage.setItem('bd-theme', next); } catch (e) { /* ignore */ }
-          var __tc = document.querySelector('meta[name="theme-color"]'); if (__tc) __tc.setAttribute('content', next === 'light' ? '#f7f6f2' : '#0e0f11');
-          icon();
-        });
-        icon();
-        // burger copies of the header tools (shown on mobile only)
-        const bmTheme = document.getElementById('bm-theme');
-        const bmLabel = () => { bmTheme.textContent = document.documentElement.getAttribute('data-theme') === 'light' ? '🌙 Dark theme' : '☀️ Light theme'; };
-        bmTheme.addEventListener('click', () => { tBtn.click(); bmLabel(); });
-        bmLabel();
-
+        // Theme toggles are wired once, in the head script (data-theme-toggle).
+        // html.menu-open lifts the header above the bottom tab bar while the
+        // burger is open (the bar used to draw over the menu's last items).
         const bBtn = document.getElementById('hdr-burger');
         const menu = document.getElementById('burger-menu');
-        const close = () => { menu.hidden = true; bBtn.setAttribute('aria-expanded', 'false'); };
+        const close = () => { menu.hidden = true; bBtn.setAttribute('aria-expanded', 'false'); document.documentElement.classList.remove('menu-open'); };
         bBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           menu.hidden = !menu.hidden;
           bBtn.setAttribute('aria-expanded', String(!menu.hidden));
+          document.documentElement.classList.toggle('menu-open', !menu.hidden);
+          if (!menu.hidden) menu.scrollTop = 0;
         });
         document.addEventListener('click', (e) => { if (!menu.hidden && !menu.contains(e.target)) close(); });
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
@@ -273,9 +293,11 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
         const input = document.getElementById('srch-input');
         const list = document.getElementById('srch-results');
         let index = null, sel = 0, rows = [];
-        const open = async () => {
-          overlay.hidden = false; input.value = ''; input.focus(); paint([]);
+        const open = async (initial) => {
+          overlay.hidden = false; input.value = typeof initial === 'string' ? initial : ''; input.focus(); paint([]);
           if (!index) { try { index = await (await fetch(`${base}/data/search.json`)).json(); } catch (e) { index = []; } }
+          // Whatever was typed (or passed in) while the index loaded is ranked now.
+          if (input.value.trim()) paint(rank(input.value.trim()));
         };
         const close = () => { overlay.hidden = true; };
         const paint = (r) => {
@@ -299,8 +321,18 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
             if (list.children[sel]) list.children[sel].scrollIntoView({ block: 'nearest' });
           } else if (e.key === 'Enter' && rows[sel]) location.href = base + rows[sel][2];
         });
-        document.getElementById('hdr-search').addEventListener('click', open);
-        document.getElementById('bm-search').addEventListener('click', () => { document.getElementById('burger-menu').hidden = true; open(); });
+        document.getElementById('hdr-search').addEventListener('click', () => open());
+        document.getElementById('bm-search').addEventListener('click', () => {
+          document.getElementById('burger-menu').hidden = true;
+          document.getElementById('hdr-burger').setAttribute('aria-expanded', 'false');
+          document.documentElement.classList.remove('menu-open');
+          open();
+        });
+        // ?q=… (the WebSite SearchAction in the structured data, or a shared
+        // link) opens the search with that query already filled in. Ask AI
+        // reads ?q= as its own question, so it is left alone there.
+        const q0 = new URLSearchParams(location.search).get('q');
+        if (q0 && q0.trim() && !/\/ask\/?$/.test(location.pathname)) open(q0.trim().slice(0, 100));
         document.addEventListener('keydown', (e) => {
           if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); overlay.hidden ? open() : close(); }
           else if (e.key === 'Escape') close();
@@ -334,7 +366,8 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
         </span>
         <span class="map-note">
           <a href="https://www.naturalearthdata.com/about/" target="_blank" rel="noopener" aria-label="Natural Earth"><img class="ne-logo" src={`${base}/natural-earth-logo.png`} alt="Natural Earth" width="405" height="85" /></a>
-          Map boundaries are from the <a href="https://www.naturalearthdata.com/about/" target="_blank" rel="noopener">Natural Earth</a> public-domain map dataset and do not imply any endorsement or judgment on the legal status of any territory.
+          <!-- one flex item, so the sentence wraps as text instead of breaking around its link -->
+          <span>Map boundaries are from the <a href="https://www.naturalearthdata.com/about/" target="_blank" rel="noopener">Natural Earth</a> public-domain map dataset and do not imply any endorsement or judgment on the legal status of any territory.</span>
         </span>
       </div>
     </footer>
@@ -392,7 +425,11 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     font:inherit;background:rgba(255,255,255,.12)}
   #a2hs #a2hs-go{padding:7px 14px;font-weight:700;background:#ffb000;color:#1a1300;white-space:nowrap}
   #a2hs-go[hidden]{display:none}
-  #a2hs-x{width:28px;height:28px;font-size:18px;line-height:1}
+  /* 44px: the 28px cross was easy to miss with a thumb. */
+  #a2hs #a2hs-x{width:44px;height:44px;font-size:22px;line-height:1;margin:-8px -8px -8px 0;background:transparent}
+  /* Desktop: a compact card in the corner rather than a full-width strip, which
+     lay across the controls at the bottom of whatever panel was on screen. */
+  @media (min-width:761px){#a2hs{left:auto;right:16px;bottom:16px;max-width:420px}}
 </style>
 <script>
   (function () {
@@ -480,6 +517,52 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
       try { localStorage.setItem(KEY, '1'); } catch (e) {}
     });
 
+  })();
+</script>
+<script is:inline>
+  // Bottom chrome. Two fixed strips can sit at the bottom of the screen: the
+  // install banner above (#a2hs) and, on Android, azenha.ai's Google Play / APK
+  // strip (#az-apk), which the site's middleware appends after this point and
+  // removes when dismissed. While one is showing, its height goes into
+  // --apk-h / --a2hs-h, and global.css lifts the tab bar above the strip and
+  // pads the page so the footer's last lines can still be scrolled clear.
+  (function () {
+    var root = document.documentElement;
+    var seen = {};
+    var mo = window.MutationObserver ? new MutationObserver(function () { sync(); }) : null;
+    var ro = window.ResizeObserver ? new ResizeObserver(function () { sync(); }) : null;
+    function shown(el) {
+      return !!el && el.isConnected !== false && !el.hidden && getComputedStyle(el).display !== 'none';
+    }
+    function watch(id) {
+      var el = document.getElementById(id);
+      if (el && seen[id] !== el) {
+        seen[id] = el;
+        if (mo) mo.observe(el, { attributes: true, attributeFilter: ['hidden', 'style', 'class'] });
+        if (ro) ro.observe(el);
+      }
+      return el;
+    }
+    var last = '';
+    function sync() {
+      var apk = watch('az-apk'), a2 = watch('a2hs');
+      var ah = shown(apk) ? Math.ceil(apk.offsetHeight) : 0;
+      // the banner floats 12px above whatever is under it; reserve that gap twice
+      var bh = shown(a2) ? Math.ceil(a2.offsetHeight) + 24 : 0;
+      var key = ah + ',' + bh;
+      if (key === last) return;
+      last = key;
+      root.style.setProperty('--apk-h', ah + 'px');
+      root.style.setProperty('--a2hs-h', bh + 'px');
+      root.classList.toggle('apk-on', ah > 0);
+    }
+    // The strip arrives as the last child of <body> and leaves the same way.
+    if (mo) mo.observe(document.body, { childList: true });
+    document.addEventListener('DOMContentLoaded', sync);
+    window.addEventListener('load', sync);
+    window.addEventListener('resize', sync);
+    document.addEventListener('click', function () { setTimeout(sync, 0); }, true);
+    sync();
   })();
 </script>
   </body>

@@ -186,8 +186,11 @@ for (const c of countries) {
   <div class="eumap-legends">
     <div class="eumap-leg">
       <span class="eumap-leg-t">Country happiness</span>
-      <span class="eumap-ramp"></span>
-      <span class="eumap-leg-s">{euMin.toFixed(1)}</span><span class="eumap-leg-s">{euMax.toFixed(1)} <em>WHR 0–10 · {wP}</em></span>
+      {/* min at the light end, max at the dark end, the way the ramp reads; both
+          numbers used to follow the bar ("[ramp] 4.7 7.8"). nowrap keeps the trio
+          on one line so a phone never strands a number under the ramp. */}
+      <span class="eumap-scale"><span class="eumap-leg-s">{euMin.toFixed(1)}</span><span class="eumap-ramp"></span><span class="eumap-leg-s">{euMax.toFixed(1)}</span></span>
+      <span class="eumap-leg-s"><em>WHR 0–10 · {wP}</em></span>
     </div>
     <div class="eumap-leg">
       <span class="eumap-leg-t">City vs its country</span>
@@ -365,6 +368,7 @@ for (const c of countries) {
   .eumap-leg-t { color: var(--text); font-weight: 600; }
   .eumap-leg-s { font-family: var(--mono); }
   .eumap-leg-s em { font-style: normal; opacity: 0.7; }
+  .eumap-scale { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
   .eumap-ramp { width: 120px; height: 11px; border-radius: 6px; background: linear-gradient(90deg, rgba(59,130,246,0.16), rgba(59,130,246,0.88)); border: 1px solid var(--border); }
   .eumap-dotkey { display: inline-flex; align-items: center; gap: 5px; }
   .eumap-dotkey .dk { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
@@ -378,4 +382,7 @@ for (const c of countries) {
   #eumap-tip .tr { display: flex; justify-content: space-between; gap: 14px; margin-top: 4px; color: var(--text-dim); }
   #eumap-tip .tr b { color: var(--text); font-family: var(--mono); }
   #eumap-tip .tv { margin-top: 5px; font-size: 11.5px; color: var(--accent); }
+  /* Metric chips are written at runtime too; 28px tall was under the 32px
+     tap target on phones. */
+  @media (max-width: 720px) { #eumap-metrics .fchip { min-height: 36px; padding-top: 8px; padding-bottom: 8px; } }
 </style>

@@ -177,21 +177,24 @@ const RESOURCES = [
         <b>Superset</b> or <b>Grafana</b> to self-host seriously, <b>Tableau</b> or <b>Power BI</b> when the company already pays for them,
         <b>Dash</b>/<b>Streamlit</b> when the logic lives in Python, and <b>D3</b> when the output must be exactly what you designed.
       </p>
-      <div style="overflow-x:auto">
-        <table class="data">
+      <!-- On phones the four columns do not fit: a sideways-scrolling table cut
+           "Strongest at" mid-word with no hint there was more. Below 640px each
+           row is restacked as a card (see .bi-table in the style block). -->
+      <div class="bi-wrap">
+        <table class="data bi-table">
           <thead>
             <tr><th>Tool</th><th>Licence</th><th>Strongest at</th><th>Keep in mind</th></tr>
           </thead>
           <tbody>
             {BI_TOOLS.map((t) => (
               <tr>
-                <td style="white-space:nowrap"><a href={t.url} target="_blank" rel="noopener">{t.name} ↗</a></td>
-                <td style="white-space:nowrap">{t.kind}</td>
-                <td>
+                <td class="bi-name"><a href={t.url} target="_blank" rel="noopener">{t.name} ↗</a></td>
+                <td class="bi-kind">{t.kind}</td>
+                <td class="bi-best">
                   {t.best}
                   <br /><a class="bi-demo" href={t.demo.url} target="_blank" rel="noopener">👀 See it live: {t.demo.label} ↗</a>
                 </td>
-                <td>{t.note}</td>
+                <td class="bi-note" data-label="Keep in mind">{t.note}</td>
               </tr>
             ))}
           </tbody>
@@ -264,6 +267,36 @@ const RESOURCES = [
 </BaseLayout>
 
 <style>
+  /* The explore-nav above is sticky under the header, so a plain jump to
+     #tools hid the heading behind both. Clear header (60px) + nav (~50px). */
+  #types, #tools, #pipeline, #learn { scroll-margin-top: 120px; }
+  .bi-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .bi-name, .bi-kind { white-space: nowrap; }
+  .bi-table td { vertical-align: top; }
+  @media (max-width: 640px) {
+    /* On phones the quick-link row is no longer sticky; only the header stays. */
+    #types, #tools, #pipeline, #learn { scroll-margin-top: 76px; }
+    .bi-wrap { overflow: visible; }
+    /* One card per tool: name and licence on the first line, then the text.
+       table.data.bi-table out-specifies the global table.data mobile rule. */
+    table.data.bi-table, table.data.bi-table tbody { display: block; overflow: visible; }
+    table.data.bi-table thead { display: none; }
+    table.data.bi-table tr {
+      display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: baseline;
+      padding: 12px 14px; margin: 0 0 10px; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 12px;
+    }
+    table.data.bi-table td { display: block; padding: 0; border: 0; min-width: 0; }
+    table.data.bi-table .bi-name { font-weight: 600; font-size: 15px; }
+    table.data.bi-table .bi-kind { font-family: var(--mono); font-size: 11.5px; color: var(--text-dim); text-align: right; }
+    table.data.bi-table .bi-best, table.data.bi-table .bi-note { grid-column: 1 / -1; line-height: 1.5; }
+    table.data.bi-table .bi-note { font-size: 13px; color: var(--text-dim); }
+    table.data.bi-table .bi-note::before {
+      content: attr(data-label) ": "; font-family: var(--mono); font-size: 10.5px;
+      text-transform: uppercase; letter-spacing: 0.8px;
+    }
+    .bi-demo { display: inline-block; padding: 6px 0; }
+  }
   .edu-sources-card { display: block; margin-top: 18px; text-decoration: none; }
   .edu-sources-card h3 { color: var(--text); }
 </style>

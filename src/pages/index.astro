@@ -16,6 +16,10 @@ const apkMB = Math.round(statSync(fileURLToPath(new URL('../../public/downloads/
 // Featured story — the happiest countries, previewed with the Europe map.
 const happy = getDataset('whr-happiness');
 const happyLatest = happy ? [...new Set(happy.data.map((o) => o.period))].sort().at(-1) : null;
+// WHR names each edition after its publication year, one past the last survey
+// year stored as the period ("2025" is the World Happiness Report 2026, as the
+// story itself says), so the link names the edition, not the period.
+const whrEdition = happyLatest ? Number(happyLatest) + 1 : null;
 const month = new Date().getMonth() + 1;
 const calendar = upcoming(month).slice(0, 6);
 
@@ -70,7 +74,10 @@ const browse = [
             <p class="pwa-other">No Google Play? <a href={`${base}/downloads/bulldozer-stats.apk`} download>Android APK, {apkMB} MB</a> — allow <b>install from unknown sources</b> when your phone asks.</p>
           </div>
         </div>
-        <button type="button" class="pwa-chip" id="theme-toggle">☀️ Light theme</button>
+        <!-- One toggle for the whole site (BaseLayout wires every [data-theme-toggle]);
+             the label is picked by CSS from html[data-theme], so this chip, the header
+             icon and the burger item can never disagree. -->
+        <button type="button" class="pwa-chip" id="theme-toggle" data-theme-toggle><span class="th-to-light">☀️ Light theme</span><span class="th-to-dark">🌙 Dark theme</span></button>
       </div>
       <span class="kicker">Marketing Analytics &amp; Research</span>
       <h1>Bulldoze the noise. <span class="hl">Mine the signal.</span></h1>
@@ -100,21 +107,6 @@ const browse = [
       window.addEventListener('appinstalled', () => { pop.hidden = true; });
     })();
 
-    (function () {
-      const btn = document.getElementById('theme-toggle');
-      if (!btn) return;
-      const isLight = () => document.documentElement.getAttribute('data-theme') === 'light';
-      const label = () => { btn.textContent = isLight() ? '🌙 Dark theme' : '☀️ Light theme'; };
-      btn.addEventListener('click', () => {
-        const next = isLight() ? 'dark' : 'light';
-        if (next === 'light') document.documentElement.setAttribute('data-theme', 'light');
-        else document.documentElement.removeAttribute('data-theme');
-        try { localStorage.setItem('bd-theme', next); } catch (e) { /* ignore */ }
-        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', next === 'light' ? '#f7f6f2' : '#0e0f11');
-        label();
-      });
-      label();
-    })();
   </script>
 
   <section class="section" id="stories">
@@ -137,7 +129,7 @@ const browse = [
         </a>
         <p class="meta" style="margin:6px 0 2px">The whole world at a glance — every country scored across 8 open datasets, happiness among them. Spin the globe or switch to the flat map, then click a country for its key indicators.</p>
         <GlobeExplorer />
-        <a class="meta feature-more" href={feature.href} style="color:var(--accent); display:inline-block; margin-top:14px">Read the story · happiest countries {happyLatest} →</a>
+        <a class="meta feature-more" href={feature.href} style="color:var(--accent); display:inline-block; margin-top:14px">Read the story · World Happiness Report {whrEdition} →</a>
       </div>
 
       <div class="quiz-box">

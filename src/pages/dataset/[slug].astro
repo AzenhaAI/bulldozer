@@ -51,12 +51,16 @@ const additive = isAdditive(ds.unit);
 // summary, group table and full ranking use each country's latest reading,
 // labelled "Latest". Where every country has just one reading, there is no
 // trend and nothing moved, so those sections are left out.
-const latestData = ds.latestPerCountry
-  ? [...ds.data.reduce((m, o) => (!m.has(o.iso ?? o.entity) || String(o.period) > String(m.get(o.iso ?? o.entity)!.period) ? m.set(o.iso ?? o.entity, o) : m), new Map<string, typeof ds.data[number]>()).values()]
-      .map((o) => ({ ...o, period: 'Latest' }))
+// "Latest" is each country's newest reading of the last ten years, the window
+// the country profiles and the panel use; `year` keeps the reading's own year
+// for the ranking's Year column.
+const lpcEnd = Math.max(...ds.data.map((o) => Number(String(o.period).slice(0, 4))).filter(Number.isFinite));
+const latestData: (typeof ds.data[number] & { year?: string })[] = ds.latestPerCountry
+  ? [...ds.data.filter((o) => !(Number(String(o.period).slice(0, 4)) < lpcEnd - 10))
+      .reduce((m, o) => (!m.has(o.iso ?? o.entity) || String(o.period) > String(m.get(o.iso ?? o.entity)!.period) ? m.set(o.iso ?? o.entity, o) : m), new Map<string, typeof ds.data[number]>()).values()]
+      .map((o) => ({ ...o, period: 'Latest', year: String(o.period) }))
   : ds.data;
-const oneEach = !!ds.latestPerCountry && latestData.length === ds.data.length;
-const groups = groupRollups(latestData, ds.changeMode, additive);
+const oneEach = !!ds.latestPerCountry && new Set(ds.data.map((o) => o.iso ?? o.entity)).size === ds.data.length;
 const single = isSinglePeriod(latestData) || oneEach;
 const periodCount = oneEach ? 1 : new Set(ds.data.map((o) => o.period)).size;
 const pairing = PAIRINGS[ds.slug];
@@ -67,6 +71,21 @@ const sidx = siblings.findIndex((d) => d.slug === ds.slug);
 const prevDs = sidx > 0 ? siblings[sidx - 1] : null;
 const nextDs = sidx < siblings.length - 1 ? siblings[sidx + 1] : null;
 const pctUnit = ds.unit === '%' ? '%' : '';
+// Suffix printed after values in the tables: any percent unit ("% YoY",
+// "% of GDP") keeps its "%", as the panel and the KPI cards do; the ranking
+// printed inflation as a bare "22.3" next to the panel's "22.3%".
+const valSuffix = ds.unit.includes('%') ? '%' : '';
+// Category scale (Freedom House status): counts per category stand in for
+// the median and change cards, which would average category codes.
+const cats = ds.categories;
+const catKpis = cats ? (() => {
+  const ps = [...new Set(ds.data.map((o) => o.period))].sort();
+  const cur = ps.at(-1)!, prev = ps.length > 1 ? ps.at(-2)! : null;
+  const now = ds.data.filter((o) => o.period === cur);
+  const before = new Map(prev ? ds.data.filter((o) => o.period === prev).map((o) => [o.entity, o.value]) : []);
+  const moved = now.filter((o) => before.has(o.entity) && before.get(o.entity) !== o.value).length;
+  return { cur, prev, moved, counts: Object.entries(cats).map(([code, name]) => ({ name, n: now.filter((o) => String(o.value) === code).length })), total: now.length };
+})() : null;
 // One unit of change and one stable band for every view on the page (the band
 // is sized on the whole series, as the interactive panel does).
 const spec = changeSpec(ds.data, ds.unit, ds.changeMode, ds.better);
@@ -89,6 +108,8 @@ const isProjected = (p: unknown) => pfYear != null && Number(String(p).slice(0, 
 const observedPeriods = dsPeriods.filter((p) => !isProjected(p));
 const lastYear = (observedPeriods.length ? observedPeriods : dsPeriods).at(-1);
 const kpiData = pfYear != null ? latestData.filter((o) => !isProjected(o.period)) : latestData;
+// Groups on observed years too: "latest period" was the IMF's projection.
+const groups = groupRollups(kpiData.length ? kpiData : latestData, ds.changeMode, additive);
 // Only advertise the year when the data is recent — a fresh "— 2025" lifts CTR,
 // but a stale "— 2013" signals outdated data and hurts it, so drop it there.
 const endYear = Number(String(lastYear ?? '').match(/(\d{4})(?!.*\d{4})/)?.[1]);
@@ -200,7 +221,26 @@ const breadcrumbLd = {
 
   <section class="section" style="padding-top:0">
     <div class="container">
-      <KpiRow data={kpiData.length ? kpiData : latestData} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode} noun={noun} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} />
+      {catKpis ? (
+        <div class="kpi-row">
+          {catKpis.counts.map((c) => (
+            <div class="kpi">
+              <div class="label">{c.name} ({catKpis.cur})</div>
+              <div class="value">{c.n}</div>
+              <div class="delta flat">of {catKpis.total} countries</div>
+            </div>
+          ))}
+          {catKpis.prev && (
+            <div class="kpi">
+              <div class="label">Changed status</div>
+              <div class="value">{catKpis.moved}</div>
+              <div class="delta flat">since {catKpis.prev}</div>
+            </div>
+          )}
+        </div>
+      ) : (
+        <KpiRow data={kpiData.length ? kpiData : latestData} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode} noun={noun} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} />
+      )}
     </div>
   </section>
 
@@ -211,7 +251,8 @@ const breadcrumbLd = {
         ? 'Interactive — choose a quarter, search a company, switch between bars and table.'
         : 'Interactive — choose a period, search a country, switch between bars, table and map.'}</p>
       <DataPanel indicators={panelIndicator} pinnedSlug={ds.slug} noun={noun} />
-      <ChartActions name={`bulldozer-${ds.slug}`} svg=".worldmap svg" hash="data" title={ds.title} source={ds.source} period={periodRange} url={dsUrl} />
+      {/* The panel exports the view on screen (bars, map or bubbles) with its legend. */}
+      <ChartActions name={`bulldozer-${ds.slug}`} svg=".datapanel" hash="data" title={ds.title} source={ds.source} period={periodRange} url={dsUrl} />
     </div>
   </section>
 
@@ -236,22 +277,22 @@ const breadcrumbLd = {
     </section>
   )}
 
-  {!single && (
+  {!single && !cats && (
     <section class="section" style="padding-top:0">
       <div class="container">
         <h2>Movers</h2>
         <p class="sub">Biggest period-over-period changes.</p>
-        <MoversTable data={ds.data} n={5} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode} better={ds.better} />
+        <MoversTable data={ds.data} n={5} unit={valSuffix} fullUnit={ds.unit} mode={ds.changeMode} better={ds.better} />
       </div>
     </section>
   )}
 
-  {groups.length > 0 && !single && !company && (
+  {groups.length > 0 && !single && !company && !cats && (
     <section class="section" style="padding-top:0" id="groups">
       <div class="container">
         <h2>By group</h2>
         <p class="sub">Change by group, latest period.</p>
-        <GroupChart data={latestData} mode={ds.changeMode} additive={additive} unit={ds.unit} better={ds.better} bandData={ds.data} />
+        <GroupChart data={kpiData.length ? kpiData : latestData} mode={ds.changeMode} additive={additive} unit={ds.unit} better={ds.better} bandData={ds.data} />
         <div style="height:24px"></div>
         <table class="data">
           <thead><tr><th>Group</th><th class="num">Members</th><th class="num">{additive ? 'Total' : 'Avg'}</th><th class="num">Change</th></tr></thead>
@@ -260,8 +301,8 @@ const breadcrumbLd = {
               <tr>
                 <td>{g.group}</td>
                 <td class="num">{g.members}</td>
-                <td class="num">{formatValue(g.value, ds.unit)}{pctUnit}</td>
-                <td class={`num ${toneOf(g.pct, spec)}`}>{formatDelta(g.pct, spec)}</td>
+                <td class="num">{formatValue(g.value, ds.unit)}{valSuffix}</td>
+                <td class={`num ${toneOf(g.pct, spec)}`}>{formatDelta(g.pct, spec.mode === 'pp' ? { ...spec, band: Math.max(spec.band, 0.01) } : spec)}</td>
               </tr>
             ))}
           </tbody>
@@ -277,7 +318,7 @@ const breadcrumbLd = {
         Every entity in this dataset, in HTML. The interactive panel above shows
         the same numbers; this is the one that survives without JavaScript.
       </p>
-      <RankTable data={latestData} unit={pctUnit} fullUnit={ds.unit} mode={ds.changeMode} valueLabel={ds.valueLabel} better={ds.better} bandData={ds.data} />
+      <RankTable data={latestData} unit={valSuffix} fullUnit={ds.unit} mode={ds.changeMode} valueLabel={ds.valueLabel} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} categories={cats} noun={noun} />
     </div>
   </section>
 

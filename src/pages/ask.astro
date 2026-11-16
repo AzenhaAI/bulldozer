@@ -172,19 +172,22 @@ const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it comp
   })();
 </script>
 
-<style>
+<!-- Global, not scoped: the news tabs and list items are built by script and
+     never get Astro's scope attribute, so scoped rules left them as bare grey
+     buttons (QA, 16 Nov 2026). Every selector here is ask-/ai-read- prefixed. -->
+<style is:global>
   .ask { padding-top: 28px; padding-bottom: 40px; max-width: 720px; }
   .ask h1 { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; font-size: clamp(28px, 5vw, 40px); }
-  .beta { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 3px 8px; font-weight: 800; }
+  .ask .beta { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 3px 8px; font-weight: 800; }
   .ask-lead { color: var(--text-dim); font-size: 15px; line-height: 1.5; margin: 0 0 18px; }
   .ask-form { display: grid; gap: 12px; }
   .ask-form label { display: grid; gap: 6px; font-size: 13px; font-weight: 600; color: var(--text-dim); }
   .ask-form input { font: 500 16px var(--font); color: var(--text); background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
   .ask-form input:focus { outline: 2px solid var(--accent); outline-offset: 0; }
   .ask-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .ask-chip { font: 500 13px var(--font); color: var(--text); background: var(--bg-elev); border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+  .ask-chip { font: 500 13px var(--font); color: var(--text); background: var(--bg-elev); border: 1px solid var(--border); border-radius: 999px; padding: 6px 14px; min-height: 36px; cursor: pointer; }
   .ask-chip:hover { border-color: var(--accent); }
-  .ask-go { justify-self: start; font: 700 15px var(--font); color: #1a1300; background: var(--accent); border: 0; border-radius: 10px; padding: 11px 22px; cursor: pointer; }
+  .ask-go { justify-self: start; font: 700 15px var(--font); color: #1a1300; background: var(--accent-fill); border: 0; border-radius: 10px; padding: 11px 22px; cursor: pointer; }
   .ask-go:disabled { opacity: 0.6; cursor: progress; }
   .ask-out { margin-top: 22px; background: var(--bg-card); border: 1px solid rgba(255,176,0,0.5); border-radius: 12px; padding: 16px; }
   .ask-out[hidden], .ask-note[hidden], .ask-profile[hidden] { display: none; }
@@ -202,12 +205,12 @@ const examples = ['Is it safe?', 'How healthy are people?', 'How rich is it comp
   .ai-read { margin-top: 30px; }
   .ai-read[hidden], .ai-read-more[hidden] { display: none; }
   .ai-read-label { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-  .ask-chip.on { background: var(--accent); color: #1a1300; border-color: var(--accent); }
+  .ask-chip.on { background: var(--accent-fill); color: #1a1300; border-color: var(--accent-fill); }
   .ai-read-list { list-style: none; padding: 0; margin: 8px 0 0; }
   .ai-read-list li { padding: 11px 0; border-bottom: 1px solid var(--border); }
   .ai-read-list a { display: block; color: var(--text); font-weight: 600; font-size: 15px; line-height: 1.35; text-decoration: none; }
   .ai-read-list a:hover { color: var(--accent); }
   .ai-read-list span { display: block; margin-top: 3px; font-size: 12px; color: var(--text-dim); }
-  .ai-read-more { margin-top: 10px; font: 600 14px var(--font); color: var(--accent); background: none; border: 0; padding: 4px 0; cursor: pointer; }
+  .ai-read-more { margin-top: 10px; font: 600 14px var(--font); color: var(--accent); background: none; border: 0; padding: 10px 0; min-height: 40px; cursor: pointer; }
   .ai-read-note { margin-top: 10px; font-size: 11px; color: var(--text-dim); }
 </style>

@@ -5,8 +5,11 @@ import CountryPanel from '@components/CountryPanel.astro';
 import CompareCountries from '@components/CompareCountries.astro';
 import SimilarCountries from '@components/SimilarCountries.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// Its own description: the homepage's was reused, so search showed the same
+// snippet for both (QA, 15 Nov 2026).
+const desc = 'Every indicator for one country in one place: world ranks, a map, similar countries and a side-by-side comparison of up to five, with CSV downloads. IMF, World Bank, WHO, V-Dem and more.';
 ---
-<BaseLayout title="Geo" active="geo">
+<BaseLayout title="Geo" description={desc} active="geo">
   <section class="section" id="country">
     <div class="container">
       <nav class="explore-nav">
@@ -20,6 +23,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <p class="page-tagline">Take the data by the horns.</p>
       <p class="sub">Pick a country to see all its statistics and where it ranks — highlighted on the map, with a downloadable CSV. Or <a href={`${base}/country/`}>browse the static profiles of all countries →</a></p>
       <CountryPanel />
+      <ChartActions name="bulldozer-country-map" svg=".cc-map svg" hash="country" title="Country profile map" />
     </div>
   </section>
 
@@ -38,7 +42,38 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <h2>Country vs country</h2>
       <p class="sub">Put a few countries side by side across every indicator, with the year of each value. Where one direction is plainly better, the better value in the row is highlighted; download the table as CSV.</p>
       <CompareCountries />
-      <ChartActions name="bulldozer-compare" svg=".worldmap svg" hash="compare" />
+      {/* The comparison is a table, not a chart: share link here, the data as
+          CSV above. A PNG button pointed at the profile map instead. */}
+      <ChartActions name="bulldozer-compare" hash="compare" />
     </div>
   </section>
+  <script is:inline>
+    // Deep links (#similar, #compare, the Copy-link buttons) land before the
+    // country index, coat of arms and Wikipedia extract render above them, so
+    // on a phone the target ended ~1,250px off. Keep re-aligning to the hash
+    // while the page grows, until the reader scrolls or taps, or 6 s pass.
+    (function () {
+      var id = decodeURIComponent(location.hash.slice(1));
+      if (!id || !('ResizeObserver' in window)) return;
+      var done = false, last = -1;
+      function align() {
+        if (done) return;
+        var t = document.getElementById(id);
+        if (!t) return;
+        var top = t.getBoundingClientRect().top;
+        if (last !== -1 && Math.abs(top - last) < 2) return; // still where we put it
+        t.scrollIntoView({ block: 'start' });
+        last = t.getBoundingClientRect().top;
+      }
+      var ro = new ResizeObserver(function () { requestAnimationFrame(align); });
+      function stop() {
+        if (done) return;
+        done = true; ro.disconnect();
+        ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) { removeEventListener(ev, stop, true); });
+      }
+      ro.observe(document.body);
+      ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) { addEventListener(ev, stop, { capture: true, passive: true }); });
+      setTimeout(stop, 6000);
+    })();
+  </script>
 </BaseLayout>

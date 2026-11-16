@@ -52,12 +52,12 @@ const config = { base, inds };
     const d = Math.sqrt(sxx * syy); return d ? sxy / d : null;
   }
   // r → diverging colour (green = positive, red = negative)
-  const mix = (a, b, t) => a.map((x, i) => Math.round(x + (b[i] - x) * t));
-  const GREY = [38, 41, 46], GREEN = [52, 211, 153], RED = [248, 113, 113];
+  // Mixed against the theme's own card colour in CSS: a fixed dark grey kept
+  // the light theme's weak cells dark with grey numbers, 1.4–2.5:1 (QA, 16 Nov 2026).
   function colour(r) {
     if (r == null) return 'var(--bg)';
-    const c = r >= 0 ? mix(GREY, GREEN, r) : mix(GREY, RED, -r);
-    return `rgb(${c[0]},${c[1]},${c[2]})`;
+    const pct = Math.round(Math.abs(r) * 100);
+    return `color-mix(in srgb, ${r >= 0 ? 'rgb(52 211 153)' : 'rgb(248 113 113)'} ${pct}%, var(--bg-elev))`;
   }
 
   (async () => {
@@ -74,7 +74,7 @@ const config = { base, inds };
         const r = R[i][j];
         const txt = r == null ? '·' : (i === j ? '1' : r.toFixed(2));
         const light = r != null && Math.abs(r) > 0.45;
-        html += `<td class="corr-cell" style="background:${colour(r)};color:${light ? '#0e0f11' : 'var(--text-dim)'}" title="${inds[i].short} × ${inds[j].short}: ${r == null ? 'n/a' : r.toFixed(2)}">${txt}</td>`;
+        html += `<td class="corr-cell" style="background:${colour(r)};color:${light ? '#0e0f11' : 'var(--text)'}" title="${inds[i].short} × ${inds[j].short}: ${r == null ? 'n/a' : r.toFixed(2)}">${txt}</td>`;
       }
       html += '</tr>';
     }

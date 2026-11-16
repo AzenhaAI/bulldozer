@@ -261,7 +261,7 @@ const description = `Cancer causes ${pct(cHi.value)} of deaths in ${cHi.entity} 
         {grades.map((g) => (
           <div class="bar-row">
             <span>Grade {g.g}</span>
-            <span class="bar-track"><span class="bar-fill" style={`width:${(g.pop / popTotal) * 100}%; background:${g.g === 4 ? 'var(--down)' : 'linear-gradient(90deg,var(--accent-2),var(--accent))'}`}></span></span>
+            <span class="bar-track"><span class="bar-fill" style={`width:${(g.pop / popTotal) * 100}%; background:${g.g === 4 ? 'var(--down)' : 'linear-gradient(90deg,var(--accent-2-fill),var(--accent-fill))'}`}></span></span>
             <span class="bar-val">{((g.pop / popTotal) * 100).toFixed(0)}% <em class="flat">· {g.n} countries</em></span>
           </div>
         ))}

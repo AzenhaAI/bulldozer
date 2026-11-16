@@ -8,6 +8,8 @@ import { feature } from 'topojson-client';
 import { geoNaturalEarth1, geoCentroid, geoPath } from 'd3-geo';
 import { betterFor } from '@lib/polarity';
 import { changeUnit } from '@lib/analytics';
+import { getDataset } from '@data/datasets';
+import countryNames from '@data/country-names.json';
 
 // Projected country centroids for the Bubbles view — same projection and
 // frame as WorldMap, so bubbles start from each country's map position.
@@ -48,6 +50,7 @@ for (const [a3, ll] of Object.entries(MICRO)) {
 export interface IndexItem {
   slug: string; title: string; kind: string; unit: string; valueLabel: string;
   changeMode: 'pct' | 'pp'; periods: string[]; projectedFrom?: string | null;
+  latestPerCountry?: boolean;
 }
 // `noun` names the entities: 'company' for the company-metrics datasets, which
 // have no map position, so their panel drops the map views and the
@@ -63,8 +66,23 @@ const showIndicator = !pinnedSlug && indicators.length > 1;
 const defaultSlug = indicators.some((d) => d.slug === 'whr-happiness') ? 'whr-happiness' : indicators[0]?.slug;
 // Which way is better (colours the change labels) and the unit a change is
 // stated in ("pp" only for % shares, "years", "points"…), per indicator.
-const enriched = indicators.map((d) => ({ ...d, better: betterFor(d.slug) ?? null, chgSuffix: changeUnit(d.unit, d.changeMode) }));
+// The registry is the one place that knows whether a series is one reading
+// per country spread over several years (latestPerCountry, oneEach) or a
+// category scale (categories): pages that build their own indicator lists
+// (/explore, /markets) do not pass those, and without them a one-year-each
+// World Bank series was shown as a time series ("0.00% vs 2023", a 2017
+// period with two countries in it).
+const enriched = indicators.map((d) => {
+  const full = getDataset(d.slug);
+  const latestPerCountry = !!(d.latestPerCountry ?? full?.latestPerCountry);
+  const oneEach = latestPerCountry && !!full && new Set(full.data.map((o) => o.iso ?? o.entity)).size === full.data.length;
+  return { ...d, better: betterFor(d.slug) ?? null, chgSuffix: changeUnit(d.unit, d.changeMode), latestPerCountry, oneEach, categories: full?.categories ?? null, source: full?.source ?? '' };
+});
 const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView: geo ? defaultView : 'bar', datasets: enriched, noun };
+// Everyday country names ("United Kingdom", not the ISO list's "United Kingdom
+// of Great Britain and Northern Ireland (the)"), the same ones the country
+// profiles use; the long forms made the "add country" select 424 px wide.
+const commonNames = Object.fromEntries(Object.entries(countryNames as Record<string, { common: string }>).map(([iso, n]) => [iso, n.common]));
 ---
 <div class="datapanel">
   <div class="controls">
@@ -111,17 +129,20 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
 <script type="application/json" id="bd-centroids" set:html={JSON.stringify(centroids)}></script>
 <script type="application/json" id="bd-iso" set:html={JSON.stringify(isoNumeric)}></script>
 <script type="application/json" id="bd-a2" set:html={JSON.stringify(isoAlpha2)}></script>
+<script type="application/json" id="bd-names" set:html={JSON.stringify(commonNames)}></script>
 
 <script>
   import { stableBand, quantile, formatValue, formatDelta, toneOf } from '@lib/analytics';
   const cfg = JSON.parse(document.getElementById('bd-config').textContent);
   const isoNumeric = JSON.parse(document.getElementById('bd-iso').textContent); // numeric -> alpha3
   const isoAlpha2 = JSON.parse(document.getElementById('bd-a2').textContent);   // alpha3 -> alpha2
+  const NAMES = JSON.parse(document.getElementById('bd-names').textContent);   // alpha3 -> everyday name
   const CENT = JSON.parse(document.getElementById('bd-centroids').textContent); // alpha3 -> [x,y]
   // Flag emoji from alpha-3; '' for aggregates/unknowns (decorative only).
   const flag = (iso) => { const a2 = iso && isoAlpha2[iso.toUpperCase()]; return a2 ? String.fromCodePoint(...[...a2].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65)) + ' ' : ''; };
   const BASE = cfg.base;
   const el = (id) => document.getElementById(id);
+  const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
   const selI = el('sel-indicator'), selP = el('sel-period'), selQ = el('sel-query');
   const TOP_N = 7;
   // "My countries" — a saved set that persists across datasets and sessions,
@@ -165,12 +186,15 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
   function fillPeriods() {
     const m = meta(); selP.innerHTML = '';
     // Countries measured in different years: open on each one's latest reading.
-    const opts = m.latestPerCountry ? ['latest', ...m.periods] : m.periods;
+    // One reading per country in all (World Bank most-recent-value series):
+    // a single year would hold a handful of countries and say nothing, so
+    // "latest" is the only choice.
+    const opts = m.oneEach ? ['latest'] : m.latestPerCountry ? ['latest', ...m.periods] : m.periods;
     // Projections are marked in the list and never the default: IMF series end in
     // the IMF's own forecast for the current year (statistical review, 15 Nov 2026).
     const pf = m.projectedFrom ? Number(String(m.projectedFrom).slice(0, 4)) : null;
     const isProj = (p) => pf != null && Number(String(p).slice(0, 4)) >= pf;
-    for (const p of opts) { const o = document.createElement('option'); o.value = p; o.textContent = p === 'latest' ? 'Latest available' : (isProj(p) ? `${p} (IMF projection)` : p); selP.appendChild(o); }
+    for (const p of opts) { const o = document.createElement('option'); o.value = p; o.textContent = p === 'latest' ? `Latest reading of each ${NOUN}` : (isProj(p) ? `${p} (IMF projection)` : p); selP.appendChild(o); }
     const observed = m.periods.filter((p) => !isProj(p));
     const lastObserved = observed.length ? observed[observed.length - 1] : m.periods[m.periods.length - 1];
     state.period = (initialPeriod && opts.includes(initialPeriod)) ? initialPeriod : (m.latestPerCountry ? 'latest' : lastObserved);
@@ -185,24 +209,53 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
     if (cache.has(slug)) return cache.get(slug);
     const ds = await (await fetch(`${BASE}/data/${slug}.json`)).json();
     const m = cfg.datasets.find((d) => d.slug === slug);
+    // Everyday names for countries (see bd-names): rows, search, pins and
+    // the "add country" list all use them.
+    if (GEO) for (const o of ds.data) if (o.iso && NAMES[o.iso]) o.entity = NAMES[o.iso];
     bands.set(slug, stableBand(ds.data.map((o) => o.value), m ? m.changeMode : 'pct'));
     cache.set(slug, ds); return ds;
   }
 
   const changeVal = (cv, pv, mode) => mode === 'pp' ? cv - pv : (pv ? (cv - pv) / pv * 100 : 0);
   const specOf = (m) => ({ mode: m.changeMode, suffix: m.chgSuffix || (m.changeMode === 'pp' ? 'pp' : '%'), band: bands.get(m.slug) ?? 0.5, better: m.better || undefined });
-  const fmtChange = (v, m) => formatDelta(v, specOf(m));
+  // At most two decimals in a change: the band rule gave "+0.590 points" on a
+  // 1–5 mean shown as 3.46. The band itself still decides the colour.
+  const fmtChange = (v, m) => { const sp = specOf(m); return formatDelta(v, sp.mode === 'pp' ? { ...sp, band: Math.max(sp.band, 0.01) } : sp); };
   const toneClass = (v, m) => toneOf(v, specOf(m));
   // Precision per scale (0–1 indices two places, huge numbers "3.19 tn").
   const fmtNum = (n) => formatValue(n, (meta() || {}).unit || '');
+  // Category scales (Freedom House status): a value is a name, and a change
+  // is a move to another category, not "0.00 points".
+  const catName = (m, v) => (m.categories ? m.categories[String(v)] : null);
+  const unitOf = (m) => (m.unit.includes('%') ? '%' : '');
+  const valText = (m, v) => catName(m, v) || (fmtNum(v) + unitOf(m));
+  const chgText = (m, r) => {
+    if (r.change == null) return '';
+    if (m.categories) return r.prev !== r.value && catName(m, r.prev) ? `was ${catName(m, r.prev)}` : '';
+    return fmtChange(r.change, m);
+  };
+  const periodLabel = () => {
+    const m = meta();
+    if (state.period === 'latest') return `latest reading of each ${NOUN}`;
+    const pf = m.projectedFrom ? Number(String(m.projectedFrom).slice(0, 4)) : null;
+    return pf != null && Number(String(state.period).slice(0, 4)) >= pf ? `${state.period} (IMF projection)` : String(state.period);
+  };
 
   function rowsFor(ds) {
     const m = meta();
     const latest = state.period === 'latest';
     const idx = m.periods.indexOf(state.period);
     const prevP = !latest && idx > 0 ? m.periods[idx - 1] : null;
+    // "Latest" = each country's newest observed reading from the last ten
+    // years, the window the country profiles use (lib/countryIndex), so a
+    // 1998 survey is not ranked against 2024 ones. Projections never count.
+    const pf = m.projectedFrom ? Number(String(m.projectedFrom).slice(0, 4)) : null;
+    const yearOf = (p) => Number(String(p).slice(0, 4));
+    const observed = m.periods.filter((p) => pf == null || yearOf(p) < pf);
+    const lastObsYear = observed.length ? yearOf(observed[observed.length - 1]) : NaN;
     const byEnt = new Map();
     for (const o of ds.data) {
+      if (latest && (pf != null && yearOf(o.period) >= pf || yearOf(o.period) < lastObsYear - 10)) continue;
       let r = byEnt.get(o.entity);
       if (!r) byEnt.set(o.entity, r = { entity: o.entity, group: o.group, iso: o.iso });
       if (latest) { if (r.year == null || String(o.period) > String(r.year)) { r.value = o.value; r.year = o.period; } continue; }
@@ -235,14 +288,15 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
     sel.innerHTML = `<option value="">＋ add ${NOUN}…</option>` +
       [...rows].sort((a, b) => a.entity.localeCompare(b.entity))
         .filter((r) => !shown.has(r.entity) && !state.pinned.has(r.entity))
-        .map((r) => `<option value="${r.entity}">${r.entity}</option>`).join('');
+        .map((r) => `<option value="${esc(r.entity)}">${esc(r.entity)}</option>`).join('');
     el('pinned-chips').innerHTML = (state.pinned.size ? `<span class="chips-lbl">★ My ${NOUNS}:</span>` : '') +
       [...state.pinned].map((n) =>
-        `<span class="chip">${n}<button data-rm="${n}" aria-label="remove">×</button></span>`).join('');
+        `<span class="chip">${esc(n)}<button type="button" data-rm="${esc(n)}" aria-label="Remove ${esc(n)}">×</button></span>`).join('');
     el('sort-dir').textContent = { desc: '↓ Highest first', asc: '↑ Lowest first', name: 'A–Z' }[state.sortDir];
     el('sort-dir').setAttribute('aria-label', `Sort: ${{ desc: 'highest first', asc: 'lowest first', name: `by ${NOUN} name` }[state.sortDir]} — tap to change`);
     el('show-all').textContent = state.showAll ? 'Show top 7' : `Show all ${rows.length}`;
-    el('show-all').hidden = state.sortDir === 'name';
+    // Nothing more to show (a company dataset with two companies): no button.
+    el('show-all').hidden = state.sortDir === 'name' || rows.length <= TOP_N;
     el('bar-controls').style.display = state.query ? 'none' : 'flex';
   }
 
@@ -281,8 +335,9 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
   function renderBars(rows) {
     const m = meta(); const unit = m.unit.includes('%') ? '%' : '';
     renderBarControls(rows);
-    // A spread across a handful of companies that each count differently says nothing.
-    const st = GEO ? distStats(rows) : null;
+    // A spread across a handful of companies that each count differently says
+    // nothing, and a median of category codes means nothing either.
+    const st = GEO && !m.categories ? distStats(rows) : null;
     renderDist(st, unit, m.kind === 'survey' ? 'all the people asked' : 'everyone in those countries');
     const top = visibleRows(rows); const vals = top.map((r) => r.value);
     // A visible zero axis with bars running both ways: length = |value|. The
@@ -301,20 +356,24 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
       // One fill for every bar: the bar is the value. The change is the small
       // label, coloured by whether it went the better way.
       const cls = r.change == null ? 'flat' : toneClass(r.change, m);
-      const chg = r.change == null ? '' : `<em class="${cls}">${fmtChange(r.change, m)}</em>`;
+      const ct = chgText(m, r);
+      const chg = ct ? `<em class="${cls}">${ct}</em>` : '';
       const rk = state.sortDir === 'name' ? `<i class="bar-rank">#${rankOf.get(r.entity)}</i>` : '';
       const yr = r.year != null ? `<em class="flat">${r.year}</em>` : '';
-      return `<div class="bar-row"><span class="bar-name" title="${r.entity}">${rk}${flag(r.iso)}${r.entity}</span><span class="bar-track">${guides}${zeroLine}<span class="bar-fill${r.value < 0 ? ' neg' : ''}" style="margin-left:${left.toFixed(2)}%;width:${w.toFixed(2)}%"></span></span><span class="bar-val">${fmtNum(r.value)}${unit}${chg}${yr}</span></div>`;
+      return `<div class="bar-row"><span class="bar-name" title="${esc(r.entity)}">${rk}${flag(r.iso)}${esc(r.entity)}</span><span class="bar-track">${guides}${zeroLine}<span class="bar-fill${r.value < 0 ? ' neg' : ''}" style="margin-left:${left.toFixed(2)}%;width:${w.toFixed(2)}%"></span></span><span class="bar-val">${valText(m, r.value)}${chg}${yr}</span></div>`;
     }).join('');
   }
 
   function renderTable(rows) {
     const m = meta(); const unit = m.unit.includes('%') ? '%' : '';
-    const head = `<thead><tr><th>${GEO ? 'Country' : 'Company'}</th>${GEO ? '<th>Group</th>' : ''}<th class="num">${m.valueLabel}</th><th class="num">Change</th></tr></thead>`;
+    // Each country's latest reading has nothing to compare with: no change column.
+    const showChg = state.period !== 'latest';
+    const head = `<thead><tr><th>${GEO ? 'Country' : 'Company'}</th>${GEO ? '<th class="dp-grp">Group</th>' : ''}<th class="num">${m.valueLabel}</th>${showChg ? '<th class="num">Change</th>' : ''}</tr></thead>`;
     el('table-target').innerHTML = head + '<tbody>' + rows.map((r) => {
       const cls = r.change == null ? 'flat' : toneClass(r.change, m);
-      const chg = r.change == null ? '—' : `<span class="${cls}">${fmtChange(r.change, m)}</span>`;
-      return `<tr><td>${flag(r.iso)}${r.entity}</td>${GEO ? `<td>${r.group || ''}</td>` : ''}<td class="num">${fmtNum(r.value)}${unit}</td><td class="num">${chg}</td></tr>`;
+      const ct = chgText(m, r);
+      const chg = ct ? `<span class="${cls}">${ct}</span>` : (m.categories && r.change != null ? 'same' : '—');
+      return `<tr><td>${flag(r.iso)}${esc(r.entity)}</td>${GEO ? `<td class="dp-grp">${r.group || ''}</td>` : ''}<td class="num">${valText(m, r.value)}${r.year != null && state.period === 'latest' ? ` <small class="flat">${r.year}</small>` : ''}</td>${showChg ? `<td class="num">${chg}</td>` : ''}</tr>`;
     }).join('') + '</tbody>';
   }
 
@@ -333,18 +392,34 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
   // collapse a class rather than repeat a break). Diverging: symmetric around
   // 0, clamped at the 95th percentile of |v| so one outlier (Venezuela) does
   // not wash every other country into the centre.
+  // Breaks rounded to two significant figures: a legend step at "92.4" people
+  // or "0.6378" reads as false precision, and a round break is easier to read.
+  const nice = (x) => {
+    if (!x || !Number.isFinite(x)) return x;
+    const p = Math.pow(10, Math.floor(Math.log10(Math.abs(x))) - 1);
+    return Number((Math.round(x / p) * p).toPrecision(2));
+  };
+  // Category scales: one class per category, in code order, on the same ramp.
+  function categoryClasses(m) {
+    const codes = Object.keys(m.categories).map(Number).sort((a, b) => a - b);
+    const ramp = seqRamp();
+    const colors = codes.map((_, i) => ramp[codes.length === 1 ? ramp.length - 1 : Math.round(i * (ramp.length - 1) / (codes.length - 1))]);
+    return { diverging: false, categorical: true, codes, breaks: [], colors, classOf: (x) => codes.indexOf(Number(x)), labels: codes.map((c) => m.categories[String(c)]) };
+  }
   function classesFor(vals) {
+    const m = meta();
+    if (m && m.categories) return categoryClasses(m);
     const v = vals.filter(Number.isFinite).sort((a, b) => a - b);
     if (!v.length) return { diverging: false, breaks: [], colors: [], classOf: () => -1 };
     const diverging = v[0] < 0 && v[v.length - 1] > 0;
     if (diverging) {
       const abs = v.map(Math.abs).sort((a, b) => a - b);
-      const L = quantile(abs, 0.95) || abs[abs.length - 1] || 1;
+      const L = nice(quantile(abs, 0.95) || abs[abs.length - 1] || 1);
       const breaks = [-2 * L / 3, -L / 3, 0, L / 3, 2 * L / 3];
       const classOf = (x) => { let i = 0; while (i < breaks.length && x >= breaks[i]) i++; return i; };
       return { diverging, breaks, colors: DIV, classOf, L };
     }
-    const raw = [0.2, 0.4, 0.6, 0.8].map((p) => quantile(v, p));
+    const raw = [0.2, 0.4, 0.6, 0.8].map((p) => nice(quantile(v, p)));
     const breaks = raw.filter((b, i) => b > v[0] && (i === 0 || b > raw[i - 1]));
     const ramp = seqRamp();
     const k = breaks.length + 1;
@@ -356,6 +431,7 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
 
   // Legend text for class i: "< 2.1", "2.1–5.0", "≥ 9.8".
   function classLabels(c, f) {
+    if (c.labels) return c.labels;
     const n = c.colors.length;
     return c.colors.map((_, i) => {
       if (n === 1) return 'all';
@@ -370,9 +446,15 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
       (noData ? `<span class="lg-step nodata"><i></i><small>No data</small></span>` : '') + `</span>`;
   }
 
+  // The rows behind the map, by ISO3, for its hover/tap tooltip.
+  let mapRows = new Map();
+  // What the last map/bubble legend showed, for the PNG export.
+  let lastLegend = null;
   function renderMap(rows) {
     const m = meta(); const unit = m.unit.includes('%') ? '%' : '';
     const byIso = new Map(); for (const r of rows) if (r.iso) byIso.set(r.iso, r.value);
+    mapRows = new Map(rows.filter((r) => r.iso).map((r) => [r.iso, r]));
+    hideMapTip();
     const c = classesFor([...byIso.values()]);
     const f = (v) => fmtNum(v) + unit;
     const svg = el('view-map').querySelector('svg');
@@ -384,12 +466,55 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
       if (v == null) { p.setAttribute('fill', hatch); p.style.opacity = '1'; }
       else { p.setAttribute('fill', c.colors[c.classOf(v)]); p.style.opacity = '1'; }
     });
-    if (svg) svg.dataset.period = state.period === 'latest' ? 'latest available' : String(state.period);
-    const how = c.diverging ? `centred on 0 · clamped at ±${f(c.L)}` : 'quintiles: a fifth of countries each';
+    if (svg) svg.dataset.period = periodLabel();
+    const how = c.categorical ? 'one colour per category' : c.diverging ? `centred on 0 · clamped at ±${f(c.L)}` : c.colors.length < 5 ? `${c.colors.length} classes of about equal size` : 'quintiles: a fifth of countries each';
+    const caption = `${m.valueLabel} · ${periodLabel()} · ${how}`;
+    lastLegend = byIso.size ? { colors: c.colors, labels: classLabels(c, f), noData: true, caption } : null;
     el('map-legend').innerHTML = byIso.size
-      ? `${legendSteps(c, f)}<span class="legend-label">${m.valueLabel} · ${state.period} · ${how}</span>`
+      ? `${legendSteps(c, f)}<span class="legend-label">${caption} · hover or tap a country</span>`
       : '<span class="legend-label">No countries with map positions for this period.</span>';
   }
+
+  // Map tooltip: name, value and year on hover; a tap pins it (phones have
+  // no hover, and a <title> shows nothing there). The paths' own <title>s are
+  // moved to data-name so the browser's tooltip does not double this one.
+  const mapWrap = el('view-map');
+  const mapTip = document.createElement('div');
+  mapTip.className = 'map-tip'; mapTip.hidden = true; mapTip.setAttribute('role', 'status');
+  mapWrap.appendChild(mapTip);
+  mapWrap.querySelectorAll('.country').forEach((p) => {
+    const t = p.querySelector('title');
+    if (t) { p.setAttribute('data-name', t.textContent); t.remove(); }
+  });
+  let mapPinned = false, mapHot = null;
+  function hideMapTip() { mapTip.hidden = true; mapPinned = false; if (mapHot) { mapHot.classList.remove('hot'); mapHot = null; } }
+  function showMapTip(p, ev) {
+    const m = meta();
+    const iso = isoNumeric[String(Number(p.getAttribute('data-num')))];
+    const r = iso ? mapRows.get(iso) : null;
+    const name = r ? r.entity : (iso && NAMES[iso]) || p.getAttribute('data-name') || '';
+    const yr = r ? (r.year != null ? String(r.year) : periodLabel()) : '';
+    mapTip.innerHTML = `<b>${flag(iso)}${esc(name)}</b>` + (r
+      ? `<span class="mt-v">${esc(valText(m, r.value))}</span><span class="mt-y">${esc(m.valueLabel)} · ${esc(yr)}</span>`
+      : `<span class="mt-y">No data for ${esc(periodLabel())}</span>`);
+    if (mapHot) mapHot.classList.remove('hot');
+    mapHot = p; p.classList.add('hot');
+    mapTip.hidden = false;
+    const box = mapWrap.getBoundingClientRect();
+    const x = ev.clientX - box.left, y = ev.clientY - box.top;
+    mapTip.style.left = Math.max(4, Math.min(x + 12, box.width - mapTip.offsetWidth - 4)) + 'px';
+    mapTip.style.top = (y - mapTip.offsetHeight - 12 >= 0 ? y - mapTip.offsetHeight - 12 : y + 16) + 'px';
+  }
+  mapWrap.addEventListener('mousemove', (e) => {
+    if (mapPinned) return;
+    const p = e.target.closest && e.target.closest('.country');
+    if (p) showMapTip(p, e); else hideMapTip();
+  });
+  mapWrap.addEventListener('mouseleave', () => { if (!mapPinned) hideMapTip(); });
+  mapWrap.addEventListener('click', (e) => {
+    const p = e.target.closest && e.target.closest('.country');
+    if (p) { showMapTip(p, e); mapPinned = true; } else hideMapTip();
+  });
 
   // Dorling-style bubble map: a circle per country, area = value, anchored at
   // the country's map position and gently pushed apart until nothing overlaps.
@@ -428,14 +553,17 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
       const showCode = n.r > 9, showVal = n.r > 19;
       const ent = String(n.entity).replace(/"/g, '&quot;');
       return `<g transform="translate(${n.x.toFixed(1)},${n.y.toFixed(1)})" data-e="${ent}" data-iso="${n.iso}"` +
-        ` data-v="${fmtNum(n.value)}${unit}" data-r="#${n.rank} of ${rows.length}"` +
-        ` data-c="${n.change == null ? '' : fmtChange(n.change, m)}" data-g="${n.group || ''}">` +
+        ` data-v="${esc(valText(m, n.value))}" data-r="#${n.rank} of ${rows.length}"` +
+        ` data-c="${esc(chgText(m, n))}" data-g="${n.group || ''}" data-y="${n.year != null ? n.year : ''}">` +
         `<circle r="${n.r.toFixed(1)}" fill="${col}" fill-opacity="0.94" stroke="rgba(0,0,0,0.35)" stroke-width="1"></circle>` +
         (showCode ? `<text class="bub-t" fill="${txt}" y="${showVal ? -2.5 : 4}">${a2}</text>` : '') +
-        (showVal ? `<text class="bub-v" fill="${txt}" y="12">${fmtNum(n.value)}${unit}</text>` : '') + `</g>`;
+        (showVal ? `<text class="bub-v" fill="${txt}" y="12">${esc(valText(m, n.value))}</text>` : '') + `</g>`;
     }).join('');
     const fb = (v) => fmtNum(v) + unit;
-    el('bubble-legend').innerHTML = `${legendSteps(cls, fb, false)}<span class="legend-label">${m.valueLabel} · ${state.period} · bubble size = ${signed ? '|value|' : 'value'} · top ${nodes.length} of ${rows.length} countries · hover or tap a bubble</span>`;
+    const bcap = `${m.valueLabel} · ${periodLabel()} · bubble size = ${signed ? '|value|' : 'value'} · top ${nodes.length} of ${rows.length} countries`;
+    lastLegend = { colors: cls.colors, labels: classLabels(cls, fb), noData: false, caption: bcap };
+    el('bubble-target').dataset.period = periodLabel();
+    el('bubble-legend').innerHTML = `${legendSteps(cls, fb, false)}<span class="legend-label">${bcap} · hover or tap a bubble</span>`;
   }
 
   // Bubble tooltip: hover for the full story, click/tap to pin it.
@@ -463,7 +591,8 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
       btip.innerHTML = `<b>${flag(d.iso)}${d.e}</b>` +
         `<div class="tr"><span>${btgt.dataset.lbl || 'Value'}</span><b>${d.v}</b></div>` +
         `<div class="tr"><span>Rank</span><b>${d.r}</b></div>` +
-        (d.c ? `<div class="tr"><span>vs previous period</span><b>${d.c}</b></div>` : '') +
+        (d.y ? `<div class="tr"><span>Year</span><b>${d.y}</b></div>` : '') +
+        (d.c ? `<div class="tr"><span>${/^was /.test(d.c) ? 'Previous period' : 'vs previous period'}</span><b>${d.c}</b></div>` : '') +
         (d.g ? `<div class="tr"><span>Region</span><b>${d.g}</b></div>` : '');
       btip.hidden = false;
       const r = bwrap.getBoundingClientRect();
@@ -483,9 +612,107 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
     });
   }
 
+  // ---- PNG export of what is on screen (ChartActions calls this) ----
+  // ChartActions finds the panel by its selector and calls bdExportSvg(): the
+  // bars, the map or the bubbles as one SVG, with the legend drawn in. The
+  // SVG is attached off-screen so its CSS colours resolve before ChartActions
+  // bakes them in; data-temp tells ChartActions to remove it afterwards.
+  // (The old export always took the map, which in the Bars view had never
+  // been coloured: an empty grey world.)
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs, text) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, String(attrs[k])); if (text != null) e.textContent = text; return e; };
+  const MONO = 'ui-monospace,SFMono-Regular,Menlo,monospace';
+  const cut = (t, n) => (t.length > n ? t.slice(0, n - 1) + '…' : t);
+  let lastRows = [];
+
+  function legendInto(svg, lg, W, y0, nodataFill) {
+    const pad = 12;
+    svg.appendChild(mk('text', { x: pad, y: y0 + 16, fill: 'var(--text-dim)', style: `font-family:${MONO};font-size:12px` }, cut(lg.caption, Math.floor((W - 2 * pad) / 7.4))));
+    const items = lg.colors.map((c, i) => ({ fill: c, label: lg.labels[i] }));
+    if (lg.noData && nodataFill) items.push({ fill: nodataFill, label: 'No data' });
+    const sw = Math.min(130, (W - 2 * pad) / items.length - 8);
+    items.forEach((it, i) => {
+      const x = pad + i * (sw + 8);
+      svg.appendChild(mk('rect', { x, y: y0 + 26, width: sw, height: 12, fill: it.fill, stroke: 'var(--border)', 'stroke-width': 1 }));
+      svg.appendChild(mk('text', { x: x + sw / 2, y: y0 + 54, 'text-anchor': 'middle', fill: 'var(--text-dim)', style: `font-family:${MONO};font-size:12px` }, cut(it.label, Math.floor(sw / 7.2))));
+    });
+  }
+
+  function barsSvg(rows) {
+    const m = meta();
+    const W = 760, top = 34, rowH = 30, H = top + rows.length * rowH + 10;
+    const svg = mk('svg', { xmlns: NS, viewBox: `0 0 ${W} ${H}` });
+    const shown = state.query ? `matching "${state.query}"` : state.showAll || state.sortDir === 'name' ? `all ${lastRows.length} ${NOUNS}` : `${rows.length} of ${lastRows.length} ${NOUNS}`;
+    const order = { desc: 'highest first', asc: 'lowest first', name: 'A–Z' }[state.sortDir];
+    svg.appendChild(mk('text', { x: 12, y: 20, fill: 'var(--text-dim)', style: `font-family:${MONO};font-size:12px` }, cut(`${m.valueLabel} · ${periodLabel()} · ${shown}, ${order}`, 100)));
+    const vals = rows.map((r) => r.value);
+    const lo = Math.min(0, ...vals), hi = Math.max(0, ...vals), span = (hi - lo) || 1;
+    const tx = 236, tw = 330;
+    const X = (v) => tx + (v - lo) / span * tw;
+    rows.forEach((r, i) => {
+      const y = top + i * rowH;
+      svg.appendChild(mk('text', { x: 12, y: y + 19, fill: 'var(--text)', style: 'font-size:13px' }, cut(r.entity, 30)));
+      svg.appendChild(mk('rect', { x: tx, y: y + 9, width: tw, height: 12, rx: 6, fill: 'var(--bg-elev)', stroke: 'var(--border)', 'stroke-width': 1 }));
+      const a = X(Math.min(0, r.value)), b = X(Math.max(0, r.value));
+      svg.appendChild(mk('rect', { x: a.toFixed(1), y: y + 9, width: Math.max(3, b - a).toFixed(1), height: 12, rx: 6, fill: 'var(--accent)' }));
+      const t = mk('text', { x: W - 12, y: y + 19, 'text-anchor': 'end', fill: 'var(--text)', style: `font-family:${MONO};font-size:13px` });
+      t.appendChild(mk('tspan', {}, valText(m, r.value)));
+      const ct = chgText(m, r);
+      if (ct) t.appendChild(mk('tspan', { dx: 8, fill: 'var(--text-dim)', style: 'font-size:11px' }, ct));
+      if (r.year != null) t.appendChild(mk('tspan', { dx: 8, fill: 'var(--text-dim)', style: 'font-size:11px' }, String(r.year)));
+      svg.appendChild(t);
+    });
+    if (lo < 0) svg.appendChild(mk('line', { x1: X(0), x2: X(0), y1: top, y2: H - 6, stroke: 'var(--text-dim)', 'stroke-width': 1 }));
+    return svg;
+  }
+
+  function mapSvg(src) {
+    const vb = src.viewBox.baseVal;
+    const legendH = lastLegend ? 66 : 0;
+    const svg = mk('svg', { xmlns: NS, viewBox: `0 0 ${vb.width} ${vb.height + legendH}` });
+    const g = mk('g', { transform: `translate(${-vb.x} ${-vb.y})` });
+    // Styles that come from rules scoped to the on-screen view (#view-bubbles
+    // .bub-t: text-anchor, font) do not reach a copy outside it: carry them over.
+    const KEEP = ['text-anchor', 'font-family', 'font-size', 'font-weight', 'opacity'];
+    for (const ch of src.childNodes) {
+      const c = ch.cloneNode(true);
+      if (ch.nodeType === 1) {
+        const from = [ch, ...ch.querySelectorAll('text')], to = [c, ...c.querySelectorAll('text')];
+        from.forEach((s, i) => { if (s.tagName === 'text') { const cs = getComputedStyle(s); to[i].setAttribute('style', KEEP.map((k) => `${k}:${cs.getPropertyValue(k)}`).join(';')); } });
+      }
+      g.appendChild(c);
+    }
+    g.querySelectorAll('.hot,.hl').forEach((x) => x.classList.remove('hot', 'hl'));
+    g.querySelectorAll('g[data-e]').forEach((x) => { x.style.opacity = ''; });
+    svg.appendChild(g);
+    const pat = src.querySelector('pattern');
+    if (lastLegend) legendInto(svg, lastLegend, vb.width, vb.height, pat ? `url(#${pat.id})` : null);
+    return svg;
+  }
+
+  el('view-bar').closest('.datapanel').bdExportSvg = () => {
+    let svg;
+    if (state.view === 'map') svg = mapSvg(el('view-map').querySelector('svg'));
+    else if (state.view === 'bubbles') svg = mapSvg(el('bubble-target'));
+    // The table exports as the bar chart of the same rows: a 190-row table is
+    // not a picture.
+    else svg = barsSvg(visibleRows(lastRows));
+    // Title and source of the indicator on screen, for the PNG footer where
+    // the page's button does not name them (/markets, /explore).
+    svg.dataset.period = periodLabel();
+    svg.dataset.title = meta().title;
+    svg.dataset.source = meta().source || '';
+    svg.setAttribute('data-temp', '1');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.style.cssText = 'position:fixed;left:-10000px;top:0;width:960px;height:auto;pointer-events:none';
+    document.body.appendChild(svg);
+    return svg;
+  };
+
   async function render() {
     const ds = await load(state.slug); const m = meta(); const rows = rowsFor(ds);
-    el('ex-summary').textContent = `${m.title} · ${state.period} · ${rows.length} ${rows.length === 1 ? NOUN : NOUNS} · unit ${m.unit}`;
+    lastRows = rows;
+    el('ex-summary').textContent = `${m.title} · ${periodLabel()} · ${rows.length} ${rows.length === 1 ? NOUN : NOUNS} · unit ${m.unit}`;
     for (const v of ['bar', 'table', 'map', 'bubbles']) el('view-' + v).hidden = state.view !== v;
     if (state.view === 'bar') renderBars(rows); else if (state.view === 'table') renderTable(rows); else if (state.view === 'bubbles') renderBubbles(rows); else renderMap(rows);
     syncUrl();
@@ -513,3 +740,31 @@ const config = { base, pinnedSlug: pinnedSlug ?? null, defaultSlug, defaultView:
   fillPeriods();
   render();
 </script>
+
+<style>
+  /* The "add country" select sizes itself to its longest option; capped so a
+     long name cannot push the page wider than a phone. */
+  .datapanel .inline-add { min-width: 0; max-width: 100%; }
+  .datapanel .inline-add select { min-width: 0; max-width: min(100%, 260px); text-overflow: ellipsis; }
+  /* Tap targets of at least 32 px: the sort and show-all buttons, and the
+     chips' remove buttons (drawn by the script, hence :global). */
+  .datapanel .bar-controls .ghost-btn { min-height: 32px; }
+  .datapanel :global(.chip) { padding-top: 0; padding-bottom: 0; }
+  .datapanel :global(.chip button) { display: inline-flex; align-items: center; justify-content: center; min-width: 32px; min-height: 32px; margin-right: -4px; }
+  /* The table scrolls sideways inside the panel rather than being cut off;
+     on phones the region column gives way to the values. */
+  #view-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  @media (max-width: 560px) { #view-table :global(.dp-grp) { display: none; } }
+  /* Map tooltip (hover; a tap pins it). */
+  #view-map { position: relative; }
+  #view-map :global(.country) { cursor: pointer; }
+  #view-map :global(.country.hot) { stroke: var(--accent); stroke-width: 1.2; }
+  #view-map :global(.map-tip) {
+    position: absolute; z-index: 6; pointer-events: none; display: flex; flex-direction: column; gap: 2px;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px;
+    font-size: 12px; color: var(--text); white-space: nowrap; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+  #view-map :global(.map-tip[hidden]) { display: none; }
+  #view-map :global(.map-tip .mt-v) { font-family: var(--mono); font-size: 15px; font-weight: 700; }
+  #view-map :global(.map-tip .mt-y) { color: var(--text-dim); font-size: 11px; }
+</style>

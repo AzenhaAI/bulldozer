@@ -55,7 +55,10 @@ const ppUnit = fullUnit.includes('%') ? 'pp' : fullUnit.replace(/^%\s*/, '').tri
 const step = ticks.length > 1 ? ticks[1] - ticks[0] : 1;
 let tickDp = 0;
 for (let sc = step; tickDp < 6 && Math.abs(sc - Math.round(sc)) > 1e-6; sc *= 10) tickDp++;
-const fmtTick = (v: number) => `${Math.abs(v) >= 1e4 ? new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(v) : v.toFixed(tickDp)}${unit}`;
+// One style per axis: "5000" next to "10K" read as two scales (QA, 16 Nov 2026),
+// and a true minus sign as on the rest of the site.
+const compactAxis = Math.max(...[lo, hi].map((v) => Math.abs(v))) >= 1e4;
+const fmtTick = (v: number) => `${compactAxis ? new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 1 }).format(v) : v.toFixed(tickDp)}${unit}`.replace(/^-/, '\u2212');
 
 const rate = (s: (typeof series)[number]) => {
   if (!s.trend?.clear) return '';

@@ -35,7 +35,7 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
       <p class="cc-extract" id="cc-extract"></p>
       <p class="country-desc" id="country-desc"></p>
     </div>
-    <div class="cc-map" id="country-map"><WorldMap legendId="country-legend" showLegend={false} /></div>
+    <div class="cc-map" id="country-map"><WorldMap legendId="country-legend" showLegend={false} /><p class="cc-map-note" id="cc-map-note" hidden></p></div>
   </div>
 
   <div class="ci-controls">
@@ -105,31 +105,67 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
     return marker;
   }
 
+  // Capitals missing from country-meta.json for places the profile still lists
+  // (Hong Kong and Macau have no shape at 110m; Kosovo has a shape but no id).
+  const EXTRA_PTS = {
+    HKG: { capital: 'Hong Kong', lon: 114.17, lat: 22.30 },
+    MAC: { capital: 'Macau', lon: 113.54, lat: 22.20 },
+    XKX: { capital: 'Pristina', lon: 21.166, lat: 42.667 },
+  };
+  // world-atlas leaves three shapes without an ISO id (Kosovo, N. Cyprus,
+  // Somaliland), so they all carry data-num="undefined"; picking Kosovo used to
+  // zoom to Northern Cyprus, the first of them. Those are matched by name.
+  const SHAPE_NAME = { XKX: 'Kosovo' };
+  function pathFor(c) {
+    const num = numByIso[c.iso];
+    if (num) return mapEl.querySelector(`.country[data-num="${num}"]`);
+    const nm = SHAPE_NAME[c.iso];
+    if (!nm) return null;
+    return [...mapEl.querySelectorAll('.country')].find((p) => (p.querySelector('title') || {}).textContent === nm) || null;
+  }
+  const mapNote = document.getElementById('cc-map-note');
+
   // Zoom the map to the selected country (silhouette + a margin of neighbours)
-  // and drop a labelled dot on its capital.
+  // and drop a labelled dot on its capital. Every call sets the view and the
+  // marker from scratch: an early return used to leave the previous country's
+  // zoom and "Tokyo" label on screen for Monaco or American Samoa.
   function focusMap(c) {
     const svg = mapEl.querySelector('svg'); if (!svg) return;
-    const num = numByIso[c.iso];
-    const path = mapEl.querySelector(`.country[data-num="${num}"]`);
-    if (!path) return;
-    const bb = path.getBBox();
-    if (!bb.width) { requestAnimationFrame(() => focusMap(c)); return; } // not laid out yet
-    const padX = Math.max(bb.width * 0.65, 22), padY = Math.max(bb.height * 0.65, 22);
-    let x = bb.x - padX, y = bb.y - padY, w = bb.width + 2 * padX, h = bb.height + 2 * padY;
+    const path = pathFor(c);
+    const meta = META[c.iso] && META[c.iso].lat !== undefined ? META[c.iso] : EXTRA_PTS[c.iso]; // HKG/MAC meta has no coordinates
+    const pt = meta && meta.lat !== undefined ? proj(meta.lon, meta.lat) : null;
+    let x, y, w, h;
+    if (path) {
+      const bb = path.getBBox();
+      if (!bb.width) { requestAnimationFrame(() => focusMap(c)); return; } // not laid out yet
+      const padX = Math.max(bb.width * 0.65, 22), padY = Math.max(bb.height * 0.65, 22);
+      x = bb.x - padX; y = bb.y - padY; w = bb.width + 2 * padX; h = bb.height + 2 * padY;
+    } else if (pt) {
+      // Too small for the 110m atlas (Monaco, Wallis and Futuna): frame the
+      // region around the capital so the dot shows where it is.
+      w = 240; h = 120; x = pt[0] - w / 2; y = pt[1] - h / 2;
+    } else {
+      x = 0; y = 0; w = 960; h = 480;
+    }
     const aspect = 960 / 480;                       // keep the container's shape
     if (w / h < aspect) { const nw = h * aspect; x -= (nw - w) / 2; w = nw; }
     else { const nh = w / aspect; y -= (nh - h) / 2; h = nh; }
+    w = Math.min(w, 960); h = Math.min(h, 480);
     x = Math.max(0, Math.min(x, 960 - w)); y = Math.max(0, Math.min(y, 480 - h));
     svg.setAttribute('viewBox', `${x} ${y} ${w} ${h}`);
-    const m = ensureMarker(svg), meta = META[c.iso];
-    if (meta && meta.lat !== undefined) {
-      const [cx, cy] = proj(meta.lon, meta.lat);
+    const m = ensureMarker(svg);
+    if (pt) {
       const r = Math.max(1.5, w * 0.007), fs = Math.max(5, w * 0.02);
-      m.style.display = ''; m.setAttribute('transform', `translate(${cx} ${cy})`);
+      m.style.display = ''; m.setAttribute('transform', `translate(${pt[0]} ${pt[1]})`);
       m.querySelector('.cc-cap-halo').setAttribute('r', r * 2);
       m.querySelector('.cc-cap-dot').setAttribute('r', r);
-      const t = m.querySelector('.cc-cap-label'); t.textContent = meta.capital || ''; t.setAttribute('font-size', fs); t.setAttribute('dy', -r * 2 - 2);
+      const t = m.querySelector('.cc-cap-label'); t.textContent = meta.capital || c.name; t.setAttribute('font-size', fs); t.setAttribute('dy', -r * 2 - 2);
     } else { m.style.display = 'none'; }
+    if (path) { mapNote.hidden = true; mapNote.textContent = ''; }
+    else {
+      mapNote.hidden = false;
+      mapNote.textContent = pt ? `${c.name} is too small to draw at this scale; the dot shows where it is.` : `${c.name} has no shape on this world map.`;
+    }
   }
 
   function coatOfArms(c) {
@@ -138,7 +174,16 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
     else { coaEl.hidden = true; coaEl.removeAttribute('src'); }
   }
 
-  const fmt = (v, unit) => `${v.toLocaleString('en-US', { maximumFractionDigits: 1 })}${unit && unit.includes('%') ? '%' : ''}`;
+  // One place for small values: a one-decimal maximum printed Monaco's 0.04
+  // million people as "0" (QA, 15 Nov 2026). Population under a million reads
+  // as thousands of people; other values under 1 keep two significant digits.
+  const numStr = (v) => Math.abs(v) > 0 && Math.abs(v) < 1
+    ? v.toLocaleString('en-US', { maximumSignificantDigits: 2 })
+    : v.toLocaleString('en-US', { maximumFractionDigits: 1 });
+  const human = (v, unit) => unit === 'million' && Math.abs(v) < 1
+    ? { val: `${Math.round(v * 1000).toLocaleString('en-US')}k`, unit: 'people' }
+    : { val: numStr(v), unit };
+  const fmt = (v, unit) => `${human(v, unit).val}${unit && unit.includes('%') ? '%' : ''}`;
   const find = (c, slug) => c.items.find((i) => i.slug === slug);
 
   // Wikipedia title aliases for names that differ from our datasets.
@@ -154,11 +199,16 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
     if (life) bits.push(`life expectancy ${life.value} yrs`);
     if (happy) bits.push(`happiness ${happy.value} (#${happy.rank})`);
     if (dem) bits.push(`liberal-democracy ${dem.value} (#${dem.rank})`);
-    return `${c.region || 'World'}. ${bits.join(' · ')}.`;
+    // Small territories have none of the four headline facts; "Asia. ." was
+    // all that was left of the sentence.
+    const where = c.region || 'World';
+    if (!bits.length) return `${where} · ${c.items.length} indicator${c.items.length === 1 ? '' : 's'} below.`;
+    const s = bits.join(' · ');
+    return `${where}. ${s.charAt(0).toUpperCase()}${s.slice(1)}.`;
   }
 
   const row = (it, cls = '') => `<tr${cls ? ` class="${cls}"` : ''}><td><span class="ind-ic">${TICON[it.topic] || ''}</span><a href="${base}/dataset/${it.slug}/">${it.title}</a></td>` +
-    `<td class="num">${fmt(it.value, it.unit)}${it.unit && !it.unit.includes('%') ? `<span class="ci-unit"> ${it.unit}</span>` : ''}</td>` +
+    `<td class="num">${fmt(it.value, it.unit)}${it.unit && !it.unit.includes('%') ? `<span class="ci-unit"> ${human(it.value, it.unit).unit}</span>` : ''}</td>` +
     `<td class="num" style="color:var(--text-dim)">#${it.rank}/${it.total}</td></tr>`;
   const COLLAPSE_AT = 3;
 
@@ -205,7 +255,7 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
     risk: [['inform-risk'], ['wri-risk'], ['wri-exposure']],
     wellbeing: [['gapminder-hdi'], ['whr-happiness']],
   };
-  const kval = (v) => v.toLocaleString('en-US', { maximumFractionDigits: 1 });
+  const kval = (v, unit) => human(v, unit).val;
   // Two big blocks so opinion surveys always sit below the hard statistics.
   const SECTIONS = [{ kind: 'macro', label: 'Statistics', icon: '📊' }, { kind: 'survey', label: 'Public-opinion surveys', icon: '🗣️' }];
   let headlineSlugs = new Set();
@@ -220,9 +270,9 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
       if (!it) continue;
       headlineSlugs.add(it.slug);
       // show the real currency code on the exchange-rate card instead of "LCU"
-      const unit = it.slug === 'wb-exchange-rate' && cur ? `${cur.code} per US$` : it.unit;
+      const unit = it.slug === 'wb-exchange-rate' && cur ? `${cur.code} per US$` : human(it.value, it.unit).unit;
       cards.push(`<a class="kpi-card" href="${base}/dataset/${it.slug}/"><div class="kpi-label">${h.label}</div>` +
-        `<div class="kpi-val">${kval(it.value)}</div><div class="kpi-unit">${unit}</div>` +
+        `<div class="kpi-val">${kval(it.value, it.unit)}</div><div class="kpi-unit">${unit}</div>` +
         `<div class="kpi-rank">#${it.rank} of ${it.total}</div></a>`);
     }
     return cards.length ? `<div class="kpi-grid">${cards.join('')}</div>` : '';
@@ -290,9 +340,9 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
   });
 
   function highlight(c) {
-    const num = numByIso[c.iso];
+    const target = pathFor(c);
     mapEl.querySelectorAll('.country').forEach((p) => {
-      const on = p.getAttribute('data-num') === num;
+      const on = p === target;
       p.style.opacity = '1';
       // neighbours stay a visible grey (map context); the selected country is
       // amber with a crisp white outline so it pops on the dark card
@@ -339,6 +389,8 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
     focusMap(c);
     coatOfArms(c);
     loadWiki(c.name);
+    // Similar countries below follows this picker (SimilarCountries.astro).
+    document.dispatchEvent(new CustomEvent('bd:geo-country', { detail: { iso: c.iso } }));
   }
 
   (window.__bdCountryIndex ??= (async (u) => { for (let i = 0; i < 4; i++) { try { const r = await fetch(u); if (r.ok) return await r.json(); } catch { /* retry */ } await new Promise((res) => setTimeout(res, 700 * (i + 1))); } window.__bdCountryIndex = undefined; throw new Error('country index unavailable'); })(`${base}/data/country-index.json`)).then((data) => {
@@ -360,14 +412,25 @@ const topicMeta = TOPIC_ORDER.map((id) => ({ id, label: TOPICS[id].label, icon: 
     const lines = [head.join(',')];
     for (const it of [...currentC.items].sort((a, b) => (a.kind === b.kind ? a.title.localeCompare(b.title) : a.kind < b.kind ? 1 : -1)))
       lines.push([esc(it.title), it.kind, it.topic, it.value, esc(it.unit), it.period, it.rank, it.total].join(','));
-    const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8' });
+    // BOM + CRLF so Excel reads UTF-8 ("2015–2017", "Côte d'Ivoire") instead of
+    // guessing the local code page; the Compare CSV does the same.
+    const blob = new Blob(['\ufeff' + lines.join('\r\n') + '\r\n'], { type: 'text/csv;charset=utf-8' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
     a.download = `${currentC.name.replace(/[^\w]+/g, '_')}_bulldozer.csv`;
-    a.click(); URL.revokeObjectURL(a.href);
+    a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000);
   }
   document.getElementById('cc-export').addEventListener('click', exportCsv);
   ciSearch.addEventListener('input', () => { ciState.q = ciSearch.value.trim(); if (currentC) renderItems(currentC); });
   ciSort.addEventListener('change', () => { ciState.sort = ciSort.value; if (currentC) renderItems(currentC); });
   ciTopic.addEventListener('change', () => { ciState.topic = ciTopic.value; if (currentC) renderItems(currentC); });
 </script>
+
+<style is:global>
+  /* One or two headline cards (small territories) stretched across the row.
+     Flex with a cap: six share the row evenly, two stay card-sized side by side. */
+  .country-panel .kpi-grid { display: flex; flex-wrap: wrap; }
+  .country-panel .kpi-grid .kpi-card { flex: 1 1 132px; max-width: 260px; }
+  /* under the map, not over it: on land the text was unreadable */
+  .cc-map-note { margin: 6px 0 0; font-size: 12px; line-height: 1.35; color: var(--text-dim); text-align: center; }
+</style>

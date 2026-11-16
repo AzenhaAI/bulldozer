@@ -1,66 +1,117 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// The policy must match what actually runs. BaseLayout loads Google Analytics 4
+// (G-M2PTQLF903) and Microsoft Clarity on every production page; the Flutter app
+// (bulldozer_app) ships no analytics or crash-reporting SDK. If either changes,
+// change this page in the same commit.
 ---
-<BaseLayout title="Privacy Policy" description="BullDozer privacy policy — no accounts, no tracking, no personal data collected.">
+<BaseLayout title="Privacy Policy" description="BullDozer privacy policy: the website uses Google Analytics and Microsoft Clarity to count visits; the apps use no analytics. No accounts, no ads, nothing sold.">
   <section class="section">
     <div class="container" style="max-width:760px">
       <span class="kicker">Legal</span>
       <h1>BullDozer — Privacy Policy</h1>
-      <p class="sub">Last updated: 27 September 2026</p>
+      <p class="sub">Last updated: 16 November 2026</p>
 
-      <p>BullDozer is a free app and website that turns public statistics into
-      charts, country profiles, maps and a data quiz. It is designed to work
-      without accounts and without collecting personal data.</p>
+      <p>BullDozer is a free website and app, published by Azenha AI, that turns
+      public statistics into charts, country profiles, maps and a data quiz. There
+      are no accounts and no ads, and we never sell or share data for advertising.
+      The website and the apps differ in one way: the website measures its visits,
+      the apps do not.</p>
 
-      <div class="gloss-term"><h3>Data we collect</h3>
-        <p>The app does not ask for a name, email, phone number or login. We do
-        not use analytics, advertising or third-party trackers inside the app.
-        The one thing that leaves your device is a question you choose to ask in
-        Ask AI — see below.</p></div>
+      <h2 class="pv-h">The website (azenha.ai/bulldozer)</h2>
+
+      <div class="gloss-term"><h3>Analytics</h3>
+        <p>Every page loads two analytics services so we can see which pages are
+        read and where they break:</p>
+        <ul class="pv-list">
+          <li><b>Google Analytics 4</b> records page views, how far you scroll, clicks
+          on outbound links and downloads, the page that sent you, your device type,
+          browser and screen size, and an approximate location (country and city,
+          worked out from your IP address).</li>
+          <li><b>Microsoft Clarity</b> records the same kind of usage plus mouse
+          movement, taps, clicks and scrolling, and can replay a visit as a
+          session recording and show it as heatmaps. We use these to find layout
+          and usability problems.</li>
+        </ul>
+        <p>Both set cookies in your browser and send this data to Google and
+        Microsoft, who process it under their own policies
+        (<a href="https://policies.google.com/privacy" rel="noopener">Google</a>,
+        <a href="https://privacy.microsoft.com/privacystatement" rel="noopener">Microsoft</a>).
+        We do not see your name or email, we do not combine this data with anything
+        else, and we use it only for traffic statistics and fixing the site.</p></div>
+
+      <div class="gloss-term"><h3>How to opt out</h3>
+        <p>Turn on your browser’s tracking protection, or use a content blocker
+        (uBlock Origin, AdGuard, Brave Shields and similar block both services).
+        Google also offers an
+        <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">opt-out add-on</a>
+        for Google Analytics. Deleting the site’s cookies resets them. The site
+        works the same with all of these.</p></div>
+
+      <div class="gloss-term"><h3>Stored in your browser</h3>
+        <p>Your theme choice and similar settings are kept in your browser’s local
+        storage, and the site may cache pages and data files so it works offline.
+        These stay on your device.</p></div>
+
+      <h2 class="pv-h">The apps (iPhone, Android, Mac, Windows)</h2>
+
+      <div class="gloss-term"><h3>No analytics</h3>
+        <p>The apps do not ask for a name, email, phone number or login, and contain
+        no analytics, advertising or third-party tracking code. The one thing that
+        leaves your device is a question you choose to ask in Ask AI — see below.
+        If the app opens a page of this website in your browser, the website
+        section above applies to that page.</p></div>
+
+      <div class="gloss-term"><h3>Stored on your device</h3>
+        <p>Your favourites, quiz progress and theme preference are saved on your
+        device only. Public datasets are cached so the app works offline. This
+        never leaves your device and is removed when you uninstall the app.</p></div>
+
+      <div class="gloss-term"><h3>Network</h3>
+        <p>The app downloads public data files from
+        <a href={`${base}/`}>azenha.ai/bulldozer</a>. These are plain file requests
+        with no personal information. Opening a source or story link launches your
+        browser and is subject to that site’s own policy.</p></div>
+
+      <div class="gloss-term"><h3>Notifications</h3>
+        <p>Any reminders are scheduled as local notifications on your device. No
+        notification data is sent to a server.</p></div>
+
+      <h2 class="pv-h">Both</h2>
 
       <div class="gloss-term"><h3>Ask AI</h3>
         <p>When you pick a country in Ask AI, or type a question there, the
         country and the question are sent to our server at bot.azenha.ai to
-        produce an answer. The server passes them, with that country's published
+        produce an answer. The server passes them, with that country’s published
         figures, to an AI provider — Anthropic (Claude) or Cloudflare Workers
-        AI — only to write the answer, under that provider's API terms. We do
+        AI — only to write the answer, under that provider’s API terms. We do
         not store your questions or the answers. Your IP address is used for a
         per-minute limit on questions and is not kept. Nothing is sent unless you
         open Ask AI and choose a country, and in the app not before you allow
         it: the app asks once, before your first question leaves the phone.</p></div>
-
-      <div class="gloss-term"><h3>Data stored on your device</h3>
-        <p>Your favourites, quiz progress and theme preference are saved locally
-        on your device only. Public datasets are cached locally so the app works
-        offline. This information never leaves your phone and is removed when you
-        uninstall the app.</p></div>
-
-      <div class="gloss-term"><h3>Network</h3>
-        <p>The app downloads public data files from
-        <a href={`${base}/`}>azenha.ai/bulldozer</a>. These are simple file
-        requests and include no personal information. Opening a source or story
-        link launches your browser and is subject to that site’s own policy.</p></div>
 
       <div class="gloss-term"><h3>Telegram bot</h3>
         <p>If you press Watch in our Telegram bot, it stores your Telegram chat
         id and the country or figure you chose, so it can message you when they
         change — nothing else about you. Stop watching deletes it.</p></div>
 
-      <div class="gloss-term"><h3>Notifications</h3>
-        <p>Any reminders are scheduled as local notifications on your device. No
-        notification data is sent to a server.</p></div>
-
       <div class="gloss-term"><h3>Children</h3>
-        <p>The app is suitable for all ages. It does not ask for or store
-        personal data from anyone.</p></div>
+        <p>BullDozer is suitable for all ages and asks no one for personal data.
+        The website’s analytics described above apply to every visitor.</p></div>
 
       <div class="gloss-term"><h3>Changes</h3>
         <p>If this policy changes, the updated version will be posted on this
-        page.</p></div>
+        page with a new date.</p></div>
 
       <div class="gloss-term"><h3>Contact</h3>
-        <p>Questions? Email <a href="mailto:agent@azenha.ai">agent@azenha.ai</a>.</p></div>
+        <p>Questions, or a request about your data? Email <a href="mailto:agent@azenha.ai">agent@azenha.ai</a>.</p></div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .pv-h { font-size: 20px; margin: 30px 0 4px; }
+  .pv-list { margin: 6px 0 10px; padding-left: 20px; }
+  .pv-list li { margin: 0 0 6px; }
+</style>

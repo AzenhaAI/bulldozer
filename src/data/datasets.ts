@@ -52,6 +52,10 @@ export interface DatasetMeta {
   entityType?: 'company';
   /** First projected year (IMF WEO): drawn dashed, left out of trends. */
   projectedFrom?: string;
+  /** Values are codes on a category scale (Freedom House 1 = Free … 3 = Not
+   *  free): shown by name, mapped by category, never averaged or "changed by
+   *  0.00 points". */
+  categories?: Record<string, string>;
 }
 
 export interface Dataset extends DatasetMeta {
@@ -66,6 +70,25 @@ interface RawDataset {
 /** Percentage / rate units compare in percentage points; counts multiplicatively. */
 function deriveChangeMode(unit: string): ChangeMode {
   return unit.includes('%') ? 'pp' : 'pct';
+}
+
+/** Category scales, by slug: code → name. */
+const CATEGORIES: Record<string, Record<string, string>> = {
+  'qog-fh-status': { 1: 'Free', 2: 'Partly free', 3: 'Not free' },
+};
+
+/** One reading per country, spread over several years: the World Bank "most
+ *  recent value" pulls (market cap, exchange rate, bank branches…). Such a
+ *  series has no trend, so it is ranked as each country's latest reading
+ *  (latestPerCountry) rather than as a time series of near-empty years. */
+function oneReadingEach(data: Observation[]): boolean {
+  const seen = new Set<string>();
+  for (const o of data) {
+    const k = o.iso ?? o.entity;
+    if (seen.has(k)) return false;
+    seen.add(k);
+  }
+  return new Set(data.map((o) => o.period)).size > 1;
 }
 
 const surveyModules = import.meta.glob<{ default: RawDataset }>('./surveys/*.json', { eager: true });
@@ -86,6 +109,8 @@ function build(modules: Record<string, { default: RawDataset }>): Dataset[] {
       // Which way is better, where that is plain (lib/polarity.ts); absent = neutral.
       ...(betterFor(slug) ? { better: betterFor(slug) } : {}),
       firstSeen: (firstSeenMap as Record<string, string>)[slug],
+      ...(raw.meta.latestPerCountry == null && oneReadingEach(raw.data) ? { latestPerCountry: true } : {}),
+      ...(CATEGORIES[slug] ? { categories: CATEGORIES[slug] } : {}),
       // A fresher series of ours measures the same thing (lib/superseded.ts).
       ...(SUPERSEDED[slug] ? { title: `${raw.meta.title} (historical)`, supersededBy: SUPERSEDED[slug] } : {}),
       ...(DUPLICATE_OF[slug] ? { supersededBy: DUPLICATE_OF[slug] } : {}),

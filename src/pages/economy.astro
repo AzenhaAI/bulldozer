@@ -37,8 +37,10 @@ const short = (p?: string) => {
 };
 // Source in the cell itself: phones show no hover titles.
 const srcShort = (s: string) => ({ Eurostat: 'ESTAT' } as Record<string, string>)[s] ?? s;
+// A true minus sign (U+2212), as everywhere else on the site; toLocaleString
+// prints an ASCII hyphen, which also reads as a dash in a dense table.
 const fmt = (v: number | null | undefined, dp = 1) =>
-  v == null ? '' : Math.abs(v) >= 1000 ? Math.round(v).toLocaleString('en-US') : v.toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+  (v == null ? '' : Math.abs(v) >= 1000 ? Math.round(v).toLocaleString('en-US') : v.toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp })).replace(/^-/, '\u2212');
 
 // Columns: key, group, label, how to read the value and whether low is bad.
 const cols = [
@@ -95,7 +97,8 @@ const dpOf = (k: string, v: number) => (k === 'yieldChg' ? 0 : k === 'stocks' ? 
       <h1>Economy this week</h1>
       <p class="sub">The latest reading of each headline indicator for {rows.length} economies, updated {asOf}. Every figure carries its own period — data arrive at different times. Tap a column heading to sort; tap a country for its profile.</p>
 
-      <div class="ew-wrap" role="region" aria-label="Economic indicators table" tabindex="0">
+      <p class="ew-hint" id="ew-hint" hidden>More columns to the right: scroll the table sideways →</p>
+      <div class="ew-wrap ew-main" id="ew-wrap" role="region" aria-label="Economic indicators table" tabindex="0">
         <table class="ew" id="ew">
           <thead>
             <tr class="ew-groups"><th rowspan="2" class="ew-c">Country</th>{groups.map((g) => <th colspan={g.n}>{g.g}</th>)}</tr>
@@ -113,11 +116,17 @@ const dpOf = (k: string, v: number) => (k === 'yieldChg' ? 0 : k === 'stocks' ? 
                   if (!v || v.value == null) return <td class="ew-na" data-v="">—</td>;
                   const href = r.links[c.k];
                   return (
-                    <td class:list={[{ 'ew-bad': c.bad(v.value) }]} data-v={v.value} title={`${v.source ?? ''}${v.period ? ', ' + v.period : ''}`}>
+                    <td class:list={[{ 'ew-bad': c.bad(v.value), 'ew-stk': c.k === 'stocks' }]} data-v={v.value} title={`${v.source ?? ''}${v.period ? ', ' + v.period : ''}`}>
                       {href
                         ? <a class="ew-v ew-ac" href={href}>{(c.k === 'yieldChg' || c.k === 'fxChg' || c.k === 'stocks') && v.value > 0 ? '+' : ''}{fmt(v.value, dpOf(c.k, v.value))}</a>
                         : <span class="ew-v">{(c.k === 'yieldChg' || c.k === 'fxChg' || c.k === 'stocks') && v.value > 0 ? '+' : ''}{fmt(v.value, dpOf(c.k, v.value))}</span>}
-                      {(v.period || (v.source && !v.source.startsWith('IMF WEO'))) && <span class="ew-p">{short(v.period)}{v.period && v.source ? ' · ' : ''}{v.source && !v.source.startsWith('IMF WEO') ? srcShort(v.source) : ''}</span>}
+                      {(() => {
+                        // IMF WEO is named in the footnote and AlfaCat in the
+                        // column group: repeating either in every cell only
+                        // widened the table past its container.
+                        const src = v.source && !v.source.startsWith('IMF WEO') && v.source !== 'AlfaCat' ? srcShort(v.source) : '';
+                        return (v.period || src) && <span class="ew-p">{short(v.period)}{v.period && src ? ' · ' : ''}{src}</span>;
+                      })()}
                     </td>
                   );
                 })}
@@ -157,6 +166,29 @@ const dpOf = (k: string, v: number) => (k === 'yieldChg' ? 0 : k === 'stocks' ? 
     </div>
   </section>
 
+  <script is:inline>
+    // The header stays pinned while the table scrolls inside its own box
+    // (position: sticky only works against the nearest scroll container,
+    // which the horizontal scroller is). The second header row sits under
+    // the first, so it needs the first row's real height. When the columns
+    // do not fit, say so above the table and fade the cut edge.
+    (function () {
+      var wrap = document.getElementById('ew-wrap');
+      var t = document.getElementById('ew');
+      var hint = document.getElementById('ew-hint');
+      if (!wrap || !t) return;
+      function update() {
+        var h1 = t.tHead.rows[0].getBoundingClientRect().height;
+        wrap.style.setProperty('--ew-h1', h1 + 'px');
+        var over = wrap.scrollWidth - wrap.clientWidth > 2;
+        hint.hidden = !over;
+        wrap.classList.toggle('ew-more', over && wrap.scrollLeft + wrap.clientWidth < wrap.scrollWidth - 2);
+      }
+      wrap.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
   <script is:inline>
     // Sort by a column: first tap high → low, second low → high, third back to the list order.
     (() => {

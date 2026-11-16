@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { stories } from '@data/stories';
+// /bulldozer/stories/ had no page of its own and returned 404, although every
+// story lives under it. Same data (src/data/stories.ts) and card markup as
+// the home page's story grid, so the two lists cannot disagree.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<BaseLayout title="Data stories" description={`All ${stories.length} BullDozer data stories: visual explainers built on public, sourced data.`} active="news">
+  <section class="section">
+    <div class="container">
+      <span class="kicker">News &amp; data stories</span>
+      <h1>Data stories</h1>
+      <p class="sub">{stories.length} visual stories built on public data. Every chart names its source.</p>
+      <div class="grid cols-2" style="margin-top:16px">
+        {stories.map((s) => (
+          <a class="card link news-card" href={`${base}/stories/${s.slug}/`}>
+            <span class="tag">{s.tag}</span>
+            <h3>{s.title}</h3>
+            <p class="meta">{s.dek}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -157,10 +157,17 @@ const sections = guideSections
   .sg-access dd { margin: 0; font-size: 13.5px; color: var(--text-dim); }
   .sg-takedown { margin: 0 0 18px; font-size: 14px; }
   .sg-index { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 14px; margin: 0 0 16px; }
+  /* Section links and filter chips were 22px and 28px tall: too small and too
+     close together to hit with a thumb. 36px+ on touch-sized screens. */
+  @media (max-width: 760px) {
+    .sg-index { gap: 6px 8px; }
+    .sg-index a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 10px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-card); text-decoration: none; }
+    .sg-filters .fchip { min-height: 38px; }
+  }
   .sg-filters { margin-bottom: 8px; }
-  .sg-section { margin-top: 30px; scroll-margin-top: 80px; }
+  .sg-section { margin-top: 30px; scroll-margin-top: 90px; }
   .sg-section[hidden], .sg-card[hidden] { display: none; }
-  .sg-card { scroll-margin-top: 80px; display: flex; flex-direction: column; }
+  .sg-card { scroll-margin-top: 90px; display: flex; flex-direction: column; }
   .sg-card h3 { overflow-wrap: anywhere; }
   .sg-prod { margin: 0 0 8px; }
   .sg-dl { display: grid; grid-template-columns: 80px 1fr; gap: 3px 10px; margin: 0; font-size: 13.5px; }
@@ -173,6 +180,12 @@ const sections = guideSections
   .sg-acc-apply { color: var(--accent-2); border-color: rgba(255,122,0,0.4); }
   .sg-acc-paid { color: var(--down); border-color: var(--border); }
   .sg-acc-reports { color: var(--text-dim); }
+  /* Light theme: amber/orange text on the pale chip fell to 2.8:1. Darker
+     shades of the same hues bring the access badges above 4.5:1. */
+  :global(html[data-theme='light']) .sg-acc-account { color: #7a5000; border-color: rgba(122,80,0,0.4); }
+  :global(html[data-theme='light']) .sg-acc-apply { color: #a54400; border-color: rgba(165,68,0,0.4); }
+  :global(html[data-theme='light']) .sg-acc-paid { color: #b0231a; }
+  :global(html[data-theme='light']) .sg-acc-open { color: #0b6b47; border-color: rgba(11,107,71,0.4); }
   .sg-unk { color: var(--text-dim); font-style: italic; }
   @media (max-width: 420px) {
     .sg-dl { grid-template-columns: 1fr; }

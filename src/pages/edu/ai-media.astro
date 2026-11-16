@@ -140,12 +140,14 @@ const learn: [string, string, string][] = [
         Open models are free to download, and nothing you make leaves the machine. Read the licence before you publish:
         “open” ranges from anything-goes to non-commercial to not-in-your-country.
       </p>
+      <!-- Below 640px each row becomes a card: as a 640px-wide table in a
+           320px phone the Licence column was clipped and Note was off-screen. -->
       <div class="ai-table-wrap">
         <table class="ai-table">
           <thead><tr><th>Model</th><th>What</th><th>Licence</th><th>Note</th></tr></thead>
           <tbody>
             {openModels.map((m) => (
-              <tr><td><a href={m.link} rel="noopener">{m.name}</a></td><td>{m.kind}</td><td>{m.licence}</td><td>{m.note}</td></tr>
+              <tr><td class="ai-name"><a href={m.link} rel="noopener">{m.name}</a></td><td class="ai-kind">{m.kind}</td><td class="ai-lic" data-label="Licence">{m.licence}</td><td class={m.note ? 'ai-nt' : 'ai-nt ai-empty'} data-label="Note">{m.note}</td></tr>
             ))}
           </tbody>
         </table>
@@ -221,4 +223,24 @@ const learn: [string, string, string][] = [
   .ai-table th, .ai-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border, rgba(127,127,127,.25)); vertical-align: top; }
   .ai-table th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; opacity: .75; }
   h2 { margin-top: 34px; }
+  @media (max-width: 640px) {
+    .ai-table-wrap { overflow: visible; }
+    .ai-table, .ai-table tbody { display: block; min-width: 0; }
+    .ai-table thead { display: none; }
+    .ai-table tr {
+      display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: baseline;
+      padding: 12px 14px; margin: 0 0 10px; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 12px;
+    }
+    .ai-table td { display: block; padding: 0; border: 0; min-width: 0; overflow-wrap: anywhere; }
+    .ai-table .ai-name { font-weight: 600; font-size: 15px; }
+    .ai-table .ai-kind { font-family: var(--mono); font-size: 11.5px; color: var(--text-dim); text-align: right; white-space: nowrap; }
+    .ai-table .ai-lic, .ai-table .ai-nt { grid-column: 1 / -1; line-height: 1.5; }
+    .ai-table .ai-nt { color: var(--text-dim); font-size: 13px; }
+    .ai-table .ai-empty { display: none; }
+    .ai-table .ai-lic::before, .ai-table .ai-nt::before {
+      content: attr(data-label) ": "; font-family: var(--mono); font-size: 10.5px;
+      text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-dim);
+    }
+  }
 </style>

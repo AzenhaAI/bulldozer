@@ -23,7 +23,7 @@ const pos = (v: number) => ((v - lo) / span) * 100;
 const zero = pos(0);
 const geom = (v: number) => { const p = pos(v); return `margin-left:${Math.min(p, zero).toFixed(2)}%;width:${Math.abs(p - zero).toFixed(2)}%`; };
 ---
-<div class="bars">
+<div class="bars bl">
   {rows.map((r) => {
     const ch = changeByEntity.get(r.entity);
     const cls = ch === undefined ? 'flat' : toneOf(ch, spec);
@@ -39,3 +39,15 @@ const geom = (v: number) => { const p = pos(v); return `margin-left:${Math.min(p
     );
   })}
 </div>
+
+<style>
+  /* The value column sizes to its content and stays on one line: on phones
+     the shared 84 px column broke "22.6% · cancer 9.6%" over three lines. */
+  .bl .bar-row { grid-template-columns: minmax(0, 140px) minmax(40px, 1fr) auto; }
+  .bl .bar-row > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bl .bar-val { white-space: nowrap; }
+  .bl .bar-val em { display: inline; margin-left: 6px; }
+  @media (max-width: 560px) {
+    .bl .bar-row { grid-template-columns: minmax(0, 96px) minmax(32px, 1fr) auto; }
+  }
+</style>

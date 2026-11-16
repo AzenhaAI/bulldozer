@@ -48,6 +48,14 @@ const desc = `The best cities to live in across Europe — a livability ranking 
     </div>
   </section>
 
+  <style is:global>
+    /* Chips are written at runtime (no scope attribute); 28px tall was under
+       the 32px tap target on phones. */
+    @media (max-width: 720px) {
+      #city-metrics .fchip { min-height: 36px; padding-top: 8px; padding-bottom: 8px; }
+      .crumbs a { display: inline-flex; align-items: center; justify-content: center; min-height: 32px; min-width: 32px; padding: 0 4px; }
+    }
+  </style>
   <script type="application/json" id="city-data" set:html={JSON.stringify(cities)}></script>
   <script is:inline>
     (() => {
