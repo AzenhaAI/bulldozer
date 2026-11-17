@@ -8,7 +8,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 // store/USAGE-ANALYTICS-PRIVACY-DRAFT.md). If either changes, change this page
 // in the same commit.
 ---
-<BaseLayout title="Privacy Policy" description="BullDozer privacy: the website counts visits with Google Analytics and Clarity; the apps send only anonymous daily counts you can turn off. Nothing is sold.">
+<BaseLayout title="Privacy Policy" description="BullDozer privacy: the site counts visits with Google Analytics and Clarity; the apps send anonymous usage counts you can turn off, and Ask AI questions.">
   <section class="section">
     <div class="container" style="max-width:760px">
       <span class="kicker">Legal</span>
@@ -19,8 +19,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       public statistics into charts, country profiles, maps and a data quiz. There
       are no accounts and no ads, and we never sell or share data for advertising.
       The website measures its visits with Google Analytics and Microsoft Clarity;
-      the apps send only anonymous daily counts, with no identifier, and you can
-      switch them off.</p>
+      the apps send anonymous daily counts with no identifier, which you can switch
+      off, and, only if you use Ask AI, the country and question you choose.</p>
 
       <h2 class="pv-h">The website (azenha.ai/bulldozer)</h2>
 
@@ -61,24 +61,31 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
       <div class="gloss-term"><h3>No accounts, no tracking</h3>
         <p>The apps do not ask for a name, email, phone number or login, and contain
-        no advertising or third-party tracking code. What leaves your device is the
-        anonymous usage statistics below and a question you choose to ask in
-        Ask AI. If the app opens a page of this website in your browser, the
+        no advertising or third-party tracking code. Apart from downloading public
+        data files (see Network), what leaves your device is the anonymous usage
+        statistics below and a question you choose to ask in Ask AI. If the app opens a page of this website in your browser, the
         website section above applies to that page.</p></div>
 
       <div class="gloss-term"><h3>Anonymous usage statistics (version 1.40 and later)</h3>
-        <p>The app counts, per day, which screens and features were used, which
-        indicators and countries were opened, and whether the app was opened. It
-        also counts app errors (the kind of error and where in the app’s code it
-        happened, never its content), coarse device settings (app language, phone
-        or tablet, dark or light theme, large text) and, on the first run, the
-        channel the app was installed from (for example a Google Play campaign).
-        It keeps its install date on your device. Once a day it sends these counts
-        to our server (Cloudflare, EU) without any identifier: no device ID,
-        account, IP address or advertising ID is stored, and nothing you type is
-        sent. We use the totals only to improve the app. You can turn this off in
-        the menu → Share anonymous usage statistics; switching it off also deletes
-        the counts not yet sent. Versions before 1.40 send nothing.</p></div>
+        <p>The app keeps simple daily tallies of how it is used: which screens you
+        open and in what order, which features you use (for example sharing a chart
+        or finishing the quiz), which indicators and countries you look at, how
+        often you open the app and how long you spend in it. It also counts app
+        errors (the type of error and where in the code it happened, never what was
+        on screen), a few device settings (your phone’s language, phone or tablet,
+        dark or light theme, large text) and, on the first run only, where the app
+        was installed from, such as a Google Play campaign or a link we shared.
+        Each batch also carries the app version, the system (iPhone, Android, Mac
+        or Windows) and the day the app was installed.</p>
+        <p>Whenever you open or leave the app, it sends these tallies to our server
+        at Cloudflare; they are stored in the EU. They carry no device ID, account
+        or advertising ID, and nothing you type is sent. Your IP address is used
+        only for a short limit against abuse and is not kept. The server only adds
+        the tallies to totals, so nothing on it can be traced back to you. We use
+        the totals only to improve the app.</p>
+        <p>This is on by default. To turn it off, open the menu (the top-right
+        button) and switch off Share anonymous usage statistics; this also deletes
+        the tallies not yet sent. Versions before 1.40 send nothing.</p></div>
 
       <div class="gloss-term"><h3>Stored on your device</h3>
         <p>Your favourites, quiz progress and theme preference are saved on your
