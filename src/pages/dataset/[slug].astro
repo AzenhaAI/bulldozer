@@ -11,6 +11,7 @@ import TrendChart from '@components/TrendChart.astro';
 import { hasRegionalPanel } from '@lib/trend';
 import BivariateMap from '@components/BivariateMap.astro';
 import ChartActions from '@components/ChartActions.astro';
+import AppHandoff from '@components/AppHandoff.astro';
 import { datasets, getDataset } from '@data/datasets';
 
 // Curated bivariate pairings — a "good" second dimension per indicator.
@@ -275,6 +276,7 @@ const breadcrumbLd = {
       <DataPanel indicators={panelIndicator} pinnedSlug={ds.slug} noun={noun} />
       {/* The panel exports the view on screen (bars, map or bubbles) with its legend. */}
       <ChartActions name={`bulldozer-${ds.slug}`} svg=".datapanel" hash="data" title={ds.title} source={ds.source} period={periodRange} url={dsUrl} />
+      <AppHandoff title={ds.title} inApp={!ds.slug.startsWith('rlms-') && !ds.slug.startsWith('cbr-')} />
     </div>
   </section>
 
@@ -343,7 +345,7 @@ const breadcrumbLd = {
         Every entity in this dataset, in HTML. The interactive panel above shows
         the same numbers; this is the one that survives without JavaScript.
       </p>
-      <RankTable data={latestData} unit={valSuffix} fullUnit={ds.unit} mode={ds.changeMode} valueLabel={ds.valueLabel} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} categories={cats} noun={noun} incomparable={!!ds.incomparable} floor={ds.floor} />
+      <RankTable data={latestData} unit={valSuffix} fullUnit={ds.unit} mode={ds.changeMode} valueLabel={ds.valueLabel} better={ds.better} bandData={ds.data} projectedFrom={ds.projectedFrom} categories={cats} noun={noun} incomparable={!!ds.incomparable} floor={ds.floor} linkSlug={ds.slug} />
     </div>
   </section>
 

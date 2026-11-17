@@ -1,0 +1,80 @@
+---
+/**
+ * "This indicator in the app": a compact card under a dataset page's main
+ * panel, with both stores and the APK (SEO session, 17 Nov 2026: grow app
+ * usage from the site; brand search should show Google Play too).
+ *
+ * Google Play comes first, except on iPhone and iPad, where the App Store
+ * does (swapped in the browser, so the static HTML stays the same for all).
+ * Hidden inside the app's own web view. Clicks reach GA4 as store_click with
+ * page_type "dataset_handoff" (BaseLayout's listener reads data-placement).
+ *
+ * Once the app handles azenha.ai links (1.40), the same page opens the
+ * indicator in the app for people who have it; until then this only offers
+ * the install.
+ */
+import { datasets } from '@data/datasets';
+
+interface Props { title: string; inApp: boolean }
+const { title, inApp } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// The app's catalog is the site's minus the single-country series
+// (pages/data/catalog.json.ts), counted here so the number stays true.
+const appCount = datasets.filter((d) => !d.slug.startsWith('rlms-') && !d.slug.startsWith('cbr-')).length;
+const APPLE = 'M16.4 12.8c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.7-3.1.7-.7 0-1.7-.7-2.8-.7-1.4 0-2.7.8-3.4 2.1-1.5 2.6-.4 6.4 1.1 8.5.7 1 1.5 2.2 2.7 2.1 1.1 0 1.5-.7 2.8-.7s1.7.7 2.8.7c1.2 0 1.9-1 2.6-2.1.8-1.2 1.1-2.3 1.2-2.4 0 0-2.7-1-2.7-3.4ZM14.3 6.6c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.6.7-1 1.6-.9 2.6 1 .1 2-.5 2.5-1.2Z';
+const PLAY = 'M4.6 2.6a1 1 0 0 0-.5.9v17a1 1 0 0 0 .5.9l9.1-9.4-9.1-9.4Zm10.2 8.3 2.9-3-9.9-5.6 7 8.6Zm0 2.2-7 8.6 9.9-5.6-2.9-3Zm4.1-2.2-2.4-1.4-3 3.5 3 3.5 2.4-1.4c.9-.5.9-1.7 0-2.2Z';
+---
+<aside class="handoff" data-placement="dataset_handoff" aria-label="BullDozer Stats app">
+  <div class="ho-text">
+    <strong>{inApp ? `${title} in the BullDozer Stats app` : 'BullDozer Stats app'}</strong>
+    <span>{inApp ? `With ${appCount - 1} other indicators, offline, with Ask AI and the country quiz. Free.` : `${appCount} indicators, offline, with Ask AI and the country quiz. Free.`}</span>
+  </div>
+  <div class="ho-btns">
+    <a class="ho-btn ho-play" href="https://play.google.com/store/apps/details?id=ai.azenha.bulldozer">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d={PLAY} /></svg>
+      <span><small>Get it on</small>Google Play</span>
+    </a>
+    <a class="ho-btn ho-ios" href="https://apps.apple.com/app/id6797664814">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d={APPLE} /></svg>
+      <span><small>Download on the</small>App Store</span>
+    </a>
+    <a class="ho-apk" href={`${base}/downloads/bulldozer-stats.apk`} download>Android APK</a>
+  </div>
+</aside>
+
+<style>
+  .handoff {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px 20px; flex-wrap: wrap;
+    margin-top: 18px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px;
+    background: var(--bg-elev);
+  }
+  :global(html.in-app) .handoff { display: none; }
+  .ho-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1 1 260px; }
+  .ho-text strong { font-size: 15px; }
+  .ho-text span { font-size: 13px; color: var(--text-dim); }
+  .ho-btns { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .ho-btn {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 14px;
+    border-radius: 10px; background: var(--text); color: var(--bg); text-decoration: none; line-height: 1.1;
+  }
+  .ho-btn span { display: flex; flex-direction: column; font-size: 15px; font-weight: 700; }
+  .ho-btn small { font-size: 10px; font-weight: 500; opacity: .85; }
+  .ho-apk { font-size: 13px; color: var(--text-dim); padding: 12px 4px; }
+  @media (max-width: 520px) {
+    .ho-btns { width: 100%; }
+    .ho-btn { flex: 1 1 0; justify-content: center; }
+    .ho-apk { width: 100%; text-align: center; padding: 4px; }
+  }
+</style>
+
+<script is:inline>
+  // iPhone and iPad: the App Store first.
+  (function () {
+    var ua = navigator.userAgent;
+    if (!(/iPhone|iPod|iPad/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))) return;
+    document.querySelectorAll('.handoff .ho-btns').forEach(function (b) {
+      var ios = b.querySelector('.ho-ios');
+      if (ios) b.insertBefore(ios, b.firstChild);
+    });
+  })();
+</script>

@@ -19,6 +19,7 @@ import type { Observation, ChangeMode, Better } from '@lib/analytics';
 import { periods, entityTotals, changeValue, isSinglePeriod, changeSpec, formatDelta, toneOf, sharedRanks, formatColumn } from '@lib/analytics';
 import { flagFor } from '@lib/flags';
 import countryNames from '@data/country-names.json';
+import { buildCountryIndex, countrySlug } from '@lib/countryIndex';
 
 /*
  * `projectedFrom`: the first projected year (IMF WEO). The ranking is of the
@@ -32,12 +33,27 @@ import countryNames from '@data/country-names.json';
 interface Props {
   data: (Observation & { year?: string })[]; unit?: string; fullUnit?: string; mode?: ChangeMode; valueLabel?: string; better?: Better; bandData?: Observation[];
   projectedFrom?: string; categories?: Record<string, string>; noun?: 'country' | 'company';
+  /** The dataset's slug: country names link to their page for it. */
+  linkSlug?: string;
   /** Values in a different unit per country (currencies): listed A–Z, unranked. */
   incomparable?: boolean;
   /** Source rounding step (datasets.ts FLOORS): smaller values print "<step". */
   floor?: number;
 }
-const { data, unit = '', fullUnit = unit, mode = 'pct', valueLabel = 'Value', better, bandData, projectedFrom, categories, noun, incomparable, floor } = Astro.props;
+const { data, unit = '', fullUnit = unit, mode = 'pct', valueLabel = 'Value', better, bandData, projectedFrom, categories, noun, incomparable, floor, linkSlug } = Astro.props;
+// `linkSlug`: the dataset's slug. Each country's name then links to its page
+// for this indicator (country/<c>/<slug>/, the Pages Function), which links on
+// to the country's profile — the internal links search engines follow from a
+// ranking to the long-tail "<country> <indicator>" pages. Only where that page
+// exists: countries with a profile that holds this indicator, and never the
+// GESIS surveys (eb-, evs-, issp-), which the function leaves out.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const linkOf = new Map<string, string>();
+if (linkSlug && noun === 'country' && !/^(eb|evs|issp)-/.test(linkSlug)) {
+  for (const c of buildCountryIndex()) {
+    if (c.items.some((it) => it.slug === linkSlug)) linkOf.set(c.iso, `${base}/country/${countrySlug(c.name)}/${linkSlug}/`);
+  }
+}
 const spec = changeSpec(bandData ?? data, fullUnit, mode, better);
 // At most two decimals in a change ("+0.59 points", not "+0.590 points");
 // the stable band still decides the colour.
@@ -112,7 +128,7 @@ const orderNote = incomparable ? 'A–Z: each value is in its own currency, so t
       {rows.map((r, i) => (
         <tr>
           {!incomparable && <td class="num">{ranks[i].label}</td>}
-          <td>{flagFor(isoOf.get(r.entity)) ? flagFor(isoOf.get(r.entity)) + ' ' : ''}{shown(r.entity)}</td>
+          <td>{flagFor(isoOf.get(r.entity)) ? flagFor(isoOf.get(r.entity)) + ' ' : ''}{(() => { const href = linkOf.get(isoOf.get(r.entity) ?? ''); return href ? <a class="rank-link" href={href}>{shown(r.entity)}</a> : shown(r.entity); })()}</td>
           {/* A source zero under a rounding floor is the source's rounding, not nothing. */}
           <td class="num" title={floor && r.value === 0 ? 'rounded to zero in the source' : undefined}>{cat(r.value) ?? `${valTexts[i]}${unit}`}</td>
           {latest && <td class="num">{yearOf.get(r.entity) ?? ''}</td>}

@@ -904,3 +904,8 @@ html:has(#hdr-burger[aria-expanded="true"]) #a2hs { display: none !important; }
 .ew a.ew-ac { color: var(--accent); text-decoration: none; display: block; font-family: var(--mono); }
 .ew a.ew-ac:hover { text-decoration: underline; }
 .ew td.ew-na a.ew-ac { font-family: inherit; font-size: 11px; }
+
+/* Country names in a full ranking link to that country's page for the
+   indicator (RankTable linkSlug): readable as text, visibly a link. */
+.rank-link { color: inherit; text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; }
+.rank-link:hover, .rank-link:focus-visible { color: var(--accent); text-decoration-color: currentColor; }
