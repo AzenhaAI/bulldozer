@@ -209,11 +209,11 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-M2PTQLF903');
-          // Store and APK clicks as one event, store_click (store, placement,
+          // Store and APK clicks as one event, store_click (store, page_type,
           // page), so site → store → install can be followed (SEO goals,
           // 17 Nov 2026). transport beacon: the page is being left.
           window.bdStoreClick = function (store, placement) {
-            gtag('event', 'store_click', { store: store, placement: placement, page_path: location.pathname, transport_type: 'beacon' });
+            gtag('event', 'store_click', { store: store, page_type: placement, page_path: location.pathname, transport_type: 'beacon' });
           };
           document.addEventListener('click', function (e) {
             var a = e.target.closest && e.target.closest('a[href]');
