@@ -2,22 +2,25 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 // The policy must match what actually runs. BaseLayout loads Google Analytics 4
-// (G-M2PTQLF903) and Microsoft Clarity on every production page; the Flutter app
-// (bulldozer_app) ships no analytics or crash-reporting SDK. If either changes,
-// change this page in the same commit.
+// (G-M2PTQLF903) and Microsoft Clarity on every production page. The Flutter app
+// (bulldozer_app) ships no analytics or crash-reporting SDK; from 1.40 it sends
+// anonymous daily counts to usage.azenha.ai (lib/usage.dart, lib/usage_stats.dart;
+// store/USAGE-ANALYTICS-PRIVACY-DRAFT.md). If either changes, change this page
+// in the same commit.
 ---
-<BaseLayout title="Privacy Policy" description="BullDozer privacy policy: the website uses Google Analytics and Microsoft Clarity to count visits; the apps use no analytics. No accounts, no ads, nothing sold.">
+<BaseLayout title="Privacy Policy" description="BullDozer privacy: the website counts visits with Google Analytics and Clarity; the apps send only anonymous daily counts you can turn off. Nothing is sold.">
   <section class="section">
     <div class="container" style="max-width:760px">
       <span class="kicker">Legal</span>
       <h1>BullDozer — Privacy Policy</h1>
-      <p class="sub">Last updated: 16 November 2026</p>
+      <p class="sub">Last updated: 17 November 2026</p>
 
       <p>BullDozer is a free website and app, published by Azenha AI, that turns
       public statistics into charts, country profiles, maps and a data quiz. There
       are no accounts and no ads, and we never sell or share data for advertising.
-      The website and the apps differ in one way: the website measures its visits,
-      the apps do not.</p>
+      The website measures its visits with Google Analytics and Microsoft Clarity;
+      the apps send only anonymous daily counts, with no identifier, and you can
+      switch them off.</p>
 
       <h2 class="pv-h">The website (azenha.ai/bulldozer)</h2>
 
@@ -56,12 +59,26 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
       <h2 class="pv-h">The apps (iPhone, Android, Mac, Windows)</h2>
 
-      <div class="gloss-term"><h3>No analytics</h3>
+      <div class="gloss-term"><h3>No accounts, no tracking</h3>
         <p>The apps do not ask for a name, email, phone number or login, and contain
-        no analytics, advertising or third-party tracking code. The one thing that
-        leaves your device is a question you choose to ask in Ask AI — see below.
-        If the app opens a page of this website in your browser, the website
-        section above applies to that page.</p></div>
+        no advertising or third-party tracking code. What leaves your device is the
+        anonymous usage statistics below and a question you choose to ask in
+        Ask AI. If the app opens a page of this website in your browser, the
+        website section above applies to that page.</p></div>
+
+      <div class="gloss-term"><h3>Anonymous usage statistics (version 1.40 and later)</h3>
+        <p>The app counts, per day, which screens and features were used, which
+        indicators and countries were opened, and whether the app was opened. It
+        also counts app errors (the kind of error and where in the app’s code it
+        happened, never its content), coarse device settings (app language, phone
+        or tablet, dark or light theme, large text) and, on the first run, the
+        channel the app was installed from (for example a Google Play campaign).
+        It keeps its install date on your device. Once a day it sends these counts
+        to our server (Cloudflare, EU) without any identifier: no device ID,
+        account, IP address or advertising ID is stored, and nothing you type is
+        sent. We use the totals only to improve the app. You can turn this off in
+        the menu → Share anonymous usage statistics; switching it off also deletes
+        the counts not yet sent. Versions before 1.40 send nothing.</p></div>
 
       <div class="gloss-term"><h3>Stored on your device</h3>
         <p>Your favourites, quiz progress and theme preference are saved on your
