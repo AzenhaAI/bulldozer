@@ -52,22 +52,27 @@ function ends(rows: { name: string; value: number }[], k: number): string[] | nu
   return null;
 }
 
-export function datasetDescription(d: DescInput): string {
-  const noun = d.company ? 'companies' : 'countries';
+/** The ranking the page shows: the last observed period (or "Latest"),
+ *  highest first, in the page's own names. */
+export function currentRanking(d: Pick<DescInput, 'data' | 'projectedFrom'>) {
   const pf = d.projectedFrom ? Number(String(d.projectedFrom).slice(0, 4)) : null;
   const isProj = (p: string) => pf != null && Number(String(p).slice(0, 4)) >= pf;
   const all = periods(d.data);
   const observed = all.filter((p) => !isProj(p));
   const ps = observed.length ? observed : all;
   const curr = ps.at(-1)!;
-  const latest = curr === 'Latest';
-
   const isoOf = new Map(d.data.filter((o) => o.iso).map((o) => [o.entity, o.iso!]));
   const shown = (e: string) => { const iso = isoOf.get(e); return (iso && NAMES[iso]?.common) || e; };
   const rows = [...entityTotals(d.data, curr).entries()]
     .map(([entity, value]) => ({ name: shown(entity), value }))
     .filter((r) => Number.isFinite(r.value))
     .sort((a, b) => b.value - a.value);
+  return { ps, curr, latest: curr === 'Latest', rows };
+}
+
+export function datasetDescription(d: DescInput): string {
+  const noun = d.company ? 'companies' : 'countries';
+  const { ps, curr, latest, rows } = currentRanking(d);
   const n = rows.length;
 
   // Years: the whole observed span; for latest-per-country, the span of the

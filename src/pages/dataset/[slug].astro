@@ -26,9 +26,8 @@ const PAIRINGS: Record<string, { y: string; title: string }> = {
 };
 import { groupRollups, isSinglePeriod, isAdditive, changeSpec, formatDelta, formatColumn, toneOf, moverBase } from '@lib/analytics';
 import { TOPICS } from '@lib/topics';
-import { normaliseGroups } from '@lib/regions';
 import { datasetDescription } from '@lib/seoDescription';
-import countryNames from '@data/country-names.json';
+import { pageRows, rankingRows } from '@lib/rankingData';
 
 export function getStaticPaths() {
   return datasets.map((d) => ({ params: { slug: d.slug } }));
@@ -54,24 +53,13 @@ const additive = isAdditive(ds.unit);
 // ("Czechia", "Hong Kong", as the ranking and the panel print them, not the
 // source's "Czech Republic" or "Hong Kong, China") and one region scheme
 // (lib/regions: Kosovo with the rest of Europe, the Pacific out of Asia).
-const NAMES = countryNames as Record<string, { common: string }>;
-const pageData = company ? ds.data : normaliseGroups(ds.data.map((o) => {
-  const n = o.iso ? NAMES[o.iso]?.common : undefined;
-  return n && n !== o.entity ? { ...o, entity: n } : o;
-}));
+const pageData = pageRows(ds);
 // Series measured in different years per country (household surveys): the
 // summary, group table and full ranking use each country's latest reading,
-// labelled "Latest". Where every country has just one reading, there is no
-// trend and nothing moved, so those sections are left out.
-// "Latest" is each country's newest reading of the last ten years, the window
-// the country profiles and the panel use; `year` keeps the reading's own year
-// for the ranking's Year column.
-const lpcEnd = Math.max(...pageData.map((o) => Number(String(o.period).slice(0, 4))).filter(Number.isFinite));
-const latestData: (typeof ds.data[number] & { year?: string })[] = ds.latestPerCountry
-  ? [...pageData.filter((o) => !(Number(String(o.period).slice(0, 4)) < lpcEnd - 10))
-      .reduce((m, o) => (!m.has(o.iso ?? o.entity) || String(o.period) > String(m.get(o.iso ?? o.entity)!.period) ? m.set(o.iso ?? o.entity, o) : m), new Map<string, typeof ds.data[number]>()).values()]
-      .map((o) => ({ ...o, period: 'Latest', year: String(o.period) }))
-  : pageData;
+// labelled "Latest" (lib/rankingData, shared with the description and the
+// share image). Where every country has just one reading, there is no trend
+// and nothing moved, so those sections are left out.
+const latestData = rankingRows(ds, pageData);
 const oneEach = !!ds.latestPerCountry && new Set(ds.data.map((o) => o.iso ?? o.entity)).size === ds.data.length;
 const single = isSinglePeriod(latestData) || oneEach;
 const periodCount = oneEach ? 1 : new Set(ds.data.map((o) => o.period)).size;

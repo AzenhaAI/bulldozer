@@ -209,6 +209,23 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-M2PTQLF903');
+          // Store and APK clicks as one event, store_click (store, placement,
+          // page), so site → store → install can be followed (SEO goals,
+          // 17 Nov 2026). transport beacon: the page is being left.
+          window.bdStoreClick = function (store, placement) {
+            gtag('event', 'store_click', { store: store, placement: placement, page_path: location.pathname, transport_type: 'beacon' });
+          };
+          document.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a[href]');
+            if (!a) return;
+            var h = a.href;
+            var store = /apps\.apple\.com\//.test(h) ? 'app_store'
+              : /play\.google\.com\/store\//.test(h) ? 'google_play'
+              : /\.apk(\?|$)/.test(h) ? 'apk' : '';
+            if (!store) return;
+            var spot = a.closest('[data-placement],header,footer,nav,main,section');
+            bdStoreClick(store, (spot && (spot.getAttribute('data-placement') || String(spot.className).split(' ')[0] || spot.tagName.toLowerCase())) || 'page');
+          }, true);
         </script>
         <script is:inline>
           (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","xr4rlyhxyo");
@@ -489,6 +506,7 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
       go.hidden = false;
       go.addEventListener('click', function () {
         try { localStorage.setItem(AKEY, '1'); } catch (e) {}
+        if (window.bdStoreClick) window.bdStoreClick('app_store', 'ios_banner');
         location.href = 'https://apps.apple.com/app/id6797664814';
       });
       document.getElementById('a2hs-x').addEventListener('click', function () {

@@ -17,7 +17,7 @@ const { name, svg, hash, title, source, period, url } = Astro.props;
 const APPLE = 'M16.4 12.8c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.7-3.1.7-.7 0-1.7-.7-2.8-.7-1.4 0-2.7.8-3.4 2.1-1.5 2.6-.4 6.4 1.1 8.5.7 1 1.5 2.2 2.7 2.1 1.1 0 1.5-.7 2.8-.7s1.7.7 2.8.7c1.2 0 1.9-1 2.6-2.1.8-1.2 1.1-2.3 1.2-2.4 0 0-2.7-1-2.7-3.4ZM14.3 6.6c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.6.7-1 1.6-.9 2.6 1 .1 2-.5 2.5-1.2Z';
 const PLAY = 'M4.6 2.6a1 1 0 0 0-.5.9v17a1 1 0 0 0 .5.9l9.1-9.4-9.1-9.4Zm10.2 8.3 2.9-3-9.9-5.6 7 8.6Zm0 2.2-7 8.6 9.9-5.6-2.9-3Zm4.1-2.2-2.4-1.4-3 3.5 3 3.5 2.4-1.4c.9-.5.9-1.7 0-2.2Z';
 ---
-<p class="chart-actions" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px">
+<p class="chart-actions" data-placement="chart_actions" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px">
   <button type="button" class="ghost-btn ca-share" data-hash={hash} style="margin:0; min-height:32px">🔗 Copy link</button>
   {svg && <button type="button" class="ghost-btn ca-png" data-svg={svg} data-name={name} data-title={title} data-source={source} data-period={period} data-url={url} style="margin:0; min-height:32px">↓ PNG</button>}
   <span class="chart-src" style="margin-left:auto; display:inline-flex; flex-direction:column; align-items:center; gap:2px; line-height:1.2; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.04em">
