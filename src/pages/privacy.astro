@@ -71,16 +71,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         open and in what order, which features you use (for example sharing a chart
         or finishing the quiz), which indicators and countries you look at, how
         often you open the app and how long you spend in it. It also counts app
-        errors (the type of error and where in the code it happened, never what was
-        on screen), a few device settings (your phone’s language, phone or tablet,
-        dark or light theme, large text) and, on the first run only, where the app
+        errors (the type of error and where in the code it happened, never the
+        error message or anything on screen), a few device settings (your phone’s language, phone or tablet,
+        whether the phone is set to dark or light mode, large text) and, on the first run only, where the app
         was installed from, such as a Google Play campaign or a link we shared.
         Each batch also carries the app version, the system (iPhone, Android, Mac
         or Windows) and the day the app was installed.</p>
         <p>Whenever you open or leave the app, it sends these tallies to our server
         at Cloudflare; they are stored in the EU. They carry no device ID, account
         or advertising ID, and nothing you type is sent. Your IP address is used
-        only for a short limit against abuse and is not kept. The server only adds
+        only for a short-lived rate limit against abuse and is not kept. The server only adds
         the tallies to totals, so nothing on it can be traced back to you. We use
         the totals only to improve the app.</p>
         <p>This is on by default. To turn it off, open the menu (the top-right
@@ -95,8 +95,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <div class="gloss-term"><h3>Network</h3>
         <p>The app downloads public data files from
         <a href={`${base}/`}>azenha.ai/bulldozer</a>. These are plain file requests
-        with no personal information. Opening a source or story link launches your
-        browser and is subject to that site’s own policy.</p></div>
+        with no personal information. Opening a source or story link opens it inside
+        the app or in your browser, and that page is subject to that site’s own policy.</p></div>
 
       <div class="gloss-term"><h3>Notifications</h3>
         <p>Any reminders are scheduled as local notifications on your device. No
