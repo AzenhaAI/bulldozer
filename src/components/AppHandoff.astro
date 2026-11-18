@@ -1,4 +1,5 @@
 ---
+import { appStoreLink, playLink } from '@lib/store';
 /**
  * "This indicator in the app": a compact card under a dataset page's main
  * panel, with both stores and the APK (SEO session, 17 Nov 2026: grow app
@@ -30,11 +31,11 @@ const PLAY = 'M4.6 2.6a1 1 0 0 0-.5.9v17a1 1 0 0 0 .5.9l9.1-9.4-9.1-9.4Zm10.2 8.
     <span>{inApp ? `With ${appCount - 1} other indicators, offline, with Ask AI and the country quiz. Free.` : `${appCount} indicators, offline, with Ask AI and the country quiz. Free.`}</span>
   </div>
   <div class="ho-btns">
-    <a class="ho-btn ho-play" href="https://play.google.com/store/apps/details?id=ai.azenha.bulldozer">
+    <a class="ho-btn ho-play" href={playLink('dataset')}>
       <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d={PLAY} /></svg>
       <span><small>Get it on</small>Google Play</span>
     </a>
-    <a class="ho-btn ho-ios" href="https://apps.apple.com/app/id6797664814">
+    <a class="ho-btn ho-ios" href={appStoreLink('dataset')}>
       <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d={APPLE} /></svg>
       <span><small>Download on the</small>App Store</span>
     </a>

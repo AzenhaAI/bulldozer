@@ -247,7 +247,7 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     {siteLd && <script type="application/ld+json" set:html={JSON.stringify(siteLd)} />}
     <!-- Smart App Banner: Safari's own strip, linking to the App Store.
          Enabled now that the app is published. -->
-    <meta name="apple-itunes-app" content="app-id=6797664814" />
+    <meta name="apple-itunes-app" content="app-id=6797664814, affiliate-data=ct=web-bulldozer-banner&pt=129240922" />
   </head>
   <body>
     <script is:inline>
@@ -481,6 +481,7 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
   @media (min-width:761px){#a2hs{left:auto;right:16px;bottom:16px;max-width:420px}}
 </style>
 <script>
+  import { appStoreLink } from '@lib/store';
   (function () {
     var el = document.getElementById('a2hs');
     if (!el) return;
@@ -519,7 +520,7 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
       go.addEventListener('click', function () {
         try { localStorage.setItem(AKEY, '1'); } catch (e) {}
         if (window.bdStoreClick) window.bdStoreClick('app_store', 'ios_banner');
-        location.href = 'https://apps.apple.com/app/id6797664814';
+        location.href = appStoreLink('ios-banner');
       });
       document.getElementById('a2hs-x').addEventListener('click', function () {
         el.hidden = true;
