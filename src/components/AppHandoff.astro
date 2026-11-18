@@ -72,7 +72,7 @@ const PLAY = 'M4.6 2.6a1 1 0 0 0-.5.9v17a1 1 0 0 0 .5.9l9.1-9.4-9.1-9.4Zm10.2 8.
   // iPhone and iPad: the App Store first.
   (function () {
     var ua = navigator.userAgent;
-    if (!(/iPhone|iPod|iPad/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))) return;
+    if (/Android/.test(ua) || !(/iPhone|iPod|iPad/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1))) return;
     document.querySelectorAll('.handoff .ho-btns').forEach(function (b) {
       var ios = b.querySelector('.ho-ios');
       if (ios) b.insertBefore(ios, b.firstChild);
