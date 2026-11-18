@@ -330,7 +330,25 @@ async function main() {
   const filled = (k) => rows.filter((r) => r[k] != null).length;
   console.log(`  GDP ${filled('gdp')}, q/q ${filled('gdpQoqAnn')}, CPI ${filled('cpi')}, unemployment ${filled('unemployment')}, 10y ${filled('yield10y')}, FX ${filled('currency')} of ${rows.length}; commodities ${commodities.length}`);
   if (failed.length) console.warn(`  – did not answer: ${failed.join('; ')}`);
-  if (failed.some((f) => f.startsWith('OECD'))) throw new Error('an OECD flow did not answer — keeping the last file (run again later)');
+  // A source that did not answer must not freeze the whole table (16 Nov 2026:
+  // the OECD answered 500 for twenty minutes and the fresh ECB, IMF and
+  // Eurostat cells were thrown away with it). Keep last week's cell wherever
+  // it is fresher than what this run found, and list what was missing.
+  if (failed.length) {
+    let prev = null;
+    try { prev = JSON.parse(await readFile(OUT, 'utf8')); } catch { /* first run */ }
+    const prevRows = new Map((prev?.rows ?? []).map((r) => [r.iso, r]));
+    const sortOf = (label) => (label ? period(String(label).replace(/^(\w{3}) (\d{4})$/, (m, mo, y) => `${y}-${String(MONTHS.indexOf(mo) + 1).padStart(2, '0')}`).replace(/^Q(\d) (\d{4})$/, '$2-Q$1')).sort : -1);
+    let kept = 0;
+    for (const r of rows) {
+      const old = prevRows.get(r.iso);
+      if (!old) continue;
+      for (const k of ['gdp', 'gdpQoqAnn', 'cpi', 'unemployment', 'yield10y']) {
+        if (old[k] && (!r[k] || sortOf(old[k].period) > sortOf(r[k].period))) { r[k] = old[k]; kept++; }
+      }
+    }
+    console.warn(`  – kept ${kept} cells from the last run where it was fresher`);
+  }
   if (filled('gdp') < 30 || filled('cpi') < 30) throw new Error('too few readings — a source changed; keeping the last file');
   await mkdir(join(ROOT, 'src', 'data', 'weekly'), { recursive: true });
   await writeFile(OUT, JSON.stringify({ asOf: now.toISOString().slice(0, 10), forecastYear: yr, degraded: failed, rows, commodities }, null, 1) + '\n');
