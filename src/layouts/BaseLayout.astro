@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import { datasets } from '@data/datasets';
 import { buildCountryIndex } from '@lib/countryIndex';
+import { appScreen } from '@lib/app-screen';
+import AppBar from '@components/AppBar.astro';
 
 interface Props {
   title?: string;
@@ -245,9 +247,10 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
       </script>
     )}
     {siteLd && <script type="application/ld+json" set:html={JSON.stringify(siteLd)} />}
-    <!-- Smart App Banner: Safari's own strip, linking to the App Store.
-         Enabled now that the app is published. -->
-    <meta name="apple-itunes-app" content="app-id=6797664814" />
+    <!-- Smart App Banner: Safari's own strip, linking to the App Store, or
+         "Open" for people who have the app; app-argument hands the app this
+         page's screen (bulldozerstats://open/..., handled since 1.39.1). -->
+    <meta name="apple-itunes-app" content={`app-id=6797664814, app-argument=bulldozerstats://open/${appScreen(Astro.url.pathname)}`} />
   </head>
   <body>
     <script is:inline>
@@ -501,39 +504,9 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     // On the apps page the store badges are the page itself.
     if (/\/apps\/?$/.test(location.pathname)) return;
 
-    // iPhone and iPad: the App Store app is the better install — offline,
-    // Ask AI, the same seven tabs — so offer it instead of Add to Home Screen,
-    // and offer it again to whoever already put the web version on their
-    // home screen. Its own dismissal: closing the old hint was not a no to this.
-    // The app needs iOS 15; below that the App Store would offer nothing.
-    var iosMajor = +((ua.match(/OS (\d+)_/) || [])[1] || 99);
-    if (iOS && iosMajor < 15) iOS = false;
-    if (iOS) {
-      var AKEY = 'appstore-dismissed';
-      try { if (localStorage.getItem(AKEY) === '1') return; } catch (e) {}
-      txt.innerHTML = installed
-        ? 'You are using the web version. <strong>BullDozer Stats</strong> is in the App Store — faster, works offline.'
-        : '<strong>BullDozer Stats</strong> is in the App Store — faster, works offline, with Ask AI.';
-      go.textContent = 'Get the app';
-      go.hidden = false;
-      go.addEventListener('click', function () {
-        try { localStorage.setItem(AKEY, '1'); } catch (e) {}
-        if (window.bdStoreClick) window.bdStoreClick('app_store', 'ios_banner');
-        location.href = 'https://apps.apple.com/app/id6797664814';
-      });
-      document.getElementById('a2hs-x').addEventListener('click', function () {
-        el.hidden = true;
-        try { localStorage.setItem(AKEY, '1'); } catch (e) {}
-      });
-      // Not immediately: a hint in the first second reads as an ad.
-      setTimeout(function () { el.hidden = false; }, 2500);
-      return;
-    }
-
-    // Android phones and tablets: the site's own strip (azenha.ai's
-    // functions/_middleware.js) already offers Google Play and the APK on every
-    // /bulldozer/ page, so a second banner here would stack on top of it.
-    if (/Android/.test(ua)) return;
+    // iPhone, iPad and Android phones: the App Store and Google Play, through
+    // Safari's Smart App Banner and AppBar.astro, not this card.
+    if (iOS || /Android/.test(ua)) return;
 
     var dismissed = false;
     try { dismissed = localStorage.getItem(KEY) === '1'; } catch (e) {}
@@ -569,6 +542,7 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
 
   })();
 </script>
+<AppBar />
 <script is:inline>
   // Bottom chrome. Two fixed strips can sit at the bottom of the screen: the
   // install banner above (#a2hs) and, on Android, azenha.ai's Google Play / APK
@@ -595,8 +569,9 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     }
     var last = '';
     function sync() {
-      var apk = watch('az-apk'), a2 = watch('a2hs');
-      var ah = shown(apk) ? Math.ceil(apk.offsetHeight) : 0;
+      var apk = watch('az-apk'), bar = watch('bd-app'), a2 = watch('a2hs');
+      // AppBar.astro's bar takes the Android strip's place (global rule there).
+      var ah = Math.max(shown(apk) ? Math.ceil(apk.offsetHeight) : 0, shown(bar) ? Math.ceil(bar.offsetHeight) : 0);
       // the banner floats 12px above whatever is under it; reserve that gap twice
       var bh = shown(a2) ? Math.ceil(a2.offsetHeight) + 24 : 0;
       var key = ah + ',' + bh;
