@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { appStoreLink, playLink } from '@lib/store';
 import { statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 // Read off the APK itself, so the figure cannot drift away from the download.
 const apkMB = Math.round(statSync(fileURLToPath(new URL('../../public/downloads/bulldozer-stats.apk', import.meta.url))).size / 1048576);
-const APP_STORE = 'https://apps.apple.com/app/id6797664814';
-const PLAY = 'https://play.google.com/store/apps/details?id=ai.azenha.bulldozer';
+const APP_STORE = appStoreLink('apps');
+const PLAY = playLink('apps');
 ---
 <BaseLayout
   title="Apps for Android, iPhone and the web"

@@ -249,8 +249,9 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png'}`;
     {siteLd && <script type="application/ld+json" set:html={JSON.stringify(siteLd)} />}
     <!-- Smart App Banner: Safari's own strip, linking to the App Store, or
          "Open" for people who have the app; app-argument hands the app this
-         page's screen (bulldozerstats://open/..., handled since 1.39.1). -->
-    <meta name="apple-itunes-app" content={`app-id=6797664814, app-argument=bulldozerstats://open/${appScreen(Astro.url.pathname)}`} />
+         page's screen (bulldozerstats://open/..., handled since 1.39.1);
+         affiliate-data tags its installs as the web-bulldozer-banner campaign. -->
+    <meta name="apple-itunes-app" content={`app-id=6797664814, affiliate-data=ct=web-bulldozer-banner&pt=129240922, app-argument=bulldozerstats://open/${appScreen(Astro.url.pathname)}`} />
   </head>
   <body>
     <script is:inline>

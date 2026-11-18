@@ -1,4 +1,5 @@
 ---
+import { appStoreLink, playLink } from '@lib/store';
 // Share-link + PNG-export buttons under a chart. `svg` is a CSS selector for
 // the chart's <svg> (omit for HTML-only charts — share link only). `hash` pins
 // the copied URL to the chart's section anchor. Script is hoisted once per page.
@@ -22,8 +23,8 @@ const PLAY = 'M4.6 2.6a1 1 0 0 0-.5.9v17a1 1 0 0 0 .5.9l9.1-9.4-9.1-9.4Zm10.2 8.
   {svg && <button type="button" class="ghost-btn ca-png" data-svg={svg} data-name={name} data-title={title} data-source={source} data-period={period} data-url={url} style="margin:0; min-height:32px">↓ PNG</button>}
   <span class="chart-src" style="margin-left:auto; display:inline-flex; flex-direction:column; align-items:center; gap:2px; line-height:1.2; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.04em">
     <span style="display:inline-flex; align-items:center; gap:6px; color:var(--accent,#ffb000); font-size:12px; font-weight:700">
-      <a href="https://apps.apple.com/app/id6797664814" aria-label="BullDozer Stats on the App Store" title="App Store" style="color:inherit; display:inline-flex; align-items:center; justify-content:center; min-width:32px; min-height:32px; margin:-10px -6px"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d={APPLE} /></svg></a>
-      <a href="https://play.google.com/store/apps/details?id=ai.azenha.bulldozer" aria-label="BullDozer Stats on Google Play" title="Google Play" style="color:inherit; display:inline-flex; align-items:center; justify-content:center; min-width:32px; min-height:32px; margin:-10px -6px"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d={PLAY} /></svg></a>
+      <a href={appStoreLink('chart')} aria-label="BullDozer Stats on the App Store" title="App Store" style="color:inherit; display:inline-flex; align-items:center; justify-content:center; min-width:32px; min-height:32px; margin:-10px -6px"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d={APPLE} /></svg></a>
+      <a href={playLink('chart')} aria-label="BullDozer Stats on Google Play" title="Google Play" style="color:inherit; display:inline-flex; align-items:center; justify-content:center; min-width:32px; min-height:32px; margin:-10px -6px"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d={PLAY} /></svg></a>
       <span>BULLDOZER STATS</span>
     </span>
     <span style="font-size:11px; color:var(--text-dim)">azenha.ai/bulldozer</span>
