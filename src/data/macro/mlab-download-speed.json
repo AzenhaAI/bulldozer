@@ -11,7 +11,7 @@
     "valueLabel": "Typical download speed in M-Lab speed tests (geometric mean, Mbps)",
     "summary": "Typical download speed measured by M-Lab's open NDT speed test, in megabits per second: the geometric mean of the year's tests in the country. Tests are run by people who choose to (M-Lab powers the speed test in Google Search), over whatever link and device they use — home Wi-Fi, mobile data, office networks — so this is the speed people experience, not the speed of the plans on sale. NDT measures a single connection to the nearest M-Lab server, which can be in another country; figures run well below multi-connection tests such as Speedtest and should not be compared with them. One randomly chosen test per IP address per day; a country-year needs at least 1,000 tests.",
     "method": "Geometric mean over the calendar year of NDT download tests (one random test per IP per day), pooled exactly from M-Lab's daily per-country log averages weighted by test counts.",
-    "parsedAt": "2026-11-16",
+    "parsedAt": "2026-11-23",
     "kind": "macro"
   },
   "data": [

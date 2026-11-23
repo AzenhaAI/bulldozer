@@ -1,10 +1,11 @@
 {
- "asOf": "2026-11-18",
+ "asOf": "2026-11-23",
  "forecastYear": "2026",
  "degraded": [
   "OECD OECD.SDD.NAD,DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD,1.1",
   "OECD OECD.SDD.TPS,DSD_PRICES@DF_PRICES_ALL,1.0",
-  "OECD OECD.SDD.TPS,DSD_LFS@DF_IALFS_UNE_M,1.0"
+  "OECD OECD.SDD.TPS,DSD_LFS@DF_IALFS_UNE_M,1.0",
+  "OECD OECD.SDD.STES,DSD_STES@DF_FINMARK,4.0"
  ],
  "rows": [
   {
@@ -67,10 +68,10 @@
    "budgetBalance": -8,
    "yield10y": null,
    "currency": {
-    "perUsd": 6.67,
-    "period": "17 Nov 2026",
+    "perUsd": 6.66,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": 6.6
+    "changeYoy": 6.7
    }
   },
   {
@@ -108,9 +109,9 @@
    },
    "currency": {
     "perUsd": 159,
-    "period": "17 Nov 2026",
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -2.8
+    "changeYoy": -1.5
    }
   },
   {
@@ -148,9 +149,9 @@
    },
    "currency": {
     "perUsd": 0.76,
-    "period": "17 Nov 2026",
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": 0.1
+    "changeYoy": -0.1
    }
   },
   {
@@ -187,10 +188,10 @@
     "changeBp": 75
    },
    "currency": {
-    "perUsd": 1.43,
-    "period": "17 Nov 2026",
+    "perUsd": 1.44,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -1.8
+    "changeYoy": -1.9
    }
   },
   {
@@ -228,9 +229,9 @@
    },
    "currency": {
     "perUsd": 0.91,
-    "period": "17 Nov 2026",
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -5.2
+    "changeYoy": -5
    }
   },
   {
@@ -268,9 +269,9 @@
    },
    "currency": {
     "perUsd": 0.91,
-    "period": "17 Nov 2026",
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -5.2
+    "changeYoy": -5
    }
   },
   {
@@ -308,9 +309,9 @@
    },
    "currency": {
     "perUsd": 0.91,
-    "period": "17 Nov 2026",
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -5.2
+    "changeYoy": -5
    }
   },
   {
@@ -328,7 +329,7 @@
    },
    "gdpForecast": 0.4,
    "cpi": {
-    "value": 3.8,
+    "value": 3.7,
     "period": "Oct 2026",
     "source": "Eurostat"
    },
@@ -348,9 +349,9 @@
    },
    "currency": {
     "perUsd": 0.91,
-    "period": "17 Nov 2026",
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -5.2
+    "changeYoy": -5
    }
   },
   {
@@ -368,7 +369,7 @@
    },
    "gdpForecast": 1.3,
    "cpi": {
-    "value": 2.8,
+    "value": 2.9,
     "period": "Oct 2026",
     "source": "Eurostat"
    },
@@ -388,9 +389,9 @@
    },
    "currency": {
     "perUsd": 0.91,
-    "period": "17 Nov 2026",
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -5.2
+    "changeYoy": -5
    }
   },
   {
@@ -408,7 +409,7 @@
    },
    "gdpForecast": 1.8,
    "cpi": {
-    "value": 5.6,
+    "value": 5.7,
     "period": "Oct 2026",
     "source": "Eurostat"
    },
@@ -428,9 +429,9 @@
    },
    "currency": {
     "perUsd": 0.91,
-    "period": "17 Nov 2026",
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -5.2
+    "changeYoy": -5
    }
   },
   {
@@ -468,9 +469,9 @@
    },
    "currency": {
     "perUsd": 0.91,
-    "period": "17 Nov 2026",
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -5.2
+    "changeYoy": -5
    }
   },
   {
@@ -495,7 +496,7 @@
    "cpiForecast": 2.9,
    "unemployment": {
     "value": 4,
-    "period": "Sep 2026",
+    "period": "Oct 2026",
     "source": "Eurostat"
    },
    "currentAccount": 8.3,
@@ -508,9 +509,9 @@
    },
    "currency": {
     "perUsd": 0.91,
-    "period": "17 Nov 2026",
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -5.2
+    "changeYoy": -5
    }
   },
   {
@@ -548,9 +549,9 @@
    },
    "currency": {
     "perUsd": 0.91,
-    "period": "17 Nov 2026",
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -5.2
+    "changeYoy": -5
    }
   },
   {
@@ -587,10 +588,10 @@
     "changeBp": 91
    },
    "currency": {
-    "perUsd": 22.2,
-    "period": "17 Nov 2026",
+    "perUsd": 22.4,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -6.1
+    "changeYoy": -5.9
    }
   },
   {
@@ -627,10 +628,10 @@
     "changeBp": 73
    },
    "currency": {
-    "perUsd": 6.8,
-    "period": "17 Nov 2026",
+    "perUsd": 6.83,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -5.3
+    "changeYoy": -5.1
    }
   },
   {
@@ -667,10 +668,10 @@
     "changeBp": 47
    },
    "currency": {
-    "perUsd": 9.62,
-    "period": "17 Nov 2026",
+    "perUsd": 9.81,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": 4.9
+    "changeYoy": 4.4
    }
   },
   {
@@ -707,10 +708,10 @@
     "changeBp": 92
    },
    "currency": {
-    "perUsd": 4.01,
-    "period": "17 Nov 2026",
+    "perUsd": 4.08,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -9.1
+    "changeYoy": -9.6
    }
   },
   {
@@ -721,7 +722,7 @@
    "gdpForecast": 0.9,
    "cpi": {
     "value": 6.3,
-    "period": "Aug 2026",
+    "period": "Sep 2026",
     "source": "IMF"
    },
    "cpiForecast": 6.1,
@@ -761,8 +762,8 @@
    },
    "cpiForecast": 1.1,
    "unemployment": {
-    "value": 8.6,
-    "period": "Sep 2026",
+    "value": 8.2,
+    "period": "Oct 2026",
     "source": "Eurostat"
    },
    "currentAccount": 7.3,
@@ -774,10 +775,10 @@
     "changeBp": 59
    },
    "currency": {
-    "perUsd": 10.1,
-    "period": "17 Nov 2026",
+    "perUsd": 10.3,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -6.5
+    "changeYoy": -6.8
    }
   },
   {
@@ -815,9 +816,9 @@
    },
    "currency": {
     "perUsd": 0.84,
-    "period": "17 Nov 2026",
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -5.3
+    "changeYoy": -4
    }
   },
   {
@@ -849,10 +850,10 @@
    "budgetBalance": -3.1,
    "yield10y": null,
    "currency": {
-    "perUsd": 50.4,
-    "period": "17 Nov 2026",
+    "perUsd": 50.6,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -16
+    "changeYoy": -16.1
    }
   },
   {
@@ -870,8 +871,8 @@
    },
    "gdpForecast": 1.9,
    "cpi": {
-    "value": 4,
-    "period": "Aug 2026",
+    "value": 4.3,
+    "period": "Sep 2026",
     "source": "IMF"
    },
    "cpiForecast": 3.9,
@@ -889,10 +890,10 @@
     "changeBp": 103
    },
    "currency": {
-    "perUsd": 1.48,
-    "period": "17 Nov 2026",
+    "perUsd": 1.51,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": 3.4
+    "changeYoy": 2.7
    }
   },
   {
@@ -916,10 +917,10 @@
    "budgetBalance": -4.4,
    "yield10y": null,
    "currency": {
-    "perUsd": 7.85,
-    "period": "17 Nov 2026",
+    "perUsd": 7.84,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -0.9
+    "changeYoy": -0.7
    }
   },
   {
@@ -951,10 +952,10 @@
    "budgetBalance": -7.5,
    "yield10y": null,
    "currency": {
-    "perUsd": 93.5,
-    "period": "17 Nov 2026",
+    "perUsd": 92.9,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -5.2
+    "changeYoy": -3.5
    }
   },
   {
@@ -982,10 +983,10 @@
    "budgetBalance": -2.9,
    "yield10y": null,
    "currency": {
-    "perUsd": 18271,
-    "period": "17 Nov 2026",
+    "perUsd": 18222,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -8.4
+    "changeYoy": -8.3
    }
   },
   {
@@ -1003,8 +1004,8 @@
    },
    "gdpForecast": 5.2,
    "cpi": {
-    "value": 1.8,
-    "period": "Sep 2026",
+    "value": 1.9,
+    "period": "Oct 2026",
     "source": "IMF"
    },
    "cpiForecast": 2.2,
@@ -1013,10 +1014,10 @@
    "budgetBalance": -3.5,
    "yield10y": null,
    "currency": {
-    "perUsd": 4.09,
-    "period": "17 Nov 2026",
+    "perUsd": 4.12,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": 1.4
+    "changeYoy": 0.6
    }
   },
   {
@@ -1075,10 +1076,10 @@
    "budgetBalance": -4.2,
    "yield10y": null,
    "currency": {
-    "perUsd": 63.7,
-    "period": "17 Nov 2026",
+    "perUsd": 63.9,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -7.4
+    "changeYoy": -7.8
    }
   },
   {
@@ -1111,9 +1112,9 @@
    "yield10y": null,
    "currency": {
     "perUsd": 1.29,
-    "period": "17 Nov 2026",
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": 1.1
+    "changeYoy": 1.3
    }
   },
   {
@@ -1150,10 +1151,10 @@
     "changeBp": 128
    },
    "currency": {
-    "perUsd": 1336,
-    "period": "17 Nov 2026",
+    "perUsd": 1349,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": 9.4
+    "changeYoy": 9.3
    }
   },
   {
@@ -1204,10 +1205,10 @@
    "budgetBalance": -3.3,
    "yield10y": null,
    "currency": {
-    "perUsd": 33.8,
-    "period": "17 Nov 2026",
+    "perUsd": 34,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -4.1
+    "changeYoy": -4.7
    }
   },
   {
@@ -1274,10 +1275,10 @@
    "budgetBalance": -8.1,
    "yield10y": null,
    "currency": {
-    "perUsd": 5.78,
-    "period": "17 Nov 2026",
+    "perUsd": 6,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -8.3
+    "changeYoy": -10.4
    }
   },
   {
@@ -1394,10 +1395,10 @@
     "changeBp": 54
    },
    "currency": {
-    "perUsd": 18.5,
-    "period": "17 Nov 2026",
+    "perUsd": 19.2,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -0.7
+    "changeYoy": -4.1
    }
   },
   {
@@ -1469,8 +1470,8 @@
    },
    "gdpForecast": 4.5,
    "cpi": {
-    "value": 1.6,
-    "period": "Sep 2026",
+    "value": 1.1,
+    "period": "Oct 2026",
     "source": "IMF"
    },
    "cpiForecast": 1.8,
@@ -1488,10 +1489,10 @@
     "changeBp": 28
    },
    "currency": {
-    "perUsd": 3.25,
-    "period": "17 Nov 2026",
+    "perUsd": 3.35,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": -0.1
+    "changeYoy": -2
    }
   },
   {
@@ -1558,10 +1559,10 @@
    "budgetBalance": -4.4,
    "yield10y": null,
    "currency": {
-    "perUsd": 16.9,
-    "period": "17 Nov 2026",
+    "perUsd": 17.5,
+    "period": "23 Nov 2026",
     "source": "ECB",
-    "changeYoy": 0.9
+    "changeYoy": -0.9
    }
   }
  ],

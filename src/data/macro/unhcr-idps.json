@@ -9,227 +9,10 @@
     "source": "UNHCR Refugee Data Finder",
     "license": "CC BY 4.0",
     "url": "https://www.unhcr.org/refugee-statistics/",
-    "parsedAt": "2026-11-16",
+    "parsedAt": "2026-11-23",
     "kind": "macro"
   },
   "data": [
-    {
-      "entity": "Afghanistan",
-      "group": "Asia",
-      "period": "2018",
-      "value": 2106893,
-      "iso": "AFG"
-    },
-    {
-      "entity": "Azerbaijan",
-      "group": "Europe",
-      "period": "2018",
-      "value": 620423,
-      "iso": "AZE"
-    },
-    {
-      "entity": "Burundi",
-      "group": "Africa",
-      "period": "2018",
-      "value": 31909,
-      "iso": "BDI"
-    },
-    {
-      "entity": "Burkina Faso",
-      "group": "Africa",
-      "period": "2018",
-      "value": 47030,
-      "iso": "BFA"
-    },
-    {
-      "entity": "Bosnia and Herzegovina",
-      "group": "Europe",
-      "period": "2018",
-      "value": 96830,
-      "iso": "BIH"
-    },
-    {
-      "entity": "Central African Republic",
-      "group": "Africa",
-      "period": "2018",
-      "value": 640970,
-      "iso": "CAF"
-    },
-    {
-      "entity": "Chad",
-      "group": "Africa",
-      "period": "2018",
-      "value": 165314,
-      "iso": "TCD"
-    },
-    {
-      "entity": "Cameroon",
-      "group": "Africa",
-      "period": "2018",
-      "value": 668494,
-      "iso": "CMR"
-    },
-    {
-      "entity": "Congo, Rep.",
-      "group": "Africa",
-      "period": "2018",
-      "value": 138000,
-      "iso": "COG"
-    },
-    {
-      "entity": "Congo, Dem. Rep.",
-      "group": "Africa",
-      "period": "2018",
-      "value": 4516866,
-      "iso": "COD"
-    },
-    {
-      "entity": "Colombia",
-      "group": "Americas",
-      "period": "2018",
-      "value": 7816473,
-      "iso": "COL"
-    },
-    {
-      "entity": "Ethiopia",
-      "group": "Africa",
-      "period": "2018",
-      "value": 2615800,
-      "iso": "ETH"
-    },
-    {
-      "entity": "Georgia",
-      "group": "Europe",
-      "period": "2018",
-      "value": 282382,
-      "iso": "GEO"
-    },
-    {
-      "entity": "Honduras",
-      "group": "Americas",
-      "period": "2018",
-      "value": 174001,
-      "iso": "HND"
-    },
-    {
-      "entity": "Iraq",
-      "group": "Asia",
-      "period": "2018",
-      "value": 1802832,
-      "iso": "IRQ"
-    },
-    {
-      "entity": "Libya",
-      "group": "Africa",
-      "period": "2018",
-      "value": 170491,
-      "iso": "LBY"
-    },
-    {
-      "entity": "Sri Lanka",
-      "group": "Asia",
-      "period": "2018",
-      "value": 35473,
-      "iso": "LKA"
-    },
-    {
-      "entity": "Mali",
-      "group": "Africa",
-      "period": "2018",
-      "value": 120298,
-      "iso": "MLI"
-    },
-    {
-      "entity": "Myanmar",
-      "group": "Asia",
-      "period": "2018",
-      "value": 370306,
-      "iso": "MMR"
-    },
-    {
-      "entity": "Niger",
-      "group": "Africa",
-      "period": "2018",
-      "value": 156137,
-      "iso": "NER"
-    },
-    {
-      "entity": "Nigeria",
-      "group": "Africa",
-      "period": "2018",
-      "value": 2167925,
-      "iso": "NGA"
-    },
-    {
-      "entity": "Pakistan",
-      "group": "Asia",
-      "period": "2018",
-      "value": 96384,
-      "iso": "PAK"
-    },
-    {
-      "entity": "Philippines",
-      "group": "Asia",
-      "period": "2018",
-      "value": 77651,
-      "iso": "PHL"
-    },
-    {
-      "entity": "El Salvador",
-      "group": "Americas",
-      "period": "2018",
-      "value": 71501,
-      "iso": "SLV"
-    },
-    {
-      "entity": "Somalia",
-      "group": "Africa",
-      "period": "2018",
-      "value": 2648001,
-      "iso": "SOM"
-    },
-    {
-      "entity": "Serbia",
-      "group": "Europe",
-      "period": "2018",
-      "value": 215794,
-      "iso": "SRB"
-    },
-    {
-      "entity": "South Sudan",
-      "group": "Africa",
-      "period": "2018",
-      "value": 1878154,
-      "iso": "SSD"
-    },
-    {
-      "entity": "Sudan",
-      "group": "Africa",
-      "period": "2018",
-      "value": 1864195,
-      "iso": "SDN"
-    },
-    {
-      "entity": "Syria",
-      "group": "Asia",
-      "period": "2018",
-      "value": 6183920,
-      "iso": "SYR"
-    },
-    {
-      "entity": "Ukraine",
-      "group": "Europe",
-      "period": "2018",
-      "value": 1500002,
-      "iso": "UKR"
-    },
-    {
-      "entity": "Yemen",
-      "group": "Asia",
-      "period": "2018",
-      "value": 2144719,
-      "iso": "YEM"
-    },
     {
       "entity": "Afghanistan",
       "group": "Asia",
@@ -1964,6 +1747,272 @@
       "group": "Asia",
       "period": "2025",
       "value": 4795983,
+      "iso": "YEM"
+    },
+    {
+      "entity": "Afghanistan",
+      "group": "Asia",
+      "period": "2026",
+      "value": 3253295,
+      "iso": "AFG"
+    },
+    {
+      "entity": "Azerbaijan",
+      "group": "Europe",
+      "period": "2026",
+      "value": 657155,
+      "iso": "AZE"
+    },
+    {
+      "entity": "Burundi",
+      "group": "Africa",
+      "period": "2026",
+      "value": 9627,
+      "iso": "BDI"
+    },
+    {
+      "entity": "Benin",
+      "group": "Africa",
+      "period": "2026",
+      "value": 42409,
+      "iso": "BEN"
+    },
+    {
+      "entity": "Burkina Faso",
+      "group": "Africa",
+      "period": "2026",
+      "value": 2062534,
+      "iso": "BFA"
+    },
+    {
+      "entity": "Bosnia and Herzegovina",
+      "group": "Europe",
+      "period": "2026",
+      "value": 94796,
+      "iso": "BIH"
+    },
+    {
+      "entity": "Cambodia",
+      "group": "Asia",
+      "period": "2026",
+      "value": 20923,
+      "iso": "KHM"
+    },
+    {
+      "entity": "Central African Republic",
+      "group": "Africa",
+      "period": "2026",
+      "value": 428226,
+      "iso": "CAF"
+    },
+    {
+      "entity": "Chad",
+      "group": "Africa",
+      "period": "2026",
+      "value": 219595,
+      "iso": "TCD"
+    },
+    {
+      "entity": "Cameroon",
+      "group": "Africa",
+      "period": "2026",
+      "value": 1004257,
+      "iso": "CMR"
+    },
+    {
+      "entity": "Congo, Dem. Rep.",
+      "group": "Africa",
+      "period": "2026",
+      "value": 5352213,
+      "iso": "COD"
+    },
+    {
+      "entity": "Colombia",
+      "group": "Americas",
+      "period": "2026",
+      "value": 7149587,
+      "iso": "COL"
+    },
+    {
+      "entity": "Ethiopia",
+      "group": "Africa",
+      "period": "2026",
+      "value": 2378000,
+      "iso": "ETH"
+    },
+    {
+      "entity": "Georgia",
+      "group": "Europe",
+      "period": "2026",
+      "value": 301225,
+      "iso": "GEO"
+    },
+    {
+      "entity": "Guatemala",
+      "group": "Americas",
+      "period": "2026",
+      "value": 573000,
+      "iso": "GTM"
+    },
+    {
+      "entity": "Haiti",
+      "group": "Americas",
+      "period": "2026",
+      "value": 1459693,
+      "iso": "HTI"
+    },
+    {
+      "entity": "Honduras",
+      "group": "Americas",
+      "period": "2026",
+      "value": 423845,
+      "iso": "HND"
+    },
+    {
+      "entity": "Iraq",
+      "group": "Asia",
+      "period": "2026",
+      "value": 997334,
+      "iso": "IRQ"
+    },
+    {
+      "entity": "Libya",
+      "group": "Africa",
+      "period": "2026",
+      "value": 32791,
+      "iso": "LBY"
+    },
+    {
+      "entity": "Lebanon",
+      "group": "Asia",
+      "period": "2026",
+      "value": 430600,
+      "iso": "LBN"
+    },
+    {
+      "entity": "Sri Lanka",
+      "group": "Asia",
+      "period": "2026",
+      "value": 4099,
+      "iso": "LKA"
+    },
+    {
+      "entity": "Mexico",
+      "group": "Americas",
+      "period": "2026",
+      "value": 262411,
+      "iso": "MEX"
+    },
+    {
+      "entity": "Mali",
+      "group": "Africa",
+      "period": "2026",
+      "value": 414524,
+      "iso": "MLI"
+    },
+    {
+      "entity": "Mozambique",
+      "group": "Africa",
+      "period": "2026",
+      "value": 503055,
+      "iso": "MOZ"
+    },
+    {
+      "entity": "Myanmar",
+      "group": "Asia",
+      "period": "2026",
+      "value": 3948628,
+      "iso": "MMR"
+    },
+    {
+      "entity": "Niger",
+      "group": "Africa",
+      "period": "2026",
+      "value": 548386,
+      "iso": "NER"
+    },
+    {
+      "entity": "Nigeria",
+      "group": "Africa",
+      "period": "2026",
+      "value": 3711314,
+      "iso": "NGA"
+    },
+    {
+      "entity": "Philippines",
+      "group": "Asia",
+      "period": "2026",
+      "value": 43500,
+      "iso": "PHL"
+    },
+    {
+      "entity": "Papua New Guinea",
+      "group": "Asia",
+      "period": "2026",
+      "value": 70124,
+      "iso": "PNG"
+    },
+    {
+      "entity": "El Salvador",
+      "group": "Americas",
+      "period": "2026",
+      "value": 71500,
+      "iso": "SLV"
+    },
+    {
+      "entity": "Somalia",
+      "group": "Africa",
+      "period": "2026",
+      "value": 3347408,
+      "iso": "SOM"
+    },
+    {
+      "entity": "Serbia",
+      "group": "Europe",
+      "period": "2026",
+      "value": 208649,
+      "iso": "SRB"
+    },
+    {
+      "entity": "South Sudan",
+      "group": "Africa",
+      "period": "2026",
+      "value": 1599792,
+      "iso": "SSD"
+    },
+    {
+      "entity": "Sudan",
+      "group": "Africa",
+      "period": "2026",
+      "value": 8685273,
+      "iso": "SDN"
+    },
+    {
+      "entity": "Syria",
+      "group": "Asia",
+      "period": "2026",
+      "value": 5542227,
+      "iso": "SYR"
+    },
+    {
+      "entity": "Togo",
+      "group": "Africa",
+      "period": "2026",
+      "value": 13409,
+      "iso": "TGO"
+    },
+    {
+      "entity": "Ukraine",
+      "group": "Europe",
+      "period": "2026",
+      "value": 3871000,
+      "iso": "UKR"
+    },
+    {
+      "entity": "Yemen",
+      "group": "Asia",
+      "period": "2026",
+      "value": 5201088,
       "iso": "YEM"
     }
   ]
