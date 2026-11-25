@@ -29,6 +29,9 @@ const config = { base, topicMeta };
 <script type="application/json" id="cheat-config" set:html={JSON.stringify(config)}></script>
 <script type="application/json" id="cheat-a2" set:html={JSON.stringify(isoAlpha2)}></script>
 <script>
+  import { whenVisible } from '@lib/lazy';
+  // Built when it nears the screen (lib/lazy), not on page load.
+  whenVisible(document.getElementById('cheat-config'), () => {
   const cfg = JSON.parse(document.getElementById('cheat-config').textContent);
   const A2 = JSON.parse(document.getElementById('cheat-a2').textContent);
   const flag = (iso) => { const a2 = iso && A2[iso.toUpperCase()]; return a2 ? String.fromCodePoint(...[...a2].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65)) + ' ' : ''; };
@@ -110,5 +113,6 @@ const config = { base, topicMeta };
     if (state.region && !regions.includes(state.region)) state.region = '';
     el('cheat-region').value = state.region;
     render();
+  });
   });
 </script>

@@ -31,6 +31,9 @@ const config = {
 </div>
 <script type="application/json" id="siv-config" set:html={JSON.stringify(config)}></script>
 <script>
+  import { whenVisible } from '@lib/lazy';
+  // Built when it nears the screen (lib/lazy), not on page load.
+  whenVisible(document.getElementById('siv-config'), () => {
   const cfg = JSON.parse(document.getElementById('siv-config').textContent);
   const BASE = cfg.base, NS = 'http://www.w3.org/2000/svg';
   const REGION = { Africa: '#fbbf24', Americas: '#e0567b', Asia: '#34d399', Europe: '#508ce6', Other: '#9ca3af' };
@@ -146,4 +149,5 @@ const config = {
   });
   svg.addEventListener('mouseleave', () => { tip.hidden = true; });
   rebuild();
+  });
 </script>

@@ -422,7 +422,13 @@ for (const [iso, m] of Object.entries(countryMeta as Record<string, any>)) {
       .map(([n, c]) => '<span class="lg"><i style="background:' + c + '"></i>' + n + '</span>').join('') +
     '<span class="lg lg-nd"><i></i>No data</span>';
 
+  // Off screen or in a hidden tab the globe neither spins nor redraws: the
+  // idle spin redrew every frame, a steady load on slow phones that each tap
+  // elsewhere on the page had to wait behind (INP, Nov 2026).
+  let onScreen = true;
+  if ('IntersectionObserver' in window) new IntersectionObserver((es) => { onScreen = es.some((e) => e.isIntersecting); }).observe(canvas);
   function frame() {
+    if (!onScreen || document.hidden) { requestAnimationFrame(frame); return; }
     if (tween) tween();
     if (view === 'globe' && !dragging && (Math.abs(vel[0]) > 0.02 || Math.abs(vel[1]) > 0.02)) {
       rot[0] += vel[0]; rot[1] = Math.max(-78, Math.min(78, rot[1] - vel[1]));

@@ -28,6 +28,9 @@ const config = {
 </div>
 <script type="application/json" id="cs-config" set:html={JSON.stringify(config)}></script>
 <script>
+  import { whenVisible } from '@lib/lazy';
+  // Built when it nears the screen (lib/lazy), not on page load.
+  whenVisible(document.getElementById('cs-config'), () => {
   const cfg = JSON.parse(document.getElementById('cs-config').textContent);
   const BASE = cfg.base;
   const PAL = ['#fbbf24', '#508ce6', '#34d399', '#e0567b', '#a78bfa', '#22d3ee', '#f97316', '#94a3b8'];
@@ -110,4 +113,5 @@ const config = {
   el('cs-add').addEventListener('change', (e) => { if (e.target.value && !state.isos.includes(e.target.value)) { state.isos.push(e.target.value); render(); syncUrl(); } });
   el('cs-chips').addEventListener('click', (e) => { const iso = e.target.getAttribute('data-rm'); if (iso) { state.isos = state.isos.filter((x) => x !== iso); render(); syncUrl(); } });
   render();
+  });
 </script>

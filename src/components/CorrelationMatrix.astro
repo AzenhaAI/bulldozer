@@ -31,6 +31,9 @@ const config = { base, inds };
 </div>
 <script type="application/json" id="corr-config" set:html={JSON.stringify(config)}></script>
 <script>
+  import { whenVisible } from '@lib/lazy';
+  // Built when it nears the screen (lib/lazy), not on page load.
+  whenVisible(document.getElementById('corr-config'), () => {
   const cfg = JSON.parse(document.getElementById('corr-config').textContent);
   const BASE = cfg.base, inds = cfg.inds;
 
@@ -84,4 +87,5 @@ const config = { base, inds };
     for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) if (R[i][j] != null && Math.abs(R[i][j]) > Math.abs(best.r)) best = { r: R[i][j], i, j };
     document.getElementById('corr-note').textContent = `Pearson correlation across countries (latest year each). Green = move together, red = move apart. Strongest link: ${inds[best.i].short} × ${inds[best.j].short} (r = ${best.r.toFixed(2)}).`;
   })();
+  });
 </script>

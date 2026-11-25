@@ -118,4 +118,23 @@ const indicators = datasets.filter(isCountryDataset).map((d) => ({
       <p class="sub" style="margin:0">Looking for one country in depth or a side-by-side comparison? Those moved to <a href={`${base}/geo/`}>Geo →</a></p>
     </div>
   </section>
+  <script is:inline>
+    // A link to a section (#heatmap…) jumps before the charts above it have
+    // been built (lib/lazy starts them as they near the screen), and their
+    // growth would push the target down. Keep the target in view while the
+    // page settles, until the reader scrolls or taps, at most 6 seconds.
+    (function () {
+      var id = decodeURIComponent(location.hash.slice(1));
+      var t = id && document.getElementById(id);
+      if (!t || !('ResizeObserver' in window)) return;
+      var stop = false, end = Date.now() + 6000;
+      var quit = function () { stop = true; };
+      ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (e) { addEventListener(e, quit, { once: true, passive: true }); });
+      var ro = new ResizeObserver(function () {
+        if (stop || Date.now() > end) { ro.disconnect(); return; }
+        t.scrollIntoView({ block: 'start' });
+      });
+      ro.observe(document.body);
+    })();
+  </script>
 </BaseLayout>

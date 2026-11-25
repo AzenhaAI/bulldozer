@@ -671,7 +671,7 @@ html[data-theme='light'] .rel-when.survey { color: #1f5fbf; }
 @media (pointer: coarse) { .ci-more { min-height: 36px; padding: 8px 0; } }
 .ci-more:hover { text-decoration: underline; }
 .cc-extract { font-size: 14px; color: var(--text-dim); line-height: 1.6; margin: 0 0 12px; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
-.country-desc { font-size: 14px; color: var(--text); border-left: 3px solid var(--accent); padding-left: 12px; margin: 0; }
+.country-desc { font-size: 14px; color: var(--text); border-left: 3px solid var(--accent); padding-left: 12px; margin: 0; min-height: 4.4em; } /* filled after load: room kept so the map below does not jump */
 .cc-map { min-width: 0; }
 #country-items table.data td { padding: 7px 8px; }
 @media (max-width: 720px) { .country-card { grid-template-columns: 1fr; } }
@@ -813,7 +813,10 @@ body { padding-bottom: calc(var(--tabbar-h) + var(--apk-h) + var(--a2hs-h)); }
   /* bottom: --apk-h sits the bar on top of azenha.ai's Android APK strip,
      which is fixed at bottom 0 above everything and used to hide the bar. */
   html:not(.in-app) .tabbar {
-    position: fixed; left: 0; right: 0; bottom: var(--apk-h); z-index: 90;
+    /* Lifted above the strip with a transform, not by changing bottom: a
+       moved bottom is a layout shift each time the strip appears or hides
+       (Clarity, 15–21 Nov 2026: CLS 0.24, the bar the most frequent source). */
+    position: fixed; left: 0; right: 0; bottom: 0; transform: translateY(calc(-1 * var(--apk-h))); z-index: 90;
     display: flex; justify-content: space-around; align-items: stretch;
     height: calc(64px + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom);
     background: var(--bg-elev); border-top: 1px solid var(--border);
