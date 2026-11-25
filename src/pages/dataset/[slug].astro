@@ -1,4 +1,5 @@
 ---
+import { fitTitle, dropParen } from '@lib/seoFit';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Provenance from '@components/Provenance.astro';
 import StatsNote from '@components/StatsNote.astro';
@@ -127,7 +128,16 @@ const groupsPeriod = moverPeriods.length > 1 ? `${moverPeriods.at(-2)} to ${move
 // Only advertise the year when the data is recent — a fresh "— 2025" lifts CTR,
 // but a stale "— 2013" signals outdated data and hurts it, so drop it there.
 const endYear = Number(String(lastYear ?? '').match(/(\d{4})(?!.*\d{4})/)?.[1]);
-const seoTitle = `${ds.title} by ${company ? 'Company' : 'Country'}${endYear >= 2022 ? ` — ${lastYear}` : ''}`;
+// Search-result titles ≤ 60 characters (lib/seoFit): the full form first, then
+// shorter ones — without the bracketed survey name, without the year.
+const byWhat = company ? 'Company' : 'Country';
+const yr = endYear >= 2022 ? String(lastYear) : '';
+const seoTitle = fitTitle([
+  `${ds.title} by ${byWhat}${yr ? ` — ${yr}` : ''}`,
+  `${dropParen(ds.title)} by ${byWhat}${yr ? ` — ${yr}` : ''}`,
+  `${dropParen(ds.title)} by ${byWhat}`,
+  dropParen(ds.title),
+]);
 // schema.org/Dataset — indexed by Google Dataset Search. Google ranks partly on
 // metadata completeness, so every recommended field it understands is filled in.
 const dsUrl = `https://azenha.ai${base}/dataset/${ds.slug}/`;

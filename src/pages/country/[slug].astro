@@ -1,4 +1,5 @@
 ---
+import { fitParts, fitTitle } from '@lib/seoFit';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import StatsNote from '@components/StatsNote.astro';
 import { COUNTRY_NOTES } from '@data/methodology';
@@ -90,9 +91,12 @@ const byTopic = TOPIC_ORDER.map((id) => ({
   items: c.items.filter((it) => it.topic === id).sort((a, b) => a.title.localeCompare(b.title)),
 })).filter((t) => t.items.length);
 
-const desc = `${c.name} — ${c.items.length} indicators with world ranks: ${
-  headline.map((h) => `${h.label.toLowerCase()} ${h.value} (#${h.rank.rank} of ${h.rank.total})`).join(', ')
-}. Data from IMF, World Bank, Gapminder, WHR, V-Dem and more.`;
+// ≤ 155 characters (lib/seoFit): the count, then headline figures while they fit.
+const desc = fitParts([
+  `${c.name}: ${c.items.length} indicators with world ranks.`,
+  ...headline.map((h) => `${h.label} ${h.value} (#${h.rank.rank} of ${h.rank.total}).`),
+  'Sources: IMF, World Bank, WHO, UN and more.',
+], ' ');
 
 // SEO title surfaces the high-intent marker indicators ("hungary gdp", "hdi of
 // hungary") plus the indicator count, instead of a generic "country data profile".
@@ -102,7 +106,7 @@ const MARKERS: [string, string][] = [
   ['life expectancy', 'Life Expectancy'], ['happiness', 'Happiness'], ['inflation', 'Inflation'],
 ];
 const markerStr = MARKERS.filter(([kw]) => has(kw)).map(([, l]) => l).slice(0, 3).join(', ');
-const seoTitle = `${c.name}: ${markerStr ? markerStr + ' & ' : ''}${c.items.length} Indicators`;
+const seoTitle = fitTitle([`${c.name}: ${markerStr ? markerStr + ' & ' : ''}${c.items.length} Indicators`, `${c.name}: ${c.items.length} Indicators, World Ranks`, `${c.name}: ${c.items.length} Indicators`]);
 
 const jsonLd = {
   '@context': 'https://schema.org',

@@ -13,7 +13,7 @@ import countryNames from '@data/country-names.json';
 
 const NAMES = countryNames as Record<string, { common: string }>;
 const MIN = 140;
-const MAX = 160;
+const MAX = 155; // lib/seoFit DESC_MAX
 
 export interface DescInput {
   title: string;

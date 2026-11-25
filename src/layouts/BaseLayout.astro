@@ -1,4 +1,5 @@
 ---
+import { fitTitle, fitDesc, dropParen } from '@lib/seoFit';
 import '../styles/global.css';
 import { datasets } from '@data/datasets';
 import { buildCountryIndex } from '@lib/countryIndex';
@@ -60,7 +61,9 @@ const tabs = [
   { ids: ['geo'], label: 'Geo', href: `${base}/geo/`, d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z' },
   { ids: ['edu'], label: 'Edu', href: `${base}/edu/`, d: 'M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z' },
 ];
-const fullTitle = title ? `${title} · BullDozer` : 'BullDozer Stats — the world in numbers, sourced';
+// ≤ 60 characters (lib/seoFit): the brand suffix only where it fits, then the
+// title without its bracketed source, then clipped at a word.
+const fullTitle = title ? fitTitle([`${title} · BullDozer`, title, dropParen(title)]) : 'BullDozer Stats — the world in numbers, sourced';
 // Counts are read from the data, not typed: the typed ones said 188 and 130+
 // long after the catalogue passed 230.
 const nDatasets = datasets.length;
@@ -68,7 +71,7 @@ const nCountries = buildCountryIndex().length;
 // What the app lists (data/catalog.json): without the single-country series.
 const nIndicators = datasets.filter((d) => !d.slug.startsWith('rlms-') && !d.slug.startsWith('cbr-')).length;
 // The A6 flyer's wording (19 Nov 2026), as on the share card (scripts/og_site.mjs).
-const desc = description ?? `The world in numbers, sourced: ${nIndicators} indicators with every country ranked, maps, world surveys, country profiles and Ask AI. Free, no account, no ads.`;
+const desc = fitDesc(description ?? `The world in numbers, sourced: ${nIndicators} indicators with every country ranked, maps, world surveys, country profiles and Ask AI. Free, no account, no ads.`);
 const canonical = new URL(Astro.url.pathname, 'https://azenha.ai').href;
 // Site-level entity markup, homepage only (Google reads WebSite/SearchAction from
 // the site root). The SearchAction declares the on-site search so Google can offer
