@@ -224,6 +224,10 @@ const ogImage = `https://azenha.ai${base}${ogPath ?? '/og.png?v=2'}`;
             else inApp = sessionStorage.getItem('bd-in-app') === '1';
           } catch (e) {}
           if (inApp) return;
+          // Only the real site counts: a local preview or QA run on localhost
+          // was recording as visits (Clarity, 15–21 Nov 2026: 55 views of
+          // http://localhost/bulldozer/dataset/imf-inflation/).
+          if (location.hostname !== 'azenha.ai') return;
           var g = document.createElement('script');
           g.async = true;
           g.src = 'https://www.googletagmanager.com/gtag/js?id=G-M2PTQLF903';
